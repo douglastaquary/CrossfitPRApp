@@ -6,18 +6,28 @@
 //
 
 import UIKit
+import SwiftUI
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-
+    let store = AppStore(initialState: .init(), reducer: appReducer, dependencies: AppDependencies(save: { _ in .init(activity: Exercise(name: .empty), date: .now, pounds: 0.0, goal: 16 * 3600)}, fetchHistories: { _ in [] }) )
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
-        // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
-        // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-        guard let _ = (scene as? UIWindowScene) else { return }
+        guard let scene = scene as? UIWindowScene else {
+            return
+        }
+
+        let window = UIWindow(windowScene: scene)
+        window.rootViewController = UIHostingController(rootView: LaunchView().environmentObject(ViewLaunch()))
+//        window.rootViewController = UIHostingController(
+//            rootView: PRHistoriesListView()
+//                //.environmentObject(store)
+//        )
+        self.window = window
+        window.makeKeyAndVisible()
     }
+
 
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.
@@ -47,7 +57,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // to restore the scene back to its current state.
 
         // Save changes in the application's managed object context when the application transitions to the background.
-        (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
+        //(UIApplication.shared.delegate as? AppDelegate)?.saveContext()
     }
 
 
