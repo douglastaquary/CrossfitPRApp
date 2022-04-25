@@ -66,23 +66,6 @@ struct Bar: Identifiable {
     let legend: Legend
 }
 
-
-struct ProgressShape: Shape {
-    let progress: Double
-
-    func path(in rect: CGRect) -> Path {
-        var path = Path()
-        path.addArc(
-            center: CGPoint(x: rect.midX, y: rect.midY),
-            radius: rect.width / 2,
-            startAngle: .radians(1.5 * .pi),
-            endAngle: .init(radians: 2 * Double.pi * progress + 1.5 * Double.pi),
-            clockwise: false
-        )
-        return path
-    }
-}
-
 struct BarsView: View {
     let bars: [Bar]
     let max: Double

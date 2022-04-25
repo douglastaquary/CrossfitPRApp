@@ -14,9 +14,16 @@ extension PR {
     }
 
     @NSManaged public var id: UUID?
-    @NSManaged public var recordValue: Double
-    @NSManaged public var recordDate: Date
+    @NSManaged public var recordValue: Int32
+    @NSManaged public var recordDate: Date?
     @NSManaged public var prName: String
+    @NSManaged public var percentage: Float
+    
+    
+    var prValue : Int {
+         get { return Int(recordValue) }
+         set { recordValue = Int32(newValue) }
+      }
     
     var recordType: PRType {
         set {
@@ -26,6 +33,13 @@ extension PR {
             PRType(rawValue: prName) ?? .empty
         }
     }
+    
+    var dateFormatter: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMM dd, yyyy"
+        return dateFormatter.string(from: recordDate ?? .now)
+    }
+    
 }
 
 extension PR : Identifiable {}

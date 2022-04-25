@@ -12,14 +12,27 @@ struct PersistenceController {
     // A singleton for our entire app to use
     static let shared = PersistenceController()
     
+    static var prMock: PR = {
+        let result = PersistenceController(inMemory: true)
+        let viewContext = result.container.viewContext
+        let pr = PR(context: viewContext)
+        pr.prName = "Air Squat"
+        pr.recordValue = 100
+        pr.recordDate = .now
+        pr.percentage = 0.60
+        pr.id = UUID()
+        return pr
+    }()
+    
     static var preview: PersistenceController = {
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
         for _ in 0..<10 {
             let pr = PR(context: viewContext)
             pr.prName = "Air Squat"
-            pr.recordValue = 100.0
+            pr.recordValue = 100
             pr.recordDate = .now
+            pr.percentage = 0.28
             pr.id = UUID()
         }
         do {

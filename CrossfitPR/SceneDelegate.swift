@@ -20,10 +20,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         let window = UIWindow(windowScene: scene)
         window.rootViewController = UIHostingController(rootView: LaunchView().environmentObject(ViewLaunch()))
-//        window.rootViewController = UIHostingController(
-//            rootView: PRHistoriesListView()
-//                //.environmentObject(store)
-//        )
+
         self.window = window
         window.makeKeyAndVisible()
     }

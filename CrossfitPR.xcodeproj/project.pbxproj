@@ -37,6 +37,8 @@
 		4E5805E7280CAA8700F16219 /* CrossfitPR.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4E5805E5280CAA8700F16219 /* CrossfitPR.xcdatamodeld */; };
 		4E5805E9280CABE900F16219 /* PR+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5805E8280CABE900F16219 /* PR+CoreDataProperties.swift */; };
 		4E5805EB280CEC1700F16219 /* CrossfitPRApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5805EA280CEC1700F16219 /* CrossfitPRApp.swift */; };
+		4E5805EE280F8B0400F16219 /* RecordDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5805ED280F8B0400F16219 /* RecordDetail.swift */; };
+		4E8BAA192816150400E179A3 /* Float+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8BAA182816150400E179A3 /* Float+extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,6 +74,8 @@
 		4E5805E6280CAA8700F16219 /* CrossfitPR.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CrossfitPR.xcdatamodel; sourceTree = "<group>"; };
 		4E5805E8280CABE900F16219 /* PR+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PR+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		4E5805EA280CEC1700F16219 /* CrossfitPRApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrossfitPRApp.swift; sourceTree = "<group>"; };
+		4E5805ED280F8B0400F16219 /* RecordDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordDetail.swift; sourceTree = "<group>"; };
+		4E8BAA182816150400E179A3 /* Float+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Float+extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +109,7 @@
 			isa = PBXGroup;
 			children = (
 				4E5805E5280CAA8700F16219 /* CrossfitPR.xcdatamodeld */,
+				4E5805EC280F8ABA00F16219 /* RecordDetail */,
 				4E5805D728026E9000F16219 /* DB */,
 				4E5805D627FD32E300F16219 /* Onboarding */,
 				4E5805D527FD32D800F16219 /* NewPR */,
@@ -159,6 +164,7 @@
 		4E5805D227FD326E00F16219 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				4E8BAA182816150400E179A3 /* Float+extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -209,6 +215,14 @@
 				4E5805E1280CA08000F16219 /* PersistenceController.swift */,
 			);
 			path = DB;
+			sourceTree = "<group>";
+		};
+		4E5805EC280F8ABA00F16219 /* RecordDetail */ = {
+			isa = PBXGroup;
+			children = (
+				4E5805ED280F8B0400F16219 /* RecordDetail.swift */,
+			);
+			path = RecordDetail;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -301,10 +315,12 @@
 				4E5805C227FB8B1C00F16219 /* AppDependencies.swift in Sources */,
 				4E5805E7280CAA8700F16219 /* CrossfitPR.xcdatamodeld in Sources */,
 				4E5805BE27FB8B1C00F16219 /* NewPRRecordView.swift in Sources */,
+				4E5805EE280F8B0400F16219 /* RecordDetail.swift in Sources */,
 				4E5805B827FB8B1C00F16219 /* App.swift in Sources */,
 				4E5805C027FB8B1C00F16219 /* HistoryViewModel.swift in Sources */,
 				4E5805B627FB8B1C00F16219 /* PersonalRecord.swift in Sources */,
 				4E5805B927FB8B1C00F16219 /* NewPRViewModel.swift in Sources */,
+				4E8BAA192816150400E179A3 /* Float+extensions.swift in Sources */,
 				4E5805BC27FB8B1C00F16219 /* OnboardingView.swift in Sources */,
 				4E5805C127FB8B1C00F16219 /* SendablePublisher.swift in Sources */,
 				4E5805BF27FB8B1C00F16219 /* HistoriesListView.swift in Sources */,

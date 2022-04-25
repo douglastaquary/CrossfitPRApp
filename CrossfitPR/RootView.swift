@@ -20,7 +20,6 @@ struct RootView: View {
         TabView(selection: $selectedTab) {
             NavigationView {
                 HistoriesListView()
-                    .navigationTitle("Personal Records")
                     .sheet(isPresented: $showNewPRView) {
                         NewPRRecordView()
                     }

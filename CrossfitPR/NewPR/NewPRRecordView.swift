@@ -16,7 +16,6 @@ struct NewPRRecordView: View {
     @StateObject private var viewModel = NewPRViewModel()
     @Environment(\.presentationMode) var presentation
     
-    //@Binding var query: String
     let onCommit: (() -> Void) = {}
 
     var body: some View {
@@ -32,6 +31,12 @@ struct NewPRRecordView: View {
                         .labelsHidden()
                     }.padding()
                     
+                    Section(header: Text("porcentagem do PR")) {
+                        Stepper(value: $viewModel.prPercentage) {
+                            Text("Porcentagem: \(viewModel.prPercentage.clean) %")
+                        }
+                    }
+                
                     Section {
                         Picker(selection: $selectedInitialPounds, label: Text("Personal Record").foregroundColor(.secondary)){
                             ForEach(0..<999) {
@@ -40,20 +45,16 @@ struct NewPRRecordView: View {
                         }
                         DatePicker("Data", selection: $viewModel.personalRecord.date)
                     }.padding()
-                    
-                    
                 }
                 .navigationBarTitle(Text("Novo Record"), displayMode: .inline)
                 .navigationBarItems(trailing:
                     Button(action: {
-                    configPrToSave()
-//                    self.viewModel.save()
-                    
                     let newPR = PR(context: viewContext)
                     newPR.prName = Crossfit.exercises[selectedCategory].name.rawValue
                     newPR.recordDate = .now
-                    newPR.recordValue = Double(selectedInitialPounds)
+                    newPR.prValue = selectedInitialPounds
                     newPR.id = UUID()
+                    newPR.percentage = viewModel.prPercentage
                     do {
                         try viewContext.save()
                         print("PR saved.")
