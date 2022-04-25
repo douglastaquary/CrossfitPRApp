@@ -33,7 +33,7 @@ struct NewPRRecordView: View {
                     
                     Section(header: Text("porcentagem do PR")) {
                         Stepper(value: $viewModel.prPercentage) {
-                            Text("Porcentagem: \(viewModel.prPercentage.clean) %")
+                            Text(" \(viewModel.prPercentage.clean) %").bold()
                         }
                     }
                 
@@ -43,7 +43,6 @@ struct NewPRRecordView: View {
                                 Text("\(String($0)) lb").foregroundColor(.primary)
                             }
                         }
-                        DatePicker("Data", selection: $viewModel.personalRecord.date)
                     }.padding()
                 }
                 .navigationBarTitle(Text("Novo Record"), displayMode: .inline)

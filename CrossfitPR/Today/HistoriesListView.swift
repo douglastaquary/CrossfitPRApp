@@ -37,7 +37,7 @@ struct HistoriesListView: View {
                     Button(action: {
                         self.showNewPRView.toggle()
                     }){
-                    Text("Novo PR")
+                    Text("New PR")
                         .foregroundColor(.white)
                         .font(.headline)
                         .frame(width: 350, height: 48)

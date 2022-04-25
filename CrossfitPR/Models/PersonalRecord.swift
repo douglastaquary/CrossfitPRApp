@@ -41,8 +41,6 @@ struct Crossfit {
     ]
     
     static let barsMock: [Bar] = [
-        Bar(id: UUID(), value: 100.3 * 2, label: "Air Squat", legend: Legend(color: .yellow, label: "Greater load")),
-        Bar(id: UUID(), value: 100.3, label: "Air Squat", legend: Legend(color: .yellow, label: "Greater load")),
         Bar(id: UUID(), value: 100.3, label: "Air Squat", legend: Legend(color: .yellow, label: "Greater load")),
         Bar(id: UUID(), value: 100.3, label: "Air Squat", legend: Legend(color: .yellow, label: "Greater load")),
         Bar(id: UUID(), value: 100.3, label: "Air Squat", legend: Legend(color: .yellow, label: "Greater load")),

@@ -30,13 +30,9 @@ struct InsightsView: View {
                         Text("There is no data to display chart...")
                     } else {
                         VStack {
-                            BarsView(bars: bars)
-                                .padding([.top], 18)
-                            LabelsView(bars: bars)
-                            LegendView(bars: bars)
-                                .padding()
-                                .accessibility(hidden: true)
+                            BarChartView(bars: bars)
                         }
+                        .frame(height: 200)
                     }
                 }
             }
@@ -125,10 +121,12 @@ struct BarChartView: View {
             } else {
                 VStack {
                     BarsView(bars: bars)
+                    LabelsView(bars: bars)
                     LegendView(bars: bars)
                         .padding()
                         .accessibility(hidden: true)
                 }
+                
             }
         }
     }

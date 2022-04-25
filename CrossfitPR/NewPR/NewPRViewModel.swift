@@ -10,10 +10,6 @@ import os
 
 @MainActor final class NewPRViewModel: ObservableObject {
 
-    lazy var persistenceController: PersistenceController = {
-       let result = PersistenceController(inMemory: true)
-        return result
-    }()
     let storage = CodableStorage(storage: DiskStorage(path: URL(fileURLWithPath: NSTemporaryDirectory())))
     private static let logger = Logger(
         subsystem: "com.douglast.mycrossfitpr",
@@ -28,9 +24,7 @@ import os
         pounds: 160,
         goal: 16 * 3600
     )
-    
-    @Published var pr: PR = PR(context: PersistenceController.shared.container.viewContext)
-    
+        
     @Published var prPercentage: Float = 0.0
 
     @Published var activities: [String] = [
