@@ -4,9 +4,9 @@
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="prName" optional="YES" attributeType="String"/>
         <attribute name="recordDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="recordValue" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="recordValue" optional="YES" attributeType="Integer 32" defaultValueString="0.0" usesScalarValueType="YES"/>
     </entity>
     <elements>
-        <element name="PR" positionX="-36" positionY="9" width="128" height="103"/>
+        <element name="PR" positionX="-36" positionY="9" width="128" height="89"/>
     </elements>
 </model>

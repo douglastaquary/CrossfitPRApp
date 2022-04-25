@@ -18,7 +18,7 @@ struct PersistenceController {
         for _ in 0..<10 {
             let pr = PR(context: viewContext)
             pr.prName = "Air Squat"
-            pr.recordValue = 100.0
+            pr.recordValue = 100
             pr.recordDate = .now
             pr.id = UUID()
         }

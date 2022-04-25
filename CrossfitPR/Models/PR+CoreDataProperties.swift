@@ -14,9 +14,14 @@ extension PR {
     }
 
     @NSManaged public var id: UUID?
-    @NSManaged public var recordValue: Double
+    @NSManaged public var recordValue: Int32
     @NSManaged public var recordDate: Date
     @NSManaged public var prName: String
+    
+    var prValue : Int {
+         get { return Int(recordValue) }
+         set { recordValue = Int32(newValue) }
+      }
     
     var recordType: PRType {
         set {

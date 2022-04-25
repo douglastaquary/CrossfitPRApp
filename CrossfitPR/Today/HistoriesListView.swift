@@ -138,7 +138,7 @@ struct PRView: View {
                 .font(.headline)
                 .foregroundColor(.primary)
             Spacer()
-            Text(String(format: "%.1f lb", "\(record.recordValue)"))
+            Text("\(record.prValue)")
                 .font(.subheadline)
                 .foregroundColor(.secondary)
             Divider()

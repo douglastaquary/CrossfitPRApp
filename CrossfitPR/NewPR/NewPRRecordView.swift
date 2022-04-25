@@ -52,8 +52,9 @@ struct NewPRRecordView: View {
                     let newPR = PR(context: viewContext)
                     newPR.prName = Crossfit.exercises[selectedCategory].name.rawValue
                     newPR.recordDate = .now
-                    newPR.recordValue = Double(selectedInitialPounds)
+                    newPR.prValue = selectedInitialPounds
                     newPR.id = UUID()
+                    //newPR.percentage = viewModel.prPercentage
                     do {
                         try viewContext.save()
                         print("PR saved.")
