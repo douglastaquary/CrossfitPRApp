@@ -8,6 +8,10 @@
         <attribute name="recordValue" optional="YES" attributeType="Integer 32" defaultValueString="0.0" usesScalarValueType="YES"/>
     </entity>
     <elements>
+<<<<<<< HEAD
         <element name="PR" positionX="-36" positionY="9" width="128" height="118"/>
+=======
+        <element name="PR" positionX="-36" positionY="9" width="128" height="89"/>
+>>>>>>> c6dfe0c1101bc59799c5d017da7421077f400d65
     </elements>
 </model>

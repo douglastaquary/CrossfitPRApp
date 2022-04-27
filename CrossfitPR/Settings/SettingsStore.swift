@@ -29,7 +29,7 @@ final class SettingsStore: ObservableObject {
             Keys.sleepGoal: 8,
             Keys.sleepTrackingEnabled: true,
             Keys.sleepTrackingMode: SleepTrackingMode.moderate.rawValue
-            ])
+        ])
 
         cancellable = NotificationCenter.default
             .publisher(for: UserDefaults.didChangeNotification)

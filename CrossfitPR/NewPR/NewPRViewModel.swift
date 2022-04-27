@@ -24,6 +24,8 @@ import os
         pounds: 160,
         goal: 16 * 3600
     )
+        
+    @Published var prPercentage: Float = 0.0
 
     @Published var activities: [String] = [
         "AIR SQUAT (AS)", "BACK SQUAT", "BAR MUSCLE-UP", "BENCH PRESS (Supino)",

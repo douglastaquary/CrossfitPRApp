@@ -37,6 +37,10 @@
 		4E5805E7280CAA8700F16219 /* CrossfitPR.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4E5805E5280CAA8700F16219 /* CrossfitPR.xcdatamodeld */; };
 		4E5805E9280CABE900F16219 /* PR+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5805E8280CABE900F16219 /* PR+CoreDataProperties.swift */; };
 		4E5805EB280CEC1700F16219 /* CrossfitPRApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5805EA280CEC1700F16219 /* CrossfitPRApp.swift */; };
+		4E5805EE280F8B0400F16219 /* RecordDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5805ED280F8B0400F16219 /* RecordDetail.swift */; };
+		4E8BAA192816150400E179A3 /* Float+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8BAA182816150400E179A3 /* Float+extensions.swift */; };
+		4E8BAA1B281760A100E179A3 /* InsightsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8BAA1A281760A100E179A3 /* InsightsStore.swift */; };
+		4E8BAA1E2817640100E179A3 /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = 4E8BAA1D2817640100E179A3 /* SwiftUICharts */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,6 +76,9 @@
 		4E5805E6280CAA8700F16219 /* CrossfitPR.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CrossfitPR.xcdatamodel; sourceTree = "<group>"; };
 		4E5805E8280CABE900F16219 /* PR+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PR+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		4E5805EA280CEC1700F16219 /* CrossfitPRApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrossfitPRApp.swift; sourceTree = "<group>"; };
+		4E5805ED280F8B0400F16219 /* RecordDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordDetail.swift; sourceTree = "<group>"; };
+		4E8BAA182816150400E179A3 /* Float+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Float+extensions.swift"; sourceTree = "<group>"; };
+		4E8BAA1A281760A100E179A3 /* InsightsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsightsStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +86,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E8BAA1E2817640100E179A3 /* SwiftUICharts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -105,6 +113,7 @@
 			isa = PBXGroup;
 			children = (
 				4E5805E5280CAA8700F16219 /* CrossfitPR.xcdatamodeld */,
+				4E5805EC280F8ABA00F16219 /* RecordDetail */,
 				4E5805D728026E9000F16219 /* DB */,
 				4E5805D627FD32E300F16219 /* Onboarding */,
 				4E5805D527FD32D800F16219 /* NewPR */,
@@ -152,6 +161,7 @@
 			isa = PBXGroup;
 			children = (
 				4E5805C527FBBE7900F16219 /* InsightsView.swift */,
+				4E8BAA1A281760A100E179A3 /* InsightsStore.swift */,
 			);
 			path = Insights;
 			sourceTree = "<group>";
@@ -159,6 +169,7 @@
 		4E5805D227FD326E00F16219 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				4E8BAA182816150400E179A3 /* Float+extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -211,6 +222,14 @@
 			path = DB;
 			sourceTree = "<group>";
 		};
+		4E5805EC280F8ABA00F16219 /* RecordDetail */ = {
+			isa = PBXGroup;
+			children = (
+				4E5805ED280F8B0400F16219 /* RecordDetail.swift */,
+			);
+			path = RecordDetail;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -227,6 +246,9 @@
 			dependencies = (
 			);
 			name = CrossfitPR;
+			packageProductDependencies = (
+				4E8BAA1D2817640100E179A3 /* SwiftUICharts */,
+			);
 			productName = CrossfitPR;
 			productReference = 4E58058F27FB8AEF00F16219 /* CrossfitPR.app */;
 			productType = "com.apple.product-type.application";
@@ -255,6 +277,9 @@
 				Base,
 			);
 			mainGroup = 4E58058627FB8AEF00F16219;
+			packageReferences = (
+				4E8BAA1C2817640100E179A3 /* XCRemoteSwiftPackageReference "SwiftUICharts" */,
+			);
 			productRefGroup = 4E58059027FB8AEF00F16219 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -296,15 +321,18 @@
 				4E5805D928026EB400F16219 /* DiskStorage.swift in Sources */,
 				4E5805CD27FD2C0C00F16219 /* RootView.swift in Sources */,
 				4E5805DD2802702100F16219 /* CodableStorage.swift in Sources */,
+				4E8BAA1B281760A100E179A3 /* InsightsStore.swift in Sources */,
 				4E5805CB27FD29B900F16219 /* SettingsStore.swift in Sources */,
 				4E58059527FB8AEF00F16219 /* SceneDelegate.swift in Sources */,
 				4E5805C227FB8B1C00F16219 /* AppDependencies.swift in Sources */,
 				4E5805E7280CAA8700F16219 /* CrossfitPR.xcdatamodeld in Sources */,
 				4E5805BE27FB8B1C00F16219 /* NewPRRecordView.swift in Sources */,
+				4E5805EE280F8B0400F16219 /* RecordDetail.swift in Sources */,
 				4E5805B827FB8B1C00F16219 /* App.swift in Sources */,
 				4E5805C027FB8B1C00F16219 /* HistoryViewModel.swift in Sources */,
 				4E5805B627FB8B1C00F16219 /* PersonalRecord.swift in Sources */,
 				4E5805B927FB8B1C00F16219 /* NewPRViewModel.swift in Sources */,
+				4E8BAA192816150400E179A3 /* Float+extensions.swift in Sources */,
 				4E5805BC27FB8B1C00F16219 /* OnboardingView.swift in Sources */,
 				4E5805C127FB8B1C00F16219 /* SendablePublisher.swift in Sources */,
 				4E5805BF27FB8B1C00F16219 /* HistoriesListView.swift in Sources */,
@@ -528,6 +556,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		4E8BAA1C2817640100E179A3 /* XCRemoteSwiftPackageReference "SwiftUICharts" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mecid/SwiftUICharts.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.6.8;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		4E8BAA1D2817640100E179A3 /* SwiftUICharts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4E8BAA1C2817640100E179A3 /* XCRemoteSwiftPackageReference "SwiftUICharts" */;
+			productName = SwiftUICharts;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		4E5805E5280CAA8700F16219 /* CrossfitPR.xcdatamodeld */ = {

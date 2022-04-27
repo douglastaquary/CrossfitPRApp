@@ -6,184 +6,87 @@
 //
 
 import SwiftUI
+import SwiftUICharts
+import CoreData
 
 struct InsightsView: View {
-    let bars: [Bar]
-    @State private var favoriteOption = "Day"
-    var times = ["Day", "Week", "Month"]
+    @State var biggestPoint: DataPoint = DataPoint.init(value: 0.0, label: "", legend: Legend(color: .green, label: "", order: 1))
+    @State var lowPoint: DataPoint = DataPoint.init(value: 0.0, label: "", legend: Legend(color: .gray, label: "", order: 2))
+    @State var limit: DataPoint = DataPoint(value: 0, label: "", legend: Legend(color: .clear, label: ""))
+    @State var barPoints: [DataPoint] = []
     
+    @EnvironmentObject var store: InsightsStore
+    @FetchRequest(entity: PR.entity(), sortDescriptors: [], predicate: NSPredicate(format: "prName != %@", PRType.empty.rawValue))
+    var prs: FetchedResults<PR>
+
     var body: some View {
         Form {
-            Section {
-                Group {
-                    VStack(spacing: 12) {
-                        Picker("", selection: $favoriteOption) {
-                            ForEach(times, id: \.self) {
-                                Text($0)
-                            }
-                        }
-                        .pickerStyle(.segmented)
-                    }
-                    .padding([.top], 18)
-                    
-                    if bars.isEmpty {
-                        Text("There is no data to display chart...")
-                    } else {
-                        VStack {
-                            BarsView(bars: bars)
-                                .padding([.top], 18)
-                            LabelsView(bars: bars)
-                            LegendView(bars: bars)
-                                .padding()
-                                .accessibility(hidden: true)
-                        }
-                    }
+            Section("Resume") {
+                HorizontalBarChartView(dataPoints: [biggestPoint, lowPoint])
+            }
+            Section("Graph Details") {
+                if barPoints.isEmpty {
+                    Text("There is no data to display chart...")
+                } else {
+                    BarChartView(dataPoints: barPoints, limit: limit)
                 }
             }
             Section("PR informations") {
                 HSubtitleView(title: "biggest pr", subtitle: "160 lb")
                 HSubtitleView(title: "percentage pr", subtitle: "70 %")
             }
+        }.onAppear {
+            loadGraph()
+            loadPRInfos()
+        }
+    }
+    
+    private func build() -> [PR] {
+        let prs: [PR] = Array(Set(prs.map { $0 }))
+        return prs
+    }
+    
+    private func loadGraph() {
+        let max: Int = prs.map { $0.prValue }.max() ?? 0
+        barPoints = prs.map { pr in
+            if pr.prValue == max {
+                self.limit = DataPoint(value: Double(max) , label: "\(pr.prName)", legend: store.biggestPr)
+            }
+            return DataPoint.init(value: Double(pr.prValue), label: "", legend: validateCategoryInformation(pr))
+        }
+    }
+    
+    private func loadPRInfos() {
+        let max: Int = prs.map { $0.prValue }.max() ?? 0
+        let min: Int = prs.map { $0.prValue }.min() ?? 0
+        for pr in prs {
+            if pr.prValue == max {
+                biggestPoint = DataPoint.init(value: Double(pr.prValue), label: "\(pr.prValue) lb", legend: Legend(color: .green, label: "\(pr.prName)", order: 1))
+            } else if pr.prValue == min {
+                lowPoint = DataPoint.init(value: Double(pr.prValue), label: "\(pr.prValue) lb", legend: Legend(color: .gray, label: "\(pr.prName)", order: 2))
+            }
+        }
+    }
+    
+    private func validateCategoryInformation(_ pr: PR) -> Legend {
+        let max: Int = prs.map { $0.prValue }.max() ?? 0
+        let min: Int = prs.map { $0.prValue }.min() ?? 0
+        let biggestPr = Legend(color: .green, label: "PR Biggest", order: 3)
+        let evolutionPr = Legend(color: .yellow, label: "PR Evolution", order: 2)
+        let lowestRecord = Legend(color: .gray, label: "PR Lowest", order: 1)
+        if pr.prValue >= max {
+            return biggestPr
+        } else if pr.prValue == min {
+            return lowestRecord
+        } else {
+            return evolutionPr
         }
     }
 }
 
 struct InsightsView_Previews: PreviewProvider {
     static var previews: some View {
-        InsightsView(bars: Crossfit.barsMock)
-    }
-}
-
-struct Legend: Hashable {
-    let color: Color
-    let label: String
-}
-
-struct Bar: Identifiable {
-    let id: UUID
-    let value: Double
-    let label: String
-    let legend: Legend
-}
-
-
-struct ProgressShape: Shape {
-    let progress: Double
-
-    func path(in rect: CGRect) -> Path {
-        var path = Path()
-        path.addArc(
-            center: CGPoint(x: rect.midX, y: rect.midY),
-            radius: rect.width / 2,
-            startAngle: .radians(1.5 * .pi),
-            endAngle: .init(radians: 2 * Double.pi * progress + 1.5 * Double.pi),
-            clockwise: false
-        )
-        return path
-    }
-}
-
-struct BarsView: View {
-    let bars: [Bar]
-    let max: Double
-
-    init(bars: [Bar]) {
-        self.bars = bars
-        self.max = bars.map { $0.value }.max() ?? 0
-    }
-
-    var body: some View {
-        GeometryReader { geometry in
-            HStack(alignment: .bottom, spacing: 0) {
-                ForEach(self.bars) { bar in
-                    Capsule()
-                        .fill(bar.legend.color)
-                        .frame(height: CGFloat(bar.value) / CGFloat(self.max) * geometry.size.height)
-                        .overlay(Rectangle().stroke(Color.white))
-                        .accessibility(label: Text(bar.label))
-                        .accessibility(value: Text(bar.legend.label))
-                }
-            }
-        }
-    }
-}
-
-struct LegendView: View {
-    private let legends: [Legend]
-
-    init(bars: [Bar]) {
-        legends = Array(Set(bars.map { $0.legend }))
-    }
-
-    var body: some View {
-        HStack(alignment: .center) {
-            ForEach(legends, id: \.self) { legend in
-                VStack(alignment: .center) {
-                    Circle()
-                        .fill(legend.color)
-                        .frame(width: 16, height: 16)
-                    Text(legend.label)
-                        .font(.subheadline)
-                        .lineLimit(nil)
-                }
-            }
-        }
-    }
-}
-
-
-struct BarChartView: View {
-    let bars: [Bar]
-
-    var body: some View {
-        Group {
-            if bars.isEmpty {
-                Text("There is no data to display chart...")
-            } else {
-                VStack {
-                    BarsView(bars: bars)
-                    LegendView(bars: bars)
-                        .padding()
-                        .accessibility(hidden: true)
-                }
-            }
-        }
-    }
-}
-
-struct LabelsView: View {
-    var labelsCount: Int = 0
-    var prs: [String] = []
-    
-    init(bars: [Bar]) {
-        prs = Array(Set(bars.map { $0.label }))
-        labelsCount = prs.count
-    }
-
-    private var threshold: Int {
-        let threshold = prs.count / labelsCount
-        return threshold == 0 ? 1 : threshold
-    }
-    
-    var body: some View {
-        HStack {
-            ForEach(0..<prs.count, id: \.self) { index in
-                Group {
-                    if index % self.threshold == 0 {
-                        Spacer()
-                        Text(self.prs[index])
-                            .font(.caption)
-                        Spacer()
-                    }
-                }
-            }
-        }
-    }
-}
-
-struct BarChartView_Previews: PreviewProvider {
-    static var previews: some View {
-        BarChartView(bars: Crossfit.barsMock)
+        InsightsView().preferredColorScheme(.dark)
     }
 }
 

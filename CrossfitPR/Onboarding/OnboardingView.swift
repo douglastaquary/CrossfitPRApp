@@ -36,7 +36,7 @@ struct OnboardingView: View {
             Text("Começar")
                 .foregroundColor(.white)
                 .font(.headline)
-                .frame(width: 350, height: 60)
+                .frame(width: 350, height: 48)
                 .background(Color.green)
                 .cornerRadius(8)
                 .padding(.top, 50)

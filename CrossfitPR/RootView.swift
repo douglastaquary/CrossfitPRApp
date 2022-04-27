@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct RootView: View {
-    
     @Environment(\.managedObjectContext) private var viewContext
     
     @SceneStorage("selectedTab")
@@ -20,7 +19,6 @@ struct RootView: View {
         TabView(selection: $selectedTab) {
             NavigationView {
                 HistoriesListView()
-                    .navigationTitle("Personal Records")
                     .sheet(isPresented: $showNewPRView) {
                         NewPRRecordView()
                     }
@@ -33,8 +31,9 @@ struct RootView: View {
             .tag(0)
 
             NavigationView {
-                InsightsView(bars: Crossfit.barsMock)
+                InsightsView()
                     .navigationTitle("Insights")
+                    .environmentObject(InsightsStore())
             }
             .tabItem {
                 Image(systemName: "chart.bar")
