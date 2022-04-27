@@ -8,9 +8,10 @@
 import Foundation
 import CloudKit
 import CoreData
+import SwiftUICharts
 
 struct Crossfit {
-    
+
     static let histories: [History] = [
         History(prs: [
             PersonalRecord.init(activity: Exercise(name: .airSquat), date: .now, pounds: 150.0, goal: 36 * 1600),
@@ -39,28 +40,7 @@ struct Crossfit {
         Exercise(name: .burpee),
         Exercise(name: .empty)
     ]
-    
-    static let barsMock: [Bar] = [
-        Bar(id: UUID(), value: 100.3, label: "Air Squat", legend: Legend(color: .yellow, label: "Greater load")),
-        Bar(id: UUID(), value: 100.3, label: "Air Squat", legend: Legend(color: .yellow, label: "Greater load")),
-        Bar(id: UUID(), value: 100.3, label: "Air Squat", legend: Legend(color: .yellow, label: "Greater load")),
-        Bar(id: UUID(), value: 100.3, label: "Air Squat", legend: Legend(color: .yellow, label: "Greater load")),
-        Bar(id: UUID(), value: 100.3, label: "Air Squat", legend: Legend(color: .yellow, label: "Greater load")),
-        Bar(id: UUID(), value: 150.0, label: "Air Squat", legend: Legend(color: .yellow, label: "Greater load")),
-        Bar(id: UUID(), value: 150.0, label: "Air Squat", legend: Legend(color: .yellow, label: "Greater load")),
-        Bar(id: UUID(), value: 150.0, label: "Air Squat", legend: Legend(color: .yellow, label: "Greater load")),
-        Bar(id: UUID(), value: 150.0, label: "Air Squat", legend: Legend(color: .yellow, label: "Greater load")),
-        Bar(id: UUID(), value: 120.0, label: "Power Snatch", legend: Legend(color: .blue, label: "Average load")),
-        Bar(id: UUID(), value: 120.0, label: "Power Snatch", legend: Legend(color: .blue, label: "Average load")),
-        Bar(id: UUID(), value: 120.0, label: "Power Snatch", legend: Legend(color: .blue, label: "Average load")),
-        Bar(id: UUID(), value: 120.0, label: "Power Snatch", legend: Legend(color: .blue, label: "Average load")),
-        Bar(id: UUID(), value: 120.0, label: "Power Snatch", legend: Legend(color: .blue, label: "Average load")),
-        Bar(id: UUID(), value: 90.0, label: "T2B", legend: Legend(color: .green, label: "Lower load")),
-        Bar(id: UUID(), value: 90.0, label: "T2B", legend: Legend(color: .green, label: "Lower load")),
-        Bar(id: UUID(), value: 90.0, label: "T2B", legend: Legend(color: .green, label: "Lower load")),
-        Bar(id: UUID(), value: 90.0, label: "T2B", legend: Legend(color: .green, label: "Lower load")),
-        Bar(id: UUID(), value: 90.0, label: "T2B", legend: Legend(color: .green, label: "Lower load"))
-    ]
+
 }
 
 struct History: Codable, Identifiable {

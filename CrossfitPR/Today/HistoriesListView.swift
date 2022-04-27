@@ -50,9 +50,6 @@ struct HistoriesListView: View {
                     }
                 }
             }
-            .onAppear {
-                self.viewModel.fetch()
-            }
             .navigationTitle("Personal Records")
         }
     }
