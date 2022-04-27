@@ -19,7 +19,6 @@ extension PR {
     @NSManaged public var prName: String
     @NSManaged public var percentage: Float
     
-    
     var prValue : Int {
          get { return Int(recordValue) }
          set { recordValue = Int32(newValue) }
