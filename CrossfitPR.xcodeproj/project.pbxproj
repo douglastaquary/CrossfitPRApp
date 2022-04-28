@@ -113,8 +113,8 @@
 			isa = PBXGroup;
 			children = (
 				4E5805E5280CAA8700F16219 /* CrossfitPR.xcdatamodeld */,
-				4E5805EC280F8ABA00F16219 /* RecordDetail */,
 				4E5805D728026E9000F16219 /* DB */,
+				4E5805EC280F8ABA00F16219 /* RecordDetail */,
 				4E5805D627FD32E300F16219 /* Onboarding */,
 				4E5805D527FD32D800F16219 /* NewPR */,
 				4E5805D427FD32B600F16219 /* Service */,
@@ -126,7 +126,6 @@
 				4E5805C727FD297E00F16219 /* Settings */,
 				4E58059227FB8AEF00F16219 /* AppDelegate.swift */,
 				4E58059427FB8AEF00F16219 /* SceneDelegate.swift */,
-				4E5805AD27FB8B1C00F16219 /* Extensions.swift */,
 				4E5805B427FB8B1C00F16219 /* SendablePublisher.swift */,
 				4E58059827FB8AEF00F16219 /* Main.storyboard */,
 				4E58059E27FB8AF300F16219 /* Assets.xcassets */,
@@ -169,6 +168,7 @@
 		4E5805D227FD326E00F16219 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				4E5805AD27FB8B1C00F16219 /* Extensions.swift */,
 				4E8BAA182816150400E179A3 /* Float+extensions.swift */,
 			);
 			path = Extensions;
