@@ -19,7 +19,7 @@ struct SettingsView: View {
                     }
                 }
 
-                Section(header: Text("Sleep tracking settings")) {
+                Section(header: Text("Crossfit tracking settings")) {
                     Toggle(isOn: $settings.isSleepTrackingEnabled) {
                         Text("Sleep tracking:")
                     }
@@ -33,8 +33,8 @@ struct SettingsView: View {
                         }
                     }
 
-                    Stepper(value: $settings.sleepGoal, in: 6...12) {
-                        Text("Sleep goal is \(settings.sleepGoal) hours")
+                    Stepper(value: $settings.sleepGoal, in: 0...24) {
+                        Text("Training target is \(settings.sleepGoal)  ")
                     }
                 }
 

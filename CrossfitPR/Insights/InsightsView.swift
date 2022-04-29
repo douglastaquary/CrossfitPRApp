@@ -23,24 +23,28 @@ struct InsightsView: View {
     var prs: FetchedResults<PR>
 
     var body: some View {
-        Form {
-            Section("Resume") {
-                HorizontalBarChartView(dataPoints: [biggestPoint, evolutionPoint, lowPoint])
-            }
-            Section("Graph Details") {
-                if barPoints.isEmpty {
-                    Text("There is no data to display chart...")
-                } else {
-                    BarChartView(dataPoints: barPoints, limit: limit)
+        if prs.isEmpty {
+            EmptyView(message: "Get started now\nby adding a new personal record")
+        } else {
+            Form {
+                Section("Resume") {
+                    HorizontalBarChartView(dataPoints: [biggestPoint, evolutionPoint, lowPoint])
                 }
+                Section("Graph Details") {
+                    if barPoints.isEmpty {
+                        Text("There is no data to display chart...")
+                    } else {
+                        BarChartView(dataPoints: barPoints, limit: limit)
+                    }
+                }
+                Section("PR informations") {
+                    HSubtitleView(title: "the biggest pr is " + "\(biggestPR?.prName ?? "")".lowercased(), subtitle: "\(biggestPR?.prValue ?? 0) lb")
+                    HSubtitleView(title: "percentage pr", subtitle: "\(biggestPR?.percentage.clean ?? "") %")
+                }
+            }.onAppear {
+                loadGraph()
+                loadPRInfos()
             }
-            Section("PR informations") {
-                HSubtitleView(title: "the biggest pr is " + "\(biggestPR?.prName ?? "")".lowercased(), subtitle: "\(biggestPR?.prValue ?? 0) lb")
-                HSubtitleView(title: "percentage pr", subtitle: "\(biggestPR?.percentage.clean ?? "") %")
-            }
-        }.onAppear {
-            loadGraph()
-            loadPRInfos()
         }
     }
     
@@ -114,6 +118,17 @@ struct HSubtitleView: View {
             Spacer()
             Text(subtitle)
                 .bold()
+        }
+    }
+}
+
+struct EmptyView: View {
+    @State var message: String
+    var body: some View {
+        VStack {
+            Text(message)
+                .multilineTextAlignment(.center)
+                .foregroundColor(.secondary)
         }
     }
 }

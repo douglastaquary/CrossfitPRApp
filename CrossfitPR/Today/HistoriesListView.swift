@@ -26,14 +26,19 @@ struct HistoriesListView: View {
         NavigationView {
             ScrollViewReader { scrollView in
                 ScrollView {
-                    ForEach(prs, id: \.id) { pr in
-                        NavigationLink(destination: RecordDetail(record: pr)) {
-                            PRView(record: pr)
+                    if prs.isEmpty {
+                        EmptyView(message: "Get started now\nby adding a new personal record")
+                    } else {
+                        ForEach(prs, id: \.id) { pr in
+                            NavigationLink(destination: RecordDetail(record: pr)) {
+                                PRView(record: pr)
+                            }
                         }
+    //                    .onDelete(perform: delete)
+    //                    .onMove(perform: move)
+                        .redacted(reason: viewModel.isLoading ? .placeholder : [])
                     }
-//                    .onDelete(perform: delete)
-//                    .onMove(perform: move)
-                    .redacted(reason: viewModel.isLoading ? .placeholder : [])
+                    
                     Button(action: {
                         self.showNewPRView.toggle()
                     }){
@@ -50,7 +55,6 @@ struct HistoriesListView: View {
                     }
                 }
             }
-            .navigationTitle("Personal Records")
         }
     }
 }

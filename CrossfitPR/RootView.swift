@@ -22,6 +22,7 @@ struct RootView: View {
                     .sheet(isPresented: $showNewPRView) {
                         NewPRRecordView()
                     }
+                    .navigationTitle("Personal records")
                     .environment(\.managedObjectContext, viewContext)
             }
             .tabItem {
