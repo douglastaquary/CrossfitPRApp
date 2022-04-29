@@ -11,10 +11,10 @@ import Combine
 final class SettingsStore: ObservableObject {
     private enum Keys {
         static let pro = "pro"
-        static let sleepGoal = "sleep_goal"
+        static let trainingTargetGoal = "training_target_goal"
         static let notificationEnabled = "notifications_enabled"
         static let sleepTrackingEnabled = "sleep_tracking_enabled"
-        static let sleepTrackingMode = "sleep_tracking_mode"
+        static let measureTrackingMode = "measure_tracking_mode"
     }
 
     private let cancellable: Cancellable
@@ -26,9 +26,9 @@ final class SettingsStore: ObservableObject {
         self.defaults = defaults
 
         defaults.register(defaults: [
-            Keys.sleepGoal: 8,
+            Keys.trainingTargetGoal: 8,
             Keys.sleepTrackingEnabled: true,
-            Keys.sleepTrackingMode: SleepTrackingMode.moderate.rawValue
+            Keys.measureTrackingMode: MeasureTrackingMode.pounds.rawValue
         ])
 
         cancellable = NotificationCenter.default
@@ -52,25 +52,23 @@ final class SettingsStore: ObservableObject {
         get { defaults.bool(forKey: Keys.sleepTrackingEnabled) }
     }
 
-    var sleepGoal: Int {
-        set { defaults.set(newValue, forKey: Keys.sleepGoal) }
-        get { defaults.integer(forKey: Keys.sleepGoal) }
+    var trainningTargetGoal: Int {
+        set { defaults.set(newValue, forKey: Keys.trainingTargetGoal) }
+        get { defaults.integer(forKey: Keys.trainingTargetGoal) }
     }
 
-    enum SleepTrackingMode: String, CaseIterable {
-        case low
-        case moderate
-        case aggressive
+    enum MeasureTrackingMode: String, CaseIterable {
+        case pounds
+        case kilos
     }
 
-    var sleepTrackingMode: SleepTrackingMode {
+    var measureTrackingMode: MeasureTrackingMode {
         get {
-            return defaults.string(forKey: Keys.sleepTrackingMode)
-                .flatMap { SleepTrackingMode(rawValue: $0) } ?? .moderate
+            return defaults.string(forKey: Keys.measureTrackingMode)
+                .flatMap { MeasureTrackingMode(rawValue: $0) } ?? .pounds
         }
-
         set {
-            defaults.set(newValue.rawValue, forKey: Keys.sleepTrackingMode)
+            defaults.set(newValue.rawValue, forKey: Keys.measureTrackingMode)
         }
     }
 }

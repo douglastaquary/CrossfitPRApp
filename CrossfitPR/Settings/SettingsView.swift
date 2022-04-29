@@ -20,21 +20,17 @@ struct SettingsView: View {
                 }
 
                 Section(header: Text("Crossfit tracking settings")) {
-                    Toggle(isOn: $settings.isSleepTrackingEnabled) {
-                        Text("Sleep tracking:")
-                    }
-
                     Picker(
-                        selection: $settings.sleepTrackingMode,
-                        label: Text("Sleep tracking mode")
+                        selection: $settings.measureTrackingMode,
+                        label: Text("Measure tracking mode")
                     ) {
-                        ForEach(SettingsStore.SleepTrackingMode.allCases, id: \.self) {
+                        ForEach(SettingsStore.MeasureTrackingMode.allCases, id: \.self) {
                             Text($0.rawValue).tag($0)
                         }
                     }
 
-                    Stepper(value: $settings.sleepGoal, in: 0...24) {
-                        Text("Training target is \(settings.sleepGoal)  ")
+                    Stepper(value: $settings.trainningTargetGoal, in: 0...24) {
+                        Text("Training target is \(settings.trainningTargetGoal):00")
                     }
                 }
 
