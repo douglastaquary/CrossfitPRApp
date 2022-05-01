@@ -18,12 +18,12 @@ struct RootView: View {
     var body: some View {
         TabView(selection: $selectedTab) {
             NavigationView {
-                HistoriesListView()
+                TodayView()
                     .sheet(isPresented: $showNewPRView) {
                         NewPRRecordView()
                     }
-                    .navigationTitle("Personal records")
                     .environment(\.managedObjectContext, viewContext)
+                    .navigationTitle("Personal records")
             }
             .tabItem {
                 Image(systemName: "heart")

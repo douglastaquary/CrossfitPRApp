@@ -23,9 +23,7 @@ struct InsightsView: View {
     var prs: FetchedResults<PR>
 
     var body: some View {
-        if prs.isEmpty {
-            EmptyView(message: "Get started now\nby adding a new personal record")
-        } else {
+        if prs.count > 2 {
             Form {
                 Section("Resume") {
                     HorizontalBarChartView(dataPoints: [biggestPoint, evolutionPoint, lowPoint])
@@ -45,6 +43,8 @@ struct InsightsView: View {
                 loadGraph()
                 loadPRInfos()
             }
+        } else {
+            EmptyView(message: "Get started now\nby adding a new personal record")
         }
     }
     
@@ -104,31 +104,5 @@ struct InsightsView: View {
 struct InsightsView_Previews: PreviewProvider {
     static var previews: some View {
         InsightsView().preferredColorScheme(.dark)
-    }
-}
-
-struct HSubtitleView: View {
-    var title: String
-    var subtitle: String
-    
-    var body: some View {
-        HStack {
-            Text(title)
-                .foregroundColor(.secondary)
-            Spacer()
-            Text(subtitle)
-                .bold()
-        }
-    }
-}
-
-struct EmptyView: View {
-    @State var message: String
-    var body: some View {
-        VStack {
-            Text(message)
-                .multilineTextAlignment(.center)
-                .foregroundColor(.secondary)
-        }
     }
 }

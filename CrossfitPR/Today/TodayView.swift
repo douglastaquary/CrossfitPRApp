@@ -9,18 +9,21 @@ import SwiftUI
 import Combine
 import CoreData
 
-typealias AppStore = Store<AppState, AppAction, AppDependencies>
-
-struct HistoriesListView: View {
-    
+struct TodayView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @FetchRequest(entity: PR.entity(), sortDescriptors: [], predicate: NSPredicate(format: "prName != %@", PRType.empty.rawValue))
-    
     var prs: FetchedResults<PR>
     
     @StateObject private var viewModel = HistoryViewModel()
-    @EnvironmentObject var viewlaunch: ViewLaunch
     @State var showNewPRView = false
+    @State var sections: [PRSection] = []
+    @State private var searchText: String = ""
+    
+    var filteredPrs: [PR] {
+        prs.filter { item in
+          searchText.isEmpty ? true : item.prName.contains(searchText)
+        }
+    }
 
     var body: some View {
         NavigationView {
@@ -29,20 +32,17 @@ struct HistoriesListView: View {
                     if prs.isEmpty {
                         EmptyView(message: "Get started now\nby adding a new personal record")
                     } else {
-                        ForEach(prs, id: \.id) { pr in
+                        ForEach(filteredPrs, id: \.id) { pr in
                             NavigationLink(destination: RecordDetail(record: pr)) {
                                 PRView(record: pr)
                             }
                         }
-    //                    .onDelete(perform: delete)
-    //                    .onMove(perform: move)
-                        .redacted(reason: viewModel.isLoading ? .placeholder : [])
                     }
                     
                     Button(action: {
                         self.showNewPRView.toggle()
                     }){
-                    Text("New PR")
+                    Text("New record")
                         .foregroundColor(.white)
                         .font(.headline)
                         .frame(width: 350, height: 48)
@@ -56,37 +56,31 @@ struct HistoriesListView: View {
                 }
             }
         }
+        .searchable(text: $searchText, prompt: "Search pr")
     }
-}
-
-struct PRHistoriesListView_Previews: PreviewProvider {
-    static var previews: some View {
-        HistoriesListView()
-            .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
-    }
-}
-
-struct PRView: View {
-    var record: PR
     
-    var body: some View {
-        VStack(alignment: .leading) {
-            Text(record.prName)
-                .font(.headline)
-                .foregroundColor(.primary)
-            Spacer()
-            HStack {
-                Text("\(record.prValue) lb")
-                    .font(.subheadline)
-                    .foregroundColor(.secondary)
-                Spacer()
-                Text("\(record.dateFormatter)")
-                    .font(.subheadline)
-                    .foregroundColor(.secondary)
-                    .padding(.trailing)
+    private func buildSections() {
+        for pr in prs {
+            if sections.isEmpty {
+                let section = PRSection(name: pr.prName, prs: [pr])
+                sections.append(section)
+            } else {
+                for s in 0..<sections.count {
+                    if sections[s].name == pr.prName {
+                        sections[s].addNewPR(pr)
+                    } else {
+                        let section = PRSection(name: pr.prName, prs: [pr])
+                        sections.append(section)
+                    }
+                }
             }
-            Divider()
         }
-        .padding(.leading, 16)
+    }
+}
+
+struct TodayView_Previews: PreviewProvider {
+    static var previews: some View {
+        TodayView()
+            .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
 }

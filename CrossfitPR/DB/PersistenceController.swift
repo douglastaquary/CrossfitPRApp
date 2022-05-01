@@ -16,7 +16,7 @@ struct PersistenceController {
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
         let pr = PR(context: viewContext)
-        pr.prName = "Air Squat"
+        pr.prName = "AIR SQUAT (AS)"
         pr.recordValue = 100
         pr.recordDate = .now
         pr.percentage = 0.60
@@ -29,7 +29,7 @@ struct PersistenceController {
         let viewContext = result.container.viewContext
         for _ in 0..<10 {
             let pr = PR(context: viewContext)
-            pr.prName = "Air Squat"
+            pr.prName = "AIR SQUAT (AS)"
             pr.recordValue = 100
             pr.recordDate = .now
             pr.percentage = 0.28

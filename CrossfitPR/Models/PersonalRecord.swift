@@ -84,7 +84,7 @@ enum PersonalRecordKeys: String {
     case goal
 }
 
-enum ActivitiesRecordKey: String, Codable {
+enum ActivitiesRecordKey: String, Codable, CaseIterable {
     case airSquat = "AIR SQUAT (AS)"
     case backSquat = "BACK SQUAT"
     case barMuscleUp = "BAR MUSCLE-UP"
@@ -127,7 +127,6 @@ enum ActivitiesRecordKey: String, Codable {
     case sitUp = "SIT-UP"
     case snatch = "SNATCH"
     case strictPullUp = "STRICT PULL-UP"
-    case squat = "SQUAT = AIR SQUAT (AS)"
     case sumoDeadLift = "SUMO DEADLIFT"
     case sumoDeadLiftHightPull = "SUMO DEADLIFT HIGH PULL (SDHP)"
     case thruster = "THRUSTER"
