@@ -14,7 +14,7 @@ import os
     let storage = CodableStorage(storage: DiskStorage(path: URL(fileURLWithPath: NSTemporaryDirectory())))
     
     private static let logger = Logger(
-        subsystem: "com.aaplab.fastbot",
+        subsystem: "com.aaplab.crossfitprapp",
         category: String(describing: HistoryViewModel.self)
     )
 
