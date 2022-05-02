@@ -21,7 +21,8 @@ struct OnboardingView: View {
                 
                 VStack(alignment: .leading) {
                     NewDetail(image: "heart.fill", imageColor: .green, title: "Anote seus PRs sem complicações", description: "Todas as informações sobre os seus PRs em um só lugar")
-                    NewDetail(image: "paperclip", imageColor: .blue, title: "New Spotlight Tab", description: "Discover great stories selected by our editors.")
+                    NewDetail(image: "paperclip", imageColor: .blue, title: "Organizing your PRs", description: "Organizing your personal records makes the evolution of your exercises more practical")
+                    NewDetail(image: "paperclip", imageColor: .blue, title: "The powerful insights", description: "The powerful insights elevator allows you to understand your biggest records and the evolution of others")
                     NewDetail(image: "play.rectangle.fill", imageColor: .black, title: "Wods para treinar em casa", description: "Wods gratuitos para treinar a qualquer hora e lugar")
             }
 

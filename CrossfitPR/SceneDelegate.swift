@@ -11,7 +11,6 @@ import SwiftUI
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-    let store = AppStore(initialState: .init(), reducer: appReducer, dependencies: AppDependencies(save: { _ in .init(activity: Exercise(name: .empty), date: .now, pounds: 0.0, goal: 16 * 3600)}, fetchHistories: { _ in [] }) )
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let scene = scene as? UIWindowScene else {

@@ -23,8 +23,8 @@ struct NewPRRecordView: View {
                 Form {
                     VStack {
                         Picker(selection: $selectedCategory, label: Text("Exercicio").foregroundColor(.secondary)){
-                            ForEach(0..<Crossfit.exercises.count) {
-                                Text(Crossfit.exercises[$0].name.rawValue)
+                            ForEach(0..<ActivitiesRecordKey.allCases.count) {
+                                Text(ActivitiesRecordKey.allCases[$0].rawValue)
                             }
                         }
                         .foregroundColor(.primary)
@@ -49,7 +49,7 @@ struct NewPRRecordView: View {
                 .navigationBarItems(trailing:
                     Button(action: {
                     let newPR = PR(context: viewContext)
-                    newPR.prName = Crossfit.exercises[selectedCategory].name.rawValue
+                    newPR.prName = ActivitiesRecordKey.allCases[selectedCategory].rawValue 
                     newPR.recordDate = .now
                     newPR.prValue = selectedInitialPounds
                     newPR.id = UUID()

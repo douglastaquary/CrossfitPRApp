@@ -1,14 +1,14 @@
 //
-//  SettingsStore.swift
+//  TodayStore.swift
 //  CrossfitPR
 //
-//  Created by Douglas Taquary on 05/04/22.
+//  Created by Douglas Taquary on 28/04/22.
 //
 
 import SwiftUI
 import Combine
 
-final class SettingsStore: ObservableObject {
+final class TodayStore: ObservableObject {
     private enum Keys {
         static let pro = "pro"
         static let trainingTargetGoal = "training_target_goal"
@@ -73,14 +73,3 @@ final class SettingsStore: ObservableObject {
     }
 }
 
-extension SettingsStore {
-    func unlockPro() {
-        // You can do your in-app transactions here
-        isPro = true
-    }
-
-    func restorePurchase() {
-        // You can do you in-app purchase restore here
-        isPro = true
-    }
-}
