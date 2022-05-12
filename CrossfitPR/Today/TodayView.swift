@@ -22,7 +22,7 @@ struct TodayView: View {
     var filteredPrs: [PR] {
         prs.filter { item in
           searchText.isEmpty ? true : item.prName.contains(searchText)
-        }
+        }.sorted()
     }
 
     var body: some View {
@@ -56,7 +56,7 @@ struct TodayView: View {
                 }
             }
         }
-        .searchable(text: $searchText, prompt: "Search pr")
+        .searchable(text: $searchText, prompt: "search by name")
     }
     
     private func buildSections() {

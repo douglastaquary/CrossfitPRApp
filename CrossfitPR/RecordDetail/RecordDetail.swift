@@ -8,18 +8,26 @@
 import SwiftUI
 
 struct RecordDetail: View {
+    @EnvironmentObject var store: RecordStore
     var record: PR
     
     var body: some View {
-        VStack {
-            ProgressView(progressValue: record.percentage/100)
+        VStack(alignment: .center) {
             Spacer()
             Form {
                 Group {
-                    Section("Record information") {
-                        HSubtitleView(title: "Personal record", subtitle: "\(record.recordValue) lb")
+                    Section("Record percentage") {
+                        ProgressView(progressValue: record.percentage/100)
+                    }
+                }
+                Group {
+                    Section("Personal record information") {
+                        HSubtitleView(title: "Weight", subtitle: "\(record.recordValue) lb")
                         HSubtitleView(title: "Date", subtitle: "\(record.dateFormatter)")
                     }
+                }
+                Section(header: Text("\(record.prName) evolution"), footer: Text("This analysis is based on the PR list of \(record.prName) registered in the app. The most recent are the ones in the green band (on the right), the oldest gray and the evolution in yellow")) {
+                    LineViewGraph()
                 }
             }
         }

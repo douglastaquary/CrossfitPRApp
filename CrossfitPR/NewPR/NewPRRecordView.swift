@@ -11,6 +11,7 @@ import CoreData
 struct NewPRRecordView: View {
     @Environment(\.managedObjectContext) private var viewContext
     
+    @State private var commentsText: String = ""
     @State private var selectedCategory: Int = 0
     @State private var selectedInitialPounds: Int = 10
     @StateObject private var viewModel = NewPRViewModel()
@@ -22,7 +23,7 @@ struct NewPRRecordView: View {
         NavigationView {
                 Form {
                     VStack {
-                        Picker(selection: $selectedCategory, label: Text("Exercicio").foregroundColor(.secondary)){
+                        Picker(selection: $selectedCategory, label: Text("Exercise").foregroundColor(.secondary)){
                             ForEach(0..<ActivitiesRecordKey.allCases.count) {
                                 Text(ActivitiesRecordKey.allCases[$0].rawValue)
                             }
@@ -30,6 +31,10 @@ struct NewPRRecordView: View {
                         .foregroundColor(.primary)
                         .labelsHidden()
                     }.padding()
+
+                    Section(header: Text("Category")) {
+                        CategoryView()
+                    }
                     
                     Section(header: Text("porcentagem do PR")) {
                         Stepper(value: $viewModel.prPercentage) {
@@ -37,15 +42,22 @@ struct NewPRRecordView: View {
                         }
                     }
                 
-                    Section {
-                        Picker(selection: $selectedInitialPounds, label: Text("Personal Record").foregroundColor(.secondary)){
+                    Section(header: Text("Personal Record")) {
+                        Picker(selection: $selectedInitialPounds, label: Text("Weight").foregroundColor(.secondary)){
                             ForEach(0..<999) {
                                 Text("\(String($0)) lb").foregroundColor(.primary)
                             }
                         }
-                    }.padding()
+                    }//.padding()
+                    
+                    Section(header: Text("Comments")) {
+                        TextField("Enter a comment if needed", text: $commentsText)
+                            .frame(height: 86)
+                    }
+                    
+                    
                 }
-                .navigationBarTitle(Text("Novo Record"), displayMode: .inline)
+                .navigationBarTitle(Text("New Record"), displayMode: .inline)
                 .navigationBarItems(trailing:
                     Button(action: {
                     let newPR = PR(context: viewContext)
@@ -62,7 +74,7 @@ struct NewPRRecordView: View {
                         print(error.localizedDescription)
                     }
                 }) {
-                    Text("Salvar")
+                    Text("Save")
                         .foregroundColor(.green)
                         .bold()
                 }).disabled(viewModel.isSaving)
@@ -82,4 +94,26 @@ struct NewPRRecordView_Previews: PreviewProvider {
     }
 }
 
+struct CategoryView: View {
+    
+    @State private var selectedCategory = 0
+    
+    var body: some View {
+        VStack(alignment: .center) {
+            Picker("What is your favorite color?", selection: $selectedCategory) {
+                Text("RX").tag(0)
+                Text("Scaled").tag(1)
+            }
+            .pickerStyle(.segmented)
+            ///Text("Value: \(selectedCategory)")
+        }
+    }
+}
+
+
+struct CategoryView_Previews: PreviewProvider {
+    static var previews: some View {
+        CategoryView()
+    }
+}
 
