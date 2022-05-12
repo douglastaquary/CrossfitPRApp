@@ -21,12 +21,12 @@ struct RecordDetail: View {
                     }
                 }
                 Group {
-                    Section("Record information") {
-                        HSubtitleView(title: "Personal record", subtitle: "\(record.recordValue) lb")
+                    Section("Personal record information") {
+                        HSubtitleView(title: "Weight", subtitle: "\(record.recordValue) lb")
                         HSubtitleView(title: "Date", subtitle: "\(record.dateFormatter)")
                     }
                 }
-                Section("Record evolution") {
+                Section(header: Text("\(record.prName) evolution"), footer: Text("This analysis is based on the PR list of \(record.prName) registered in the app. The most recent are the ones in the green band (on the right), the oldest gray and the evolution in yellow")) {
                     LineViewGraph()
                 }
             }

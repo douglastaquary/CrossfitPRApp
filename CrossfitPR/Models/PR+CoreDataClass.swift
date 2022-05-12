@@ -10,3 +10,10 @@ import CoreData
 
 @objc(PR)
 public class PR: NSManagedObject {}
+
+extension PR: Comparable {
+    public static func < (lhs: PR, rhs: PR) -> Bool {
+        return lhs.prName < rhs.prName
+    }
+}
+
