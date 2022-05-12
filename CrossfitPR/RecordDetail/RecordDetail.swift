@@ -8,18 +8,26 @@
 import SwiftUI
 
 struct RecordDetail: View {
+    @EnvironmentObject var store: RecordStore
     var record: PR
     
     var body: some View {
-        VStack {
-            ProgressView(progressValue: record.percentage/100)
+        VStack(alignment: .center) {
             Spacer()
             Form {
+                Group {
+                    Section("Record percentage") {
+                        ProgressView(progressValue: record.percentage/100)
+                    }
+                }
                 Group {
                     Section("Record information") {
                         HSubtitleView(title: "Personal record", subtitle: "\(record.recordValue) lb")
                         HSubtitleView(title: "Date", subtitle: "\(record.dateFormatter)")
                     }
+                }
+                Section("Record evolution") {
+                    LineViewGraph()
                 }
             }
         }

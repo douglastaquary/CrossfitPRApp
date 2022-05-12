@@ -11,13 +11,10 @@ struct ProgressView: View {
     @State var progressValue: Float = 0.0
     
     var body: some View {
-        VStack {
-            ProgressBar(progress: self.$progressValue)
-                .frame(width: 250, height: 250.0)
-                .padding(40.0)
-            Spacer()
-        }
-        .padding(.top, 36)
+        ProgressBar(progress: self.$progressValue)
+            .frame(width: 216.0, height: 216.0)
+            .padding()
+            .padding(.leading, 28)
     }
 }
 
@@ -47,5 +44,6 @@ struct ProgressBar: View {
                             .font(.largeTitle)
                             .bold()
         }
+        .background(.clear)
     }
 }
