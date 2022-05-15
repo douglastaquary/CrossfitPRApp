@@ -38,25 +38,22 @@ struct TodayView: View {
                             }
                         }
                     }
-                    
-                    Button(action: {
-                        self.showNewPRView.toggle()
-                    }){
-                    Text("New record")
-                        .foregroundColor(.white)
-                        .font(.headline)
-                        .frame(width: 350, height: 48)
-                        .background(Color.green)
-                        .cornerRadius(8)
-                        .padding(.top, 12)
-                    }
-                    .sheet(isPresented: $showNewPRView) {
-                        NewPRRecordView()
-                    }
                 }
             }
         }
+        .navigationBarItems(
+            trailing: HStack(spacing: 16) {
+                Button(action: { self.showNewPRView.toggle() }) {
+                    Image(systemName: "plus.square")
+                        .font(.headline)
+                        .foregroundColor(.green)
+                        .accessibility(label: Text("add"))
+                }.sheet(isPresented: $showNewPRView) {
+                    NewPRRecordView()
+                }
+            })
         .searchable(text: $searchText, prompt: "search by name")
+        
     }
     
     private func buildSections() {

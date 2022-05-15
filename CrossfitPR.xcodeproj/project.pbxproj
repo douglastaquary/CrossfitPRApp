@@ -49,6 +49,8 @@
 		4E8BAA1E2817640100E179A3 /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = 4E8BAA1D2817640100E179A3 /* SwiftUICharts */; };
 		4E8D9113282C798F00C88BF2 /* LineViewGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8D9112282C798F00C88BF2 /* LineViewGraph.swift */; };
 		4E8D9115282C820F00C88BF2 /* RecordStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8D9114282C820F00C88BF2 /* RecordStore.swift */; };
+		4E8D911F283192D800C88BF2 /* PurchaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8D911E283192D800C88BF2 /* PurchaseView.swift */; };
+		4E8D9121283195A000C88BF2 /* HViewImageAndText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8D9120283195A000C88BF2 /* HViewImageAndText.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -95,6 +97,8 @@
 		4E8BAA1A281760A100E179A3 /* InsightsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsightsStore.swift; sourceTree = "<group>"; };
 		4E8D9112282C798F00C88BF2 /* LineViewGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineViewGraph.swift; sourceTree = "<group>"; };
 		4E8D9114282C820F00C88BF2 /* RecordStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordStore.swift; sourceTree = "<group>"; };
+		4E8D911E283192D800C88BF2 /* PurchaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseView.swift; sourceTree = "<group>"; };
+		4E8D9120283195A000C88BF2 /* HViewImageAndText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HViewImageAndText.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +124,7 @@
 				4E26EC52281EE6FC00A4F8C3 /* ProgressView.swift */,
 				4E26EC54281EEB4700A4F8C3 /* HSubtitleView.swift */,
 				4E8D9112282C798F00C88BF2 /* LineViewGraph.swift */,
+				4E8D9120283195A000C88BF2 /* HViewImageAndText.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -143,6 +148,7 @@
 		4E58059127FB8AEF00F16219 /* CrossfitPR */ = {
 			isa = PBXGroup;
 			children = (
+				4E8D911D283192B600C88BF2 /* Purchase */,
 				4E26EC4B281EE61C00A4F8C3 /* Views */,
 				4E5805E5280CAA8700F16219 /* CrossfitPR.xcdatamodeld */,
 				4E5805D728026E9000F16219 /* DB */,
@@ -262,6 +268,14 @@
 			path = RecordDetail;
 			sourceTree = "<group>";
 		};
+		4E8D911D283192B600C88BF2 /* Purchase */ = {
+			isa = PBXGroup;
+			children = (
+				4E8D911E283192D800C88BF2 /* PurchaseView.swift */,
+			);
+			path = Purchase;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -347,7 +361,9 @@
 				4E5805BB27FB8B1C00F16219 /* OnboardingViewModel.swift in Sources */,
 				4E5805E4280CA76700F16219 /* PR+CoreDataClass.swift in Sources */,
 				4E5805EB280CEC1700F16219 /* CrossfitPRApp.swift in Sources */,
+				4E8D9121283195A000C88BF2 /* HViewImageAndText.swift in Sources */,
 				4E5805E9280CABE900F16219 /* PR+CoreDataProperties.swift in Sources */,
+				4E8D911F283192D800C88BF2 /* PurchaseView.swift in Sources */,
 				4E26EC57281EEDA400A4F8C3 /* PRSection.swift in Sources */,
 				4E26EC51281EE6B200A4F8C3 /* DetailItemView.swift in Sources */,
 				4E5805C427FBA91700F16219 /* LaunchView.swift in Sources */,
