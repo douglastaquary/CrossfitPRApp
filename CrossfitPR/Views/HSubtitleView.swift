@@ -23,10 +23,17 @@ struct HSubtitleView: View {
     }
 }
 
+struct HSubtitleView_Previews: PreviewProvider {
+    static var previews: some View {
+        HSubtitleView(title: "teste", subtitle: "teste")
+    }
+}
+
+
 struct EmptyView: View {
     @State var message: String
     var body: some View {
-        VStack {
+        VStack(alignment: .center) {
             Text(message)
                 .multilineTextAlignment(.center)
                 .foregroundColor(.secondary)
@@ -35,8 +42,9 @@ struct EmptyView: View {
 }
 
 
-struct HSubtitleView_Previews: PreviewProvider {
+struct EmptyView_Previews: PreviewProvider {
     static var previews: some View {
-        HSubtitleView(title: "teste", subtitle: "teste")
+        EmptyView(message: "Get started\nnow by adding a new\npersonal record")
     }
 }
+

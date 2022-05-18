@@ -16,7 +16,7 @@ public enum Route: String {
 struct LaunchView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @EnvironmentObject var viewlaunch: ViewLaunch
-
+    
     var body: some View {
         VStack {
             if viewlaunch.currentPage == Route.onBoardingView.rawValue {
@@ -32,7 +32,7 @@ struct LaunchView: View {
 }
 
 class ViewLaunch: ObservableObject {
-
+    
     init() {
         if !UserDefaults.standard.bool(forKey: "LaunchBefore") {
             currentPage = Route.onBoardingView.rawValue

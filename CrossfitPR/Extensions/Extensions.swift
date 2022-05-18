@@ -41,34 +41,22 @@ extension RandomAccessCollection {
     }
 }
 
+// Butons Extensions
+
 struct FilledButton: ButtonStyle {
     @Environment(\.isEnabled) private var isEnabled
+    var widthSizeEnabled: Bool = false
 
     func makeBody(configuration: Configuration) -> some View {
         configuration
             .label
             .font(.headline)
             .foregroundColor(configuration.isPressed ? .gray : .white)
+            .frame(maxWidth: widthSizeEnabled ? .infinity : .none)
             .padding()
             .background(isEnabled ? Color.green : .gray)
             .cornerRadius(8)
     }
-    
-    
-//    Button(action: {
-//        UserDefaults.standard.set(true, forKey: "LaunchBefore")
-//        withAnimation(){
-//            self.viewlaunch.currentPage = Route.prHistoriesListView.rawValue
-//        }
-//    }){
-//    Text("Começar")
-//        .foregroundColor(.white)
-//        .font(.headline)
-//        .frame(width: 350, height: 48)
-//        .background(Color.green)
-//        .cornerRadius(8)
-//        .padding(.top, 50)
-//    }
 }
 
 struct OutlineButton: ButtonStyle {

@@ -10,7 +10,7 @@ import SwiftUI
 struct RecordDetail: View {
     @EnvironmentObject var store: RecordStore
     var record: PR
-    
+
     var body: some View {
         VStack(alignment: .center) {
             Spacer()

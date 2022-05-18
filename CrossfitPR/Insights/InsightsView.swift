@@ -21,7 +21,7 @@ struct InsightsView: View {
     @EnvironmentObject var store: InsightsStore
     @FetchRequest(entity: PR.entity(), sortDescriptors: [], predicate: NSPredicate(format: "prName != %@", PRType.empty.rawValue))
     var prs: FetchedResults<PR>
-
+    
     var body: some View {
         if prs.count > 2 {
             Form {
@@ -71,7 +71,7 @@ struct InsightsView: View {
         }.sorted {
             $0.prValue > $1.prValue
         }.first
-
+        
         evolutionPoint = DataPoint.init(value: Double(evolutionPRselected?.prValue ?? 0), label: "\(evolutionPRselected?.prValue ?? 0) lb", legend: Legend(color: .yellow, label: "\(evolutionPRselected?.prName ?? "")", order: 2))
         
         for pr in prs {

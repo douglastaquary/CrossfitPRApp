@@ -21,39 +21,42 @@ struct TodayView: View {
     
     var filteredPrs: [PR] {
         prs.filter { item in
-          searchText.isEmpty ? true : item.prName.contains(searchText)
+            searchText.isEmpty ? true : item.prName.contains(searchText)
         }.sorted()
     }
-
+    
     var body: some View {
-        NavigationView {
-            ScrollViewReader { scrollView in
-                ScrollView {
-                    if prs.isEmpty {
-                        EmptyView(message: "Get started now\nby adding a new personal record")
-                    } else {
-                        ForEach(filteredPrs, id: \.id) { pr in
-                            NavigationLink(destination: RecordDetail(record: pr)) {
-                                PRView(record: pr)
-                            }
+        ScrollViewReader { scrollView in
+            ScrollView {
+                if prs.isEmpty {
+                    EmptyView(message: "Get started\nnow by adding a new\npersonal record")
+                } else {
+                    ForEach(filteredPrs, id: \.id) { pr in
+                        NavigationLink(destination: RecordDetail(record: pr)) {
+                            PRView(record: pr)
                         }
                     }
                 }
             }
         }
-        .navigationBarItems(
-            trailing: HStack(spacing: 16) {
+        .toolbar {
+            ToolbarItemGroup(placement: .navigationBarTrailing) {
                 Button(action: { self.showNewPRView.toggle() }) {
-                    Image(systemName: "plus.square")
+                    Image(systemName: "plus.circle")
                         .font(.headline)
                         .foregroundColor(.green)
                         .accessibility(label: Text("add"))
                 }.sheet(isPresented: $showNewPRView) {
                     NewPRRecordView()
                 }
-            })
+            }
+        }
+        .navigationBarTitle("Personal records", displayMode: .large)
         .searchable(text: $searchText, prompt: "search by name")
-        
+        .onAppear {
+            UINavigationBar.appearance().tintColor = .green
+        }
+    
     }
     
     private func buildSections() {

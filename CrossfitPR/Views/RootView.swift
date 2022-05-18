@@ -14,23 +14,25 @@ struct RootView: View {
     private var selectedTab = 0
     
     @State var showNewPRView = false
-
+    
     var body: some View {
         TabView(selection: $selectedTab) {
             NavigationView {
-                TodayView()
-                    .sheet(isPresented: $showNewPRView) {
-                        NewPRRecordView()
-                    }
-                    .environment(\.managedObjectContext, viewContext)
-                    .navigationTitle("Personal records")
+                VStack {
+                    TodayView()
+                        .sheet(isPresented: $showNewPRView) {
+                            NewPRRecordView()
+                        }
+                        .environment(\.managedObjectContext, viewContext)
+                }
+                
             }
             .tabItem {
                 Image(systemName: "heart")
                 Text("today")
             }
             .tag(0)
-
+            
             NavigationView {
                 InsightsView()
                     .navigationTitle("Insights")
