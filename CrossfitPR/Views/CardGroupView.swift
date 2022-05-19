@@ -23,35 +23,39 @@ struct CardGroupView: View {
     var buttonTitle: String = ""
     var iconSystemText: String = ""
     var body: some View {
-        GroupBox(
-            label: Label(cardTitle, systemImage: iconSystemText)
-                .foregroundColor(.green)
-        ) {
-            VStack {
-                HStack {
-                    Text(cardDescript).multilineTextAlignment(.leading)
-                        .padding(.top, 2)
-                    Spacer()
-                }
-                HStack {
-                    if !buttonTitle.isEmpty {
-                        Button(buttonTitle) {
-                            touched?()
-                        }
-                        .foregroundColor(.green)
+        
+        VStack {
+            GroupBox(
+                label: Label(cardTitle, systemImage: iconSystemText)
+                    .foregroundColor(.green)
+            ) {
+                VStack {
+                    HStack {
+                        Text(cardDescript)
+                            .multilineTextAlignment(.leading)
+                            .padding(.top, 2)
+                            .foregroundColor(.primary)
                         Spacer()
                     }
+                    HStack {
+                        if !buttonTitle.isEmpty {
+                            Button(buttonTitle) {
+                                touched?()
+                            }
+                            .foregroundColor(.green)
+                            Spacer()
+                        }
+                    }
+                    .padding(.top, 2)
                 }
-                .padding(.top, 2)
             }
         }
-        .padding()//.groupBoxStyle(PlainGroupBoxStyle())
     }
 }
 
 struct CardGroupView_Previews: PreviewProvider {
     static var previews: some View {
-        CardGroupView(cardTitle: "evolution", cardDescript: "Your hear rate is 90 BPM.", buttonTitle: "Unlock CrossfitPR PRO", iconSystemText: "chart.bar.fill") //.colorScheme(.dark)
+        CardGroupView(cardTitle: "evolution", cardDescript: "PRO subsciption enables historical data analysis that helps you undestand how new habits influence your heart", buttonTitle: "Unlock CrossfitPR PRO", iconSystemText: "chart.bar.fill") //.colorScheme(.dark)
     }
 }
 

@@ -40,12 +40,12 @@ struct SettingsView: View {
                     }) {
                         Text("Unlock PRO")
                     }
-                    
-                    Button(action: {
-                        self.settings.restorePurchase()
-                    }) {
-                        Text("Restore purchase")
-                    }
+                }
+            } else {
+                Button(action: {
+                    self.settings.restorePurchase()
+                }) {
+                    Text("Restore purchase")
                 }
             }
         }

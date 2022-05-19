@@ -17,6 +17,7 @@ struct InsightsView: View {
     @State var barPoints: [DataPoint] = []
     @State var biggestPRName: String = ""
     @State var biggestPR: PR?
+    @State var showPROsubsciptionView = false
     
     @EnvironmentObject var store: InsightsStore
     @FetchRequest(entity: PR.entity(), sortDescriptors: [], predicate: NSPredicate(format: "prName != %@", PRType.empty.rawValue))
@@ -24,30 +25,45 @@ struct InsightsView: View {
     
     var body: some View {
         if prs.count > 2 {
-            Form {
-                Section("Resume") {
-                    HorizontalBarChartView(dataPoints: [biggestPoint, evolutionPoint, lowPoint])
-                }
-                Section("Graph Details") {
-                    if barPoints.isEmpty {
-                        Text("There is no data to display chart...")
-                    } else {
-                        BarChartView(dataPoints: barPoints, limit: limit)
+            VStack {
+                Form {
+                    Section("Resume") {
+                        HorizontalBarChartView(dataPoints: [biggestPoint, evolutionPoint, lowPoint])
                     }
+                    Section("Graph Details") {
+                        if barPoints.isEmpty {
+                            Text("There is no data to display chart...")
+                        } else {
+                            BarChartView(dataPoints: barPoints, limit: limit)
+                        }
+                    }
+                    Section("PR informations") {
+                        HSubtitleView(title: "the biggest pr is " + "\(biggestPR?.prName ?? "")".lowercased(), subtitle: "\(biggestPR?.prValue ?? 0) lb")
+                        HSubtitleView(title: "percentage pr", subtitle: "\(biggestPR?.percentage.clean ?? "") %")
+                    }
+                    
+                    Button {
+                        self.showPROsubsciptionView.toggle()
+                    } label: {
+                        CardGroupView(
+                            cardTitle: "Insights",
+                            cardDescript: "PRO subsciption enables historical data analysis that helps you undestand how new habits influence your heart",
+                            buttonTitle: "Unlock CrossfitPR PRO",
+                            iconSystemText: "chart.bar.fill"
+                        )
+                    }.sheet(isPresented: $showPROsubsciptionView) {
+                        PurchaseView()
+                    }
+                    
+                }.onAppear {
+                    loadGraph()
+                    loadPRInfos()
                 }
-                Section("PR informations") {
-                    HSubtitleView(title: "the biggest pr is " + "\(biggestPR?.prName ?? "")".lowercased(), subtitle: "\(biggestPR?.prValue ?? 0) lb")
-                    HSubtitleView(title: "percentage pr", subtitle: "\(biggestPR?.percentage.clean ?? "") %")
-                }
-            }.onAppear {
-                loadGraph()
-                loadPRInfos()
             }
-            .accentColor(.green)
         } else {
             EmptyView(message: "Get started now\nby adding a new personal record")
         }
-    
+        
     }
     
     private func build() -> [PR] {

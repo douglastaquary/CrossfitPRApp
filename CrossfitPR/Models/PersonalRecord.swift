@@ -84,7 +84,11 @@ enum PersonalRecordKeys: String {
     case goal
 }
 
-enum ActivitiesRecordKey: String, Codable, CaseIterable {
+enum ActivitiesRecordKey: String, Codable, CaseIterable, Comparable {
+    static func < (lhs: ActivitiesRecordKey, rhs: ActivitiesRecordKey) -> Bool {
+        return lhs.rawValue < rhs.rawValue
+    }
+    
     case airSquat = "AIR SQUAT (AS)"
     case backSquat = "BACK SQUAT"
     case barMuscleUp = "BAR MUSCLE-UP"

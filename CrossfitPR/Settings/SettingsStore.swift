@@ -81,6 +81,6 @@ extension SettingsStore {
 
     func restorePurchase() {
         // You can do you in-app purchase restore here
-        isPro = true
+        isPro = false
     }
 }

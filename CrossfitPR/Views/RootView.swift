@@ -19,11 +19,13 @@ struct RootView: View {
         TabView(selection: $selectedTab) {
             NavigationView {
                 VStack {
-                    TodayView()
-                        .sheet(isPresented: $showNewPRView) {
-                            NewPRRecordView()
-                        }
+                    CategoryListView()
                         .environment(\.managedObjectContext, viewContext)
+//                    TodayView()
+//                        .sheet(isPresented: $showNewPRView) {
+//                            NewPRRecordView()
+//                        }
+//                        .environment(\.managedObjectContext, viewContext)
                 }
                 
             }

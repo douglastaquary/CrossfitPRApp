@@ -52,6 +52,7 @@
 		4E8D911F283192D800C88BF2 /* PurchaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8D911E283192D800C88BF2 /* PurchaseView.swift */; };
 		4E8D9121283195A000C88BF2 /* HViewImageAndText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8D9120283195A000C88BF2 /* HViewImageAndText.swift */; };
 		4E8D91232835C1B900C88BF2 /* CardGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8D91222835C1B900C88BF2 /* CardGroupView.swift */; };
+		4E8D91252835E23600C88BF2 /* CategoryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8D91242835E23600C88BF2 /* CategoryListView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -101,6 +102,7 @@
 		4E8D911E283192D800C88BF2 /* PurchaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseView.swift; sourceTree = "<group>"; };
 		4E8D9120283195A000C88BF2 /* HViewImageAndText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HViewImageAndText.swift; sourceTree = "<group>"; };
 		4E8D91222835C1B900C88BF2 /* CardGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardGroupView.swift; sourceTree = "<group>"; };
+		4E8D91242835E23600C88BF2 /* CategoryListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +130,7 @@
 				4E8D9112282C798F00C88BF2 /* LineViewGraph.swift */,
 				4E8D9120283195A000C88BF2 /* HViewImageAndText.swift */,
 				4E8D91222835C1B900C88BF2 /* CardGroupView.swift */,
+				4E8D91242835E23600C88BF2 /* CategoryListView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -368,6 +371,7 @@
 				4E8D9121283195A000C88BF2 /* HViewImageAndText.swift in Sources */,
 				4E5805E9280CABE900F16219 /* PR+CoreDataProperties.swift in Sources */,
 				4E8D911F283192D800C88BF2 /* PurchaseView.swift in Sources */,
+				4E8D91252835E23600C88BF2 /* CategoryListView.swift in Sources */,
 				4E26EC57281EEDA400A4F8C3 /* PRSection.swift in Sources */,
 				4E26EC51281EE6B200A4F8C3 /* DetailItemView.swift in Sources */,
 				4E5805C427FBA91700F16219 /* LaunchView.swift in Sources */,
