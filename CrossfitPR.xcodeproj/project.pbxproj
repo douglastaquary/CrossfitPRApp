@@ -51,6 +51,7 @@
 		4E8D9115282C820F00C88BF2 /* RecordStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8D9114282C820F00C88BF2 /* RecordStore.swift */; };
 		4E8D911F283192D800C88BF2 /* PurchaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8D911E283192D800C88BF2 /* PurchaseView.swift */; };
 		4E8D9121283195A000C88BF2 /* HViewImageAndText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8D9120283195A000C88BF2 /* HViewImageAndText.swift */; };
+		4E8D91232835C1B900C88BF2 /* CardGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8D91222835C1B900C88BF2 /* CardGroupView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -99,6 +100,7 @@
 		4E8D9114282C820F00C88BF2 /* RecordStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordStore.swift; sourceTree = "<group>"; };
 		4E8D911E283192D800C88BF2 /* PurchaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseView.swift; sourceTree = "<group>"; };
 		4E8D9120283195A000C88BF2 /* HViewImageAndText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HViewImageAndText.swift; sourceTree = "<group>"; };
+		4E8D91222835C1B900C88BF2 /* CardGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardGroupView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +127,7 @@
 				4E26EC54281EEB4700A4F8C3 /* HSubtitleView.swift */,
 				4E8D9112282C798F00C88BF2 /* LineViewGraph.swift */,
 				4E8D9120283195A000C88BF2 /* HViewImageAndText.swift */,
+				4E8D91222835C1B900C88BF2 /* CardGroupView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -354,6 +357,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4E5805BD27FB8B1C00F16219 /* CloudKitService.swift in Sources */,
+				4E8D91232835C1B900C88BF2 /* CardGroupView.swift in Sources */,
 				4E5805C627FBBE7900F16219 /* InsightsView.swift in Sources */,
 				4E5805BA27FB8B1C00F16219 /* Extensions.swift in Sources */,
 				4E5805DB28026EC500F16219 /* Protocols.swift in Sources */,

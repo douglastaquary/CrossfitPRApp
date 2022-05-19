@@ -12,9 +12,9 @@ struct ProgressView: View {
     
     var body: some View {
         ProgressBar(progress: self.$progressValue)
-            .frame(width: 216.0, height: 216.0)
+            .frame(width: 188.0, height: 188.0)
             .padding()
-            .padding(.leading, 28)
+            .padding(.leading, 44)
     }
 }
 
@@ -44,6 +44,6 @@ struct ProgressBar: View {
                             .font(.largeTitle)
                             .bold()
         }
-        .background(.clear)
+        //.background(.clear)
     }
 }

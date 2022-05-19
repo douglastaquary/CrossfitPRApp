@@ -33,6 +33,10 @@ struct RecordDetail: View {
         }
         .navigationBarTitle(Text(record.prName))
         .navigationBarTitleDisplayMode(.inline)
+        .onAppear {
+            UINavigationBar.appearance().tintColor = .green
+        }
+        .accentColor(.green)
     }
 }
 

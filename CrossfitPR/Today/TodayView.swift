@@ -56,7 +56,6 @@ struct TodayView: View {
         .onAppear {
             UINavigationBar.appearance().tintColor = .green
         }
-    
     }
     
     private func buildSections() {

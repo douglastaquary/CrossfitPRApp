@@ -43,9 +43,11 @@ struct InsightsView: View {
                 loadGraph()
                 loadPRInfos()
             }
+            .accentColor(.green)
         } else {
             EmptyView(message: "Get started now\nby adding a new personal record")
         }
+    
     }
     
     private func build() -> [PR] {

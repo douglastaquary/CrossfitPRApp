@@ -54,7 +54,7 @@ struct RootView: View {
                 Text("Settings")
             }
             .tag(1)
-        }
+        }.accentColor(.green)
     }
 }
 
