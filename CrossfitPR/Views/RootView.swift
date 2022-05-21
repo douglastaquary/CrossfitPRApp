@@ -21,11 +21,6 @@ struct RootView: View {
                 VStack {
                     CategoryListView()
                         .environment(\.managedObjectContext, viewContext)
-//                    TodayView()
-//                        .sheet(isPresented: $showNewPRView) {
-//                            NewPRRecordView()
-//                        }
-//                        .environment(\.managedObjectContext, viewContext)
                 }
                 
             }

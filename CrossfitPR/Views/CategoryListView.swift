@@ -6,8 +6,10 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct Category: Identifiable, Comparable {
+    
     static func < (lhs: Category, rhs: Category) -> Bool {
         lhs.title < rhs.title
     }
@@ -17,6 +19,10 @@ struct Category: Identifiable, Comparable {
 }
 
 struct CategoryListView: View {
+    @Environment(\.managedObjectContext) private var viewContext
+    @FetchRequest(entity: PR.entity(), sortDescriptors: [], predicate: NSPredicate(format: "prName != %@", PRType.empty.rawValue))
+    var prs: FetchedResults<PR>
+    
     @State private var searchText: String = ""
     @State var showNewPRView = false
     
@@ -27,14 +33,17 @@ struct CategoryListView: View {
             searchText.isEmpty ? true : $0.title.contains(searchText)
         }.sorted()
     }
-
+    
     var body: some View {
         ScrollViewReader { scrollView in
             ScrollView {
                 ForEach(filteredCategories, id: \.id) { category in
-                    NavigationLink(destination: RecordDetail(record: PersistenceController.prMock, prName: category.title)) {
-                            CategoryItemView(title: category.title)
-                        }
+                    NavigationLink(
+                        destination:RecordDetail(recordType:category.title)
+                            .environmentObject(RecordStore(records: prs, recordType: category.title))
+                    ) {
+                        CategoryItemView(title: category.title)
+                    }
                 }
             }
         }
@@ -56,7 +65,7 @@ struct CategoryListView: View {
             UINavigationBar.appearance().tintColor = .green
         }
         
-
+        
     }
 }
 

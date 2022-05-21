@@ -11,15 +11,10 @@ import SwiftUICharts
 struct PRView: View {
     var record: PR
     
-    @State var biggestPoint: DataPoint = DataPoint.init(value: 60.0, label: "", legend: Legend(color: .green, label: "60 lb", order: 1))
-    @State var evolutionPoint: DataPoint = DataPoint.init(value: 98.0, label: "75 lb", legend: Legend(color: .yellow, label: "pr", order: 2))
-    @State var lowPoint: DataPoint = DataPoint.init(value: 50.0, label: "", legend: Legend(color: .gray, label: "", order: 3))
-    
     var body: some View {
-        
         VStack(alignment: .leading) {
             HStack {
-                ProgressView(progressValue: (60/100))
+                ProgressView(progressValue: (record.percentage/100))
                 VStack(alignment: .leading) {
                     Text("\(record.dateFormatter)")
                         .font(.body)
@@ -28,10 +23,16 @@ struct PRView: View {
                     Text("Personal record")
                         .font(.footnote)
                         .foregroundColor(.secondary)
-                    HorizontalBarChartView(dataPoints: [evolutionPoint])
+                    HorizontalBarChartView(dataPoints: [
+                        DataPoint.init(
+                            value: Double(record.prValue),
+                            label: "\(record.prValue) lb",
+                            legend: Legend(color: .yellow, label: "pr", order: 2)
+                        )
+                    ])
                 }
             }
-            Divider()
+            //Divider()
         }
     }
 }
@@ -46,7 +47,7 @@ struct PRView_Previews: PreviewProvider {
 
 struct CategoryItemView: View {
     @State var title: String = ""
-
+    
     var body: some View {
         
         VStack(alignment: .leading) {

@@ -32,7 +32,7 @@ struct TodayView: View {
                     EmptyView(message: "Get started\nnow by adding a new\npersonal record")
                 } else {
                     ForEach(filteredPrs, id: \.id) { pr in
-                        NavigationLink(destination: RecordDetail(record: pr)) {
+                        NavigationLink(destination: RecordDetail(recordType: pr.prName)) {
                             PRView(record: pr)
                         }
                     }

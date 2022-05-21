@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 import os
 
 @MainActor final class RecordStore: ObservableObject {
@@ -13,14 +14,16 @@ import os
         subsystem: "com.aaplab.crossfitprapp",
         category: String(describing: RecordStore.self)
     )
-    @Published var prs: [PR] = []
-    
-    func orderByValue() {
-        prs.sort { $0.prValue < $1.prValue }
-    }
-    
-    func orderFrom(textFilter: String) -> [PR] {
-        return prs.filter { $0.prName == textFilter }
-    }
 
+    private var records: FetchedResults<PR>
+    private var recordType: String = ""
+    init(records: FetchedResults<PR>, recordType: String = "") {
+        self.records = records
+        self.recordType = recordType
+        
+    }
+    
+    var filteredPrs: [PR] {
+        records.filter { $0.prName.contains(recordType) }.sorted()
+    }
 }
