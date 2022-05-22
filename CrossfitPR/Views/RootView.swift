@@ -21,6 +21,7 @@ struct RootView: View {
                 VStack {
                     CategoryListView()
                         .environment(\.managedObjectContext, viewContext)
+                        .environmentObject(CategoryStore())
                 }
                 
             }

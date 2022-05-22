@@ -23,21 +23,14 @@ struct CategoryListView: View {
     @FetchRequest(entity: PR.entity(), sortDescriptors: [], predicate: NSPredicate(format: "prName != %@", PRType.empty.rawValue))
     var prs: FetchedResults<PR>
     
-    @State private var searchText: String = ""
+    @EnvironmentObject var store: CategoryStore
+//    @State private var searchText: String = ""
     @State var showNewPRView = false
-    
-    var filteredCategories: [Category] {
-        ActivitiesRecordKey.allCases.map {
-            Category(title: $0.rawValue)
-        }.filter {
-            searchText.isEmpty ? true : $0.title.contains(searchText)
-        }.sorted()
-    }
     
     var body: some View {
         ScrollViewReader { scrollView in
             ScrollView {
-                ForEach(filteredCategories, id: \.id) { category in
+                ForEach(store.filteredCategories, id: \.id) { category in
                     NavigationLink(
                         destination:RecordDetail(recordType:category.title)
                             .environmentObject(RecordStore(records: prs, recordType: category.title))
@@ -59,11 +52,11 @@ struct CategoryListView: View {
                 }
             }
         }
-        .navigationBarTitle("Personal records", displayMode: .large)
-        .searchable(text: $searchText, prompt: "search by name")
+        .searchable(text: $store.searchText, prompt: "search by name")
         .onAppear {
             UINavigationBar.appearance().tintColor = .green
         }
+        .navigationBarTitle("Personal records", displayMode: .large)
         
         
     }

@@ -39,7 +39,7 @@ struct InsightsView: View {
                     }
                     Section("PR informations") {
                         HSubtitleView(title: "the biggest pr is " + "\(biggestPR?.prName ?? "")".lowercased(), subtitle: "\(biggestPR?.prValue ?? 0) lb")
-                        HSubtitleView(title: "percentage pr", subtitle: "\(biggestPR?.percentage.clean ?? "") %")
+                        HSubtitleView(title: "with intensity of", subtitle: "\(biggestPR?.percentage.clean ?? "") %")
                     }
                     
                     Button {
