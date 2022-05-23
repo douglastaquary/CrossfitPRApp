@@ -18,30 +18,28 @@ struct OnboardingView: View {
                     .font(.system(size: 50))
                     .frame(width: 300, alignment: .leading)
         
-                
-                VStack(alignment: .leading) {
-                    NewDetail(image: "heart.fill", imageColor: .green, title: "Anote seus PRs sem complicações", description: "Todas as informações sobre os seus PRs em um só lugar")
-                    NewDetail(image: "paperclip", imageColor: .blue, title: "Organizing your PRs", description: "Organizing your personal records makes the evolution of your exercises more practical")
-                    NewDetail(image: "paperclip", imageColor: .blue, title: "The powerful insights", description: "The powerful insights elevator allows you to understand your biggest records and the evolution of others")
-                    NewDetail(image: "play.rectangle.fill", imageColor: .black, title: "Wods para treinar em casa", description: "Wods gratuitos para treinar a qualquer hora e lugar")
-            }
+            NewDetail(image: "heart.fill", imageColor: .green, title: "Anote seus PRs sem complicações", description: "Todas as informações sobre os seus PRs em um só lugar")
+            NewDetail(image: "paperclip", imageColor: .blue, title: "Organizing your PRs", description: "Organizing your personal records makes the evolution of your exercises more practical")
+            NewDetail(image: "paperclip", imageColor: .blue, title: "The powerful insights", description: "The powerful insights elevator allows you to understand your biggest records and the evolution of others")
+//                VStack(alignment: .leading) {
+//                    NewDetail(image: "heart.fill", imageColor: .green, title: "Anote seus PRs sem complicações", description: "Todas as informações sobre os seus PRs em um só lugar")
+//                    NewDetail(image: "paperclip", imageColor: .blue, title: "Organizing your PRs", description: "Organizing your personal records makes the evolution of your exercises more practical")
+//                    NewDetail(image: "paperclip", imageColor: .blue, title: "The powerful insights", description: "The powerful insights elevator allows you to understand your biggest records and the evolution of others")
+//
+//            }
 
             Spacer()
-            
-            Button(action: {
-                UserDefaults.standard.set(true, forKey: "LaunchBefore")
-                withAnimation(){
-                    self.viewlaunch.currentPage = Route.prHistoriesListView.rawValue
+            VStack {
+                Button("Start"){
+                    UserDefaults.standard.set(true, forKey: "LaunchBefore")
+                    withAnimation(){
+                        self.viewlaunch.currentPage = Route.prHistoriesListView.rawValue
+                    }
                 }
-            }){
-            Text("Começar")
-                .foregroundColor(.white)
-                .font(.headline)
-                .frame(width: 350, height: 48)
-                .background(Color.green)
-                .cornerRadius(8)
-                .padding(.top, 50)
+                .buttonStyle(FilledButton(widthSizeEnabled: true))
             }
+            .padding()
+            
         }
     }
 }
@@ -82,6 +80,5 @@ struct NewDetail_Previews: PreviewProvider {
     static var previews: some View {
         NewDetail(image: "heart.fill", imageColor: .pink, title: "More Personalized", description: "Top Stories picked for you and recommendations from siri.")
         .previewLayout(.sizeThatFits)
-        .padding(10)
     }
 }

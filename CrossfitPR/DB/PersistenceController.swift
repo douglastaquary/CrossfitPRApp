@@ -24,6 +24,18 @@ struct PersistenceController {
         return pr
     }()
     
+    static var emptyRecord: PR = {
+        let result = PersistenceController(inMemory: true)
+        let viewContext = result.container.viewContext
+        let pr = PR(context: viewContext)
+        pr.prName = ""
+        pr.recordValue = 0
+        pr.recordDate = .now
+        pr.percentage = 0.0
+        pr.id = UUID()
+        return pr
+    }()
+    
     static var preview: PersistenceController = {
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext

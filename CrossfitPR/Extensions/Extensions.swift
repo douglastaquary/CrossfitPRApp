@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 struct IndexedCollection<Base: RandomAccessCollection>: RandomAccessCollection {
     typealias Index = Base.Index
@@ -37,5 +38,38 @@ struct IndexedCollection<Base: RandomAccessCollection>: RandomAccessCollection {
 extension RandomAccessCollection {
     func indexed() -> IndexedCollection<Self> {
         IndexedCollection(base: self)
+    }
+}
+
+// Butons Extensions
+
+struct FilledButton: ButtonStyle {
+    @Environment(\.isEnabled) private var isEnabled
+    var widthSizeEnabled: Bool = false
+
+    func makeBody(configuration: Configuration) -> some View {
+        configuration
+            .label
+            .font(.headline)
+            .foregroundColor(configuration.isPressed ? .gray : .white)
+            .frame(maxWidth: widthSizeEnabled ? .infinity : .none)
+            .padding()
+            .background(isEnabled ? Color.green : .gray)
+            .cornerRadius(8)
+    }
+}
+
+struct OutlineButton: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration
+            .label
+            .foregroundColor(configuration.isPressed ? .gray : .green)
+            .padding()
+            .background(
+                RoundedRectangle(
+                    cornerRadius: 8,
+                    style: .continuous
+                ).stroke(Color.green)
+        )
     }
 }

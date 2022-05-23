@@ -6,28 +6,64 @@
 //
 
 import SwiftUI
+import SwiftUICharts
 
 struct PRView: View {
     var record: PR
     
     var body: some View {
         VStack(alignment: .leading) {
-            Text(record.prName.capitalized)
-                .font(.headline)
-                .foregroundColor(.primary)
-            Spacer()
             HStack {
-                Text("\(record.prValue) lb")
-                    .font(.subheadline)
-                    .foregroundColor(.secondary)
-                Spacer()
-                Text("\(record.dateFormatter)")
-                    .font(.subheadline)
-                    .foregroundColor(.secondary)
-                    .padding(.trailing)
+                ProgressView(progressValue: (record.percentage/100))
+                VStack(alignment: .leading) {
+                    Text("\(record.dateFormatter)")
+                        .font(.body)
+                        .fontWeight(.semibold)
+                        .padding(.bottom, 8)
+                    Text("Personal record")
+                        .font(.footnote)
+                        .foregroundColor(.secondary)
+                    HorizontalBarChartView(dataPoints: [
+                        DataPoint.init(
+                            value: Double(record.prValue),
+                            label: "\(record.prValue) lb",
+                            legend: Legend(color: .yellow, label: "pr", order: 2)
+                        )
+                    ])
+                }
             }
+            //Divider()
+        }
+    }
+}
+
+
+struct PRView_Previews: PreviewProvider {
+    static var previews: some View {
+        PRView(record: PersistenceController.prMock)
+    }
+}
+
+
+struct CategoryItemView: View {
+    @State var title: String = ""
+    
+    var body: some View {
+        
+        VStack(alignment: .leading) {
+            Text(title)
+                .font(.title2)
+                .fontWeight(.semibold)
+                .foregroundColor(.primary)
+                .padding([.top, .bottom], 8)
+                .padding(.leading, 12)
             Divider()
         }
-        .padding(.leading, 16)
+    }
+}
+
+struct CategoryItemView_Previews: PreviewProvider {
+    static var previews: some View {
+        CategoryItemView(title: "DEADLIFT")
     }
 }
