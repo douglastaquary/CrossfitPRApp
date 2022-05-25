@@ -1,0 +1,20 @@
+/* 
+  Localizable.strings
+  CrossfitPR
+
+  Created by Douglas Taquary on 25/05/22.
+  
+*/
+/* Screen titles*/
+"screen.category.title" = "Personal records";
+"screen.insights.title" = "Insights";
+"screen.settings.title" = "Settings";
+
+/* Category searchbar descript */
+"category.search.descript" = "search by name";
+
+/* Tabbar title screens */
+"tabbar.today.title" = "today";
+"tabbar.insights.title" = "insights";
+"tabbar.settings.title" = "settings";
+

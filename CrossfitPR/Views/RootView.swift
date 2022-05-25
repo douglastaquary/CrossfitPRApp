@@ -27,29 +27,29 @@ struct RootView: View {
             }
             .tabItem {
                 Image(systemName: "heart")
-                Text("today")
+                Text(LocalizedStringKey("tabbar.today.title"))
             }
             .tag(0)
             
             NavigationView {
                 InsightsView()
-                    .navigationTitle("Insights")
+                    .navigationTitle(LocalizedStringKey("screen.insights.title"))
                     .environmentObject(InsightsStore())
             }
             .tabItem {
                 Image(systemName: "chart.bar")
-                Text("insights")
+                Text(LocalizedStringKey("tabbar.insights.title"))
             }
             .tag(1)
             
             NavigationView {
                 SettingsView()
-                    .navigationTitle("Settings")
+                    .navigationTitle(LocalizedStringKey("screen.settings.title"))
                     .environmentObject(SettingsStore())
             }
             .tabItem {
                 Image(systemName: "gear")
-                Text("Settings")
+                Text(LocalizedStringKey("tabbar.settings.title"))
             }
             .tag(1)
         }.accentColor(.green)

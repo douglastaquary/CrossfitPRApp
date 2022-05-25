@@ -52,6 +52,8 @@
 		4E8D9121283195A000C88BF2 /* HViewImageAndText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8D9120283195A000C88BF2 /* HViewImageAndText.swift */; };
 		4E8D91232835C1B900C88BF2 /* CardGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8D91222835C1B900C88BF2 /* CardGroupView.swift */; };
 		4E8D91252835E23600C88BF2 /* CategoryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8D91242835E23600C88BF2 /* CategoryListView.swift */; };
+		4EA48820283B238800183E03 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA4881F283B238800183E03 /* Category.swift */; };
+		4EA48835283DD39A00183E03 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4EA48837283DD39A00183E03 /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,7 +66,6 @@
 		4E26EC56281EEDA400A4F8C3 /* PRSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PRSection.swift; sourceTree = "<group>"; };
 		4E58058F27FB8AEF00F16219 /* CrossfitPR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CrossfitPR.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E58059427FB8AEF00F16219 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		4E58059927FB8AEF00F16219 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4E58059E27FB8AF300F16219 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4E5805A127FB8AF300F16219 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4E5805A327FB8AF300F16219 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -101,6 +102,10 @@
 		4E8D9120283195A000C88BF2 /* HViewImageAndText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HViewImageAndText.swift; sourceTree = "<group>"; };
 		4E8D91222835C1B900C88BF2 /* CardGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardGroupView.swift; sourceTree = "<group>"; };
 		4E8D91242835E23600C88BF2 /* CategoryListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListView.swift; sourceTree = "<group>"; };
+		4EA4881F283B238800183E03 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		4EA48832283DD21900183E03 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/Main.storyboard; sourceTree = "<group>"; };
+		4EA48836283DD39A00183E03 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		4EA48838283DD3A200183E03 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,6 +141,7 @@
 		4E58058627FB8AEF00F16219 = {
 			isa = PBXGroup;
 			children = (
+				4EA48837283DD39A00183E03 /* Localizable.strings */,
 				4E58059127FB8AEF00F16219 /* CrossfitPR */,
 				4E58059027FB8AEF00F16219 /* Products */,
 			);
@@ -220,6 +226,7 @@
 				4E5805E3280CA76700F16219 /* PR+CoreDataClass.swift */,
 				4E5805E8280CABE900F16219 /* PR+CoreDataProperties.swift */,
 				4E26EC56281EEDA400A4F8C3 /* PRSection.swift */,
+				4EA4881F283B238800183E03 /* Category.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -324,6 +331,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"pt-BR",
 			);
 			mainGroup = 4E58058627FB8AEF00F16219;
 			packageReferences = (
@@ -344,6 +352,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4E5805A227FB8AF300F16219 /* LaunchScreen.storyboard in Resources */,
+				4EA48835283DD39A00183E03 /* Localizable.strings in Resources */,
 				4E58059F27FB8AF300F16219 /* Assets.xcassets in Resources */,
 				4E58059A27FB8AEF00F16219 /* Main.storyboard in Resources */,
 			);
@@ -397,6 +406,7 @@
 				4E8D9113282C798F00C88BF2 /* LineViewGraph.swift in Sources */,
 				4E8D9115282C820F00C88BF2 /* RecordStore.swift in Sources */,
 				4E5805E2280CA08000F16219 /* PersistenceController.swift in Sources */,
+				4EA48820283B238800183E03 /* Category.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -406,7 +416,7 @@
 		4E58059827FB8AEF00F16219 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				4E58059927FB8AEF00F16219 /* Base */,
+				4EA48832283DD21900183E03 /* en */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -419,6 +429,15 @@
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
+		4EA48837283DD39A00183E03 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4EA48836283DD39A00183E03 /* en */,
+				4EA48838283DD3A200183E03 /* pt-BR */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -426,6 +445,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -487,6 +507,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";

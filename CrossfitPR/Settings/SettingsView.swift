@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SettingsView: View {
     @EnvironmentObject var settings: SettingsStore
+    @State var showPROsubsciptionView = false
     
     var body: some View {
         Form {
@@ -39,15 +40,17 @@ struct SettingsView: View {
                         self.settings.unlockPro()
                     }) {
                         Text("Unlock PRO")
+                    }.sheet(isPresented: $showPROsubsciptionView) {
+                        PurchaseView()
+                    }
+                    
+                    Button(action: {
+                        self.settings.restorePurchase()
+                    }) {
+                        Text("Restore purchase")
                     }
                 }
-            } else {
-                Button(action: {
-                    self.settings.restorePurchase()
-                }) {
-                    Text("Restore purchase")
-                }
-            }
+            } 
         }
     }
 }

@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import Combine
 import CoreData
 import SwiftUICharts
 
@@ -18,6 +19,30 @@ final class InsightsStore: ObservableObject {
     @Published var barPoints: [DataPoint] = []
     @Published var biggestPRName: String = ""
     @Published var biggestPR: PR?
+    
+    private enum Keys {
+        static let pro = "pro"
+    }
+    
+    let objectWillChange = PassthroughSubject<Void, Never>()
+    
+    private let cancellable: Cancellable
+    private let defaults: UserDefaults
+    init(defaults: UserDefaults = .standard) {
+        self.defaults = defaults
+
+        cancellable = NotificationCenter.default
+            .publisher(for: UserDefaults.didChangeNotification)
+            .map { _ in () }
+            .subscribe(objectWillChange)
+    }
+    
+    var isPro: Bool {
+        set { defaults.set(newValue, forKey: Keys.pro) }
+        get { defaults.bool(forKey: Keys.pro) }
+    }
+    
+    
 //    private var max: Int = 0
 //    private var min: Int = 0
     let biggestPr = Legend(color: .green, label: "PR Biggest", order: 3)
@@ -120,4 +145,16 @@ final class InsightsStore: ObservableObject {
         }
     }
     
+}
+
+extension InsightsStore {
+    func unlockPro() {
+        // You can do your in-app transactions here
+        isPro = true
+    }
+
+    func restorePurchase() {
+        // You can do you in-app purchase restore here
+        isPro = false
+    }
 }

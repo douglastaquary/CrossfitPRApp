@@ -32,7 +32,7 @@ struct RecordDetail: View {
                 }
 
                 Section(header: Text("\(recordType) evolution"), footer: Text("This analysis is based on the PR list of \(recordType) registered in the app. The most recent are the ones in the green band (on the right), the oldest gray and the evolution in yellow")) {
-                    LineViewGraph()
+                    LineViewGraph(points: store.points)
                 }
             }
         }

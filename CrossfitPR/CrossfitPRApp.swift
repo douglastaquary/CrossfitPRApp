@@ -13,7 +13,8 @@ struct CrossfitPRApp: App {
 
     var body: some Scene {
         WindowGroup {
-            LaunchView().environmentObject(ViewLaunch())
+            LaunchView()
+                .environmentObject(ViewLaunch())
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
