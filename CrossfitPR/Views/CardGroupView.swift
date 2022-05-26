@@ -22,8 +22,8 @@ struct CardGroupView: View {
     var cardDescript: String = ""
     var buttonTitle: String = ""
     var iconSystemText: String = ""
+    
     var body: some View {
-        
         VStack {
             GroupBox(
                 label: Label(cardTitle, systemImage: iconSystemText)
@@ -33,22 +33,19 @@ struct CardGroupView: View {
                     HStack {
                         Text(cardDescript)
                             .multilineTextAlignment(.leading)
+                            .fixedSize(horizontal: false, vertical: true)
                             .padding(.top, 2)
                             .foregroundColor(.primary)
                         Spacer()
                     }
                     HStack {
-                        if !buttonTitle.isEmpty {
-                            Button(buttonTitle) {
-                                touched?()
-                            }
+                        Text(buttonTitle)
                             .foregroundColor(.green)
                             Spacer()
-                        }
                     }
                     .padding(.top, 2)
                 }
-            }
+            }.groupBoxStyle(PlainGroupBoxStyle())
         }
     }
 }
