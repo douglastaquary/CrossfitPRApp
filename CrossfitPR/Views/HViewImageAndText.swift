@@ -23,11 +23,11 @@ struct HViewImageAndText: View {
 
                 VStack(alignment: .leading, spacing: 8) {
                     Text(title)
-                        .fixedSize(horizontal: true, vertical: true)
+                        .fixedSize(horizontal: true, vertical: false)
                     Text(description)
                         .font(.footnote)
                         .foregroundColor(.secondary)
-                        .fixedSize(horizontal: false, vertical: true)
+                        .fixedSize(horizontal: false, vertical: false)
                 }
             }.frame(width: 340, height: 100)
         }
