@@ -27,7 +27,7 @@ struct PRView: View {
                         DataPoint.init(
                             value: Double(record.prValue),
                             label: "\(record.prValue) lb",
-                            legend: Legend(color: .yellow, label: "pr", order: 2)
+                            legend: Legend(color: .yellow, label: "\(record.categoryRecord ?? "")", order: 2)
                         )
                     ])
                 }

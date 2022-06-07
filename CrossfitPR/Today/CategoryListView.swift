@@ -22,7 +22,7 @@ struct CategoryListView: View {
             ScrollView {
                 ForEach(store.filteredCategories, id: \.id) { category in
                     NavigationLink(
-                        destination:RecordDetail(recordType:category.title)
+                        destination: RecordDetail(recordType:category.title)
                             .environmentObject(RecordStore(records: prs, recordType: category.title))
                     ) {
                         CategoryItemView(title: category.title)

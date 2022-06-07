@@ -32,6 +32,7 @@ struct PersistenceController {
         pr.recordValue = 0
         pr.recordDate = .now
         pr.percentage = 0.0
+        pr.categoryRecord = CrossfitPrescribed.rx.rawValue
         pr.id = UUID()
         return pr
     }()
@@ -45,6 +46,7 @@ struct PersistenceController {
             pr.recordValue = 100
             pr.recordDate = .now
             pr.percentage = 0.28
+            pr.categoryRecord = CrossfitPrescribed.rx.rawValue
             pr.id = UUID()
         }
         do {

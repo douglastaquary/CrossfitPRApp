@@ -11,8 +11,10 @@ import CoreData
 struct NewPRRecordView: View {
     @Environment(\.managedObjectContext) private var viewContext
     
+    let categoriesString = ["Rx", "Scale", "Fitness"]
     @State private var commentsText: String = ""
     @State private var selectedCategory: Int = 0
+    @State private var selectedCategoryItem: Int = 0
     @State private var selectedPercentage: Int = 10
     @State private var selectedInitialPounds: Int = 10
     @StateObject private var viewModel = NewPRViewModel()
@@ -24,8 +26,8 @@ struct NewPRRecordView: View {
         NavigationView {
             Form {
                 Section(header: Text("Personal record")) {
-                    CategoryView()
-                    Picker(selection: $selectedCategory, label: Text("Exercise").foregroundColor(.secondary)){
+                    CategoryView(categoriesNames: categoriesString, selectedCategory: $selectedCategoryItem)
+                    Picker(selection: $selectedCategory, label: Text("Exercise").foregroundColor(.secondary)) {
                         ForEach(0..<ActivitiesRecordKey.allCases.count) {
                             Text(ActivitiesRecordKey.allCases[$0].rawValue)
                         }
@@ -43,10 +45,6 @@ struct NewPRRecordView: View {
                     }
                     .foregroundColor(.primary)
                     .labelsHidden()
-                    //.padding(.bottom, 12)
-//                    Stepper(value: $viewModel.prPercentage) {
-//                        Text(" \(viewModel.prPercentage.clean) %").bold()
-//                    }
                     Picker(selection: $selectedInitialPounds, label: Text("Weight").foregroundColor(.secondary)){
                         ForEach(0..<999) {
                             Text("\(String($0)) lb").foregroundColor(.primary)
@@ -76,7 +74,8 @@ struct NewPRRecordView: View {
                         newPR.recordDate = .now
                         newPR.prValue = selectedInitialPounds
                         newPR.id = UUID()
-                        newPR.percentage = viewModel.prPercentage
+                        newPR.percentage = Float(selectedPercentage)
+                        newPR.categoryRecord = CrossfitPrescribed.allCases[selectedCategoryItem].rawValue
                         do {
                             try viewContext.save()
                             print("PR saved.")
@@ -107,17 +106,17 @@ struct NewPRRecordView_Previews: PreviewProvider {
 }
 
 struct CategoryView: View {
-    
-    @State private var selectedCategory = 0
-    
+    let categoriesNames: [String]
+    @Binding var selectedCategory: Int
+
     var body: some View {
         VStack(alignment: .center) {
             Picker("What is your favorite color?", selection: $selectedCategory) {
-                Text("RX").tag(0)
-                Text("Scaled").tag(1)
+                ForEach(0..<categoriesNames.count) { index in
+                    Text(self.categoriesNames[index]).tag(index)
+                }
             }
             .pickerStyle(.segmented)
-            ///Text("Value: \(selectedCategory)")
         }
         .padding([.bottom, .top], 14)
     }
@@ -126,7 +125,7 @@ struct CategoryView: View {
 
 struct CategoryView_Previews: PreviewProvider {
     static var previews: some View {
-        CategoryView()
+        CategoryView(categoriesNames: [], selectedCategory: .constant(0))
     }
 }
 

@@ -18,6 +18,7 @@ struct RecordDetail: View {
             Form {
                 Group {
                     Section("Biggest PR") {
+                        HSubtitleView(title: "Category", subtitle: "\(String(describing: store.record.categoryRecord ?? ""))")
                         HSubtitleView(title: "Percentage", subtitle: "\(String(describing: store.record.percentage.clean)) %")
                         HSubtitleView(title: "Weight", subtitle: "\(String(describing: store.record.prValue)) lb")
                         HSubtitleView(title: "Date", subtitle: "\(String(describing: store.record.dateFormatter))")

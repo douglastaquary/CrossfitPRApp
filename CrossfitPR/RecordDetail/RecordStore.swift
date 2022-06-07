@@ -39,9 +39,9 @@ import os
         self.recordType = recordType
         self.defaults = defaults
         
-        defaults.register(defaults: [
-            Keys.enabledSortedByValue: false,
-        ])
+//        defaults.register(defaults: [
+//            Keys.enabledSortedByValue: false,
+//        ])
 
         cancellable = NotificationCenter.default
             .publisher(for: UserDefaults.didChangeNotification)

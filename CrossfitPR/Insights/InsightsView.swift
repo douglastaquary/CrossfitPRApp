@@ -24,7 +24,7 @@ struct InsightsView: View {
     var prs: FetchedResults<PR>
     
     var body: some View {
-        if prs.count > 2 {
+        if prs.count > 5 {
             VStack {
                 Form {
                     Section("Resume") {
