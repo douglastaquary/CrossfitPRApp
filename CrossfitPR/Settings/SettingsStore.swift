@@ -8,6 +8,11 @@
 import SwiftUI
 import Combine
 
+enum MeasureTrackingMode: String, CaseIterable {
+    case pounds
+    case kilos
+}
+
 final class SettingsStore: ObservableObject {
     private enum Keys {
         static let pro = "pro"
@@ -68,6 +73,7 @@ final class SettingsStore: ObservableObject {
                 .flatMap { MeasureTrackingMode(rawValue: $0) } ?? .pounds
         }
         set {
+            UserDefaultsConfig.shared.measureTrackingMode = newValue.rawValue
             defaults.set(newValue.rawValue, forKey: Keys.measureTrackingMode)
         }
     }
@@ -84,3 +90,5 @@ extension SettingsStore {
         isPro = false
     }
 }
+
+

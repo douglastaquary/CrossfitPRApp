@@ -20,11 +20,12 @@ struct InsightsView: View {
     @State var showPROsubsciptionView = false
     
     @EnvironmentObject var store: InsightsStore
+    @Environment(\.managedObjectContext) private var viewContext
     @FetchRequest(entity: PR.entity(), sortDescriptors: [], predicate: NSPredicate(format: "prName != %@", PRType.empty.rawValue))
     var prs: FetchedResults<PR>
     
     var body: some View {
-        if prs.count > 5 {
+        if prs.count > 3 {
             VStack {
                 Form {
                     Section("Resume") {

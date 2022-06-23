@@ -17,6 +17,7 @@ struct NewPRRecordView: View {
     @State private var selectedCategoryItem: Int = 0
     @State private var selectedPercentage: Int = 10
     @State private var selectedInitialPounds: Int = 10
+    @State private var selectedMaxReps: Int = 0
     @StateObject private var viewModel = NewPRViewModel()
     @Environment(\.presentationMode) var presentation
     
@@ -28,7 +29,7 @@ struct NewPRRecordView: View {
                 Section(header: Text("Personal record")) {
                     CategoryView(categoriesNames: categoriesString, selectedCategory: $selectedCategoryItem)
                     Picker(selection: $selectedCategory, label: Text("Exercise").foregroundColor(.secondary)) {
-                        ForEach(0..<ActivitiesRecordKey.allCases.count) {
+                        ForEach(0..<ActivitiesRecordKey.allCases.count, id: \.self) {
                             Text(ActivitiesRecordKey.allCases[$0].rawValue)
                         }
                     }
@@ -37,17 +38,32 @@ struct NewPRRecordView: View {
                     .padding(.bottom, 12)
                 }
                 
-                Section(header: Text("Informations")) {
-                    Picker(selection: $selectedPercentage, label: Text("Percentage").foregroundColor(.secondary)){
-                        ForEach(0..<200) {
-                            Text("\($0) %")
+                Toggle(isOn: $viewModel.isMaxRepetitions) {
+                    Text("Maximum repetitions")
+                }
+                
+                if viewModel.isMaxRepetitions {
+                    Section(header: Text("Max reps")) {
+                        Picker(selection: $selectedMaxReps, label: Text("Repetitions").foregroundColor(.secondary)){
+                            ForEach(0..<999) {
+                                Text("\(String($0))").foregroundColor(.primary)
+                            }
                         }
                     }
-                    .foregroundColor(.primary)
-                    .labelsHidden()
-                    Picker(selection: $selectedInitialPounds, label: Text("Weight").foregroundColor(.secondary)){
-                        ForEach(0..<999) {
-                            Text("\(String($0)) lb").foregroundColor(.primary)
+                    
+                } else {
+                    Section(header: Text("Informations")) {
+                        Picker(selection: $selectedPercentage, label: Text("Percentage").foregroundColor(.secondary)){
+                            ForEach(0..<200) {
+                                Text("\($0) %")
+                            }
+                        }
+                        .foregroundColor(.primary)
+                        .labelsHidden()
+                        Picker(selection: $selectedInitialPounds, label: Text("Weight").foregroundColor(.secondary)){
+                            ForEach(0..<999) {
+                                Text("\(String($0)) lb").foregroundColor(.primary)
+                            }
                         }
                     }
                 }
@@ -75,7 +91,7 @@ struct NewPRRecordView: View {
                         newPR.prValue = selectedInitialPounds
                         newPR.id = UUID()
                         newPR.percentage = Float(selectedPercentage)
-                        newPR.categoryRecord = CrossfitPrescribed.allCases[selectedCategoryItem].rawValue
+                        newPR.category = CrossfitPrescribed.allCases[selectedCategoryItem].rawValue
                         do {
                             try viewContext.save()
                             print("PR saved.")
@@ -112,7 +128,7 @@ struct CategoryView: View {
     var body: some View {
         VStack(alignment: .center) {
             Picker("What is your favorite color?", selection: $selectedCategory) {
-                ForEach(0..<categoriesNames.count) { index in
+                ForEach(0..<categoriesNames.count, id: \.self) { index in
                     Text(self.categoriesNames[index]).tag(index)
                 }
             }

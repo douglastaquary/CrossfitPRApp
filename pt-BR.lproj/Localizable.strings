@@ -18,3 +18,14 @@
 "tabbar.insights.title" = "percepções";
 "tabbar.settings.title" = "configurações";
 
+/* Purchase screen */
+"purchase.manager.title" = "Gerencie seus recordes pessoais";
+"purchase.manager.description" = "Edite, apague records, organize suas categorias de acordo com os seus treinos.";
+
+"purchase.insights.title" = "Os poderosos insights";
+"purchase.insights.description" = "Os poderosos insights permite que você acompanhe, entenda seus maiores records e evolução através de gráficos simplificados.";
+
+"purchase.tryfree.title" = "Experimente GRÁTIS por 7 dias";
+
+"purchase.commitment.title"= "Sem compromisso.\nCancele a qualquer momento.\nApós 7 dias de teste gratuito, esta assinatura\né renovada automaticamente dependendo da forma que\nvocê escolher, a menos que a renovação\nautomática esteja desativada.";
+

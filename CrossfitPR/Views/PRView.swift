@@ -10,6 +10,9 @@ import SwiftUICharts
 
 struct PRView: View {
     var record: PR
+    var isPounds: Bool {
+        UserDefaultsConfig.shared.measureTrackingMode == MeasureTrackingMode.pounds.rawValue
+    }
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -26,8 +29,8 @@ struct PRView: View {
                     HorizontalBarChartView(dataPoints: [
                         DataPoint.init(
                             value: Double(record.prValue),
-                            label: "\(record.prValue) lb",
-                            legend: Legend(color: .yellow, label: "\(record.categoryRecord ?? "")", order: 2)
+                            label: isPounds ? "\(record.prValue.pounds.string) lb" : "\(record.prValue.kilograms.string) kg",
+                            legend: Legend(color: .yellow, label: "\(record.category ?? "")", order: 2)
                         )
                     ])
                 }

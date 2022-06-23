@@ -98,7 +98,7 @@ enum ActivitiesRecordKey: String, Codable, CaseIterable, Comparable {
     case bob = "Burpee over the bar"
     case butterfly = "Butterfly"
     case c2b = "Chest to bar (C2B)"
-    case clean = "CLEAN"
+    case clean = "Clean"
     case cleanJerk = "Clean & Jerk"
     case cluester = "Cluster"
     case deadlift = "Deadlift"

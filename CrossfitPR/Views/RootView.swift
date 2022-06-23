@@ -32,9 +32,13 @@ struct RootView: View {
             .tag(0)
             
             NavigationView {
-                InsightsView()
-                    .navigationTitle(LocalizedStringKey("screen.insights.title"))
-                    .environmentObject(InsightsStore())
+                VStack{
+                    InsightsView()
+                        .environment(\.managedObjectContext, viewContext)
+                        .navigationTitle(LocalizedStringKey("screen.insights.title"))
+                        .environmentObject(InsightsStore())
+                }
+                    
             }
             .tabItem {
                 Image(systemName: "chart.bar")

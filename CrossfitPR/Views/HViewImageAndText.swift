@@ -22,9 +22,10 @@ struct HViewImageAndText: View {
                     .padding()
 
                 VStack(alignment: .leading, spacing: 8) {
-                    Text(title)
+                    Text(LocalizedStringKey(title))
+                    
                         .fixedSize(horizontal: true, vertical: false)
-                    Text(description)
+                    Text(LocalizedStringKey(description))
                         .font(.footnote)
                         .foregroundColor(.secondary)
                         .fixedSize(horizontal: false, vertical: false)

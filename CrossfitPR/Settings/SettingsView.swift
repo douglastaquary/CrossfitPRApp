@@ -14,9 +14,11 @@ struct SettingsView: View {
     var body: some View {
         Form {
             Section(header: Text("Notifications settings")) {
-                Toggle(isOn: $settings.isNotificationEnabled) {
-                    Text("Notification:")
-                }
+                UserDefaultsConfigToggleItemView(path: \.isNotificationEnabled, name: "Notification:")
+//                UserDefaultsConfigToggleItemView
+//                Toggle(isOn: $settings.isNotificationEnabled) {
+//                    Text("Notification:")
+//                }
             }
             
             Section(header: Text("Crossfit tracking settings")) {

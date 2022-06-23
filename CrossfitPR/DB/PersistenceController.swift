@@ -20,6 +20,7 @@ struct PersistenceController {
         pr.recordValue = 100
         pr.recordDate = .now
         pr.percentage = 0.60
+        pr.category = CrossfitPrescribed.rx.rawValue
         pr.id = UUID()
         return pr
     }()
@@ -32,7 +33,7 @@ struct PersistenceController {
         pr.recordValue = 0
         pr.recordDate = .now
         pr.percentage = 0.0
-        pr.categoryRecord = CrossfitPrescribed.rx.rawValue
+        pr.category = CrossfitPrescribed.rx.rawValue
         pr.id = UUID()
         return pr
     }()
@@ -46,7 +47,7 @@ struct PersistenceController {
             pr.recordValue = 100
             pr.recordDate = .now
             pr.percentage = 0.28
-            pr.categoryRecord = CrossfitPrescribed.rx.rawValue
+            pr.category = CrossfitPrescribed.rx.rawValue
             pr.id = UUID()
         }
         do {
@@ -87,4 +88,15 @@ struct PersistenceController {
             }
         })
     }
+}
+
+
+public extension NSManagedObject {
+
+    convenience init(context: NSManagedObjectContext) {
+        let name = String(describing: type(of: self))
+        let entity = NSEntityDescription.entity(forEntityName: name, in: context)!
+        self.init(entity: entity, insertInto: context)
+    }
+
 }

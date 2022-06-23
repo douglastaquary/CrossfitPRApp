@@ -53,7 +53,6 @@ final class InsightsStore: ObservableObject {
 //    @Published var barPoints: [DataPoint] = []
 //    @Published var limit: DataPoint = DataPoint(value: 0, label: "", legend: Legend(color: .clear, label: ""))
     
-    @Environment(\.managedObjectContext) private var viewContext
     @FetchRequest(entity: PR.entity(), sortDescriptors: [], predicate: NSPredicate(format: "prName != %@", PRType.empty.rawValue))
     
     var prs: FetchedResults<PR>

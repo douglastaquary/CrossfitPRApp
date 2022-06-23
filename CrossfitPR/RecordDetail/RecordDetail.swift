@@ -11,6 +11,9 @@ struct RecordDetail: View {
     @EnvironmentObject var store: RecordStore
     var recordType: String = ""
     var prName: String = ""
+    var isPounds: Bool {
+        UserDefaultsConfig.shared.measureTrackingMode == MeasureTrackingMode.pounds.rawValue
+    }
     
     var body: some View {
         VStack(alignment: .center) {
@@ -18,9 +21,12 @@ struct RecordDetail: View {
             Form {
                 Group {
                     Section("Biggest PR") {
-                        HSubtitleView(title: "Category", subtitle: "\(String(describing: store.record.categoryRecord ?? ""))")
+                        HSubtitleView(title: "Category", subtitle: "\(String(describing: store.record.category ?? ""))")
                         HSubtitleView(title: "Percentage", subtitle: "\(String(describing: store.record.percentage.clean)) %")
-                        HSubtitleView(title: "Weight", subtitle: "\(String(describing: store.record.prValue)) lb")
+                        HSubtitleView(
+                            title: "Weight",
+                            subtitle: isPounds ? "\(String(describing: store.record.prValue.pounds))" : "\(String(describing: store.record.prValue.kilograms))"
+                        )
                         HSubtitleView(title: "Date", subtitle: "\(String(describing: store.record.dateFormatter))")
                     }
                 }

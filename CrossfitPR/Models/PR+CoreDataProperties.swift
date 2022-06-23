@@ -9,9 +9,9 @@ import Foundation
 import CoreData
 
 enum CrossfitPrescribed: String, CaseIterable {
-    case rx = "Rx"
-    case scale = "Sc"
-    case fitness = "Ft"
+    case rx = "RX"
+    case scale = "Scale"
+    case fitness = "Fitness"
 }
 
 extension PR {
@@ -24,7 +24,7 @@ extension PR {
     @NSManaged public var recordDate: Date?
     @NSManaged public var prName: String
     @NSManaged public var percentage: Float
-    @NSManaged public var categoryRecord: String?
+    @NSManaged public var category: String?
     
     var prValue : Int {
         get { return Int(recordValue) }
@@ -41,8 +41,8 @@ extension PR {
     }
     
     var categoryType: CrossfitPrescribed {
-        get { CrossfitPrescribed(rawValue: categoryRecord ?? "Rx") ?? .rx }
-        set { categoryRecord = newValue.rawValue }
+        get { CrossfitPrescribed(rawValue: category ?? CrossfitPrescribed.rx.rawValue) ?? .rx }
+        set { category = newValue.rawValue }
     }
     
     var dateFormatter: String {

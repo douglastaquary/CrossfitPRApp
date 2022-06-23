@@ -26,6 +26,7 @@ import os
     )
         
     @Published var prPercentage: Float = 0.0
+    @Published var isMaxRepetitions: Bool = false
 
     @Published var activities: [String] = [
         "AIR SQUAT (AS)", "BACK SQUAT", "BAR MUSCLE-UP", "BENCH PRESS (Supino)",
