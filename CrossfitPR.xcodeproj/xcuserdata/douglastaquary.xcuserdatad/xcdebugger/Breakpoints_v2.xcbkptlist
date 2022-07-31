@@ -3,4 +3,86 @@
    uuid = "7E515A19-F11A-440A-BFDC-B50D1A9B9443"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "4D8B9B81-754D-4AAF-BCD4-E70D9639F4F4"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CrossfitPR/RecordDetail/RecordStore.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "108"
+            endingLineNumber = "108"
+            landmarkName = "loadGraph()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "4D8B9B81-754D-4AAF-BCD4-E70D9639F4F4 - f63ed6478feb00fa"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "CrossfitPR.RecordStore.loadGraph() -&gt; ()"
+                  moduleName = "CrossfitPR"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/douglastaquary/Documents/Projects/Github/SwiftUI/CrossfitPR/CrossfitPR/RecordDetail/RecordStore.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "108"
+                  endingLineNumber = "108"
+                  offsetFromSymbolStart = "119">
+               </Location>
+               <Location
+                  uuid = "4D8B9B81-754D-4AAF-BCD4-E70D9639F4F4 - 591ce86b4223fcad"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (CrossfitPR.PersonalRecord) -&gt; SwiftUICharts.DataPoint in CrossfitPR.RecordStore.loadGraph() -&gt; ()"
+                  moduleName = "CrossfitPR"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/douglastaquary/Documents/Projects/Github/SwiftUI/CrossfitPR/CrossfitPR/RecordDetail/RecordStore.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "108"
+                  endingLineNumber = "108"
+                  offsetFromSymbolStart = "84">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E9E66AF0-68B9-4B32-A64F-D1B2ADCE0856"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CrossfitPR/RecordDetail/RecordStore.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "68"
+            endingLineNumber = "68"
+            landmarkName = "points"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F58A515A-803A-43A8-A9E5-291DEDE26532"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CrossfitPR/RecordDetail/RecordStore.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "65"
+            endingLineNumber = "65"
+            landmarkName = "points"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

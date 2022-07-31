@@ -25,7 +25,7 @@ struct LaunchView: View {
                 RootView()
                     .environment(\.managedObjectContext, viewContext)
             } else if viewlaunch.currentPage == Route.newPR.rawValue {
-                NewPRRecordView()
+                NewRecordView()
             }
         }
     }

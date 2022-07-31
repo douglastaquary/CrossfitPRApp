@@ -36,7 +36,7 @@ struct EmptyView: View {
         VStack(alignment: .center) {
             Text(message)
                 .multilineTextAlignment(.center)
-                .lineLimit(4)
+                .lineLimit(8)
                 .foregroundColor(.secondary)
         }
     }

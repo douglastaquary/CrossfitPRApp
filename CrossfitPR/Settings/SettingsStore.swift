@@ -8,19 +8,21 @@
 import SwiftUI
 import Combine
 
+enum SettingStoreKeys {
+    static let pro = "pro"
+    static let trainingTargetGoal = "training_target_goal"
+    static let notificationEnabled = "notifications_enabled"
+    static let sleepTrackingEnabled = "sleep_tracking_enabled"
+    static let measureTrackingMode = "measure_tracking_mode"
+    static let enabledSortedByValue = "enabled_sorted_by_value"
+}
+
 enum MeasureTrackingMode: String, CaseIterable {
     case pounds
     case kilos
 }
 
 final class SettingsStore: ObservableObject {
-    private enum Keys {
-        static let pro = "pro"
-        static let trainingTargetGoal = "training_target_goal"
-        static let notificationEnabled = "notifications_enabled"
-        static let sleepTrackingEnabled = "sleep_tracking_enabled"
-        static let measureTrackingMode = "measure_tracking_mode"
-    }
 
     private let cancellable: Cancellable
     private let defaults: UserDefaults
@@ -31,9 +33,9 @@ final class SettingsStore: ObservableObject {
         self.defaults = defaults
 
         defaults.register(defaults: [
-            Keys.trainingTargetGoal: 8,
-            Keys.sleepTrackingEnabled: true,
-            Keys.measureTrackingMode: MeasureTrackingMode.pounds.rawValue
+            SettingStoreKeys.trainingTargetGoal: 8,
+            SettingStoreKeys.sleepTrackingEnabled: true,
+            SettingStoreKeys.measureTrackingMode: MeasureTrackingMode.pounds.rawValue
         ])
 
         cancellable = NotificationCenter.default
@@ -43,38 +45,34 @@ final class SettingsStore: ObservableObject {
     }
 
     var isNotificationEnabled: Bool {
-        set { defaults.set(newValue, forKey: Keys.notificationEnabled) }
-        get { defaults.bool(forKey: Keys.notificationEnabled) }
+        set { defaults.set(newValue, forKey: SettingStoreKeys.notificationEnabled) }
+        get { defaults.bool(forKey: SettingStoreKeys.notificationEnabled) }
     }
 
     var isPro: Bool {
-        set { defaults.set(newValue, forKey: Keys.pro) }
-        get { defaults.bool(forKey: Keys.pro) }
+        set { defaults.set(newValue, forKey: SettingStoreKeys.pro) }
+        get { defaults.bool(forKey: SettingStoreKeys.pro) }
     }
 
     var isSleepTrackingEnabled: Bool {
-        set { defaults.set(newValue, forKey: Keys.sleepTrackingEnabled) }
-        get { defaults.bool(forKey: Keys.sleepTrackingEnabled) }
+        set { defaults.set(newValue, forKey: SettingStoreKeys.sleepTrackingEnabled) }
+        get { defaults.bool(forKey: SettingStoreKeys.sleepTrackingEnabled) }
     }
 
     var trainningTargetGoal: Int {
-        set { defaults.set(newValue, forKey: Keys.trainingTargetGoal) }
-        get { defaults.integer(forKey: Keys.trainingTargetGoal) }
+        set { defaults.set(newValue, forKey: SettingStoreKeys.trainingTargetGoal) }
+        get { defaults.integer(forKey: SettingStoreKeys.trainingTargetGoal) }
     }
 
-    enum MeasureTrackingMode: String, CaseIterable {
-        case pounds
-        case kilos
-    }
 
     var measureTrackingMode: MeasureTrackingMode {
         get {
-            return defaults.string(forKey: Keys.measureTrackingMode)
+            return defaults.string(forKey: SettingStoreKeys.measureTrackingMode)
                 .flatMap { MeasureTrackingMode(rawValue: $0) } ?? .pounds
         }
         set {
             UserDefaultsConfig.shared.measureTrackingMode = newValue.rawValue
-            defaults.set(newValue.rawValue, forKey: Keys.measureTrackingMode)
+            defaults.set(newValue.rawValue, forKey: SettingStoreKeys.measureTrackingMode)
         }
     }
 }

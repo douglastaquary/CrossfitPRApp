@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftUICharts
 
 struct PRView: View {
-    var record: PR
+    var record: PersonalRecord
     var isPounds: Bool {
         UserDefaultsConfig.shared.measureTrackingMode == MeasureTrackingMode.pounds.rawValue
     }
@@ -28,9 +28,9 @@ struct PRView: View {
                         .foregroundColor(.secondary)
                     HorizontalBarChartView(dataPoints: [
                         DataPoint.init(
-                            value: Double(record.prValue),
-                            label: isPounds ? "\(record.prValue.pounds.string) lb" : "\(record.prValue.kilograms.string) kg",
-                            legend: Legend(color: .yellow, label: "\(record.category ?? "")", order: 2)
+                            value: Double(isPounds ? record.poundValue : record.kiloValue),
+                            label: isPounds ? "\(record.poundValue) lb" : "\(record.kiloValue) kg",
+                            legend: Legend(color: .yellow, label: "\(record.category?.rawValue ?? "")", order: 2)
                         )
                     ])
                 }
@@ -43,7 +43,7 @@ struct PRView: View {
 
 struct PRView_Previews: PreviewProvider {
     static var previews: some View {
-        PRView(record: PersistenceController.prMock)
+        PRView(record: PersonalRecord.recordMock)
     }
 }
 

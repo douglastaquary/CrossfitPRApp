@@ -17,70 +17,101 @@ import os
         category: String(describing: RecordStore.self)
     )
     
-    private enum Keys {
-        static let pro = "pro"
-        static let enabledSortedByValue = "enabled_sorted_by_value"
-    }
-    
     @Published var evolutionPoints: [DataPoint] = []
+    @Published var records: [PersonalRecord] = []
+    @Published private var dataManager: DataManager?
     
-    let objectWillChange = PassthroughSubject<Void, Never>()
+    //let objectWillChange = PassthroughSubject<Void, Never>()
+        
+    var anyCancellable: AnyCancellable? = nil
     
-    private let cancellable: Cancellable
     private let defaults: UserDefaults
-    private var records: FetchedResults<PR>
     private var recordType: String = ""
+    
     private var prEvolution = Legend(color: .yellow, label: "PR evolution", order: 3)
     private var mostRecent = Legend(color: .green, label: "Most recent pr", order: 4)
     private var lowestPR = Legend(color: .gray, label: "Lowest pr", order: 2)
     
-    init(records: FetchedResults<PR>, recordType: String = "", defaults: UserDefaults = .standard) {
-        self.records = records
+    init(recordType: String = "", defaults: UserDefaults = .standard, dataManager: DataManager = DataManager.shared) {
         self.recordType = recordType
         self.defaults = defaults
+        self.dataManager = dataManager
         
-//        defaults.register(defaults: [
-//            Keys.enabledSortedByValue: false,
-//        ])
+        anyCancellable = dataManager.objectWillChange.sink { [weak self] (_) in
+            self?.objectWillChange.send()
+        }
 
-        cancellable = NotificationCenter.default
-            .publisher(for: UserDefaults.didChangeNotification)
-            .map { _ in () }
-            .subscribe(objectWillChange)
-        
     }
     
     var isPro: Bool {
-        set { defaults.set(newValue, forKey: Keys.pro) }
-        get { defaults.bool(forKey: Keys.pro) }
+        get { defaults.bool(forKey: SettingStoreKeys.pro) }
     }
     
-    var record: PR {
+    var measureTrackingMode: MeasureTrackingMode {
+        get {
+            return defaults.string(forKey: SettingStoreKeys.measureTrackingMode)
+                .flatMap { MeasureTrackingMode(rawValue: $0) } ?? .pounds
+        }
+    }
+    
+    var record: PersonalRecord {
         getMaxRecord(prs: filteredPrs)
     }
     
     var points: [DataPoint] {
-        filteredPrs.map { pr in DataPoint.init(value: Double(pr.prValue), label: "\(pr.prValue) lb", legend: validateCategoryInformation(pr)) }
+        let isPounds = measureTrackingMode == .pounds
+        if isPounds {
+            return filteredPrs.map { pr in DataPoint.init(value: Double(pr.poundValue), label: "\(pr.poundValue) lb", legend: validateCategoryInformation(pr)) }
+        }
+        
+        return filteredPrs.map { pr in DataPoint.init(value: Double(pr.kiloValue), label: "\(pr.kiloValue) kg", legend: validateCategoryInformation(pr)) }
+    
+    }
+
+    var filteredPrs: [PersonalRecord] {
+        if let records = dataManager?.recordsArray {
+            return records.filter { $0.prName.rawValue.contains(recordType) }.sorted()
+        }
+        return []
     }
     
-    var filteredPrs: [PR] {
-        records.filter { $0.prName.contains(recordType) }.sorted()
-    }
-    
-    private func getMaxRecord(prs: [PR]) -> PR {
-        let max: Int = prs.map { $0.prValue }.max() ?? 0
-        let biggestPR = prs.filter { $0.prValue == max }.first ?? PersistenceController.emptyRecord
+    private func getMaxRecord(prs: [PersonalRecord]) -> PersonalRecord {
+        if prs.isEmpty {
+            return PersonalRecord()
+        }
+        
+        if measureTrackingMode == .pounds {
+            let max: Int = prs.map { Int($0.poundValue) }.max() ?? 0
+            let biggestPR = prs.filter { Int($0.poundValue) == max }.first ?? PersonalRecord()
+            return biggestPR
+        }
+        let max: Int = prs.map { Int($0.kiloValue) }.max() ?? 0
+        let biggestPR = prs.filter { Int($0.kiloValue)  == max }.first ?? PersonalRecord()
+        
         return biggestPR
     }
     
-    private func getMinRecord(prs: [PR]) -> PR {
-        let min: Int = prs.map { $0.prValue }.min() ?? 0
-        let biggestPr = prs.filter { $0.prValue == min }.first ?? PersistenceController.emptyRecord
+    private func getMinRecord(prs: [PersonalRecord]) -> PersonalRecord {
+        if measureTrackingMode == .pounds {
+            let min: Int = prs.map { Int($0.poundValue)  }.min() ?? 0
+            let biggestPr = prs.filter { Int($0.poundValue) == min }.first ?? PersonalRecord()
+            return biggestPr
+        }
+        
+        let min: Int = prs.map { Int($0.kiloValue) }.min() ?? 0
+        let biggestPr = prs.filter { Int($0.kiloValue) == min }.first ?? PersonalRecord()
         return biggestPr
     }
     
     func loadGraph() {
-        evolutionPoints = filteredPrs.map { pr in DataPoint.init(value: Double(pr.prValue), label: "", legend: validateCategoryInformation(pr)) }
+        if measureTrackingMode == .pounds {
+            evolutionPoints = filteredPrs.map { pr in DataPoint.init(value: Double(pr.poundValue), label: "", legend: validateCategoryInformation(pr))
+            }
+            return
+        }
+        evolutionPoints = filteredPrs.map { pr in DataPoint.init(value: Double(pr.kiloValue), label: "", legend: validateCategoryInformation(pr))
+            
+        }
     }
 //
 //    private func loadPRInfos() {
@@ -105,15 +136,29 @@ import os
 //        }
 //    }
 //
-    private func validateCategoryInformation(_ pr: PR) -> Legend {
-        let max: Int = filteredPrs.map { $0.prValue }.max() ?? 0
-        let min: Int = filteredPrs.map { $0.prValue }.min() ?? 0
+    private func validateCategoryInformation(_ pr: PersonalRecord) -> Legend {
         let biggestPr = Legend(color: .green, label: "Most recent pr", order: 3)
         let evolutionPr = Legend(color: .yellow, label: "PR Evolution", order: 2)
         let lowestRecord = Legend(color: .gray, label: "PR Lowest", order: 1)
-        if pr.prValue >= max {
+        
+        if measureTrackingMode == .pounds {
+            let max: Int = filteredPrs.map { Int($0.poundValue) }.max() ?? 0
+            let min: Int = filteredPrs.map { Int($0.poundValue) }.min() ?? 0
+            let recordPound =  pr.poundValue
+            if recordPound >= max {
+                return biggestPr
+            } else if recordPound == min {
+                return lowestRecord
+            } else {
+                return evolutionPr
+            }
+        }
+        let max: Int = filteredPrs.map { Int($0.kiloValue) }.max() ?? 0
+        let min: Int = filteredPrs.map { Int($0.kiloValue) }.min() ?? 0
+        let recordKilo =  pr.kiloValue
+        if recordKilo >= max {
             return biggestPr
-        } else if pr.prValue == min {
+        } else if recordKilo == min {
             return lowestRecord
         } else {
             return evolutionPr
@@ -121,3 +166,4 @@ import os
     }
     
 }
+

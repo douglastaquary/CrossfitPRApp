@@ -20,7 +20,7 @@ struct InsightsView: View {
     @State var showPROsubsciptionView = false
     
     @EnvironmentObject var store: InsightsStore
-    @Environment(\.managedObjectContext) private var viewContext
+    //@Environment(\.managedObjectContext) private var viewContext
     @FetchRequest(entity: PR.entity(), sortDescriptors: [], predicate: NSPredicate(format: "prName != %@", PRType.empty.rawValue))
     var prs: FetchedResults<PR>
     
@@ -28,7 +28,7 @@ struct InsightsView: View {
         if prs.count > 3 {
             VStack {
                 Form {
-                    Section("Resume") {
+                    Section("Records ranking") {
                         HorizontalBarChartView(dataPoints: [biggestPoint, evolutionPoint, lowPoint])
                     }
                     Section("Graph Details") {
@@ -39,7 +39,12 @@ struct InsightsView: View {
                         }
                     }
                     Section("PR informations") {
-                        HSubtitleView(title: "the biggest pr is " + "\(biggestPR?.prName ?? "")".lowercased(), subtitle: "\(biggestPR?.prValue ?? 0) lb")
+                        if store.measureTrackingMode == .pounds {
+                            HSubtitleView(title: "the biggest pr is " + "\(biggestPR?.prName ?? "")".lowercased(), subtitle: "\(biggestPR?.recordPound ?? 0) lb")
+                        } else {
+                            HSubtitleView(title: "the biggest pr is " + "\(biggestPR?.prName ?? "")".lowercased(), subtitle: "\(biggestPR?.recordKilo ?? 0) kg")
+                        }
+                        
                         HSubtitleView(title: "with intensity of", subtitle: "\(biggestPR?.percentage.clean ?? "") %")
                     }
                     
@@ -62,7 +67,7 @@ struct InsightsView: View {
                 }
             }
         } else {
-            EmptyView(message: "Get started now\nby adding a new personal record")
+            EmptyView(message: "Get started now\nby adding a new personal record.\n\nThe Powerful insights are generated from\nthe records you add. For better visualization, the minimum number of records\nto generate the graphs is ten.")
         }
         
     }
@@ -73,46 +78,98 @@ struct InsightsView: View {
     }
     
     private func loadGraph() {
-        let max: Int = prs.map { $0.prValue }.max() ?? 0
-        barPoints = prs.map { pr in
-            if pr.prValue == max {
-                self.limit = DataPoint(value: Double(max) , label: "\(pr.prName)", legend: store.biggestPr)
+        if store.measureTrackingMode == .pounds {
+            let max: Int = prs.map { $0.recordPound }.max() ?? 0
+            barPoints = prs.map { pr in
+                if pr.recordPound == max {
+                    self.limit = DataPoint(value: Double(max) , label: "\(pr.prName)", legend: store.biggestPr)
+                }
+                return DataPoint.init(value: Double(pr.recordPound), label: "", legend: validateCategoryInformationPounds(pr))
             }
-            return DataPoint.init(value: Double(pr.prValue), label: "", legend: validateCategoryInformation(pr))
+        } else {
+            let max: Int = prs.map { $0.recordKilo }.max() ?? 0
+            barPoints = prs.map { pr in
+                if pr.recordKilo == max {
+                    self.limit = DataPoint(value: Double(max) , label: "\(pr.prName)", legend: store.biggestPr)
+                }
+                return DataPoint.init(value: Double(pr.recordKilo), label: "", legend: validateCategoryInformationKilos(pr))
+            }
         }
+
     }
     
     private func loadPRInfos() {
-        let max: Int = prs.map { $0.prValue }.max() ?? 0
-        let min: Int = prs.map { $0.prValue }.min() ?? 0
-        let evolutionPRselected = prs.filter { pr in
-            return pr.prValue < max && pr.prValue > min && pr.prName != biggestPRName
-        }.sorted {
-            $0.prValue > $1.prValue
-        }.first
-        
-        evolutionPoint = DataPoint.init(value: Double(evolutionPRselected?.prValue ?? 0), label: "\(evolutionPRselected?.prValue ?? 0) lb", legend: Legend(color: .yellow, label: "\(evolutionPRselected?.prName ?? "")", order: 2))
-        
-        for pr in prs {
-            if pr.prValue == max {
-                biggestPoint = DataPoint.init(value: Double(pr.prValue), label: "\(pr.prValue) lb", legend: Legend(color: .green, label: "\(pr.prName)", order: 1))
-                biggestPRName = pr.prName
-                biggestPR = pr
-            } else if pr.prValue == min {
-                lowPoint = DataPoint.init(value: Double(pr.prValue), label: "\(pr.prValue) lb", legend: Legend(color: .gray, label: "\(pr.prName)", order: 3))
+        if store.measureTrackingMode == .pounds {
+            let max: Int = prs.map { $0.recordPound }.max() ?? 0
+            let min: Int = prs.map { $0.recordPound }.min() ?? 0
+            let evolutionPRselected = prs.filter { pr in
+                return pr.recordPound < max && pr.recordPound > min && pr.prName != biggestPRName
+            }.sorted {
+                $0.recordPound > $1.recordPound
+            }.first
+            
+            evolutionPoint = DataPoint.init(
+                value: Double(evolutionPRselected?.recordPound ?? 0),
+                label: "\(evolutionPRselected?.recordPound ?? 0) lb",
+                legend: Legend(color: .yellow, label: "\(evolutionPRselected?.prName ?? "")", order: 2)
+            )
+            
+            for pr in prs {
+                if pr.recordPound == max {
+                    biggestPoint = DataPoint.init(value: Double(pr.recordPound), label: "\(pr.recordPound) lb", legend: Legend(color: .green, label: "\(pr.prName)", order: 1))
+                    biggestPRName = pr.prName
+                    biggestPR = pr
+                } else if pr.recordPound == min {
+                    lowPoint = DataPoint.init(value: Double(pr.recordPound), label: "\(pr.recordPound) lb", legend: Legend(color: .gray, label: "\(pr.prName)", order: 3))
+                }
+            }
+        } else {
+            let max: Int = prs.map { $0.recordKilo }.max() ?? 0
+            let min: Int = prs.map { $0.recordKilo }.min() ?? 0
+            let evolutionPRselected = prs.filter { pr in
+                return pr.recordKilo < max && pr.recordKilo > min && pr.prName != biggestPRName
+            }.sorted {
+                $0.recordKilo > $1.recordKilo
+            }.first
+            
+            evolutionPoint = DataPoint.init(value: Double(evolutionPRselected?.recordKilo ?? 0), label: "\(evolutionPRselected?.recordKilo ?? 0) lb", legend: Legend(color: .yellow, label: "\(evolutionPRselected?.prName ?? "")", order: 2))
+            
+            for pr in prs {
+                if pr.recordKilo == max {
+                    biggestPoint = DataPoint.init(value: Double(pr.recordKilo), label: "\(pr.recordKilo) kg", legend: Legend(color: .green, label: "\(pr.prName)", order: 1))
+                    biggestPRName = pr.prName
+                    biggestPR = pr
+                } else if pr.recordKilo == min {
+                    lowPoint = DataPoint.init(value: Double(pr.recordKilo), label: "\(pr.recordKilo) kg", legend: Legend(color: .gray, label: "\(pr.prName)", order: 3))
+                }
             }
         }
     }
     
-    private func validateCategoryInformation(_ pr: PR) -> Legend {
-        let max: Int = prs.map { $0.prValue }.max() ?? 0
-        let min: Int = prs.map { $0.prValue }.min() ?? 0
+    private func validateCategoryInformationPounds(_ pr: PR) -> Legend {
+        let max: Int = prs.map { $0.recordPound }.max() ?? 0
+        let min: Int = prs.map { $0.recordPound }.min() ?? 0
         let biggestPr = Legend(color: .green, label: "PR Biggest", order: 3)
         let evolutionPr = Legend(color: .yellow, label: "PR Evolution", order: 2)
         let lowestRecord = Legend(color: .gray, label: "PR Lowest", order: 1)
-        if pr.prValue >= max {
+        if pr.recordPound >= max {
             return biggestPr
-        } else if pr.prValue == min {
+        } else if pr.recordPound == min {
+            return lowestRecord
+        } else {
+            return evolutionPr
+        }
+    }
+    
+    private func validateCategoryInformationKilos(_ pr: PR) -> Legend {
+        let max: Int = prs.map { $0.recordKilo }.max() ?? 0
+        let min: Int = prs.map { $0.recordKilo }.min() ?? 0
+        let biggestPr = Legend(color: .green, label: "PR Biggest", order: 3)
+        let evolutionPr = Legend(color: .yellow, label: "PR Evolution", order: 2)
+        let lowestRecord = Legend(color: .gray, label: "PR Lowest", order: 1)
+        if pr.recordKilo >= max {
+            return biggestPr
+        } else if pr.recordKilo == min {
             return lowestRecord
         } else {
             return evolutionPr

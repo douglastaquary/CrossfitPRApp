@@ -14,7 +14,7 @@
 "category.search.descript" = "buscar por nome";
 
 /* Tabbar title screens */
-"tabbar.today.title" = "hoje";
+"tabbar.records.title" = "records";
 "tabbar.insights.title" = "percepções";
 "tabbar.settings.title" = "configurações";
 

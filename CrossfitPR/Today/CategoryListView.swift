@@ -9,12 +9,7 @@ import SwiftUI
 import CoreData
 
 struct CategoryListView: View {
-    @Environment(\.managedObjectContext) private var viewContext
-    @FetchRequest(entity: PR.entity(), sortDescriptors: [], predicate: NSPredicate(format: "prName != %@", PRType.empty.rawValue))
-    var prs: FetchedResults<PR>
-    
     @EnvironmentObject var store: CategoryStore
-//    @State private var searchText: String = ""
     @State var showNewPRView = false
     
     var body: some View {
@@ -23,7 +18,7 @@ struct CategoryListView: View {
                 ForEach(store.filteredCategories, id: \.id) { category in
                     NavigationLink(
                         destination: RecordDetail(recordType:category.title)
-                            .environmentObject(RecordStore(records: prs, recordType: category.title))
+                            .environmentObject(RecordStore(recordType: category.title))
                     ) {
                         CategoryItemView(title: category.title)
                     }
@@ -38,7 +33,7 @@ struct CategoryListView: View {
                         .foregroundColor(.green)
                         .accessibility(label: Text("add"))
                 }.sheet(isPresented: $showNewPRView) {
-                    NewPRRecordView()
+                    NewRecordView()
                 }
             }
         }

@@ -76,14 +76,13 @@ struct OutlineButton: ButtonStyle {
 
 extension Int {
     var pounds: Measurement<Unit> {
-        let poundsResult = (Double(self) * 2.204)
-        let cleanResult = String(format: "%.2f", poundsResult)
+        let cleanResult = String(format: "%.0f", self)
         return Measurement(value: Double(cleanResult) ?? 0.0, unit: UnitMass.pounds)
     }
     
     var kilograms: Measurement<Unit> {
-        let kgResult = (Double(self) * 0.453)
-        let cleanResult = String(format: "%.2f", kgResult)
+        let kgResult = (Double(self) * 0.4)
+        let cleanResult = String(format: "%.0f", kgResult)
         return Measurement(value: Double(cleanResult) ?? 0.0, unit: UnitMass.kilograms)
     }
 }

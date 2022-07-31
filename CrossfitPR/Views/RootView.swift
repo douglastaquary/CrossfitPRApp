@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct RootView: View {
-    @Environment(\.managedObjectContext) private var viewContext
     
     @SceneStorage("selectedTab")
     private var selectedTab = 0
@@ -20,21 +19,19 @@ struct RootView: View {
             NavigationView {
                 VStack {
                     CategoryListView()
-                        .environment(\.managedObjectContext, viewContext)
                         .environmentObject(CategoryStore())
                 }
                 
             }
             .tabItem {
-                Image(systemName: "heart")
-                Text(LocalizedStringKey("tabbar.today.title"))
+                Image(systemName: "rosette")
+                Text(LocalizedStringKey("tabbar.records.title"))
             }
             .tag(0)
             
             NavigationView {
                 VStack{
                     InsightsView()
-                        .environment(\.managedObjectContext, viewContext)
                         .navigationTitle(LocalizedStringKey("screen.insights.title"))
                         .environmentObject(InsightsStore())
                 }

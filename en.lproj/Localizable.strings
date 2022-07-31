@@ -14,7 +14,7 @@
 "category.search.descript" = "search by name";
 
 /* Tabbar title screens */
-"tabbar.today.title" = "today";
+"tabbar.records.title" = "records";
 "tabbar.insights.title" = "insights";
 "tabbar.settings.title" = "settings";
 
@@ -30,3 +30,9 @@
 "purchase.tryfree.title" = "Try FREE for 7 Days";
 
 "purchase.commitment.title"= "No commitment. Cancel Anytime.\nAfter 7 day free trial, this subscription automatically\n renews depending on witch pan you choose unless\nauto-renew is turned off.";
+
+
+/* New record screen */
+"screen.newRecord.personalRecordTitle" = "Personal record";
+"tabbar.insights.title" = "insights";
+"tabbar.settings.title" = "settings";

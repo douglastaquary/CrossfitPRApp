@@ -26,7 +26,7 @@ struct SettingsView: View {
                     selection: $settings.measureTrackingMode,
                     label: Text("Measure tracking mode")
                 ) {
-                    ForEach(SettingsStore.MeasureTrackingMode.allCases, id: \.self) {
+                    ForEach(MeasureTrackingMode.allCases, id: \.self) {
                         Text($0.rawValue).tag($0)
                     }
                 }
