@@ -9,12 +9,6 @@ import Foundation
 import Combine
 import os
 
-public enum PRKeyOptions {
-    case pr
-    case maxRep
-    case minTime
-}
-
 @MainActor final class NewRecordViewModel: ObservableObject {
     private static let logger = Logger(
         subsystem: "com.douglast.mycrossfitpr",
@@ -26,7 +20,6 @@ public enum PRKeyOptions {
     var anyCancellable: AnyCancellable? = nil
 
     @Published var editingRecord: PersonalRecord
-    @Published var keyOptions: PRKeyOptions = .pr
     @Published var prPercentage: Float = 0.0
     @Published var isWeightInPounds: Bool = false
     @Published var isMaxRepetitions: Bool = false

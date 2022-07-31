@@ -35,7 +35,6 @@ struct PRView: View {
                     ])
                 }
             }
-            //Divider()
         }
     }
 }

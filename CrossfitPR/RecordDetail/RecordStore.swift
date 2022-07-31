@@ -20,9 +20,6 @@ import os
     @Published var evolutionPoints: [DataPoint] = []
     @Published var records: [PersonalRecord] = []
     @Published private var dataManager: DataManager?
-    
-    //let objectWillChange = PassthroughSubject<Void, Never>()
-        
     var anyCancellable: AnyCancellable? = nil
     
     private let defaults: UserDefaults
@@ -40,7 +37,6 @@ import os
         anyCancellable = dataManager.objectWillChange.sink { [weak self] (_) in
             self?.objectWillChange.send()
         }
-
     }
     
     var isPro: Bool {
@@ -61,10 +57,14 @@ import os
     var points: [DataPoint] {
         let isPounds = measureTrackingMode == .pounds
         if isPounds {
-            return filteredPrs.map { pr in DataPoint.init(value: Double(pr.poundValue), label: "\(pr.poundValue) lb", legend: validateCategoryInformation(pr)) }
+            return filteredPrs.map { pr in
+                DataPoint.init(value: Double(pr.poundValue), label: "\(pr.poundValue) lb", legend: validateCategoryInformation(pr))
+            }
         }
         
-        return filteredPrs.map { pr in DataPoint.init(value: Double(pr.kiloValue), label: "\(pr.kiloValue) kg", legend: validateCategoryInformation(pr)) }
+        return filteredPrs.map { pr in
+            DataPoint.init(value: Double(pr.kiloValue), label: "\(pr.kiloValue) kg", legend: validateCategoryInformation(pr))
+        }
     
     }
 
@@ -79,7 +79,6 @@ import os
         if prs.isEmpty {
             return PersonalRecord()
         }
-        
         if measureTrackingMode == .pounds {
             let max: Int = prs.map { Int($0.poundValue) }.max() ?? 0
             let biggestPR = prs.filter { Int($0.poundValue) == max }.first ?? PersonalRecord()
@@ -92,12 +91,14 @@ import os
     }
     
     private func getMinRecord(prs: [PersonalRecord]) -> PersonalRecord {
+        if prs.isEmpty {
+            return PersonalRecord()
+        }
         if measureTrackingMode == .pounds {
             let min: Int = prs.map { Int($0.poundValue)  }.min() ?? 0
             let biggestPr = prs.filter { Int($0.poundValue) == min }.first ?? PersonalRecord()
             return biggestPr
         }
-        
         let min: Int = prs.map { Int($0.kiloValue) }.min() ?? 0
         let biggestPr = prs.filter { Int($0.kiloValue) == min }.first ?? PersonalRecord()
         return biggestPr
@@ -105,37 +106,16 @@ import os
     
     func loadGraph() {
         if measureTrackingMode == .pounds {
-            evolutionPoints = filteredPrs.map { pr in DataPoint.init(value: Double(pr.poundValue), label: "", legend: validateCategoryInformation(pr))
+            evolutionPoints = filteredPrs.map { pr in
+                DataPoint.init(value: Double(pr.poundValue), label: "", legend: validateCategoryInformation(pr))
             }
             return
         }
-        evolutionPoints = filteredPrs.map { pr in DataPoint.init(value: Double(pr.kiloValue), label: "", legend: validateCategoryInformation(pr))
-            
+        evolutionPoints = filteredPrs.map { pr in
+            DataPoint.init(value: Double(pr.kiloValue), label: "", legend: validateCategoryInformation(pr))
         }
     }
-//
-//    private func loadPRInfos() {
-//        let max: Int = filteredPrs.map { $0.prValue }.max() ?? 0
-//        let min: Int = filteredPrs.map { $0.prValue }.min() ?? 0
-//        let evolutionPRselected = filteredPrs.filter { pr in
-//            return pr.prValue < max && pr.prValue > min && pr.prName != biggestPRName
-//        }.sorted {
-//            $0.prValue > $1.prValue
-//        }.first
-//
-//        evolutionPoint = DataPoint.init(value: Double(evolutionPRselected?.prValue ?? 0), label: "\(evolutionPRselected?.prValue ?? 0) lb", legend: Legend(color: .yellow, label: "\(evolutionPRselected?.prName ?? "")", order: 2))
-//
-//        for pr in prs {
-//            if pr.prValue == max {
-//                biggestPoint = DataPoint.init(value: Double(pr.prValue), label: "\(pr.prValue) lb", legend: Legend(color: .green, label: "\(pr.prName)", order: 1))
-//                biggestPRName = pr.prName
-//                biggestPR = pr
-//            } else if pr.prValue == min {
-//                lowPoint = DataPoint.init(value: Double(pr.prValue), label: "\(pr.prValue) lb", legend: Legend(color: .gray, label: "\(pr.prName)", order: 3))
-//            }
-//        }
-//    }
-//
+
     private func validateCategoryInformation(_ pr: PersonalRecord) -> Legend {
         let biggestPr = Legend(color: .green, label: "Most recent pr", order: 3)
         let evolutionPr = Legend(color: .yellow, label: "PR Evolution", order: 2)
