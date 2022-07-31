@@ -1,0 +1,38 @@
+/* 
+  Localizable.strings
+  CrossfitPR
+
+  Created by Douglas Taquary on 25/05/22.
+  
+*/
+/* Screen titles*/
+"screen.category.title" = "Personal records";
+"screen.insights.title" = "Insights";
+"screen.settings.title" = "Settings";
+
+/* Category searchbar descript */
+"category.search.descript" = "search by name";
+
+/* Tabbar title screens */
+"tabbar.records.title" = "records";
+"tabbar.insights.title" = "insights";
+"tabbar.settings.title" = "settings";
+
+/* Purchase screen */
+
+"purchase.manager.title" = "Manage your records easily and conveniently";
+"purchase.manager.description" = "Edit, delete records, organize your categories according to your workouts.";
+
+"purchase.insights.title" = "The Powerful insights";
+"purchase.insights.description" = "The Powerful insights allow you to track and understand your biggest records and the evolution of others.";
+
+
+"purchase.tryfree.title" = "Try FREE for 7 Days";
+
+"purchase.commitment.title"= "No commitment. Cancel Anytime.\nAfter 7 day free trial, this subscription automatically\n renews depending on witch pan you choose unless\nauto-renew is turned off.";
+
+
+/* New record screen */
+"screen.newRecord.personalRecordTitle" = "Personal record";
+"tabbar.insights.title" = "insights";
+"tabbar.settings.title" = "settings";

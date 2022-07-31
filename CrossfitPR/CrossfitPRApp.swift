@@ -9,12 +9,28 @@ import SwiftUI
 
 @main
 struct CrossfitPRApp: App {
-    let persistenceController = PersistenceController.shared
+    @Environment(\.scenePhase) private var scenePhase
+    
+    var dataManager = DataManager.shared
 
     var body: some Scene {
         WindowGroup {
-            LaunchView().environmentObject(ViewLaunch())
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            LaunchView()
+                .environmentObject(ViewLaunch())
+        }
+        .onChange(of: scenePhase) { phase in
+            switch phase {
+            case .active:
+                print("Active")
+            case .inactive:
+                print("Inactive")
+                dataManager.saveData()
+            case .background:
+                print("background")
+                dataManager.saveData()
+            default:
+                print("unknown")
+            }
         }
     }
 }

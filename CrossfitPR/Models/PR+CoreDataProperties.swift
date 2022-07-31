@@ -14,15 +14,42 @@ extension PR {
     }
 
     @NSManaged public var id: UUID?
-    @NSManaged public var recordValue: Int32
+    @NSManaged public var kiloValue: Int32
+    @NSManaged public var poundValue: Int32
+    @NSManaged public var distance: Int32
     @NSManaged public var recordDate: Date?
     @NSManaged public var prName: String
     @NSManaged public var percentage: Float
+    @NSManaged public var category: String?
+    @NSManaged public var recordMode: String?
+    @NSManaged public var maxReps: Int32
+    @NSManaged public var minTime: Int32
+    @NSManaged public var comments: String
     
-    var prValue : Int {
-         get { return Int(recordValue) }
-         set { recordValue = Int32(newValue) }
-      }
+    var recordPound: Int {
+        get { return Int(poundValue) }
+        set { poundValue = Int32(newValue) }
+    }
+    
+    var recordKilo : Int {
+        get { return Int(kiloValue) }
+        set { kiloValue = Int32(newValue) }
+    }
+    
+    var maxRepetition : Int {
+        get { return Int(maxReps) }
+        set { maxReps = Int32(newValue) }
+    }
+    
+    var minimumTime : Int {
+        get { return Int(minTime) }
+        set { minTime = Int32(newValue) }
+    }
+    
+    var recordDistance : Int {
+        get { return Int(distance) }
+        set { distance = Int32(newValue) }
+    }
     
     var recordType: PRType {
         set {
@@ -31,6 +58,20 @@ extension PR {
         get {
             PRType(rawValue: prName) ?? .empty
         }
+    }
+    
+    var recordModeType: RecordMode {
+        set {
+            recordMode = newValue.rawValue
+        }
+        get {
+            RecordMode(rawValue: recordMode ?? "") ?? .maxWeight
+        }
+    }
+    
+    var categoryType: CrossfitLevel {
+        get { CrossfitLevel(rawValue: category ?? CrossfitLevel.rx.rawValue) ?? .rx }
+        set { category = newValue.rawValue }
     }
     
     var dateFormatter: String {
@@ -42,14 +83,4 @@ extension PR {
 }
 
 extension PR : Identifiable {}
-
-enum PRType: String {
-    case airSquat = "AIR SQUAT (AS)"
-    case backSquat = "BACK SQUAT"
-    case barMuscleUp = "BAR MUSCLE-UP"
-    case benchPress = "BENCH PRESS"
-    case boxJump = "BOX JUMP (BJ)"
-    case burpee = "BURPEE"
-    case empty = ""
-}
 

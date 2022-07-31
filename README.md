@@ -4,5 +4,5 @@
 
 SwiftUI project based on [SwiftUICharts](https://github.com/mecid/SwiftUICharts)
 
-<a href=""><img src ="images/update_crossfitprapp_screenshots.png"></a>
+<a href=""><img src ="images/screenshots_dark_light_app.png"></a>
 

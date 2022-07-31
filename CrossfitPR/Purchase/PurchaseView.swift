@@ -9,34 +9,35 @@ import SwiftUI
 
 struct PurchaseView: View {
     var body: some View {
-        VStack(spacing: 12) {
-            Spacer()
-            Text("CrossfitPR PRO")
-                .font(.title)
-                .foregroundColor(.green)
-            
-            VStack(alignment: .leading) {
-                HViewImageAndText(image: "chart.bar", imageColor: .green, title: "Anote seus PRs sem complicações", description: "Todas as informações sobre os seus PRs em um só lugar")
-                HViewImageAndText(image: "paperclip", imageColor: .blue, title: "Organizing your PRs", description: "Organizing your personal records makes the evolution of your exercises more practical")
-                HViewImageAndText(image: "info.circle.fill", imageColor: .green, title: "The powerful insights", description: "The powerful insights elevator allows you to understand your biggest records and the evolution of others")
-            }
-            Text("Try FREE for 7 Days")
-                .fontWeight(.bold)
-                .font(.body)
-                .padding()
-            VStack(spacing: 12) {
-                Button("R$ 4,90 / Mounth"){}
-                .buttonStyle(OutlineButton())
-                Button("R$ 57,90 / Year"){}
-                .buttonStyle(FilledButton())
+        ScrollView(.vertical, showsIndicators: false) {
+            VStack {
+                Spacer()
+                Text("CrossFitPR PRO")
+                    .font(.title)
+                    .fontWeight(.semibold)
+                    .foregroundColor(.green)
+                    .padding(.top)
                 
+                HViewImageAndText(image: "list.bullet", imageColor: .green, title: "purchase.manager.title", description: "purchase.manager.description")
+                HViewImageAndText(image: "chart.bar", imageColor: .green, title: "purchase.insights.title", description: "purchase.insights.description")
+                Text(LocalizedStringKey("purchase.tryfree.title"))
+                    .fontWeight(.bold)
+                    .font(.body)
+                    .padding()
+                VStack(spacing: 12) {
+                    Button("R$ 4,90 / Mounth"){}
+                    .buttonStyle(OutlineButton())
+                    Button("R$ 50,90 / Year"){}
+                    .buttonStyle(FilledButton())
+                    
+                }
+                .padding()
+                Text(LocalizedStringKey("purchase.commitment.title"))
+                    .font(Font.footnote)
+                    .multilineTextAlignment(.center)
+                    .foregroundColor(.secondary)
+                Spacer()
             }
-            .padding()
-            Text("No commitment. Cancel Anytime.\nAfter 7 day free trial, this subscription automatically\n renews depending on witch pan you choose unless\nauto-renew is turned off.")
-                .font(Font.footnote)
-                .multilineTextAlignment(.center)
-                .foregroundColor(.secondary)
-            Spacer()
         }
     }
 }

@@ -11,15 +11,23 @@ struct RecordDetail: View {
     @EnvironmentObject var store: RecordStore
     var recordType: String = ""
     var prName: String = ""
-
+    var isPounds: Bool {
+        store.measureTrackingMode == .pounds
+    }
+    
     var body: some View {
         VStack(alignment: .center) {
             Spacer()
             Form {
                 Group {
                     Section("Biggest PR") {
+                        HSubtitleView(title: "Category", subtitle: "\(String(describing: store.record.category?.rawValue ?? ""))")
                         HSubtitleView(title: "Percentage", subtitle: "\(String(describing: store.record.percentage.clean)) %")
-                        HSubtitleView(title: "Weight", subtitle: "\(String(describing: store.record.prValue)) lb")
+                        
+                        HSubtitleView(
+                            title: "Weight",
+                            subtitle: isPounds ? "\(String(describing: store.record.poundValue)) lb" : "\(String(describing: store.record.kiloValue)) kg"
+                        )
                         HSubtitleView(title: "Date", subtitle: "\(String(describing: store.record.dateFormatter))")
                     }
                 }
@@ -30,9 +38,9 @@ struct RecordDetail: View {
                         }
                     }
                 }
-
+                
                 Section(header: Text("\(recordType) evolution"), footer: Text("This analysis is based on the PR list of \(recordType) registered in the app. The most recent are the ones in the green band (on the right), the oldest gray and the evolution in yellow")) {
-                    LineViewGraph()
+                    LineViewGraph(points: store.points)
                 }
             }
         }

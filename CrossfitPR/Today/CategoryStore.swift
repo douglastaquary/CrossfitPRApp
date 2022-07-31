@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import Combine
 import os
 
 @MainActor final class CategoryStore: ObservableObject {
@@ -18,7 +19,7 @@ import os
     @Published var searchText: String = ""
     
     private var categories: [Category] {
-        ActivitiesRecordKey.allCases.map {
+        PRType.allCases.map {
             Category(title: $0.rawValue)
         }.filter { !$0.title.isEmpty }.sorted()
     }

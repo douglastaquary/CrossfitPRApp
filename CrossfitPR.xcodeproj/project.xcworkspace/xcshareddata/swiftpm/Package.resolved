@@ -1,16 +1,23 @@
 {
-  "object": {
-    "pins": [
-      {
-        "package": "SwiftUICharts",
-        "repositoryURL": "https://github.com/mecid/SwiftUICharts.git",
-        "state": {
-          "branch": null,
-          "revision": "15ec6551761e6a444e9439073e1f557c1c9700c6",
-          "version": "0.6.8"
-        }
+  "pins" : [
+    {
+      "identity" : "swift-collections",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-collections.git",
+      "state" : {
+        "revision" : "48254824bb4248676bf7ce56014ff57b142b77eb",
+        "version" : "1.0.2"
       }
-    ]
-  },
-  "version": 1
+    },
+    {
+      "identity" : "swiftuicharts",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/mecid/SwiftUICharts.git",
+      "state" : {
+        "revision" : "15ec6551761e6a444e9439073e1f557c1c9700c6",
+        "version" : "0.6.8"
+      }
+    }
+  ],
+  "version" : 2
 }

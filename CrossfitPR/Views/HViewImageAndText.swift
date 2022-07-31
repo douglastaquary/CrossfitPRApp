@@ -17,16 +17,18 @@ struct HViewImageAndText: View {
         HStack(alignment: .center) {
             HStack {
                 Image(systemName: image)
-                    .font(.system(size: 36))
-                    .frame(width: 36)
+                    .font(.system(size: 24))
                     .foregroundColor(imageColor)
                     .padding()
 
-                VStack(alignment: .leading) {
-                    Text(title).bold()
-                
-                    Text(description)
-                        .fixedSize(horizontal: false, vertical: true)
+                VStack(alignment: .leading, spacing: 8) {
+                    Text(LocalizedStringKey(title))
+                    
+                        .fixedSize(horizontal: true, vertical: false)
+                    Text(LocalizedStringKey(description))
+                        .font(.footnote)
+                        .foregroundColor(.secondary)
+                        .fixedSize(horizontal: false, vertical: false)
                 }
             }.frame(width: 340, height: 100)
         }
@@ -36,7 +38,6 @@ struct HViewImageAndText: View {
 struct HViewImageAndText_Previews: PreviewProvider {
     static var previews: some View {
         HViewImageAndText(image: "heart.fill", imageColor: .pink, title: "More Personalized", description: "Top Stories picked for you and recommendations from siri.")
-        .previewLayout(.sizeThatFits)
-        .padding(10)
+
     }
 }

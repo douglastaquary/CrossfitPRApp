@@ -34,7 +34,7 @@ func appReducer(
         return SendablePublisher {
             try await dependencies.save(activity)
         }
-        .replaceError(with: PersonalRecord.init(activity: Exercise(name: .empty), date: .now, pounds: 0.0, goal: 36 * 1600))
+        .replaceError(with: PersonalRecord())
         .map(AppAction.save)
         .eraseToAnyPublisher()
     case let .setHistoriesResult(prs):

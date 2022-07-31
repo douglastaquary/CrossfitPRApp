@@ -9,13 +9,16 @@ import SwiftUI
 
 struct SettingsView: View {
     @EnvironmentObject var settings: SettingsStore
+    @State var showPROsubsciptionView = false
     
     var body: some View {
         Form {
             Section(header: Text("Notifications settings")) {
-                Toggle(isOn: $settings.isNotificationEnabled) {
-                    Text("Notification:")
-                }
+                UserDefaultsConfigToggleItemView(path: \.isNotificationEnabled, name: "Notification:")
+//                UserDefaultsConfigToggleItemView
+//                Toggle(isOn: $settings.isNotificationEnabled) {
+//                    Text("Notification:")
+//                }
             }
             
             Section(header: Text("Crossfit tracking settings")) {
@@ -23,7 +26,7 @@ struct SettingsView: View {
                     selection: $settings.measureTrackingMode,
                     label: Text("Measure tracking mode")
                 ) {
-                    ForEach(SettingsStore.MeasureTrackingMode.allCases, id: \.self) {
+                    ForEach(MeasureTrackingMode.allCases, id: \.self) {
                         Text($0.rawValue).tag($0)
                     }
                 }
@@ -39,15 +42,17 @@ struct SettingsView: View {
                         self.settings.unlockPro()
                     }) {
                         Text("Unlock PRO")
+                    }.sheet(isPresented: $showPROsubsciptionView) {
+                        PurchaseView()
+                    }
+                    
+                    Button(action: {
+                        self.settings.restorePurchase()
+                    }) {
+                        Text("Restore purchase")
                     }
                 }
-            } else {
-                Button(action: {
-                    self.settings.restorePurchase()
-                }) {
-                    Text("Restore purchase")
-                }
-            }
+            } 
         }
     }
 }

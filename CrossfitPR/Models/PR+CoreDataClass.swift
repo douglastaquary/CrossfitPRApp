@@ -13,7 +13,7 @@ public class PR: NSManagedObject {}
 
 extension PR: Comparable {
     public static func < (lhs: PR, rhs: PR) -> Bool {
-        return lhs.prName < rhs.prName
+        return lhs.id == rhs.id && lhs.prName < rhs.prName
     }
 }
 

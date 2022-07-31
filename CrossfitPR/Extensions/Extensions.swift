@@ -73,3 +73,23 @@ struct OutlineButton: ButtonStyle {
         )
     }
 }
+
+extension Int {
+    var pounds: Measurement<Unit> {
+        let cleanResult = String(format: "%.0f", self)
+        return Measurement(value: Double(cleanResult) ?? 0.0, unit: UnitMass.pounds)
+    }
+    
+    var kilograms: Measurement<Unit> {
+        let kgResult = (Double(self) * 0.4)
+        let cleanResult = String(format: "%.0f", kgResult)
+        return Measurement(value: Double(cleanResult) ?? 0.0, unit: UnitMass.kilograms)
+    }
+}
+
+extension Measurement {
+    var string: String {
+        return String(describing: "\(self.value)")
+    }
+}
+
