@@ -27,7 +27,7 @@ struct HViewImageAndText: View {
                         .font(.footnote)
                         .foregroundColor(.secondary)
                 }
-            }.frame(width: 340, height: 100)
+            }.frame(width: 348, height: 100)
         }
     }
 }

@@ -3,8 +3,41 @@
   CrossfitPR
 
   Created by Douglas Taquary on 25/05/22.
+ 
+ /* Onboarding screen */
+
+"onboarding.view.title" = "What's New";
+ 
+"onboarding.item1.title" = "Organizing your personal records";
+"onboarding.item1.description" = "Organizing your records makes the evolution of your crossfit training faster";
+
+"onboarding.item2.title" = "Manage your records";
+"onboarding.item2.description" = "Your high performance workouts now in one place simply and quickly";
+
+"onboarding.item3.title" = "The Powerful graphics";
+"onboarding.item3.description" = "Simple, easy-to-understand graphics to show your evolution";
+
+"onboarding.item4.title" = "The Powerful Insights";
+"onboarding.item4.description" = "The powerful insights elevator allows you to track and understand your evolution, the highest records through powerful graphics";
+
+"onboarding.button.title" = "Start";
+ 
+/* Purchase screen */
+
+"purchase.item1.title" = "Manage your records easily and conveniently";
+"purchase.item1.description" = "Edit, delete records, organize your categories according to your crossfit workouts.";
+
+"purchase.item2.title" = "The Powerful insights";
+"purchase.item2.description" = "The powerful insights elevator allows you to track and understand your evolution, the highest records through powerful graphics";
+
+"purchase.item3.title" = "Ranks of your top records";
+"purchase.item3.description" = "Allows you to track the rank of your top high performance records";
+
+
+"purchase.tryfree.title" = "Try FREE for 7 Days";
+
+"purchase.commitment.title"= "No commitment. Cancel Anytime.\nAfter 7 day free trial, this subscription automatically\n renews depending on witch pan you choose unless\nauto-renew is turned off.";
   
-*/
 /* Screen titles*/
 "screen.category.title" = "Personal records";
 "screen.insights.title" = "Insights";

@@ -18,8 +18,12 @@ struct PurchaseView: View {
                     .foregroundColor(.green)
                     .padding(.top)
                 
-                HViewImageAndText(image: "list.bullet", imageColor: .green, title: "purchase.manager.title", description: "purchase.manager.description")
-                HViewImageAndText(image: "chart.bar", imageColor: .green, title: "purchase.insights.title", description: "purchase.insights.description")
+                
+                HViewImageAndText(image: "list.bullet", imageColor: .green, title: "purchase.item1.title", description: "purchase.item1.description")
+                
+                HViewImageAndText(image: "chart.xyaxis.line", imageColor: .green, title: "purchase.item2.title", description: "purchase.item2.description")
+                
+                HViewImageAndText(image: "chart.bar", imageColor: .green, title: "purchase.item3.title", description: "purchase.item3.description")
                 
                 Text(LocalizedStringKey("purchase.tryfree.title"))
                     .fontWeight(.bold)

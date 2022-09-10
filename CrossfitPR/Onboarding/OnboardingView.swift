@@ -13,18 +13,23 @@ struct OnboardingView: View {
     var body: some View {
         VStack {
             Spacer()
-                Text("What's New")
+                Text(LocalizedStringKey("onboarding.view.title"))
                     .fontWeight(.heavy)
                     .font(.system(size: 36))
                     .frame(width: 300, alignment: .leading)
             
-            HViewImageAndText(image: "list.bullet", imageColor: .green, title: "Organizing your records", description: "Organizing your personal records makes the evolution of your exercises more practical")
+            HViewImageAndText(image: "figure.strengthtraining.traditional", imageColor: .green, title: "onboarding.item2.title", description: "onboarding.item2.description")
             
-            HViewImageAndText(image: "figure.strengthtraining.traditional", imageColor: .green, title: "Anote seus PRs sem complicações", description: "Seus recordes pessoais em um só lugar: fácil e prático.")
+            HViewImageAndText(
+                image: "list.bullet",
+                imageColor: .green,
+                title: "onboarding.item1.title",
+                description: "onboarding.item1.description"
+            )
             
-            HViewImageAndText(image: "chart.xyaxis.line", imageColor: .green, title: "Gráficos simplificados", description: "Gráficos simples e fáceis de entender para mostrar sua evolucão")
+            HViewImageAndText(image: "chart.xyaxis.line", imageColor: .green, title: "onboarding.item3.title", description: "onboarding.item3.description")
             
-            HViewImageAndText(image: "chart.bar", imageColor: .green, title: "The Powerful Insights", description: "The powerful insights elevator allows you to understand your biggest records and the evolution of others")
+            HViewImageAndText(image: "chart.bar", imageColor: .green, title: "onboarding.item4.title", description: "onboarding.item4.description")
   
             Spacer()
             VStack {

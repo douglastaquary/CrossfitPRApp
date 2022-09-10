@@ -3,6 +3,24 @@
   CrossfitPR
 
   Created by Douglas Taquary on 25/05/22.
+ 
+ /* Onboarding screen */
+
+"onboarding.view.title" = "O que há de novo";
+ 
+"onboarding.item1.title" = "Organize seus recordes pessoais";
+"onboarding.item1.description" = "Organizar seus records torna mais rápida a evolução dos seus treinos de crossfit";
+
+"onboarding.item2.title" = "Gerencie seus recordes";
+"onboarding.item2.description" = "Seus treinos de alta performance agora em um só lugar de forma simples e rápida ";
+
+"onboarding.item3.title" = "Os poderosos gráficos simplificados";
+"onboarding.item3.description" = "Gráficos de forma simples e fácil de entender para mostrar sua evolução";
+
+"onboarding.item4.title" = "Os Poderosos Insights";
+"onboarding.item4.description" = "O Poderoso Insights permite que você entenda sua evolução, os maiores records através de poderosos gráficos";
+
+"onboarding.button.title" = "Começar";
   
 */
 /* Screen titles*/
@@ -19,11 +37,14 @@
 "tabbar.settings.title" = "configurações";
 
 /* Purchase screen */
-"purchase.manager.title" = "Gerencie seus recordes pessoais";
-"purchase.manager.description" = "Edite, apague records, organize suas categorias de acordo com os seus treinos.";
+"purchase.item1.title" = "Gerencie seus recordes pessoais";
+"purchase.item1.description" = "Edite, apague records, organize suas categorias de acordo com os seus treinos de crossfit.";
 
-"purchase.insights.title" = "Os poderosos insights";
-"purchase.insights.description" = "Os poderosos insights permite que você acompanhe, entenda seus maiores records e evolução através de gráficos simplificados.";
+"purchase.item2.title" = "Os Poderosos Insights";
+"purchase.item2.description" = "Os Poderosos Insights permitem que você acompanhe, entenda seus maiores records e evolução através de gráficos simplificados.";
+
+"purchase.item3.title" = "Top rank dos seus records";
+"purchase.item3.description" = "Permite que você acompanhe a classificação dos seus principais recordes de alto desempenho";
 
 "purchase.tryfree.title" = "Experimente GRÁTIS por 7 dias";
 
