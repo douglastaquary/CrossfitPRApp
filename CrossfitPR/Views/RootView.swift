@@ -52,7 +52,7 @@ struct RootView: View {
                 Image(systemName: "gear")
                 Text(LocalizedStringKey("tabbar.settings.title"))
             }
-            .tag(1)
+            .tag(2)
         }.accentColor(.green)
     }
 }

@@ -13,35 +13,38 @@ struct CategoryListView: View {
     @State var showNewPRView = false
     
     var body: some View {
-        ScrollViewReader { scrollView in
-            ScrollView {
-                ForEach(store.filteredCategories, id: \.id) { category in
-                    NavigationLink(
-                        destination: RecordDetail(recordType:category.title)
-                            .environmentObject(RecordStore(recordType: category.title))
-                    ) {
-                        CategoryItemView(title: category.title)
+        NavigationStack {
+            ScrollViewReader { scrollView in
+                ScrollView {
+                    ForEach(store.filteredCategories, id: \.id) { category in
+                        NavigationLink(value: category) {
+                            CategoryItemView(title: category.title)
+                        }
                     }
                 }
             }
-        }
-        .toolbar {
-            ToolbarItemGroup(placement: .navigationBarTrailing) {
-                Button(action: { self.showNewPRView.toggle() }) {
-                    Image(systemName: "plus.circle")
-                        .font(.headline)
-                        .foregroundColor(.green)
-                        .accessibility(label: Text("add"))
-                }.sheet(isPresented: $showNewPRView) {
-                    NewRecordView()
+            .toolbar {
+                ToolbarItemGroup(placement: .navigationBarTrailing) {
+                    Button(action: { self.showNewPRView.toggle() }) {
+                        Image(systemName: "plus.circle")
+                            .font(.headline)
+                            .foregroundColor(.green)
+                            .accessibility(label: Text("add"))
+                    }.sheet(isPresented: $showNewPRView) {
+                        NewRecordView()
+                    }
                 }
             }
+            .navigationBarTitle(LocalizedStringKey("screen.category.title"), displayMode: .large)
+            .searchable(text: $store.searchText, prompt: LocalizedStringKey("category.search.descript"))
+            .onAppear {
+                UINavigationBar.appearance().tintColor = .green
+            }
+            .navigationDestination(for: Category.self) { category in
+                RecordDetail(recordType:category.title).environmentObject(RecordStore(recordType: category.title))
+            }   
         }
-        .navigationBarTitle(LocalizedStringKey("screen.category.title"), displayMode: .large)
-        .searchable(text: $store.searchText, prompt: LocalizedStringKey("category.search.descript"))
-        .onAppear {
-            UINavigationBar.appearance().tintColor = .green
-        }
+
     }
 }
 
