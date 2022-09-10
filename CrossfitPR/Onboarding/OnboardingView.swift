@@ -15,19 +15,17 @@ struct OnboardingView: View {
             Spacer()
                 Text("What's New")
                     .fontWeight(.heavy)
-                    .font(.system(size: 50))
+                    .font(.system(size: 36))
                     .frame(width: 300, alignment: .leading)
-        
-            NewDetail(image: "heart.fill", imageColor: .green, title: "Anote seus PRs sem complicações", description: "Todas as informações sobre os seus PRs em um só lugar")
-            NewDetail(image: "paperclip", imageColor: .blue, title: "Organizing your PRs", description: "Organizing your personal records makes the evolution of your exercises more practical")
-            NewDetail(image: "paperclip", imageColor: .blue, title: "The powerful insights", description: "The powerful insights elevator allows you to understand your biggest records and the evolution of others")
-//                VStack(alignment: .leading) {
-//                    NewDetail(image: "heart.fill", imageColor: .green, title: "Anote seus PRs sem complicações", description: "Todas as informações sobre os seus PRs em um só lugar")
-//                    NewDetail(image: "paperclip", imageColor: .blue, title: "Organizing your PRs", description: "Organizing your personal records makes the evolution of your exercises more practical")
-//                    NewDetail(image: "paperclip", imageColor: .blue, title: "The powerful insights", description: "The powerful insights elevator allows you to understand your biggest records and the evolution of others")
-//
-//            }
-
+            
+            HViewImageAndText(image: "list.bullet", imageColor: .green, title: "Organizing your records", description: "Organizing your personal records makes the evolution of your exercises more practical")
+            
+            HViewImageAndText(image: "figure.strengthtraining.traditional", imageColor: .green, title: "Anote seus PRs sem complicações", description: "Seus recordes pessoais em um só lugar: fácil e prático.")
+            
+            HViewImageAndText(image: "chart.xyaxis.line", imageColor: .green, title: "Gráficos simplificados", description: "Gráficos simples e fáceis de entender para mostrar sua evolucão")
+            
+            HViewImageAndText(image: "chart.bar", imageColor: .green, title: "The Powerful Insights", description: "The powerful insights elevator allows you to understand your biggest records and the evolution of others")
+  
             Spacer()
             VStack {
                 Button("Start"){
