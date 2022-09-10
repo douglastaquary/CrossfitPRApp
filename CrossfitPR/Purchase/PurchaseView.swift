@@ -20,6 +20,7 @@ struct PurchaseView: View {
                 
                 HViewImageAndText(image: "list.bullet", imageColor: .green, title: "purchase.manager.title", description: "purchase.manager.description")
                 HViewImageAndText(image: "chart.bar", imageColor: .green, title: "purchase.insights.title", description: "purchase.insights.description")
+                
                 Text(LocalizedStringKey("purchase.tryfree.title"))
                     .fontWeight(.bold)
                     .font(.body)

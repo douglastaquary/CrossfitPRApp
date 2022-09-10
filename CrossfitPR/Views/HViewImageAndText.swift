@@ -23,12 +23,9 @@ struct HViewImageAndText: View {
 
                 VStack(alignment: .leading, spacing: 8) {
                     Text(LocalizedStringKey(title))
-                    
-                        .fixedSize(horizontal: true, vertical: false)
                     Text(LocalizedStringKey(description))
                         .font(.footnote)
                         .foregroundColor(.secondary)
-                        .fixedSize(horizontal: false, vertical: false)
                 }
             }.frame(width: 340, height: 100)
         }
@@ -37,7 +34,7 @@ struct HViewImageAndText: View {
 
 struct HViewImageAndText_Previews: PreviewProvider {
     static var previews: some View {
-        HViewImageAndText(image: "heart.fill", imageColor: .pink, title: "More Personalized", description: "Top Stories picked for you and recommendations from siri.")
+        HViewImageAndText(image: "heart.fill", imageColor: .pink, title: "More Personalized that you see and think to break", description: "Top Stories picked for you and recommendations from siri.")
 
     }
 }
