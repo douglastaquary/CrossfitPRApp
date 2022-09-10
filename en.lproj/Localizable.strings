@@ -21,6 +21,18 @@
 "onboarding.item4.description" = "The powerful insights elevator allows you to track and understand your evolution, the highest records through powerful graphics";
 
 "onboarding.button.title" = "Start";
+
+/* Record detail screen */
+
+"record.biggest.section.title" = "Biggest PR";
+"record.category.title" = "Category";
+"record.percentage.title" = "Percentage";
+"record.weight.title" = "Weight";
+"record.date.title" = "Date";
+
+"record.records.section.title" = "Personal records";
+"%@ record.evolution.section.title" = "%@ evolution";
+"record.evolution.section.description %@" = "This analysis is based on the PR list of %@ registered in the app. The most recent are the ones in the green band (on the right), the oldest gray and the evolution in yellow";
  
 /* Purchase screen */
 
@@ -67,5 +79,4 @@
 
 /* New record screen */
 "screen.newRecord.personalRecordTitle" = "Personal record";
-"tabbar.insights.title" = "insights";
-"tabbar.settings.title" = "settings";
+

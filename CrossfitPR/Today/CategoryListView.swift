@@ -29,7 +29,7 @@ struct CategoryListView: View {
                         Image(systemName: "plus.circle")
                             .font(.headline)
                             .foregroundColor(.green)
-                            .accessibility(label: Text("add"))
+                            .accessibility(label: Text("add new record"))
                     }.sheet(isPresented: $showNewPRView) {
                         NewRecordView()
                     }

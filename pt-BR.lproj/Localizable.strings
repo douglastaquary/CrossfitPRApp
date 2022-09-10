@@ -4,6 +4,8 @@
 
   Created by Douglas Taquary on 25/05/22.
  
+ */
+ 
  /* Onboarding screen */
 
 "onboarding.view.title" = "O que há de novo";
@@ -22,10 +24,9 @@
 
 "onboarding.button.title" = "Começar";
   
-*/
 /* Screen titles*/
 "screen.category.title" = "Recordes pessoais";
-"screen.insights.title" = "Percepções";
+"screen.insights.title" = "Insights";
 "screen.settings.title" = "Configurações";
 
 /* Category searchbar descript */
@@ -33,7 +34,7 @@
 
 /* Tabbar title screens */
 "tabbar.records.title" = "records";
-"tabbar.insights.title" = "percepções";
+"tabbar.insights.title" = "insights";
 "tabbar.settings.title" = "configurações";
 
 /* Purchase screen */

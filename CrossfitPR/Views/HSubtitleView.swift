@@ -14,10 +14,10 @@ struct HSubtitleView: View {
     
     var body: some View {
         HStack {
-            Text(title)
+            Text(LocalizedStringKey(title))
                 .foregroundColor(.secondary)
             Spacer()
-            Text(subtitle)
+            Text(LocalizedStringKey(subtitle))
                 .bold()
         }
     }
