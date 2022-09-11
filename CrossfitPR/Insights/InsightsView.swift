@@ -14,7 +14,7 @@ struct InsightsView: View {
     @EnvironmentObject var store: InsightsStore
 
     var body: some View {
-        if store.records.count > 3 {
+        if store.records.count > 8 {
             VStack {
                 Form {
                     Section("Records ranking") {
