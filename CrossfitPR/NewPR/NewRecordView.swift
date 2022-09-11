@@ -34,7 +34,7 @@ struct NewRecordView: View {
     var body: some View {
         NavigationView {
             Form {
-                Section(header: Text("Personal record")) {
+                Section(header: Text("Personal Record")) {
                     CategoryView(categoriesNames: viewModel.crossfitLevelList, selectedCategory: $viewModel.selectedCategoryItem)
                     Picker(selection: $viewModel.selectedCategory, label: Text("Crossfit PR").foregroundColor(.secondary)) {
                         ForEach(0..<viewModel.personalRecordTypeList.count, id: \.self) {
@@ -45,44 +45,44 @@ struct NewRecordView: View {
                     .padding(.bottom, 12)
                 }
                 
-                Section(header: Text("Record configurations")) {
+                Section(header: Text("newRecord.screen.section.personal.title")) {
                     Toggle(isOn: $viewModel.isMaxRepetitions) {
-                        Text("Maximum repetitions")
+                        Text("newRecord.screen.toggle.maxreps.title")
                     }
                     Toggle(isOn: $viewModel.minimunTimes) {
-                        Text("Minimum time")
+                        Text("newRecord.screen.toggle.mintime.title")
                     }
                 }
                 if viewModel.isMaxRepetitions {
-                    Section(header: Text("Max reps")) {
-                        Picker(selection: $viewModel.editingRecord.maxReps, label: Text("Repetitions").foregroundColor(.secondary)){
+                    Section(header: Text("newRecord.screen.toggle.maxrep.title")) {
+                        Picker(selection: $viewModel.editingRecord.maxReps, label: Text("newRecord.screen.picker.repetition.title").foregroundColor(.secondary)){
                             ForEach(0..<100) {
                                 Text("\(String($0))").foregroundColor(.primary)
                             }
                         }
                     }
                 } else if viewModel.minimunTimes {
-                    Section(header: Text("Minimum time")) {
-                        Picker(selection: $viewModel.editingRecord.minTime, label: Text("Times").foregroundColor(.secondary)){
+                    Section(header: Text("newRecord.screen.toggle.mintime.title")) {
+                        Picker(selection: $viewModel.editingRecord.minTime, label: Text("newRecord.screen.picker.timecount.title").foregroundColor(.secondary)){
                             ForEach(0..<200) {
                                 Text("\(String($0)) min").foregroundColor(.primary)
                             }
                         }
                         
-                        Picker(selection: $viewModel.editingRecord.distance, label: Text("Distance").foregroundColor(.secondary)){
+                        Picker(selection: $viewModel.editingRecord.distance, label: Text("newRecord.screen.toggle.distance.title").foregroundColor(.secondary)){
                             ForEach(0..<100) {
                                 Text("\(String($0)) km").foregroundColor(.primary)
                             }
                         }
                     }
                 } else {
-                    Section(header: Text("Informations")) {
-                        Picker(selection: $viewModel.selectedPercentage, label: Text("Percentage").foregroundColor(.secondary)){
+                    Section(header: Text("newRecord.screen.section.informations.title")) {
+                        Picker(selection: $viewModel.selectedPercentage, label: Text("newRecord.screen.section.informations.percentage.title").foregroundColor(.secondary)){
                             ForEach(0..<199) {
                                 Text("\(String($0)) %").foregroundColor(.primary)
                             }
                         }
-                        Picker(selection: $viewModel.selectedInitialPounds, label: Text("Weight").foregroundColor(.secondary)){
+                        Picker(selection: $viewModel.selectedInitialPounds, label: Text("newRecord.screen.section.informations.weight.title").foregroundColor(.secondary)){
                             ForEach(0..<999) {
                                 Text("\(String($0)) lb").foregroundColor(.primary)
                             }
@@ -90,18 +90,18 @@ struct NewRecordView: View {
                     }
                 }
 
-                Section(header: Text("Comments")) {
-                    TextField("Enter a comment if needed", text: $viewModel.editingRecord.comments)
+                Section(header: Text("newRecord.screen.section.comment.title")) {
+                    TextField("newRecord.screen.section.comment.description", text: $viewModel.editingRecord.comments)
                         .frame(height: 86)
                 }
             }
-            .navigationBarTitle(Text("New Record"), displayMode: .inline)
+            .navigationBarTitle(Text("newRecord.screen.title"), displayMode: .inline)
             .navigationBarItems(
                 leading: Button(
                     action:{
                         self.presentation.wrappedValue.dismiss()
                     }, label: {
-                        Text("Cancel")
+                        Text("newRecord.screen.cancel.button.title")
                             .foregroundColor(.green)
                             .bold()
                     }),
@@ -110,7 +110,7 @@ struct NewRecordView: View {
                         viewModel.saveRecord()
                         self.presentation.wrappedValue.dismiss()
                     }) {
-                        Text("Save")
+                        Text("newRecord.screen.save.button.title")
                             .foregroundColor(.green)
                             .bold()
                     }

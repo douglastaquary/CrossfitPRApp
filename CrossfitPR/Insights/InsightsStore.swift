@@ -119,7 +119,7 @@ final class InsightsStore: ObservableObject {
             
             evolutionPoint = DataPoint.init(
                 value: Double(evolutionPRselected?.kiloValue ?? 0),
-                label: "\(evolutionPRselected?.kiloValue ?? 0) lb",
+                label: "\(evolutionPRselected?.kiloValue ?? 0) kg",
                 legend: Legend(color: .yellow, label: "\(evolutionPRselected?.prName.rawValue ?? "")", order: 2)
             )
             for pr in records {

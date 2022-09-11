@@ -8,38 +8,68 @@
 import SwiftUI
 
 struct PurchaseView: View {
+    @Environment(\.presentationMode) var presentation
+    
     var body: some View {
-        ScrollView(.vertical, showsIndicators: false) {
-            VStack {
-                Spacer()
-                Text("CrossFitPR PRO")
-                    .font(.title)
-                    .fontWeight(.semibold)
-                    .foregroundColor(.green)
-                    .padding(.top)
-                
-                HViewImageAndText(image: "list.bullet", imageColor: .green, title: "purchase.manager.title", description: "purchase.manager.description")
-                HViewImageAndText(image: "chart.bar", imageColor: .green, title: "purchase.insights.title", description: "purchase.insights.description")
-                Text(LocalizedStringKey("purchase.tryfree.title"))
-                    .fontWeight(.bold)
-                    .font(.body)
-                    .padding()
-                VStack(spacing: 12) {
-                    Button("R$ 4,90 / Mounth"){}
-                    .buttonStyle(OutlineButton())
-                    Button("R$ 50,90 / Year"){}
-                    .buttonStyle(FilledButton())
+        
+        NavigationView {
+            ScrollView(.vertical, showsIndicators: false) {
+                VStack {
                     
+                    HStack {
+                        VStack(alignment: .trailing) {
+                            Button(
+                                action:{
+                                    self.presentation.wrappedValue.dismiss()
+                                }, label: {
+                                    Text("newRecord.screen.cancel.button.title")
+                                        .foregroundColor(.green)
+                                        .bold()
+                                })
+                            .padding(.trailing, 16)
+                        }
+                        Spacer()
+                    }
+                    .padding([.top, .leading], 24)
+                    
+                    Spacer()
+                    Text("CrossFitPR PRO")
+                        .font(.title)
+                        .fontWeight(.semibold)
+                        .foregroundColor(.green)
+                        .padding(.top)
+                    
+                    HViewImageAndText(image: "gearshape", imageColor: .green, title: "purchase.item1.title", description: "purchase.item1.description")
+                    
+                    HViewImageAndText(image: "chart.bar", imageColor: .green, title: "purchase.item2.title", description: "purchase.item2.description")
+                    
+                    HViewImageAndText(image: "trophy", imageColor: .green, title: "purchase.item3.title", description: "purchase.item3.description")
+                    
+                    Text(LocalizedStringKey("purchase.tryfree.title"))
+                        .fontWeight(.bold)
+                        .font(.body)
+                        .padding()
+                    VStack(spacing: 12) {
+                        Button("R$ 4,90 / Mounth"){
+                            
+                        }.buttonStyle(OutlineButton())
+                        
+                        Button("R$ 50,90 / Year"){
+                            
+                        }.buttonStyle(FilledButton())
+                        
+                    }
+                    .padding()
+                    Text(LocalizedStringKey("purchase.commitment.title"))
+                        .font(Font.footnote)
+                        .multilineTextAlignment(.center)
+                        .foregroundColor(.secondary)
+                    Spacer()
                 }
-                .padding()
-                Text(LocalizedStringKey("purchase.commitment.title"))
-                    .font(Font.footnote)
-                    .multilineTextAlignment(.center)
-                    .foregroundColor(.secondary)
-                Spacer()
             }
         }
     }
+    
 }
 
 struct PurchaseView_Previews: PreviewProvider {

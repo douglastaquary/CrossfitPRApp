@@ -3,8 +3,53 @@
   CrossfitPR
 
   Created by Douglas Taquary on 25/05/22.
+ 
+ /* Onboarding screen */
+
+"onboarding.view.title" = "What's New";
+ 
+"onboarding.item1.title" = "Organizing your personal records";
+"onboarding.item1.description" = "Organizing your records makes the evolution of your crossfit training faster";
+
+"onboarding.item2.title" = "Manage your records";
+"onboarding.item2.description" = "Your high performance workouts now in one place simply and quickly";
+
+"onboarding.item3.title" = "The Powerful graphics";
+"onboarding.item3.description" = "Simple, easy-to-understand graphics to show your evolution";
+
+"onboarding.item4.title" = "The Powerful Insights";
+"onboarding.item4.description" = "The powerful insights elevator allows you to track and understand your evolution, the highest records through powerful graphics";
+
+"onboarding.button.title" = "Start";
+
+/* Record detail screen */
+
+"record.biggest.section.title" = "Biggest PR";
+"record.category.title" = "Category";
+"record.percentage.title" = "Percentage";
+"record.weight.title" = "Weight";
+"record.date.title" = "Date";
+
+"record.records.section.title" = "Personal records";
+"%@ record.evolution.section.title" = "%@ evolution";
+"record.evolution.section.description %@" = "This analysis is based on the PR list of %@ registered in the app. The most recent are the ones in the green band (on the right), the oldest gray and the evolution in yellow";
+ 
+/* Purchase screen */
+
+"purchase.item1.title" = "Manage your records easily and conveniently";
+"purchase.item1.description" = "Edit, delete records, organize your categories according to your crossfit workouts.";
+
+"purchase.item2.title" = "The Powerful insights";
+"purchase.item2.description" = "The powerful insights elevator allows you to track and understand your evolution, the highest records through powerful graphics";
+
+"purchase.item3.title" = "Ranks of your top records";
+"purchase.item3.description" = "Allows you to track the rank of your top high performance records";
+
+
+"purchase.tryfree.title" = "Try FREE for 7 Days";
+
+"purchase.commitment.title"= "No commitment. Cancel Anytime.\nAfter 7 day free trial, this subscription automatically\n renews depending on witch pan you choose unless\nauto-renew is turned off.";
   
-*/
 /* Screen titles*/
 "screen.category.title" = "Personal records";
 "screen.insights.title" = "Insights";
@@ -18,21 +63,41 @@
 "tabbar.insights.title" = "insights";
 "tabbar.settings.title" = "settings";
 
-/* Purchase screen */
+/* Insight screen */
 
-"purchase.manager.title" = "Manage your records easily and conveniently";
-"purchase.manager.description" = "Edit, delete records, organize your categories according to your workouts.";
+"insight.section.ranking.title" = "Top records";
+"insight.section.graph.title" = "Graph Details";
 
-"purchase.insights.title" = "The Powerful insights";
-"purchase.insights.description" = "The Powerful insights allow you to track and understand your biggest records and the evolution of others.";
+"insight.section.information.title" = "The biggest PR";
+"insight.view.error.description" = "There is no data to display chart.";
+
+"insight.view.biggestpr.description %@" = "the biggest pr is %@";
+
+"insight.view.intensity.title"= "with intensity of";
+"insight.view.card.pro.title"= "Insights";
+"insight.view.card.pro.description"= "PRO subscription allows the analysis of historical data from your records that help you understand how to evolve faster in high performance training";
+"insight.view.card.unlockprobutton.title"= "Unlock CrossFitPR PRO";
+
+/* New Record screen */
+"newRecord.screen.title" = "New Record";
+"newRecord.screen.save.button.title" = "Save";
+"newRecord.screen.cancel.button.title" = "Cancel";
+"newRecord.screen.section.personal.title" = "Personal Record";
+"newRecord.screen.toggle.maxreps.title" = "Maximum repetitions";
+"newRecord.screen.toggle.mintime.title" = "Minimum time";
+"newRecord.screen.toggle.maxrep.title" = "Max reps";
+"newRecord.screen.picker.repetition.title" = "Repetitions";
+"newRecord.screen.picker.timecount.title" = "Time";
+"newRecord.screen.toggle.distance.title" = "Distance";
+"newRecord.screen.section.informations.title" = "Informations";
+"newRecord.screen.section.informations.percentage.title" = "Percentage";
+"newRecord.screen.section.informations.weight.title" = "Weight";
+"newRecord.screen.section.comment.title" = "Comment";
+"newRecord.screen.section.comment.description" = "Enter a comment if needed";
 
 
-"purchase.tryfree.title" = "Try FREE for 7 Days";
-
-"purchase.commitment.title"= "No commitment. Cancel Anytime.\nAfter 7 day free trial, this subscription automatically\n renews depending on witch pan you choose unless\nauto-renew is turned off.";
 
 
-/* New record screen */
-"screen.newRecord.personalRecordTitle" = "Personal record";
-"tabbar.insights.title" = "insights";
-"tabbar.settings.title" = "settings";
+
+
+

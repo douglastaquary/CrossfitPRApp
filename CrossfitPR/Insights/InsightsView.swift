@@ -14,35 +14,45 @@ struct InsightsView: View {
     @EnvironmentObject var store: InsightsStore
 
     var body: some View {
-        if store.records.count > 3 {
+        if store.records.count > 8 {
             VStack {
                 Form {
-                    Section("Records ranking") {
+                    Section("insight.section.ranking.title") {
                         HorizontalBarChartView(dataPoints: [store.biggestPoint, store.evolutionPoint, store.lowPoint])
                     }
-                    Section("Graph Details") {
+                    Section("insight.section.graph.title") {
                         if store.barPoints.isEmpty {
-                            Text("There is no data to display chart...")
+                            Text("insight.view.error.description")
                         } else {
                             BarChartView(dataPoints: store.barPoints, limit: store.limit)
                         }
                     }
-                    Section("PR informations") {
+                    Section("insight.section.information.title") {
+                        let recordTypeName = store.biggestPR?.prName.rawValue ?? ""
                         if store.measureTrackingMode == .pounds {
-                            HSubtitleView(title: "the biggest pr is " + "\(store.biggestPR?.prName.rawValue ?? "")".lowercased(), subtitle: "\(store.biggestPR?.poundValue ?? 0) lb")
+                            HSubtitleView(
+                                title: recordTypeName,
+                                subtitle: "\(store.biggestPR?.poundValue ?? 0) lb"
+                            )
                         } else {
-                            HSubtitleView(title: "the biggest pr is " + "\(store.biggestPR?.prName.rawValue ?? "")".lowercased(), subtitle: "\(store.biggestPR?.kiloValue ?? 0) kg")
+                            HSubtitleView(
+                                title: recordTypeName,
+                                subtitle: "\(store.biggestPR?.kiloValue ?? 0) kg"
+                            )
                         }
-                        HSubtitleView(title: "with intensity of", subtitle: "\(store.biggestPR?.percentage.clean ?? "") %")
+                        HSubtitleView(
+                            title: "insight.view.intensity.title",
+                            subtitle: "\(store.biggestPR?.percentage.clean ?? "") %"
+                        )
                     }
                     
                     Button {
                         self.showPROsubsciptionView.toggle()
                     } label: {
                         CardGroupView(
-                            cardTitle: "Insights",
-                            cardDescript: "PRO subsciption enables historical data analysis that helps you undestand how new habits influence your heart",
-                            buttonTitle: "Unlock CrossfitPR PRO",
+                            cardTitle: "insight.view.card.pro.title",
+                            cardDescript: "insight.view.card.pro.description",
+                            buttonTitle: "insight.view.card.unlockprobutton.title",
                             iconSystemText: "chart.bar.fill"
                         )
                     }.sheet(isPresented: $showPROsubsciptionView) {

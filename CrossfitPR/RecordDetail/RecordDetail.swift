@@ -20,26 +20,26 @@ struct RecordDetail: View {
             Spacer()
             Form {
                 Group {
-                    Section("Biggest PR") {
-                        HSubtitleView(title: "Category", subtitle: "\(String(describing: store.record.category?.rawValue ?? ""))")
-                        HSubtitleView(title: "Percentage", subtitle: "\(String(describing: store.record.percentage.clean)) %")
+                    Section("record.biggest.section.title") {
+                        HSubtitleView(title: "record.category.title", subtitle: "\(String(describing: store.record.category?.rawValue ?? ""))")
+                        HSubtitleView(title: "record.percentage.title", subtitle: "\(String(describing: store.record.percentage.clean)) %")
                         
                         HSubtitleView(
-                            title: "Weight",
+                            title: "record.weight.title",
                             subtitle: isPounds ? "\(String(describing: store.record.poundValue)) lb" : "\(String(describing: store.record.kiloValue)) kg"
                         )
-                        HSubtitleView(title: "Date", subtitle: "\(String(describing: store.record.dateFormatter))")
+                        HSubtitleView(title: "record.date.title", subtitle: "\(String(describing: store.record.dateFormatter))")
                     }
                 }
                 Group {
-                    Section("Personal records") {
+                    Section("record.records.section.title") {
                         ForEach(store.filteredPrs, id: \.id) { pr in
                             PRView(record: pr)
                         }
                     }
                 }
                 
-                Section(header: Text("\(recordType) evolution"), footer: Text("This analysis is based on the PR list of \(recordType) registered in the app. The most recent are the ones in the green band (on the right), the oldest gray and the evolution in yellow")) {
+                Section(header: Text("\(recordType) record.evolution.section.title"), footer: Text("record.evolution.section.description \(recordType)")) {
                     LineViewGraph(points: store.points)
                 }
             }

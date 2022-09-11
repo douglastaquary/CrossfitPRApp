@@ -26,12 +26,12 @@ struct CardGroupView: View {
     var body: some View {
         VStack {
             GroupBox(
-                label: Label(cardTitle, systemImage: iconSystemText)
+                label: Label(LocalizedStringKey(cardTitle), systemImage: iconSystemText)
                     .foregroundColor(.green)
             ) {
                 VStack {
                     HStack {
-                        Text(cardDescript)
+                        Text(LocalizedStringKey(cardDescript))
                             .multilineTextAlignment(.leading)
                             .fixedSize(horizontal: false, vertical: true)
                             .padding(.top, 2)
@@ -39,7 +39,7 @@ struct CardGroupView: View {
                         Spacer()
                     }
                     HStack {
-                        Text(buttonTitle)
+                        Text(LocalizedStringKey(buttonTitle))
                             .foregroundColor(.green)
                             Spacer()
                     }
