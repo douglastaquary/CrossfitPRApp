@@ -33,7 +33,7 @@ struct OnboardingView: View {
   
             Spacer()
             VStack {
-                Button("Start"){
+                Button("onboarding.button.title"){
                     UserDefaults.standard.set(true, forKey: "LaunchBefore")
                     withAnimation(){
                         self.viewlaunch.currentPage = Route.prHistoriesListView.rawValue
