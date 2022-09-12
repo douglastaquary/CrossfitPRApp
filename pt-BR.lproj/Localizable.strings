@@ -67,6 +67,9 @@
 "record.records.section.title" = "Record Pessoal";
 "%@ record.evolution.section.title" = "%@ evolução";
 "record.evolution.section.description %@" = "Esta análise é baseada na lista records de %@ cadastrada no aplicativo. Os mais recentes são os da faixa verde (à direita), o cinza mais antigo e a evolução em amarelo";
+"record.screen.delete.button.title" = "Apagar";
+"record.screen.cancel.button.title" = "Cancelar";
+"record.screen.delete.confirmation.title" = "Você realmente deseja excluir?";
 
 /* Insight screen */
 

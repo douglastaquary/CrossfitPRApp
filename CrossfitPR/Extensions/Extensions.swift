@@ -110,6 +110,14 @@ extension TimeInterval {
 }
 
 
+extension Date {
+    var dateFormat: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMM dd, yyyy"
+        return dateFormatter.string(from: self)
+    }
+}
+
 
 extension String {
   static func randomNotificationMessage(list:[String]) -> String {

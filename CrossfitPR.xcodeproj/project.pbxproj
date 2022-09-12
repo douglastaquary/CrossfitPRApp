@@ -60,6 +60,7 @@
 		4EE666E428CE91F60090BB35 /* LocalNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE666E328CE91F60090BB35 /* LocalNotificationManager.swift */; };
 		4EE666E628CE922A0090BB35 /* LocalNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE666E528CE922A0090BB35 /* LocalNotification.swift */; };
 		4EE666E828CE92370090BB35 /* NextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE666E728CE92370090BB35 /* NextView.swift */; };
+		4EE666EA28CFA2A70090BB35 /* CrossFitLineChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE666E928CFA2A70090BB35 /* CrossFitLineChart.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -119,6 +120,7 @@
 		4EE666E328CE91F60090BB35 /* LocalNotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalNotificationManager.swift; sourceTree = "<group>"; };
 		4EE666E528CE922A0090BB35 /* LocalNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalNotification.swift; sourceTree = "<group>"; };
 		4EE666E728CE92370090BB35 /* NextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NextView.swift; sourceTree = "<group>"; };
+		4EE666E928CFA2A70090BB35 /* CrossFitLineChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrossFitLineChart.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,6 +150,7 @@
 				4E8D9112282C798F00C88BF2 /* LineViewGraph.swift */,
 				4E8D9120283195A000C88BF2 /* HViewImageAndText.swift */,
 				4E8D91222835C1B900C88BF2 /* CardGroupView.swift */,
+				4EE666E928CFA2A70090BB35 /* CrossFitLineChart.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -421,6 +424,7 @@
 				4EE666E428CE91F60090BB35 /* LocalNotificationManager.swift in Sources */,
 				4EE666E628CE922A0090BB35 /* LocalNotification.swift in Sources */,
 				4E8BAA1B281760A100E179A3 /* InsightsStore.swift in Sources */,
+				4EE666EA28CFA2A70090BB35 /* CrossFitLineChart.swift in Sources */,
 				4EC1DF2E289625AC0027D38F /* CrossfitLevel.swift in Sources */,
 				4E5805CB27FD29B900F16219 /* SettingsStore.swift in Sources */,
 				4E26EC4A281B67B300A4F8C3 /* CategoryStore.swift in Sources */,

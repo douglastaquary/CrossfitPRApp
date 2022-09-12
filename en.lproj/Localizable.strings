@@ -47,7 +47,11 @@
 "record.records.section.title" = "Personal records";
 "%@ record.evolution.section.title" = "%@ evolution";
 "record.evolution.section.description %@" = "This analysis is based on the PR list of %@ registered in the app. The most recent are the ones in the green band (on the right), the oldest gray and the evolution in yellow";
- 
+"record.screen.delete.button.title" = "Delete";
+"record.screen.cancel.button.title" = "Cancel";
+"record.screen.delete.confirmation.title" = "Do you really want to delete?";
+
+
 /* Purchase screen */
 
 "purchase.item1.title" = "Manage your records easily and conveniently";

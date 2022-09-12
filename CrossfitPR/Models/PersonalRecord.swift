@@ -45,12 +45,13 @@ struct PersonalRecord: Identifiable, Hashable {
         self.minTime = Int(minTime)
         self.comments = comments
     }
-    
+
     var dateFormatter: String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MMM dd, yyyy"
         return dateFormatter.string(from: recordDate ?? .now)
     }
+    
     
     static let recordMock: PersonalRecord = PersonalRecord(
         kiloValue: 38,
@@ -58,6 +59,30 @@ struct PersonalRecord: Identifiable, Hashable {
         prName: .airSquat,
         percentage: 80
     )
+    
+    static let recordListMock: [PersonalRecord] = [
+        PersonalRecord(
+            kiloValue: 38,
+            poundValue: 90,
+            recordDate: .now,
+            prName: .airSquat,
+            percentage: 80
+        ),
+        PersonalRecord(
+            kiloValue: 60,
+            poundValue: 120,
+            recordDate: .now + 3,
+            prName: .airSquat,
+            percentage: 40
+        ),
+        PersonalRecord(
+            kiloValue: 120,
+            poundValue: 240,
+            recordDate: .now + 6,
+            prName: .airSquat,
+            percentage: 80
+        )
+    ]
 }
 
 extension PersonalRecord: Comparable {

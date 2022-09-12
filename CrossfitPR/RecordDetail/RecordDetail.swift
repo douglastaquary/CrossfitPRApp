@@ -6,9 +6,13 @@
 //
 
 import SwiftUI
+import Charts
 
 struct RecordDetail: View {
     @EnvironmentObject var store: RecordStore
+    @State var showPROsubsciptionView = false
+    @State private var confirmationShow = false
+    @State private var indexSet: IndexSet?
     var recordType: String = ""
     var prName: String = ""
     var isPounds: Bool {
@@ -36,6 +40,20 @@ struct RecordDetail: View {
                         ForEach(store.filteredPrs, id: \.id) { pr in
                             PRView(record: pr)
                         }
+                        .onDelete { indexSet in
+                            confirmationShow = true
+                            self.indexSet = indexSet
+                        }
+                        .confirmationDialog(
+                            "record.screen.delete.confirmation.title",
+                            isPresented: $confirmationShow,
+                            titleVisibility: .visible
+                        ) {
+                            Button("record.screen.delete.button.title", role: .destructive) {
+                                validateIfPro()
+                            }
+                            Button("record.screen.cancel.button.title", role: .cancel) { }
+                        }
                     }
                 }
                 
@@ -44,12 +62,26 @@ struct RecordDetail: View {
                 }
             }
         }
+        .sheet(isPresented: $showPROsubsciptionView) {
+            PurchaseView()
+        }
         .navigationBarTitle(Text(recordType))
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
             UINavigationBar.appearance().tintColor = .green
         }
         .accentColor(.green)
+    }
+    
+    func validateIfPro() {
+        if store.isPro {
+            guard let indexSet = self.indexSet else {
+                return
+            }
+            store.delete(at: indexSet)
+        } else {
+            self.showPROsubsciptionView.toggle()
+        }
     }
 }
 

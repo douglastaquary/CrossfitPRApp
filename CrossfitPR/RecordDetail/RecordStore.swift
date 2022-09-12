@@ -59,7 +59,10 @@ import os
         let sortedPoints = filteredPrs.sorted(by: {$0.recordDate?.compare($1.recordDate ?? Date()) == .orderedAscending })
         if isPounds {
             return sortedPoints.map { pr in
-                DataPoint.init(value: Double(pr.poundValue), label: "\(pr.poundValue) lb", legend: validateCategoryInformation(pr))
+                DataPoint.init(
+                    value: Double(pr.poundValue),
+                    label: "\(pr.poundValue) lb",
+                    legend: validateCategoryInformation(pr))
             }
         }
         
@@ -146,6 +149,12 @@ import os
             return evolutionPr
         }
     }
+    
+    func delete(at offsets: IndexSet) {
+            for index in offsets {
+                self.dataManager?.delete(record: dataManager?.recordsArray[index] ?? PersonalRecord.recordMock)
+            }
+        }
     
 }
 
