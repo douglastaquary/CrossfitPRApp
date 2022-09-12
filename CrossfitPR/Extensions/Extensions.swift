@@ -93,3 +93,27 @@ extension Measurement {
     }
 }
 
+
+extension TimeInterval {
+    
+    var double: Double {
+        return Double(self * 1_000)
+    }
+
+    var seconds: Int {
+        return Int(self.rounded())
+    }
+
+    var milliseconds: Int {
+        return Int(self * 1_000)
+    }
+}
+
+
+
+extension String {
+  static func randomNotificationMessage(list:[String]) -> String {
+    assert(!list.isEmpty,"Empty Lists not supported")
+    return list.randomElement() ?? ""
+  }
+}

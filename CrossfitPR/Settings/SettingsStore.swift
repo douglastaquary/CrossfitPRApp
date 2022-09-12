@@ -7,6 +7,8 @@
 
 import SwiftUI
 import Combine
+import UserNotifications
+
 
 enum SettingStoreKeys {
     static let pro = "pro"
@@ -26,13 +28,12 @@ final class SettingsStore: ObservableObject {
 
     private let cancellable: Cancellable
     private let defaults: UserDefaults
-
     let objectWillChange = PassthroughSubject<Void, Never>()
 
     init(defaults: UserDefaults = .standard) {
         self.defaults = defaults
 
-        defaults.register(defaults: [
+        self.defaults.register(defaults: [
             SettingStoreKeys.trainingTargetGoal: 8,
             SettingStoreKeys.sleepTrackingEnabled: true,
             SettingStoreKeys.measureTrackingMode: MeasureTrackingMode.pounds.rawValue
@@ -45,7 +46,9 @@ final class SettingsStore: ObservableObject {
     }
 
     var isNotificationEnabled: Bool {
-        set { defaults.set(newValue, forKey: SettingStoreKeys.notificationEnabled) }
+        set {
+            defaults.set(newValue, forKey: SettingStoreKeys.notificationEnabled)
+        }
         get { defaults.bool(forKey: SettingStoreKeys.notificationEnabled) }
     }
 
@@ -58,12 +61,12 @@ final class SettingsStore: ObservableObject {
         set { defaults.set(newValue, forKey: SettingStoreKeys.sleepTrackingEnabled) }
         get { defaults.bool(forKey: SettingStoreKeys.sleepTrackingEnabled) }
     }
-
+    
     var trainningTargetGoal: Int {
         set { defaults.set(newValue, forKey: SettingStoreKeys.trainingTargetGoal) }
-        get { defaults.integer(forKey: SettingStoreKeys.trainingTargetGoal) }
+       
+        get { defaults.integer(forKey: SettingStoreKeys.trainingTargetGoal)}
     }
-
 
     var measureTrackingMode: MeasureTrackingMode {
         get {

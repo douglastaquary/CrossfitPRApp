@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct RootView: View {
-    
+    @StateObject var lnManager = LocalNotificationManager()
     @SceneStorage("selectedTab")
     private var selectedTab = 0
     
@@ -38,7 +38,7 @@ struct RootView: View {
                     
             }
             .tabItem {
-                Image(systemName: "chart.bar")
+                Image(systemName: "chart.xyaxis.line")
                 Text(LocalizedStringKey("tabbar.insights.title"))
             }
             .tag(1)
@@ -47,6 +47,7 @@ struct RootView: View {
                 SettingsView()
                     .navigationTitle(LocalizedStringKey("screen.settings.title"))
                     .environmentObject(SettingsStore())
+                    .environmentObject(lnManager)
             }
             .tabItem {
                 Image(systemName: "gear")

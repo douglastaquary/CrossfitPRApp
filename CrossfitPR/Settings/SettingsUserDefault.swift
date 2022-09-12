@@ -103,7 +103,7 @@ struct UserDefaultsConfigToggleItemView: View {
     var body: some View {
         HStack {
             Toggle(isOn: Binding(keyPath: self.path, object: self.defaultsConfig)) {
-                Text(name)
+                Text(LocalizedStringKey(name))
             }
             Spacer()
         }

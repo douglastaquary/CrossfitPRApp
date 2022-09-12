@@ -41,7 +41,7 @@ struct PurchaseView: View {
                     
                     HViewImageAndText(image: "gearshape", imageColor: .green, title: "purchase.item1.title", description: "purchase.item1.description")
                     
-                    HViewImageAndText(image: "chart.bar", imageColor: .green, title: "purchase.item2.title", description: "purchase.item2.description")
+                    HViewImageAndText(image: "chart.xyaxis.line", imageColor: .green, title: "purchase.item2.title", description: "purchase.item2.description")
                     
                     HViewImageAndText(image: "trophy", imageColor: .green, title: "purchase.item3.title", description: "purchase.item3.description")
                     
