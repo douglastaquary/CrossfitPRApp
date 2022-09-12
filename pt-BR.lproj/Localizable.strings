@@ -109,3 +109,6 @@
 "settings.screen.section.tracking.measure.title" = "Informação de força";
 "settings.screen.section.tracking.target.title" = "Treino às";
 "settings.screen.section.unlockpro.title" = "Desbloquear CrossFitPR PRO";
+
+"emptyView.screen.message" = "Comece agora\nadicionando um novo record.\nOs poderosos insights são gerados a partir\ndos dados que você adiciona no app. Para melhor visualização dos gráficos\n, é necessário ao menos 8 registros de records.";
+

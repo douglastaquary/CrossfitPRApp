@@ -11,7 +11,6 @@ struct PurchaseView: View {
     @Environment(\.presentationMode) var presentation
     
     var body: some View {
-        
         NavigationView {
             ScrollView(.vertical, showsIndicators: false) {
                 VStack {

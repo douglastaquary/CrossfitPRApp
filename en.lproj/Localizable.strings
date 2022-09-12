@@ -113,6 +113,9 @@
 "newRecord.screen.section.comment.title" = "Comment";
 "newRecord.screen.section.comment.description" = "Enter a comment if needed";
 
+/* EmptyView text*/
+"emptyView.screen.message" = "Get start now\nby adding a new record.\nThe Powerful insights are generated from\nthe data you add to the app. For better\nvisualization of the graphs, it is necessary\nat least 8 records.";
+
 
 
 

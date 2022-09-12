@@ -14,58 +14,63 @@ struct InsightsView: View {
     @EnvironmentObject var store: InsightsStore
 
     var body: some View {
-        if store.records.count > 8 {
-            VStack {
-                Form {
-                    Section("insight.section.ranking.title") {
-                        HorizontalBarChartView(dataPoints: [store.biggestPoint, store.evolutionPoint, store.lowPoint])
-                    }
-                    Section("insight.section.graph.title") {
-                        if store.barPoints.isEmpty {
-                            Text("insight.view.error.description")
-                        } else {
-                            BarChartView(dataPoints: store.barPoints, limit: store.limit)
+        if store.isPro {
+            if store.records.count >= 8 {
+                VStack {
+                    Form {
+                        Section("insight.section.ranking.title") {
+                            HorizontalBarChartView(dataPoints: [store.biggestPoint, store.evolutionPoint, store.lowPoint])
                         }
-                    }
-                    Section("insight.section.information.title") {
-                        let recordTypeName = store.biggestPR?.prName.rawValue ?? ""
-                        if store.measureTrackingMode == .pounds {
+                        Section("insight.section.graph.title") {
+                            if store.barPoints.isEmpty {
+                                Text("insight.view.error.description")
+                            } else {
+                                BarChartView(dataPoints: store.barPoints, limit: store.limit)
+                            }
+                        }
+                        Section("insight.section.information.title") {
+                            let recordTypeName = store.biggestPR?.prName.rawValue ?? ""
+                            if store.measureTrackingMode == .pounds {
+                                HSubtitleView(
+                                    title: recordTypeName,
+                                    subtitle: "\(store.biggestPR?.poundValue ?? 0) lb"
+                                )
+                            } else {
+                                HSubtitleView(
+                                    title: recordTypeName,
+                                    subtitle: "\(store.biggestPR?.kiloValue ?? 0) kg"
+                                )
+                            }
                             HSubtitleView(
-                                title: recordTypeName,
-                                subtitle: "\(store.biggestPR?.poundValue ?? 0) lb"
-                            )
-                        } else {
-                            HSubtitleView(
-                                title: recordTypeName,
-                                subtitle: "\(store.biggestPR?.kiloValue ?? 0) kg"
+                                title: "insight.view.intensity.title",
+                                subtitle: "\(store.biggestPR?.percentage.clean ?? "") %"
                             )
                         }
-                        HSubtitleView(
-                            title: "insight.view.intensity.title",
-                            subtitle: "\(store.biggestPR?.percentage.clean ?? "") %"
-                        )
-                    }
-                    
-                    Button {
-                        self.showPROsubsciptionView.toggle()
-                    } label: {
-                        CardGroupView(
-                            cardTitle: "insight.view.card.pro.title",
-                            cardDescript: "insight.view.card.pro.description",
-                            buttonTitle: "insight.view.card.unlockprobutton.title",
-                            iconSystemText: "chart.bar.fill"
-                        )
-                    }.sheet(isPresented: $showPROsubsciptionView) {
-                        PurchaseView()
-                    }.onAppear {
-                        UINavigationBar.appearance().tintColor = .green
                     }
                 }
+            } else {
+                EmptyView(message: "emptyView.screen.message")
             }
         } else {
-            EmptyView(message: "Get started now\nby adding a new personal record.\n\nThe Powerful insights are generated from\nthe records you add. For better visualization, the minimum\nnumber of records\nto generate the graphs is ten.")
+            VStack {
+                Button {
+                    self.showPROsubsciptionView.toggle()
+                } label: {
+                    CardGroupView(
+                        cardTitle: "insight.view.card.pro.title",
+                        cardDescript: "insight.view.card.pro.description",
+                        buttonTitle: "insight.view.card.unlockprobutton.title",
+                        iconSystemText: "chart.bar.fill"
+                    )
+                }.sheet(isPresented: $showPROsubsciptionView) {
+                    PurchaseView()
+                }.onAppear {
+                    UINavigationBar.appearance().tintColor = .green
+                }
+                Spacer()
+            }
+            .padding(22)
         }
-        
     }
 }
 

@@ -50,7 +50,8 @@ struct SettingsView: View {
             if !settings.isPro {
                 Section {
                     Button(action: {
-                        self.settings.unlockPro()
+                        self.showPROsubsciptionView.toggle()
+                        //self.settings.unlockPro()
                     }) {
                         Text("settings.screen.section.unlockpro.title")
                     }.sheet(isPresented: $showPROsubsciptionView) {
