@@ -4,6 +4,15 @@
 
   Created by Douglas Taquary on 25/05/22.
  
+ /* Settings screen */
+ "settings.screen.title" = "Settings";
+ "settings.screen.section.notification.title" = "Notifications";
+ "settings.screen.section.notification.toggle.title" = "Notification:";
+ "settings.screen.section.tracking.title" = "Crossfit settings";
+ "settings.screen.section.tracking.measure.title" = "Measurement option";
+ "settings.screen.section.tracking.target.title" = "Training target is";
+ "settings.screen.section.unlockpro.title" = "Unlock PRO";
+ 
  /* Onboarding screen */
 
 "onboarding.view.title" = "What's New";
@@ -14,11 +23,11 @@
 "onboarding.item2.title" = "Manage your records";
 "onboarding.item2.description" = "Your high performance workouts now in one place simply and quickly";
 
-"onboarding.item3.title" = "The Powerful graphics";
+"onboarding.item3.title" = "Easy graphics";
 "onboarding.item3.description" = "Simple, easy-to-understand graphics to show your evolution";
 
 "onboarding.item4.title" = "The Powerful Insights";
-"onboarding.item4.description" = "The powerful insights elevator allows you to track and understand your evolution, the highest records through powerful graphics";
+"onboarding.item4.description" = "The powerful insights allows you to track and understand your evolution, the highest records through powerful graphics";
 
 "onboarding.button.title" = "Start";
 
@@ -94,8 +103,6 @@
 "newRecord.screen.section.informations.weight.title" = "Weight";
 "newRecord.screen.section.comment.title" = "Comment";
 "newRecord.screen.section.comment.description" = "Enter a comment if needed";
-
-
 
 
 

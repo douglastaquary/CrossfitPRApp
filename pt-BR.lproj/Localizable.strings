@@ -16,7 +16,7 @@
 "onboarding.item2.title" = "Gerencie seus recordes";
 "onboarding.item2.description" = "Seus treinos de alta performance agora em um só lugar de forma simples e rápida ";
 
-"onboarding.item3.title" = "Os poderosos gráficos simplificados";
+"onboarding.item3.title" = "Gráficos simplificados";
 "onboarding.item3.description" = "Gráficos de forma simples e fácil de entender para mostrar sua evolução";
 
 "onboarding.item4.title" = "Os Poderosos Insights";
@@ -80,3 +80,12 @@
 "newRecord.screen.section.informations.weight.title" = "Peso";
 "newRecord.screen.section.comment.title" = "Comentário";
 "newRecord.screen.section.comment.description" = "Adicione algum comentário caso necessário";
+
+/* Settings screen */
+"settings.screen.title" = "Configurações";
+"settings.screen.section.notification.title" = "Notificações";
+"settings.screen.section.notification.toggle.title" = "Notificação:";
+"settings.screen.section.tracking.title" = "Configuração para Crossfit";
+"settings.screen.section.tracking.measure.title" = "Informação de força";
+"settings.screen.section.tracking.target.title" = "Treino às";
+"settings.screen.section.unlockpro.title" = "Desbloquear CrossFitPR PRO";
