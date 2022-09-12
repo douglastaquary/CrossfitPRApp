@@ -23,7 +23,7 @@ struct PRView: View {
                         .font(.body)
                         .fontWeight(.semibold)
                         .padding(.bottom, 8)
-                    Text("Personal record")
+                    Text(LocalizedStringKey("record.item.view.default.title"))
                         .font(.footnote)
                         .foregroundColor(.secondary)
                     HorizontalBarChartView(dataPoints: [

@@ -39,6 +39,11 @@
 "record.weight.title" = "Weight";
 "record.date.title" = "Date";
 
+"record.view.category.recent.title" = "Most recent PR";
+"record.view.category.evolution.title" = "PR in evolution";
+"record.view.category.lowest.title" = "Lowest PR";
+"record.item.view.default.title" = "Personal record";
+
 "record.records.section.title" = "Personal records";
 "%@ record.evolution.section.title" = "%@ evolution";
 "record.evolution.section.description %@" = "This analysis is based on the PR list of %@ registered in the app. The most recent are the ones in the green band (on the right), the oldest gray and the evolution in yellow";

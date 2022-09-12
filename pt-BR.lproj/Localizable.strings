@@ -51,6 +51,23 @@
 
 "purchase.commitment.title"= "Sem compromisso.\nCancele a qualquer momento.\nApós 7 dias de teste gratuito, esta assinatura\né renovada automaticamente dependendo da forma que\nvocê escolher, a menos que a renovação\nautomática esteja desativada.";
 
+/* Record detail screen */
+
+"record.biggest.section.title" = "Maior PR";
+"record.category.title" = "Categoria";
+"record.percentage.title" = "Porcentagem";
+"record.weight.title" = "Peso";
+"record.date.title" = "Data";
+
+"record.view.category.recent.title" = "PR mais recente";
+"record.view.category.evolution.title" = "PR em evolução";
+"record.view.category.lowest.title" = "Menor PR";
+"record.item.view.default.title" = "Record Pessoal";
+
+"record.records.section.title" = "Record Pessoal";
+"%@ record.evolution.section.title" = "%@ evolução";
+"record.evolution.section.description %@" = "Esta análise é baseada na lista records de %@ cadastrada no aplicativo. Os mais recentes são os da faixa verde (à direita), o cinza mais antigo e a evolução em amarelo";
+
 /* Insight screen */
 
 "insight.section.ranking.title" = "Top recordes";
