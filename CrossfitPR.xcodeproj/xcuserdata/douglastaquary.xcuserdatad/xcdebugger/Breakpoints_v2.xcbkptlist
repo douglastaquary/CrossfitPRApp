@@ -7,16 +7,64 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "F113536B-22BD-4AE4-BF92-60651414B11E"
+            uuid = "4E2997E4-366F-4FC5-9EC8-6A57726538F5"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "CrossfitPR/DB/DataManager.swift"
+            filePath = "CrossfitPR/Insights/InsightsStore.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "74"
-            endingLineNumber = "74"
-            landmarkName = "saveData()"
+            startingLineNumber = "345"
+            endingLineNumber = "345"
+            landmarkName = "loadEnduranceHorizontalBars()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "4E2997E4-366F-4FC5-9EC8-6A57726538F5 - 8d0a0e0614a48685"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "CrossfitPR.InsightsStore.loadEnduranceHorizontalBars() -&gt; ()"
+                  moduleName = "CrossfitPR"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/douglastaquary/Documents/Projects/Github/SwiftUI/CrossfitPR/CrossfitPR/Insights/InsightsStore.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "345"
+                  endingLineNumber = "345"
+                  offsetFromSymbolStart = "5371">
+               </Location>
+               <Location
+                  uuid = "4E2997E4-366F-4FC5-9EC8-6A57726538F5 - a614b365d095ccdb"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #4 (CrossfitPR.PersonalRecord) -&gt; Swift.Bool in CrossfitPR.InsightsStore.loadEnduranceHorizontalBars() -&gt; ()"
+                  moduleName = "CrossfitPR"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/douglastaquary/Documents/Projects/Github/SwiftUI/CrossfitPR/CrossfitPR/Insights/InsightsStore.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "346"
+                  endingLineNumber = "346"
+                  offsetFromSymbolStart = "120">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "AE9B6F9B-22E9-4BCA-BD27-E46DD3E3E10B"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CrossfitPR/Insights/InsightsStore.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "351"
+            endingLineNumber = "351"
+            landmarkName = "loadEnduranceHorizontalBars()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -33,12 +33,12 @@ struct InsightsView: View {
                 VStack {
                     Form {
                         Section("insight.section.ranking.barbell.title") {
-                            HorizontalBarChartView(dataPoints: [store.barbellBiggestPoint, store.barbellEvolutionPoint, store.barbellLowPoint])
+                            HorizontalBarChartView(dataPoints: store.barbellHorizontalBarList)
                         }
                         Chart {
                             ForEach(store.barbellRecords) { record in
                                 BarMark(
-                                    x: .value("Weight", record.prName),
+                                    x: .value("Record Name", record.prName),
                                     y: .value("Intensity", record.poundValue)
                                 )
                                 .foregroundStyle(by: .value("Weight", record.prName))
@@ -49,17 +49,18 @@ struct InsightsView: View {
                             }
                         }
                         .frame(height: 240)
+                        .padding(.top, 12)
                         
                         Section("insight.section.ranking.gymnastic.title") {
-                            HorizontalBarChartView(dataPoints: [store.gymnasticBiggestPoint, store.hangstandWalkPoint, store.gymnasticEvolutionPoint, store.gymnasticLowPoint])
+                            HorizontalBarChartView(dataPoints: store.gynmnasticHorizontalBarList)
                         }
                         Chart {
                             ForEach(store.gymnasticRecords) { record in
                                 BarMark(
-                                    x: .value("Weight", record.prName),
-                                    y: .value("Intensity", record.maxReps)
+                                    x: .value("Record Name", record.prName),
+                                    y: .value("Reps", record.maxReps)
                                 )
-                                .foregroundStyle(by: .value("Weight", record.prName))
+                                .foregroundStyle(by: .value("Record Name", record.prName))
                                 .annotation(position: .top) {
                                     AnnotationView(recordValue: "\(record.maxReps) reps")
                                 }
@@ -67,33 +68,44 @@ struct InsightsView: View {
                             }
                         }
                         .frame(height: 240)
+                        .padding(.top, 12)
                         
-                        
-//                        Section("insight.section.graph.title") {
-//                            if store.barPoints.isEmpty {
-//                                Text("insight.view.error.description")
-//                            } else {
-//                                BarChartView(dataPoints: store.barPoints, limit: store.limit)
-//                            }
-//                        }
-                        Section("insight.section.information.title") {
-                            let recordTypeName = store.biggestPR?.prName ?? ""
-                            if store.measureTrackingMode == .pounds {
-                                HSubtitleView(
-                                    title: recordTypeName,
-                                    subtitle: "\(store.biggestPR?.poundValue ?? 0) lb"
-                                )
-                            } else {
-                                HSubtitleView(
-                                    title: recordTypeName,
-                                    subtitle: "\(store.biggestPR?.kiloValue ?? 0) kg"
-                                )
-                            }
-                            HSubtitleView(
-                                title: "insight.view.intensity.title",
-                                subtitle: "\(store.biggestPR?.percentage.clean ?? "") %"
-                            )
+                        Section("insight.section.ranking.endurance.title") {
+                            HorizontalBarChartView(dataPoints: store.enduranceHorizontalBarList)
                         }
+                        Chart {
+                            ForEach(store.enduranceRecords) { record in
+                                BarMark(
+                                    x: .value("Record Name", record.prName),
+                                    y: .value("Endurance", record.distance)
+                                )
+                                .foregroundStyle(by: .value("Record Name", record.prName))
+                                .annotation(position: .top) {
+                                    AnnotationView(recordValue: "\(record.distance) km")
+                                }
+                            }
+                        }
+                        .frame(height: 240)
+                        .padding(.top, 12)
+//
+//                        Section("insight.section.information.title") {
+//                            let recordTypeName = store.biggestPR?.prName ?? ""
+//                            if store.measureTrackingMode == .pounds {
+//                                HSubtitleView(
+//                                    title: recordTypeName,
+//                                    subtitle: "\(store.biggestPR?.poundValue ?? 0) lb"
+//                                )
+//                            } else {
+//                                HSubtitleView(
+//                                    title: recordTypeName,
+//                                    subtitle: "\(store.biggestPR?.kiloValue ?? 0) kg"
+//                                )
+//                            }
+//                            HSubtitleView(
+//                                title: "insight.view.intensity.title",
+//                                subtitle: "\(store.biggestPR?.percentage.clean ?? "") %"
+//                            )
+//                        }
                     }
                 }
             } else {

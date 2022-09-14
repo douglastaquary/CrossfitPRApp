@@ -90,6 +90,9 @@
 /* Insight screen */
 
 "insight.section.ranking.title" = "Top barbell records";
+"insight.section.ranking.barbell.title" = "Top Barbell Records";
+"insight.section.ranking.gymnastic.title" = "Top Gymnastic Records";
+"insight.section.ranking.endurance.title"= "Top Endurance Records";
 "insight.section.graph.title" = "Graph Details";
 
 "insight.section.information.title" = "The biggest PR";
