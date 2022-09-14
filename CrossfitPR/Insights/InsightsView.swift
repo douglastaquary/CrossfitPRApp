@@ -11,11 +11,11 @@ import CoreData
 import Charts
 
 struct AnnotationView: View {
-    let record: PersonalRecord
+    let recordValue: String
     
     var body: some View {
         VStack(spacing: 0) {
-            Text("\(record.poundValue) lb")
+            Text(recordValue)
             //Image(systemName: "figure.stand")
         }
         .font(.caption)
@@ -32,7 +32,7 @@ struct InsightsView: View {
         if !store.records.isEmpty {
                 VStack {
                     Form {
-                        Section("insight.section.ranking.title") {
+                        Section("insight.section.ranking.barbell.title") {
                             HorizontalBarChartView(dataPoints: [store.barbellBiggestPoint, store.barbellEvolutionPoint, store.barbellLowPoint])
                         }
                         Chart {
@@ -43,19 +43,39 @@ struct InsightsView: View {
                                 )
                                 .foregroundStyle(by: .value("Weight", record.prName))
                                 .annotation(position: .top) {
-                                    AnnotationView(record: record)
+                                    AnnotationView(recordValue: "\(record.poundValue) lb")
                                 }
 
                             }
                         }
                         .frame(height: 240)
-                        Section("insight.section.graph.title") {
-                            if store.barPoints.isEmpty {
-                                Text("insight.view.error.description")
-                            } else {
-                                BarChartView(dataPoints: store.barPoints, limit: store.limit)
+                        
+                        Section("insight.section.ranking.gymnastic.title") {
+                            HorizontalBarChartView(dataPoints: [store.gymnasticBiggestPoint, store.hangstandWalkPoint, store.gymnasticEvolutionPoint, store.gymnasticLowPoint])
+                        }
+                        Chart {
+                            ForEach(store.gymnasticRecords) { record in
+                                BarMark(
+                                    x: .value("Weight", record.prName),
+                                    y: .value("Intensity", record.maxReps)
+                                )
+                                .foregroundStyle(by: .value("Weight", record.prName))
+                                .annotation(position: .top) {
+                                    AnnotationView(recordValue: "\(record.maxReps) reps")
+                                }
+
                             }
                         }
+                        .frame(height: 240)
+                        
+                        
+//                        Section("insight.section.graph.title") {
+//                            if store.barPoints.isEmpty {
+//                                Text("insight.view.error.description")
+//                            } else {
+//                                BarChartView(dataPoints: store.barPoints, limit: store.limit)
+//                            }
+//                        }
                         Section("insight.section.information.title") {
                             let recordTypeName = store.biggestPR?.prName ?? ""
                             if store.measureTrackingMode == .pounds {

@@ -31,7 +31,19 @@ final class InsightsStore: ObservableObject {
     @Published var barbellEvolutionPoint: DataPoint = DataPoint.init(value: 0.0, label: "", legend: Legend(color: .yellow, label: "", order: 2))
     @Published var barbellLowPoint: DataPoint = DataPoint.init(value: 0.0, label: "", legend: Legend(color: .gray, label: "", order: 3))
     
+    // Gymnastic
     @Published var gymnasticRecords: [PersonalRecord] = []
+    @Published var gymnasticBiggestPRName: String = ""
+    @Published var gymnasticBiggestRecord: PersonalRecord?
+    @Published var hangstandWalkPoint: DataPoint = DataPoint.init(value: 0.0, label: "", legend: Legend(color: .orange, label: "", order: 4))
+    //@Published var barbellBarPoints: [DataPoint] = []
+    @Published var gymnasticBiggestPoint: DataPoint = DataPoint.init(value: 0.0, label: "", legend: Legend(color: .green, label: "", order: 1))
+    @Published var gymnasticEvolutionPoint: DataPoint = DataPoint.init(value: 0.0, label: "", legend: Legend(color: .yellow, label: "", order: 2))
+    @Published var gymnasticLowPoint: DataPoint = DataPoint.init(value: 0.0, label: "", legend: Legend(color: .gray, label: "", order: 3))
+    
+    
+    
+    
     @Published var enduranceRecords: [PersonalRecord] = []
     
     
@@ -69,6 +81,7 @@ final class InsightsStore: ObservableObject {
         }
         loadBarbellRecords()
         loadBabellHorizontalBar()
+        loadGymnasticRecords()
         //loadPRInfos()
     }
     
@@ -76,23 +89,23 @@ final class InsightsStore: ObservableObject {
     
     func loadBarbellRecords() {
         barbellRecords = getAllRecordsFor(recordGroup: .barbell)
-        if measureTrackingMode == .pounds {
-            let max: Int = barbellRecords.map { $0.poundValue }.max() ?? 0
-            barbellBarPoints = barbellRecords.map { pr in
-                if pr.poundValue == max {
-                    self.limit = DataPoint(value: Double(max) , label: "\(pr.prName)", legend: biggestPr)
-                }
-                return DataPoint.init(value: Double(pr.poundValue), label: "", legend: validateCategoryInformationPounds(pr))
-            }
-        } else {
-            let max: Int = barbellRecords.map { $0.kiloValue }.max() ?? 0
-            barbellBarPoints = barbellRecords.map { pr in
-                if pr.kiloValue == max {
-                    self.limit = DataPoint(value: Double(max) , label: "\(pr.prName)", legend: biggestPr)
-                }
-                return DataPoint.init(value: Double(pr.kiloValue), label: "", legend: validateCategoryInformationKilos(pr))
-            }
-        }
+//        if measureTrackingMode == .pounds {
+//            let max: Int = barbellRecords.map { $0.poundValue }.max() ?? 0
+//            barbellBarPoints = barbellRecords.map { pr in
+//                if pr.poundValue == max {
+//                    self.limit = DataPoint(value: Double(max) , label: "\(pr.prName)", legend: biggestPr)
+//                }
+//                return DataPoint.init(value: Double(pr.poundValue), label: "", legend: validateCategoryInformationPounds(pr))
+//            }
+//        } else {
+//            let max: Int = barbellRecords.map { $0.kiloValue }.max() ?? 0
+//            barbellBarPoints = barbellRecords.map { pr in
+//                if pr.kiloValue == max {
+//                    self.limit = DataPoint(value: Double(max) , label: "\(pr.prName)", legend: biggestPr)
+//                }
+//                return DataPoint.init(value: Double(pr.kiloValue), label: "", legend: validateCategoryInformationKilos(pr))
+//            }
+//        }
     }
     
     private func loadBabellHorizontalBar() {
@@ -165,6 +178,89 @@ final class InsightsStore: ObservableObject {
     
     func loadGymnasticRecords() {
         gymnasticRecords = getAllRecordsFor(recordGroup: .gymnastic)
+        let maxRepsRecords = gymnasticRecords.filter { record in
+            if let recordMode = record.recordMode {
+                return recordMode.rawValue.contains(RecordMode.maxRepetition.rawValue)
+            }
+            return false
+        }
+        let maxGymnastic: Int = maxRepsRecords.map { $0.maxReps }.max() ?? 0
+        let minGymnastic: Int = maxRepsRecords.map { $0.maxReps }.min() ?? 0
+        let handstandWalk = gymnasticRecords.filter { record in
+            if let recordMode = record.recordMode {
+                return recordMode.rawValue.contains(RecordMode.maxDistance.rawValue)
+            }
+            return false
+        }.first ?? PersonalRecord()
+        
+        hangstandWalkPoint = DataPoint.init(
+            value: Double(handstandWalk.distance),
+            label: "\(handstandWalk.distance) km",
+            legend: Legend(color: .yellow, label: "\(handstandWalk.prName)", order: 4)
+        )
+        
+        let maxRepEvolution = maxRepsRecords.filter { pr in
+            return pr.maxReps < maxGymnastic && pr.maxReps > minGymnastic //&& pr.prName != biggestPRName
+        }.sorted {
+            $0.maxReps > $1.maxReps
+        }.first
+
+        gymnasticEvolutionPoint = DataPoint.init(
+            value: Double(maxRepEvolution?.maxReps ?? 0),
+            label: "\(maxRepEvolution?.maxReps ?? 0) reps",
+            legend: Legend(color: .yellow, label: "\(maxRepEvolution?.prName ?? "")", order: 2)
+        )
+        for pr in maxRepsRecords {
+            if pr.maxReps == maxGymnastic {
+                gymnasticBiggestPoint = DataPoint.init(
+                    value: Double(pr.maxReps),
+                    label: "\(pr.maxReps) reps",
+                    legend: Legend(color: .green, label: "\(pr.prName)", order: 1)
+                )
+                barbellBiggestPRName = pr.prName
+                barbellBiggestRecord = pr
+            } else if pr.maxReps == minGymnastic {
+                gymnasticLowPoint = DataPoint.init(
+                    value: Double(pr.maxReps),
+                    label: "\(pr.maxReps) reps",
+                    legend: Legend(color: .gray, label: "\(pr.prName)", order: 3)
+                )
+            }
+        }
+        
+    }
+    
+    func loadGymnasticHorizontalBars() {
+        let max: Int = gymnasticRecords.map { $0.poundValue }.max() ?? 0
+        let min: Int = barbellRecords.map { $0.poundValue }.min() ?? 0
+        let evolutionPRselected = barbellRecords.filter { pr in
+            return pr.poundValue < max && pr.poundValue > min && pr.prName != biggestPRName
+        }.sorted {
+            $0.poundValue > $1.poundValue
+        }.first
+        
+        barbellEvolutionPoint = DataPoint.init(
+            value: Double(evolutionPRselected?.poundValue ?? 0),
+            label: "\(evolutionPRselected?.poundValue ?? 0) lb",
+            legend: Legend(color: .yellow, label: "\(evolutionPRselected?.prName ?? "")", order: 2)
+        )
+        for pr in barbellRecords {
+            if pr.poundValue == max {
+                barbellBiggestPoint = DataPoint.init(
+                    value: Double(pr.poundValue),
+                    label: "\(pr.poundValue) lb",
+                    legend: Legend(color: .green, label: "\(pr.prName)", order: 1)
+                )
+                barbellBiggestPRName = pr.prName
+                barbellBiggestRecord = pr
+            } else if pr.poundValue == min {
+                barbellLowPoint = DataPoint.init(
+                    value: Double(pr.poundValue),
+                    label: "\(pr.poundValue) lb",
+                    legend: Legend(color: .gray, label: "\(pr.prName)", order: 3)
+                )
+            }
+        }
     }
     
     
