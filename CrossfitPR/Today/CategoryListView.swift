@@ -18,7 +18,7 @@ struct CategoryListView: View {
                 ScrollView {
                     ForEach(store.filteredCategories, id: \.id) { category in
                         NavigationLink(value: category) {
-                            CategoryItemView(title: category.title)
+                            CategoryItemView(title: category.title, group: category.group.rawValue)
                         }
                     }
                 }
@@ -41,7 +41,7 @@ struct CategoryListView: View {
                 UINavigationBar.appearance().tintColor = .green
             }
             .navigationDestination(for: Category.self) { category in
-                RecordDetail()
+                RecordDetail(prName: category.title)
                     .environmentObject(RecordStore(recordCategory: category))
             }   
         }

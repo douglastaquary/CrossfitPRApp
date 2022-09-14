@@ -101,16 +101,21 @@ struct PRView_Previews: PreviewProvider {
 
 struct CategoryItemView: View {
     @State var title: String = ""
+    @State var group: String = ""
     
     var body: some View {
         
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: 6) {
             Text(title)
                 .font(.title2)
                 .fontWeight(.semibold)
                 .foregroundColor(.primary)
-                .padding([.top, .bottom], 8)
-                .padding(.leading, 12)
+                .padding(.top, 8)
+                .padding(.leading, 22)
+            Text(LocalizedStringKey(group))
+                .font(.caption)
+                .foregroundColor(.secondary)
+                .padding(.leading, 22)
             Divider()
         }
     }

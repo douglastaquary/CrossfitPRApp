@@ -33,7 +33,11 @@ struct InsightsView: View {
                 VStack {
                     Form {
                         Section("insight.section.ranking.barbell.title") {
-                            HorizontalBarChartView(dataPoints: store.barbellHorizontalBarList)
+                            if store.barbellHorizontalBarList.isEmpty {
+                                Text(LocalizedStringKey("insight.view.error.description"))
+                            } else {
+                                HorizontalBarChartView(dataPoints: store.barbellHorizontalBarList)
+                            }
                         }
                         Chart {
                             ForEach(store.barbellRecords) { record in
@@ -52,7 +56,11 @@ struct InsightsView: View {
                         .padding(.top, 12)
                         
                         Section("insight.section.ranking.gymnastic.title") {
-                            HorizontalBarChartView(dataPoints: store.gynmnasticHorizontalBarList)
+                            if store.gynmnasticHorizontalBarList.isEmpty {
+                                Text(LocalizedStringKey("insight.view.error.description"))
+                            } else {
+                                HorizontalBarChartView(dataPoints: store.gynmnasticHorizontalBarList)
+                            }
                         }
                         Chart {
                             ForEach(store.gymnasticRecords) { record in
@@ -71,7 +79,11 @@ struct InsightsView: View {
                         .padding(.top, 12)
                         
                         Section("insight.section.ranking.endurance.title") {
-                            HorizontalBarChartView(dataPoints: store.enduranceHorizontalBarList)
+                            if store.enduranceHorizontalBarList.isEmpty {
+                                Text(LocalizedStringKey("insight.view.error.description"))
+                            } else {
+                                HorizontalBarChartView(dataPoints: store.enduranceHorizontalBarList)
+                            }
                         }
                         Chart {
                             ForEach(store.enduranceRecords) { record in

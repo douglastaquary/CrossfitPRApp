@@ -72,7 +72,7 @@ struct RecordDetail: View {
         .sheet(isPresented: $showPROsubsciptionView) {
             PurchaseView()
         }
-        .navigationBarTitle(Text(store.record.prName))
+        .navigationBarTitle(Text(prName))
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
             UINavigationBar.appearance().tintColor = .green

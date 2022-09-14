@@ -77,9 +77,9 @@
 
 /* Insight screen */
 
-"insight.section.ranking.barbell.title" = "Top recordes de barra";
-"insight.section.ranking.gymnastic.title" = "Top recordes ginásticos";
-"insight.section.ranking.endurance.title"= "Top recordes de resistência";
+"insight.section.ranking.barbell.title" = "Top Recordes com Barra";
+"insight.section.ranking.gymnastic.title" = "Top Recordes Ginásticos";
+"insight.section.ranking.endurance.title"= "Top Recordes de Resistência";
 "insight.section.graph.title" = "Percepções";
 
 "insight.section.information.title" = "Maior recorde";
