@@ -7,46 +7,52 @@
  /* Settings screen */
  "settings.screen.title" = "Settings";
  "settings.screen.section.notification.title" = "Notifications";
- "settings.screen.section.notification.toggle.title" = "Notification:";
+ "settings.screen.section.notification.toggle.title" = "Training notification:";
  "settings.screen.section.tracking.title" = "Crossfit settings";
  "settings.screen.section.tracking.measure.title" = "Measurement option";
- "settings.screen.section.tracking.target.title" = "Training target is";
+ "settings.screen.section.tracking.target.title" = "Training target";
  "settings.screen.section.unlockpro.title" = "Unlock PRO";
+ "settings.screen.section.privacy.title"= "Privacy policy and Terms of Use";
+"settings.screen.section.about.title" = "About";
+"settings.screen.section.crossfitpro.title" = "CrossFitPR PRO";
  
  /* Onboarding screen */
 
 "onboarding.view.title" = "What's New";
  
 "onboarding.item1.title" = "Organizing your personal records";
-"onboarding.item1.description" = "Organizing your records makes the evolution of your crossfit training faster";
+"onboarding.item1.description" = "Delete records, organize your categories according to your crossfit workouts.";
 
 "onboarding.item2.title" = "Manage your records";
-"onboarding.item2.description" = "Your high performance workouts now in one place simply and quickly";
+"onboarding.item2.description" = "Your high performance workouts now in one place simply and quickly.";
 
 "onboarding.item3.title" = "Easy graphics";
-"onboarding.item3.description" = "Simple, easy-to-understand graphics to show your evolution";
+"onboarding.item3.description" = "Simple, easy-to-understand graphics to show your evolution.";
 
 "onboarding.item4.title" = "The Powerful Insights";
-"onboarding.item4.description" = "The powerful insights allows you to track and understand your evolution, the highest records through powerful graphics";
+"onboarding.item4.description" = "The powerful insights allows you to track and understand your evolution, the highest records through powerful graphics.";
 
 "onboarding.button.title" = "Start";
 
 /* Record detail screen */
 
-"record.biggest.section.title" = "Biggest PR";
-"record.category.title" = "Category";
-"record.percentage.title" = "Percentage";
+"record.biggest.section.title" = "Biggest record";
+"record.category.title" = "Exercise";
+"record.percentage.title" = "Intensity";
+"record.maxReps.title" = "Repetitions";
+"record.distance.title" = "Distance";
+"record.time.title" = "Time";
 "record.weight.title" = "Weight";
 "record.date.title" = "Date";
 
-"record.view.category.recent.title" = "Most recent PR";
-"record.view.category.evolution.title" = "PR in evolution";
-"record.view.category.lowest.title" = "Lowest PR";
+"record.view.category.recent.title" = "Most recent";
+"record.view.category.evolution.title" = "Evolution";
+"record.view.category.lowest.title" = "Lowest";
 "record.item.view.default.title" = "Personal record";
 
-"record.records.section.title" = "Personal records";
+"record.records.section.title" = "Records";
 "%@ record.evolution.section.title" = "%@ evolution";
-"record.evolution.section.description %@" = "This analysis is based on the PR list of %@ registered in the app. The most recent are the ones in the green band (on the right), the oldest gray and the evolution in yellow";
+"record.evolution.section.description %@" = "This analysis is based on the PR list of %@ registered in the app. The most recent are the ones in the green band (on the right), the oldest gray and the evolution in yellow.";
 "record.screen.delete.button.title" = "Delete";
 "record.screen.cancel.button.title" = "Cancel";
 "record.screen.delete.confirmation.title" = "Do you really want to delete?";
@@ -83,7 +89,7 @@
 
 /* Insight screen */
 
-"insight.section.ranking.title" = "Top records";
+"insight.section.ranking.title" = "Top barbell records";
 "insight.section.graph.title" = "Graph Details";
 
 "insight.section.information.title" = "The biggest PR";
@@ -91,8 +97,8 @@
 
 "insight.view.biggestpr.description %@" = "the biggest pr is %@";
 
-"insight.view.intensity.title"= "with intensity of";
-"insight.view.card.pro.title"= "Insights";
+"insight.view.intensity.title"= "Intensity";
+"insight.view.card.pro.title"= "The The Powerful Insights";
 "insight.view.card.pro.description"= "PRO subscription allows the analysis of historical data from your records that help you understand how to evolve faster in high performance training";
 "insight.view.card.unlockprobutton.title"= "Unlock CrossFitPR PRO";
 
@@ -100,10 +106,10 @@
 "newRecord.screen.title" = "New Record";
 "newRecord.screen.save.button.title" = "Save";
 "newRecord.screen.cancel.button.title" = "Cancel";
-"newRecord.screen.section.personal.title" = "Personal Record";
+"newRecord.screen.section.personal.title" = "Training configuration";
 "newRecord.screen.toggle.maxreps.title" = "Maximum repetitions";
-"newRecord.screen.toggle.mintime.title" = "Minimum time";
-"newRecord.screen.toggle.maxrep.title" = "Max reps";
+"newRecord.screen.toggle.mintime.title" = "Distance";
+"newRecord.screen.toggle.maxrep.title" = "Maximum repetitions";
 "newRecord.screen.picker.repetition.title" = "Repetitions";
 "newRecord.screen.picker.timecount.title" = "Time";
 "newRecord.screen.toggle.distance.title" = "Distance";

@@ -131,7 +131,8 @@ extension PersonalRecord {
         self.poundValue = Int(record.poundValue)
         self.distance = Int(record.distance)
         self.recordDate = record.recordDate ?? Date()
-        self.prName = PRType(rawValue: record.prName) ?? .empty
+        self.prName = record.prName
+        self.group = RecordGroup(rawValue: record.group ?? "")
         self.percentage = record.percentage
         self.category = CrossfitLevel(rawValue: record.category ?? "") ?? .rx
         self.recordMode = RecordMode(rawValue: record.recordMode ?? "") ?? .maxWeight
@@ -193,7 +194,7 @@ extension DataManager {
     private func recordMO(from pr: PersonalRecord) {
         let recordMO = PR(context: managedObjectContext)
         recordMO.id = pr.id
-        recordMO.prName = pr.prName.rawValue
+        recordMO.prName = pr.prName
         recordMO.category = pr.category?.rawValue
         recordMO.recordMode = pr.recordMode?.rawValue
         recordMO.kiloValue = Int32(pr.kiloValue)
@@ -204,12 +205,13 @@ extension DataManager {
         recordMO.percentage = pr.percentage
         recordMO.recordDate = pr.recordDate
         recordMO.comments = pr.comments
+        recordMO.group = pr.group?.rawValue
         //update(recordMO: recordMO, from: pr)
     }
     
     private func update(recordMO: PR, from record: PersonalRecord) {
         recordMO.id = record.id
-        recordMO.prName = record.prName.rawValue
+        recordMO.prName = record.prName
         recordMO.category = record.category?.rawValue
         recordMO.recordMode = record.recordMode?.rawValue
         recordMO.kiloValue = Int32(record.kiloValue)
@@ -220,6 +222,7 @@ extension DataManager {
         recordMO.percentage = record.percentage
         recordMO.recordDate = record.recordDate
         recordMO.comments = record.comments
+        recordMO.group = record.group?.rawValue
     }
     
     ///Get's the PR that corresponds to the PersonalRecord. If no PR is found, returns nil.

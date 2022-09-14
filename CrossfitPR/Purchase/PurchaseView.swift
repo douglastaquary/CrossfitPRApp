@@ -14,9 +14,9 @@ struct PurchaseView: View {
         NavigationView {
             ScrollView(.vertical, showsIndicators: false) {
                 VStack {
-                    
                     HStack {
-                        VStack(alignment: .trailing) {
+                        Spacer()
+                        VStack(alignment: .leading) {
                             Button(
                                 action:{
                                     self.presentation.wrappedValue.dismiss()
@@ -25,11 +25,9 @@ struct PurchaseView: View {
                                         .foregroundColor(.green)
                                         .bold()
                                 })
-                            .padding(.trailing, 16)
                         }
-                        Spacer()
                     }
-                    .padding([.top, .leading], 24)
+                    .padding([.top, .trailing], 24)
                     
                     Spacer()
                     Text("CrossFitPR PRO")

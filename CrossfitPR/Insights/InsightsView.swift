@@ -8,19 +8,47 @@
 import SwiftUI
 import SwiftUICharts
 import CoreData
+import Charts
+
+struct AnnotationView: View {
+    let record: PersonalRecord
+    
+    var body: some View {
+        VStack(spacing: 0) {
+            Text("\(record.poundValue) lb")
+            //Image(systemName: "figure.stand")
+        }
+        .font(.caption)
+        .foregroundStyle(.black)
+    }
+}
 
 struct InsightsView: View {
     @State var showPROsubsciptionView = false
     @EnvironmentObject var store: InsightsStore
 
     var body: some View {
-        if store.isPro {
-            if store.records.count >= 8 {
+        //if store.isPro {
+        if !store.records.isEmpty {
                 VStack {
                     Form {
                         Section("insight.section.ranking.title") {
-                            HorizontalBarChartView(dataPoints: [store.biggestPoint, store.evolutionPoint, store.lowPoint])
+                            HorizontalBarChartView(dataPoints: [store.barbellBiggestPoint, store.barbellEvolutionPoint, store.barbellLowPoint])
                         }
+                        Chart {
+                            ForEach(store.barbellRecords) { record in
+                                BarMark(
+                                    x: .value("Weight", record.prName),
+                                    y: .value("Intensity", record.poundValue)
+                                )
+                                .foregroundStyle(by: .value("Weight", record.prName))
+                                .annotation(position: .top) {
+                                    AnnotationView(record: record)
+                                }
+
+                            }
+                        }
+                        .frame(height: 240)
                         Section("insight.section.graph.title") {
                             if store.barPoints.isEmpty {
                                 Text("insight.view.error.description")
@@ -29,7 +57,7 @@ struct InsightsView: View {
                             }
                         }
                         Section("insight.section.information.title") {
-                            let recordTypeName = store.biggestPR?.prName.rawValue ?? ""
+                            let recordTypeName = store.biggestPR?.prName ?? ""
                             if store.measureTrackingMode == .pounds {
                                 HSubtitleView(
                                     title: recordTypeName,
@@ -51,26 +79,26 @@ struct InsightsView: View {
             } else {
                 EmptyView(message: "emptyView.screen.message")
             }
-        } else {
-            VStack {
-                Button {
-                    self.showPROsubsciptionView.toggle()
-                } label: {
-                    CardGroupView(
-                        cardTitle: "insight.view.card.pro.title",
-                        cardDescript: "insight.view.card.pro.description",
-                        buttonTitle: "insight.view.card.unlockprobutton.title",
-                        iconSystemText: "chart.bar.fill"
-                    )
-                }.sheet(isPresented: $showPROsubsciptionView) {
-                    PurchaseView()
-                }.onAppear {
-                    UINavigationBar.appearance().tintColor = .green
-                }
-                Spacer()
-            }
-            .padding(22)
-        }
+       // } else {
+//            VStack {
+//                Button {
+//                    self.showPROsubsciptionView.toggle()
+//                } label: {
+//                    CardGroupView(
+//                        cardTitle: "insight.view.card.pro.title",
+//                        cardDescript: "insight.view.card.pro.description",
+//                        buttonTitle: "insight.view.card.unlockprobutton.title",
+//                        iconSystemText: "chart.bar.fill"
+//                    )
+//                }.sheet(isPresented: $showPROsubsciptionView) {
+//                    PurchaseView()
+//                }.onAppear {
+//                    UINavigationBar.appearance().tintColor = .green
+//                }
+//                Spacer()
+//            }
+//            .padding(22)
+       // }
     }
 }
 

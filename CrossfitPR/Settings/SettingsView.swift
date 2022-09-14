@@ -11,6 +11,7 @@ struct SettingsView: View {
     
     @EnvironmentObject var settings: SettingsStore
     @Environment(\.scenePhase) var scenePhase
+    @Environment(\.openURL) var openURL
     @State var showPROsubsciptionView = false
     @State private var scheduleDate = Date()
     @EnvironmentObject var lnManager: LocalNotificationManager
@@ -30,6 +31,10 @@ struct SettingsView: View {
                 Toggle(isOn: $settings.isNotificationEnabled) {
                     Text("settings.screen.section.notification.toggle.title")
                 }
+                DatePicker(selection: dateProxy) {
+                    Image(systemName: "calendar")
+                        .font(.system(size: 18)).foregroundColor(.green)
+                }
             }
             
             Section(header: Text("settings.screen.section.tracking.title")) {
@@ -41,14 +46,10 @@ struct SettingsView: View {
                         Text($0.rawValue).tag($0)
                     }
                 }
-
-                DatePicker(selection: dateProxy) {
-                    Text("settings.screen.section.tracking.target.title")
-                }
             }
             
             if !settings.isPro {
-                Section {
+                Section(header: Text("settings.screen.section.crossfitpro.title")) {
                     Button(action: {
                         self.showPROsubsciptionView.toggle()
                         //self.settings.unlockPro()
@@ -57,6 +58,13 @@ struct SettingsView: View {
                     }.sheet(isPresented: $showPROsubsciptionView) {
                         PurchaseView()
                     }
+                }
+            }
+            Section(header: Text("settings.screen.section.about.title")) {
+                Button(action: {
+                    openURL(URL(string: "https://www.apple.com")!)
+                }) {
+                    Text(LocalizedStringKey("settings.screen.section.privacy.title"))
                 }
             }
         }

@@ -41,7 +41,8 @@ struct CategoryListView: View {
                 UINavigationBar.appearance().tintColor = .green
             }
             .navigationDestination(for: Category.self) { category in
-                RecordDetail(recordType:category.title).environmentObject(RecordStore(recordType: category.title))
+                RecordDetail()
+                    .environmentObject(RecordStore(recordCategory: category))
             }   
         }
 

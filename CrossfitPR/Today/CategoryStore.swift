@@ -19,9 +19,7 @@ import os
     @Published var searchText: String = ""
     
     private var categories: [Category] {
-        PRType.allCases.map {
-            Category(title: $0.rawValue)
-        }.filter { !$0.title.isEmpty }.sorted()
+        Category.list
     }
     
     var filteredCategories: [Category] {

@@ -16,21 +16,21 @@ import os
     )
     
     let crossfitLevelList = CrossfitLevel.allCases.map { $0.rawValue }
-    let personalRecordTypeList = PRType.allCases
+    let personalRecordTypeList = Category.list.sorted()
     var anyCancellable: AnyCancellable? = nil
 
     @Published var editingRecord: PersonalRecord
     @Published var prPercentage: Float = 0.0
     @Published var isWeightInPounds: Bool = false
     @Published var isMaxRepetitions: Bool = false
-    @Published var minimunTimes: Bool = false
+    @Published var isMaxDistance: Bool = false
     @Published var selectedCategory: Int = 0
     @Published var selectedCategoryItem: Int = 0
-    @Published var selectedPercentage: Int = 10
-    @Published var selectedInitialPounds: Int = 10
-    @Published private var selectedMaxReps: Int = 0
-    @Published private var selectedMinTime: Int = 0
-    @Published private var selectedDistance: Int = 10
+    @Published var selectedPercentage: Int = 0
+    @Published var selectedInitialPounds: Int = 0
+    @Published var selectedMaxReps: Int = 0
+    @Published var selectedMinTime: Int = 0
+    @Published var selectedDistance: Int = 0
     @Published private(set) var isSaving = false
     @Published private var dataManager: DataManager
     @Published private var settings: UserDefaults
@@ -59,13 +59,14 @@ import os
     }
 
     func saveRecord() {
-        editingRecord.prName = personalRecordTypeList[selectedCategory]
+        editingRecord.prName = personalRecordTypeList[selectedCategory].title
+        editingRecord.group = personalRecordTypeList[selectedCategory].group 
         editingRecord.recordDate = .now
         editingRecord.category = CrossfitLevel.allCases[selectedCategoryItem]
         if isMaxRepetitions {
             editingRecord.recordMode = .maxRepetition
-        } else if minimunTimes {
-            editingRecord.recordMode = .minTime
+        } else if isMaxDistance {
+            editingRecord.recordMode = .maxDistance
         } else {
             editingRecord.recordMode = .maxWeight
         }
@@ -76,6 +77,7 @@ import os
         switch recordMode {
         case .maxRepetition:
             editingRecord.maxReps = selectedMaxReps
+            editingRecord.minTime = selectedMinTime
         case .maxWeight:
             editingRecord.percentage = Float(selectedPercentage)
             if measureTrackingMode == .pounds {
@@ -87,7 +89,7 @@ import os
                 let valueInPounds = (selectedInitialPounds * Int(2.2))
                 editingRecord.poundValue = valueInPounds
             }
-        case .minTime:
+        case .maxDistance:
             editingRecord.distance = selectedDistance
             editingRecord.minTime = selectedMinTime
         }

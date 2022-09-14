@@ -17,23 +17,75 @@ struct PRView: View {
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
-                ProgressView(progressValue: (record.percentage/100))
-                VStack(alignment: .leading) {
-                    Text("\(record.dateFormatter)")
-                        .font(.body)
-                        .fontWeight(.semibold)
-                        .padding(.bottom, 8)
-                    Text(LocalizedStringKey("record.item.view.default.title"))
-                        .font(.footnote)
-                        .foregroundColor(.secondary)
-                    HorizontalBarChartView(dataPoints: [
-                        DataPoint.init(
-                            value: Double(isPounds ? record.poundValue : record.kiloValue),
-                            label: isPounds ? "\(record.poundValue) lb" : "\(record.kiloValue) kg",
-                            legend: Legend(color: .yellow, label: "\(record.category?.rawValue ?? "")", order: 2)
-                        )
-                    ])
-                }
+                    
+                    if let category = record.recordMode {
+                        switch category {
+                        case .maxWeight:
+                            ProgressView(progressValue: (record.percentage/100))
+                            VStack(alignment: .leading) {
+                                Text("\(record.dateFormatter)")
+                                    .font(.body)
+                                    .fontWeight(.semibold)
+                                    .padding(.bottom, 8)
+                                Text(record.prName)
+                                    .font(.footnote)
+                                .foregroundColor(.secondary)
+                                HorizontalBarChartView(dataPoints: [
+                                    DataPoint.init(
+                                        value: Double(isPounds ? record.poundValue : record.kiloValue),
+                                        label: isPounds ? "\(record.poundValue) lb" : "\(record.kiloValue) kg",
+                                        legend: Legend(color: .yellow, label: "\(record.category?.rawValue ?? "")", order: 2)
+                                    )
+                                ])
+                            }
+                            
+                        case .maxDistance:
+                            VStack(alignment: .leading) {
+                                Text("\(record.dateFormatter)")
+                                    .font(.body)
+                                    .fontWeight(.semibold)
+                                    .padding(.bottom, 8)
+                                Text(record.prName)
+                                    .font(.footnote)
+                                .foregroundColor(.secondary)
+                                HorizontalBarChartView(dataPoints: [
+                                    DataPoint.init(
+                                        value: Double(record.minTime),
+                                        label: "\(record.minTime) min",
+                                        legend: Legend(color: .blue, label: "record.time.title", order: 3)
+                                    ),
+                                    DataPoint.init(
+                                        value: Double(record.distance),
+                                        label: "\(record.distance) km",
+                                        legend: Legend(color: .yellow, label: "\(record.category?.rawValue ?? "")", order: 2)
+                                    )
+                                ])
+                            }
+                        case .maxRepetition:
+                            VStack(alignment: .leading) {
+                                Text("\(record.dateFormatter)")
+                                    .font(.body)
+                                    .fontWeight(.semibold)
+                                    .padding(.bottom, 8)
+                                Text(record.prName)
+                                    .font(.footnote)
+                                .foregroundColor(.secondary)
+                                HorizontalBarChartView(dataPoints: [
+                                    DataPoint.init(
+                                        value: Double(record.minTime),
+                                        label: "\(record.minTime) min",
+                                        legend: Legend(color: .blue, label: "record.time.title", order: 3)
+                                    ),
+                                    DataPoint.init(
+                                        value: Double(record.maxReps),
+                                        label: "\(record.maxReps) reps",
+                                        legend: Legend(color: .yellow, label: "\(record.category?.rawValue ?? "")", order: 2)
+                                    )
+                                ])
+                            }
+                        }
+                    }
+                
             }
         }
     }
