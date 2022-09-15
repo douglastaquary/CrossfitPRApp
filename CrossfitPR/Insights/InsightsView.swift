@@ -16,7 +16,6 @@ struct AnnotationView: View {
     var body: some View {
         VStack(spacing: 0) {
             Text(recordValue)
-            //Image(systemName: "figure.stand")
         }
         .font(.caption)
         .foregroundStyle(.black)

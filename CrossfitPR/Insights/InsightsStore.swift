@@ -78,10 +78,8 @@ final class InsightsStore: ObservableObject {
     init(dataManager: DataManager = DataManager.shared, defaults: UserDefaults = .standard) {
         self.defaults = defaults
         self.dataManager = dataManager
-        
         anyCancellable = dataManager.objectWillChange.sink { [weak self] (_) in
             self?.objectWillChange.send()
-            
         }
         loadBarbellRecords()
         loadBabellHorizontalBar()
@@ -257,7 +255,6 @@ final class InsightsStore: ObservableObject {
             gynmnasticHorizontalBarList.append(hangstandWalkPoint)
         }
         
-        
         let maxRepEvolution = maxRepsRecords.filter { pr in
             return pr.maxReps < maxGymnastic && pr.maxReps > minGymnastic //&& pr.prName != biggestPRName
         }.sorted {
@@ -296,7 +293,6 @@ final class InsightsStore: ObservableObject {
             
         }
     }
-    
     
     // Endurance methods
     func loadEnduranceRecords() {
