@@ -36,7 +36,7 @@ final class InsightsStore: ObservableObject {
     @Published var gymnasticBiggestPRName: String = ""
     @Published var gymnasticBiggestRecord: PersonalRecord?
     @Published var hangstandWalkRecord: PersonalRecord?
-    @Published var hangstandWalkPoint: DataPoint = DataPoint.init(value: 0.0, label: "", legend: Legend(color: .orange, label: "", order: 4))
+    @Published var hangstandWalkPoint: DataPoint = DataPoint.init(value: 0.0, label: "", legend: Legend(color: .brown, label: "", order: 4))
     @Published var gymnasticBiggestPoint: DataPoint = DataPoint.init(value: 0.0, label: "", legend: Legend(color: .green, label: "", order: 1))
     @Published var gymnasticEvolutionPoint: DataPoint = DataPoint.init(value: 0.0, label: "", legend: Legend(color: .yellow, label: "", order: 2))
     @Published var gymnasticLowPoint: DataPoint = DataPoint.init(value: 0.0, label: "", legend: Legend(color: .gray, label: "", order: 3))
@@ -129,7 +129,9 @@ final class InsightsStore: ObservableObject {
                     barbellBiggestPRName = pr.prName
                     barbellBiggestRecord = pr
                     barbellHorizontalBarList.append(barbellBiggestPoint)
-                    barbellHorizontalBarList.append(barbellEvolutionPoint)
+                    if barbellRecords.count > 2 {
+                        barbellHorizontalBarList.append(barbellEvolutionPoint)
+                    }
                 }
                 
             }
@@ -152,6 +154,7 @@ final class InsightsStore: ObservableObject {
                 )
                 barbellBiggestPRName = barbellEvolution.prName
                 barbellBiggestRecord = barbellEvolution
+                barbellHorizontalBarList.append(barbellBiggestPoint)
                 return
             }
             
@@ -163,14 +166,14 @@ final class InsightsStore: ObservableObject {
                 $0.kiloValue > $1.kiloValue
             }.first
             
-            evolutionPoint = DataPoint.init(
+            barbellEvolutionPoint = DataPoint.init(
                 value: Double(evolutionPRselected?.kiloValue ?? 0),
                 label: "\(evolutionPRselected?.kiloValue ?? 0) kg",
                 legend: Legend(color: .yellow, label: "\(evolutionPRselected?.prName ?? "")", order: 2)
             )
             for pr in barbellRecords {
                 if pr.kiloValue == max {
-                    biggestPoint = DataPoint.init(
+                    barbellBiggestPoint = DataPoint.init(
                         value: Double(pr.kiloValue),
                         label: "\(pr.kiloValue) kg",
                         legend: Legend(color: .green, label: "\(pr.prName)", order: 1)
@@ -178,13 +181,15 @@ final class InsightsStore: ObservableObject {
                     barbellBiggestPRName = pr.prName
                     barbellBiggestRecord = pr
                     barbellHorizontalBarList.append(barbellBiggestPoint)
-                    barbellHorizontalBarList.append(barbellEvolutionPoint)
+                    if barbellRecords.count > 2 {
+                        barbellHorizontalBarList.append(barbellEvolutionPoint)
+                    }
                 }
+                
             }
-            
             for pr in barbellRecords {
                 if pr.kiloValue == min {
-                    lowPoint = DataPoint.init(
+                    barbellLowPoint = DataPoint.init(
                         value: Double(pr.kiloValue),
                         label: "\(pr.kiloValue) kg",
                         legend: Legend(color: .gray, label: "\(pr.prName)", order: 3)
@@ -192,7 +197,6 @@ final class InsightsStore: ObservableObject {
                     barbellHorizontalBarList.append(barbellLowPoint)
                 }
             }
-                 
         }
     }
     
@@ -211,14 +215,14 @@ final class InsightsStore: ObservableObject {
                 return false
             }.first
             if let handstand = handstandWalk {
-                gymnasticBiggestPoint = DataPoint.init(
+                hangstandWalkPoint = DataPoint.init(
                     value: Double(handstand.distance),
                     label: "\(handstand.distance) m",
                     legend: Legend(color: .green, label: "\(handstand.prName)", order: 1)
                 )
                 gymnasticBiggestPRName = handstand.prName
                 gymnasticBiggestRecord = handstand
-                gynmnasticHorizontalBarList.append(gymnasticBiggestPoint)
+                gynmnasticHorizontalBarList.append(hangstandWalkPoint)
                 return
             }
             gymnasticBiggestPoint = DataPoint.init(
@@ -228,7 +232,6 @@ final class InsightsStore: ObservableObject {
             )
             gymnasticBiggestPRName = gymnasticEvolution.prName
             gymnasticBiggestRecord = gymnasticEvolution
-            gynmnasticHorizontalBarList.append(gymnasticBiggestPoint)
             return
         }
         let maxRepsRecords = gymnasticRecords.filter { record in
@@ -252,7 +255,6 @@ final class InsightsStore: ObservableObject {
                 label: "\(handstandWalk.distance) km",
                 legend: Legend(color: .yellow, label: "\(handstandWalk.prName)", order: 4)
             )
-            gynmnasticHorizontalBarList.append(hangstandWalkPoint)
         }
         
         let maxRepEvolution = maxRepsRecords.filter { pr in
@@ -260,6 +262,11 @@ final class InsightsStore: ObservableObject {
         }.sorted {
             $0.maxReps > $1.maxReps
         }.first
+        
+        // So tenho dois itens e um deles é handstand
+        if gymnasticRecords.count == 2, handstandWalk.distance > 0 {
+            
+        }
         
         gymnasticEvolutionPoint = DataPoint.init(
             value: Double(maxRepEvolution?.maxReps ?? 0),
@@ -277,8 +284,17 @@ final class InsightsStore: ObservableObject {
                 barbellBiggestPRName = pr.prName
                 barbellBiggestRecord = pr
                 gynmnasticHorizontalBarList.append(gymnasticBiggestPoint)
-                gynmnasticHorizontalBarList.append(gymnasticEvolutionPoint)
+                // So tenho dois itens e um deles é handstand
+                if gymnasticRecords.count == 2, handstandWalk.distance > 0 {
+                    gynmnasticHorizontalBarList.append(hangstandWalkPoint)
+                } else if gymnasticRecords.count > 2 {
+                    gynmnasticHorizontalBarList.append(gymnasticEvolutionPoint)
+                }
             }
+        }
+        
+        if gymnasticRecords.count == 2, handstandWalk.distance > 0 {
+            return
         }
         
         for pr in maxRepsRecords {

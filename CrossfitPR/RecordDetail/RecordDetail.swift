@@ -10,6 +10,7 @@ import Charts
 
 struct RecordDetail: View {
     @EnvironmentObject var store: RecordStore
+    @StateObject var storeKitManager = StoreKitManager()
     @State var showPROsubsciptionView = false
     @State private var confirmationShow = false
     @State private var indexSet: IndexSet?
@@ -70,7 +71,8 @@ struct RecordDetail: View {
             }
         }
         .sheet(isPresented: $showPROsubsciptionView) {
-            PurchaseView()
+            PurchaseView(storeKitManager: storeKitManager)
+                .environmentObject(PurchaseStore(storeKitManager: storeKitManager))
         }
         .navigationBarTitle(Text(prName))
         .navigationBarTitleDisplayMode(.inline)

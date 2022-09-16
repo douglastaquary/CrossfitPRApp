@@ -18,6 +18,7 @@ import os
     let crossfitLevelList = CrossfitLevel.allCases.map { $0.rawValue }
     let personalRecordTypeList = Category.list.sorted()
     var anyCancellable: AnyCancellable? = nil
+    private let handstandWalkString = "Handstand walk"
 
     @Published var editingRecord: PersonalRecord
     @Published var prPercentage: Float = 0.0
@@ -90,6 +91,9 @@ import os
                 editingRecord.poundValue = valueInPounds
             }
         case .maxDistance:
+            if personalRecordTypeList[selectedCategory].title.contains(handstandWalkString) {
+                editingRecord.maxReps = selectedDistance
+            }
             editingRecord.distance = selectedDistance
             editingRecord.minTime = selectedMinTime
         }

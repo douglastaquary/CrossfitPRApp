@@ -9,8 +9,8 @@ import SwiftUI
 
 @main
 struct CrossfitPRApp: App {
-    @Environment(\.scenePhase) private var scenePhase
     
+    @Environment(\.scenePhase) private var scenePhase
     var dataManager = DataManager.shared
 
     var body: some Scene {

@@ -21,7 +21,7 @@ struct PRView: View {
                     if let category = record.recordMode {
                         switch category {
                         case .maxWeight:
-                            ProgressView(progressValue: (record.percentage/100))
+                            RingProgressView(progressValue: (record.percentage/100))
                             VStack(alignment: .leading) {
                                 Text("\(record.dateFormatter)")
                                     .font(.body)

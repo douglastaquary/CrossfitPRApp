@@ -6,9 +6,12 @@
 //
 
 import SwiftUI
+import StoreKit
 
 struct PurchaseView: View {
     @Environment(\.presentationMode) var presentation
+    @EnvironmentObject var store: PurchaseStore
+    @StateObject var storeKitManager: StoreKitManager
     
     var body: some View {
         NavigationView {
@@ -23,7 +26,6 @@ struct PurchaseView: View {
                                 }, label: {
                                     Text("newRecord.screen.cancel.button.title")
                                         .foregroundColor(.green)
-                                        .bold()
                                 })
                         }
                     }
@@ -47,13 +49,29 @@ struct PurchaseView: View {
                         .font(.body)
                         .padding()
                     VStack(spacing: 12) {
-                        Button("R$ 4,90 / Mounth"){
+                        if store.subscriptions.isEmpty {
+                            Button {
+                                ""
+                            } label: {
+                                ProgressView()
+                            }
+                            .buttonStyle(OutlineButton())
+                            .frame(width: 160)
+                            Button {
+                                ""
+                            } label: {
+                                ProgressView()
+                            }.buttonStyle(FilledButton())
+                            .frame(width: 160)
+                        }  else {
+                            Button("\(store.priceLocale(to: store.subscriptions[1]) ?? "") / Mounth"){
+                                store.performPROMonthly(product: store.subscriptions[1])
+                            }.buttonStyle(OutlineButton())
                             
-                        }.buttonStyle(OutlineButton())
-                        
-                        Button("R$ 50,90 / Year"){
-                            
-                        }.buttonStyle(FilledButton())
+                            Button("\(store.priceLocale(to: store.subscriptions[0]) ?? "") / Year"){
+                                store.performPROAnnual(product: store.subscriptions[0])
+                            }.buttonStyle(FilledButton())
+                        }
                         
                     }
                     .padding()
@@ -63,6 +81,10 @@ struct PurchaseView: View {
                         .foregroundColor(.secondary)
                     Spacer()
                 }
+            }.onChange(of: store.state) { newValue in
+                if store.state == .confirmation {
+                    store.unlockPro()
+                }
             }
         }
     }
@@ -71,6 +93,6 @@ struct PurchaseView: View {
 
 struct PurchaseView_Previews: PreviewProvider {
     static var previews: some View {
-        PurchaseView()
+        PurchaseView(storeKitManager: StoreKitManager())
     }
 }

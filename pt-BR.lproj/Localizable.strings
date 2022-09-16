@@ -83,7 +83,7 @@
 "insight.section.graph.title" = "Percepções";
 
 "insight.section.information.title" = "Maior recorde";
-"insight.view.error.description" = "No momento vocês ainda não tem dados para mostrar.";
+"insight.view.error.description" = "No momento você ainda não tem dados para mostrar.";
 
 "insight.view.intensity.title"= "Intensidade";
 "insight.view.card.pro.title"= "Os Poderosos Insights";
@@ -119,5 +119,5 @@
 "settings.screen.section.about.title" = "Sobre";
 "settings.screen.section.crossfitpro.title" = "CrossFitPR PRO";
 
-"emptyView.screen.message" = "Comece agora\nadicionando um novo record.\nOs poderosos insights são gerados a partir\ndos dados que você adiciona no app. Para melhor visualização dos gráficos\n, é necessário ao menos 8 registros de records.";
+"emptyView.screen.message" = "Comece agora\nadicionando um novo record.\nOs poderosos insights são gerados a partir\ndos dados que você adiciona no app.\nPara melhor visualização dos gráficos,\n é necessário ao menos 8 registros de records.";
 

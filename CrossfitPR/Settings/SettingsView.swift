@@ -10,6 +10,7 @@ import SwiftUI
 struct SettingsView: View {
     
     @EnvironmentObject var settings: SettingsStore
+    @StateObject var storeKitManager = StoreKitManager()
     @Environment(\.scenePhase) var scenePhase
     @Environment(\.openURL) var openURL
     @State var showPROsubsciptionView = false
@@ -56,7 +57,8 @@ struct SettingsView: View {
                     }) {
                         Text("settings.screen.section.unlockpro.title")
                     }.sheet(isPresented: $showPROsubsciptionView) {
-                        PurchaseView()
+                        PurchaseView(storeKitManager: storeKitManager)
+                            .environmentObject(PurchaseStore(storeKitManager: storeKitManager))
                     }
                 }
             }
