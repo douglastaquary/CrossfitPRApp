@@ -69,7 +69,7 @@
 
 "record.records.section.title" = "Recordes";
 "record.evolution.section.title %@" = "Evolução de %@";
-"record.evolution.section.description %@" = "Esta análise é baseada na lista de recordes de %@ cadastrada no aplicativo. Os mais recentes são os da faixa verde (à direita), o cinza mais antigo e em evolução o amarelo.";
+"record.evolution.section.description %@" = "Esta análise é baseada na lista de recordes de %@ cadastrada no aplicativo. The ones in the yellow band (on the right) are evolving and the gray one is the lowest.";
 "record.screen.delete.button.title" = "Apagar";
 "record.screen.cancel.button.title" = "Cancelar";
 "record.screen.delete.confirmation.title" = "Você realmente deseja excluir?";

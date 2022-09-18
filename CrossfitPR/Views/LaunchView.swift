@@ -14,7 +14,6 @@ public enum Route: String {
 }
 
 struct LaunchView: View {
-    @Environment(\.managedObjectContext) private var viewContext
     @EnvironmentObject var viewlaunch: ViewLaunch
     
     var body: some View {
@@ -23,7 +22,6 @@ struct LaunchView: View {
                 OnboardingView()
             } else if viewlaunch.currentPage == Route.prHistoriesListView.rawValue {
                 RootView()
-                    .environment(\.managedObjectContext, viewContext)
             } else if viewlaunch.currentPage == Route.newPR.rawValue {
                 NewRecordView()
             }

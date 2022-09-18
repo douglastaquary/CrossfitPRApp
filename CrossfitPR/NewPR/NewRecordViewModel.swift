@@ -71,15 +71,15 @@ import os
         } else {
             editingRecord.recordMode = .maxWeight
         }
-        guard let recordMode = editingRecord.recordMode else {
+        guard let group = editingRecord.group else {
             print("\n🆘 Error: Record mode is empty when save new recors!\n")
             return
         }
-        switch recordMode {
-        case .maxRepetition:
+        switch group {
+        case .gymnastic:
             editingRecord.maxReps = selectedMaxReps
             editingRecord.minTime = selectedMinTime
-        case .maxWeight:
+        case .barbell:
             editingRecord.percentage = Float(selectedPercentage)
             if measureTrackingMode == .pounds {
                 editingRecord.poundValue = selectedInitialPounds
@@ -90,7 +90,7 @@ import os
                 let valueInPounds = (selectedInitialPounds * Int(2.2))
                 editingRecord.poundValue = valueInPounds
             }
-        case .maxDistance:
+        case .endurance:
             if personalRecordTypeList[selectedCategory].title.contains(handstandWalkString) {
                 editingRecord.maxReps = selectedDistance
             }
