@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ProgressView: View {
+struct RingProgressView: View {
     @State var progressValue: Float = 0.0
     
     var body: some View {
@@ -21,7 +21,7 @@ struct ProgressView: View {
 
 struct ProgressView_Previews: PreviewProvider {
     static var previews: some View {
-        ProgressView(progressValue: 0.40)
+        RingProgressView(progressValue: 0.40)
     }
 }
 

@@ -39,7 +39,7 @@
 
 /* Purchase screen */
 "purchase.item1.title" = "Gerencie seus recordes pessoais";
-"purchase.item1.description" = "Edite, apague records, organize suas categorias de acordo com os seus treinos de crossfit.";
+"purchase.item1.description" = "Apague records, organize suas categorias de acordo com os seus treinos de crossfit.";
 
 "purchase.item2.title" = "Os Poderosos Insights";
 "purchase.item2.description" = "Os Poderosos Insights permitem que você acompanhe, entenda seus maiores records e evolução através de gráficos simplificados.";
@@ -51,27 +51,53 @@
 
 "purchase.commitment.title"= "Sem compromisso.\nCancele a qualquer momento.\nApós 7 dias de teste gratuito, esta assinatura\né renovada automaticamente dependendo da forma que\nvocê escolher, a menos que a renovação\nautomática esteja desativada.";
 
+/* Record detail screen */
+
+"record.biggest.section.title" = "Maior recorde";
+"record.category.title" = "Exercício";
+"record.percentage.title" = "Intensidade";
+"record.maxReps.title" = "Máximo de repetições";
+"record.time.title" = "Tempo";
+"record.distance.title" = "Distância";
+"record.weight.title" = "Peso";
+"record.date.title" = "Data";
+
+"record.view.category.recent.title" = "Mais recente";
+"record.view.category.evolution.title" = "Evolução";
+"record.view.category.lowest.title" = "Menor";
+"record.item.view.default.title" = "Record Pessoal";
+
+"record.records.section.title" = "Recordes";
+"record.evolution.section.title %@" = "Evolução de %@";
+"record.evolution.section.description %@" = "Esta análise é baseada na lista de recordes de %@ cadastrada no aplicativo. Os mais recentes são os da faixa verde (à direita), o cinza mais antigo e em evolução o amarelo.";
+"record.screen.delete.button.title" = "Apagar";
+"record.screen.cancel.button.title" = "Cancelar";
+"record.screen.delete.confirmation.title" = "Você realmente deseja excluir?";
+"record.screen.maxReps.title" = "Máximo de repetições";
+
 /* Insight screen */
 
-"insight.section.ranking.title" = "Top recordes";
-"insight.section.graph.title" = "Insights";
+"insight.section.ranking.barbell.title" = "Top Recordes com Barra";
+"insight.section.ranking.gymnastic.title" = "Top Recordes Ginásticos";
+"insight.section.ranking.endurance.title"= "Top Recordes de Resistência";
+"insight.section.graph.title" = "Percepções";
 
-"insight.section.information.title" = "O maior recorde";
-"insight.view.error.description" = "No momento vocês ainda não tem dados para mostrar.";
+"insight.section.information.title" = "Maior recorde";
+"insight.view.error.description" = "No momento você ainda não tem dados para mostrar.";
 
-"insight.view.intensity.title"= "com intensidade de";
-"insight.view.card.pro.title"= "Insights";
-"insight.view.card.pro.description"= "Assinatura PRO permite a análise de dados históricos dos seus records que ajudam você a entender como evoluir mais rápidos nos treinos de alta performance";
+"insight.view.intensity.title"= "Intensidade";
+"insight.view.card.pro.title"= "Os Poderosos Insights";
+"insight.view.card.pro.description"= "Assinatura PRO permite a análise de dados históricos dos seus records que ajudam você a entender como evoluir mais rápido nos treinos de alta performance";
 "insight.view.card.unlockprobutton.title"= "Desbloquear o CrossFitPR PRO";
 
 /* New Record screen */
 "newRecord.screen.title" = "Novo Recorde";
 "newRecord.screen.save.button.title" = "Salvar";
 "newRecord.screen.cancel.button.title" = "Cancelar";
-"newRecord.screen.section.personal.title" = "Recorde Pessoal";
+"newRecord.screen.section.personal.title" = "Configuração do treino";
 "newRecord.screen.toggle.maxreps.title" = "Máximo de repetições";
-"newRecord.screen.toggle.mintime.title" = "Menor tempo";
-"newRecord.screen.toggle.maxrep.title" = "Máximo reps";
+"newRecord.screen.toggle.mintime.title" = "Máximo de distância";
+"newRecord.screen.toggle.maxrep.title" = "Máximo de repetições";
 "newRecord.screen.picker.repetition.title" = "Repetições";
 "newRecord.screen.picker.timecount.title" = "Tempo";
 "newRecord.screen.toggle.distance.title" = "Distância";
@@ -84,8 +110,14 @@
 /* Settings screen */
 "settings.screen.title" = "Configurações";
 "settings.screen.section.notification.title" = "Notificações";
-"settings.screen.section.notification.toggle.title" = "Notificação:";
-"settings.screen.section.tracking.title" = "Configuração para Crossfit";
+"settings.screen.section.notification.toggle.title" = "Notificação de treino:";
+"settings.screen.section.tracking.title" = "Configuração de Crossfit";
 "settings.screen.section.tracking.measure.title" = "Informação de força";
-"settings.screen.section.tracking.target.title" = "Treino às";
+"settings.screen.section.tracking.target.title" = "Treino";
 "settings.screen.section.unlockpro.title" = "Desbloquear CrossFitPR PRO";
+"settings.screen.section.privacy.title" = "Política de privacidade e Termos de Uso";
+"settings.screen.section.about.title" = "Sobre";
+"settings.screen.section.crossfitpro.title" = "CrossFitPR PRO";
+
+"emptyView.screen.message" = "Comece agora\nadicionando um novo record.\nOs poderosos insights são gerados a partir\ndos dados que você adiciona no app.\nPara melhor visualização dos gráficos,\n é necessário ao menos 8 registros de records.";
+

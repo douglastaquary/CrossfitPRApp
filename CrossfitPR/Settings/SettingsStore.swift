@@ -11,7 +11,7 @@ import UserNotifications
 
 
 enum SettingStoreKeys {
-    static let pro = "pro"
+    static let pro = "is_pro"
     static let trainingTargetGoal = "training_target_goal"
     static let notificationEnabled = "notifications_enabled"
     static let sleepTrackingEnabled = "sleep_tracking_enabled"

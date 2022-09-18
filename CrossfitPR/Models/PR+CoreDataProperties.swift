@@ -22,6 +22,7 @@ extension PR {
     @NSManaged public var percentage: Float
     @NSManaged public var category: String?
     @NSManaged public var recordMode: String?
+    @NSManaged public var group: String?
     @NSManaged public var maxReps: Int32
     @NSManaged public var minTime: Int32
     @NSManaged public var comments: String
@@ -66,6 +67,15 @@ extension PR {
         }
         get {
             RecordMode(rawValue: recordMode ?? "") ?? .maxWeight
+        }
+    }
+    
+    var recordGroup: RecordGroup {
+        set {
+            group = newValue.rawValue
+        }
+        get {
+            RecordGroup(rawValue: group ?? "") ?? .barbell
         }
     }
     

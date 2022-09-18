@@ -10,7 +10,7 @@
 		4E26EC4A281B67B300A4F8C3 /* CategoryStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E26EC49281B67B300A4F8C3 /* CategoryStore.swift */; };
 		4E26EC4F281EE66600A4F8C3 /* PRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E26EC4E281EE66600A4F8C3 /* PRView.swift */; };
 		4E26EC51281EE6B200A4F8C3 /* DetailItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E26EC50281EE6B200A4F8C3 /* DetailItemView.swift */; };
-		4E26EC53281EE6FC00A4F8C3 /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E26EC52281EE6FC00A4F8C3 /* ProgressView.swift */; };
+		4E26EC53281EE6FC00A4F8C3 /* RingProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E26EC52281EE6FC00A4F8C3 /* RingProgressView.swift */; };
 		4E26EC55281EEB4700A4F8C3 /* HSubtitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E26EC54281EEB4700A4F8C3 /* HSubtitleView.swift */; };
 		4E26EC57281EEDA400A4F8C3 /* PRSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E26EC56281EEDA400A4F8C3 /* PRSection.swift */; };
 		4E35F8522852D289008FCC2B /* SettingsUserDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E35F8512852D289008FCC2B /* SettingsUserDefault.swift */; };
@@ -60,13 +60,19 @@
 		4EE666E428CE91F60090BB35 /* LocalNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE666E328CE91F60090BB35 /* LocalNotificationManager.swift */; };
 		4EE666E628CE922A0090BB35 /* LocalNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE666E528CE922A0090BB35 /* LocalNotification.swift */; };
 		4EE666E828CE92370090BB35 /* NextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE666E728CE92370090BB35 /* NextView.swift */; };
+		4EE666EA28CFA2A70090BB35 /* CrossFitLineChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE666E928CFA2A70090BB35 /* CrossFitLineChart.swift */; };
+		4EE666EC28D2AABF0090BB35 /* StoreKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE666EB28D2AABF0090BB35 /* StoreKitManager.swift */; };
+		4EE666EE28D2AE000090BB35 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EE666ED28D2AE000090BB35 /* StoreKit.framework */; };
+		4EE666F228D2B4A60090BB35 /* PurchaseStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE666F128D2B4A60090BB35 /* PurchaseStore.swift */; };
+		4EE666F428D35C800090BB35 /* LoadingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE666F328D35C800090BB35 /* LoadingState.swift */; };
+		4EE666F628D4B3730090BB35 /* InsightsViewPRO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE666F528D4B3730090BB35 /* InsightsViewPRO.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		4E26EC49281B67B300A4F8C3 /* CategoryStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryStore.swift; sourceTree = "<group>"; };
 		4E26EC4E281EE66600A4F8C3 /* PRView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PRView.swift; sourceTree = "<group>"; };
 		4E26EC50281EE6B200A4F8C3 /* DetailItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailItemView.swift; sourceTree = "<group>"; };
-		4E26EC52281EE6FC00A4F8C3 /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
+		4E26EC52281EE6FC00A4F8C3 /* RingProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RingProgressView.swift; sourceTree = "<group>"; };
 		4E26EC54281EEB4700A4F8C3 /* HSubtitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HSubtitleView.swift; sourceTree = "<group>"; };
 		4E26EC56281EEDA400A4F8C3 /* PRSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PRSection.swift; sourceTree = "<group>"; };
 		4E35F8512852D289008FCC2B /* SettingsUserDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsUserDefault.swift; sourceTree = "<group>"; };
@@ -119,6 +125,12 @@
 		4EE666E328CE91F60090BB35 /* LocalNotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalNotificationManager.swift; sourceTree = "<group>"; };
 		4EE666E528CE922A0090BB35 /* LocalNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalNotification.swift; sourceTree = "<group>"; };
 		4EE666E728CE92370090BB35 /* NextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NextView.swift; sourceTree = "<group>"; };
+		4EE666E928CFA2A70090BB35 /* CrossFitLineChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrossFitLineChart.swift; sourceTree = "<group>"; };
+		4EE666EB28D2AABF0090BB35 /* StoreKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreKitManager.swift; sourceTree = "<group>"; };
+		4EE666ED28D2AE000090BB35 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		4EE666F128D2B4A60090BB35 /* PurchaseStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseStore.swift; sourceTree = "<group>"; };
+		4EE666F328D35C800090BB35 /* LoadingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingState.swift; sourceTree = "<group>"; };
+		4EE666F528D4B3730090BB35 /* InsightsViewPRO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsightsViewPRO.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +141,7 @@
 				4E8BAA1E2817640100E179A3 /* SwiftUICharts in Frameworks */,
 				4EE58AB9286BD0910073A351 /* CloudKit.framework in Frameworks */,
 				4EE58ABE2895A1280073A351 /* OrderedCollections in Frameworks */,
+				4EE666EE28D2AE000090BB35 /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -143,11 +156,13 @@
 				4E5805C327FBA91700F16219 /* LaunchView.swift */,
 				4E26EC4E281EE66600A4F8C3 /* PRView.swift */,
 				4E26EC50281EE6B200A4F8C3 /* DetailItemView.swift */,
-				4E26EC52281EE6FC00A4F8C3 /* ProgressView.swift */,
+				4E26EC52281EE6FC00A4F8C3 /* RingProgressView.swift */,
 				4E26EC54281EEB4700A4F8C3 /* HSubtitleView.swift */,
 				4E8D9112282C798F00C88BF2 /* LineViewGraph.swift */,
 				4E8D9120283195A000C88BF2 /* HViewImageAndText.swift */,
 				4E8D91222835C1B900C88BF2 /* CardGroupView.swift */,
+				4EE666E928CFA2A70090BB35 /* CrossFitLineChart.swift */,
+				4EE666F328D35C800090BB35 /* LoadingState.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -223,6 +238,7 @@
 			children = (
 				4E5805C527FBBE7900F16219 /* InsightsView.swift */,
 				4E8BAA1A281760A100E179A3 /* InsightsStore.swift */,
+				4EE666F528D4B3730090BB35 /* InsightsViewPRO.swift */,
 			);
 			path = Insights;
 			sourceTree = "<group>";
@@ -303,6 +319,8 @@
 			isa = PBXGroup;
 			children = (
 				4E8D911E283192D800C88BF2 /* PurchaseView.swift */,
+				4EE666EB28D2AABF0090BB35 /* StoreKitManager.swift */,
+				4EE666F128D2B4A60090BB35 /* PurchaseStore.swift */,
 			);
 			path = Purchase;
 			sourceTree = "<group>";
@@ -310,6 +328,7 @@
 		4EE58AB7286BD0910073A351 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4EE666ED28D2AE000090BB35 /* StoreKit.framework */,
 				4EE58AB8286BD0910073A351 /* CloudKit.framework */,
 			);
 			name = Frameworks;
@@ -396,11 +415,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4EE666EC28D2AABF0090BB35 /* StoreKitManager.swift in Sources */,
 				4E5805BD27FB8B1C00F16219 /* CloudKitService.swift in Sources */,
 				4E8D91232835C1B900C88BF2 /* CardGroupView.swift in Sources */,
 				4E5805C627FBBE7900F16219 /* InsightsView.swift in Sources */,
 				4E5805BA27FB8B1C00F16219 /* Extensions.swift in Sources */,
 				4E5805DB28026EC500F16219 /* Protocols.swift in Sources */,
+				4EE666F628D4B3730090BB35 /* InsightsViewPRO.swift in Sources */,
 				4EC1DF30289625E60027D38F /* PRType.swift in Sources */,
 				4E5805C927FD29A400F16219 /* SettingsView.swift in Sources */,
 				4E35F8522852D289008FCC2B /* SettingsUserDefault.swift in Sources */,
@@ -413,14 +434,17 @@
 				4EE58AC02896222F0073A351 /* ActivitiesRecordKey.swift in Sources */,
 				4E8D91252835E23600C88BF2 /* CategoryListView.swift in Sources */,
 				4E26EC57281EEDA400A4F8C3 /* PRSection.swift in Sources */,
+				4EE666F228D2B4A60090BB35 /* PurchaseStore.swift in Sources */,
 				4E26EC51281EE6B200A4F8C3 /* DetailItemView.swift in Sources */,
 				4E5805C427FBA91700F16219 /* LaunchView.swift in Sources */,
 				4E26EC4F281EE66600A4F8C3 /* PRView.swift in Sources */,
+				4EE666F428D35C800090BB35 /* LoadingState.swift in Sources */,
 				4E26EC55281EEB4700A4F8C3 /* HSubtitleView.swift in Sources */,
 				4E5805CD27FD2C0C00F16219 /* RootView.swift in Sources */,
 				4EE666E428CE91F60090BB35 /* LocalNotificationManager.swift in Sources */,
 				4EE666E628CE922A0090BB35 /* LocalNotification.swift in Sources */,
 				4E8BAA1B281760A100E179A3 /* InsightsStore.swift in Sources */,
+				4EE666EA28CFA2A70090BB35 /* CrossFitLineChart.swift in Sources */,
 				4EC1DF2E289625AC0027D38F /* CrossfitLevel.swift in Sources */,
 				4E5805CB27FD29B900F16219 /* SettingsStore.swift in Sources */,
 				4E26EC4A281B67B300A4F8C3 /* CategoryStore.swift in Sources */,
@@ -436,7 +460,7 @@
 				4E5805BC27FB8B1C00F16219 /* OnboardingView.swift in Sources */,
 				4E5805C127FB8B1C00F16219 /* SendablePublisher.swift in Sources */,
 				4EE666E828CE92370090BB35 /* NextView.swift in Sources */,
-				4E26EC53281EE6FC00A4F8C3 /* ProgressView.swift in Sources */,
+				4E26EC53281EE6FC00A4F8C3 /* RingProgressView.swift in Sources */,
 				4E8D9113282C798F00C88BF2 /* LineViewGraph.swift in Sources */,
 				4E8D9115282C820F00C88BF2 /* RecordStore.swift in Sources */,
 				4EE58ABB289590650073A351 /* DataManager.swift in Sources */,

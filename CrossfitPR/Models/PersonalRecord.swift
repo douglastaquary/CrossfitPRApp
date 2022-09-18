@@ -23,15 +23,16 @@ struct PersonalRecord: Identifiable, Hashable {
     var poundValue: Int
     var distance: Int
     var recordDate: Date?
-    var prName: PRType
+    var prName: String
     var percentage: Float
     var category: CrossfitLevel?
     var recordMode: RecordMode?
+    var group: RecordGroup?
     var maxReps: Int
     var minTime: Int
     var comments: String
     
-    init(id: UUID = UUID(), kiloValue: Int32 = 0, poundValue: Int32 = 0, distance: Int32 = 0, recordDate: Date? = nil, prName: PRType = .empty, percentage: Float = 10.0, category: CrossfitLevel? = nil, recordMode: RecordMode? = nil, maxReps: Int32 = 0, minTime: Int32 = 0, comments: String = "") {
+    init(id: UUID = UUID(), kiloValue: Int32 = 0, poundValue: Int32 = 0, distance: Int32 = 0, recordDate: Date? = nil, prName: String = "", percentage: Float = 10.0, category: CrossfitLevel? = nil, recordMode: RecordMode? = nil, group: RecordGroup? = nil, maxReps: Int32 = 0, minTime: Int32 = 0, comments: String = "") {
         self.id = id
         self.kiloValue = Int(kiloValue)
         self.poundValue = Int(poundValue)
@@ -41,28 +42,54 @@ struct PersonalRecord: Identifiable, Hashable {
         self.percentage = percentage
         self.category = category
         self.recordMode = recordMode
+        self.group = group
         self.maxReps = Int(maxReps)
         self.minTime = Int(minTime)
         self.comments = comments
     }
-    
+
     var dateFormatter: String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MMM dd, yyyy"
         return dateFormatter.string(from: recordDate ?? .now)
     }
     
+    
     static let recordMock: PersonalRecord = PersonalRecord(
         kiloValue: 38,
         poundValue: 90,
-        prName: .airSquat,
+        prName: "Air Squat",
         percentage: 80
     )
+    
+    static let recordListMock: [PersonalRecord] = [
+        PersonalRecord(
+            kiloValue: 38,
+            poundValue: 90,
+            recordDate: .now,
+            prName: "Air Squat",
+            percentage: 80
+        ),
+        PersonalRecord(
+            kiloValue: 60,
+            poundValue: 120,
+            recordDate: .now + 3,
+            prName: "Air Squat",
+            percentage: 40
+        ),
+        PersonalRecord(
+            kiloValue: 120,
+            poundValue: 240,
+            recordDate: .now + 6,
+            prName: "Air Squat",
+            percentage: 80
+        )
+    ]
 }
 
 extension PersonalRecord: Comparable {
     static func < (lhs: PersonalRecord, rhs: PersonalRecord) -> Bool {
-        return lhs.id == rhs.id && lhs.prName.rawValue.lowercased() == rhs.prName.rawValue.lowercased()
+        return lhs.id == rhs.id && lhs.prName.lowercased() == rhs.prName.lowercased()
     }
 }
 

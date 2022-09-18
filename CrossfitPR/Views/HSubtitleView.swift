@@ -34,7 +34,7 @@ struct EmptyView: View {
     @State var message: String
     var body: some View {
         VStack(alignment: .center) {
-            Text(message)
+            Text(LocalizedStringKey(message))
                 .multilineTextAlignment(.center)
                 .lineLimit(8)
                 .foregroundColor(.secondary)
