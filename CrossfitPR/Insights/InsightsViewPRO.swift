@@ -22,15 +22,16 @@ struct InsightsViewPRO: View {
                         HorizontalBarChartView(dataPoints: store.barbellHorizontalBarList)
                     }
                 }
+
                 Chart {
                     ForEach(store.barbellRecords) { record in
                         BarMark(
                             x: .value("Record Name", record.prName),
-                            y: .value("Intensity", record.poundValue)
+                            y: .value("Measure", validateIfKilosOrPounds(record: record))
                         )
                         .foregroundStyle(by: .value("Weight", record.prName))
                         .annotation(position: .top) {
-                            AnnotationView(recordValue: "\(record.poundValue) lb")
+                            AnnotationView(recordValue: validateAnnotation(record: record))
                         }
                         
                     }
@@ -86,6 +87,19 @@ struct InsightsViewPRO: View {
         }
     }
     
+    private func validateIfKilosOrPounds(record: PersonalRecord) -> Int {
+        if store.measureTrackingMode == .pounds {
+            return record.poundValue
+        }
+        return record.kiloValue
+    }
+    
+    private func validateAnnotation(record: PersonalRecord) -> String {
+        if store.measureTrackingMode == .pounds {
+            return "\(record.poundValue) lb"
+        }
+        return "\(record.kiloValue) kg"
+    }
 }
 
 //struct InsightsViewPRO_Previews: PreviewProvider {

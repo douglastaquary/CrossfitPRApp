@@ -18,7 +18,7 @@ struct AnnotationView: View {
             Text(recordValue)
         }
         .font(.caption)
-        .foregroundStyle(.black)
+        .foregroundStyle(.primary)
     }
 }
 

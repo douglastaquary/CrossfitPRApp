@@ -12,11 +12,6 @@ import CoreData
 import SwiftUICharts
 
 final class InsightsStore: ObservableObject {
-    @Published var biggestPoint: DataPoint = DataPoint.init(value: 0.0, label: "", legend: Legend(color: .green, label: "", order: 1))
-    @Published var evolutionPoint: DataPoint = DataPoint.init(value: 0.0, label: "", legend: Legend(color: .yellow, label: "", order: 2))
-    @Published var lowPoint: DataPoint = DataPoint.init(value: 0.0, label: "", legend: Legend(color: .gray, label: "", order: 3))
-    @Published var limit: DataPoint = DataPoint(value: 0, label: "", legend: Legend(color: .clear, label: ""))
-    @Published var barPoints: [DataPoint] = []
     @Published var biggestPRName: String = ""
     @Published var biggestPR: PersonalRecord?
     @Published private var dataManager: DataManager?
