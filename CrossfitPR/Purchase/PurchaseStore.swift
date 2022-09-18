@@ -12,7 +12,7 @@ import StoreKit
 @MainActor
 final class PurchaseStore: ObservableObject {
     enum State: Equatable {
-        case confirmation
+        case unlockPro
         case loading
         case failed(RequestError)
         case success
@@ -55,21 +55,13 @@ final class PurchaseStore: ObservableObject {
     func performProducts() {
         self.storeKitManager.getProducts(productIDs: crossFitPRProductIDs)
     }
-    
-//
-//    func performPRO(completion: @escaping(() -> Void)) {
-//        self.storeKitManager.purchaseProduct(product: crossfitPROProduct) { value in
-//            self.dismissView = true
-//            completion()
-//        }
-//    }
-//
+
     func performPROMonthly(product: SKProduct) {
         self.storeKitManager.purchaseProduct(product: product) { result in
             self.state = .loading
             switch result {
             case .success:
-                self.state = .confirmation
+                self.state = .unlockPro
                 print("Payment Monthly Success!")
             case .failure(let error):
                 self.state = .failed(error)

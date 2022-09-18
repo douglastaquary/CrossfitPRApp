@@ -82,7 +82,7 @@ struct PurchaseView: View {
                     Spacer()
                 }
             }.onChange(of: store.state) { newValue in
-                if store.state == .confirmation {
+                if store.state == .unlockPro {
                     store.unlockPro()
                 }
             }

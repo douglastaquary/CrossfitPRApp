@@ -44,16 +44,22 @@ struct NewRecordView: View {
                     .foregroundColor(.primary)
                     .padding(.bottom, 12)
                 }
-                
-                Section(header: Text("newRecord.screen.section.personal.title")) {
-                    Toggle(isOn: $viewModel.isMaxRepetitions) {
-                        Text("newRecord.screen.toggle.maxreps.title")
+
+                switch viewModel.personalRecordTypeList[viewModel.selectedCategory].group {
+                case .barbell:
+                    Section(header: Text("newRecord.screen.section.informations.title")) {
+                        Picker(selection: $viewModel.selectedPercentage, label: Text("newRecord.screen.section.informations.percentage.title").foregroundColor(.secondary)){
+                            ForEach(0..<199) {
+                                Text("\(String($0)) %").foregroundColor(.primary)
+                            }
+                        }
+                        Picker(selection: $viewModel.selectedInitialPounds, label: Text("newRecord.screen.section.informations.weight.title").foregroundColor(.secondary)){
+                            ForEach(0..<999) {
+                                Text("\(String($0)) lb").foregroundColor(.primary)
+                            }
+                        }
                     }
-                    Toggle(isOn: $viewModel.isMaxDistance) {
-                        Text("newRecord.screen.toggle.mintime.title")
-                    }
-                }
-                if viewModel.isMaxRepetitions {
+                case .gymnastic:
                     Section(header: Text("newRecord.screen.toggle.maxrep.title")) {
                         Picker(selection: $viewModel.selectedMaxReps, label: Text("newRecord.screen.picker.repetition.title").foregroundColor(.secondary)){
                             ForEach(0..<100) {
@@ -66,8 +72,7 @@ struct NewRecordView: View {
                             }
                         }
                     }
-                }
-                else if viewModel.isMaxDistance {
+                case .endurance:
                     Section(header: Text("newRecord.screen.toggle.mintime.title")) {
                         Picker(selection: $viewModel.selectedDistance, label: Text("newRecord.screen.toggle.distance.title").foregroundColor(.secondary)){
                             ForEach(0..<100) {
@@ -82,21 +87,7 @@ struct NewRecordView: View {
                         }
                     }
                 }
-                else {
-                    Section(header: Text("newRecord.screen.section.informations.title")) {
-                        Picker(selection: $viewModel.selectedPercentage, label: Text("newRecord.screen.section.informations.percentage.title").foregroundColor(.secondary)){
-                            ForEach(0..<199) {
-                                Text("\(String($0)) %").foregroundColor(.primary)
-                            }
-                        }
-                        Picker(selection: $viewModel.selectedInitialPounds, label: Text("newRecord.screen.section.informations.weight.title").foregroundColor(.secondary)){
-                            ForEach(0..<999) {
-                                Text("\(String($0)) lb").foregroundColor(.primary)
-                            }
-                        }
-                    }
-                }
-
+                
                 Section(header: Text("newRecord.screen.section.comment.title")) {
                     TextField("newRecord.screen.section.comment.description", text: $viewModel.editingRecord.comments)
                         .frame(height: 86)
