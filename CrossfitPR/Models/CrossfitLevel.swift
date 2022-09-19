@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum CrossfitLevel: String, CaseIterable {
+public enum CrossfitLevel: String, CaseIterable {
     case rx = "Rx"
     case scale = "Scale"
     case fitness = "Fitness"

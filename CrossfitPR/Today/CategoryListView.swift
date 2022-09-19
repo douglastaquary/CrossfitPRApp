@@ -7,6 +7,7 @@
 
 import SwiftUI
 import CoreData
+import ActivityKit
 
 struct CategoryListView: View {
     @EnvironmentObject var store: CategoryStore
@@ -39,6 +40,11 @@ struct CategoryListView: View {
             .searchable(text: $store.searchText, prompt: LocalizedStringKey("category.search.descript"))
             .onAppear {
                 UINavigationBar.appearance().tintColor = .green
+                if #available(iOS 16.1, *) {
+                    store.startLiveActivity()
+                } else {
+                    // Fallback on earlier versions
+                }
             }
             .navigationDestination(for: Category.self) { category in
                 RecordDetail(prName: category.title)

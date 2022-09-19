@@ -61,10 +61,13 @@ final class PurchaseStore: ObservableObject {
             self.state = .loading
             switch result {
             case .success:
-                self.state = .unlockPro
-                print("Payment Monthly Success!")
+                if self.storeKitManager.transactionState == .purchased {
+                    self.state = .success
+                    print("Payment Annual Success!")
+                }
             case .failure(let error):
                 self.state = .failed(error)
+                
                 print(error.localizedDescription)
             }
         }
@@ -74,10 +77,13 @@ final class PurchaseStore: ObservableObject {
         self.storeKitManager.purchaseProduct(product: product) { result in
             switch result {
             case .success:
-                self.state = .success
-                print("Payment Annual Success!")
+                if self.storeKitManager.transactionState == .purchased {
+                    self.state = .success
+                    print("Payment Annual Success!")
+                }
             case .failure(let error):
                 self.state = .failed(error)
+                self.blockPro()
                 print(error.localizedDescription)
             }
         }
@@ -106,6 +112,11 @@ extension PurchaseStore {
     func restorePurchase() {
         // You can do you in-app purchase restore here
         isPro = false
+    }
+    
+    func blockPro() {
+        // You can do your in-app transactions here
+        isPro = true
     }
 }
 

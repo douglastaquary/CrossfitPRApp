@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum RecordGroup: String {
+public enum RecordGroup: String {
     case barbell = "Barbell"
     case gymnastic = "Gymnastic"
     case endurance = "Endurance"

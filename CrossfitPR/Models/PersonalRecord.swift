@@ -17,22 +17,44 @@ enum PersonalRecordKeys: String {
     case goal
 }
 
-struct PersonalRecord: Identifiable, Hashable {
-    var id: UUID
-    var kiloValue: Int
-    var poundValue: Int
-    var distance: Int
-    var recordDate: Date?
-    var prName: String
-    var percentage: Float
-    var category: CrossfitLevel?
-    var recordMode: RecordMode?
-    var group: RecordGroup?
-    var maxReps: Int
-    var minTime: Int
-    var comments: String
+
+struct Teste: Codable {
+    var id: UUID = UUID()
+    var text: String?
+}
+
+public struct PersonalRecord: Identifiable, Hashable {
+    public var id: UUID
+    public var kiloValue: Int
+    public var poundValue: Int
+    public var distance: Int
+    public var recordDate: Date?
+    public var prName: String
+    public var percentage: Float
+    public var category: CrossfitLevel?
+    public var recordMode: RecordMode?
+    public var group: RecordGroup?
+    public var maxReps: Int
+    public var minTime: Int
+    public var comments: String
     
-    init(id: UUID = UUID(), kiloValue: Int32 = 0, poundValue: Int32 = 0, distance: Int32 = 0, recordDate: Date? = nil, prName: String = "", percentage: Float = 10.0, category: CrossfitLevel? = nil, recordMode: RecordMode? = nil, group: RecordGroup? = nil, maxReps: Int32 = 0, minTime: Int32 = 0, comments: String = "") {
+//    enum CodingKeys: String, CodingKey {
+//        case kiloValue
+//        case poundValue
+//        case distance
+//        case recordDate
+//        case prName
+//        case percentage
+//        case category
+//        case recordMode
+//        case group
+//        case maxReps
+//        case minTime
+//        case comments
+//
+//    }
+//
+    init(id: UUID = UUID(), kiloValue: Int32 = 0, poundValue: Int32 = 0, distance: Int32 = 0, recordDate: Date? = nil, prName: String = "", percentage: Float = 0.0, category: CrossfitLevel? = nil, recordMode: RecordMode? = nil, group: RecordGroup? = nil, maxReps: Int32 = 0, minTime: Int32 = 0, comments: String = "") {
         self.id = id
         self.kiloValue = Int(kiloValue)
         self.poundValue = Int(poundValue)
@@ -88,7 +110,7 @@ struct PersonalRecord: Identifiable, Hashable {
 }
 
 extension PersonalRecord: Comparable {
-    static func < (lhs: PersonalRecord, rhs: PersonalRecord) -> Bool {
+    public static func < (lhs: PersonalRecord, rhs: PersonalRecord) -> Bool {
         return lhs.id == rhs.id && lhs.prName.lowercased() == rhs.prName.lowercased()
     }
 }

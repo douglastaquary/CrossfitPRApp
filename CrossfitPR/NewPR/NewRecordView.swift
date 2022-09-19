@@ -8,7 +8,7 @@
 import SwiftUI
 import CoreData
 
-enum RecordMode: String {
+public enum RecordMode: String {
     case maxWeight
     case maxRepetition
     case maxDistance
