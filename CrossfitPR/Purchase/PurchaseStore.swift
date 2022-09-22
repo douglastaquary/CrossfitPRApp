@@ -51,18 +51,18 @@ final class PurchaseStore: ObservableObject {
         set { defaults.set(newValue, forKey: SettingStoreKeys.pro) }
         get { defaults.bool(forKey: SettingStoreKeys.pro) }
     }
-
+    
     func performProducts() {
         self.storeKitManager.getProducts(productIDs: crossFitPRProductIDs)
     }
 
     func performPROMonthly(product: SKProduct) {
+        self.state = .loading
         self.storeKitManager.purchaseProduct(product: product) { result in
-            self.state = .loading
             switch result {
             case .success:
                 if self.storeKitManager.transactionState == .purchased {
-                    self.state = .success
+                    self.state = .unlockPro
                     print("Payment Annual Success!")
                 }
             case .failure(let error):
@@ -74,11 +74,12 @@ final class PurchaseStore: ObservableObject {
     }
     
     func performPROAnnual(product: SKProduct) {
+        self.state = .loading
         self.storeKitManager.purchaseProduct(product: product) { result in
             switch result {
             case .success:
                 if self.storeKitManager.transactionState == .purchased {
-                    self.state = .success
+                    self.state = .unlockPro
                     print("Payment Annual Success!")
                 }
             case .failure(let error):
@@ -91,6 +92,10 @@ final class PurchaseStore: ObservableObject {
     
     func priceLocale(to product: SKProduct) -> String? {
         return getPriceFormatted(for: product) ?? ""
+    }
+    
+    func stopObserving() {
+        storeKitManager.stopObserving()
     }
 
     private func getPriceFormatted(for product: SKProduct) -> String? {
@@ -111,7 +116,7 @@ extension PurchaseStore {
 
     func restorePurchase() {
         // You can do you in-app purchase restore here
-        isPro = false
+        isPro = true
     }
     
     func blockPro() {

@@ -90,6 +90,11 @@ extension SettingsStore {
         // You can do you in-app purchase restore here
         isPro = false
     }
+    
+    func lockPro() {
+        // You can do you in-app purchase restore here
+        isPro = false
+    }
 }
 
 

@@ -22,6 +22,7 @@ struct PurchaseView: View {
                         VStack(alignment: .leading) {
                             Button(
                                 action:{
+                                    self.store.stopObserving()
                                     self.presentation.wrappedValue.dismiss()
                                 }, label: {
                                     Text("newRecord.screen.cancel.button.title")
@@ -81,10 +82,13 @@ struct PurchaseView: View {
                         .foregroundColor(.secondary)
                     Spacer()
                 }
-            }.onChange(of: store.state) { newValue in
-                if store.state == .unlockPro {
-                    store.unlockPro()
-                }
+            }
+        }
+        .onChange(of: store.state) { newValue in
+            if store.state == .unlockPro {
+                store.unlockPro()
+                self.store.stopObserving()
+                self.presentation.wrappedValue.dismiss()
             }
         }
     }

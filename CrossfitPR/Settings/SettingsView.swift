@@ -14,18 +14,19 @@ struct SettingsView: View {
     @Environment(\.scenePhase) var scenePhase
     @Environment(\.openURL) var openURL
     @State var showPROsubsciptionView = false
+    @State var showSubscriptionsSheet = false
     @State private var scheduleDate = Date()
     @EnvironmentObject var lnManager: LocalNotificationManager
     
     private var dateProxy:Binding<Date> {
-            Binding<Date>(get: { self.scheduleDate }, set: {
-                self.scheduleDate = $0
-                Task{
-                    await self.updateWeekAndDayFromDate()
-                }
-            })
-        }
-
+        Binding<Date>(get: { self.scheduleDate }, set: {
+            self.scheduleDate = $0
+            Task{
+                await self.updateWeekAndDayFromDate()
+            }
+        })
+    }
+    
     var body: some View {
         Form {
             Section(header: Text("settings.screen.section.notification.title")) {
@@ -37,7 +38,6 @@ struct SettingsView: View {
                         .font(.system(size: 18)).foregroundColor(.green)
                 }
             }
-            
             Section(header: Text("settings.screen.section.tracking.title")) {
                 Picker(
                     selection: $settings.measureTrackingMode,
@@ -48,9 +48,8 @@ struct SettingsView: View {
                     }
                 }
             }
-            
-            if !settings.isPro {
-                Section(header: Text("settings.screen.section.crossfitpro.title")) {
+            Section(header: Text("settings.screen.section.crossfitpro.title")) {
+                if !settings.isPro {
                     Button(action: {
                         self.showPROsubsciptionView.toggle()
                         //self.settings.unlockPro()
@@ -61,6 +60,11 @@ struct SettingsView: View {
                             .environmentObject(PurchaseStore(storeKitManager: storeKitManager))
                     }
                 }
+                Button(action: {
+                    self.showSubscriptionsSheet.toggle()
+                }) {
+                    Text("settings.screen.section.nocommitment.title")
+                }.manageSubscriptionsSheet(isPresented: $showSubscriptionsSheet)
             }
             Section(header: Text("settings.screen.section.about.title")) {
                 Button(action: {
@@ -92,7 +96,7 @@ struct SettingsView: View {
         } else {
             // show alert
         }
-
+        
     }
 }
 

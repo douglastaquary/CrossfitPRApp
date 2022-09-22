@@ -627,7 +627,7 @@
 				CODE_SIGN_ENTITLEMENTS = CrossfitPR/CrossfitPR.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = 2GL8HK863C;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CrossfitPR/Info.plist;
@@ -664,7 +664,7 @@
 				CODE_SIGN_ENTITLEMENTS = CrossfitPR/CrossfitPR.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = 2GL8HK863C;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CrossfitPR/Info.plist;

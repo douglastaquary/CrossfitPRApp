@@ -17,16 +17,18 @@ enum RequestError: Error {
 }
 
 //https://blckbirds.com/post/how-to-use-in-app-purchases-in-swiftui-apps/
-class StoreKitManager: NSObject, ObservableObject, SKProductsRequestDelegate {
+class StoreKitManager: NSObject, ObservableObject, SKProductsRequestDelegate, SKPaymentTransactionObserver {
     
     @Published var products = [SKProduct]()
     @Published var transactionState: SKPaymentTransactionState?
-    var storeKitState: LoadingState<[SKProduct]> = .idle
+    @Published var storeKitState: LoadingState = .idle
     
     var request: SKProductsRequest!
     
     func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
-        storeKitState = .loading
+        DispatchQueue.main.async {
+            self.storeKitState = .loading
+        }
         print("Start productsRequest..")
         
         if !response.invalidProductIdentifiers.isEmpty {
@@ -40,9 +42,11 @@ class StoreKitManager: NSObject, ObservableObject, SKProductsRequestDelegate {
             return
         }
         print("Did receive response..")
-        self.products = response.products
-        print("\n==== Products response ====\n\(self.products )")
-        storeKitState = .loaded(self.products)
+        DispatchQueue.main.async {
+            self.products = response.products
+            print("\n==== Products response ====\n\(self.products )")
+            self.storeKitState = .loaded(self.products)
+        }
     }
 
     func getProducts(productIDs: [String]) {
@@ -75,21 +79,23 @@ class StoreKitManager: NSObject, ObservableObject, SKProductsRequestDelegate {
                     transactionState = .restored
                 case .failed, .deferred:
                     print("Payment Queue Error: \(String(describing: transaction.error))")
-                        queue.finishTransaction(transaction)
-                        transactionState = .failed
-                        default:
-                        queue.finishTransaction(transaction)
+                    UserDefaults.standard.setValue(false, forKey: SettingStoreKeys.pro)
+                    queue.finishTransaction(transaction)
+                    transactionState = .failed
+                    default:
+                    queue.finishTransaction(transaction)
                 }
             }
     }
-    
+
     func purchaseProduct(product: SKProduct, completion: @escaping (Result<Bool, RequestError>) -> Void) {
+        startObserving()
         storeKitState = .loading
         if SKPaymentQueue.canMakePayments() {
             let payment = SKPayment(product: product)
             SKPaymentQueue.default().add(payment)
-            completion(.success(true))
-            storeKitState = .loaded([])
+            //storeKitState = .loaded([])
+            //completion(.success(true))
         } else {
             print("User can't make payment.")
             completion(.failure(.userCantMakePayment))
@@ -101,5 +107,17 @@ class StoreKitManager: NSObject, ObservableObject, SKProductsRequestDelegate {
     func restoreProducts() {
         print("Restoring products ...")
         SKPaymentQueue.default().restoreCompletedTransactions()
+    }
+    
+    func startObserving() {
+      SKPaymentQueue.default().add(self)
+    }
+    
+    func stopObserving() {
+      SKPaymentQueue.default().remove(self)
+    }
+
+    func cancel(){
+        
     }
 }

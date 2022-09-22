@@ -118,6 +118,7 @@
 "settings.screen.section.privacy.title" = "Política de privacidade e Termos de Uso";
 "settings.screen.section.about.title" = "Sobre";
 "settings.screen.section.crossfitpro.title" = "CrossFitPR PRO";
+"settings.screen.section.nocommitment.title" = "Sem compromisso. Cancele a qualquer momento";
 
 "emptyView.screen.message" = "Comece agora\nadicionando um novo record.\nOs poderosos insights são gerados a partir\ndos dados que você adiciona no app.\nPara melhor visualização dos gráficos,\n é necessário ao menos 8 registros de records.";
 
