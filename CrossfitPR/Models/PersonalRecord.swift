@@ -9,6 +9,18 @@ import Foundation
 import CloudKit
 import CoreData
 
+enum UserSessionRecordKeys: String {
+    case type = "UserSessionRecord"
+    case name
+    case isPro
+}
+
+struct UserSession: Hashable, Identifiable {
+    var id: UUID = UUID()
+    var name: String
+    var isPro: Bool
+}
+
 enum PersonalRecordKeys: String {
     case type = "PersonalRecord"
     case activity
@@ -93,27 +105,30 @@ extension PersonalRecord: Comparable {
     }
 }
 
+// UserRecord extensions
 
-//extension PersonalRecord {
-//    var record: CKRecord {
-//        let record = CKRecord(recordType: PersonalRecordKeys.type.rawValue)
-//        record[PersonalRecordKeys.activity.rawValue] = activity.name.rawValue
-//        record[PersonalRecordKeys.date.rawValue] = date
-//        record[PersonalRecordKeys.pounds.rawValue] = pounds
-//        record[PersonalRecordKeys.goal.rawValue] = goal
-//        return record
-//    }
-//}
-//
-//extension PersonalRecord {
-//    init?(from record: CKRecord) {
-//        guard
-//            let name = record[PersonalRecordKeys.activity.rawValue] as? String,
-//            let date = record[PersonalRecordKeys.date.rawValue] as? Date,
-//            let pounds = record[PersonalRecordKeys.pounds.rawValue] as? Double,
-//            let goal = record[PersonalRecordKeys.goal.rawValue] as? TimeInterval
-//        else { return nil }
-//        let activity = Exercise(name: ActivitiesRecordKey(rawValue: name)!)
-//        self = .init(activity: activity, date: date, pounds: pounds, goal: goal)
-//    }
-//}
+extension UserSession: Comparable {
+    static func < (lhs: UserSession, rhs: UserSession) -> Bool {
+        return lhs.id == rhs.id
+    }
+}
+
+
+extension UserSession {
+    var record: CKRecord {
+        let record = CKRecord(recordType: UserSessionRecordKeys.type.rawValue)
+        record[UserSessionRecordKeys.name.rawValue] = name
+        record[UserSessionRecordKeys.isPro.rawValue] = isPro
+        return record
+    }
+}
+
+extension UserSession {
+    init?(from record: CKRecord) {
+        guard let isPro = record[UserSessionRecordKeys.isPro.rawValue] as? Bool,
+        let name = record[UserSessionRecordKeys.isPro.rawValue] as? String else {
+            return nil
+        }
+        self = .init(name: name, isPro: isPro)
+    }
+}

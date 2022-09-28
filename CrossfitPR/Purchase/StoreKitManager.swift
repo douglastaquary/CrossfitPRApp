@@ -117,7 +117,7 @@ class StoreKitManager: NSObject, ObservableObject, SKProductsRequestDelegate, SK
       SKPaymentQueue.default().remove(self)
     }
 
-    func cancel(){
+    func cancel() {
         
     }
 }

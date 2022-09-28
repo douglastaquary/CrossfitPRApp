@@ -51,6 +51,7 @@
 		4E8D91252835E23600C88BF2 /* CategoryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8D91242835E23600C88BF2 /* CategoryListView.swift */; };
 		4EA48820283B238800183E03 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA4881F283B238800183E03 /* Category.swift */; };
 		4EA48835283DD39A00183E03 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4EA48837283DD39A00183E03 /* Localizable.strings */; };
+		4EB4313428E2977B0086C0C8 /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB4313328E2977B0086C0C8 /* NetworkMonitor.swift */; };
 		4EC1DF2E289625AC0027D38F /* CrossfitLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC1DF2D289625AC0027D38F /* CrossfitLevel.swift */; };
 		4EC1DF30289625E60027D38F /* PRType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC1DF2F289625E60027D38F /* PRType.swift */; };
 		4EE58AB9286BD0910073A351 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EE58AB8286BD0910073A351 /* CloudKit.framework */; };
@@ -117,6 +118,7 @@
 		4EA48832283DD21900183E03 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4EA48836283DD39A00183E03 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4EA48838283DD3A200183E03 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		4EB4313328E2977B0086C0C8 /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
 		4EC1DF2D289625AC0027D38F /* CrossfitLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrossfitLevel.swift; sourceTree = "<group>"; };
 		4EC1DF2F289625E60027D38F /* PRType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PRType.swift; sourceTree = "<group>"; };
 		4EE58AB8286BD0910073A351 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
@@ -275,6 +277,7 @@
 				4E5805AB27FB8B1C00F16219 /* App.swift */,
 				4E5805B527FB8B1C00F16219 /* AppDependencies.swift */,
 				4E5805B027FB8B1C00F16219 /* CloudKitService.swift */,
+				4EB4313328E2977B0086C0C8 /* NetworkMonitor.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -424,6 +427,7 @@
 				4EE666F628D4B3730090BB35 /* InsightsViewPRO.swift in Sources */,
 				4EC1DF30289625E60027D38F /* PRType.swift in Sources */,
 				4E5805C927FD29A400F16219 /* SettingsView.swift in Sources */,
+				4EB4313428E2977B0086C0C8 /* NetworkMonitor.swift in Sources */,
 				4E35F8522852D289008FCC2B /* SettingsUserDefault.swift in Sources */,
 				4E5805BB27FB8B1C00F16219 /* OnboardingViewModel.swift in Sources */,
 				4E5805E4280CA76700F16219 /* PR+CoreDataClass.swift in Sources */,

@@ -43,7 +43,15 @@ struct CategoryListView: View {
             .navigationDestination(for: Category.self) { category in
                 RecordDetail(prName: category.title)
                     .environmentObject(RecordStore(recordCategory: category))
-            }   
+            }
+//            .onAppear {
+//                if monitor.isConnected {
+//                                return Alert(title: Text("Success!"), message: Text("The network request can be performed"), dismissButton: .default(Text("OK")))
+//                            }
+//                Task {
+//                    await store.fetchUserSession()
+//                }
+//            }
         }
 
     }

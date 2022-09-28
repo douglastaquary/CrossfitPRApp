@@ -9,6 +9,7 @@ import SwiftUI
 
 struct RootView: View {
     @StateObject var lnManager = LocalNotificationManager()
+    private let cloudKitService = CloudKitService()
     @SceneStorage("selectedTab")
     private var selectedTab = 0
     
@@ -21,7 +22,6 @@ struct RootView: View {
                     CategoryListView()
                         .environmentObject(CategoryStore())
                 }
-                
             }
             .tabItem {
                 Image(systemName: "rosette")

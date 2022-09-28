@@ -23,18 +23,22 @@
 "onboarding.item4.description" = "O Poderoso Insights permite que você entenda sua evolução, os maiores records através de poderosos gráficos";
 
 "onboarding.button.title" = "Começar";
+
+"onboarding.alert.icloud.account.title" = "Conta do iCloud desativada";
+"onboarding.alert.icloud.account.message" = "Vá em Ajustes, Apple ID, faça login na sua conta da Apple e tente novamente.";
+"onboarding.alert.cancel.button.title" = "Cancelar";
   
 /* Screen titles*/
 "screen.category.title" = "Recordes pessoais";
-"screen.insights.title" = "Insights";
+"screen.insights.title" = "Percepções";
 "screen.settings.title" = "Configurações";
 
 /* Category searchbar descript */
 "category.search.descript" = "buscar por nome";
 
 /* Tabbar title screens */
-"tabbar.records.title" = "records";
-"tabbar.insights.title" = "insights";
+"tabbar.records.title" = "recordes";
+"tabbar.insights.title" = "percepções";
 "tabbar.settings.title" = "configurações";
 
 /* Purchase screen */
@@ -69,7 +73,7 @@
 
 "record.records.section.title" = "Recordes";
 "record.evolution.section.title %@" = "Evolução de %@";
-"record.evolution.section.description %@" = "Esta análise é baseada na lista de recordes de %@ cadastrada no aplicativo. The ones in the yellow band (on the right) are evolving and the gray one is the lowest.";
+"record.evolution.section.description %@" = "Esta análise é baseada na lista de recordes de %@ cadastrada no aplicativo. A faixa amarela indica os recordes em evolução e o cinza o menor.";
 "record.screen.delete.button.title" = "Apagar";
 "record.screen.cancel.button.title" = "Cancelar";
 "record.screen.delete.confirmation.title" = "Você realmente deseja excluir?";
@@ -119,6 +123,8 @@
 "settings.screen.section.about.title" = "Sobre";
 "settings.screen.section.crossfitpro.title" = "CrossFitPR PRO";
 "settings.screen.section.nocommitment.title" = "Sem compromisso. Cancele a qualquer momento";
+"settings.pounds.title" = "libras";
+"settings.kilo.title" = "quilos";
 
 "emptyView.screen.message" = "Comece agora\nadicionando um novo record.\nOs poderosos insights são gerados a partir\ndos dados que você adiciona no app.\nPara melhor visualização dos gráficos,\n é necessário ao menos 8 registros de records.";
 

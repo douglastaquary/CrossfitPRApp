@@ -20,8 +20,8 @@ enum SettingStoreKeys {
 }
 
 enum MeasureTrackingMode: String, CaseIterable {
-    case pounds
-    case kilos
+    case pounds = "settings.pounds.title"
+    case kilos = "settings.kilo.title"
 }
 
 final class SettingsStore: ObservableObject {
@@ -53,8 +53,13 @@ final class SettingsStore: ObservableObject {
     }
 
     var isPro: Bool {
-        set { defaults.set(newValue, forKey: SettingStoreKeys.pro) }
-        get { defaults.bool(forKey: SettingStoreKeys.pro) }
+        set {
+            defaults.set(newValue, forKey: SettingStoreKeys.pro)
+            
+        }
+        get {
+            defaults.bool(forKey: SettingStoreKeys.pro)
+        }
     }
 
     var isSleepTrackingEnabled: Bool {
@@ -64,7 +69,6 @@ final class SettingsStore: ObservableObject {
     
     var trainningTargetGoal: Int {
         set { defaults.set(newValue, forKey: SettingStoreKeys.trainingTargetGoal) }
-       
         get { defaults.integer(forKey: SettingStoreKeys.trainingTargetGoal)}
     }
 
@@ -78,6 +82,8 @@ final class SettingsStore: ObservableObject {
             defaults.set(newValue.rawValue, forKey: SettingStoreKeys.measureTrackingMode)
         }
     }
+    
+    
 }
 
 extension SettingsStore {

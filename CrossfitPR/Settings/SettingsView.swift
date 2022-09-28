@@ -44,7 +44,7 @@ struct SettingsView: View {
                     label: Text("settings.screen.section.tracking.measure.title")
                 ) {
                     ForEach(MeasureTrackingMode.allCases, id: \.self) {
-                        Text($0.rawValue).tag($0)
+                        Text(LocalizedStringKey($0.rawValue)).tag($0)
                     }
                 }
             }
