@@ -9,6 +9,19 @@ import Foundation
 import CloudKit
 import CoreData
 
+struct RecordPoint: Identifiable, Hashable {
+    var id: UUID = UUID()
+    var name: String
+    var legend: String
+    var value: Double
+}
+
+extension RecordPoint: Comparable {
+    static func < (lhs: RecordPoint, rhs: RecordPoint) -> Bool {
+        return lhs.id == rhs.id && lhs.name.lowercased() == rhs.name.lowercased()
+    }
+}
+
 enum UserSessionRecordKeys: String {
     case type = "UserSessionRecord"
     case name

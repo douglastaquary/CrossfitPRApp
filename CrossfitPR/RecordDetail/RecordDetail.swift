@@ -26,17 +26,17 @@ struct RecordDetail: View {
                 Group {
                     Section("record.biggest.section.title") {
                         HSubtitleView(title: "record.category.title", subtitle: store.category.title)
-                        switch store.category.type {
-                        case .maxWeight:
+                        switch store.category.group {
+                        case .barbell:
                             HSubtitleView(title: "record.percentage.title", subtitle: "\(String(describing: store.record.percentage.clean)) %")
                             HSubtitleView(
                                 title: "record.weight.title",
                                 subtitle: isPounds ? "\(String(describing: store.record.poundValue)) lb" : "\(String(describing: store.record.kiloValue)) kg"
                             )
-                        case .maxRepetition:
+                        case .gymnastic:
                             HSubtitleView(title: "record.maxReps.title", subtitle: "\(String(describing: store.record.maxReps))")
                             HSubtitleView(title: "record.time.title", subtitle: "\(String(describing: store.record.minTime)) min")
-                        case .maxDistance:
+                        case .endurance:
                             HSubtitleView(title: "record.distance.title", subtitle: "\(String(describing: store.record.distance)) km")
                             HSubtitleView(title: "record.time.title", subtitle: "\(String(describing: store.record.minTime)) min")
                         }
@@ -66,7 +66,19 @@ struct RecordDetail: View {
                 }
                 
                 Section(header: Text("record.evolution.section.title \(store.category.title)"), footer: Text("record.evolution.section.description \(store.category.title)")) {
-                    LineViewGraph(points: store.points)
+                    Chart(store.points) {
+                        LineMark(
+                            x: .value("Date", $0.legend),
+                            y: .value("Weight", $0.value)
+                        )
+                        .foregroundStyle(.green)
+                        .symbol(by: .value("Name", $0.name))
+                    }
+                    .chartYAxis(){
+                        AxisMarks(position: .leading)
+                    }
+                    .frame(height: 250)
+                    .padding(.top)
                 }
             }
         }

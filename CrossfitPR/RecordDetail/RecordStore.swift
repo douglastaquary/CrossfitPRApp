@@ -58,7 +58,7 @@ import os
         getMaxRecord(prs: filteredPrs)
     }
     
-    var points: [DataPoint] {
+    var points: [RecordPoint] {
         let isPounds = measureTrackingMode == .pounds
         let sortedPoints = filteredPrs.sorted(by: {$0.recordDate?.compare($1.recordDate ?? Date()) == .orderedAscending })
         guard let category = self.recordCategory else { return [] }
@@ -66,22 +66,35 @@ import os
         case .maxWeight:
             if isPounds {
                 return sortedPoints.map { pr in
-                    DataPoint.init(
-                        value: Double(pr.percentage),
-                        label: "\(pr.poundValue) lb",
-                        legend: validateCategoryInformation(pr))
+                    RecordPoint.init(
+                        name: pr.prName,
+                        legend: pr.dateFormatter,
+                        value: Double(pr.poundValue)
+                    )
                 }
             }
             return sortedPoints.map { pr in
-                DataPoint.init(value: Double(pr.kiloValue), label: "\(pr.kiloValue) kg", legend: validateCategoryInformation(pr))
+                RecordPoint.init(
+                    name: pr.prName,
+                    legend: pr.dateFormatter,
+                    value: Double(pr.kiloValue)
+                )
             }
         case .maxDistance:
             return sortedPoints.map { pr in
-                DataPoint.init(value: Double(pr.minTime), label: "\(pr.distance) km", legend: validateCategoryInformation(pr))
+                RecordPoint.init(
+                    name: pr.prName,
+                    legend: "\(pr.minTime)",
+                    value: Double(pr.distance)
+                )
             }
         case .maxRepetition:
             return sortedPoints.map { pr in
-                DataPoint.init(value: Double(pr.minTime), label: "\(pr.maxReps) reps", legend: validateCategoryInformation(pr))
+                RecordPoint.init(
+                    name: pr.prName,
+                    legend: "\(pr.minTime)",
+                    value: Double(pr.maxReps)
+                )
             }
         }
     }
@@ -90,8 +103,8 @@ import os
         if let records = dataManager?.recordsArray {
             guard let category = self.recordCategory else { return [] }
             let sortedRecords = records.filter {
-                if let recordMode = $0.recordMode {
-                    return recordMode.rawValue.contains(category.type.rawValue)
+                if let group = $0.group {
+                    return group.rawValue.contains(category.group.rawValue)
                 }
                 return false
             }.sorted()
