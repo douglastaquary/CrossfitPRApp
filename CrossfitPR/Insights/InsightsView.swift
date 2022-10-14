@@ -18,7 +18,7 @@ struct AnnotationView: View {
             Text(recordValue)
         }
         .font(.caption)
-        .foregroundStyle(.primary)
+        .foregroundStyle(.secondary)
     }
 }
 
@@ -26,9 +26,10 @@ struct InsightsView: View {
     @State var showPROsubsciptionView = false
     @EnvironmentObject var store: InsightsStore
     @StateObject var storeKitManager = StoreKitManager()
+    @Environment(\.isPro) var isPro
     
     var body: some View {
-        if store.isPro {
+        if isPro {
             InsightsViewPRO()
                 .environmentObject(store)
         } else {
@@ -45,14 +46,16 @@ struct InsightsView: View {
                 }.sheet(isPresented: $showPROsubsciptionView) {
                     PurchaseView(storeKitManager: storeKitManager)
                         .environmentObject(PurchaseStore(storeKitManager: storeKitManager))
-                    
+
                 }.onAppear {
                     UINavigationBar.appearance().tintColor = .green
                 }
                 Spacer()
             }
             .padding(22)
+            //.environment(\.isPro, store.isPro)
         }
+        
     }
 }
 

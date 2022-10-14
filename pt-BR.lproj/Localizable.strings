@@ -82,11 +82,12 @@
 /* Insight screen */
 
 "insight.section.ranking.barbell.title" = "Top Recordes com Barra";
+"insight.section.footer.rank.barbell.title" = "O Top rank mostra o record mais alto, record em evolução e o menor desempenho.";
 "insight.section.ranking.gymnastic.title" = "Top Recordes Ginásticos";
 "insight.section.ranking.endurance.title"= "Top Recordes de Resistência";
 "insight.section.graph.title" = "Percepções";
 
-"insight.section.information.title" = "Maior recorde";
+"insight.section.information.title" = "Seu maior recorde";
 "insight.view.error.description" = "No momento você ainda não tem dados para mostrar.";
 
 "insight.view.intensity.title"= "Intensidade";

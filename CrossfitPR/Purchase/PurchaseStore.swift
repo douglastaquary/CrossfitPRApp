@@ -17,19 +17,12 @@ final class PurchaseStore: ObservableObject {
         case failed(RequestError)
         case success
     }
-    private let crossFitPRProductIDs = [
-        "com.taquarylab.crossfitprapp.subscription.monthly",
-        "com.taquarylab.crossfitprapp.subscription.annual"
-    ]
-    
+
     @Published var storeKitManager: StoreKitManager
-    @Published var subscriptions: [SKProduct] = []
-    var monthlySubscription: SKProduct = SKProduct()
-    @Published var monthlySubscriptionPrice: String = ""
-    var annualSubscription: SKProduct = SKProduct()
-    @Published var annualSubscriptionPrice: String = ""
-    
+    @Published var subscriptions: [Product] = []
+    @Published var products: [Product] = []
     @Published private(set) var state = State.loading
+    
     private let defaults: UserDefaults
     private let cancellable: Cancellable
     let objectWillChange = PassthroughSubject<Void, Never>()
@@ -42,71 +35,97 @@ final class PurchaseStore: ObservableObject {
             .publisher(for: UserDefaults.didChangeNotification)
             .map { _ in () }
             .subscribe(objectWillChange)
-        
-        self.performProducts()
-        self.subscriptions = storeKitManager.products
     }
     
-    var isPro: Bool {
-        set { defaults.set(newValue, forKey: SettingStoreKeys.pro) }
-        get { defaults.bool(forKey: SettingStoreKeys.pro) }
+    @Published var isPro: Bool = false
+
+    func fetchProducs() async throws -> Task<[Product], Error> {
+        Task {
+            do {
+                self.products = try await self.storeKitManager.fetchProducts(ids: CrossFitPRConstants.productIDs)
+                debugPrint("\(products)")
+                return self.products
+            } catch {
+                debugPrint("\(error)")
+                throw RequestError.fail
+            }
+        }
     }
     
-    func performProducts() {
-        self.storeKitManager.getProducts(productIDs: crossFitPRProductIDs)
+    func purchase(product: Product) async {
+        self.state = .loading
+        Task {
+            do {
+                let transaction = try await self.storeKitManager.purchase(product)
+                print("\(transaction)")
+                if transaction.ownershipType == .purchased {
+                    self.state = .unlockPro
+                    isPro = true
+                }
+            } catch {
+                self.state = .failed(RequestError.fail)
+                self.blockPro()
+                //userIsPRO = false
+                print("\(error)")
+            }
+        }
+    }
+    
+    func updatePurchases() async {
+        Task {
+            do {
+                let transaction = try await storeKitManager.updatePurchases()
+                print("\(transaction)")
+                if try await transaction.value.ownershipType == .purchased {
+                    isPro = true
+                    self.state = .unlockPro
+                    //userIsPRO = true
+                } else {
+                    isPro = false
+                    self.blockPro()
+                }
+                //return transaction
+            } catch {
+                debugPrint("\(error)")
+                throw RequestError.fail
+            }
+        }
     }
 
-    func performPROMonthly(product: SKProduct) {
-        self.state = .loading
-        self.storeKitManager.purchaseProduct(product: product) { result in
-            switch result {
-            case .success:
-                if self.storeKitManager.transactionState == .purchased {
-                    self.state = .unlockPro
-                    print("Payment Annual Success!")
-                }
-            case .failure(let error):
-                self.state = .failed(error)
-                self.blockPro()
-                print(error.localizedDescription)
-            }
-        }
-    }
-    
-    func performPROAnnual(product: SKProduct) {
-        self.state = .loading
-        self.storeKitManager.purchaseProduct(product: product) { result in
-            switch result {
-            case .success:
-                if self.storeKitManager.transactionState == .purchased {
-                    self.state = .unlockPro
-                    print("Payment Annual Success!")
-                }
-            case .failure(let error):
-                self.state = .failed(error)
-                self.blockPro()
-                print(error.localizedDescription)
-            }
-        }
-    }
-    
-    func priceLocale(to product: SKProduct) -> String? {
+    func priceLocale(to product: Product) -> String? {
         return getPriceFormatted(for: product) ?? ""
     }
-    
-    func stopObserving() {
-        storeKitManager.stopObserving()
-    }
 
-    private func getPriceFormatted(for product: SKProduct) -> String? {
+    private func getPriceFormatted(for product: Product) -> String? {
         let formatter = NumberFormatter()
-        formatter.numberStyle = .currency
-        formatter.locale = product.priceLocale
-        return formatter.string(from: product.price)
+        //formatter.numberStyle = .currency
+        formatter.locale = Locale.current
+        
+        formatter.numberStyle = .decimal
+        formatter.maximumFractionDigits = 2
+        if let stringNumber = Double(product.price.description) {
+            let number = NSNumber(value: stringNumber)
+            let formattedValue = formatter.string(from: number)!
+            return formattedValue
+        }
+        return ""
     }
 }
 
-
+extension Decimal {
+    var formatted: String {
+        let formatter = NumberFormatter()
+        formatter.locale = Locale.current
+        formatter.numberStyle = .decimal
+        formatter.maximumFractionDigits = 2
+        if let stringNumber = Double(self.description) {
+            let number = NSNumber(value: stringNumber)
+            let formattedValue = formatter.string(from: number)!
+            return formattedValue
+        }
+        return "\(0.0)"
+    }
+}
 
 extension PurchaseStore {
     func unlockPro() {

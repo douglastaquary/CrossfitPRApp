@@ -13,6 +13,7 @@ struct SettingsView: View {
     @StateObject var storeKitManager = StoreKitManager()
     @Environment(\.scenePhase) var scenePhase
     @Environment(\.openURL) var openURL
+    @Environment(\.isPro) var isPRO
     @State var showPROsubsciptionView = false
     @State var showSubscriptionsSheet = false
     @State private var scheduleDate = Date()
@@ -49,7 +50,7 @@ struct SettingsView: View {
                 }
             }
             Section(header: Text("settings.screen.section.crossfitpro.title")) {
-                if !settings.isPro {
+                if !isPRO {
                     Button(action: {
                         self.showPROsubsciptionView.toggle()
                         //self.settings.unlockPro()

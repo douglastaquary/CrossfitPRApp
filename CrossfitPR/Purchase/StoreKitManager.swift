@@ -13,111 +13,91 @@ enum RequestError: Error {
     case userCantMakePayment
     case invalidProductIdentifiers
     case fail
+    case pending
     case paymentQueueError
+    case cancelled
 }
 
 //https://blckbirds.com/post/how-to-use-in-app-purchases-in-swiftui-apps/
-class StoreKitManager: NSObject, ObservableObject, SKProductsRequestDelegate, SKPaymentTransactionObserver {
+class StoreKitManager: NSObject, ObservableObject {
     
-    @Published var products = [SKProduct]()
+    @Published var products = [Product]()
+    @Published var newProducts = [Product]()
     @Published var transactionState: SKPaymentTransactionState?
     @Published var storeKitState: LoadingState = .idle
     
-    var request: SKProductsRequest!
-    
-    func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
-        DispatchQueue.main.async {
-            self.storeKitState = .loading
-        }
-        print("Start productsRequest..")
-        
-        if !response.invalidProductIdentifiers.isEmpty {
-            for invalidIdentifier in response.invalidProductIdentifiers {
-                print("Invalid identifiers found: \(invalidIdentifier)")
-            }
-            return
-        }
-        guard !response.products.isEmpty else {
-            storeKitState = .loaded([])
-            return
-        }
-        print("Did receive response..")
-        DispatchQueue.main.async {
-            self.products = response.products
-            print("\n==== Products response ====\n\(self.products )")
-            self.storeKitState = .loaded(self.products)
-        }
-    }
-
-    func getProducts(productIDs: [String]) {
-        print("Start requesting products ...")
-        print("\(productIDs)")
-        let request = SKProductsRequest(productIdentifiers: Set(productIDs))
-        request.delegate = self
-        request.start()
+    @MainActor
+    func fetchProducts(ids: [String]) async throws -> [Product] {
+        let storeProducts = try await Product.products(for: Set(ids))
+        return storeProducts
     }
     
-    func request(_ request: SKRequest, didFailWithError error: Error) {
-        print("Request did fail: \(error)")
-    }
-    
-    // Purchase products using the SKPaymentTransactionObserver protocol
-    func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
-        for transaction in transactions {
-                switch transaction.transactionState {
-                case .purchasing:
-                    transactionState = .purchasing
-                case .purchased:
-                    UserDefaults.standard.setValue(true, forKey: transaction.payment.productIdentifier)
-                    UserDefaults.standard.setValue(true, forKey: SettingStoreKeys.pro)
-                    queue.finishTransaction(transaction)
-                    transactionState = .purchased
-                case .restored:
-                    UserDefaults.standard.setValue(true, forKey: transaction.payment.productIdentifier)
-                    UserDefaults.standard.setValue(true, forKey: SettingStoreKeys.pro)
-                    queue.finishTransaction(transaction)
-                    transactionState = .restored
-                case .failed, .deferred:
-                    print("Payment Queue Error: \(String(describing: transaction.error))")
-                    UserDefaults.standard.setValue(false, forKey: SettingStoreKeys.pro)
-                    queue.finishTransaction(transaction)
-                    transactionState = .failed
-                    default:
-                    queue.finishTransaction(transaction)
+    static func listenForStoreKitUpdates() -> Task<Void, Error> {
+        Task.detached {
+            for await result in Transaction.updates {
+                switch result {
+                case .verified(let transaction):
+                    print("Transaction verified in listener")
+                    
+                    await transaction.finish()
+                    
+                    // Update the user's purchases...
+                case .unverified:
+                    print("Transaction unverified")
                 }
             }
-    }
-
-    func purchaseProduct(product: SKProduct, completion: @escaping (Result<Bool, RequestError>) -> Void) {
-        startObserving()
-        storeKitState = .loading
-        if SKPaymentQueue.canMakePayments() {
-            let payment = SKPayment(product: product)
-            SKPaymentQueue.default().add(payment)
-            //storeKitState = .loaded([])
-            //completion(.success(true))
-        } else {
-            print("User can't make payment.")
-            completion(.failure(.userCantMakePayment))
-            storeKitState = .failed(RequestError.userCantMakePayment)
         }
     }
     
-    //Restore products already purchased
-    func restoreProducts() {
-        print("Restoring products ...")
-        SKPaymentQueue.default().restoreCompletedTransactions()
-    }
-    
-    func startObserving() {
-      SKPaymentQueue.default().add(self)
-    }
-    
-    func stopObserving() {
-      SKPaymentQueue.default().remove(self)
+    @MainActor
+    func updatePurchases() async throws -> Task<Transaction, Error> {
+        Task {
+            for await result in Transaction.currentEntitlements {
+                guard case .verified(let transaction) = result else {
+                    throw RequestError.fail
+                }
+
+                if transaction.revocationDate == nil {
+                    // show to purchase screen
+                    print("\(transaction)")
+                    return transaction
+                } else {
+                    print("\(transaction)")
+                    return transaction
+                }
+            }
+            
+            throw RequestError.fail
+        }
     }
 
-    func cancel() {
+    func purchase(_ product: Product) async throws -> Transaction {
+        let result = try await product.purchase()
         
+        switch result {
+        case .pending:
+            throw RequestError.pending
+        case .success(let verification):
+            switch verification {
+            case .verified(let transaction):
+                await transaction.finish()
+                DispatchQueue.main.async {
+                    UserDefaults.standard.setValue(true, forKey: transaction.productID)
+                    UserDefaults.standard.setValue(true, forKey: SettingStoreKeys.pro)
+                    self.transactionState = .purchased
+                }
+                                
+                return transaction
+            case .unverified:
+                UserDefaults.standard.setValue(false, forKey: SettingStoreKeys.pro)
+                transactionState = .failed
+                throw RequestError.fail
+            }
+        case .userCancelled:
+            throw RequestError.cancelled
+        @unknown default:
+            assertionFailure("Unexpected result")
+            throw RequestError.fail
+        }
     }
 }

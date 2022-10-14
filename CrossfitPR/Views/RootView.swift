@@ -10,6 +10,8 @@ import SwiftUI
 struct RootView: View {
     @StateObject var lnManager = LocalNotificationManager()
     private let cloudKitService = CloudKitService()
+    @EnvironmentObject var settings: InsightsStore
+    
     @SceneStorage("selectedTab")
     private var selectedTab = 0
     
@@ -21,6 +23,8 @@ struct RootView: View {
                 VStack {
                     CategoryListView()
                         .environmentObject(CategoryStore())
+                        .user(settings.isPro)
+                        //.environment(\.isPro, settings.isPro)
                 }
             }
             .tabItem {
@@ -34,6 +38,8 @@ struct RootView: View {
                     InsightsView()
                         .navigationTitle(LocalizedStringKey("screen.insights.title"))
                         .environmentObject(InsightsStore())
+                        .user(settings.isPro)
+                        //.environment(\.isPro, settings.isPro)
                 }
                     
             }
@@ -48,13 +54,16 @@ struct RootView: View {
                     .navigationTitle(LocalizedStringKey("screen.settings.title"))
                     .environmentObject(SettingsStore())
                     .environmentObject(lnManager)
+                    .user(settings.isPro)
+                    //.environment(\.isPro, settings.isPro)
             }
             .tabItem {
                 Image(systemName: "gear")
                 Text(LocalizedStringKey("tabbar.settings.title"))
             }
             .tag(2)
-        }.accentColor(.green)
+        }
+        .accentColor(.green)
     }
 }
 

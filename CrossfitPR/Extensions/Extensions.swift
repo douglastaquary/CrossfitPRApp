@@ -125,3 +125,9 @@ extension String {
     return list.randomElement() ?? ""
   }
 }
+
+extension View {
+    func user(_ isPRO: Bool) -> some View {
+        return self.environment(\.isPro, isPRO)
+    }
+}

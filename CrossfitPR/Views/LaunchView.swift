@@ -55,15 +55,16 @@ struct LaunchView: View {
                     OnboardingView()
                 } else if viewlaunch.currentPage == Route.prHistoriesListView.rawValue {
                     RootView()
+                        .environmentObject(InsightsStore())
                         .onAppear {
-//                            Task {
-//                                await viewModel.fetchAccountStatus()
-//                                if viewModel.accountStatus != .available {
-//                                    accountStatusAlertShown = true
-//                                } else {
-//                                    dismiss()
-//                                }
-//                            }
+                            Task {
+                                await viewModel.fetchAccountStatus()
+                                if viewModel.accountStatus != .available {
+                                    accountStatusAlertShown = true
+                                } else {
+                                    dismiss()
+                                }
+                            }
                         }
                         .alert(isPresented: $accountStatusAlertShown) {
                             Alert(

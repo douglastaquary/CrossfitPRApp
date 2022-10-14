@@ -11,6 +11,7 @@ import Charts
 struct RecordDetail: View {
     @EnvironmentObject var store: RecordStore
     @StateObject var storeKitManager = StoreKitManager()
+    @Environment(\.isPro) var isPRO
     @State var showPROsubsciptionView = false
     @State private var confirmationShow = false
     @State private var indexSet: IndexSet?
@@ -68,17 +69,20 @@ struct RecordDetail: View {
                 Section(header: Text("record.evolution.section.title \(store.category.title)"), footer: Text("record.evolution.section.description \(store.category.title)")) {
                     Chart(store.points) {
                         LineMark(
-                            x: .value("Date", $0.legend),
+                            x: .value("Date", $0.date),
                             y: .value("Weight", $0.value)
                         )
                         .foregroundStyle(.green)
                         .symbol(by: .value("Name", $0.name))
+                        
                     }
-                    .chartYAxis(){
-                        AxisMarks(position: .leading)
-                    }
+                    
+//                    .chartYAxis(){
+//                        AxisMarks(position: .leading)
+//                    }
                     .frame(height: 250)
                     .padding(.top)
+                    
                 }
             }
         }
@@ -95,7 +99,7 @@ struct RecordDetail: View {
     }
     
     func validateIfPro() {
-        if store.isPro {
+        if isPRO {
             guard let indexSet = self.indexSet else {
                 return
             }

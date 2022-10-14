@@ -12,6 +12,7 @@ import CoreData
 struct RecordPoint: Identifiable, Hashable {
     var id: UUID = UUID()
     var name: String
+    var date: String
     var legend: String
     var value: Double
 }
@@ -78,7 +79,6 @@ struct PersonalRecord: Identifiable, Hashable {
         dateFormatter.dateFormat = "MMM dd, yyyy"
         return dateFormatter.string(from: recordDate ?? .now)
     }
-    
     
     static let recordMock: PersonalRecord = PersonalRecord(
         kiloValue: 38,

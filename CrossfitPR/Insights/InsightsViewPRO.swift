@@ -15,74 +15,101 @@ struct InsightsViewPRO: View {
     var body: some View {
         VStack {
             Form {
-                Section("insight.section.ranking.barbell.title") {
-                    if store.barbellHorizontalBarList.isEmpty {
+                Section(header: Text("insight.section.ranking.barbell.title"),
+                        footer: Text("insight.section.footer.rank.barbell.title")) {
+                    if store.barbellRecords.isEmpty {
                         Text(LocalizedStringKey("insight.view.error.description"))
                     } else {
-                        HorizontalBarChartView(dataPoints: store.barbellHorizontalBarList)
-                    }
-                }
-
-                Chart {
-                    ForEach(store.barbellRecords) { record in
-                        BarMark(
-                            x: .value("Record Name", record.prName),
-                            y: .value("Measure", validateIfKilosOrPounds(record: record))
-                        )
-                        .foregroundStyle(by: .value("Weight", record.prName))
-                        .annotation(position: .top) {
-                            AnnotationView(recordValue: validateAnnotation(record: record))
+                        Chart {
+                            ForEach(store.topRakingBarbellRecords) {
+                                BarMark(x: .value("Weight", $0.kiloValue))
+                                    .foregroundStyle(by: .value("Name", $0.prName))
+                            }
                         }
-                        
+                        .padding(.top)
                     }
                 }
-                .frame(height: 240)
-                .padding(.top, 12)
+                Section("Barbell records") {
+                    if store.barbellRecords.isEmpty {
+                        Text(LocalizedStringKey("insight.view.error.description"))
+                    } else {
+                        Chart {
+                            ForEach(store.barbellRecords) { record in
+                                BarMark(
+                                    x: .value("Record Name", record.dateFormatter),
+                                    y: .value("Measure", validateIfKilosOrPounds(record: record))
+                                )
+                                .foregroundStyle(by: .value("Weight", record.prName))
+                                .annotation(position: .top) {
+                                    AnnotationView(recordValue: validateAnnotation(record: record))
+                                }
+                            }
+                        }
+                        .frame(height: 240)
+                        .padding(.top, 12)
+                    }
+                }
                 
                 Section("insight.section.ranking.gymnastic.title") {
-                    if store.gynmnasticHorizontalBarList.isEmpty {
+                    if store.topRakingGynmnasticRecords.isEmpty {
                         Text(LocalizedStringKey("insight.view.error.description"))
                     } else {
-                        HorizontalBarChartView(dataPoints: store.gynmnasticHorizontalBarList)
-                    }
-                }
-                Chart {
-                    ForEach(store.gymnasticRecords) { record in
-                        BarMark(
-                            x: .value("Record Name", record.prName),
-                            y: .value("Reps", record.maxReps)
-                        )
-                        .foregroundStyle(by: .value("Record Name", record.prName))
-                        .annotation(position: .top) {
-                            AnnotationView(recordValue: "\(record.maxReps) reps")
+                        Chart {
+                            ForEach(store.gymnasticRecords) {
+                                BarMark(x: .value("Weight", $0.maxReps))
+                                    .foregroundStyle(by: .value("Distance", $0.prName))
+                            }
                         }
-                        
+                        .padding(.top)
                     }
                 }
-                .frame(height: 240)
-                .padding(.top, 12)
+                
+                Section("Gymnastic records") {
+                    Chart {
+                        ForEach(store.gymnasticRecords) { record in
+                            BarMark(
+                                x: .value("Record Name", record.dateFormatter),
+                                y: .value("Reps", record.maxReps)
+                            )
+                            .foregroundStyle(by: .value("Record Name", record.prName))
+                            .annotation(position: .top) {
+                                AnnotationView(recordValue: "\(record.maxReps) reps")
+                            }
+                            
+                        }
+                    }
+                    .frame(height: 240)
+                    .padding(.top, 12)
+                }
                 
                 Section("insight.section.ranking.endurance.title") {
-                    if store.enduranceHorizontalBarList.isEmpty {
+                    if store.topRakingEnduranceRecords.isEmpty {
                         Text(LocalizedStringKey("insight.view.error.description"))
                     } else {
-                        HorizontalBarChartView(dataPoints: store.enduranceHorizontalBarList)
+                        Chart(store.enduranceRecords) { // Get the Production values.
+                            BarMark(x: .value("Distance", $0.distance))
+                                .foregroundStyle(by: .value("Distance", "\($0.prName)"))
+                        }
+                        .padding(.top)
                     }
                 }
-                Chart {
-                    ForEach(store.enduranceRecords) { record in
-                        BarMark(
-                            x: .value("Record Name", record.prName),
-                            y: .value("Endurance", record.distance)
-                        )
-                        .foregroundStyle(by: .value("Record Name", record.prName))
-                        .annotation(position: .top) {
-                            AnnotationView(recordValue: "\(record.distance) km")
+                
+                Section("Endurance records") {
+                    Chart {
+                        ForEach(store.enduranceRecords) { record in
+                            BarMark(
+                                x: .value("Record Name", record.prName),
+                                y: .value("Endurance", record.distance)
+                            )
+                            .foregroundStyle(by: .value("Record Name", record.prName))
+                            .annotation(position: .top) {
+                                AnnotationView(recordValue: "\(record.distance) km")
+                            }
                         }
                     }
+                    .frame(height: 240)
+                    .padding(.top, 12)
                 }
-                .frame(height: 240)
-                .padding(.top, 12)
             }
         }
     }

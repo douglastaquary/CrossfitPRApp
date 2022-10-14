@@ -12,6 +12,14 @@ import CoreData
 import SwiftUICharts
 
 final class InsightsStore: ObservableObject {
+    enum State: Equatable {
+        case unlockPro
+        case loading
+        case blockPro
+        case failed(RequestError)
+        case success
+    }
+    @Published private(set) var state = State.loading
     @Published var biggestPRName: String = ""
     @Published var biggestPR: PersonalRecord?
     @Published private var dataManager: DataManager?
@@ -25,6 +33,7 @@ final class InsightsStore: ObservableObject {
     @Published var barbellEvolutionPoint: DataPoint = DataPoint.init(value: 0.0, label: "", legend: Legend(color: .yellow, label: "", order: 2))
     @Published var barbellLowPoint: DataPoint = DataPoint.init(value: 0.0, label: "", legend: Legend(color: .gray, label: "", order: 3))
     var barbellHorizontalBarList: [DataPoint] = []
+    var topRakingBarbellRecords: [PersonalRecord] = []
     
     // Gymnastic
     @Published var gymnasticRecords: [PersonalRecord] = []
@@ -36,6 +45,7 @@ final class InsightsStore: ObservableObject {
     @Published var gymnasticEvolutionPoint: DataPoint = DataPoint.init(value: 0.0, label: "", legend: Legend(color: .yellow, label: "", order: 2))
     @Published var gymnasticLowPoint: DataPoint = DataPoint.init(value: 0.0, label: "", legend: Legend(color: .gray, label: "", order: 3))
     var gynmnasticHorizontalBarList: [DataPoint] = []
+    var topRakingGynmnasticRecords: [PersonalRecord] = []
     
     // Endurance
     @Published var enduranceRecords: [PersonalRecord] = []
@@ -46,8 +56,10 @@ final class InsightsStore: ObservableObject {
     @Published var enduranceEvolutionPoint: DataPoint = DataPoint.init(value: 0.0, label: "", legend: Legend(color: .yellow, label: "", order: 2))
     @Published var enduranceLowPoint: DataPoint = DataPoint.init(value: 0.0, label: "", legend: Legend(color: .gray, label: "", order: 3))
     var enduranceHorizontalBarList: [DataPoint] = []
+    var topRakingEnduranceRecords: [PersonalRecord] = []
     
     private let defaults: UserDefaults
+    private let storeKitService: StoreKitManager
     let biggestPr = Legend(color: .green, label: "PR Biggest", order: 3)
     
     var anyCancellable: AnyCancellable? = nil
@@ -58,10 +70,7 @@ final class InsightsStore: ObservableObject {
         }
     }
     
-    var isPro: Bool {
-        set { defaults.set(newValue, forKey: SettingStoreKeys.pro) }
-        get { defaults.bool(forKey: SettingStoreKeys.pro) }
-    }
+    @Published var isPro: Bool = false
     
     var records: [PersonalRecord] {
         if let records = dataManager?.recordsArray {
@@ -70,16 +79,29 @@ final class InsightsStore: ObservableObject {
         return []
     }
     
-    init(dataManager: DataManager = DataManager.shared, defaults: UserDefaults = .standard) {
+    init(dataManager: DataManager = DataManager.shared, defaults: UserDefaults = .standard, storeKitService: StoreKitManager = StoreKitManager()) {
         self.defaults = defaults
         self.dataManager = dataManager
+        self.storeKitService = storeKitService
         anyCancellable = dataManager.objectWillChange.sink { [weak self] (_) in
             self?.objectWillChange.send()
         }
+        Task {
+            await updatePurchases()
+        }
         loadBarbellRecords()
-        loadBabellHorizontalBar()
         loadGymnasticRecords()
         loadEnduranceRecords()
+        
+        switch measureTrackingMode {
+        case .pounds:
+            performTopRankingBarbellRecordsForPounds()
+        case .kilos:
+            performTopRankingBarbellRecordsForKilos()
+        }
+        
+        performTopRankingGymnasticRecords()
+        performTopRankingEnduranceRecords()
     }
     
     // Barbell methods
@@ -87,304 +109,155 @@ final class InsightsStore: ObservableObject {
         barbellRecords = getAllRecordsFor(recordGroup: .barbell)
     }
     
-    private func loadBabellHorizontalBar() {
-        if measureTrackingMode == .pounds {
-            if validateIfOnlyOneRecord(for: barbellRecords), let barbellEvolution = barbellRecords.first {
-                barbellBiggestPoint = DataPoint.init(
-                    value: Double(barbellEvolution.poundValue),
-                    label: "\(barbellEvolution.poundValue) lb",
-                    legend: Legend(color: .green, label: "\(barbellEvolution.prName)", order: 1)
-                )
-                barbellBiggestPRName = barbellEvolution.prName
-                barbellBiggestRecord = barbellEvolution
-                barbellHorizontalBarList.append(barbellBiggestPoint)
-                return
-            }
-            
-            let max: Int = barbellRecords.map { $0.poundValue }.max() ?? 0
-            let min: Int = barbellRecords.map { $0.poundValue }.min() ?? 0
-            let evolutionPRselected = barbellRecords.filter { pr in
-                return pr.poundValue < max && pr.poundValue > min && pr.prName != biggestPRName
-            }.sorted {
-                $0.poundValue > $1.poundValue
-            }.first
-            
-            barbellEvolutionPoint = DataPoint.init(
-                value: Double(evolutionPRselected?.poundValue ?? 0),
-                label: "\(evolutionPRselected?.poundValue ?? 0) lb",
-                legend: Legend(color: .yellow, label: "\(evolutionPRselected?.prName ?? "")", order: 2)
-            )
-            for pr in barbellRecords {
-                if pr.poundValue == max {
-                    barbellBiggestPoint = DataPoint.init(
-                        value: Double(pr.poundValue),
-                        label: "\(pr.poundValue) lb",
-                        legend: Legend(color: .green, label: "\(pr.prName)", order: 1)
-                    )
-                    barbellBiggestPRName = pr.prName
-                    barbellBiggestRecord = pr
-                    barbellHorizontalBarList.append(barbellBiggestPoint)
-                    if barbellRecords.count > 2 {
-                        barbellHorizontalBarList.append(barbellEvolutionPoint)
-                    }
-                }
-                
-            }
-            for pr in barbellRecords {
-                if pr.poundValue == min {
-                    barbellLowPoint = DataPoint.init(
-                        value: Double(pr.poundValue),
-                        label: "\(pr.poundValue) lb",
-                        legend: Legend(color: .gray, label: "\(pr.prName)", order: 3)
-                    )
-                    barbellHorizontalBarList.append(barbellLowPoint)
-                }
-            }
-        } else {
-            if validateIfOnlyOneRecord(for: barbellRecords), let barbellEvolution = barbellRecords.first {
-                barbellBiggestPoint = DataPoint.init(
-                    value: Double(barbellEvolution.kiloValue),
-                    label: "\(barbellEvolution.kiloValue) kg",
-                    legend: Legend(color: .green, label: "\(barbellEvolution.prName)", order: 1)
-                )
-                barbellBiggestPRName = barbellEvolution.prName
-                barbellBiggestRecord = barbellEvolution
-                barbellHorizontalBarList.append(barbellBiggestPoint)
-                return
-            }
-            
-            let max: Int = barbellRecords.map { $0.kiloValue }.max() ?? 0
-            let min: Int = barbellRecords.map { $0.kiloValue }.min() ?? 0
-            let evolutionPRselected = barbellRecords.filter { pr in
-                return pr.kiloValue < max && pr.kiloValue > min && pr.prName != biggestPRName
-            }.sorted {
-                $0.kiloValue > $1.kiloValue
-            }.first
-            
-            barbellEvolutionPoint = DataPoint.init(
-                value: Double(evolutionPRselected?.kiloValue ?? 0),
-                label: "\(evolutionPRselected?.kiloValue ?? 0) kg",
-                legend: Legend(color: .yellow, label: "\(evolutionPRselected?.prName ?? "")", order: 2)
-            )
-            for pr in barbellRecords {
-                if pr.kiloValue == max {
-                    barbellBiggestPoint = DataPoint.init(
-                        value: Double(pr.kiloValue),
-                        label: "\(pr.kiloValue) kg",
-                        legend: Legend(color: .green, label: "\(pr.prName)", order: 1)
-                    )
-                    barbellBiggestPRName = pr.prName
-                    barbellBiggestRecord = pr
-                    barbellHorizontalBarList.append(barbellBiggestPoint)
-                    if barbellRecords.count > 2 {
-                        barbellHorizontalBarList.append(barbellEvolutionPoint)
-                    }
-                }
-                
-            }
-            for pr in barbellRecords {
-                if pr.kiloValue == min {
-                    barbellLowPoint = DataPoint.init(
-                        value: Double(pr.kiloValue),
-                        label: "\(pr.kiloValue) kg",
-                        legend: Legend(color: .gray, label: "\(pr.prName)", order: 3)
-                    )
-                    barbellHorizontalBarList.append(barbellLowPoint)
-                }
+    func performTopRankingBarbellRecordsForKilos() {
+        let max: Int = barbellRecords.map { $0.kiloValue }.max() ?? 0
+        let maxPR = barbellRecords.filter { pr in pr.kiloValue == max }.first ?? PersonalRecord()
+        barbellBiggestPRName = maxPR.prName
+        topRakingBarbellRecords.append(maxPR)
+        
+        let min: Int = barbellRecords.filter { pr in
+            pr.kiloValue < max
+        }.filter { pr in
+            pr.prName != barbellBiggestPRName
+        }.sorted {
+            $0.percentage > $1.percentage
+        }.map {
+            $0.kiloValue
+        }.min() ?? 0
+        let minPR = barbellRecords.filter { pr in pr.kiloValue == min }.first ?? PersonalRecord()
+        
+        let evolutionPR = barbellRecords.filter { pr in
+            return pr.kiloValue < max && pr.kiloValue > min && pr.prName != barbellBiggestPRName && pr.prName != minPR.prName
+        }.sorted {
+            $0.kiloValue > $1.kiloValue
+        }.first
+        
+        guard let barbellRvolutionPR  = evolutionPR else { return }
+        topRakingBarbellRecords.append(barbellRvolutionPR)
+        
+        for barbell in barbellRecords {
+            if barbell.kiloValue == min, barbell.prName != barbellBiggestPRName {
+                topRakingBarbellRecords.append(barbell)
             }
         }
+        let sortedTopBarbellRecordsRanking = topRakingBarbellRecords.sorted { $0.kiloValue > $1.kiloValue }
+        topRakingBarbellRecords = sortedTopBarbellRecordsRanking
+    }
+    
+    func performTopRankingBarbellRecordsForPounds() {
+        let max: Int = barbellRecords.map { $0.poundValue }.max() ?? 0
+        let maxPR = barbellRecords.filter { pr in pr.poundValue == max }.first ?? PersonalRecord()
+        barbellBiggestPRName = maxPR.prName
+        topRakingBarbellRecords.append(maxPR)
+        
+        let min: Int = barbellRecords.filter { pr in
+            pr.poundValue < max
+        }.filter { pr in
+            pr.prName != barbellBiggestPRName
+        }.sorted {
+            $0.percentage > $1.percentage
+        }.map {
+            $0.poundValue
+        }.min() ?? 0
+        let minPR = barbellRecords.filter { pr in pr.poundValue == min }.first ?? PersonalRecord()
+        
+        let evolutionPR = barbellRecords.filter { pr in
+            return pr.poundValue < max && pr.poundValue > min && pr.prName != barbellBiggestPRName && pr.prName != minPR.prName
+        }.sorted {
+            $0.poundValue > $1.poundValue
+        }.first
+        
+        guard let barbellRvolutionPR  = evolutionPR else { return }
+        topRakingBarbellRecords.append(barbellRvolutionPR)
+        
+        for barbell in barbellRecords {
+            if barbell.poundValue == min, barbell.prName != barbellBiggestPRName {
+                topRakingBarbellRecords.append(barbell)
+            }
+        }
+        let sortedTopBarbellRecordsRanking = topRakingBarbellRecords.sorted { $0.poundValue > $1.poundValue }
+        topRakingBarbellRecords = sortedTopBarbellRecordsRanking
     }
     
     // Gymnastic methods
     func loadGymnasticRecords() {
         gymnasticRecords = getAllRecordsFor(recordGroup: .gymnastic)
-        loadGymnasticHorizontalBars()
     }
     
-    func loadGymnasticHorizontalBars() {
-        if validateIfOnlyOneRecord(for: gymnasticRecords), let gymnasticEvolution = gymnasticRecords.first {
-            let handstandWalk = gymnasticRecords.filter { record in
-                if let recordMode = record.recordMode {
-                    return recordMode.rawValue.contains(RecordMode.maxDistance.rawValue)
-                }
-                return false
-            }.first
-            if let handstand = handstandWalk {
-                hangstandWalkPoint = DataPoint.init(
-                    value: Double(handstand.distance),
-                    label: "\(handstand.distance) m",
-                    legend: Legend(color: .green, label: "\(handstand.prName)", order: 1)
-                )
-                gymnasticBiggestPRName = handstand.prName
-                gymnasticBiggestRecord = handstand
-                gynmnasticHorizontalBarList.append(hangstandWalkPoint)
-                return
-            }
-            gymnasticBiggestPoint = DataPoint.init(
-                value: Double(gymnasticEvolution.maxReps),
-                label: "\(gymnasticEvolution.maxReps) reps",
-                legend: Legend(color: .green, label: "\(gymnasticEvolution.prName)", order: 1)
-            )
-            gymnasticBiggestPRName = gymnasticEvolution.prName
-            gymnasticBiggestRecord = gymnasticEvolution
-            return
-        }
-        let maxRepsRecords = gymnasticRecords.filter { record in
-            if let recordMode = record.recordMode {
-                return recordMode.rawValue.contains(RecordMode.maxRepetition.rawValue)
-            }
-            return false
-        }
-        let maxGymnastic: Int = maxRepsRecords.map { $0.maxReps }.max() ?? 0
-        let minGymnastic: Int = maxRepsRecords.map { $0.maxReps }.min() ?? 0
-        let handstandWalk = gymnasticRecords.filter { record in
-            if let recordMode = record.recordMode {
-                return recordMode.rawValue.contains(RecordMode.maxDistance.rawValue)
-            }
-            return false
-        }.first ?? PersonalRecord()
-        if handstandWalk.distance > 0 {
-            hangstandWalkRecord = handstandWalk
-            hangstandWalkPoint = DataPoint.init(
-                value: Double(handstandWalk.distance),
-                label: "\(handstandWalk.distance) km",
-                legend: Legend(color: .yellow, label: "\(handstandWalk.prName)", order: 4)
-            )
-        }
+    func performTopRankingGymnasticRecords() {
+        let max: Int = gymnasticRecords.map { $0.maxReps }.max() ?? 0
+        let maxPR = gymnasticRecords.filter { pr in pr.maxReps == max }.first ?? PersonalRecord()
+        gymnasticBiggestPRName = maxPR.prName
+        topRakingGynmnasticRecords.append(maxPR)
         
-        let maxRepEvolution = maxRepsRecords.filter { pr in
-            return pr.maxReps < maxGymnastic && pr.maxReps > minGymnastic //&& pr.prName != biggestPRName
+        let min: Int = gymnasticRecords.filter { pr in
+            pr.maxReps < max
+        }.filter { pr in
+            pr.prName != gymnasticBiggestPRName
+        }.sorted {
+            $0.minTime > $1.minTime
+        }.map {
+            $0.maxReps
+        }.min() ?? 0
+        let minPR = gymnasticRecords.filter { pr in pr.maxReps == min }.first ?? PersonalRecord()
+        
+        let evolutionPR = gymnasticRecords.filter { pr in
+            return pr.maxReps < max && pr.maxReps > min && pr.prName != gymnasticBiggestPRName && pr.prName != minPR.prName
         }.sorted {
             $0.maxReps > $1.maxReps
         }.first
         
-        // So tenho dois itens e um deles é handstand
-        if gymnasticRecords.count == 2, handstandWalk.distance > 0 {
-            
-        }
+        guard let gymEvolutionPR = evolutionPR else { return }
+        topRakingGynmnasticRecords.append(gymEvolutionPR)
         
-        gymnasticEvolutionPoint = DataPoint.init(
-            value: Double(maxRepEvolution?.maxReps ?? 0),
-            label: "\(maxRepEvolution?.maxReps ?? 0) reps",
-            legend: Legend(color: .yellow, label: "\(maxRepEvolution?.prName ?? "")", order: 2)
-        )
-        
-        for pr in maxRepsRecords {
-            if pr.maxReps == maxGymnastic {
-                gymnasticBiggestPoint = DataPoint.init(
-                    value: Double(pr.maxReps),
-                    label: "\(pr.maxReps) reps",
-                    legend: Legend(color: .green, label: "\(pr.prName)", order: 1)
-                )
-                barbellBiggestPRName = pr.prName
-                barbellBiggestRecord = pr
-                gynmnasticHorizontalBarList.append(gymnasticBiggestPoint)
-                // So tenho dois itens e um deles é handstand
-                if gymnasticRecords.count == 2, handstandWalk.distance > 0 {
-                    gynmnasticHorizontalBarList.append(hangstandWalkPoint)
-                } else if gymnasticRecords.count > 2 {
-                    gynmnasticHorizontalBarList.append(gymnasticEvolutionPoint)
-                }
+        for barbell in gymnasticRecords {
+            if barbell.kiloValue == min, barbell.prName != gymnasticBiggestPRName {
+                topRakingGynmnasticRecords.append(barbell)
             }
         }
-        
-        if gymnasticRecords.count == 2, handstandWalk.distance > 0 {
-            return
-        }
-        
-        for pr in maxRepsRecords {
-            if pr.maxReps == minGymnastic {
-                gymnasticLowPoint = DataPoint.init(
-                    value: Double(pr.maxReps),
-                    label: "\(pr.maxReps) reps",
-                    legend: Legend(color: .gray, label: "\(pr.prName)", order: 3)
-                )
-                gynmnasticHorizontalBarList.append(gymnasticLowPoint)
-            }
-            
-        }
+        let sortedTopGymRecordsRanking = topRakingGynmnasticRecords.sorted { $0.maxReps > $1.maxReps }
+        topRakingGynmnasticRecords = sortedTopGymRecordsRanking
     }
+    
     
     // Endurance methods
     func loadEnduranceRecords() {
         enduranceRecords = getAllRecordsFor(recordGroup: .endurance)
-        loadEnduranceHorizontalBars()
     }
     
-    func loadEnduranceHorizontalBars() {
-        let maxEndurance: Int = enduranceRecords.map { $0.distance }.max() ?? 0
-        let minEndurance: Int = enduranceRecords.map { $0.distance }.min() ?? 0
-        if validateIfOnlyOneRecord(for: enduranceRecords), let enduranceEvolution = enduranceRecords.first {
-            enduranceBiggestPoint = DataPoint.init(
-                value: Double(enduranceEvolution.distance),
-                label: "\(enduranceEvolution.distance) km",
-                legend: Legend(color: .green, label: "\(enduranceEvolution.prName)", order: 1)
-            )
-            enduranceBiggestPRName = enduranceEvolution.prName
-            enduranceBiggestRecord = enduranceEvolution
-            enduranceHorizontalBarList.append(enduranceBiggestPoint)
-            return
-        }
-        if enduranceRecords.count == 2 {
-            let sortedRecords = enduranceRecords.sorted {
-                $0.distance < $1.distance
-            }
-            
-            enduranceEvolutionPoint = DataPoint.init(
-                value: Double(sortedRecords[0].distance),
-                label: "\(sortedRecords[0].distance) km",
-                legend: Legend(color: .yellow, label: "\(sortedRecords[0].prName)", order: 2)
-            )
-            
-            enduranceBiggestPRName = sortedRecords[0].prName
-            enduranceBiggestRecord = sortedRecords[0]
-            
-            enduranceBiggestPoint = DataPoint.init(
-                value: Double(sortedRecords[1].distance),
-                label: "\(sortedRecords[1].distance) km",
-                legend: Legend(color: .green, label: "\(sortedRecords[1].prName)", order: 1)
-            )
-            
-            enduranceHorizontalBarList.append(enduranceBiggestPoint)
-            enduranceHorizontalBarList.append(enduranceEvolutionPoint)
-            return
-        } else {
-            let enduranceEvolution = enduranceRecords.filter { pr in
-                return pr.distance < maxEndurance && pr.distance > minEndurance
-            }.sorted {
-                $0.distance > $1.distance
-            }.first ?? PersonalRecord()
-            
-            enduranceEvolutionPoint = DataPoint.init(
-                value: Double(enduranceEvolution.distance),
-                label: "\(enduranceEvolution.distance) km",
-                legend: Legend(color: .yellow, label: "\(enduranceEvolution.prName)", order: 2)
-            )
-            for pr in enduranceRecords {
-                if pr.distance == maxEndurance {
-                    enduranceBiggestPoint = DataPoint.init(
-                        value: Double(pr.distance),
-                        label: "\(pr.distance) km",
-                        legend: Legend(color: .green, label: "\(pr.prName)", order: 1)
-                    )
-                    enduranceBiggestPRName = pr.prName
-                    enduranceBiggestRecord = pr
-                    enduranceHorizontalBarList.append(enduranceBiggestPoint)
-                    enduranceHorizontalBarList.append(enduranceEvolutionPoint)
-                }
-            }
-            
-            for pr in enduranceRecords {
-                if pr.distance == minEndurance {
-                    enduranceLowPoint = DataPoint.init(
-                        value: Double(pr.distance),
-                        label: "\(pr.distance) km",
-                        legend: Legend(color: .gray, label: "\(pr.prName)", order: 3)
-                    )
-                    enduranceHorizontalBarList.append(enduranceLowPoint)
-                }
+    func performTopRankingEnduranceRecords() {
+        let max: Int = enduranceRecords.map { $0.distance }.max() ?? 0
+        let maxPR = enduranceRecords.filter { pr in pr.distance == max }.first ?? PersonalRecord()
+        enduranceBiggestPRName = maxPR.prName
+        topRakingEnduranceRecords.append(maxPR)
+        
+        let min: Int = enduranceRecords.filter { pr in
+            pr.distance < max
+        }.filter { pr in
+            pr.prName != enduranceBiggestPRName
+        }.sorted {
+            $0.minTime > $1.minTime
+        }.map {
+            $0.distance
+        }.min() ?? 0
+        let minPR = enduranceRecords.filter { pr in pr.distance == min }.first ?? PersonalRecord()
+        
+        let evolutionPR = enduranceRecords.filter { pr in
+            return pr.distance < max && pr.distance > min && pr.prName != enduranceBiggestPRName && pr.prName != minPR.prName
+        }.sorted {
+            $0.minTime > $1.minTime
+        }.first
+        
+        guard let enduranceRvolutionPR = evolutionPR else { return }
+        topRakingEnduranceRecords.append(enduranceRvolutionPR)
+        
+        for barbell in enduranceRecords {
+            if barbell.distance == min, barbell.prName != enduranceBiggestPRName {
+                topRakingEnduranceRecords.append(barbell)
             }
         }
+        let sortedTopEnduranceRecordsRanking = topRakingEnduranceRecords.sorted { $0.distance > $1.distance }
+        topRakingEnduranceRecords = sortedTopEnduranceRecordsRanking
     }
     
     private func validateIfOnlyOneRecord(for data: [PersonalRecord]) -> Bool {
@@ -445,5 +318,49 @@ extension InsightsStore {
     func restorePurchase() {
         // You can do you in-app purchase restore here
         isPro = false
+    }
+    
+    func blockPro() {
+        // You can do you in-app purchase restore here
+        isPro = false
+    }
+}
+
+extension InsightsStore {
+    func subscriptions() async {
+        // You can do your in-app transactions here
+        Task {
+            do {
+                let products = try await storeKitService.fetchProducts(ids: CrossFitPRConstants.productIDs)
+                print("\(products)")
+                //productLoadingState = .loaded(products)
+            } catch {
+                print("\(error)")
+                //productLoadingState = .failed(error)
+            }
+        }
+    }
+    
+    func updatePurchases() async {
+        Task {
+            do {
+                let transaction = try await storeKitService.updatePurchases()
+                if try await transaction.value.ownershipType == .purchased {
+                    DispatchQueue.main.async {
+                        print("User isPro:\n\(transaction)\n")
+                        self.isPro = true
+                        self.state = .unlockPro
+                    }
+                }
+            } catch {
+                debugPrint("\(error)")
+                DispatchQueue.main.async {
+                    self.isPro = false
+                    self.state = .blockPro
+                }
+                
+                throw RequestError.fail
+            }
+        }
     }
 }

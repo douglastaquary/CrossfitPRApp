@@ -68,7 +68,8 @@ import os
                 return sortedPoints.map { pr in
                     RecordPoint.init(
                         name: pr.prName,
-                        legend: pr.dateFormatter,
+                        date: pr.dateFormatter,
+                        legend: "\(pr.percentage)",
                         value: Double(pr.poundValue)
                     )
                 }
@@ -76,7 +77,8 @@ import os
             return sortedPoints.map { pr in
                 RecordPoint.init(
                     name: pr.prName,
-                    legend: pr.dateFormatter,
+                    date: pr.dateFormatter,
+                    legend: "\(pr.percentage)",
                     value: Double(pr.kiloValue)
                 )
             }
@@ -84,6 +86,7 @@ import os
             return sortedPoints.map { pr in
                 RecordPoint.init(
                     name: pr.prName,
+                    date: pr.dateFormatter,
                     legend: "\(pr.minTime)",
                     value: Double(pr.distance)
                 )
@@ -92,6 +95,7 @@ import os
             return sortedPoints.map { pr in
                 RecordPoint.init(
                     name: pr.prName,
+                    date: pr.dateFormatter,
                     legend: "\(pr.minTime)",
                     value: Double(pr.maxReps)
                 )

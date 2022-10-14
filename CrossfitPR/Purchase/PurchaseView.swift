@@ -11,6 +11,8 @@ import StoreKit
 struct PurchaseView: View {
     @Environment(\.presentationMode) var presentation
     @EnvironmentObject var store: PurchaseStore
+    @Environment(\.isPro) var isPro
+    @State var products: [Product] = []
     @StateObject var storeKitManager: StoreKitManager
     
     var body: some View {
@@ -22,7 +24,6 @@ struct PurchaseView: View {
                         VStack(alignment: .leading) {
                             Button(
                                 action:{
-                                    self.store.stopObserving()
                                     self.presentation.wrappedValue.dismiss()
                                 }, label: {
                                     Text("newRecord.screen.cancel.button.title")
@@ -50,27 +51,26 @@ struct PurchaseView: View {
                         .font(.body)
                         .padding()
                     VStack(spacing: 12) {
-                        if store.subscriptions.isEmpty {
-                            Button {
-                                ""
-                            } label: {
-                                ProgressView()
-                            }
-                            .buttonStyle(OutlineButton())
-                            .frame(width: 160)
-                            Button {
-                                ""
-                            } label: {
-                                ProgressView()
-                            }.buttonStyle(FilledButton())
-                            .frame(width: 160)
+                        if self.products.isEmpty {
+                            Button(action: {}, label: { ProgressView() })
+                                .buttonStyle(OutlineButton())
+                                .frame(width: 160)
+                            Button(action: {}, label: { ProgressView() })
+                                .buttonStyle(FilledButton())
+                                .frame(width: 160)
                         }  else {
-                            Button("\(store.priceLocale(to: store.subscriptions[1]) ?? "") / Mounth"){
-                                store.performPROMonthly(product: store.subscriptions[1])
+                            Button("\(products[1].price.formatted()) / Mounth"){
+                                let product = products[1]
+                                Task {
+                                    await store.purchase(product: product)
+                                }
                             }.buttonStyle(OutlineButton())
                             
-                            Button("\(store.priceLocale(to: store.subscriptions[0]) ?? "") / Year"){
-                                store.performPROAnnual(product: store.subscriptions[0])
+                            Button("\(products[0].price.formatted()) / Year"){
+                                let product = products[0]
+                                Task {
+                                    await store.purchase(product: product)
+                                }
                             }.buttonStyle(FilledButton())
                         }
                         
@@ -87,12 +87,21 @@ struct PurchaseView: View {
         .onChange(of: store.state) { newValue in
             if store.state == .unlockPro {
                 store.unlockPro()
-                self.store.stopObserving()
                 self.presentation.wrappedValue.dismiss()
             }
         }
+        .onAppear {
+            Task {
+                do {
+                    let currentProducts = try await store.fetchProducs()
+                    self.products = try await currentProducts.value
+                } catch {
+                    print("\(error)")
+                }
+            }
+        }
+        .user(store.isPro)
     }
-    
 }
 
 struct PurchaseView_Previews: PreviewProvider {
