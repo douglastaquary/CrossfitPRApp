@@ -11,9 +11,6 @@ struct UserIsProKey: EnvironmentKey {
     static let defaultValue: Bool = false
 }
 
-extension EnvironmentValues {
-    var isPro: Bool {
-        get { self[UserIsProKey.self] }
-        set { self[UserIsProKey.self] = newValue }
-    }
+struct StoreKitManagerKey: EnvironmentKey {
+    static let defaultValue: StoreKitManager = StoreKitManager()
 }

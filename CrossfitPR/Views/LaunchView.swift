@@ -17,10 +17,16 @@ struct LaunchView: View {
     @EnvironmentObject var viewlaunch: ViewLaunch
     @ObservedObject var monitor = NetworkMonitor()
     @State private var showAlertSheet = false
-    
-    @StateObject private var viewModel = OnboardingViewModel()
+    @ObservedObject var viewModel: CrossfitPRViewModel
     @State private var accountStatusAlertShown = false
     @Environment(\.dismiss) var dismiss
+    
+    private let storeKitService: StoreKitManager
+    
+    init(storeKitManager: StoreKitManager, viewModel: CrossfitPRViewModel) {
+        self.viewModel = viewModel
+        self.storeKitService = storeKitManager
+    }
     
     var body: some View {
         VStack {
@@ -55,17 +61,18 @@ struct LaunchView: View {
                     OnboardingView()
                 } else if viewlaunch.currentPage == Route.prHistoriesListView.rawValue {
                     RootView()
-                        .environmentObject(InsightsStore())
                         .onAppear {
                             Task {
                                 await viewModel.fetchAccountStatus()
                                 if viewModel.accountStatus != .available {
                                     accountStatusAlertShown = true
                                 } else {
+                                    //viewModel.updatePurchases()
                                     dismiss()
                                 }
                             }
                         }
+                        .environment(\.storeKitManager, self.storeKitService)
                         .alert(isPresented: $accountStatusAlertShown) {
                             Alert(
                                 title: Text("onboarding.alert.icloud.account.title"),
@@ -76,14 +83,15 @@ struct LaunchView: View {
                                         if viewModel.accountStatus != .available {
                                             accountStatusAlertShown = true
                                         } else {
-                                            dismiss()
+                                            Task {
+                                                viewModel.updatePurchases()
+                                                dismiss()
+                                            }
                                         }
                                     }
                                 }
                             )
                         }
-                } else if viewlaunch.currentPage == Route.newPR.rawValue {
-                    NewRecordView()
                 }
                 
             }

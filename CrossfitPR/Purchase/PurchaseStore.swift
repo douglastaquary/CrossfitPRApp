@@ -11,17 +11,11 @@ import StoreKit
 
 @MainActor
 final class PurchaseStore: ObservableObject {
-    enum State: Equatable {
-        case unlockPro
-        case loading
-        case failed(RequestError)
-        case success
-    }
 
     @Published var storeKitManager: StoreKitManager
     @Published var subscriptions: [Product] = []
     @Published var products: [Product] = []
-    @Published private(set) var state = State.loading
+    @Published private(set) var state = UserPurchaseState.loading
     
     private let defaults: UserDefaults
     private let cancellable: Cancellable
@@ -43,11 +37,9 @@ final class PurchaseStore: ObservableObject {
         Task {
             do {
                 self.products = try await self.storeKitManager.fetchProducts(ids: CrossFitPRConstants.productIDs)
-                debugPrint("\(products)")
                 return self.products
             } catch {
-                debugPrint("\(error)")
-                throw RequestError.fail
+                throw RequestError.fail(message: "fetchProducs(), Error: \(error)")
             }
         }
     }
@@ -63,7 +55,7 @@ final class PurchaseStore: ObservableObject {
                     isPro = true
                 }
             } catch {
-                self.state = .failed(RequestError.fail)
+                self.state = .failed(RequestError.fail(message: "[LOG] Error when try to confirm purchase request!\n:\(error)"))
                 self.blockPro()
                 //userIsPRO = false
                 print("\(error)")
@@ -87,7 +79,7 @@ final class PurchaseStore: ObservableObject {
                 //return transaction
             } catch {
                 debugPrint("\(error)")
-                throw RequestError.fail
+                throw RequestError.fail(message: "[LOG] updatePurchases(), Error: \(error)")
             }
         }
     }

@@ -10,9 +10,10 @@ import SwiftUI
 struct SettingsView: View {
     
     @EnvironmentObject var settings: SettingsStore
-    @StateObject var storeKitManager = StoreKitManager()
+    //@StateObject var storeKitManager = StoreKitManager()
     @Environment(\.scenePhase) var scenePhase
     @Environment(\.openURL) var openURL
+    @Environment(\.storeKitManager) var storeKitManager
     @Environment(\.isPro) var isPRO
     @State var showPROsubsciptionView = false
     @State var showSubscriptionsSheet = false
@@ -50,7 +51,15 @@ struct SettingsView: View {
                 }
             }
             Section(header: Text("settings.screen.section.crossfitpro.title")) {
-                if !isPRO {
+                if !settings.isPro {
+                    Button(action: {
+                        self.showSubscriptionsSheet.toggle()
+                        print("######## settings.isPro\(settings.isPro)")
+                    }) {
+                        Text("settings.screen.section.nocommitment.title")
+                    }.manageSubscriptionsSheet(isPresented: $showSubscriptionsSheet)
+                    
+                } else {
                     Button(action: {
                         self.showPROsubsciptionView.toggle()
                         //self.settings.unlockPro()
@@ -61,11 +70,7 @@ struct SettingsView: View {
                             .environmentObject(PurchaseStore(storeKitManager: storeKitManager))
                     }
                 }
-                Button(action: {
-                    self.showSubscriptionsSheet.toggle()
-                }) {
-                    Text("settings.screen.section.nocommitment.title")
-                }.manageSubscriptionsSheet(isPresented: $showSubscriptionsSheet)
+                
             }
             Section(header: Text("settings.screen.section.about.title")) {
                 Button(action: {

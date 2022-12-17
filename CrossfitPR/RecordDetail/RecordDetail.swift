@@ -66,7 +66,7 @@ struct RecordDetail: View {
                     }
                 }
                 
-                Section(header: Text("record.evolution.section.title \(store.category.title)"), footer: Text("record.evolution.section.description \(store.category.title)")) {
+                Section(header: Text("record.evolution.section.title \(store.category.title)"), footer: Text("record.evolution.section.description\(store.category.title)")) {
                     Chart(store.points) {
                         LineMark(
                             x: .value("Date", $0.date),
@@ -76,10 +76,6 @@ struct RecordDetail: View {
                         .symbol(by: .value("Name", $0.name))
                         
                     }
-                    
-//                    .chartYAxis(){
-//                        AxisMarks(position: .leading)
-//                    }
                     .frame(height: 250)
                     .padding(.top)
                     

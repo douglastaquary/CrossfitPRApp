@@ -92,6 +92,7 @@ struct NewRecordView: View {
                     TextField("newRecord.screen.section.comment.description", text: $viewModel.editingRecord.comments)
                         .frame(height: 86)
                 }
+                
             }
             .navigationBarTitle(Text("newRecord.screen.title"), displayMode: .inline)
             .navigationBarItems(
@@ -113,7 +114,9 @@ struct NewRecordView: View {
                             .bold()
                     }
             ).disabled(viewModel.isSaving)
+            
         }
+    
     }
 }
 

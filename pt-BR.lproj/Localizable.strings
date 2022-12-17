@@ -5,6 +5,9 @@
   Created by Douglas Taquary on 25/05/22.
  
  */
+
+/* Loading screen */
+"loading.view.title" = "Carregando..";
  
  /* Onboarding screen */
 
@@ -37,7 +40,8 @@
 "category.search.descript" = "buscar por nome";
 
 /* Tabbar title screens */
-"tabbar.records.title" = "recordes";
+"tabbar.myrecords.title" = "meus records";
+"tabbar.categories.title" = "categorias";
 "tabbar.insights.title" = "percepções";
 "tabbar.settings.title" = "configurações";
 
@@ -73,7 +77,7 @@
 
 "record.records.section.title" = "Recordes";
 "record.evolution.section.title %@" = "Evolução de %@";
-"record.evolution.section.description %@" = "Esta análise é baseada na lista de recordes de %@ cadastrada no aplicativo. A faixa amarela indica os recordes em evolução e o cinza o menor.";
+"record.evolution.section.description %@" = "Esta análise é baseada na sua lista de recordes de %@ cadastrada no aplicativo.";
 "record.screen.delete.button.title" = "Apagar";
 "record.screen.cancel.button.title" = "Cancelar";
 "record.screen.delete.confirmation.title" = "Você realmente deseja excluir?";

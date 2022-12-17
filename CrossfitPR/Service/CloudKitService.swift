@@ -9,19 +9,31 @@ import CloudKit
 import Combine
 import os
 
-final class CloudKitService {
+
+@MainActor
+class CloudKitService {
     private let cancellable: Cancellable
-    private let defaults: UserDefaults
+    private var defaults: UserDefaults = .standard
     let objectWillChange = PassthroughSubject<Void, Never>()
     
+    
+    //TODO: Search about this issues
+    private var unsafeNonisolated: Bool = false
     private static let logger = Logger(
         subsystem: "com.douglast.crossfitPR",
         category: String(describing: CloudKitService.self)
     )
     
-    init(defaults: UserDefaults = .standard) {
-        self.defaults = defaults
-        
+    init() {
+        cancellable = NotificationCenter.default
+            .publisher(for: UserDefaults.didChangeNotification)
+            .map { _ in () }
+            .subscribe(objectWillChange)
+    }
+    
+    // https://forums.swift.org/t/using-mainactor-values-in-initializer-default-arguments/52694/2
+    nonisolated init(unsafeNonisolated: Bool) {
+        self.unsafeNonisolated = unsafeNonisolated
         cancellable = NotificationCenter.default
             .publisher(for: UserDefaults.didChangeNotification)
             .map { _ in () }
@@ -29,6 +41,7 @@ final class CloudKitService {
     }
 
     func checkAccountStatus() async throws -> CKAccountStatus {
+        
         try await CKContainer.default().accountStatus()
     }
 }

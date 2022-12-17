@@ -20,13 +20,18 @@ struct InsightsViewPRO: View {
                     if store.barbellRecords.isEmpty {
                         Text(LocalizedStringKey("insight.view.error.description"))
                     } else {
-                        Chart {
-                            ForEach(store.topRakingBarbellRecords) {
-                                BarMark(x: .value("Weight", $0.kiloValue))
-                                    .foregroundStyle(by: .value("Name", $0.prName))
-                            }
+                        ForEach(store.topRakingBarbellRecords) { barbell in
+                            RankingView(record: barbell, measure: store.measureTrackingMode)
+                            
                         }
-                        .padding(.top)
+                        
+//                        Chart {
+//                            ForEach(store.topRakingBarbellRecords) {
+//                                BarMark(x: .value("Weight", validateIfKilosOrPounds(record: $0)))
+//                                    .foregroundStyle(by: .value("Name", $0.prName))
+//                            }
+//                        }
+//                        .padding(.top)
                     }
                 }
                 Section("Barbell records") {
@@ -37,7 +42,7 @@ struct InsightsViewPRO: View {
                             ForEach(store.barbellRecords) { record in
                                 BarMark(
                                     x: .value("Record Name", record.dateFormatter),
-                                    y: .value("Measure", validateIfKilosOrPounds(record: record))
+                                    y: .value("Measure", record.poundValue)
                                 )
                                 .foregroundStyle(by: .value("Weight", record.prName))
                                 .annotation(position: .top) {
@@ -50,19 +55,19 @@ struct InsightsViewPRO: View {
                     }
                 }
                 
-                Section("insight.section.ranking.gymnastic.title") {
-                    if store.topRakingGynmnasticRecords.isEmpty {
-                        Text(LocalizedStringKey("insight.view.error.description"))
-                    } else {
-                        Chart {
-                            ForEach(store.gymnasticRecords) {
-                                BarMark(x: .value("Weight", $0.maxReps))
-                                    .foregroundStyle(by: .value("Distance", $0.prName))
-                            }
-                        }
-                        .padding(.top)
-                    }
-                }
+//                Section("insight.section.ranking.gymnastic.title") {
+//                    if store.topRakingGynmnasticRecords.isEmpty {
+//                        Text(LocalizedStringKey("insight.view.error.description"))
+//                    } else {
+//                        Chart {
+//                            ForEach(store.gymnasticRecords) {
+//                                BarMark(x: .value("Weight", $0.maxReps))
+//                                    .foregroundStyle(by: .value("Distance", $0.prName))
+//                            }
+//                        }
+//                        .padding(.top)
+//                    }
+//                }
                 
                 Section("Gymnastic records") {
                     Chart {
@@ -82,17 +87,17 @@ struct InsightsViewPRO: View {
                     .padding(.top, 12)
                 }
                 
-                Section("insight.section.ranking.endurance.title") {
-                    if store.topRakingEnduranceRecords.isEmpty {
-                        Text(LocalizedStringKey("insight.view.error.description"))
-                    } else {
-                        Chart(store.enduranceRecords) { // Get the Production values.
-                            BarMark(x: .value("Distance", $0.distance))
-                                .foregroundStyle(by: .value("Distance", "\($0.prName)"))
-                        }
-                        .padding(.top)
-                    }
-                }
+//                Section("insight.section.ranking.endurance.title") {
+//                    if store.topRakingEnduranceRecords.isEmpty {
+//                        Text(LocalizedStringKey("insight.view.error.description"))
+//                    } else {
+//                        Chart(store.enduranceRecords) { // Get the Production values.
+//                            BarMark(x: .value("Distance", $0.distance))
+//                                .foregroundStyle(by: .value("Distance", "\($0.prName)"))
+//                        }
+//                        .padding(.top)
+//                    }
+//                }
                 
                 Section("Endurance records") {
                     Chart {
@@ -123,7 +128,7 @@ struct InsightsViewPRO: View {
     
     private func validateAnnotation(record: PersonalRecord) -> String {
         if store.measureTrackingMode == .pounds {
-            return "\(record.poundValue) lb"
+            return "\(record.poundValue) lbs"
         }
         return "\(record.kiloValue) kg"
     }

@@ -73,18 +73,34 @@ struct PersonalRecord: Identifiable, Hashable {
         self.minTime = Int(minTime)
         self.comments = comments
     }
-
+    
     var dateFormatter: String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MMM dd, yyyy"
         return dateFormatter.string(from: recordDate ?? .now)
     }
     
+    var marketTexts: (result: String, measure: String) {
+        if let group = group {
+            switch group {
+            case .barbell:
+                return (result: poundValue.description, measure: "\(percentage)%")
+            case .gymnastic:
+                return (result: maxReps.description, measure: "\(maxReps)reps")
+            case .endurance:
+                return (result: minTime.description, measure: "\(distance)m")
+            }
+        }
+        return (result: "", measure: "")
+    }
+    
     static let recordMock: PersonalRecord = PersonalRecord(
         kiloValue: 38,
         poundValue: 90,
         prName: "Air Squat",
-        percentage: 80
+        percentage: 80,
+        recordMode: .maxWeight,
+        group: .barbell
     )
     
     static let recordListMock: [PersonalRecord] = [

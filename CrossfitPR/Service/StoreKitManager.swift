@@ -12,7 +12,7 @@ enum RequestError: Error {
     case badURL
     case userCantMakePayment
     case invalidProductIdentifiers
-    case fail
+    case fail(message: String)
     case pending
     case paymentQueueError
     case cancelled
@@ -24,7 +24,7 @@ class StoreKitManager: NSObject, ObservableObject {
     @Published var products = [Product]()
     @Published var newProducts = [Product]()
     @Published var transactionState: SKPaymentTransactionState?
-    @Published var storeKitState: LoadingState = .idle
+    @Published var uiState: UserPurchaseState = .loading
     
     @MainActor
     func fetchProducts(ids: [String]) async throws -> [Product] {
@@ -37,37 +37,44 @@ class StoreKitManager: NSObject, ObservableObject {
             for await result in Transaction.updates {
                 switch result {
                 case .verified(let transaction):
-                    print("Transaction verified in listener")
+                    print("[LOG] Transaction verified in listener: \(transaction)\n")
                     
                     await transaction.finish()
                     
                     // Update the user's purchases...
                 case .unverified:
-                    print("Transaction unverified")
+                    print("[LOG] Transaction unverified!\n")
                 }
             }
         }
     }
     
+    
     @MainActor
     func updatePurchases() async throws -> Task<Transaction, Error> {
         Task {
+            //try? await AppStore.sync()
             for await result in Transaction.currentEntitlements {
+                
                 guard case .verified(let transaction) = result else {
-                    throw RequestError.fail
+                    self.uiState = .blockPro
+                    throw RequestError.fail(message: "updatePurchases(), Fail when try to fetch a transaction verified!")
                 }
+                
+                self.uiState = .isPRO
 
                 if transaction.revocationDate == nil {
                     // show to purchase screen
-                    print("\(transaction)")
+                    print("[LOG] 🏁 Success User Transaction: \(transaction)\n")
                     return transaction
                 } else {
-                    print("\(transaction)")
+                    print("[LOG] 🔴 Transaction error: \(transaction)\n")
                     return transaction
                 }
             }
             
-            throw RequestError.fail
+            self.uiState = .blockPro
+            throw RequestError.fail(message: "[LOG] Error when try to verify user purchase state request")
         }
     }
 
@@ -91,13 +98,13 @@ class StoreKitManager: NSObject, ObservableObject {
             case .unverified:
                 UserDefaults.standard.setValue(false, forKey: SettingStoreKeys.pro)
                 transactionState = .failed
-                throw RequestError.fail
+                throw RequestError.fail(message: "[LOG] purchase(), case .unverified, Transaction not vefified!")
             }
         case .userCancelled:
             throw RequestError.cancelled
         @unknown default:
             assertionFailure("Unexpected result")
-            throw RequestError.fail
+            throw RequestError.fail(message: "[LOG] purchase(), Unexpected result")
         }
     }
 }

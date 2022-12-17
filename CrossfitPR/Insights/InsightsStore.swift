@@ -12,18 +12,13 @@ import CoreData
 import SwiftUICharts
 
 final class InsightsStore: ObservableObject {
-    enum State: Equatable {
-        case unlockPro
-        case loading
-        case blockPro
-        case failed(RequestError)
-        case success
-    }
-    @Published private(set) var state = State.loading
+
+    @Published var uiState = UserPurchaseState.loading
     @Published var biggestPRName: String = ""
     @Published var biggestPR: PersonalRecord?
     @Published private var dataManager: DataManager?
-    
+    private var storeKitTaskHandle: Task<Void, Error>?
+
     // Barbell
     @Published var barbellBiggestPRName: String = ""
     @Published var barbellBiggestRecord: PersonalRecord?
@@ -66,12 +61,10 @@ final class InsightsStore: ObservableObject {
     var measureTrackingMode: MeasureTrackingMode {
         get {
             return defaults.string(forKey: SettingStoreKeys.measureTrackingMode)
-                .flatMap { MeasureTrackingMode(rawValue: $0) } ?? .pounds
+                .flatMap { MeasureTrackingMode(rawValue: $0)} ?? .pounds
         }
     }
-    
-    @Published var isPro: Bool = false
-    
+
     var records: [PersonalRecord] {
         if let records = dataManager?.recordsArray {
             return records
@@ -79,16 +72,20 @@ final class InsightsStore: ObservableObject {
         return []
     }
     
-    init(dataManager: DataManager = DataManager.shared, defaults: UserDefaults = .standard, storeKitService: StoreKitManager = StoreKitManager()) {
+    init(dataManager: DataManager = DataManager.shared, defaults: UserDefaults = .standard, storeKitService: StoreKitManager) {
         self.defaults = defaults
         self.dataManager = dataManager
         self.storeKitService = storeKitService
+        self.uiState = storeKitService.uiState
         anyCancellable = dataManager.objectWillChange.sink { [weak self] (_) in
             self?.objectWillChange.send()
         }
+//        startStoreKitListener()
+//        
         Task {
             await updatePurchases()
         }
+        
         loadBarbellRecords()
         loadGymnasticRecords()
         loadEnduranceRecords()
@@ -102,6 +99,11 @@ final class InsightsStore: ObservableObject {
         
         performTopRankingGymnasticRecords()
         performTopRankingEnduranceRecords()
+    }
+    
+    // Call this early in the app's lifecycle.
+    private func startStoreKitListener() {
+        storeKitTaskHandle = StoreKitManager.listenForStoreKitUpdates()
     }
     
     // Barbell methods
@@ -310,56 +312,23 @@ final class InsightsStore: ObservableObject {
 }
 
 extension InsightsStore {
-    func unlockPro() {
-        // You can do your in-app transactions here
-        isPro = true
-    }
-    
-    func restorePurchase() {
-        // You can do you in-app purchase restore here
-        isPro = false
-    }
-    
-    func blockPro() {
-        // You can do you in-app purchase restore here
-        isPro = false
-    }
-}
-
-extension InsightsStore {
-    func subscriptions() async {
-        // You can do your in-app transactions here
-        Task {
-            do {
-                let products = try await storeKitService.fetchProducts(ids: CrossFitPRConstants.productIDs)
-                print("\(products)")
-                //productLoadingState = .loaded(products)
-            } catch {
-                print("\(error)")
-                //productLoadingState = .failed(error)
-            }
-        }
-    }
-    
     func updatePurchases() async {
         Task {
             do {
                 let transaction = try await storeKitService.updatePurchases()
                 if try await transaction.value.ownershipType == .purchased {
                     DispatchQueue.main.async {
-                        print("User isPro:\n\(transaction)\n")
-                        self.isPro = true
-                        self.state = .unlockPro
+                        print("###### 💎 User is PRO! 🤩✅\n\n[Transaction Info]:\n\(transaction)\n\n♻️ Configuring app to PRO mode!")
+                        self.uiState = .isPRO
+                        print("[Updated] User permission content updated to PRO [value: \(self.uiState)].")
                     }
                 }
             } catch {
-                debugPrint("\(error)")
+                print("[Updated] User permission content updated to BLOCKED PRO. [value: \(self.uiState)].")
                 DispatchQueue.main.async {
-                    self.isPro = false
-                    self.state = .blockPro
+                    self.uiState = .blockPro
                 }
-                
-                throw RequestError.fail
+                throw RequestError.fail(message: "[LOG] InsightsStore.updatePurchases(), Error: \(error)")
             }
         }
     }

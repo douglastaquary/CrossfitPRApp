@@ -10,28 +10,19 @@ import CloudKit
 import StoreKit
 import os
 
-@MainActor final class OnboardingViewModel: ObservableObject {
+@MainActor final class CrossfitPRViewModel: ObservableObject {
+    private static let logger = Logger(subsystem: "com.douglast.mycrossfitpr", category: String(describing: CrossfitPRViewModel.self))
     
-    enum State: Equatable {
-        case isPro
-        case purchase
-        case failed(RequestError)
-        case noNetwork
-    }
-    private static let logger = Logger(
-        subsystem: "com.douglast.mycrossfitpr",
-        category: String(describing: OnboardingViewModel.self)
-    )
-
     @Published private(set) var accountStatus: CKAccountStatus = .couldNotDetermine
     @Published var userIsPRO: Bool = false
 
     private let cloudKitService = CloudKitService()
-    private let storeKitService: StoreKitManager = StoreKitManager()
+    private let storeKitService: StoreKitManager
     
     private var storeKitTaskHandle: Task<Void, Error>?
     
-    init() {
+    init(storeKitService: StoreKitManager) {
+        self.storeKitService = storeKitService
         startStoreKitListener()
     }
 
@@ -50,20 +41,18 @@ import os
 
 }
 
-extension OnboardingViewModel {
+extension CrossfitPRViewModel {
     func subscriptions() async {
         // You can do your in-app transactions here
         Task {
             do {
                 let products = try await storeKitService.fetchProducts(ids: CrossFitPRConstants.productIDs)
-                print("\(products)")
-                //productLoadingState = .loaded(products)
+                print("[LOG] ✅ OnboardingViewModel.subscriptions(), Products:\n\(products)\n\n")
             } catch {
-                print("\(error)")
+                print("[LOG] 🔴 OnboardingViewModel.subscriptions(), Error:\n\(error)\n\n")
                 //productLoadingState = .failed(error)
             }
         }
-        
     }
     
     func updatePurchases() {
@@ -76,7 +65,7 @@ extension OnboardingViewModel {
                 }
             } catch {
                 userIsPRO = false
-                print("\(error)")
+                print("[LOG] OnboardingViewModel, subscriptions(),  Error: \(error)\n")
             }
         }
     }

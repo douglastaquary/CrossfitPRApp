@@ -26,13 +26,15 @@ struct InsightsView: View {
     @State var showPROsubsciptionView = false
     @EnvironmentObject var store: InsightsStore
     @StateObject var storeKitManager = StoreKitManager()
-    @Environment(\.isPro) var isPro
     
     var body: some View {
-        if isPro {
+        switch store.uiState {
+        case .loading:
+            LoadingView()
+        case .isPRO:
             InsightsViewPRO()
                 .environmentObject(store)
-        } else {
+        default:
             VStack {
                 Button {
                     self.showPROsubsciptionView.toggle()
@@ -53,10 +55,9 @@ struct InsightsView: View {
                 Spacer()
             }
             .padding(22)
-            //.environment(\.isPro, store.isPro)
         }
-        
     }
+    
 }
 
 

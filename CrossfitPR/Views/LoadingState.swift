@@ -9,12 +9,6 @@ import Foundation
 import SwiftUI
 import StoreKit
 
-//protocol LoadableObject: ObservableObject {
-//    associatedtype Output
-//    var state: LoadingState<Output> { get }
-//    func load()
-//}
-
 enum LoadingState: Equatable {
     static func == (lhs: LoadingState, rhs: LoadingState) -> Bool {
         switch (lhs, rhs) {

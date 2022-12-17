@@ -63,15 +63,42 @@ struct OutlineButton: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration
             .label
+            .fontWeight(.bold)
             .foregroundColor(configuration.isPressed ? .gray : .green)
             .padding()
             .background(
                 RoundedRectangle(
-                    cornerRadius: 8,
+                    cornerRadius: 12,
                     style: .continuous
-                ).stroke(Color.green)
+                ).stroke(Color.green.opacity(0.15))
         )
     }
+
+}
+
+struct OpacityButton: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration
+            .label
+            .foregroundColor(configuration.isPressed ? .gray : Color.green.opacity(0.15))
+        
+
+        HStack {
+            Image(systemName: "figure.strengthtraining.traditional")
+                .padding(.leading)
+                .foregroundColor(.green)
+            Text("Add new record")
+                .padding([.bottom, .top, .trailing])
+                .foregroundColor(.green)
+                .fontWeight(.bold)
+                .cornerRadius(12)
+        }
+        .padding([.trailing, .leading], 56)
+        .background(Color.green.opacity(0.15))
+        .cornerRadius(10)
+        
+    }
+
 }
 
 extension Int {
@@ -127,7 +154,26 @@ extension String {
 }
 
 extension View {
-    func user(_ isPRO: Bool) -> some View {
+    func typeOfUserContentAllowed(_ isPRO: Bool) -> some View {
         return self.environment(\.isPro, isPRO)
     }
+        
+    func storyManager(_ service: StoreKitManager) -> some View {
+        return self.environment(\.storeKitManager, service)
+    }
 }
+
+
+extension EnvironmentValues {
+    var isPro: Bool {
+        get { self[UserIsProKey.self] }
+        set { self[UserIsProKey.self] = newValue }
+    }
+    
+    var storeKitManager: StoreKitManager {
+        get { self[StoreKitManagerKey.self] }
+        set { self[StoreKitManagerKey.self] = newValue }
+    }
+    
+}
+

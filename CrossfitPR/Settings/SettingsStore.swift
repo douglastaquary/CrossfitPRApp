@@ -27,15 +27,9 @@ enum MeasureTrackingMode: String, CaseIterable {
 
 @MainActor
 final class SettingsStore: ObservableObject {
-    enum State: Equatable {
-        case unlockPro
-        case loading
-        case failed(RequestError)
-        case success
-    }
-    
+
     @Published var storeKitManager: StoreKitManager
-    @Published private(set) var state = State.loading
+    @Published private(set) var state = UserPurchaseState.loading
     private let cancellable: Cancellable
     private let defaults: UserDefaults
     var anyCancellable: AnyCancellable? = nil
@@ -99,14 +93,13 @@ extension SettingsStore {
                 let transaction = try await storeKitManager.updatePurchases()
                 if try await transaction.value.ownershipType == .purchased {
                     DispatchQueue.main.async {
-                        print("User isPro:\n\(transaction)\n")
                         self.isPro = true
                         self.state = .unlockPro
                     }
                 }
             } catch {
-                debugPrint("\(error)")
-                throw RequestError.fail
+                self.isPro = false
+                throw RequestError.fail(message: "[LOG] SettingsStore.updatePurchases(), Error: \(error)")
             }
         }
     }

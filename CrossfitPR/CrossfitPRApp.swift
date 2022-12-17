@@ -12,24 +12,25 @@ struct CrossfitPRApp: App {
     
     @Environment(\.scenePhase) private var scenePhase
     var dataManager = DataManager.shared
+    private let storeKitService: StoreKitManager = StoreKitManager()
 
     var body: some Scene {
         WindowGroup {
-            LaunchView()
+            LaunchView(storeKitManager: storeKitService, viewModel: CrossfitPRViewModel(storeKitService: storeKitService))
                 .environmentObject(ViewLaunch())
         }
         .onChange(of: scenePhase) { phase in
             switch phase {
             case .active:
-                print("Active")
+                print("🟢 [App State] App in foreground.\n")
             case .inactive:
-                print("Inactive")
+                print("🟢 [App State] App inactive. Saving data.\n")
                 dataManager.saveData()
             case .background:
-                print("background")
+                print("🟢 [App State] App in background.\n")
                 dataManager.saveData()
             default:
-                print("unknown")
+                print("🔶 [App State] App unknown state..\n")
             }
         }
     }

@@ -11,6 +11,7 @@ import SwiftUI
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+    private let storeKitService: StoreKitManager = StoreKitManager()
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let scene = scene as? UIWindowScene else {
@@ -25,7 +26,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         UINavigationBar.appearance().tintColor = .green
 
         let window = UIWindow(windowScene: scene)
-        window.rootViewController = UIHostingController(rootView: LaunchView().environmentObject(ViewLaunch()))
+        window.rootViewController = UIHostingController(
+            rootView: LaunchView(
+                storeKitManager: storeKitService,
+                viewModel: CrossfitPRViewModel(storeKitService: storeKitService)
+            ).environmentObject(ViewLaunch()))
 
         self.window = window
         window.makeKeyAndVisible()
