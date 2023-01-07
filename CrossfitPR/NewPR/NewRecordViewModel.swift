@@ -21,6 +21,7 @@ import os
     private let handstandWalkString = "Handstand walk"
 
     @Published var editingRecord: PersonalRecord
+    @Published var editingCategory: Category
     @Published var prPercentage: Float = 0.0
     @Published var isWeightInPounds: Bool = false
     @Published var isMaxRepetitions: Bool = false
@@ -46,24 +47,43 @@ import os
         }
     }
     
-    init(record: PersonalRecord? = nil, dataManager: DataManager = DataManager.shared, settings: UserDefaults = .standard) {
+    init(record: PersonalRecord? = nil, dataManager: DataManager = DataManager.shared, settings: UserDefaults = .standard, category: Category? = nil) {
         self.dataManager = dataManager
         self.settings = settings
         if let newRecord = record {
             self.editingRecord = newRecord
+        } else if let category = category {
+            self.editingRecord = PersonalRecord(prName: category.title, recordMode: category.type ,group: category.group)
+            self.selectedCategory = category.type.index
         } else {
             self.editingRecord = PersonalRecord()
         }
+        self.editingCategory = category ?? Category(title: "", type: .maxWeight)
+        
         anyCancellable = dataManager.objectWillChange.sink { [weak self] _ in
             self?.objectWillChange.send()
         }
+        
+        setupCategoryForEditingRecord()
+        
     }
+    
+    func setupCategoryForEditingRecord() {
+        selectedCategory = editingCategory.type.index
+    }
+    
+    func displayNavigationTitle(for text: String) -> String {
+        return personalRecordTypeList.filter {
+            $0.title.contains(text)
+        }.first?.title ?? ""
+    }
+      
 
     func saveRecord() {
         editingRecord.prName = personalRecordTypeList[selectedCategory].title
         editingRecord.group = personalRecordTypeList[selectedCategory].group 
         editingRecord.recordDate = .now
-        editingRecord.category = CrossfitLevel.allCases[selectedCategoryItem]
+        editingRecord.crossfitLevel = CrossfitLevel.allCases[selectedCategoryItem]
         if isMaxRepetitions {
             editingRecord.recordMode = .maxRepetition
         } else if isMaxDistance {

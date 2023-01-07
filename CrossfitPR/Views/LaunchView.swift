@@ -81,7 +81,7 @@ struct LaunchView: View {
                                     Task {
                                         await viewModel.fetchAccountStatus()
                                         if viewModel.accountStatus != .available {
-                                            accountStatusAlertShown = true
+                                            //accountStatusAlertShown = true
                                         } else {
                                             Task {
                                                 viewModel.updatePurchases()

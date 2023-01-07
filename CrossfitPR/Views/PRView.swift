@@ -34,7 +34,7 @@ struct PRView: View {
                                     DataPoint.init(
                                         value: Double(isPounds ? record.poundValue : record.kiloValue),
                                         label: isPounds ? "\(record.poundValue) lb" : "\(record.kiloValue) kg",
-                                        legend: Legend(color: .yellow, label: "\(record.category?.rawValue ?? "")", order: 2)
+                                        legend: Legend(color: .yellow, label: "\(record.crossfitLevel?.rawValue ?? "")", order: 2)
                                     )
                                 ])
                             }
@@ -57,7 +57,7 @@ struct PRView: View {
                                     DataPoint.init(
                                         value: Double(record.distance),
                                         label: "\(record.distance) km",
-                                        legend: Legend(color: .yellow, label: "\(record.category?.rawValue ?? "")", order: 2)
+                                        legend: Legend(color: .yellow, label: "\(record.crossfitLevel?.rawValue ?? "")", order: 2)
                                     )
                                 ])
                             }
@@ -79,7 +79,7 @@ struct PRView: View {
                                     DataPoint.init(
                                         value: Double(record.maxReps),
                                         label: "\(record.maxReps) reps",
-                                        legend: Legend(color: .yellow, label: "\(record.category?.rawValue ?? "")", order: 2)
+                                        legend: Legend(color: .yellow, label: "\(record.crossfitLevel?.rawValue ?? "")", order: 2)
                                     )
                                 ])
                             }

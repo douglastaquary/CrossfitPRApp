@@ -51,14 +51,14 @@ struct PersonalRecord: Identifiable, Hashable {
     var recordDate: Date?
     var prName: String
     var percentage: Float
-    var category: CrossfitLevel?
+    var crossfitLevel: CrossfitLevel?
     var recordMode: RecordMode?
     var group: RecordGroup?
     var maxReps: Int
     var minTime: Int
     var comments: String
     
-    init(id: UUID = UUID(), kiloValue: Int32 = 0, poundValue: Int32 = 0, distance: Int32 = 0, recordDate: Date? = nil, prName: String = "", percentage: Float = 10.0, category: CrossfitLevel? = nil, recordMode: RecordMode? = nil, group: RecordGroup? = nil, maxReps: Int32 = 0, minTime: Int32 = 0, comments: String = "") {
+    init(id: UUID = UUID(), kiloValue: Int32 = 0, poundValue: Int32 = 0, distance: Int32 = 0, recordDate: Date? = nil, prName: String = "", percentage: Float = 10.0, crossfitLevel: CrossfitLevel? = nil, recordMode: RecordMode? = nil, group: RecordGroup? = nil, maxReps: Int32 = 0, minTime: Int32 = 0, comments: String = "") {
         self.id = id
         self.kiloValue = Int(kiloValue)
         self.poundValue = Int(poundValue)
@@ -66,7 +66,7 @@ struct PersonalRecord: Identifiable, Hashable {
         self.recordDate = recordDate
         self.prName = prName
         self.percentage = percentage
-        self.category = category
+        self.crossfitLevel = crossfitLevel
         self.recordMode = recordMode
         self.group = group
         self.maxReps = Int(maxReps)

@@ -134,7 +134,7 @@ extension PersonalRecord {
         self.prName = record.prName
         self.group = RecordGroup(rawValue: record.group ?? "")
         self.percentage = record.percentage
-        self.category = CrossfitLevel(rawValue: record.category ?? "") ?? .rx
+        self.crossfitLevel = CrossfitLevel(rawValue: record.category ?? "") ?? .rx
         self.recordMode = RecordMode(rawValue: record.recordMode ?? "") ?? .maxWeight
         self.maxReps = Int(record.maxReps)
         self.minTime = Int(record.minTime)
@@ -195,7 +195,7 @@ extension DataManager {
         let recordMO = PR(context: managedObjectContext)
         recordMO.id = pr.id
         recordMO.prName = pr.prName
-        recordMO.category = pr.category?.rawValue
+        recordMO.category = pr.crossfitLevel?.rawValue
         recordMO.recordMode = pr.recordMode?.rawValue
         recordMO.kiloValue = Int32(pr.kiloValue)
         recordMO.poundValue = Int32(pr.poundValue)
@@ -212,7 +212,7 @@ extension DataManager {
     private func update(recordMO: PR, from record: PersonalRecord) {
         recordMO.id = record.id
         recordMO.prName = record.prName
-        recordMO.category = record.category?.rawValue
+        recordMO.category = record.crossfitLevel?.rawValue
         recordMO.recordMode = record.recordMode?.rawValue
         recordMO.kiloValue = Int32(record.kiloValue)
         recordMO.poundValue = Int32(record.poundValue)

@@ -14,12 +14,13 @@ struct RootView: View {
     @SceneStorage("selectedTab")
     private var selectedTab = 0
     @State var showNewPRView = false
+    @State var selectCategoryItemInitialize: Int = 0
     
     var body: some View {
         TabView(selection: $selectedTab) {
             NavigationView {
                 VStack {
-                    MyRecordsView()
+                    MyRecordsView(exercises: [], searchText: .constant(""))
                 }
             }
             .tabItem {
@@ -30,7 +31,7 @@ struct RootView: View {
             
             NavigationView {
                 VStack {
-                    CategoryListView()
+                    CategoryListView(selectedCategoryItem: $selectCategoryItemInitialize)
                         .environmentObject(CategoryStore())
                 }
             }

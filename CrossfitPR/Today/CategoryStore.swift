@@ -22,6 +22,7 @@ import os
     let objectWillChange = PassthroughSubject<Void, Never>()
     
     @Published var searchText: String = ""
+    @Published var selectedCategoryItem: Int = 0
     @Published private(set) var session: [UserSession] = []
     @Published private(set) var accountStatus: CKAccountStatus = .couldNotDetermine
     private let cloudKitService = CloudKitService()
@@ -44,11 +45,33 @@ import os
         get { defaults.bool(forKey: SettingStoreKeys.pro) }
     }
     
-    var filteredCategories: [Category] {
+    @Published var filteredCategories: [Category] = []
+//
+    var categoriesPerGroup: [Category] {
         categories.filter {
-            searchText.isEmpty ? true : $0.title.contains(searchText)
+            $0.group.rawValue.contains(categories[selectedCategoryItem].group.rawValue)
         }.sorted()
     }
+    
+    func fetchCategoryPerGroup(recordGroup: RecordGroup = .barbell) -> [Category] {
+        filteredCategories = categories.filter {
+            $0.group.rawValue.contains(recordGroup.rawValue)
+        }.sorted()
+        
+        return filteredCategories
+    }
+    
+    func searchExercise(for text: String) -> [Category] {
+        if text.isEmpty {
+            filteredCategories = categories
+            return filteredCategories
+        } else {
+            return filteredCategories.filter {
+                $0.title.contains(text)
+            }.sorted()
+        }
+    }
+    
     
     func fetchUserSession() async {
         do {
