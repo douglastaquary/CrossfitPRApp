@@ -26,7 +26,7 @@ import os
     private var mostRecent = Legend(color: .green, label: "record.view.category.recent.title", order: 4)
     private var lowestPR = Legend(color: .gray, label: "record.view.category.lowest.title", order: 2)
     
-    init(recordCategory: Category, defaults: UserDefaults = .standard, dataManager: DataManager = DataManager.shared) {
+    init(recordCategory: Category? = nil, defaults: UserDefaults = .standard, dataManager: DataManager = DataManager.shared) {
         self.recordCategory = recordCategory
         self.defaults = defaults
         self.dataManager = dataManager
@@ -102,6 +102,24 @@ import os
             }
         }
     }
+    
+    var allRecords: [PersonalRecord] {
+        if let records = dataManager?.recordsArray {
+//            guard let category = self.recordCategory else { return [] }
+//            let sortedRecords = records.filter {
+//                if let group = $0.group {
+//                    return group.rawValue.contains(category.group.rawValue)
+//                }
+//                return false
+//            }.sorted()
+//            let categoryRecords = sortedRecords.filter { $0.prName.contains(category.title) }
+//            let records = categoryRecords.sorted(by: {$0.recordDate?.compare($1.recordDate ?? Date()) == .orderedDescending })
+
+            return records.sorted()
+        }
+        return []
+    }
+    
 
     var filteredPrs: [PersonalRecord] {
         if let records = dataManager?.recordsArray {

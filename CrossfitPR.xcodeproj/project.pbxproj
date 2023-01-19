@@ -40,6 +40,7 @@
 		4E5805E9280CABE900F16219 /* PR+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5805E8280CABE900F16219 /* PR+CoreDataProperties.swift */; };
 		4E5805EB280CEC1700F16219 /* CrossfitPRApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5805EA280CEC1700F16219 /* CrossfitPRApp.swift */; };
 		4E5805EE280F8B0400F16219 /* RecordDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5805ED280F8B0400F16219 /* RecordDetail.swift */; };
+		4E6154162978E31E00284E8E /* MyRecordsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6154152978E31E00284E8E /* MyRecordsViewModel.swift */; };
 		4E8BAA192816150400E179A3 /* Float+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8BAA182816150400E179A3 /* Float+extensions.swift */; };
 		4E8BAA1B281760A100E179A3 /* InsightsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8BAA1A281760A100E179A3 /* InsightsStore.swift */; };
 		4E8BAA1E2817640100E179A3 /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = 4E8BAA1D2817640100E179A3 /* SwiftUICharts */; };
@@ -111,6 +112,7 @@
 		4E5805E8280CABE900F16219 /* PR+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PR+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		4E5805EA280CEC1700F16219 /* CrossfitPRApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrossfitPRApp.swift; sourceTree = "<group>"; };
 		4E5805ED280F8B0400F16219 /* RecordDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordDetail.swift; sourceTree = "<group>"; };
+		4E6154152978E31E00284E8E /* MyRecordsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecordsViewModel.swift; sourceTree = "<group>"; };
 		4E8BAA182816150400E179A3 /* Float+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Float+extensions.swift"; sourceTree = "<group>"; };
 		4E8BAA1A281760A100E179A3 /* InsightsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsightsStore.swift; sourceTree = "<group>"; };
 		4E8D9112282C798F00C88BF2 /* LineViewGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineViewGraph.swift; sourceTree = "<group>"; };
@@ -353,6 +355,7 @@
 			isa = PBXGroup;
 			children = (
 				4E921705294E07CB00D8BED2 /* MyRecordsView.swift */,
+				4E6154152978E31E00284E8E /* MyRecordsViewModel.swift */,
 			);
 			path = MyRecords;
 			sourceTree = "<group>";
@@ -490,6 +493,7 @@
 				4E5805BE27FB8B1C00F16219 /* NewRecordView.swift in Sources */,
 				4E5805EE280F8B0400F16219 /* RecordDetail.swift in Sources */,
 				4E5805B827FB8B1C00F16219 /* App.swift in Sources */,
+				4E6154162978E31E00284E8E /* MyRecordsViewModel.swift in Sources */,
 				4E5805B627FB8B1C00F16219 /* PersonalRecord.swift in Sources */,
 				4E5805B927FB8B1C00F16219 /* NewRecordViewModel.swift in Sources */,
 				4E8BAA192816150400E179A3 /* Float+extensions.swift in Sources */,

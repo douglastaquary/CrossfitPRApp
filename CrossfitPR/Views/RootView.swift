@@ -20,7 +20,8 @@ struct RootView: View {
         TabView(selection: $selectedTab) {
             NavigationView {
                 VStack {
-                    MyRecordsView(exercises: [], searchText: .constant(""))
+                    MyRecordsView(searchText: .constant(""))
+                        .environmentObject(RecordStore())
                 }
             }
             .tabItem {
