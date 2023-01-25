@@ -67,18 +67,22 @@ struct RecordDetail: View {
                 }
                 
                 Section(header: Text("record.evolution.section.title \(store.category.title)"), footer: Text("record.evolution.section.description\(store.category.title)")) {
-                    Chart(store.points) {
-                        LineMark(
-                            x: .value("Date", $0.date),
-                            y: .value("Weight", $0.value)
-                        )
-                        .foregroundStyle(.green)
-                        .symbol(by: .value("Name", $0.name))
-                        
+                    Chart {
+                        ForEach(store.points, id: \.name) { point in
+                            BarMark(
+                                x: .value("Date", point.date),
+                                y: .value("Weight", point.value)
+                            )
+                            .clipShape(RoundedRectangle(cornerRadius: 14))
+                            .position(by: .value("Date", point.date))
+                            .annotation {
+                                Text(verbatim: point.value.formatted())
+                                    .font(.caption)
+                            }
+                        }
                     }
                     .frame(height: 250)
                     .padding(.top)
-                    
                 }
             }
         }
