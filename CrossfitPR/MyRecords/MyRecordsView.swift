@@ -15,30 +15,27 @@ struct MyRecordsView: View {
     
     var body: some View {
         NavigationStack {
-            if !store.allRecords.isEmpty {
+            if !store.sections.isEmpty {
                 ScrollViewReader { scrollView in
                     ScrollView {
-                        ForEach(store.allRecords, id: \.id) { record in
-                            NavigationLink(value: record) {
-                                CategoryItemView(title: record.prName, group: record.group?.rawValue ?? "")
+                        ForEach(store.sections, id: \.id) { section in
+                            NavigationLink(value: section) {
+                                CategoryItemView(title: section.name, group: section.group.rawValue)
                             }
                         }
                     }
-                }
-                .navigationBarTitle(LocalizedStringKey("My Records"), displayMode: .large)
-                .searchable(text: self.$searchText, prompt: LocalizedStringKey("category.search.descript"))
-                .onAppear {
-                    UINavigationBar.appearance().tintColor = .green
-                }
-                .navigationDestination(for: PersonalRecord.self) { record in
-                    RecordDetail(prName: record.prName)
-                        .environmentObject(
-                            RecordStore(recordCategory: Category(title: record.prName, type: record.recordMode ?? .maxWeight, group: record.group ?? .barbell))
-                        )
+                    .navigationBarTitle(LocalizedStringKey("My Records"), displayMode: .large)
+                    .searchable(text: self.$searchText, prompt: LocalizedStringKey("category.search.descript"))
+                    .onAppear {
+                        UINavigationBar.appearance().tintColor = .green
+                    }
+                    .navigationDestination(for: PRSection.self) { section in
+                        RecordDetail(prName: section.name)
+                            .environmentObject(RecordStore(prSection: section))
+                    }
                 }
                 
             } else {
-                
                 VStack{
                     Text("Começe agora mesmo\nadicionando um novo record.")
                         .foregroundColor(.secondary)
@@ -53,9 +50,7 @@ struct MyRecordsView: View {
                     }
                 }
             }
-            
         }
-        
     }
 }
 

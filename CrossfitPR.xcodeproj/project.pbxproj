@@ -41,6 +41,8 @@
 		4E5805EB280CEC1700F16219 /* CrossfitPRApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5805EA280CEC1700F16219 /* CrossfitPRApp.swift */; };
 		4E5805EE280F8B0400F16219 /* RecordDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5805ED280F8B0400F16219 /* RecordDetail.swift */; };
 		4E6154162978E31E00284E8E /* MyRecordsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6154152978E31E00284E8E /* MyRecordsViewModel.swift */; };
+		4E615418298225EE00284E8E /* PRPercentagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E615417298225EE00284E8E /* PRPercentagesView.swift */; };
+		4E61541A298B515600284E8E /* MaxRecordItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E615419298B515600284E8E /* MaxRecordItem.swift */; };
 		4E8BAA192816150400E179A3 /* Float+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8BAA182816150400E179A3 /* Float+extensions.swift */; };
 		4E8BAA1B281760A100E179A3 /* InsightsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8BAA1A281760A100E179A3 /* InsightsStore.swift */; };
 		4E8BAA1E2817640100E179A3 /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = 4E8BAA1D2817640100E179A3 /* SwiftUICharts */; };
@@ -113,6 +115,8 @@
 		4E5805EA280CEC1700F16219 /* CrossfitPRApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrossfitPRApp.swift; sourceTree = "<group>"; };
 		4E5805ED280F8B0400F16219 /* RecordDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordDetail.swift; sourceTree = "<group>"; };
 		4E6154152978E31E00284E8E /* MyRecordsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecordsViewModel.swift; sourceTree = "<group>"; };
+		4E615417298225EE00284E8E /* PRPercentagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PRPercentagesView.swift; sourceTree = "<group>"; };
+		4E615419298B515600284E8E /* MaxRecordItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaxRecordItem.swift; sourceTree = "<group>"; };
 		4E8BAA182816150400E179A3 /* Float+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Float+extensions.swift"; sourceTree = "<group>"; };
 		4E8BAA1A281760A100E179A3 /* InsightsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsightsStore.swift; sourceTree = "<group>"; };
 		4E8D9112282C798F00C88BF2 /* LineViewGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineViewGraph.swift; sourceTree = "<group>"; };
@@ -184,6 +188,8 @@
 				4EE5FA3D293CF9A200A28B8C /* LoadingView.swift */,
 				4EE5FA3F293D152600A28B8C /* SimpleBarProgressView.swift */,
 				4E921702294BE11800D8BED2 /* OpaqueActionButton.swift */,
+				4E615417298225EE00284E8E /* PRPercentagesView.swift */,
+				4E615419298B515600284E8E /* MaxRecordItem.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -470,6 +476,7 @@
 				4E5805E9280CABE900F16219 /* PR+CoreDataProperties.swift in Sources */,
 				4E8D911F283192D800C88BF2 /* PurchaseView.swift in Sources */,
 				4EE58AC02896222F0073A351 /* ActivitiesRecordKey.swift in Sources */,
+				4E615418298225EE00284E8E /* PRPercentagesView.swift in Sources */,
 				4E921703294BE11800D8BED2 /* OpaqueActionButton.swift in Sources */,
 				4E8D91252835E23600C88BF2 /* CategoryListView.swift in Sources */,
 				4E26EC57281EEDA400A4F8C3 /* PRSection.swift in Sources */,
@@ -505,6 +512,7 @@
 				4EE666E828CE92370090BB35 /* NextView.swift in Sources */,
 				4E26EC53281EE6FC00A4F8C3 /* RingProgressView.swift in Sources */,
 				4E8D9113282C798F00C88BF2 /* LineViewGraph.swift in Sources */,
+				4E61541A298B515600284E8E /* MaxRecordItem.swift in Sources */,
 				4E8D9115282C820F00C88BF2 /* RecordStore.swift in Sources */,
 				4EE5FA40293D152600A28B8C /* SimpleBarProgressView.swift in Sources */,
 				4EE58ABB289590650073A351 /* DataManager.swift in Sources */,

@@ -15,7 +15,11 @@ struct CategoryListView: View {
     @Binding var selectedCategoryItem: Int
     @State var searchText = ""
     @State var categories: [Category] = []
-    @State var categoryNames: [String] = [RecordGroup.barbell.rawValue, RecordGroup.gymnastic.rawValue, RecordGroup.endurance.rawValue]
+    @State var categoryNames: [String] = [
+        RecordGroup.barbell.rawValue,
+        RecordGroup.gymnastic.rawValue,
+        RecordGroup.endurance.rawValue
+    ]
 
     var body: some View {
         NavigationStack {
