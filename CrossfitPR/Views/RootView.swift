@@ -22,6 +22,7 @@ struct RootView: View {
                 VStack {
                     MyRecordsView(searchText: .constant(""))
                         .environmentObject(RecordStore())
+                        .environmentObject(SettingsStore())
                 }
             }
             .tabItem {
@@ -48,6 +49,7 @@ struct RootView: View {
                         .navigationTitle(LocalizedStringKey("screen.insights.title"))
                         .environment(\.storeKitManager, storeManager)
                         .environmentObject(InsightsStore(storeKitService: storeManager))
+                        .environmentObject(SettingsStore())
                 }
                     
             }

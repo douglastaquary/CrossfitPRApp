@@ -59,8 +59,8 @@
 "record.view.category.lowest.title" = "Lowest";
 "record.item.view.default.title" = "Personal record";
 
-"record.records.section.title" = "Records";
-"record.evolution.section.title %@" = "Evolution - %@";
+"record.records.section.title" = "record history";
+"record.evolution.section.title %@" = " %@ evolution";
 "record.evolution.section.description %@" = "This analysis is based on the your PR list of %@ registered in the app.";
 "record.screen.delete.button.title" = "Delete";
 "record.screen.cancel.button.title" = "Cancel";

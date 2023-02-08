@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct MyRecordsView: View {
+    @EnvironmentObject var settings: SettingsStore
     @State var showNewPRView = false
     @State var isEmpty = false
     @EnvironmentObject var store: RecordStore
@@ -32,6 +33,7 @@ struct MyRecordsView: View {
                     .navigationDestination(for: PRSection.self) { section in
                         RecordDetail(prName: section.name)
                             .environmentObject(RecordStore(prSection: section))
+                            .environmentObject(SettingsStore())
                     }
                 }
                 

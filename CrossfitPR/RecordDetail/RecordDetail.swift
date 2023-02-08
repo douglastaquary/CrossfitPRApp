@@ -10,13 +10,16 @@ import Charts
 
 struct RecordDetail: View {
     @EnvironmentObject var store: RecordStore
-    @StateObject var storeKitManager = StoreKitManager()
+    @EnvironmentObject var settings: SettingsStore
     @Environment(\.isPro) var isPRO
+    
+    @StateObject var storeKitManager = StoreKitManager()
     @State var showPROsubsciptionView = false
     @State private var confirmationShow = false
     @State var record: PersonalRecord = PersonalRecord()
     @State var points: [RecordPoint] = []
     @State private var indexSet: IndexSet?
+    
     var prName: String = ""
     var isPounds: Bool {
         store.measureTrackingMode == .pounds
@@ -82,7 +85,7 @@ struct RecordDetail: View {
                     }
                 }
                 
-                Section(header: Text("record.evolution.section.title \(store.category?.name ?? "")"), footer: Text("record.evolution.section.description\(store.category?.name ?? "")")) {
+                Section(header: Text("record.evolution.section.title \(store.category?.name ?? "")"), footer: Text("record.evolution.section.description \(store.category?.name ?? "")")) {
                     Chart {
                         ForEach(points, id: \.id) { point in
                             BarMark(
