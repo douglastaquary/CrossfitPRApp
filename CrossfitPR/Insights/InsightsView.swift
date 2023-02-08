@@ -18,7 +18,7 @@ struct AnnotationView: View {
             Text(recordValue)
         }
         .font(.caption)
-        .foregroundStyle(.primary)
+        .foregroundStyle(.secondary)
     }
 }
 
@@ -28,10 +28,13 @@ struct InsightsView: View {
     @StateObject var storeKitManager = StoreKitManager()
     
     var body: some View {
-        if store.isPro {
+        switch store.uiState {
+        case .loading:
+            LoadingView()
+        case .isPRO:
             InsightsViewPRO()
                 .environmentObject(store)
-        } else {
+        default:
             VStack {
                 Button {
                     self.showPROsubsciptionView.toggle()
@@ -45,7 +48,7 @@ struct InsightsView: View {
                 }.sheet(isPresented: $showPROsubsciptionView) {
                     PurchaseView(storeKitManager: storeKitManager)
                         .environmentObject(PurchaseStore(storeKitManager: storeKitManager))
-                    
+
                 }.onAppear {
                     UINavigationBar.appearance().tintColor = .green
                 }
@@ -54,6 +57,7 @@ struct InsightsView: View {
             .padding(22)
         }
     }
+    
 }
 
 

@@ -22,7 +22,7 @@
 		4E5805B827FB8B1C00F16219 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5805AB27FB8B1C00F16219 /* App.swift */; };
 		4E5805B927FB8B1C00F16219 /* NewRecordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5805AC27FB8B1C00F16219 /* NewRecordViewModel.swift */; };
 		4E5805BA27FB8B1C00F16219 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5805AD27FB8B1C00F16219 /* Extensions.swift */; };
-		4E5805BB27FB8B1C00F16219 /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5805AE27FB8B1C00F16219 /* OnboardingViewModel.swift */; };
+		4E5805BB27FB8B1C00F16219 /* CrossfitPRViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5805AE27FB8B1C00F16219 /* CrossfitPRViewModel.swift */; };
 		4E5805BC27FB8B1C00F16219 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5805AF27FB8B1C00F16219 /* OnboardingView.swift */; };
 		4E5805BD27FB8B1C00F16219 /* CloudKitService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5805B027FB8B1C00F16219 /* CloudKitService.swift */; };
 		4E5805BE27FB8B1C00F16219 /* NewRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5805B127FB8B1C00F16219 /* NewRecordView.swift */; };
@@ -40,6 +40,9 @@
 		4E5805E9280CABE900F16219 /* PR+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5805E8280CABE900F16219 /* PR+CoreDataProperties.swift */; };
 		4E5805EB280CEC1700F16219 /* CrossfitPRApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5805EA280CEC1700F16219 /* CrossfitPRApp.swift */; };
 		4E5805EE280F8B0400F16219 /* RecordDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5805ED280F8B0400F16219 /* RecordDetail.swift */; };
+		4E6154162978E31E00284E8E /* MyRecordsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6154152978E31E00284E8E /* MyRecordsViewModel.swift */; };
+		4E615418298225EE00284E8E /* PRPercentagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E615417298225EE00284E8E /* PRPercentagesView.swift */; };
+		4E61541A298B515600284E8E /* MaxRecordItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E615419298B515600284E8E /* MaxRecordItem.swift */; };
 		4E8BAA192816150400E179A3 /* Float+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8BAA182816150400E179A3 /* Float+extensions.swift */; };
 		4E8BAA1B281760A100E179A3 /* InsightsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8BAA1A281760A100E179A3 /* InsightsStore.swift */; };
 		4E8BAA1E2817640100E179A3 /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = 4E8BAA1D2817640100E179A3 /* SwiftUICharts */; };
@@ -49,14 +52,22 @@
 		4E8D9121283195A000C88BF2 /* HViewImageAndText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8D9120283195A000C88BF2 /* HViewImageAndText.swift */; };
 		4E8D91232835C1B900C88BF2 /* CardGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8D91222835C1B900C88BF2 /* CardGroupView.swift */; };
 		4E8D91252835E23600C88BF2 /* CategoryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8D91242835E23600C88BF2 /* CategoryListView.swift */; };
+		4E921703294BE11800D8BED2 /* OpaqueActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E921702294BE11800D8BED2 /* OpaqueActionButton.swift */; };
+		4E921706294E07CB00D8BED2 /* MyRecordsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E921705294E07CB00D8BED2 /* MyRecordsView.swift */; };
 		4EA48820283B238800183E03 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA4881F283B238800183E03 /* Category.swift */; };
 		4EA48835283DD39A00183E03 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4EA48837283DD39A00183E03 /* Localizable.strings */; };
+		4EB4313428E2977B0086C0C8 /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB4313328E2977B0086C0C8 /* NetworkMonitor.swift */; };
+		4EB4313628F654B10086C0C8 /* CrossFitPRConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB4313528F654B10086C0C8 /* CrossFitPRConstants.swift */; };
+		4EB4313828F666A90086C0C8 /* UserIsProKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB4313728F666A90086C0C8 /* UserIsProKey.swift */; };
 		4EC1DF2E289625AC0027D38F /* CrossfitLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC1DF2D289625AC0027D38F /* CrossfitLevel.swift */; };
 		4EC1DF30289625E60027D38F /* PRType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC1DF2F289625E60027D38F /* PRType.swift */; };
 		4EE58AB9286BD0910073A351 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EE58AB8286BD0910073A351 /* CloudKit.framework */; };
 		4EE58ABB289590650073A351 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE58ABA289590650073A351 /* DataManager.swift */; };
 		4EE58ABE2895A1280073A351 /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 4EE58ABD2895A1280073A351 /* OrderedCollections */; };
 		4EE58AC02896222F0073A351 /* ActivitiesRecordKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE58ABF2896222F0073A351 /* ActivitiesRecordKey.swift */; };
+		4EE5FA3C293BB8F400A28B8C /* UserPurchaseState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE5FA3B293BB8F400A28B8C /* UserPurchaseState.swift */; };
+		4EE5FA3E293CF9A200A28B8C /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE5FA3D293CF9A200A28B8C /* LoadingView.swift */; };
+		4EE5FA40293D152600A28B8C /* SimpleBarProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE5FA3F293D152600A28B8C /* SimpleBarProgressView.swift */; };
 		4EE666E428CE91F60090BB35 /* LocalNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE666E328CE91F60090BB35 /* LocalNotificationManager.swift */; };
 		4EE666E628CE922A0090BB35 /* LocalNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE666E528CE922A0090BB35 /* LocalNotification.swift */; };
 		4EE666E828CE92370090BB35 /* NextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE666E728CE92370090BB35 /* NextView.swift */; };
@@ -85,7 +96,7 @@
 		4E5805AB27FB8B1C00F16219 /* App.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		4E5805AC27FB8B1C00F16219 /* NewRecordViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewRecordViewModel.swift; sourceTree = "<group>"; };
 		4E5805AD27FB8B1C00F16219 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
-		4E5805AE27FB8B1C00F16219 /* OnboardingViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
+		4E5805AE27FB8B1C00F16219 /* CrossfitPRViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CrossfitPRViewModel.swift; sourceTree = "<group>"; };
 		4E5805AF27FB8B1C00F16219 /* OnboardingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		4E5805B027FB8B1C00F16219 /* CloudKitService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudKitService.swift; sourceTree = "<group>"; };
 		4E5805B127FB8B1C00F16219 /* NewRecordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewRecordView.swift; sourceTree = "<group>"; };
@@ -103,6 +114,9 @@
 		4E5805E8280CABE900F16219 /* PR+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PR+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		4E5805EA280CEC1700F16219 /* CrossfitPRApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrossfitPRApp.swift; sourceTree = "<group>"; };
 		4E5805ED280F8B0400F16219 /* RecordDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordDetail.swift; sourceTree = "<group>"; };
+		4E6154152978E31E00284E8E /* MyRecordsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecordsViewModel.swift; sourceTree = "<group>"; };
+		4E615417298225EE00284E8E /* PRPercentagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PRPercentagesView.swift; sourceTree = "<group>"; };
+		4E615419298B515600284E8E /* MaxRecordItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaxRecordItem.swift; sourceTree = "<group>"; };
 		4E8BAA182816150400E179A3 /* Float+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Float+extensions.swift"; sourceTree = "<group>"; };
 		4E8BAA1A281760A100E179A3 /* InsightsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsightsStore.swift; sourceTree = "<group>"; };
 		4E8D9112282C798F00C88BF2 /* LineViewGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineViewGraph.swift; sourceTree = "<group>"; };
@@ -111,17 +125,25 @@
 		4E8D9120283195A000C88BF2 /* HViewImageAndText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HViewImageAndText.swift; sourceTree = "<group>"; };
 		4E8D91222835C1B900C88BF2 /* CardGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardGroupView.swift; sourceTree = "<group>"; };
 		4E8D91242835E23600C88BF2 /* CategoryListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListView.swift; sourceTree = "<group>"; };
+		4E921702294BE11800D8BED2 /* OpaqueActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpaqueActionButton.swift; sourceTree = "<group>"; };
+		4E921705294E07CB00D8BED2 /* MyRecordsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecordsView.swift; sourceTree = "<group>"; };
 		4E96EA912860087400F2192E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4E96EA92286A91C400F2192E /* CrossfitPR.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CrossfitPR.entitlements; sourceTree = "<group>"; };
 		4EA4881F283B238800183E03 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		4EA48832283DD21900183E03 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4EA48836283DD39A00183E03 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4EA48838283DD3A200183E03 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		4EB4313328E2977B0086C0C8 /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
+		4EB4313528F654B10086C0C8 /* CrossFitPRConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrossFitPRConstants.swift; sourceTree = "<group>"; };
+		4EB4313728F666A90086C0C8 /* UserIsProKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserIsProKey.swift; sourceTree = "<group>"; };
 		4EC1DF2D289625AC0027D38F /* CrossfitLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrossfitLevel.swift; sourceTree = "<group>"; };
 		4EC1DF2F289625E60027D38F /* PRType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PRType.swift; sourceTree = "<group>"; };
 		4EE58AB8286BD0910073A351 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		4EE58ABA289590650073A351 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		4EE58ABF2896222F0073A351 /* ActivitiesRecordKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesRecordKey.swift; sourceTree = "<group>"; };
+		4EE5FA3B293BB8F400A28B8C /* UserPurchaseState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPurchaseState.swift; sourceTree = "<group>"; };
+		4EE5FA3D293CF9A200A28B8C /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		4EE5FA3F293D152600A28B8C /* SimpleBarProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleBarProgressView.swift; sourceTree = "<group>"; };
 		4EE666E328CE91F60090BB35 /* LocalNotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalNotificationManager.swift; sourceTree = "<group>"; };
 		4EE666E528CE922A0090BB35 /* LocalNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalNotification.swift; sourceTree = "<group>"; };
 		4EE666E728CE92370090BB35 /* NextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NextView.swift; sourceTree = "<group>"; };
@@ -163,6 +185,11 @@
 				4E8D91222835C1B900C88BF2 /* CardGroupView.swift */,
 				4EE666E928CFA2A70090BB35 /* CrossFitLineChart.swift */,
 				4EE666F328D35C800090BB35 /* LoadingState.swift */,
+				4EE5FA3D293CF9A200A28B8C /* LoadingView.swift */,
+				4EE5FA3F293D152600A28B8C /* SimpleBarProgressView.swift */,
+				4E921702294BE11800D8BED2 /* OpaqueActionButton.swift */,
+				4E615417298225EE00284E8E /* PRPercentagesView.swift */,
+				4E615419298B515600284E8E /* MaxRecordItem.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -188,6 +215,7 @@
 		4E58059127FB8AEF00F16219 /* CrossfitPR */ = {
 			isa = PBXGroup;
 			children = (
+				4E921704294E079100D8BED2 /* MyRecords */,
 				4E96EA92286A91C400F2192E /* CrossfitPR.entitlements */,
 				4E8D911D283192B600C88BF2 /* Purchase */,
 				4E26EC4B281EE61C00A4F8C3 /* Views */,
@@ -265,6 +293,9 @@
 				4EE58ABF2896222F0073A351 /* ActivitiesRecordKey.swift */,
 				4EC1DF2D289625AC0027D38F /* CrossfitLevel.swift */,
 				4EC1DF2F289625E60027D38F /* PRType.swift */,
+				4EB4313528F654B10086C0C8 /* CrossFitPRConstants.swift */,
+				4EB4313728F666A90086C0C8 /* UserIsProKey.swift */,
+				4EE5FA3B293BB8F400A28B8C /* UserPurchaseState.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -273,8 +304,10 @@
 			isa = PBXGroup;
 			children = (
 				4E5805AB27FB8B1C00F16219 /* App.swift */,
+				4EE666EB28D2AABF0090BB35 /* StoreKitManager.swift */,
 				4E5805B527FB8B1C00F16219 /* AppDependencies.swift */,
 				4E5805B027FB8B1C00F16219 /* CloudKitService.swift */,
+				4EB4313328E2977B0086C0C8 /* NetworkMonitor.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -292,7 +325,7 @@
 			isa = PBXGroup;
 			children = (
 				4E5805AF27FB8B1C00F16219 /* OnboardingView.swift */,
-				4E5805AE27FB8B1C00F16219 /* OnboardingViewModel.swift */,
+				4E5805AE27FB8B1C00F16219 /* CrossfitPRViewModel.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -319,10 +352,18 @@
 			isa = PBXGroup;
 			children = (
 				4E8D911E283192D800C88BF2 /* PurchaseView.swift */,
-				4EE666EB28D2AABF0090BB35 /* StoreKitManager.swift */,
 				4EE666F128D2B4A60090BB35 /* PurchaseStore.swift */,
 			);
 			path = Purchase;
+			sourceTree = "<group>";
+		};
+		4E921704294E079100D8BED2 /* MyRecords */ = {
+			isa = PBXGroup;
+			children = (
+				4E921705294E07CB00D8BED2 /* MyRecordsView.swift */,
+				4E6154152978E31E00284E8E /* MyRecordsViewModel.swift */,
+			);
+			path = MyRecords;
 			sourceTree = "<group>";
 		};
 		4EE58AB7286BD0910073A351 /* Frameworks */ = {
@@ -420,18 +461,23 @@
 				4E8D91232835C1B900C88BF2 /* CardGroupView.swift in Sources */,
 				4E5805C627FBBE7900F16219 /* InsightsView.swift in Sources */,
 				4E5805BA27FB8B1C00F16219 /* Extensions.swift in Sources */,
+				4EE5FA3E293CF9A200A28B8C /* LoadingView.swift in Sources */,
 				4E5805DB28026EC500F16219 /* Protocols.swift in Sources */,
 				4EE666F628D4B3730090BB35 /* InsightsViewPRO.swift in Sources */,
 				4EC1DF30289625E60027D38F /* PRType.swift in Sources */,
 				4E5805C927FD29A400F16219 /* SettingsView.swift in Sources */,
+				4EB4313428E2977B0086C0C8 /* NetworkMonitor.swift in Sources */,
 				4E35F8522852D289008FCC2B /* SettingsUserDefault.swift in Sources */,
-				4E5805BB27FB8B1C00F16219 /* OnboardingViewModel.swift in Sources */,
+				4E5805BB27FB8B1C00F16219 /* CrossfitPRViewModel.swift in Sources */,
 				4E5805E4280CA76700F16219 /* PR+CoreDataClass.swift in Sources */,
 				4E5805EB280CEC1700F16219 /* CrossfitPRApp.swift in Sources */,
+				4EB4313828F666A90086C0C8 /* UserIsProKey.swift in Sources */,
 				4E8D9121283195A000C88BF2 /* HViewImageAndText.swift in Sources */,
 				4E5805E9280CABE900F16219 /* PR+CoreDataProperties.swift in Sources */,
 				4E8D911F283192D800C88BF2 /* PurchaseView.swift in Sources */,
 				4EE58AC02896222F0073A351 /* ActivitiesRecordKey.swift in Sources */,
+				4E615418298225EE00284E8E /* PRPercentagesView.swift in Sources */,
+				4E921703294BE11800D8BED2 /* OpaqueActionButton.swift in Sources */,
 				4E8D91252835E23600C88BF2 /* CategoryListView.swift in Sources */,
 				4E26EC57281EEDA400A4F8C3 /* PRSection.swift in Sources */,
 				4EE666F228D2B4A60090BB35 /* PurchaseStore.swift in Sources */,
@@ -454,15 +500,21 @@
 				4E5805BE27FB8B1C00F16219 /* NewRecordView.swift in Sources */,
 				4E5805EE280F8B0400F16219 /* RecordDetail.swift in Sources */,
 				4E5805B827FB8B1C00F16219 /* App.swift in Sources */,
+				4E6154162978E31E00284E8E /* MyRecordsViewModel.swift in Sources */,
 				4E5805B627FB8B1C00F16219 /* PersonalRecord.swift in Sources */,
 				4E5805B927FB8B1C00F16219 /* NewRecordViewModel.swift in Sources */,
 				4E8BAA192816150400E179A3 /* Float+extensions.swift in Sources */,
+				4E921706294E07CB00D8BED2 /* MyRecordsView.swift in Sources */,
+				4EB4313628F654B10086C0C8 /* CrossFitPRConstants.swift in Sources */,
+				4EE5FA3C293BB8F400A28B8C /* UserPurchaseState.swift in Sources */,
 				4E5805BC27FB8B1C00F16219 /* OnboardingView.swift in Sources */,
 				4E5805C127FB8B1C00F16219 /* SendablePublisher.swift in Sources */,
 				4EE666E828CE92370090BB35 /* NextView.swift in Sources */,
 				4E26EC53281EE6FC00A4F8C3 /* RingProgressView.swift in Sources */,
 				4E8D9113282C798F00C88BF2 /* LineViewGraph.swift in Sources */,
+				4E61541A298B515600284E8E /* MaxRecordItem.swift in Sources */,
 				4E8D9115282C820F00C88BF2 /* RecordStore.swift in Sources */,
+				4EE5FA40293D152600A28B8C /* SimpleBarProgressView.swift in Sources */,
 				4EE58ABB289590650073A351 /* DataManager.swift in Sources */,
 				4E5805E2280CA08000F16219 /* PersistenceStore.swift in Sources */,
 				4EA48820283B238800183E03 /* Category.swift in Sources */,
@@ -627,7 +679,7 @@
 				CODE_SIGN_ENTITLEMENTS = CrossfitPR/CrossfitPR.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = 2GL8HK863C;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CrossfitPR/Info.plist;
@@ -643,7 +695,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.0.1;
+				MARKETING_VERSION = 0.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.taquarylab.crossfitprapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -664,7 +716,7 @@
 				CODE_SIGN_ENTITLEMENTS = CrossfitPR/CrossfitPR.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = 2GL8HK863C;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CrossfitPR/Info.plist;
@@ -680,7 +732,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.0.1;
+				MARKETING_VERSION = 0.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.taquarylab.crossfitprapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

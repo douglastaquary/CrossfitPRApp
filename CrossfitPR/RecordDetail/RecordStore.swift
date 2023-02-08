@@ -20,28 +20,24 @@ import os
     @Published var records: [PersonalRecord] = []
     @Published private var dataManager: DataManager?
     var anyCancellable: AnyCancellable? = nil
-    private var recordCategory: Category?
+    private var prSection: PRSection?
     private let defaults: UserDefaults
     private var prEvolution = Legend(color: .yellow, label: "record.view.category.evolution.title", order: 3)
     private var mostRecent = Legend(color: .green, label: "record.view.category.recent.title", order: 4)
     private var lowestPR = Legend(color: .gray, label: "record.view.category.lowest.title", order: 2)
     
-    init(recordCategory: Category, defaults: UserDefaults = .standard, dataManager: DataManager = DataManager.shared) {
-        self.recordCategory = recordCategory
+    init(prSection: PRSection? = nil, defaults: UserDefaults = .standard, dataManager: DataManager = DataManager.shared) {
+        self.prSection = prSection
         self.defaults = defaults
         self.dataManager = dataManager
+        self.category = prSection
         
         anyCancellable = dataManager.objectWillChange.sink { [weak self] (_) in
             self?.objectWillChange.send()
         }
     }
     
-    var category: Category {
-        if let category = recordCategory {
-            return category
-        }
-        return Category(title: "", type: .maxWeight)
-    }
+    @Published var category: PRSection?
     
     var isPro: Bool {
         get { defaults.bool(forKey: SettingStoreKeys.pro) }
@@ -58,58 +54,108 @@ import os
         getMaxRecord(prs: filteredPrs)
     }
     
-    var points: [DataPoint] {
+    func getPoints() -> [RecordPoint] {
         let isPounds = measureTrackingMode == .pounds
         let sortedPoints = filteredPrs.sorted(by: {$0.recordDate?.compare($1.recordDate ?? Date()) == .orderedAscending })
-        guard let category = self.recordCategory else { return [] }
-        switch category.type {
-        case .maxWeight:
+        guard let prSection = self.prSection else { return [] }
+        switch prSection.group {
+        case .barbell:
             if isPounds {
                 return sortedPoints.map { pr in
-                    DataPoint.init(
-                        value: Double(pr.percentage),
-                        label: "\(pr.poundValue) lb",
-                        legend: validateCategoryInformation(pr))
+                    RecordPoint.init(
+                        name: pr.prName,
+                        date: pr.dateFormatter,
+                        legend: "\(pr.percentage)",
+                        value: Double(pr.poundValue)
+                    )
                 }
             }
             return sortedPoints.map { pr in
-                DataPoint.init(value: Double(pr.kiloValue), label: "\(pr.kiloValue) kg", legend: validateCategoryInformation(pr))
+                RecordPoint.init(
+                    name: pr.prName,
+                    date: pr.dateFormatter,
+                    legend: "\(pr.percentage)",
+                    value: Double(pr.kiloValue)
+                )
             }
-        case .maxDistance:
+        case .endurance:
             return sortedPoints.map { pr in
-                DataPoint.init(value: Double(pr.minTime), label: "\(pr.distance) km", legend: validateCategoryInformation(pr))
+                RecordPoint.init(
+                    name: pr.prName,
+                    date: pr.dateFormatter,
+                    legend: "\(pr.minTime)",
+                    value: Double(pr.distance)
+                )
             }
-        case .maxRepetition:
+        case .gymnastic:
             return sortedPoints.map { pr in
-                DataPoint.init(value: Double(pr.minTime), label: "\(pr.maxReps) reps", legend: validateCategoryInformation(pr))
+                RecordPoint.init(
+                    name: pr.prName,
+                    date: pr.dateFormatter,
+                    legend: "\(pr.minTime)",
+                    value: Double(pr.maxReps)
+                )
             }
         }
     }
-
-    var filteredPrs: [PersonalRecord] {
+    
+    var allRecords: [PersonalRecord] {
         if let records = dataManager?.recordsArray {
-            guard let category = self.recordCategory else { return [] }
-            let sortedRecords = records.filter {
-                if let recordMode = $0.recordMode {
-                    return recordMode.rawValue.contains(category.type.rawValue)
-                }
-                return false
-            }.sorted()
-            let categoryRecords = sortedRecords.filter { $0.prName.contains(category.title) }
-            let records = categoryRecords.sorted(by: {$0.recordDate?.compare($1.recordDate ?? Date()) == .orderedDescending })
+//            guard let category = self.recordCategory else { return [] }
+//            let sortedRecords = records.filter {
+//                if let group = $0.group {
+//                    return group.rawValue.contains(category.group.rawValue)
+//                }
+//                return false
+//            }.sorted()
+//            let categoryRecords = sortedRecords.filter { $0.prName.contains(category.title) }
+//            let records = categoryRecords.sorted(by: {$0.recordDate?.compare($1.recordDate ?? Date()) == .orderedDescending })
 
-            return records
+            return records.sorted()
         }
         return []
     }
     
-    private func getMaxRecord(prs: [PersonalRecord]) -> PersonalRecord {
+    var sections: [PRSection] {
+        if let records = dataManager?.recordsArray {
+            let recordsCache = records.unique{ $0.prName }
+            let sections = recordsCache.map { record in
+                PRSection(name: record.prName, group: record.group ?? .barbell)
+            }
+            return sections
+        }
+        return []
+    }
+    
+//    func filteredPRs(byName: String) {
+//        if let records = dataManager?.recordsArray {
+//            let sortedRecords = records.filter {
+//                return $0.prName.lowercased().contains(byName.lowercased())
+//            }.sorted()
+//            let records = sortedRecords.sorted(by: {$0.recordDate?.compare($1.recordDate ?? Date()) == .orderedDescending })
+//            //filteredPrs.append(contentsOf: records)
+//        }
+//    }
+//    
+    var filteredPrs: [PersonalRecord] {
+        if let records = dataManager?.recordsArray {
+            let prName = prSection?.name ?? ""
+            let sortedRecords = records.filter {
+                $0.prName.lowercased().contains(prName.lowercased())
+            }.sorted()
+            let records = sortedRecords.sorted(by: {$0.recordDate?.compare($1.recordDate ?? Date()) == .orderedDescending })
+            return records
+        }
+        return []
+    }
+
+    func getMaxRecord(prs: [PersonalRecord]) -> PersonalRecord {
         if prs.isEmpty {
             return PersonalRecord()
         }
-        guard let category = recordCategory else { return PersonalRecord() }
-        switch category.type {
-        case .maxWeight:
+        guard let section = prSection else { return PersonalRecord() }
+        switch section.group {
+        case .barbell:
             if measureTrackingMode == .pounds {
                 let max: Int = prs.map { Int($0.poundValue) }.max() ?? 0
                 let biggestPR = prs.filter { Int($0.poundValue) == max }.first ?? PersonalRecord()
@@ -118,11 +164,11 @@ import os
             let max: Int = prs.map { Int($0.kiloValue) }.max() ?? 0
             let biggestPR = prs.filter { Int($0.kiloValue)  == max }.first ?? PersonalRecord()
             return biggestPR
-        case .maxDistance:
+        case .endurance:
             let max: Int = prs.map { Int($0.distance) }.max() ?? 0
             let maxRepsPR = prs.filter { Int($0.distance)  == max }.first ?? PersonalRecord()
             return maxRepsPR
-        case .maxRepetition:
+        case .gymnastic:
             let max: Int = prs.map { Int($0.maxReps) }.max() ?? 0
             let maxRepsPR = prs.filter { Int($0.maxReps)  == max }.first ?? PersonalRecord()
             return maxRepsPR
@@ -133,9 +179,9 @@ import os
         if prs.isEmpty {
             return PersonalRecord()
         }
-        guard let category = recordCategory else { return PersonalRecord() }
-        switch category.type {
-        case .maxWeight:
+        guard let section = prSection else { return PersonalRecord() }
+        switch section.group {
+        case .barbell:
             if measureTrackingMode == .pounds {
                 let min: Int = prs.map { Int($0.poundValue)  }.min() ?? 0
                 let lowerPr = prs.filter { Int($0.poundValue) == min }.first ?? PersonalRecord()
@@ -144,11 +190,11 @@ import os
             let min: Int = prs.map { Int($0.kiloValue) }.min() ?? 0
             let lowerPr = prs.filter { Int($0.kiloValue) == min }.first ?? PersonalRecord()
             return lowerPr
-        case .maxDistance:
+        case .endurance:
             let min: Int = prs.map { Int($0.distance) }.min() ?? 0
             let minRepsPR = prs.filter { Int($0.distance) == min }.first ?? PersonalRecord()
             return minRepsPR
-        case .maxRepetition:
+        case .gymnastic:
             let max: Int = prs.map { Int($0.maxReps) }.max() ?? 0
             let maxRepsPR = prs.filter { Int($0.maxReps)  == max }.first ?? PersonalRecord()
             return maxRepsPR
@@ -156,9 +202,9 @@ import os
     }
     
     func loadGraph() {
-        guard let category = recordCategory else { return }
-        switch category.type {
-        case .maxWeight:
+        guard let section = prSection else { return }
+        switch section.group {
+        case .barbell:
             if measureTrackingMode == .pounds {
                 evolutionPoints = filteredPrs.map { pr in
                     DataPoint.init(value: Double(pr.poundValue), label: "", legend: validateCategoryInformation(pr))
@@ -168,11 +214,11 @@ import os
             evolutionPoints = filteredPrs.map { pr in
                 DataPoint.init(value: Double(pr.kiloValue), label: "", legend: validateCategoryInformation(pr))
             }
-        case .maxDistance:
+        case .endurance:
             evolutionPoints = filteredPrs.map { pr in
                 DataPoint.init(value: Double(pr.distance), label: "\(pr.minTime)", legend: validateCategoryInformation(pr))
             }
-        case .maxRepetition:
+        case .gymnastic:
             evolutionPoints = filteredPrs.map { pr in
                 DataPoint.init(value: Double(pr.maxReps), label: "\(pr.minTime)", legend: validateCategoryInformation(pr))
             }
@@ -180,14 +226,14 @@ import os
     }
 
     private func validateCategoryInformation(_ pr: PersonalRecord) -> Legend {
-        guard let category = recordCategory else {
+        guard let section = prSection else {
             return Legend(color: .red, label: "record.view.category.recent.title", order: 3)
         }
         
         let evolutionPr = Legend(color: .yellow, label: "record.view.category.evolution.title", order: 2)
         let lowestRecord = Legend(color: .gray, label: "record.view.category.lowest.title", order: 1)
-        switch category.type {
-        case .maxWeight:
+        switch section.group {
+        case .barbell:
             if measureTrackingMode == .pounds {
                 let max: Int = filteredPrs.map { Int($0.poundValue) }.max() ?? 0
                 let recordPound =  pr.poundValue
@@ -205,7 +251,7 @@ import os
             } else {
                 return lowestRecord
             }
-        case .maxDistance:
+        case .endurance:
             let max: Int = filteredPrs.map { Int($0.distance) }.max() ?? 0
             let recordPound =  pr.distance
             if recordPound >= max {
@@ -213,7 +259,7 @@ import os
             } else {
                 return lowestRecord
             }
-        case .maxRepetition:
+        case .gymnastic:
             let max: Int = filteredPrs.map { Int($0.maxReps) }.max() ?? 0
             let recordPound =  pr.maxReps
             if recordPound >= max {
@@ -231,4 +277,3 @@ import os
     }
     
 }
-

@@ -4,6 +4,9 @@
 
   Created by Douglas Taquary on 25/05/22.
  
+ /* Loading screen */
+ "loading.view.title" = "Loading..";
+ 
  /* Settings screen */
  "settings.screen.title" = "Settings";
  "settings.screen.section.notification.title" = "Notifications";
@@ -15,6 +18,9 @@
  "settings.screen.section.privacy.title"= "Privacy policy and Terms of Use";
 "settings.screen.section.about.title" = "About";
 "settings.screen.section.crossfitpro.title" = "CrossFitPR PRO";
+"settings.screen.section.nocommitment.title" = "No Commitment. Cancel Anytime";
+"settings.pounds.title" = "pounds";
+"settings.kilo.title" = "kilos";
  
  /* Onboarding screen */
 
@@ -33,6 +39,9 @@
 "onboarding.item4.description" = "The powerful insights allows you to track and understand your evolution, the highest records through powerful graphics.";
 
 "onboarding.button.title" = "Start";
+"onboarding.alert.icloud.account.title" = "iCloud account disabled";
+"onboarding.alert.icloud.account.message" = "Go to Settings, Apple ID, log in to your Apple account and try again.";
+"onboarding.alert.cancel.button.title" = "Cancel";
 
 /* Record detail screen */
 
@@ -50,9 +59,9 @@
 "record.view.category.lowest.title" = "Lowest";
 "record.item.view.default.title" = "Personal record";
 
-"record.records.section.title" = "Records";
-"%@ record.evolution.section.title" = "%@ evolution";
-"record.evolution.section.description %@" = "This analysis is based on the PR list of %@ registered in the app. The most recent are the ones in the green band (on the right), the oldest gray and the evolution in yellow.";
+"record.records.section.title" = "record history";
+"record.evolution.section.title %@" = " %@ evolution";
+"record.evolution.section.description %@" = "This analysis is based on the your PR list of %@ registered in the app.";
 "record.screen.delete.button.title" = "Delete";
 "record.screen.cancel.button.title" = "Cancel";
 "record.screen.delete.confirmation.title" = "Do you really want to delete?";
@@ -83,13 +92,16 @@
 "category.search.descript" = "search by name";
 
 /* Tabbar title screens */
-"tabbar.records.title" = "records";
+"tabbar.myrecords.title" = "my records";
+"tabbar.categories.title" = "categories";
 "tabbar.insights.title" = "insights";
 "tabbar.settings.title" = "settings";
 
 /* Insight screen */
 
-"insight.section.ranking.title" = "Top barbell records";
+"insight.section.top.ranking.title" = "Top ranking";
+"insight.section.footer.rank.barbell.title" = "The top rank shows the highest record, evolution record and lowest performing.";
+"insight.section.ranking.title" = "Top barbell ranking";
 "insight.section.ranking.barbell.title" = "Top Barbell Records";
 "insight.section.ranking.gymnastic.title" = "Top Gymnastic Records";
 "insight.section.ranking.endurance.title"= "Top Endurance Records";

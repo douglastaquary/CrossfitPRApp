@@ -10,10 +10,16 @@ import Charts
 
 struct RecordDetail: View {
     @EnvironmentObject var store: RecordStore
+    @EnvironmentObject var settings: SettingsStore
+    @Environment(\.isPro) var isPRO
+    
     @StateObject var storeKitManager = StoreKitManager()
     @State var showPROsubsciptionView = false
     @State private var confirmationShow = false
+    @State var record: PersonalRecord = PersonalRecord()
+    @State var points: [RecordPoint] = []
     @State private var indexSet: IndexSet?
+    
     var prName: String = ""
     var isPounds: Bool {
         store.measureTrackingMode == .pounds
@@ -25,24 +31,38 @@ struct RecordDetail: View {
             Form {
                 Group {
                     Section("record.biggest.section.title") {
-                        HSubtitleView(title: "record.category.title", subtitle: store.category.title)
-                        switch store.category.type {
-                        case .maxWeight:
-                            HSubtitleView(title: "record.percentage.title", subtitle: "\(String(describing: store.record.percentage.clean)) %")
+                        HSubtitleView(title: "record.category.title", subtitle: store.category?.name ?? "")
+                        let group = store.category?.group ?? .barbell
+                        switch group {
+                        case .barbell:
                             HSubtitleView(
                                 title: "record.weight.title",
-                                subtitle: isPounds ? "\(String(describing: store.record.poundValue)) lb" : "\(String(describing: store.record.kiloValue)) kg"
+                                subtitle: isPounds ? "\(String(describing: record.poundValue)) lb" : "\(String(describing: record.kiloValue)) kg"
                             )
-                        case .maxRepetition:
-                            HSubtitleView(title: "record.maxReps.title", subtitle: "\(String(describing: store.record.maxReps))")
-                            HSubtitleView(title: "record.time.title", subtitle: "\(String(describing: store.record.minTime)) min")
-                        case .maxDistance:
-                            HSubtitleView(title: "record.distance.title", subtitle: "\(String(describing: store.record.distance)) km")
-                            HSubtitleView(title: "record.time.title", subtitle: "\(String(describing: store.record.minTime)) min")
+                        case .gymnastic:
+                            HSubtitleView(title: "record.maxReps.title", subtitle: "\(String(describing: record.maxReps))")
+                            HSubtitleView(title: "record.time.title", subtitle: "\(String(describing: record.minTime)) min")
+                        case .endurance:
+                            HSubtitleView(title: "record.distance.title", subtitle: "\(String(describing: record.distance))km")
+                            HSubtitleView(title: "record.time.title", subtitle: "\(String(describing: record.minTime)) min")
                         }
-                        HSubtitleView(title: "record.date.title", subtitle: "\(String(describing: store.record.dateFormatter))")
+
+                        HSubtitleView(title: "record.date.title", subtitle: "\(String(describing: record.dateFormatter))")
                     }
+                    
+                    if store.category?.group == .barbell {
+                        Section("Porcentagens do PR") {
+                            NavigationLink(value: record) {
+                                HSubtitleView(
+                                    title: "Porcentagem",
+                                    subtitle: "\(String(describing: record.percentage.clean))%"
+                                )
+                            }
+                        }
+                    }
+                    
                 }
+
                 Group {
                     Section("record.records.section.title") {
                         ForEach(store.filteredPrs, id: \.id) { pr in
@@ -65,8 +85,23 @@ struct RecordDetail: View {
                     }
                 }
                 
-                Section(header: Text("record.evolution.section.title \(store.category.title)"), footer: Text("record.evolution.section.description \(store.category.title)")) {
-                    LineViewGraph(points: store.points)
+                Section(header: Text("record.evolution.section.title \(store.category?.name ?? "")"), footer: Text("record.evolution.section.description \(store.category?.name ?? "")")) {
+                    Chart {
+                        ForEach(points, id: \.id) { point in
+                            BarMark(
+                                x: .value("Date", point.date),
+                                y: .value("Weight", point.value)
+                            )
+                            .clipShape(RoundedRectangle(cornerRadius: 14))
+                            .position(by: .value("Date", point.date))
+                            .annotation {
+                                Text(verbatim: point.value.formatted())
+                                    .font(.caption)
+                            }
+                        }
+                    }
+                    .frame(height: 250)
+                    .padding(.top)
                 }
             }
         }
@@ -78,12 +113,17 @@ struct RecordDetail: View {
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
             UINavigationBar.appearance().tintColor = .green
+            record = store.getMaxRecord(prs: store.filteredPrs)
+            points = store.getPoints()
+        }
+        .navigationDestination(for: PersonalRecord.self) { record in
+            PRPercentagesView(record: record)
         }
         .accentColor(.green)
     }
     
     func validateIfPro() {
-        if store.isPro {
+        if isPRO {
             guard let indexSet = self.indexSet else {
                 return
             }

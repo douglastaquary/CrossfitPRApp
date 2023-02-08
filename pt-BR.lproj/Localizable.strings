@@ -5,6 +5,9 @@
   Created by Douglas Taquary on 25/05/22.
  
  */
+
+/* Loading screen */
+"loading.view.title" = "Carregando..";
  
  /* Onboarding screen */
 
@@ -23,18 +26,23 @@
 "onboarding.item4.description" = "O Poderoso Insights permite que você entenda sua evolução, os maiores records através de poderosos gráficos";
 
 "onboarding.button.title" = "Começar";
+
+"onboarding.alert.icloud.account.title" = "Conta do iCloud desativada";
+"onboarding.alert.icloud.account.message" = "Vá em Ajustes, Apple ID, faça login na sua conta da Apple e tente novamente.";
+"onboarding.alert.cancel.button.title" = "Cancelar";
   
 /* Screen titles*/
 "screen.category.title" = "Recordes pessoais";
-"screen.insights.title" = "Insights";
+"screen.insights.title" = "Percepções";
 "screen.settings.title" = "Configurações";
 
 /* Category searchbar descript */
 "category.search.descript" = "buscar por nome";
 
 /* Tabbar title screens */
-"tabbar.records.title" = "records";
-"tabbar.insights.title" = "insights";
+"tabbar.myrecords.title" = "meus records";
+"tabbar.categories.title" = "categorias";
+"tabbar.insights.title" = "percepções";
 "tabbar.settings.title" = "configurações";
 
 /* Purchase screen */
@@ -69,7 +77,7 @@
 
 "record.records.section.title" = "Recordes";
 "record.evolution.section.title %@" = "Evolução de %@";
-"record.evolution.section.description %@" = "Esta análise é baseada na lista de recordes de %@ cadastrada no aplicativo. Os mais recentes são os da faixa verde (à direita), o cinza mais antigo e em evolução o amarelo.";
+"record.evolution.section.description %@" = "Esta análise é baseada na sua lista de recordes de %@ cadastrada no aplicativo.";
 "record.screen.delete.button.title" = "Apagar";
 "record.screen.cancel.button.title" = "Cancelar";
 "record.screen.delete.confirmation.title" = "Você realmente deseja excluir?";
@@ -78,11 +86,12 @@
 /* Insight screen */
 
 "insight.section.ranking.barbell.title" = "Top Recordes com Barra";
+"insight.section.footer.rank.barbell.title" = "O Top rank mostra o record mais alto, record em evolução e o menor desempenho.";
 "insight.section.ranking.gymnastic.title" = "Top Recordes Ginásticos";
 "insight.section.ranking.endurance.title"= "Top Recordes de Resistência";
 "insight.section.graph.title" = "Percepções";
 
-"insight.section.information.title" = "Maior recorde";
+"insight.section.information.title" = "Seu maior recorde";
 "insight.view.error.description" = "No momento você ainda não tem dados para mostrar.";
 
 "insight.view.intensity.title"= "Intensidade";
@@ -118,6 +127,9 @@
 "settings.screen.section.privacy.title" = "Política de privacidade e Termos de Uso";
 "settings.screen.section.about.title" = "Sobre";
 "settings.screen.section.crossfitpro.title" = "CrossFitPR PRO";
+"settings.screen.section.nocommitment.title" = "Sem compromisso. Cancele a qualquer momento";
+"settings.pounds.title" = "libras";
+"settings.kilo.title" = "quilos";
 
 "emptyView.screen.message" = "Comece agora\nadicionando um novo record.\nOs poderosos insights são gerados a partir\ndos dados que você adiciona no app.\nPara melhor visualização dos gráficos,\n é necessário ao menos 8 registros de records.";
 

@@ -12,6 +12,14 @@ enum RecordMode: String {
     case maxWeight
     case maxRepetition
     case maxDistance
+    
+    var index: Int {
+        switch self {
+        case .maxWeight: return  0
+        case .maxRepetition: return 1
+        case .maxDistance: return 3
+        }
+    }
 }
 
 struct NewRecordView: View {
@@ -26,6 +34,7 @@ struct NewRecordView: View {
     @State private var selectedMaxReps: Int = 0
     @State private var selectedMinTime: Int = 0
     @State private var selectedDistance: Int = 10
+    @State private var title: String = ""
     
     @Environment(\.presentationMode) var presentation
     
@@ -35,10 +44,14 @@ struct NewRecordView: View {
         NavigationView {
             Form {
                 Section(header: Text("Personal Record")) {
-                    CategoryView(categoriesNames: viewModel.crossfitLevelList, selectedCategory: $viewModel.selectedCategoryItem)
+                    CategoryView(items: viewModel.crossfitLevelList, selectedCategory: $viewModel.selectedCategoryItem)
                     Picker(selection: $viewModel.selectedCategory, label: Text("Crossfit PR").foregroundColor(.secondary)) {
-                        ForEach(0..<viewModel.personalRecordTypeList.count, id: \.self) {
-                            Text(viewModel.personalRecordTypeList[$0].title)
+                        if viewModel.editingCategory.title.isEmpty {
+                            ForEach(0..<viewModel.personalRecordTypeList.count, id: \.self) {
+                                Text(viewModel.personalRecordTypeList[$0].title)
+                            }
+                        } else {
+                            Text(viewModel.editingCategory.title)
                         }
                     }
                     .foregroundColor(.primary)
@@ -92,8 +105,17 @@ struct NewRecordView: View {
                     TextField("newRecord.screen.section.comment.description", text: $viewModel.editingRecord.comments)
                         .frame(height: 86)
                 }
+                
             }
-            .navigationBarTitle(Text("newRecord.screen.title"), displayMode: .inline)
+            .onAppear {
+                if !viewModel.editingCategory.title.isEmpty {
+                    viewModel.editingRecord.group = viewModel.editingCategory.group
+                    viewModel.editingRecord.prName = viewModel.editingCategory.title
+                    viewModel.editingRecord.recordMode = viewModel.editingCategory.type
+                    viewModel.selectedCategory = viewModel.editingCategory.type.index
+                }
+            }
+            .navigationBarTitle(Text(viewModel.editingCategory.title), displayMode: .inline)
             .navigationBarItems(
                 leading: Button(
                     action:{
@@ -113,7 +135,9 @@ struct NewRecordView: View {
                             .bold()
                     }
             ).disabled(viewModel.isSaving)
+            
         }
+    
     }
 }
 
@@ -124,14 +148,14 @@ struct NewPRRecordView_Previews: PreviewProvider {
 }
 
 struct CategoryView: View {
-    let categoriesNames: [String]
+    let items: [String]
     @Binding var selectedCategory: Int
 
     var body: some View {
         VStack(alignment: .center) {
             Picker("What is your favorite color?", selection: $selectedCategory) {
-                ForEach(0..<categoriesNames.count, id: \.self) { index in
-                    Text(self.categoriesNames[index]).tag(index)
+                ForEach(0..<items.count, id: \.self) { index in
+                    Text(self.items[index]).tag(index)
                 }
             }
             .pickerStyle(.segmented)
@@ -143,7 +167,7 @@ struct CategoryView: View {
 
 struct CategoryView_Previews: PreviewProvider {
     static var previews: some View {
-        CategoryView(categoriesNames: [], selectedCategory: .constant(0))
+        CategoryView(items: [], selectedCategory: .constant(0))
     }
 }
 

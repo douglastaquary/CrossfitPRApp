@@ -1,8 +1,8 @@
 //
-//  CategoryStore.swift
+//  MyRecordsViewModel.swift
 //  CrossfitPR
 //
-//  Created by Douglas Taquary on 28/04/22.
+//  Created by Douglas Taquary on 18/01/23.
 //
 
 import Foundation
@@ -11,10 +11,10 @@ import Combine
 import CloudKit
 import os
 
-@MainActor final class CategoryStore: ObservableObject {
+@MainActor final class MyRecordsViewModel: ObservableObject {
     private static let logger = Logger(
         subsystem: "com.dabtlab.crossfitprapp",
-        category: String(describing: CategoryStore.self)
+        category: String(describing: MyRecordsViewModel.self)
     )
     
     private let cancellable: Cancellable
@@ -96,3 +96,4 @@ import os
     }
     
 }
+

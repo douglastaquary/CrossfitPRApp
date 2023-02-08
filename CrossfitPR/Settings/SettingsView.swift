@@ -10,22 +10,25 @@ import SwiftUI
 struct SettingsView: View {
     
     @EnvironmentObject var settings: SettingsStore
-    @StateObject var storeKitManager = StoreKitManager()
+    //@StateObject var storeKitManager = StoreKitManager()
     @Environment(\.scenePhase) var scenePhase
     @Environment(\.openURL) var openURL
+    @Environment(\.storeKitManager) var storeKitManager
+    @Environment(\.isPro) var isPRO
     @State var showPROsubsciptionView = false
+    @State var showSubscriptionsSheet = false
     @State private var scheduleDate = Date()
     @EnvironmentObject var lnManager: LocalNotificationManager
     
     private var dateProxy:Binding<Date> {
-            Binding<Date>(get: { self.scheduleDate }, set: {
-                self.scheduleDate = $0
-                Task{
-                    await self.updateWeekAndDayFromDate()
-                }
-            })
-        }
-
+        Binding<Date>(get: { self.scheduleDate }, set: {
+            self.scheduleDate = $0
+            Task{
+                await self.updateWeekAndDayFromDate()
+            }
+        })
+    }
+    
     var body: some View {
         Form {
             Section(header: Text("settings.screen.section.notification.title")) {
@@ -37,20 +40,26 @@ struct SettingsView: View {
                         .font(.system(size: 18)).foregroundColor(.green)
                 }
             }
-            
             Section(header: Text("settings.screen.section.tracking.title")) {
                 Picker(
                     selection: $settings.measureTrackingMode,
                     label: Text("settings.screen.section.tracking.measure.title")
                 ) {
                     ForEach(MeasureTrackingMode.allCases, id: \.self) {
-                        Text($0.rawValue).tag($0)
+                        Text(LocalizedStringKey($0.rawValue)).tag($0)
                     }
                 }
             }
-            
-            if !settings.isPro {
-                Section(header: Text("settings.screen.section.crossfitpro.title")) {
+            Section(header: Text("settings.screen.section.crossfitpro.title")) {
+                if !settings.isPro {
+                    Button(action: {
+                        self.showSubscriptionsSheet.toggle()
+                        print("######## settings.isPro\(settings.isPro)")
+                    }) {
+                        Text("settings.screen.section.nocommitment.title")
+                    }.manageSubscriptionsSheet(isPresented: $showSubscriptionsSheet)
+                    
+                } else {
                     Button(action: {
                         self.showPROsubsciptionView.toggle()
                         //self.settings.unlockPro()
@@ -61,6 +70,7 @@ struct SettingsView: View {
                             .environmentObject(PurchaseStore(storeKitManager: storeKitManager))
                     }
                 }
+                
             }
             Section(header: Text("settings.screen.section.about.title")) {
                 Button(action: {
@@ -92,7 +102,7 @@ struct SettingsView: View {
         } else {
             // show alert
         }
-
+        
     }
 }
 

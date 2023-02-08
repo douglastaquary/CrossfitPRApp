@@ -9,31 +9,47 @@ import SwiftUI
 
 struct RootView: View {
     @StateObject var lnManager = LocalNotificationManager()
+    @Environment(\.storeKitManager) var storeManager
+    
     @SceneStorage("selectedTab")
     private var selectedTab = 0
-    
     @State var showNewPRView = false
+    @State var selectCategoryItemInitialize: Int = 0
     
     var body: some View {
         TabView(selection: $selectedTab) {
             NavigationView {
                 VStack {
-                    CategoryListView()
-                        .environmentObject(CategoryStore())
+                    MyRecordsView(searchText: .constant(""))
+                        .environmentObject(RecordStore())
+                        .environmentObject(SettingsStore())
                 }
-                
             }
             .tabItem {
-                Image(systemName: "rosette")
-                Text(LocalizedStringKey("tabbar.records.title"))
+                Image(systemName: "trophy.circle.fill")
+                Text(LocalizedStringKey("tabbar.myrecords.title"))
             }
             .tag(0)
+            
+            NavigationView {
+                VStack {
+                    CategoryListView(selectedCategoryItem: $selectCategoryItemInitialize)
+                        .environmentObject(CategoryStore())
+                }
+            }
+            .tabItem {
+                Image(systemName: "square.grid.3x3")
+                Text(LocalizedStringKey("tabbar.categories.title"))
+            }
+            .tag(1)
             
             NavigationView {
                 VStack{
                     InsightsView()
                         .navigationTitle(LocalizedStringKey("screen.insights.title"))
-                        .environmentObject(InsightsStore())
+                        .environment(\.storeKitManager, storeManager)
+                        .environmentObject(InsightsStore(storeKitService: storeManager))
+                        .environmentObject(SettingsStore())
                 }
                     
             }
@@ -41,20 +57,22 @@ struct RootView: View {
                 Image(systemName: "chart.xyaxis.line")
                 Text(LocalizedStringKey("tabbar.insights.title"))
             }
-            .tag(1)
+            .tag(2)
             
             NavigationView {
                 SettingsView()
                     .navigationTitle(LocalizedStringKey("screen.settings.title"))
                     .environmentObject(SettingsStore())
                     .environmentObject(lnManager)
+                    .environment(\.storeKitManager, storeManager)
             }
             .tabItem {
                 Image(systemName: "gear")
                 Text(LocalizedStringKey("tabbar.settings.title"))
             }
-            .tag(2)
-        }.accentColor(.green)
+            .tag(3)
+        }
+        .accentColor(.green)
     }
 }
 
