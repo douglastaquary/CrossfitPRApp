@@ -38,12 +38,6 @@ final class SettingsStore: ObservableObject {
     init(storeKitManager: StoreKitManager =  StoreKitManager(), defaults: UserDefaults = .standard) {
         self.storeKitManager = storeKitManager
         self.defaults = defaults
-//
-//        self.defaults.register(defaults: [
-//            SettingStoreKeys.trainingTargetGoal: 8,
-//            SettingStoreKeys.sleepTrackingEnabled: true,
-//            SettingStoreKeys.measureTrackingMode: MeasureTrackingMode.pounds.rawValue
-//        ])
 
         cancellable = NotificationCenter.default
             .publisher(for: UserDefaults.didChangeNotification)
@@ -51,6 +45,11 @@ final class SettingsStore: ObservableObject {
             .subscribe(objectWillChange)
 
         Task {
+            self.defaults.register(defaults: [
+                SettingStoreKeys.trainingTargetGoal: 8,
+                SettingStoreKeys.sleepTrackingEnabled: true,
+                SettingStoreKeys.measureTrackingMode: MeasureTrackingMode.pounds.rawValue
+            ])
             await updatePurchases()
         }
     }

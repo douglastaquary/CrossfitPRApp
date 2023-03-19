@@ -11,10 +11,10 @@ import Combine
 import SwiftUICharts
 import os
 
-@MainActor final class RecordStore: ObservableObject {
+@MainActor final class RecordDetailViewModel: ObservableObject {
     private static let logger = Logger(
         subsystem: "com.dabtlab.crossfitprapp",
-        category: String(describing: RecordStore.self)
+        category: String(describing: RecordDetailViewModel.self)
     )
     @Published var evolutionPoints: [DataPoint] = []
     @Published var records: [PersonalRecord] = []

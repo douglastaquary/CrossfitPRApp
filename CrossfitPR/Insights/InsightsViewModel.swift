@@ -11,7 +11,7 @@ import Combine
 import CoreData
 import SwiftUICharts
 
-final class InsightsStore: ObservableObject {
+final class InsightsViewModel: ObservableObject {
 
     @Published var uiState = UserPurchaseState.loading
     @Published var biggestPRName: String = ""
@@ -134,12 +134,19 @@ final class InsightsStore: ObservableObject {
             $0.kiloValue > $1.kiloValue
         }.first
         
-        guard let barbellRvolutionPR  = evolutionPR else { return }
+        guard var barbellRvolutionPR  = evolutionPR else { return }
+        barbellRvolutionPR.legend = .yellow
         topRakingBarbellRecords.append(barbellRvolutionPR)
         
         for barbell in barbellRecords {
             if barbell.kiloValue == min, barbell.prName != barbellBiggestPRName {
-                topRakingBarbellRecords.append(barbell)
+                var minArrayRecords: [PersonalRecord] = []
+                minArrayRecords.append(barbell)
+                if var lowerRecordToshow = minArrayRecords.first {
+                    lowerRecordToshow.legend = .red
+                    topRakingBarbellRecords.append(lowerRecordToshow)
+                }
+                
             }
         }
         let sortedTopBarbellRecordsRanking = topRakingBarbellRecords.sorted { $0.kiloValue > $1.kiloValue }
@@ -169,12 +176,25 @@ final class InsightsStore: ObservableObject {
             $0.poundValue > $1.poundValue
         }.first
         
-        guard let barbellRvolutionPR  = evolutionPR else { return }
+        
+        guard var barbellRvolutionPR = evolutionPR else { return }
+        barbellRvolutionPR.legend = .yellow
         topRakingBarbellRecords.append(barbellRvolutionPR)
         
         for barbell in barbellRecords {
             if barbell.poundValue == min, barbell.prName != barbellBiggestPRName {
-                topRakingBarbellRecords.append(barbell)
+                var minArrayRecords: [PersonalRecord] = []
+                minArrayRecords.append(barbell)
+                if var lowerRecordToshow = minArrayRecords.first {
+                    lowerRecordToshow.legend = .red
+                    topRakingBarbellRecords.append(lowerRecordToshow)
+                }
+                
+                
+                
+                var minRecord = barbell
+                minRecord.legend = .red
+                topRakingBarbellRecords.append(minRecord)
             }
         }
         let sortedTopBarbellRecordsRanking = topRakingBarbellRecords.sorted { $0.poundValue > $1.poundValue }
@@ -226,6 +246,22 @@ final class InsightsStore: ObservableObject {
     func loadEnduranceRecords() {
         enduranceRecords = getAllRecordsFor(recordGroup: .endurance)
     }
+    
+    func buildLastPercentage(to record: PersonalRecord) {
+        let max: Int = topRakingBarbellRecords.map { Int($0.poundValue) }.max() ?? 0
+        
+        let min: Int = barbellRecords.filter { pr in
+            pr.poundValue < max
+        }.filter { pr in
+            pr.prName != barbellBiggestPRName
+        }.sorted {
+            $0.percentage > $1.percentage
+        }.map {
+            $0.poundValue
+        }.min() ?? 0
+        let minPR = barbellRecords.filter { pr in pr.poundValue == min }.first ?? PersonalRecord()
+    }
+    
     
     func performTopRankingEnduranceRecords() {
         let max: Int = enduranceRecords.map { $0.distance }.max() ?? 0
@@ -311,7 +347,7 @@ final class InsightsStore: ObservableObject {
     }
 }
 
-extension InsightsStore {
+extension InsightsViewModel {
     func updatePurchases() async {
         Task {
             do {

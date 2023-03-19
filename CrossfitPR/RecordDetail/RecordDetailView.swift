@@ -8,8 +8,8 @@
 import SwiftUI
 import Charts
 
-struct RecordDetail: View {
-    @EnvironmentObject var store: RecordStore
+struct RecordDetailView: View {
+    @EnvironmentObject var store: RecordDetailViewModel
     @EnvironmentObject var settings: SettingsStore
     @Environment(\.isPro) var isPRO
     
@@ -136,6 +136,6 @@ struct RecordDetail: View {
 
 struct RecordDetail_Previews: PreviewProvider {
     static var previews: some View {
-        RecordDetail()
+        RecordDetailView()
     }
 }

@@ -11,7 +11,7 @@ struct MyRecordsView: View {
     @EnvironmentObject var settings: SettingsStore
     @State var showNewPRView = false
     @State var isEmpty = false
-    @EnvironmentObject var store: RecordStore
+    @EnvironmentObject var store: RecordDetailViewModel
     @Binding var searchText: String
     
     var body: some View {
@@ -31,8 +31,8 @@ struct MyRecordsView: View {
                         UINavigationBar.appearance().tintColor = .green
                     }
                     .navigationDestination(for: PRSection.self) { section in
-                        RecordDetail(prName: section.name)
-                            .environmentObject(RecordStore(prSection: section))
+                        RecordDetailView(prName: section.name)
+                            .environmentObject(RecordDetailViewModel(prSection: section))
                             .environmentObject(SettingsStore())
                     }
                 }
@@ -48,7 +48,7 @@ struct MyRecordsView: View {
                         title: "Add new record",
                         completion: { self.showNewPRView.toggle() }
                     ).sheet(isPresented: $showNewPRView) {
-                        NewRecordView()
+                        NewRecordView(viewModel: NewRecordViewModel())
                     }
                 }
             }

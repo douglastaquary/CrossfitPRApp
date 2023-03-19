@@ -33,10 +33,10 @@ struct PRPercentagesView: View {
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: 100))]) {
                     ForEach(1 ..< 11) { i in
                         Button(action: {}) {
-                            VStack(spacing: 12) {
+                            VStack(spacing: 8) {
                                 let percentage = Int(i*10)
                                 let kiloValue = ((record.kiloValue)*percentage)/100
-                                Text("\((kiloValue).formatted()) kg")
+                                Text("100 kg")
                                     .font(.title2)
                                     .foregroundColor(.green)
                                     .fontWeight(.bold)
@@ -46,7 +46,7 @@ struct PRPercentagesView: View {
                                     .font(.title3)
                                     .foregroundColor(.primary)
                             }
-                            .padding()
+                            .padding(8)
                             .buttonStyle(CardFilledButton())
                             .overlay(RoundedRectangle(cornerRadius: 5).stroke(.primary, lineWidth: 1))
                         }

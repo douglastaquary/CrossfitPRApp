@@ -7,7 +7,7 @@
  */
 
 /* Loading screen */
-"loading.view.title" = "Carregando..";
+"loading.view.title" = "Carregando...";
  
  /* Onboarding screen */
 
@@ -32,7 +32,8 @@
 "onboarding.alert.cancel.button.title" = "Cancelar";
   
 /* Screen titles*/
-"screen.category.title" = "Recordes pessoais";
+"screen.records.title" = "Meus recordes";
+"screen.category.title" = "Categorias";
 "screen.insights.title" = "Percepções";
 "screen.settings.title" = "Configurações";
 
@@ -47,7 +48,7 @@
 
 /* Purchase screen */
 "purchase.item1.title" = "Gerencie seus recordes pessoais";
-"purchase.item1.description" = "Apague records, organize suas categorias de acordo com os seus treinos de crossfit.";
+"purchase.item1.description" = "Apague records, organize suas categorias de acordo com os seus treinos de alta performance.";
 
 "purchase.item2.title" = "Os Poderosos Insights";
 "purchase.item2.description" = "Os Poderosos Insights permitem que você acompanhe, entenda seus maiores records e evolução através de gráficos simplificados.";
@@ -86,7 +87,7 @@
 /* Insight screen */
 
 "insight.section.ranking.barbell.title" = "Top Recordes com Barra";
-"insight.section.footer.rank.barbell.title" = "O Top rank mostra o record mais alto, record em evolução e o menor desempenho.";
+"insight.section.footer.rank.barbell.title" = "O Top ranking mostra o record mais alto, recordes em evolução e a menor performance.";
 "insight.section.ranking.gymnastic.title" = "Top Recordes Ginásticos";
 "insight.section.ranking.endurance.title"= "Top Recordes de Resistência";
 "insight.section.graph.title" = "Percepções";
@@ -133,3 +134,5 @@
 
 "emptyView.screen.message" = "Comece agora\nadicionando um novo record.\nOs poderosos insights são gerados a partir\ndos dados que você adiciona no app.\nPara melhor visualização dos gráficos,\n é necessário ao menos 8 registros de records.";
 
+/* Ranking screen view*/
+"ranking.screen.evolution.percentage %@" = "Evolution of %@ from last PR recored.";

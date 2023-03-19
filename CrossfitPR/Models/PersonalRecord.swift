@@ -8,6 +8,7 @@
 import Foundation
 import CloudKit
 import CoreData
+import SwiftUI
 
 struct RecordPoint: Identifiable, Hashable {
     var id: UUID = UUID()
@@ -57,6 +58,8 @@ struct PersonalRecord: Identifiable, Hashable {
     var maxReps: Int
     var minTime: Int
     var comments: String
+    var legend: Color = .green
+    var evolutionPercentage: Int = 0
     
     init(id: UUID = UUID(), kiloValue: Int32 = 0, poundValue: Int32 = 0, distance: Int32 = 0, recordDate: Date? = nil, prName: String = "", percentage: Float = 10.0, crossfitLevel: CrossfitLevel? = nil, recordMode: RecordMode? = nil, group: RecordGroup? = nil, maxReps: Int32 = 0, minTime: Int32 = 0, comments: String = "") {
         self.id = id
@@ -80,18 +83,18 @@ struct PersonalRecord: Identifiable, Hashable {
         return dateFormatter.string(from: recordDate ?? .now)
     }
     
-    var marketTexts: (result: String, measure: String) {
+    var marketTexts: (value: (pound: String, kilos: String, another: String), measure: String) {
         if let group = group {
             switch group {
             case .barbell:
-                return (result: poundValue.description, measure: "\(percentage)%")
+                return (value: (pound: "\(poundValue.description)lbs", kilos: "\(kiloValue.description)kg", another: ""), measure: "\(percentage)%")
             case .gymnastic:
-                return (result: maxReps.description, measure: "\(maxReps)reps")
+                return (value: (pound: "", kilos: "", another: ""), measure: "\(maxReps.description)reps")
             case .endurance:
-                return (result: minTime.description, measure: "\(distance)m")
+                return (value: (pound: "", kilos: "", another: minTime.description), measure: "\(distance)m")
             }
         }
-        return (result: "", measure: "")
+        return (value: (pound: "", kilos: "", another: ""), measure: "")
     }
     
     static let recordMock: PersonalRecord = PersonalRecord(
@@ -126,6 +129,7 @@ struct PersonalRecord: Identifiable, Hashable {
             percentage: 80
         )
     ]
+    
 }
 
 extension PersonalRecord: Comparable {

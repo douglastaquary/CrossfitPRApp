@@ -39,15 +39,15 @@
 		4E5805E7280CAA8700F16219 /* CrossfitPR.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4E5805E5280CAA8700F16219 /* CrossfitPR.xcdatamodeld */; };
 		4E5805E9280CABE900F16219 /* PR+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5805E8280CABE900F16219 /* PR+CoreDataProperties.swift */; };
 		4E5805EB280CEC1700F16219 /* CrossfitPRApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5805EA280CEC1700F16219 /* CrossfitPRApp.swift */; };
-		4E5805EE280F8B0400F16219 /* RecordDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5805ED280F8B0400F16219 /* RecordDetail.swift */; };
+		4E5805EE280F8B0400F16219 /* RecordDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5805ED280F8B0400F16219 /* RecordDetailView.swift */; };
 		4E6154162978E31E00284E8E /* MyRecordsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6154152978E31E00284E8E /* MyRecordsViewModel.swift */; };
 		4E615418298225EE00284E8E /* PRPercentagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E615417298225EE00284E8E /* PRPercentagesView.swift */; };
 		4E61541A298B515600284E8E /* MaxRecordItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E615419298B515600284E8E /* MaxRecordItem.swift */; };
 		4E8BAA192816150400E179A3 /* Float+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8BAA182816150400E179A3 /* Float+extensions.swift */; };
-		4E8BAA1B281760A100E179A3 /* InsightsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8BAA1A281760A100E179A3 /* InsightsStore.swift */; };
+		4E8BAA1B281760A100E179A3 /* InsightsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8BAA1A281760A100E179A3 /* InsightsViewModel.swift */; };
 		4E8BAA1E2817640100E179A3 /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = 4E8BAA1D2817640100E179A3 /* SwiftUICharts */; };
 		4E8D9113282C798F00C88BF2 /* LineViewGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8D9112282C798F00C88BF2 /* LineViewGraph.swift */; };
-		4E8D9115282C820F00C88BF2 /* RecordStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8D9114282C820F00C88BF2 /* RecordStore.swift */; };
+		4E8D9115282C820F00C88BF2 /* RecordDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8D9114282C820F00C88BF2 /* RecordDetailViewModel.swift */; };
 		4E8D911F283192D800C88BF2 /* PurchaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8D911E283192D800C88BF2 /* PurchaseView.swift */; };
 		4E8D9121283195A000C88BF2 /* HViewImageAndText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8D9120283195A000C88BF2 /* HViewImageAndText.swift */; };
 		4E8D91232835C1B900C88BF2 /* CardGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8D91222835C1B900C88BF2 /* CardGroupView.swift */; };
@@ -113,14 +113,14 @@
 		4E5805E6280CAA8700F16219 /* CrossfitPR.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CrossfitPR.xcdatamodel; sourceTree = "<group>"; };
 		4E5805E8280CABE900F16219 /* PR+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PR+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		4E5805EA280CEC1700F16219 /* CrossfitPRApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrossfitPRApp.swift; sourceTree = "<group>"; };
-		4E5805ED280F8B0400F16219 /* RecordDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordDetail.swift; sourceTree = "<group>"; };
+		4E5805ED280F8B0400F16219 /* RecordDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordDetailView.swift; sourceTree = "<group>"; };
 		4E6154152978E31E00284E8E /* MyRecordsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecordsViewModel.swift; sourceTree = "<group>"; };
 		4E615417298225EE00284E8E /* PRPercentagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PRPercentagesView.swift; sourceTree = "<group>"; };
 		4E615419298B515600284E8E /* MaxRecordItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaxRecordItem.swift; sourceTree = "<group>"; };
 		4E8BAA182816150400E179A3 /* Float+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Float+extensions.swift"; sourceTree = "<group>"; };
-		4E8BAA1A281760A100E179A3 /* InsightsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsightsStore.swift; sourceTree = "<group>"; };
+		4E8BAA1A281760A100E179A3 /* InsightsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsightsViewModel.swift; sourceTree = "<group>"; };
 		4E8D9112282C798F00C88BF2 /* LineViewGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineViewGraph.swift; sourceTree = "<group>"; };
-		4E8D9114282C820F00C88BF2 /* RecordStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordStore.swift; sourceTree = "<group>"; };
+		4E8D9114282C820F00C88BF2 /* RecordDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordDetailViewModel.swift; sourceTree = "<group>"; };
 		4E8D911E283192D800C88BF2 /* PurchaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseView.swift; sourceTree = "<group>"; };
 		4E8D9120283195A000C88BF2 /* HViewImageAndText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HViewImageAndText.swift; sourceTree = "<group>"; };
 		4E8D91222835C1B900C88BF2 /* CardGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardGroupView.swift; sourceTree = "<group>"; };
@@ -265,7 +265,7 @@
 			isa = PBXGroup;
 			children = (
 				4E5805C527FBBE7900F16219 /* InsightsView.swift */,
-				4E8BAA1A281760A100E179A3 /* InsightsStore.swift */,
+				4E8BAA1A281760A100E179A3 /* InsightsViewModel.swift */,
 				4EE666F528D4B3730090BB35 /* InsightsViewPRO.swift */,
 			);
 			path = Insights;
@@ -342,8 +342,8 @@
 		4E5805EC280F8ABA00F16219 /* RecordDetail */ = {
 			isa = PBXGroup;
 			children = (
-				4E5805ED280F8B0400F16219 /* RecordDetail.swift */,
-				4E8D9114282C820F00C88BF2 /* RecordStore.swift */,
+				4E5805ED280F8B0400F16219 /* RecordDetailView.swift */,
+				4E8D9114282C820F00C88BF2 /* RecordDetailViewModel.swift */,
 			);
 			path = RecordDetail;
 			sourceTree = "<group>";
@@ -489,7 +489,7 @@
 				4E5805CD27FD2C0C00F16219 /* RootView.swift in Sources */,
 				4EE666E428CE91F60090BB35 /* LocalNotificationManager.swift in Sources */,
 				4EE666E628CE922A0090BB35 /* LocalNotification.swift in Sources */,
-				4E8BAA1B281760A100E179A3 /* InsightsStore.swift in Sources */,
+				4E8BAA1B281760A100E179A3 /* InsightsViewModel.swift in Sources */,
 				4EE666EA28CFA2A70090BB35 /* CrossFitLineChart.swift in Sources */,
 				4EC1DF2E289625AC0027D38F /* CrossfitLevel.swift in Sources */,
 				4E5805CB27FD29B900F16219 /* SettingsStore.swift in Sources */,
@@ -498,7 +498,7 @@
 				4E5805C227FB8B1C00F16219 /* AppDependencies.swift in Sources */,
 				4E5805E7280CAA8700F16219 /* CrossfitPR.xcdatamodeld in Sources */,
 				4E5805BE27FB8B1C00F16219 /* NewRecordView.swift in Sources */,
-				4E5805EE280F8B0400F16219 /* RecordDetail.swift in Sources */,
+				4E5805EE280F8B0400F16219 /* RecordDetailView.swift in Sources */,
 				4E5805B827FB8B1C00F16219 /* App.swift in Sources */,
 				4E6154162978E31E00284E8E /* MyRecordsViewModel.swift in Sources */,
 				4E5805B627FB8B1C00F16219 /* PersonalRecord.swift in Sources */,
@@ -513,7 +513,7 @@
 				4E26EC53281EE6FC00A4F8C3 /* RingProgressView.swift in Sources */,
 				4E8D9113282C798F00C88BF2 /* LineViewGraph.swift in Sources */,
 				4E61541A298B515600284E8E /* MaxRecordItem.swift in Sources */,
-				4E8D9115282C820F00C88BF2 /* RecordStore.swift in Sources */,
+				4E8D9115282C820F00C88BF2 /* RecordDetailViewModel.swift in Sources */,
 				4EE5FA40293D152600A28B8C /* SimpleBarProgressView.swift in Sources */,
 				4EE58ABB289590650073A351 /* DataManager.swift in Sources */,
 				4E5805E2280CA08000F16219 /* PersistenceStore.swift in Sources */,

@@ -21,7 +21,7 @@ struct RootView: View {
             NavigationView {
                 VStack {
                     MyRecordsView(searchText: .constant(""))
-                        .environmentObject(RecordStore())
+                        .environmentObject(RecordDetailViewModel())
                         .environmentObject(SettingsStore())
                 }
             }
@@ -48,7 +48,7 @@ struct RootView: View {
                     InsightsView()
                         .navigationTitle(LocalizedStringKey("screen.insights.title"))
                         .environment(\.storeKitManager, storeManager)
-                        .environmentObject(InsightsStore(storeKitService: storeManager))
+                        .environmentObject(InsightsViewModel(storeKitService: storeManager))
                         .environmentObject(SettingsStore())
                 }
                     

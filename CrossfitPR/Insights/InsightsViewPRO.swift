@@ -10,7 +10,7 @@ import Charts
 import SwiftUICharts
 
 struct InsightsViewPRO: View {
-    @EnvironmentObject var store: InsightsStore
+    @EnvironmentObject var store: InsightsViewModel
     
     var body: some View {
         VStack {
@@ -21,7 +21,8 @@ struct InsightsViewPRO: View {
                         Text(LocalizedStringKey("insight.view.error.description"))
                     } else {
                         ForEach(store.topRakingBarbellRecords) { barbell in
-                            RankingView(record: barbell, measure: store.measureTrackingMode)
+                            RankingView()
+                                .environmentObject(RankingViewModel(record: barbell, measure: store.measureTrackingMode, legend: barbell.legend))
                             
                         }
                         
@@ -139,3 +140,36 @@ struct InsightsViewPRO: View {
 //        InsightsViewPRO(store: InsightsStore())
 //    }
 //}
+
+struct RackingSection: Identifiable {
+    let id: UUID = UUID()
+    var name: String
+    var records: [PersonalRecord]
+    var measure: MeasureTrackingMode
+}
+
+
+
+
+struct RankingViewPRO: View {
+    
+    @State var sections: [RackingSection]
+    
+    var body: some View {
+        VStack {
+            Form {
+                ForEach(sections, id: \.id) { section in
+                    Section(
+                        header: Text(section.name),
+                        footer: Text("Evolução de 30% em relação ao ultimo PR registrado.")
+                    ) {
+                        ForEach(section.records) { record in
+                            RankingView()
+                                .environmentObject(RankingViewModel(record: record, measure: section.measure))
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
