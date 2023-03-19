@@ -31,6 +31,7 @@ struct RootView: View {
             }
             .tag(0)
             
+            
             NavigationView {
                 VStack {
                     CategoryListView(selectedCategoryItem: $selectCategoryItemInitialize)
@@ -42,6 +43,7 @@ struct RootView: View {
                 Text(LocalizedStringKey("tabbar.categories.title"))
             }
             .tag(1)
+            
             
             NavigationView {
                 VStack{
@@ -59,6 +61,7 @@ struct RootView: View {
             }
             .tag(2)
             
+            
             NavigationView {
                 SettingsView()
                     .navigationTitle(LocalizedStringKey("screen.settings.title"))
@@ -71,8 +74,13 @@ struct RootView: View {
                 Text(LocalizedStringKey("tabbar.settings.title"))
             }
             .tag(3)
+            
         }
         .accentColor(.green)
+        .onChange(of: selectedTab) { newValue in
+            let impact = UIImpactFeedbackGenerator(style: .light)
+            impact.impactOccurred()
+        }
     }
 }
 
