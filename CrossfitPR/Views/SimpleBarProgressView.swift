@@ -77,11 +77,13 @@ struct RankingView: View {
             }
             .frame(height: 15)
             
-            HStack {
-                Text("ranking.screen.evolution.percentage \(viewModel.percentageEvolutionValue)")
-                    .font(.caption)
-                    .lineLimit(3)
-                    .foregroundColor(.secondary)
+            if !viewModel.percentageEvolutionValue.isEmpty {
+                HStack {
+                    Text("ranking.screen.evolution.percentage \(viewModel.percentageEvolutionValue)")
+                        .font(.caption)
+                        .lineLimit(3)
+                        .foregroundColor(.secondary)
+                }
             }
         }
         

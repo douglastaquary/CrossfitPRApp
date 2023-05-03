@@ -169,7 +169,13 @@ struct RankingViewPRO: View {
                     ) {
                         ForEach(section.records) { record in
                             RankingView()
-                                .environmentObject(RankingViewModel(record: record, measure: section.measure))
+                                .environmentObject(
+                                    RankingViewModel(
+                                        record: record,
+                                        measure: section.measure,
+                                        percentageEvolutionValue: "\(record.evolutionPercentage)"
+                                )
+                            )
                         }
                     }
                 }

@@ -92,7 +92,7 @@ struct RecordDetailView: View {
                                 x: .value("Date", point.date),
                                 y: .value("Weight", point.value)
                             )
-                            .clipShape(RoundedRectangle(cornerRadius: 14))
+                            //.clipShape(RoundedRectangle(cornerRadius: 14))
                             .position(by: .value("Date", point.date))
                             .annotation {
                                 Text(verbatim: point.value.formatted())

@@ -32,5 +32,69 @@
             categories = "SwiftUI">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "4E84284B-11B6-4660-8498-ADA1A00B02B7"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CrossfitPR/Insights/InsightsViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "257"
+            endingLineNumber = "257"
+            landmarkName = "buildLastPercentage()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "4E84284B-11B6-4660-8498-ADA1A00B02B7 - b4fb3ee7fc3035cd"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "CrossfitPR.InsightsViewModel.buildLastPercentage() -&gt; ()"
+                  moduleName = "CrossfitPR"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/douglastaquary/Documents/Projects/Github/SwiftUI/CrossfitPR/CrossfitPR/Insights/InsightsViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "257"
+                  endingLineNumber = "257"
+                  offsetFromSymbolStart = "737">
+               </Location>
+               <Location
+                  uuid = "4E84284B-11B6-4660-8498-ADA1A00B02B7 - 1a3eacab8e401f9d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (CrossfitPR.PersonalRecord) -&gt; Swift.Bool in CrossfitPR.InsightsViewModel.buildLastPercentage() -&gt; ()"
+                  moduleName = "CrossfitPR"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/douglastaquary/Documents/Projects/Github/SwiftUI/CrossfitPR/CrossfitPR/Insights/InsightsViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "258"
+                  endingLineNumber = "258"
+                  offsetFromSymbolStart = "136">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "39A9A109-B72A-419D-8DA4-3F1282BEDBF7"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CrossfitPR/Insights/InsightsViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "260"
+            endingLineNumber = "260"
+            landmarkName = "buildLastPercentage()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

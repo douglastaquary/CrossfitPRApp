@@ -27,9 +27,6 @@ struct PRView: View {
                                     .font(.body)
                                     .fontWeight(.semibold)
                                     .padding(.bottom, 8)
-                                Text(record.prName)
-                                    .font(.footnote)
-                                .foregroundColor(.secondary)
                                 HorizontalBarChartView(dataPoints: [
                                     DataPoint.init(
                                         value: Double(isPounds ? record.poundValue : record.kiloValue),

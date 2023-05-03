@@ -255,7 +255,7 @@ final class InsightsViewModel: ObservableObject {
     func buildLastPercentage() {
         for i in 0..<topRakingBarbellRecords.count {
             let mostRecents = barbellRecords.filter {
-                pr in pr.prName.contains(topRakingBarbellRecords[i].prName)
+                pr in pr.prName == topRakingBarbellRecords[i].prName
             }
             
             if mostRecents.count > 1 {
@@ -265,6 +265,8 @@ final class InsightsViewModel: ObservableObject {
                 let evolutionValue = firstRecordPoundValue - secondRecordPoundValue
                 topRakingBarbellRecords[i].evolutionPercentage =  evolutionValue
                 print("topRakingBarbellRecords \(i) = \(evolutionValue)%")
+            } else {
+                topRakingBarbellRecords[i].evolutionPercentage = mostRecents.first?.evolutionPercentage ?? 0
             }
         }
     }
