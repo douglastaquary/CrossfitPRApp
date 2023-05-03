@@ -77,7 +77,7 @@ struct RankingView: View {
             }
             .frame(height: 15)
             
-            if !viewModel.percentageEvolutionValue.isEmpty {
+            if !(viewModel.percentageEvolutionValue == "0%") {
                 HStack {
                     Text("ranking.screen.evolution.percentage \(viewModel.percentageEvolutionValue)")
                         .font(.caption)
