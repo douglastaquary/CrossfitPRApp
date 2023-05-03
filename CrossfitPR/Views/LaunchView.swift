@@ -52,9 +52,17 @@ struct LaunchView: View {
                 .padding()
                 .alert(isPresented: $showAlertSheet, content: {
                     if monitor.isConnected {
-                        return Alert(title: Text("Success!"), message: Text("The network request can be performed"), dismissButton: .default(Text("OK")))
+                        return Alert(
+                            title: Text("Success!"),
+                            message: Text("The network request can be performed"),
+                            dismissButton: .default(Text("OK"))
+                        )
                     }
-                    return Alert(title: Text("No Internet Connection"), message: Text("Please enable Wifi or Celluar data"), dismissButton: .default(Text("Cancel")))
+                    return Alert(
+                        title: Text("No Internet Connection"),
+                        message: Text("Please enable Wifi or Celluar data"),
+                        dismissButton: .default(Text("Cancel"))
+                    )
                 })
             } else {
                 if viewlaunch.currentPage == Route.onBoardingView.rawValue {
@@ -79,7 +87,7 @@ struct LaunchView: View {
                                 message: Text("onboarding.alert.icloud.account.message"),
                                 dismissButton: .default(Text("onboarding.alert.cancel.button.title")) {
                                     Task {
-                                        await viewModel.fetchAccountStatus()
+                                        //await viewModel.fetchAccountStatus()
                                         if viewModel.accountStatus != .available {
                                             //accountStatusAlertShown = true
                                         } else {

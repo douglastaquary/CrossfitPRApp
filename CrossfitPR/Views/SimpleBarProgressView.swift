@@ -109,7 +109,7 @@ final class RankingViewModel: ObservableObject {
     @Published var legend: Color = .green
     @Published var legendBackground: Color = .green
     
-    init(record: PersonalRecord, measure: MeasureTrackingMode, percentageEvolutionValue: String = "80", legend: Color = .green) {
+    init(record: PersonalRecord, measure: MeasureTrackingMode, percentageEvolutionValue: String = "", legend: Color = .green) {
         self.record = record
         self.measure = measure
         self.percentageEvolutionValue = "\(percentageEvolutionValue)%"

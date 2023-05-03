@@ -56,7 +56,7 @@ import os
     
     func getPoints() -> [RecordPoint] {
         let isPounds = measureTrackingMode == .pounds
-        let sortedPoints = filteredPrs.sorted(by: {$0.recordDate?.compare($1.recordDate ?? Date()) == .orderedAscending })
+        let sortedPoints = filteredPrs.sorted(by: {$0.recordDate.compare($1.recordDate) == .orderedAscending })
         guard let prSection = self.prSection else { return [] }
         switch prSection.group {
         case .barbell:
@@ -143,7 +143,7 @@ import os
             let sortedRecords = records.filter {
                 $0.prName.lowercased().contains(prName.lowercased())
             }.sorted()
-            let records = sortedRecords.sorted(by: {$0.recordDate?.compare($1.recordDate ?? Date()) == .orderedDescending })
+            let records = sortedRecords.sorted(by: {$0.recordDate.compare($1.recordDate) == .orderedDescending })
             return records
         }
         return []

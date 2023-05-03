@@ -49,7 +49,7 @@ struct PersonalRecord: Identifiable, Hashable {
     var kiloValue: Int
     var poundValue: Int
     var distance: Int
-    var recordDate: Date?
+    var recordDate: Date
     var prName: String
     var percentage: Float
     var crossfitLevel: CrossfitLevel?
@@ -61,7 +61,7 @@ struct PersonalRecord: Identifiable, Hashable {
     var legend: Color = .green
     var evolutionPercentage: Int = 0
     
-    init(id: UUID = UUID(), kiloValue: Int32 = 0, poundValue: Int32 = 0, distance: Int32 = 0, recordDate: Date? = nil, prName: String = "", percentage: Float = 10.0, crossfitLevel: CrossfitLevel? = nil, recordMode: RecordMode? = nil, group: RecordGroup? = nil, maxReps: Int32 = 0, minTime: Int32 = 0, comments: String = "") {
+    init(id: UUID = UUID(), kiloValue: Int32 = 0, poundValue: Int32 = 0, distance: Int32 = 0, recordDate: Date = Date(), prName: String = "", percentage: Float = 10.0, crossfitLevel: CrossfitLevel? = nil, recordMode: RecordMode? = nil, group: RecordGroup? = nil, maxReps: Int32 = 0, minTime: Int32 = 0, comments: String = "") {
         self.id = id
         self.kiloValue = Int(kiloValue)
         self.poundValue = Int(poundValue)
@@ -80,7 +80,7 @@ struct PersonalRecord: Identifiable, Hashable {
     var dateFormatter: String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MMM dd, yyyy"
-        return dateFormatter.string(from: recordDate ?? .now)
+        return dateFormatter.string(from: recordDate)
     }
     
     var marketTexts: (value: (pound: String, kilos: String, another: String), measure: String) {
@@ -133,8 +133,13 @@ struct PersonalRecord: Identifiable, Hashable {
 }
 
 extension PersonalRecord: Comparable {
-    static func < (lhs: PersonalRecord, rhs: PersonalRecord) -> Bool {
+    
+    static func == (lhs: PersonalRecord, rhs: PersonalRecord) -> Bool {
         return lhs.id == rhs.id && lhs.prName.lowercased() == rhs.prName.lowercased()
+    }
+    
+    static func < (lhs: PersonalRecord, rhs: PersonalRecord) -> Bool {
+        return lhs.recordDate < rhs.recordDate
     }
 }
 

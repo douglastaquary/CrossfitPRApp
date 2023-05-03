@@ -99,6 +99,7 @@ final class InsightsViewModel: ObservableObject {
         
         performTopRankingGymnasticRecords()
         performTopRankingEnduranceRecords()
+        buildLastPercentage()
     }
     
     // Call this early in the app's lifecycle.
@@ -155,7 +156,11 @@ final class InsightsViewModel: ObservableObject {
     
     func performTopRankingBarbellRecordsForPounds() {
         let max: Int = barbellRecords.map { $0.poundValue }.max() ?? 0
-        let maxPR = barbellRecords.filter { pr in pr.poundValue == max }.first ?? PersonalRecord()
+        let maxPR = barbellRecords.filter {
+            pr in pr.poundValue == max
+        }.sorted {
+            $0.recordDate < $1.recordDate
+        }.first ?? PersonalRecord()
         barbellBiggestPRName = maxPR.prName
         topRakingBarbellRecords.append(maxPR)
         
@@ -247,22 +252,23 @@ final class InsightsViewModel: ObservableObject {
         enduranceRecords = getAllRecordsFor(recordGroup: .endurance)
     }
     
-    func buildLastPercentage(to record: PersonalRecord) {
-        let max: Int = topRakingBarbellRecords.map { Int($0.poundValue) }.max() ?? 0
-        
-        let min: Int = barbellRecords.filter { pr in
-            pr.poundValue < max
-        }.filter { pr in
-            pr.prName != barbellBiggestPRName
-        }.sorted {
-            $0.percentage > $1.percentage
-        }.map {
-            $0.poundValue
-        }.min() ?? 0
-        let minPR = barbellRecords.filter { pr in pr.poundValue == min }.first ?? PersonalRecord()
+    func buildLastPercentage() {
+        for i in 0..<topRakingBarbellRecords.count {
+            let mostRecents = barbellRecords.filter {
+                pr in pr.prName.contains(topRakingBarbellRecords[i].prName)
+            }
+            
+            if mostRecents.count > 1 {
+                let sorted = mostRecents.sorted { $0.recordDate.timeIntervalSince1970 > $1.recordDate.timeIntervalSince1970 }
+                let firstRecordPoundValue = sorted[0].poundValue
+                let secondRecordPoundValue = sorted[1].poundValue
+                let evolutionValue = firstRecordPoundValue - secondRecordPoundValue
+                topRakingBarbellRecords[i].evolutionPercentage =  evolutionValue
+                print("topRakingBarbellRecords \(i) = \(evolutionValue)%")
+            }
+        }
     }
-    
-    
+
     func performTopRankingEnduranceRecords() {
         let max: Int = enduranceRecords.map { $0.distance }.max() ?? 0
         let maxPR = enduranceRecords.filter { pr in pr.distance == max }.first ?? PersonalRecord()
@@ -312,7 +318,7 @@ final class InsightsViewModel: ObservableObject {
             }
             return false
         }
-        let records = groupRecords.sorted(by: {$0.recordDate?.compare($1.recordDate ?? Date()) == .orderedAscending })
+        let records = groupRecords.sorted(by: {$0.recordDate.compare($1.recordDate) == .orderedAscending })
         return records
     }
     
@@ -347,25 +353,38 @@ final class InsightsViewModel: ObservableObject {
     }
 }
 
+//extension Sequence {
+//    func sorted<T: Comparable>(
+//        by keyPath: KeyPath<Element, T>,
+//        using comparator: (T, T) -> Bool = (<)
+//    ) -> [Element] {
+//        sorted { a, b in
+//            comparator(a[keyPath: keyPath], b[keyPath: keyPath])
+//        }
+//    }
+//}
+
 extension InsightsViewModel {
     func updatePurchases() async {
-        Task {
-            do {
-                let transaction = try await storeKitService.updatePurchases()
-                if try await transaction.value.ownershipType == .purchased {
-                    DispatchQueue.main.async {
-                        print("###### 💎 User is PRO! 🤩✅\n\n[Transaction Info]:\n\(transaction)\n\n♻️ Configuring app to PRO mode!")
-                        self.uiState = .isPRO
-                        print("[Updated] User permission content updated to PRO [value: \(self.uiState)].")
-                    }
-                }
-            } catch {
-                print("[Updated] User permission content updated to BLOCKED PRO. [value: \(self.uiState)].")
-                DispatchQueue.main.async {
-                    self.uiState = .blockPro
-                }
-                throw RequestError.fail(message: "[LOG] InsightsStore.updatePurchases(), Error: \(error)")
-            }
-        }
+        self.uiState = .isPRO
+        
+//        Task {
+//            do {
+//                let transaction = try await storeKitService.updatePurchases()
+//                if try await transaction.value.ownershipType == .purchased {
+//                    DispatchQueue.main.async {
+//                        print("###### 💎 User is PRO! 🤩✅\n\n[Transaction Info]:\n\(transaction)\n\n♻️ Configuring app to PRO mode!")
+//                        self.uiState = .isPRO
+//                        print("[Updated] User permission content updated to PRO [value: \(self.uiState)].")
+//                    }
+//                }
+//            } catch {
+//                print("[Updated] User permission content updated to BLOCKED PRO. [value: \(self.uiState)].")
+//                DispatchQueue.main.async {
+//                    self.uiState = .blockPro
+//                }
+//                throw RequestError.fail(message: "[LOG] InsightsStore.updatePurchases(), Error: \(error)")
+//            }
+//        }
     }
 }

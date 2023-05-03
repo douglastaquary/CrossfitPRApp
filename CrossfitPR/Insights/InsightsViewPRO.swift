@@ -22,7 +22,11 @@ struct InsightsViewPRO: View {
                     } else {
                         ForEach(store.topRakingBarbellRecords) { barbell in
                             RankingView()
-                                .environmentObject(RankingViewModel(record: barbell, measure: store.measureTrackingMode, legend: barbell.legend))
+                                .environmentObject(
+                                    RankingViewModel(
+                                        record: barbell,
+                                        measure: store.measureTrackingMode, percentageEvolutionValue: "\(barbell.evolutionPercentage)", legend: barbell.legend)
+                                )
                             
                         }
                         
