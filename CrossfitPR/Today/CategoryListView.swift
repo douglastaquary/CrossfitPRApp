@@ -40,18 +40,9 @@ struct CategoryListView: View {
                             .onTapGesture {
                                 self.showAddNewPRView.toggle()
                             }.sheet(isPresented: $showAddNewPRView) {
-                                NewRecordView()
+                                NewRecordView(viewModel: NewRecordViewModel(category: category))
                                     .environmentObject(NewRecordViewModel(category: category))
-                            }
-//                        NavigationLink(value: category) {
-//                            CategoryItemView(title: category.title, group: category.group.rawValue)
-//                                .onTapGesture {
-//                                    self.showAddNewPRView.toggle()
-//                                }.sheet(isPresented: $showAddNewPRView) {
-//                                    NewRecordView()
-//                                        .environment(NewRecordViewModel(category: category))
-//                                }
-//                        }
+                        }
                     }
                 }
             }
@@ -63,7 +54,7 @@ struct CategoryListView: View {
                             .foregroundColor(.green)
                             .accessibility(label: Text("add new record"))
                     }.sheet(isPresented: $showNewPRView) {
-                        NewRecordView()
+                        NewRecordView(viewModel: NewRecordViewModel())
                     }
                 }
             }
@@ -78,11 +69,6 @@ struct CategoryListView: View {
                     recordGroup: RecordGroup(rawValue: categoryNames[selectedCategoryItem]) ?? RecordGroup.barbell
                 )
             }
-//            .navigationDestination(for: Category.self) { category in
-//                NewRecordView(category: category)
-////                RecordDetail(prName: category.title)
-////                    .environmentObject(RecordStore(recordCategory: category))
-//            }
         }
         .onChange(of: searchText) { searchText in
             categories = store.searchExercise(for: searchText)

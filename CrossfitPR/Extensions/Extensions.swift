@@ -247,3 +247,12 @@ extension Array {
 }
 
 
+extension View {
+    func hapticFeedbackOnTap(style: UIImpactFeedbackGenerator.FeedbackStyle = .light) -> some View {
+        self.onTapGesture {
+            let impact = UIImpactFeedbackGenerator(style: style)
+            impact.impactOccurred()
+        }
+    }
+}
+

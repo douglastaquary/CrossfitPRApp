@@ -12,6 +12,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
     private let storeKitService: StoreKitManager = StoreKitManager()
+    private let appDefaults: UserDefaults = .standard
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let scene = scene as? UIWindowScene else {
@@ -29,7 +30,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window.rootViewController = UIHostingController(
             rootView: LaunchView(
                 storeKitManager: storeKitService,
-                viewModel: CrossfitPRViewModel(storeKitService: storeKitService)
+                appDefaults: appDefaults
             ).environmentObject(ViewLaunch()))
 
         self.window = window

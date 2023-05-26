@@ -10,19 +10,26 @@ import SwiftUI
 struct RootView: View {
     @StateObject var lnManager = LocalNotificationManager()
     @Environment(\.storeKitManager) var storeManager
+    @Environment(\.dismiss) var dismiss
     
     @SceneStorage("selectedTab")
     private var selectedTab = 0
     @State var showNewPRView = false
     @State var selectCategoryItemInitialize: Int = 0
-    
+    @State var accountStatusAlertShown = false
+    let appDefaults: UserDefaults
+
+    init(defaults: UserDefaults) {
+        self.appDefaults = defaults
+    }
+
     var body: some View {
         TabView(selection: $selectedTab) {
             NavigationView {
                 VStack {
-                    MyRecordsView(searchText: .constant(""))
-                        .environmentObject(RecordStore())
-                        .environmentObject(SettingsStore())
+                    MyRecordsView(appDefaults: appDefaults)
+                        .environmentObject(RecordDetailViewModel())
+                        .environmentObject(SettingsStore(defaults: self.appDefaults))
                 }
             }
             .tabItem {
@@ -30,6 +37,7 @@ struct RootView: View {
                 Text(LocalizedStringKey("tabbar.myrecords.title"))
             }
             .tag(0)
+            
             
             NavigationView {
                 VStack {
@@ -43,13 +51,14 @@ struct RootView: View {
             }
             .tag(1)
             
+            
             NavigationView {
                 VStack{
                     InsightsView()
                         .navigationTitle(LocalizedStringKey("screen.insights.title"))
                         .environment(\.storeKitManager, storeManager)
-                        .environmentObject(InsightsStore(storeKitService: storeManager))
-                        .environmentObject(SettingsStore())
+                        .environmentObject(InsightsViewModel(defaults: appDefaults, storeKitService: storeManager))
+                        .environmentObject(SettingsStore(defaults: appDefaults))
                 }
                     
             }
@@ -59,10 +68,11 @@ struct RootView: View {
             }
             .tag(2)
             
+            
             NavigationView {
-                SettingsView()
+                SettingsView(appDefaults: self.appDefaults)
                     .navigationTitle(LocalizedStringKey("screen.settings.title"))
-                    .environmentObject(SettingsStore())
+                    .environmentObject(SettingsStore(defaults: appDefaults))
                     .environmentObject(lnManager)
                     .environment(\.storeKitManager, storeManager)
             }
@@ -71,13 +81,51 @@ struct RootView: View {
                 Text(LocalizedStringKey("tabbar.settings.title"))
             }
             .tag(3)
+            
         }
         .accentColor(.green)
+        .onChange(of: selectedTab) { newValue in
+            let impact = UIImpactFeedbackGenerator(style: .light)
+            impact.impactOccurred()
+        }
+        .onAppear {
+            performSetupStatus()
+        }
+        .alert(isPresented: $accountStatusAlertShown) {
+            Alert(
+                title: Text("onboarding.alert.icloud.account.title"),
+                message: Text("onboarding.alert.icloud.account.message"),
+                dismissButton: .default(Text("onboarding.alert.cancel.button.title")) {
+                    dismiss()
+                }
+            )
+        }
+        
+    }
+    
+}
+
+extension RootView {
+    func performSetupStatus() {
+        Task {
+            await storeManager.fetchAccountStatus()
+            if storeManager.accountStatus == .available {
+                _ = try await storeManager.updatePurchases()
+                if storeManager.transactionState == .purchased {
+                    self.appDefaults.set(true, forKey: SettingStoreKeys.pro)
+                } else {
+                    self.appDefaults.set(false, forKey: SettingStoreKeys.pro)
+                }
+            } else {
+                accountStatusAlertShown = true
+            }
+            throw RequestError.fail(message: "[LOG] purchase(), Unexpected result")
+        }
     }
 }
 
 struct RootView_Previews: PreviewProvider {
     static var previews: some View {
-        RootView()
+        RootView(defaults: UserDefaults.standard)
     }
 }

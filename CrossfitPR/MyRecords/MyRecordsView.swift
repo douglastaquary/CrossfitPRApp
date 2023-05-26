@@ -9,10 +9,16 @@ import SwiftUI
 
 struct MyRecordsView: View {
     @EnvironmentObject var settings: SettingsStore
+    @EnvironmentObject var store: RecordDetailViewModel
     @State var showNewPRView = false
     @State var isEmpty = false
-    @EnvironmentObject var store: RecordStore
-    @Binding var searchText: String
+    @State var searchText: String = ""
+    let appDefaults: UserDefaults
+    
+    init(appDefaults: UserDefaults) {
+        self.appDefaults = appDefaults
+        
+    }
     
     var body: some View {
         NavigationStack {
@@ -31,9 +37,9 @@ struct MyRecordsView: View {
                         UINavigationBar.appearance().tintColor = .green
                     }
                     .navigationDestination(for: PRSection.self) { section in
-                        RecordDetail(prName: section.name)
-                            .environmentObject(RecordStore(prSection: section))
-                            .environmentObject(SettingsStore())
+                        RecordDetailView(prName: section.name)
+                            .environmentObject(RecordDetailViewModel(prSection: section))
+                            .environmentObject(SettingsStore(defaults: self.appDefaults))
                     }
                 }
                 
@@ -48,7 +54,7 @@ struct MyRecordsView: View {
                         title: "Add new record",
                         completion: { self.showNewPRView.toggle() }
                     ).sheet(isPresented: $showNewPRView) {
-                        NewRecordView()
+                        NewRecordView(viewModel: NewRecordViewModel())
                     }
                 }
             }
@@ -58,6 +64,6 @@ struct MyRecordsView: View {
 
 struct MyRecordsView_Previews: PreviewProvider {
     static var previews: some View {
-        MyRecordsView(searchText: .constant("snatch"))
+        MyRecordsView(appDefaults: .standard)
     }
 }

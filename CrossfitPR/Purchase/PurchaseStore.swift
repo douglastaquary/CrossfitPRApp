@@ -17,13 +17,11 @@ final class PurchaseStore: ObservableObject {
     @Published var products: [Product] = []
     @Published private(set) var state = UserPurchaseState.loading
     
-    private let defaults: UserDefaults
     private let cancellable: Cancellable
     let objectWillChange = PassthroughSubject<Void, Never>()
 
-    init(storeKitManager: StoreKitManager, defaults: UserDefaults = .standard) {
+    init(storeKitManager: StoreKitManager) {
         self.storeKitManager = storeKitManager
-        self.defaults = defaults
         
         cancellable = NotificationCenter.default
             .publisher(for: UserDefaults.didChangeNotification)
@@ -31,8 +29,6 @@ final class PurchaseStore: ObservableObject {
             .subscribe(objectWillChange)
     }
     
-    @Published var isPro: Bool = false
-
     func fetchProducs() async throws -> Task<[Product], Error> {
         Task {
             do {
@@ -51,14 +47,12 @@ final class PurchaseStore: ObservableObject {
                 let transaction = try await self.storeKitManager.purchase(product)
                 print("\(transaction)")
                 if transaction.ownershipType == .purchased {
-                    self.state = .unlockPro
-                    isPro = true
+                    unlockPro()
                 }
             } catch {
                 self.state = .failed(RequestError.fail(message: "[LOG] Error when try to confirm purchase request!\n:\(error)"))
-                self.blockPro()
-                //userIsPRO = false
-                print("\(error)")
+                blockPro()
+
             }
         }
     }
@@ -69,14 +63,10 @@ final class PurchaseStore: ObservableObject {
                 let transaction = try await storeKitManager.updatePurchases()
                 print("\(transaction)")
                 if try await transaction.value.ownershipType == .purchased {
-                    isPro = true
-                    self.state = .unlockPro
-                    //userIsPRO = true
+                    unlockPro()
                 } else {
-                    isPro = false
                     self.blockPro()
                 }
-                //return transaction
             } catch {
                 debugPrint("\(error)")
                 throw RequestError.fail(message: "[LOG] updatePurchases(), Error: \(error)")
@@ -122,17 +112,16 @@ extension Decimal {
 extension PurchaseStore {
     func unlockPro() {
         // You can do your in-app transactions here
-        isPro = true
+        DispatchQueue.main.async {
+            self.state = .unlockPro
+        }
     }
 
-    func restorePurchase() {
-        // You can do you in-app purchase restore here
-        isPro = true
-    }
-    
     func blockPro() {
         // You can do you in-app purchase restore here
-        isPro = false
+        DispatchQueue.main.async {
+            self.state = .blockPro
+        }
     }
 }
 

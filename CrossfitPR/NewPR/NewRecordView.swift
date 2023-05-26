@@ -17,14 +17,16 @@ enum RecordMode: String {
         switch self {
         case .maxWeight: return  0
         case .maxRepetition: return 1
-        case .maxDistance: return 3
+        case .maxDistance: return 2
         }
     }
 }
 
 struct NewRecordView: View {
 
-    @StateObject private var viewModel = NewRecordViewModel()
+    @StateObject var viewModel: NewRecordViewModel
+    
+    //@EnvironmentObject var viewModel: NewRecordViewModel
     
     @State private var commentsText: String = ""
     @State private var selectedCategory: Int = 0
@@ -143,7 +145,7 @@ struct NewRecordView: View {
 
 struct NewPRRecordView_Previews: PreviewProvider {
     static var previews: some View {
-        NewRecordView()
+        NewRecordView(viewModel: NewRecordViewModel())
     }
 }
 

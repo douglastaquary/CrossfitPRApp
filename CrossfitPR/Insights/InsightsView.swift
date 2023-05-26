@@ -24,7 +24,7 @@ struct AnnotationView: View {
 
 struct InsightsView: View {
     @State var showPROsubsciptionView = false
-    @EnvironmentObject var store: InsightsStore
+    @EnvironmentObject var store: InsightsViewModel
     @StateObject var storeKitManager = StoreKitManager()
     
     var body: some View {
@@ -51,6 +51,9 @@ struct InsightsView: View {
 
                 }.onAppear {
                     UINavigationBar.appearance().tintColor = .green
+                    Task {
+                        await store.updatePurchases()
+                    }
                 }
                 Spacer()
             }
