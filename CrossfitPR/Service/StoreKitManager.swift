@@ -7,6 +7,8 @@
 
 import StoreKit
 import Combine
+import CloudKit
+import OSLog
 
 enum RequestError: Error {
     case badURL
@@ -20,11 +22,17 @@ enum RequestError: Error {
 
 //https://blckbirds.com/post/how-to-use-in-app-purchases-in-swiftui-apps/
 class StoreKitManager: NSObject, ObservableObject {
+    private static let logger = Logger(subsystem: "com.douglast.mycrossfitpr", category: String(describing: StoreKitManager.self))
+
     
     @Published var products = [Product]()
     @Published var newProducts = [Product]()
     @Published var transactionState: SKPaymentTransactionState?
     @Published var uiState: UserPurchaseState = .loading
+    @Published private(set) var accountStatus: CKAccountStatus = .couldNotDetermine
+    
+    @MainActor
+    private let cloudKitService = CloudKitService()
     
     @MainActor
     func fetchProducts(ids: [String]) async throws -> [Product] {
@@ -32,18 +40,30 @@ class StoreKitManager: NSObject, ObservableObject {
         return storeProducts
     }
     
+    func fetchAccountStatus() async {
+        do {
+            accountStatus = try await cloudKitService.checkAccountStatus()
+        } catch {
+            Self.logger.error("\(error.localizedDescription, privacy: .public)")
+        }
+    }
+    
     static func listenForStoreKitUpdates() -> Task<Void, Error> {
         Task.detached {
             for await result in Transaction.updates {
                 switch result {
                 case .verified(let transaction):
-                    print("[LOG] Transaction verified in listener: \(transaction)\n")
-                    
                     await transaction.finish()
-                    
+                    if transaction.revocationDate == nil {
+                        DispatchQueue.main.async {
+                            UserDefaults.standard.setValue(true, forKey: transaction.productID)
+                            UserDefaults.standard.setValue(true, forKey: SettingStoreKeys.pro)
+                        }
+                    }
                     // Update the user's purchases...
                 case .unverified:
-                    print("[LOG] Transaction unverified!\n")
+                    UserDefaults.standard.setValue(false, forKey: SettingStoreKeys.pro)
+                    print("[LOG] 🔴")
                 }
             }
         }
@@ -53,22 +73,20 @@ class StoreKitManager: NSObject, ObservableObject {
     @MainActor
     func updatePurchases() async throws -> Task<Transaction, Error> {
         Task {
-            //try? await AppStore.sync()
+            self.uiState = .loading
             for await result in Transaction.currentEntitlements {
-                
                 guard case .verified(let transaction) = result else {
                     self.uiState = .blockPro
                     throw RequestError.fail(message: "updatePurchases(), Fail when try to fetch a transaction verified!")
                 }
-                
-                self.uiState = .isPRO
-
                 if transaction.revocationDate == nil {
                     // show to purchase screen
-                    print("[LOG] 🏁 Success User Transaction: \(transaction)\n")
+                    print("[LOG] 🏁\n\(transaction)\n")
+                    performUser(to: .isPRO)
                     return transaction
                 } else {
-                    print("[LOG] 🔴 Transaction error: \(transaction)\n")
+                    print("[LOG] 🔴")
+                    performUser(to: .blockPro)
                     return transaction
                 }
             }
@@ -88,23 +106,42 @@ class StoreKitManager: NSObject, ObservableObject {
             switch verification {
             case .verified(let transaction):
                 await transaction.finish()
-                DispatchQueue.main.async {
-                    UserDefaults.standard.setValue(true, forKey: transaction.productID)
-                    UserDefaults.standard.setValue(true, forKey: SettingStoreKeys.pro)
-                    self.transactionState = .purchased
-                }
-                                
+                performUser(to: .isPRO, transaction: transaction)
                 return transaction
             case .unverified:
+                performUser(to: .blockPro)
                 UserDefaults.standard.setValue(false, forKey: SettingStoreKeys.pro)
                 transactionState = .failed
                 throw RequestError.fail(message: "[LOG] purchase(), case .unverified, Transaction not vefified!")
             }
         case .userCancelled:
+            performUser(to: .blockPro)
             throw RequestError.cancelled
         @unknown default:
+            performUser(to: .blockPro)
             assertionFailure("Unexpected result")
             throw RequestError.fail(message: "[LOG] purchase(), Unexpected result")
         }
     }
+    
+    func performUser(to status: UserPurchaseState, transaction: Transaction? = nil) {
+        switch status {
+        case .loading:
+            self.uiState = .loading
+        case .isPRO:
+            DispatchQueue.main.async {
+                UserDefaults.standard.setValue(true, forKey: transaction?.productID ?? "")
+                UserDefaults.standard.setValue(true, forKey: SettingStoreKeys.pro)
+                self.transactionState = .purchased
+                self.uiState = .isPRO
+            }
+        default:
+            DispatchQueue.main.async {
+                UserDefaults.standard.removeObject(forKey: transaction?.productID ?? "")
+                self.transactionState = .failed
+                self.uiState = .blockPro
+            }
+        }
+    }
+    
 }

@@ -10,7 +10,6 @@ import SwiftUI
 struct SettingsView: View {
     
     @EnvironmentObject var settings: SettingsStore
-    //@StateObject var storeKitManager = StoreKitManager()
     @Environment(\.scenePhase) var scenePhase
     @Environment(\.openURL) var openURL
     @Environment(\.storeKitManager) var storeKitManager
@@ -18,8 +17,13 @@ struct SettingsView: View {
     @State var showPROsubsciptionView = false
     @State var showSubscriptionsSheet = false
     @State private var scheduleDate = Date()
+    let appDefaults: UserDefaults
     @EnvironmentObject var lnManager: LocalNotificationManager
     
+    init(appDefaults: UserDefaults) {
+        self.appDefaults = appDefaults
+    }
+
     private var dateProxy:Binding<Date> {
         Binding<Date>(get: { self.scheduleDate }, set: {
             self.scheduleDate = $0
@@ -51,23 +55,25 @@ struct SettingsView: View {
                 }
             }
             Section(header: Text("settings.screen.section.crossfitpro.title")) {
-                if !settings.isPro {
+                if settings.isPRO {
                     Button(action: {
                         self.showSubscriptionsSheet.toggle()
-                        print("######## settings.isPro\(settings.isPro)")
                     }) {
                         Text("settings.screen.section.nocommitment.title")
-                    }.manageSubscriptionsSheet(isPresented: $showSubscriptionsSheet)
+                    }
+                    .manageSubscriptionsSheet(isPresented: $showSubscriptionsSheet)
                     
                 } else {
                     Button(action: {
                         self.showPROsubsciptionView.toggle()
-                        //self.settings.unlockPro()
                     }) {
                         Text("settings.screen.section.unlockpro.title")
-                    }.sheet(isPresented: $showPROsubsciptionView) {
+                    }
+                    .sheet(isPresented: $showPROsubsciptionView) {
+                        Text("")
                         PurchaseView(storeKitManager: storeKitManager)
                             .environmentObject(PurchaseStore(storeKitManager: storeKitManager))
+                            .environmentObject(SettingsStore(defaults: self.appDefaults))
                     }
                 }
                 
@@ -108,6 +114,6 @@ struct SettingsView: View {
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsView()
+        SettingsView(appDefaults: UserDefaults.standard)
     }
 }

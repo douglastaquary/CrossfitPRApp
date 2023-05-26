@@ -35,47 +35,93 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "4E84284B-11B6-4660-8498-ADA1A00B02B7"
+            uuid = "C28F591C-8403-4201-92D0-7DA203974452"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "CrossfitPR/Insights/InsightsViewModel.swift"
+            filePath = "CrossfitPR/Views/RootView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "257"
-            endingLineNumber = "257"
-            landmarkName = "buildLastPercentage()"
+            startingLineNumber = "112"
+            endingLineNumber = "112"
+            landmarkName = "performSetupStatus()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1B68136F-E514-4186-9992-6A185BF6B523"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CrossfitPR/Views/RootView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "113"
+            endingLineNumber = "113"
+            landmarkName = "performSetupStatus()"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "4E84284B-11B6-4660-8498-ADA1A00B02B7 - b4fb3ee7fc3035cd"
+                  uuid = "1B68136F-E514-4186-9992-6A185BF6B523 - fda014199d0cd2ed"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "CrossfitPR.InsightsViewModel.buildLastPercentage() -&gt; ()"
+                  symbolName = "(3) suspend resume partial function for closure #1 @Sendable () async throws -&gt; () in CrossfitPR.RootView.performSetupStatus() -&gt; ()"
                   moduleName = "CrossfitPR"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/douglastaquary/Documents/Projects/Github/SwiftUI/CrossfitPR/CrossfitPR/Insights/InsightsViewModel.swift"
+                  urlString = "file:///Users/douglastaquary/Documents/Projects/Github/SwiftUI/CrossfitPR/CrossfitPR/Views/RootView.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "257"
-                  endingLineNumber = "257"
-                  offsetFromSymbolStart = "737">
+                  startingLineNumber = "113"
+                  endingLineNumber = "113"
+                  offsetFromSymbolStart = "264">
                </Location>
                <Location
-                  uuid = "4E84284B-11B6-4660-8498-ADA1A00B02B7 - 1a3eacab8e401f9d"
+                  uuid = "1B68136F-E514-4186-9992-6A185BF6B523 - 354242a307a82b2e"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (CrossfitPR.PersonalRecord) -&gt; Swift.Bool in CrossfitPR.InsightsViewModel.buildLastPercentage() -&gt; ()"
+                  symbolName = "(4) await resume partial function for closure #1 @Sendable () async throws -&gt; () in CrossfitPR.RootView.performSetupStatus() -&gt; ()"
                   moduleName = "CrossfitPR"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/douglastaquary/Documents/Projects/Github/SwiftUI/CrossfitPR/CrossfitPR/Insights/InsightsViewModel.swift"
+                  urlString = "file:///Users/douglastaquary/Documents/Projects/Github/SwiftUI/CrossfitPR/CrossfitPR/Views/RootView.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "258"
-                  endingLineNumber = "258"
-                  offsetFromSymbolStart = "136">
+                  startingLineNumber = "113"
+                  endingLineNumber = "113"
+                  offsetFromSymbolStart = "44">
+               </Location>
+               <Location
+                  uuid = "1B68136F-E514-4186-9992-6A185BF6B523 - 5278d642e09956cb"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(5) suspend resume partial function for closure #1 @Sendable () async throws -&gt; () in CrossfitPR.RootView.performSetupStatus() -&gt; ()"
+                  moduleName = "CrossfitPR"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/douglastaquary/Documents/Projects/Github/SwiftUI/CrossfitPR/CrossfitPR/Views/RootView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "113"
+                  endingLineNumber = "113"
+                  offsetFromSymbolStart = "84">
+               </Location>
+               <Location
+                  uuid = "1B68136F-E514-4186-9992-6A185BF6B523 - f8eb769e66e0883a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(6) suspend resume partial function for closure #1 @Sendable () async throws -&gt; () in CrossfitPR.RootView.performSetupStatus() -&gt; ()"
+                  moduleName = "CrossfitPR"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/douglastaquary/Documents/Projects/Github/SwiftUI/CrossfitPR/CrossfitPR/Views/RootView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "113"
+                  endingLineNumber = "113"
+                  offsetFromSymbolStart = "28">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -83,16 +129,96 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "39A9A109-B72A-419D-8DA4-3F1282BEDBF7"
+            uuid = "10205638-E642-417A-B130-000E4B7CEBA5"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "CrossfitPR/Insights/InsightsViewModel.swift"
+            filePath = "CrossfitPR/Views/RootView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "260"
-            endingLineNumber = "260"
-            landmarkName = "buildLastPercentage()"
+            startingLineNumber = "115"
+            endingLineNumber = "115"
+            landmarkName = "performSetupStatus()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "74F0E425-2088-4C43-9615-C4CA0718B344"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CrossfitPR/Views/RootView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "117"
+            endingLineNumber = "117"
+            landmarkName = "performSetupStatus()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E2F906A2-D67B-4129-9593-D2E5E180A659"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CrossfitPR/Views/RootView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "120"
+            endingLineNumber = "120"
+            landmarkName = "performSetupStatus()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9E729080-D565-4FE3-8440-24A7524B9A4C"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CrossfitPR/Service/StoreKitManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "78"
+            endingLineNumber = "78"
+            landmarkName = "updatePurchases()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "5A35F8B9-3E1C-49EF-B79A-E523E1CB1C59"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CrossfitPR/Service/StoreKitManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "82"
+            endingLineNumber = "82"
+            landmarkName = "updatePurchases()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D80CC731-9A35-4987-A046-90383CF5F5EF"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CrossfitPR/Service/StoreKitManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "88"
+            endingLineNumber = "88"
+            landmarkName = "updatePurchases()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

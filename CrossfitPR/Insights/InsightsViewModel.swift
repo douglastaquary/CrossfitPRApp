@@ -72,7 +72,7 @@ final class InsightsViewModel: ObservableObject {
         return []
     }
     
-    init(dataManager: DataManager = DataManager.shared, defaults: UserDefaults = .standard, storeKitService: StoreKitManager) {
+    init(dataManager: DataManager = DataManager.shared, defaults: UserDefaults, storeKitService: StoreKitManager) {
         self.defaults = defaults
         self.dataManager = dataManager
         self.storeKitService = storeKitService
@@ -80,11 +80,11 @@ final class InsightsViewModel: ObservableObject {
         anyCancellable = dataManager.objectWillChange.sink { [weak self] (_) in
             self?.objectWillChange.send()
         }
-//        startStoreKitListener()
+        startStoreKitListener()
 //        
-        Task {
-            await updatePurchases()
-        }
+//        Task {
+//            await updatePurchases()
+//        }
         
         loadBarbellRecords()
         loadGymnasticRecords()
@@ -355,38 +355,17 @@ final class InsightsViewModel: ObservableObject {
     }
 }
 
-//extension Sequence {
-//    func sorted<T: Comparable>(
-//        by keyPath: KeyPath<Element, T>,
-//        using comparator: (T, T) -> Bool = (<)
-//    ) -> [Element] {
-//        sorted { a, b in
-//            comparator(a[keyPath: keyPath], b[keyPath: keyPath])
-//        }
-//    }
-//}
-
 extension InsightsViewModel {
     func updatePurchases() async {
-        self.uiState = .isPRO
-        
-//        Task {
-//            do {
-//                let transaction = try await storeKitService.updatePurchases()
-//                if try await transaction.value.ownershipType == .purchased {
-//                    DispatchQueue.main.async {
-//                        print("###### 💎 User is PRO! 🤩✅\n\n[Transaction Info]:\n\(transaction)\n\n♻️ Configuring app to PRO mode!")
-//                        self.uiState = .isPRO
-//                        print("[Updated] User permission content updated to PRO [value: \(self.uiState)].")
-//                    }
-//                }
-//            } catch {
-//                print("[Updated] User permission content updated to BLOCKED PRO. [value: \(self.uiState)].")
-//                DispatchQueue.main.async {
-//                    self.uiState = .blockPro
-//                }
-//                throw RequestError.fail(message: "[LOG] InsightsStore.updatePurchases(), Error: \(error)")
-//            }
-//        }
+        var isPRO: Bool { get { defaults.bool(forKey: SettingStoreKeys.pro) } }
+        if isPRO {
+            DispatchQueue.main.async {
+                self.uiState = .isPRO
+            }
+        } else {
+            DispatchQueue.main.async {
+                self.uiState = .blockPro
+            }
+        }
     }
 }

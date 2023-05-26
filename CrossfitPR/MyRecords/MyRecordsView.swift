@@ -9,10 +9,16 @@ import SwiftUI
 
 struct MyRecordsView: View {
     @EnvironmentObject var settings: SettingsStore
+    @EnvironmentObject var store: RecordDetailViewModel
     @State var showNewPRView = false
     @State var isEmpty = false
-    @EnvironmentObject var store: RecordDetailViewModel
-    @Binding var searchText: String
+    @State var searchText: String = ""
+    let appDefaults: UserDefaults
+    
+    init(appDefaults: UserDefaults) {
+        self.appDefaults = appDefaults
+        
+    }
     
     var body: some View {
         NavigationStack {
@@ -33,7 +39,7 @@ struct MyRecordsView: View {
                     .navigationDestination(for: PRSection.self) { section in
                         RecordDetailView(prName: section.name)
                             .environmentObject(RecordDetailViewModel(prSection: section))
-                            .environmentObject(SettingsStore())
+                            .environmentObject(SettingsStore(defaults: self.appDefaults))
                     }
                 }
                 
@@ -58,6 +64,6 @@ struct MyRecordsView: View {
 
 struct MyRecordsView_Previews: PreviewProvider {
     static var previews: some View {
-        MyRecordsView(searchText: .constant("snatch"))
+        MyRecordsView(appDefaults: .standard)
     }
 }

@@ -16,8 +16,11 @@ struct CrossfitPRApp: App {
 
     var body: some Scene {
         WindowGroup {
-            LaunchView(storeKitManager: storeKitService, viewModel: CrossfitPRViewModel(storeKitService: storeKitService))
-                .environmentObject(ViewLaunch())
+            LaunchView(
+                storeKitManager: storeKitService,
+                appDefaults: UserDefaults.standard
+            )
+            .environmentObject(ViewLaunch())
         }
         .onChange(of: scenePhase) { phase in
             switch phase {

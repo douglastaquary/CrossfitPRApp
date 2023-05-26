@@ -17,15 +17,14 @@ struct LaunchView: View {
     @EnvironmentObject var viewlaunch: ViewLaunch
     @ObservedObject var monitor = NetworkMonitor()
     @State private var showAlertSheet = false
-    @ObservedObject var viewModel: CrossfitPRViewModel
     @State private var accountStatusAlertShown = false
-    @Environment(\.dismiss) var dismiss
     
     private let storeKitService: StoreKitManager
+    let appDefaults: UserDefaults
     
-    init(storeKitManager: StoreKitManager, viewModel: CrossfitPRViewModel) {
-        self.viewModel = viewModel
+    init(storeKitManager: StoreKitManager, appDefaults: UserDefaults) {
         self.storeKitService = storeKitManager
+        self.appDefaults = appDefaults
     }
     
     var body: some View {
@@ -68,40 +67,9 @@ struct LaunchView: View {
                 if viewlaunch.currentPage == Route.onBoardingView.rawValue {
                     OnboardingView()
                 } else if viewlaunch.currentPage == Route.prHistoriesListView.rawValue {
-                    RootView()
-                        .onAppear {
-                            Task {
-                                await viewModel.fetchAccountStatus()
-                                if viewModel.accountStatus != .available {
-                                    accountStatusAlertShown = true
-                                } else {
-                                    //viewModel.updatePurchases()
-                                    dismiss()
-                                }
-                            }
-                        }
+                    RootView(defaults: appDefaults)
                         .environment(\.storeKitManager, self.storeKitService)
-                        .alert(isPresented: $accountStatusAlertShown) {
-                            Alert(
-                                title: Text("onboarding.alert.icloud.account.title"),
-                                message: Text("onboarding.alert.icloud.account.message"),
-                                dismissButton: .default(Text("onboarding.alert.cancel.button.title")) {
-                                    Task {
-                                        //await viewModel.fetchAccountStatus()
-                                        if viewModel.accountStatus != .available {
-                                            //accountStatusAlertShown = true
-                                        } else {
-                                            Task {
-                                                viewModel.updatePurchases()
-                                                dismiss()
-                                            }
-                                        }
-                                    }
-                                }
-                            )
-                        }
                 }
-                
             }
         }
     }

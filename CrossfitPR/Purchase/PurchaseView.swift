@@ -11,7 +11,7 @@ import StoreKit
 struct PurchaseView: View {
     @Environment(\.presentationMode) var presentation
     @EnvironmentObject var store: PurchaseStore
-    @Environment(\.isPro) var isPro
+    @EnvironmentObject var settings: SettingsStore
     @State var products: [Product] = []
     @StateObject var storeKitManager: StoreKitManager
     
@@ -80,22 +80,30 @@ struct PurchaseView: View {
                     }
                 }
                 .onChange(of: store.state) { newValue in
-                    if store.state == .unlockPro {
+                    if settings.isPRO {
                         store.unlockPro()
+                        settings.unlockPro()
                         self.presentation.wrappedValue.dismiss()
                     }
                 }
                 .onAppear {
-                    Task {
-                        do {
-                            let currentProducts = try await store.fetchProducs()
-                            self.products = try await currentProducts.value
-                        } catch {
-                            print("\(error)")
+                    if settings.isPRO {
+                        store.unlockPro()
+                        settings.unlockPro()
+                        self.presentation.wrappedValue.dismiss()
+                    } else {
+                        settings.lockPro()
+                        Task {
+                            do {
+                                let currentProducts = try await store.fetchProducs()
+                                self.products = try await currentProducts.value
+                            } catch {
+                                print("\(error)")
+                            }
                         }
                     }
                 }
-           // }
+            // }
         }
     }
 }

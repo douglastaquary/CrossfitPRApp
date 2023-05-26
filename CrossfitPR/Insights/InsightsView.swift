@@ -51,6 +51,9 @@ struct InsightsView: View {
 
                 }.onAppear {
                     UINavigationBar.appearance().tintColor = .green
+                    Task {
+                        await store.updatePurchases()
+                    }
                 }
                 Spacer()
             }

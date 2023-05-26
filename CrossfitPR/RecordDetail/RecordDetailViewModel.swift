@@ -101,16 +101,6 @@ import os
     
     var allRecords: [PersonalRecord] {
         if let records = dataManager?.recordsArray {
-//            guard let category = self.recordCategory else { return [] }
-//            let sortedRecords = records.filter {
-//                if let group = $0.group {
-//                    return group.rawValue.contains(category.group.rawValue)
-//                }
-//                return false
-//            }.sorted()
-//            let categoryRecords = sortedRecords.filter { $0.prName.contains(category.title) }
-//            let records = categoryRecords.sorted(by: {$0.recordDate?.compare($1.recordDate ?? Date()) == .orderedDescending })
-
             return records.sorted()
         }
         return []
@@ -126,17 +116,7 @@ import os
         }
         return []
     }
-    
-//    func filteredPRs(byName: String) {
-//        if let records = dataManager?.recordsArray {
-//            let sortedRecords = records.filter {
-//                return $0.prName.lowercased().contains(byName.lowercased())
-//            }.sorted()
-//            let records = sortedRecords.sorted(by: {$0.recordDate?.compare($1.recordDate ?? Date()) == .orderedDescending })
-//            //filteredPrs.append(contentsOf: records)
-//        }
-//    }
-//    
+     
     var filteredPrs: [PersonalRecord] {
         if let records = dataManager?.recordsArray {
             let prName = prSection?.name ?? ""

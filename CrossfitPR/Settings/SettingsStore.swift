@@ -10,16 +10,6 @@ import Combine
 import UserNotifications
 import StoreKit
 
-
-enum SettingStoreKeys {
-    static let pro = "is_pro"
-    static let trainingTargetGoal = "training_target_goal"
-    static let notificationEnabled = "notifications_enabled"
-    static let sleepTrackingEnabled = "sleep_tracking_enabled"
-    static let measureTrackingMode = "measure_tracking_mode"
-    static let enabledSortedByValue = "enabled_sorted_by_value"
-}
-
 enum MeasureTrackingMode: String, CaseIterable {
     case pounds = "settings.pounds.title"
     case kilos = "settings.kilo.title"
@@ -34,8 +24,10 @@ final class SettingsStore: ObservableObject {
     private let defaults: UserDefaults
     var anyCancellable: AnyCancellable? = nil
     let objectWillChange = PassthroughSubject<Void, Never>()
+    
+    private var storeKitTaskHandle: Task<Void, Error>?
 
-    init(storeKitManager: StoreKitManager =  StoreKitManager(), defaults: UserDefaults = .standard) {
+    init(storeKitManager: StoreKitManager =  StoreKitManager(), defaults: UserDefaults) {
         self.storeKitManager = storeKitManager
         self.defaults = defaults
 
@@ -50,8 +42,13 @@ final class SettingsStore: ObservableObject {
                 SettingStoreKeys.sleepTrackingEnabled: true,
                 SettingStoreKeys.measureTrackingMode: MeasureTrackingMode.pounds.rawValue
             ])
-            await updatePurchases()
+            //await updatePurchases()
         }
+    }
+    
+    var isPRO: Bool {
+        set { defaults.set(newValue, forKey: SettingStoreKeys.pro) }
+        get { defaults.bool(forKey: SettingStoreKeys.pro) }
     }
 
     var isNotificationEnabled: Bool {
@@ -60,8 +57,6 @@ final class SettingsStore: ObservableObject {
         }
         get { defaults.bool(forKey: SettingStoreKeys.notificationEnabled) }
     }
-    
-    @Published var isPro: Bool = false
 
     var isSleepTrackingEnabled: Bool {
         set { defaults.set(newValue, forKey: SettingStoreKeys.sleepTrackingEnabled) }
@@ -83,6 +78,11 @@ final class SettingsStore: ObservableObject {
             defaults.set(newValue.rawValue, forKey: SettingStoreKeys.measureTrackingMode)
         }
     }
+    
+    // Call this early in the app's lifecycle.
+    func startStoreKitListener() {
+        storeKitTaskHandle = StoreKitManager.listenForStoreKitUpdates()
+    }
 }
 
 extension SettingsStore {
@@ -92,13 +92,12 @@ extension SettingsStore {
                 let transaction = try await storeKitManager.updatePurchases()
                 if try await transaction.value.ownershipType == .purchased {
                     DispatchQueue.main.async {
-                        self.isPro = true
                         self.state = .unlockPro
                     }
                 }
             } catch {
-                self.isPro = false
-                throw RequestError.fail(message: "[LOG] SettingsStore.updatePurchases(), Error: \(error)")
+                self.state = .blockPro
+                throw RequestError.fail(message: "[LOG] Error: \(error)")
             }
         }
     }
@@ -107,17 +106,12 @@ extension SettingsStore {
 extension SettingsStore {
     func unlockPro() {
         // You can do your in-app transactions here
-        isPro = true
+       isPRO = true
     }
 
-    func restorePurchase() {
-        // You can do you in-app purchase restore here
-        isPro = false
-    }
-    
     func lockPro() {
         // You can do you in-app purchase restore here
-        isPro = false
+        isPRO = false
     }
 }
 

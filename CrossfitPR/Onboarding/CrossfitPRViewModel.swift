@@ -14,15 +14,16 @@ import os
     private static let logger = Logger(subsystem: "com.douglast.mycrossfitpr", category: String(describing: CrossfitPRViewModel.self))
     
     @Published private(set) var accountStatus: CKAccountStatus = .couldNotDetermine
-    @Published var userIsPRO: Bool = false
 
     private let cloudKitService = CloudKitService()
     private let storeKitService: StoreKitManager
     
     private var storeKitTaskHandle: Task<Void, Error>?
+    var settings: SettingsStore
     
-    init(storeKitService: StoreKitManager) {
+    init(storeKitService: StoreKitManager, settings: SettingsStore) {
         self.storeKitService = storeKitService
+        self.settings = settings
         startStoreKitListener()
     }
 
@@ -47,10 +48,8 @@ extension CrossfitPRViewModel {
         Task {
             do {
                 let products = try await storeKitService.fetchProducts(ids: CrossFitPRConstants.productIDs)
-                print("[LOG] ✅ OnboardingViewModel.subscriptions(), Products:\n\(products)\n\n")
             } catch {
-                print("[LOG] 🔴 OnboardingViewModel.subscriptions(), Error:\n\(error)\n\n")
-                //productLoadingState = .failed(error)
+                print("Error:\n\(error)\n")
             }
         }
     }
@@ -61,11 +60,10 @@ extension CrossfitPRViewModel {
                 let transaction = try await storeKitService.updatePurchases()
                 print("\(transaction)")
                 if try await transaction.value.ownershipType == .purchased {
-                    userIsPRO = true
+                    settings.unlockPro()
                 }
             } catch {
-                userIsPRO = false
-                print("[LOG] OnboardingViewModel, subscriptions(),  Error: \(error)\n")
+                settings.lockPro()
             }
         }
     }
