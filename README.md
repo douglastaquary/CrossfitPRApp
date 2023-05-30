@@ -1,5 +1,6 @@
 ## CrossfitPR App 🏋🏽📊
 <p align="leading">
+    <img src="https://github.com/douglastaquary/CrossfitPRApp/actions/workflows/ios.yml/badge.svg" />
     <img src="https://img.shields.io/github/actions/workflow/status/douglastaquary/CrossfitPRApp/ios.yml?branch=main" />
     <img src="https://img.shields.io/badge/Swift-5.2-orange.svg" />
     <a href="https://swift.org/package-manager">
