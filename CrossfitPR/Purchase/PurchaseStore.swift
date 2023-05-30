@@ -82,7 +82,6 @@ final class PurchaseStore: ObservableObject {
         let formatter = NumberFormatter()
         //formatter.numberStyle = .currency
         formatter.locale = Locale.current
-        
         formatter.numberStyle = .decimal
         formatter.maximumFractionDigits = 2
         if let stringNumber = Double(product.price.description) {
@@ -102,7 +101,7 @@ extension Decimal {
         formatter.maximumFractionDigits = 2
         if let stringNumber = Double(self.description) {
             let number = NSNumber(value: stringNumber)
-            let formattedValue = formatter.string(from: number)!
+            let formattedValue = formatter.string(from: number) ?? ""
             return formattedValue
         }
         return "\(0.0)"

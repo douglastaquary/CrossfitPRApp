@@ -73,6 +73,15 @@ import os
     }
     
     
+    var searchResults: [Category] {
+            if searchText.isEmpty {
+                return categories
+            } else {
+                return categories.filter { $0.title.contains(searchText) }
+            }
+        }
+    
+    
     func fetchUserSession() async {
         do {
             session = try await cloudKitService.fetchUserSession()

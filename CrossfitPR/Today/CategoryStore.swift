@@ -72,6 +72,14 @@ import os
         }
     }
     
+    var searchResults: [Category] {
+        if searchText.isEmpty {
+            return filteredCategories
+        } else {
+            return filteredCategories.filter { $0.title.contains(searchText) }
+        }
+    }
+    
     
     func fetchUserSession() async {
         do {

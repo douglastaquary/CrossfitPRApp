@@ -35,7 +35,7 @@ struct CategoryListView: View {
                         )
                     }
                     .padding([.trailing, .leading], 12)
-                    ForEach(categories, id: \.id) { category in
+                    ForEach(searchResults, id: \.id) { category in
                         CategoryItemView(title: category.title, group: category.group.rawValue)
                             .onTapGesture {
                                 self.showAddNewPRView.toggle()
@@ -72,6 +72,14 @@ struct CategoryListView: View {
         }
         .onChange(of: searchText) { searchText in
             categories = store.searchExercise(for: searchText)
+        }
+    }
+    
+    var searchResults: [Category] {
+        if searchText.isEmpty {
+            return categories
+        } else {
+            return categories.filter { $0.title.contains(searchText) }
         }
     }
 }

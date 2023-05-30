@@ -61,8 +61,10 @@
 "purchase.commitment.title"= "Sem compromisso.\nCancele a qualquer momento.\nApós 7 dias de teste gratuito, esta assinatura\né renovada automaticamente dependendo da forma que\nvocê escolher, a menos que a renovação\nautomática esteja desativada.";
 
 /* Record detail screen */
-
+"record.screen.title" = "Meus Recordes";
 "record.biggest.section.title" = "Maior recorde";
+"record.datail.section.percentage.title" = "Porcentagens do PR";
+"record.datail.percentage.title" = "Porcentagens";
 "record.category.title" = "Exercício";
 "record.percentage.title" = "Intensidade";
 "record.maxReps.title" = "Máximo de repetições";
@@ -83,6 +85,8 @@
 "record.screen.cancel.button.title" = "Cancelar";
 "record.screen.delete.confirmation.title" = "Você realmente deseja excluir?";
 "record.screen.maxReps.title" = "Máximo de repetições";
+"record.screen.empty.records.message" = "Começe agora mesmo\nadicionando um novo record.";
+"record.button.get.started.new.record" = "Novo record";
 
 /* Insight screen */
 
