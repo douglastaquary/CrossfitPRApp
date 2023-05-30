@@ -25,13 +25,13 @@ struct MyRecordsView: View {
             if !store.sections.isEmpty {
                 ScrollViewReader { scrollView in
                     ScrollView {
-                        ForEach(store.sections, id: \.id) { section in
+                        ForEach(searchSectionResults, id: \.id) { section in
                             NavigationLink(value: section) {
                                 CategoryItemView(title: section.name, group: section.group.rawValue)
                             }
                         }
                     }
-                    .navigationBarTitle(LocalizedStringKey("My Records"), displayMode: .large)
+                    .navigationBarTitle(LocalizedStringKey("record.screen.title"), displayMode: .large)
                     .searchable(text: self.$searchText, prompt: LocalizedStringKey("category.search.descript"))
                     .onAppear {
                         UINavigationBar.appearance().tintColor = .green
@@ -45,7 +45,7 @@ struct MyRecordsView: View {
                 
             } else {
                 VStack{
-                    Text("Começe agora mesmo\nadicionando um novo record.")
+                    Text("record.screen.empty.records.message")
                         .foregroundColor(.secondary)
                         .multilineTextAlignment(.center)
                         .padding(.bottom, 64)
@@ -58,6 +58,14 @@ struct MyRecordsView: View {
                     }
                 }
             }
+        }
+    }
+    
+    var searchSectionResults: [PRSection] {
+        if searchText.isEmpty {
+            return store.sections
+        } else {
+            return store.sections.filter { $0.name.contains(searchText) }
         }
     }
 }

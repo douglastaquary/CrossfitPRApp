@@ -44,8 +44,10 @@
 "onboarding.alert.cancel.button.title" = "Cancel";
 
 /* Record detail screen */
-
+"record.screen.title" = "My Records";
 "record.biggest.section.title" = "Biggest record";
+"record.datail.section.percentage.title" = "PR percentages";
+"record.datail.percentage.title" = "Percentages";
 "record.category.title" = "Exercise";
 "record.percentage.title" = "Intensity";
 "record.maxReps.title" = "Repetitions";
@@ -65,6 +67,9 @@
 "record.screen.delete.button.title" = "Delete";
 "record.screen.cancel.button.title" = "Cancel";
 "record.screen.delete.confirmation.title" = "Do you really want to delete?";
+"record.screen.empty.records.message" = "Get started right now by\nadding a new record.";
+"record.button.get.started.new.record" = "Add new record";
+
 
 
 /* Purchase screen */

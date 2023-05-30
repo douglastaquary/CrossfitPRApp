@@ -8,12 +8,13 @@
 import SwiftUI
 
 struct RootView: View {
-    @StateObject var lnManager = LocalNotificationManager()
+    @SceneStorage("selectedTab")
+    private var selectedTab = 0
+    
+    @StateObject var localNotificationManager = LocalNotificationManager()
     @Environment(\.storeKitManager) var storeManager
     @Environment(\.dismiss) var dismiss
     
-    @SceneStorage("selectedTab")
-    private var selectedTab = 0
     @State var showNewPRView = false
     @State var selectCategoryItemInitialize: Int = 0
     @State var accountStatusAlertShown = false
@@ -73,7 +74,7 @@ struct RootView: View {
                 SettingsView(appDefaults: self.appDefaults)
                     .navigationTitle(LocalizedStringKey("screen.settings.title"))
                     .environmentObject(SettingsStore(defaults: appDefaults))
-                    .environmentObject(lnManager)
+                    .environmentObject(localNotificationManager)
                     .environment(\.storeKitManager, storeManager)
             }
             .tabItem {
@@ -117,6 +118,7 @@ extension RootView {
                     self.appDefaults.set(false, forKey: SettingStoreKeys.pro)
                 }
             } else {
+                self.appDefaults.set(false, forKey: SettingStoreKeys.pro)
                 accountStatusAlertShown = true
             }
             throw RequestError.fail(message: "[LOG] purchase(), Unexpected result")

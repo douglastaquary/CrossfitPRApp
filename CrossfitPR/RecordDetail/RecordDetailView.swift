@@ -51,10 +51,10 @@ struct RecordDetailView: View {
                     }
                     
                     if store.category?.group == .barbell {
-                        Section("Porcentagens do PR") {
+                        Section("record.datail.section.percentage.title") {
                             NavigationLink(value: record) {
                                 HSubtitleView(
-                                    title: "Porcentagem",
+                                    title: "record.datail.percentage.title",
                                     subtitle: "\(String(describing: record.percentage.clean))%"
                                 )
                             }
