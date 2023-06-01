@@ -53,7 +53,7 @@ import os
         if let newRecord = record {
             self.editingRecord = newRecord
         } else if let category = category {
-            self.editingRecord = PersonalRecord(prName: category.title, recordMode: category.type ,group: category.group)
+            self.editingRecord = PersonalRecord(prName: category.title, recordMode: category.type, group: category.group)
             self.selectedCategory = category.type.index
         } else {
             self.editingRecord = PersonalRecord()

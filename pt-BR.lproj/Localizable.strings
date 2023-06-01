@@ -38,6 +38,9 @@
 "screen.settings.title" = "Configurações";
 
 /* Category searchbar descript */
+"category.group.barbell.descript" = "Barra";
+"category.group.gymnastic.descript" = "Ginastico";
+"category.group.endurance.descript" = "Resistência";
 "category.search.descript" = "buscar por nome";
 
 /* Tabbar title screens */

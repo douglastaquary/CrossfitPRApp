@@ -77,8 +77,8 @@ import os
             return filteredCategories
         } else {
             return filteredCategories.filter { $0.title.contains(searchText) }
+            }
         }
-    }
     
     
     func fetchUserSession() async {

@@ -24,7 +24,7 @@ enum RecordMode: String {
 
 struct NewRecordView: View {
 
-    @StateObject var viewModel: NewRecordViewModel
+    @EnvironmentObject var viewModel: NewRecordViewModel
     
     //@EnvironmentObject var viewModel: NewRecordViewModel
     
@@ -145,7 +145,7 @@ struct NewRecordView: View {
 
 struct NewPRRecordView_Previews: PreviewProvider {
     static var previews: some View {
-        NewRecordView(viewModel: NewRecordViewModel())
+        NewRecordView()
     }
 }
 
@@ -157,7 +157,7 @@ struct CategoryView: View {
         VStack(alignment: .center) {
             Picker("What is your favorite color?", selection: $selectedCategory) {
                 ForEach(0..<items.count, id: \.self) { index in
-                    Text(self.items[index]).tag(index)
+                    Text(LocalizedStringKey(self.items[index])).tag(index)
                 }
             }
             .pickerStyle(.segmented)

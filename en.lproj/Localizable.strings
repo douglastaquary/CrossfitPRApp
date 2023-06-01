@@ -95,6 +95,9 @@
 "screen.settings.title" = "Settings";
 
 /* Category searchbar descript */
+"category.group.barbell.descript" = "Barbell";
+"category.group.gymnastic.descript" = "Gymnastic";
+"category.group.endurance.descript" = "Endurance";
 "category.search.descript" = "search by name";
 
 /* Tabbar title screens */

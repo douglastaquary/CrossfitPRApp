@@ -17,7 +17,6 @@ struct MyRecordsView: View {
     
     init(appDefaults: UserDefaults) {
         self.appDefaults = appDefaults
-        
     }
     
     var body: some View {
@@ -27,7 +26,7 @@ struct MyRecordsView: View {
                     ScrollView {
                         ForEach(searchSectionResults, id: \.id) { section in
                             NavigationLink(value: section) {
-                                CategoryItemView(title: section.name, group: section.group.rawValue)
+                                CategoryItemView(title: section.name, group: section.group.localized)
                             }
                         }
                     }
@@ -54,7 +53,8 @@ struct MyRecordsView: View {
                         title: "Add new record",
                         completion: { self.showNewPRView.toggle() }
                     ).sheet(isPresented: $showNewPRView) {
-                        NewRecordView(viewModel: NewRecordViewModel())
+                        NewRecordView()
+                            .environmentObject(NewRecordViewModel())
                     }
                 }
             }

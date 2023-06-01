@@ -35,12 +35,12 @@ struct CategoryListView: View {
                         )
                     }
                     .padding([.trailing, .leading], 12)
-                    ForEach(searchResults, id: \.id) { category in
+                    ForEach(searchResults, id: \.self) { category in
                         CategoryItemView(title: category.title, group: category.group.rawValue)
                             .onTapGesture {
                                 self.showAddNewPRView.toggle()
                             }.sheet(isPresented: $showAddNewPRView) {
-                                NewRecordView(viewModel: NewRecordViewModel(category: category))
+                                NewRecordView()
                                     .environmentObject(NewRecordViewModel(category: category))
                         }
                     }
@@ -54,7 +54,8 @@ struct CategoryListView: View {
                             .foregroundColor(.green)
                             .accessibility(label: Text("add new record"))
                     }.sheet(isPresented: $showNewPRView) {
-                        NewRecordView(viewModel: NewRecordViewModel())
+                        NewRecordView()
+                            .environmentObject(NewRecordViewModel())
                     }
                 }
             }
