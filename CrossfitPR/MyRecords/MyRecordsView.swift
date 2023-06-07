@@ -48,14 +48,14 @@ struct MyRecordsView: View {
                         .foregroundColor(.secondary)
                         .multilineTextAlignment(.center)
                         .padding(.bottom, 64)
-                    OpaqueActionButton(
-                        imageName: "figure.cross.training",
-                        title: "Add new record",
-                        completion: { self.showNewPRView.toggle() }
-                    ).sheet(isPresented: $showNewPRView) {
-                        NewRecordView()
-                            .environmentObject(NewRecordViewModel())
-                    }
+//                    OpaqueActionButton(
+//                        imageName: "figure.cross.training",
+//                        title: "Add new record",
+//                        completion: { self.showNewPRView.toggle() }
+//                    ).sheet(isPresented: $showNewPRView) {
+//                        NewRecordView()
+//                            .environmentObject(NewRecordViewModel())
+//                    }
                 }
             }
         }
@@ -73,5 +73,8 @@ struct MyRecordsView: View {
 struct MyRecordsView_Previews: PreviewProvider {
     static var previews: some View {
         MyRecordsView(appDefaults: .standard)
+            .environmentObject(SettingsStore(defaults: .standard))
+            .environmentObject(RecordDetailViewModel())
+        
     }
 }

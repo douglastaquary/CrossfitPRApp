@@ -31,7 +31,7 @@ struct RecordDetailView: View {
             Form {
                 Group {
                     Section("record.biggest.section.title") {
-                        HSubtitleView(title: "record.category.title", subtitle: store.category?.name ?? "")
+//                        HSubtitleView(title: "record.category.title", subtitle: store.category?.name ?? "")
                         let group = store.category?.group ?? .barbell
                         switch group {
                         case .barbell:
@@ -109,7 +109,7 @@ struct RecordDetailView: View {
                 .environmentObject(PurchaseStore(storeKitManager: storeKitManager))
         }
         .navigationBarTitle(Text(prName))
-        .navigationBarTitleDisplayMode(.inline)
+        .navigationBarTitleDisplayMode(.large)
         .onAppear {
             UINavigationBar.appearance().tintColor = .green
             record = store.getMaxRecord(prs: store.filteredPrs)

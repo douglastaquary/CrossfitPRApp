@@ -23,7 +23,7 @@
 "onboarding.item3.description" = "Gráficos de forma simples e fácil de entender para mostrar sua evolução";
 
 "onboarding.item4.title" = "Os Poderosos Insights";
-"onboarding.item4.description" = "O Poderoso Insights permite que você entenda sua evolução, os maiores records através de poderosos gráficos";
+"onboarding.item4.description" = "O Poderoso Insights permite que você entenda sua evolução, analises dos records através de poderosos gráficos simplificados.";
 
 "onboarding.button.title" = "Começar";
 
@@ -33,7 +33,7 @@
   
 /* Screen titles*/
 "screen.records.title" = "Meus recordes";
-"screen.category.title" = "Categorias";
+"screen.category.title" = "Exercícios";
 "screen.insights.title" = "Percepções";
 "screen.settings.title" = "Configurações";
 
@@ -45,18 +45,18 @@
 
 /* Tabbar title screens */
 "tabbar.myrecords.title" = "meus records";
-"tabbar.categories.title" = "categorias";
+"tabbar.categories.title" = "exercícios";
 "tabbar.insights.title" = "percepções";
 "tabbar.settings.title" = "configurações";
 
 /* Purchase screen */
 "purchase.item1.title" = "Gerencie seus recordes pessoais";
-"purchase.item1.description" = "Apague records, organize suas categorias de acordo com os seus treinos de alta performance.";
+"purchase.item1.description" = "Apague records, organize os exercícios de acordo com os seus treinos de alta performance.";
 
 "purchase.item2.title" = "Os Poderosos Insights";
-"purchase.item2.description" = "Os Poderosos Insights permitem que você acompanhe, entenda seus maiores records e evolução através de gráficos simplificados.";
-
-"purchase.item3.title" = "Top rank dos seus records";
+"purchase.item2.description" = "Os Poderosos Insights permitem que você acompanhe, analise, entenda seus maiores records e evolução através de gráficos simplificados.";
+"purchase.processing.description" = "Processando sua compra...";
+"purchase.item3.title" = "Top ranking dos seus records";
 "purchase.item3.description" = "Permite que você acompanhe a classificação dos seus principais recordes de alto desempenho";
 
 "purchase.tryfree.title" = "Experimente GRÁTIS por 7 dias";
@@ -88,7 +88,7 @@
 "record.screen.cancel.button.title" = "Cancelar";
 "record.screen.delete.confirmation.title" = "Você realmente deseja excluir?";
 "record.screen.maxReps.title" = "Máximo de repetições";
-"record.screen.empty.records.message" = "Começe agora mesmo\nadicionando um novo record.";
+"record.screen.empty.records.message" = "Voçê ainda não tem records salvos.\nComeçe acessando a aba exercícios\ne clique para adicionar um novo record.";
 "record.button.get.started.new.record" = "Novo record";
 
 /* Insight screen */

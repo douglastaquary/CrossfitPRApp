@@ -24,10 +24,8 @@ enum RecordMode: String {
 
 struct NewRecordView: View {
 
+    @EnvironmentObject var settings: SettingsStore
     @EnvironmentObject var viewModel: NewRecordViewModel
-    
-    //@EnvironmentObject var viewModel: NewRecordViewModel
-    
     @State private var commentsText: String = ""
     @State private var selectedCategory: Int = 0
     @State private var selectedCategoryItem: Int = 0
@@ -60,7 +58,7 @@ struct NewRecordView: View {
                     .padding(.bottom, 12)
                 }
 
-                switch viewModel.personalRecordTypeList[viewModel.selectedCategory].group {
+                switch viewModel.editingCategory.group {
                 case .barbell:
                     Section(header: Text("newRecord.screen.section.informations.title")) {
                         Picker(selection: $viewModel.selectedPercentage, label: Text("newRecord.screen.section.informations.percentage.title").foregroundColor(.secondary)){
@@ -118,9 +116,7 @@ struct NewRecordView: View {
                 }
             }
             .navigationBarTitle(Text(viewModel.editingCategory.title), displayMode: .inline)
-            .navigationBarItems(
-                leading: Button(
-                    action:{
+            .navigationBarItems(leading: Button(action:{
                         self.presentation.wrappedValue.dismiss()
                     }, label: {
                         Text("newRecord.screen.cancel.button.title")
@@ -137,9 +133,7 @@ struct NewRecordView: View {
                             .bold()
                     }
             ).disabled(viewModel.isSaving)
-            
         }
-    
     }
 }
 
@@ -157,7 +151,9 @@ struct CategoryView: View {
         VStack(alignment: .center) {
             Picker("What is your favorite color?", selection: $selectedCategory) {
                 ForEach(0..<items.count, id: \.self) { index in
-                    Text(LocalizedStringKey(self.items[index])).tag(index)
+                    Text(LocalizedStringKey(self.items[index]))
+                        .tag(index)
+                        .foregroundColor(.green)
                 }
             }
             .pickerStyle(.segmented)
@@ -169,7 +165,7 @@ struct CategoryView: View {
 
 struct CategoryView_Previews: PreviewProvider {
     static var previews: some View {
-        CategoryView(items: [], selectedCategory: .constant(0))
+        CategoryView(items: ["barbell", "gymnastic"], selectedCategory: .constant(1))
     }
 }
 

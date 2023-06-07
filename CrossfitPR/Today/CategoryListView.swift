@@ -9,10 +9,12 @@ import SwiftUI
 import CoreData
 
 struct CategoryListView: View {
+    let impact = UIImpactFeedbackGenerator(style: .light)
     @EnvironmentObject var store: CategoryStore
     @State var showNewPRView = false
     @State var showAddNewPRView = false
-    @Binding var selectedCategoryItem: Int
+    @State var selectedCategoryItem: Int = 0
+    @State var selectedCategory: Category? = nil
     @State var searchText = ""
     @State var categories: [Category] = []
     @State var categoryNames: [String] = [
@@ -25,6 +27,7 @@ struct CategoryListView: View {
         NavigationStack {
             ScrollViewReader { scrollView in
                 ScrollView {
+                    VStack(alignment: .leading, spacing: 6) {
                     CategoryView(
                         items: categoryNames,
                         selectedCategory: $selectedCategoryItem
@@ -33,34 +36,29 @@ struct CategoryListView: View {
                         categories = store.fetchCategoryPerGroup(
                             recordGroup: RecordGroup(rawValue: categoryNames[index]) ?? RecordGroup.barbell
                         )
+                        impact.impactOccurred()
                     }
-                    .padding([.trailing, .leading], 12)
-                    ForEach(searchResults, id: \.self) { category in
-                        CategoryItemView(title: category.title, group: category.group.rawValue)
-                            .onTapGesture {
-                                self.showAddNewPRView.toggle()
-                            }.sheet(isPresented: $showAddNewPRView) {
-                                NewRecordView()
-                                    .environmentObject(NewRecordViewModel(category: category))
+                    .padding([.trailing, .leading], 16)
+                    .padding(.bottom)
+                        Text("💡Clique no exercício para cadastrar um novo PR")
+                            .foregroundColor(.secondary)
+                            .font(.subheadline)
+                            .padding(.leading, 20)
+                        ForEach(searchResults, id: \.self) { exercise in
+                            CategoryItemView(title: exercise.title, group: exercise.group.rawValue)
+                                .onTapGesture {
+                                    if let index = searchResults.firstIndex(where: { $0.id == exercise.id }) {
+                                        categoryBuilder(category: searchResults[index])
+                                        impact.impactOccurred()
+                                        self.showAddNewPRView.toggle()
+                                    }
+                                }
                         }
                     }
                 }
             }
-            .toolbar {
-                ToolbarItemGroup(placement: .navigationBarTrailing) {
-                    Button(action: { self.showNewPRView.toggle() }) {
-                        Image(systemName: "plus.circle")
-                            .font(.headline)
-                            .foregroundColor(.green)
-                            .accessibility(label: Text("add new record"))
-                    }.sheet(isPresented: $showNewPRView) {
-                        NewRecordView()
-                            .environmentObject(NewRecordViewModel())
-                    }
-                }
-            }
             .navigationBarTitle(LocalizedStringKey("screen.category.title"), displayMode: .large)
-            .searchable(text: $searchText, prompt: LocalizedStringKey("category.search.descript"))
+            .searchable(text: $searchText, prompt: LocalizedStringKey("category.search.descript")).foregroundColor(.green)
             .onSubmit(of: .search) {
                 categories = store.searchExercise(for: searchText)
             }
@@ -70,10 +68,20 @@ struct CategoryListView: View {
                     recordGroup: RecordGroup(rawValue: categoryNames[selectedCategoryItem]) ?? RecordGroup.barbell
                 )
             }
+            .sheet(isPresented: $showAddNewPRView) {
+                NewRecordView()
+                    .environmentObject(NewRecordViewModel(category: selectedCategory))
+            }
         }
         .onChange(of: searchText) { searchText in
             categories = store.searchExercise(for: searchText)
         }
+    }
+    
+    private func categoryBuilder(category: Category) {
+        selectedCategory = category
+        selectedCategory?.group = category.group
+        selectedCategory?.type = category.type
     }
     
     var searchResults: [Category] {
@@ -87,7 +95,8 @@ struct CategoryListView: View {
 
 struct CategoryListView_Previews: PreviewProvider {
     static var previews: some View {
-        CategoryListView(selectedCategoryItem: .constant(0))
+        CategoryListView()
+            .environmentObject(CategoryStore())
     }
 }
 

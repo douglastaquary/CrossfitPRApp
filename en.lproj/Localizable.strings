@@ -67,7 +67,7 @@
 "record.screen.delete.button.title" = "Delete";
 "record.screen.cancel.button.title" = "Cancel";
 "record.screen.delete.confirmation.title" = "Do you really want to delete?";
-"record.screen.empty.records.message" = "Get started right now by\nadding a new record.";
+"record.screen.empty.records.message" = "You don't have saved records yet.\nGet started by accessing the exercises tab\nand click to add a new record.";
 "record.button.get.started.new.record" = "Add new record";
 
 
@@ -79,7 +79,7 @@
 
 "purchase.item2.title" = "The Powerful insights";
 "purchase.item2.description" = "The powerful insights elevator allows you to track and understand your evolution, the highest records through powerful graphics";
-
+"purchase.processing.description" = "Processing your purchase...";
 "purchase.item3.title" = "Ranks of your top records";
 "purchase.item3.description" = "Allows you to track the rank of your top high performance records";
 
@@ -90,7 +90,7 @@
   
 /* Screen titles*/
 "screen.records.title" = "My records";
-"screen.category.title" = "Categories";
+"screen.category.title" = "Exercises";
 "screen.insights.title" = "Insights";
 "screen.settings.title" = "Settings";
 
@@ -102,7 +102,7 @@
 
 /* Tabbar title screens */
 "tabbar.myrecords.title" = "my records";
-"tabbar.categories.title" = "categories";
+"tabbar.categories.title" = "exercises";
 "tabbar.insights.title" = "insights";
 "tabbar.settings.title" = "settings";
 

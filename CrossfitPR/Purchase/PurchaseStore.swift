@@ -15,7 +15,7 @@ final class PurchaseStore: ObservableObject {
     @Published var storeKitManager: StoreKitManager
     @Published var subscriptions: [Product] = []
     @Published var products: [Product] = []
-    @Published private(set) var state = UserPurchaseState.loading
+    @Published var state = UserPurchaseState.loading
     
     private let cancellable: Cancellable
     let objectWillChange = PassthroughSubject<Void, Never>()
@@ -45,8 +45,10 @@ final class PurchaseStore: ObservableObject {
         Task {
             do {
                 let transaction = try await self.storeKitManager.purchase(product)
+                self.state = .processing
                 print("\(transaction)")
                 if transaction.ownershipType == .purchased {
+                    self.state = .success
                     unlockPro()
                 }
             } catch {
@@ -109,6 +111,12 @@ extension Decimal {
 }
 
 extension PurchaseStore {
+    func processing() {
+        DispatchQueue.main.async {
+            self.state = .processing
+        }
+    }
+    
     func unlockPro() {
         // You can do your in-app transactions here
         DispatchQueue.main.async {

@@ -16,7 +16,7 @@ import os
     )
     
     let crossfitLevelList = CrossfitLevel.allCases.map { $0.rawValue }
-    let personalRecordTypeList = Category.list.sorted()
+    var personalRecordTypeList: [Category] = []
     var anyCancellable: AnyCancellable? = nil
     private let handstandWalkString = "Handstand walk"
 
@@ -47,25 +47,32 @@ import os
         }
     }
     
-    init(record: PersonalRecord? = nil, dataManager: DataManager = DataManager.shared, settings: UserDefaults = .standard, category: Category? = nil) {
+    init(
+        record: PersonalRecord? = nil,
+        dataManager: DataManager = DataManager.shared,
+        settings: UserDefaults = .standard,
+        category: Category? = nil
+    ) {
         self.dataManager = dataManager
         self.settings = settings
+        
         if let newRecord = record {
             self.editingRecord = newRecord
         } else if let category = category {
-            self.editingRecord = PersonalRecord(prName: category.title, recordMode: category.type, group: category.group)
+            self.editingCategory = category
+            self.editingRecord = PersonalRecord(prName: category.title, recordMode: category.type ,group: category.group)
             self.selectedCategory = category.type.index
         } else {
             self.editingRecord = PersonalRecord()
         }
+        
+        self.personalRecordTypeList = Category.list.sorted()
         self.editingCategory = category ?? Category(title: "", type: .maxWeight)
         
         anyCancellable = dataManager.objectWillChange.sink { [weak self] _ in
             self?.objectWillChange.send()
         }
-        
         setupCategoryForEditingRecord()
-        
     }
     
     func setupCategoryForEditingRecord() {
