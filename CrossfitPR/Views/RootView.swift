@@ -66,7 +66,6 @@ struct RootView: View {
             }
             .tag(2)
             
-            
             NavigationView {
                 SettingsView(appDefaults: self.appDefaults)
                     .navigationTitle(LocalizedStringKey("screen.settings.title"))
@@ -98,22 +97,23 @@ struct RootView: View {
                 }
             )
         }
-        
     }
     
 }
 
 extension RootView {
     func performSetupStatus() {
-        Task {
-            _ = try await storeManager.updatePurchases()
-            if storeManager.transactionState == .purchased {
-                self.appDefaults.set(true, forKey: SettingStoreKeys.pro)
-            } else {
-                self.appDefaults.set(false, forKey: SettingStoreKeys.pro)
-            }
-            throw RequestError.fail(message: "[LOG] purchase(), Unexpected result")
-        }
+        self.appDefaults.set(true, forKey: SettingStoreKeys.pro)
+
+//        Task {
+//            //_ = try await storeManager.updatePurchases()
+//            if storeManager.transactionState == .purchased {
+//                self.appDefaults.set(true, forKey: SettingStoreKeys.pro)
+//            } else {
+//                self.appDefaults.set(false, forKey: SettingStoreKeys.pro)
+//            }
+//            throw RequestError.fail(message: "[LOG] purchase(), Unexpected result")
+//        }
     }
 }
 

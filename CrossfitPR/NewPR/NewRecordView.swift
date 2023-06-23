@@ -8,21 +8,10 @@
 import SwiftUI
 import CoreData
 
-enum RecordMode: String {
-    case maxWeight
-    case maxRepetition
-    case maxDistance
-    
-    var index: Int {
-        switch self {
-        case .maxWeight: return  0
-        case .maxRepetition: return 1
-        case .maxDistance: return 2
-        }
-    }
-}
-
 struct NewRecordView: View {
+    private enum Field: Int, CaseIterable {
+        case percentage, weight, distance, duration
+    }
 
     @EnvironmentObject var settings: SettingsStore
     @EnvironmentObject var viewModel: NewRecordViewModel
@@ -35,8 +24,10 @@ struct NewRecordView: View {
     @State private var selectedMinTime: Int = 0
     @State private var selectedDistance: Int = 10
     @State private var title: String = ""
+    @State private var isPound: Bool = false
     
     @Environment(\.presentationMode) var presentation
+    //@FocusState private var focusedField: Field?
     
     let onCommit: (() -> Void) = {}
     
@@ -45,14 +36,8 @@ struct NewRecordView: View {
             Form {
                 Section(header: Text("Personal Record")) {
                     CategoryView(items: viewModel.crossfitLevelList, selectedCategory: $viewModel.selectedCategoryItem)
-                    Picker(selection: $viewModel.selectedCategory, label: Text("Crossfit PR").foregroundColor(.secondary)) {
-                        if viewModel.editingCategory.title.isEmpty {
-                            ForEach(0..<viewModel.personalRecordTypeList.count, id: \.self) {
-                                Text(viewModel.personalRecordTypeList[$0].title)
-                            }
-                        } else {
-                            Text(viewModel.editingCategory.title)
-                        }
+                    Picker(selection: $viewModel.selectedCategory, label: Text("Crossfit PR")) {
+                        Text(viewModel.editingCategory.title)
                     }
                     .foregroundColor(.primary)
                     .padding(.bottom, 12)
@@ -60,42 +45,107 @@ struct NewRecordView: View {
 
                 switch viewModel.editingCategory.group {
                 case .barbell:
-                    Section(header: Text("newRecord.screen.section.informations.title")) {
-                        Picker(selection: $viewModel.selectedPercentage, label: Text("newRecord.screen.section.informations.percentage.title").foregroundColor(.secondary)){
-                            ForEach(0..<199) {
-                                Text("\(String($0)) %").foregroundColor(.primary)
-                            }
-                        }
-                        Picker(selection: $viewModel.selectedInitialPounds, label: Text("newRecord.screen.section.informations.weight.title").foregroundColor(.secondary)){
-                            ForEach(0..<999) {
-                                Text("\(String($0)) lb").foregroundColor(.primary)
+                    
+                    Section(header: Text("newRecord.screen.section.informations.percentage.title")) {
+                        HStack(alignment: .firstTextBaseline, spacing: 0) {
+                            TextField("0%", text: $viewModel.selectedPercentage) { UIApplication.shared.endEditing() }
+                                .keyboardType(.numberPad)
+                                .fixedSize(horizontal: true, vertical: false)
+                                .font(.system(size: 18, weight: .medium))
+                                .foregroundColor(.primary)
+                                .multilineTextAlignment(.center)
+                                .accentColor(.green)
+                                //.focused($focusedField, equals: .percentage)
+                            if !viewModel.selectedPercentage.isEmpty {
+                                Text("%")
+                                    .font(.system(size: 18, weight: .medium))
+                                    .foregroundColor(!viewModel.selectedPercentage.isEmpty ? .primary : .secondary)
                             }
                         }
                     }
-                case .gymnastic:
-                    Section(header: Text("newRecord.screen.toggle.maxrep.title")) {
-                        Picker(selection: $viewModel.selectedMaxReps, label: Text("newRecord.screen.picker.repetition.title").foregroundColor(.secondary)){
-                            ForEach(0..<100) {
-                                Text("\(String($0))").foregroundColor(.primary)
+                    
+                    Section(header: Text("newRecord.screen.section.informations.weight.title")) {
+                        HStack(alignment: .firstTextBaseline, spacing: 0) {
+                            TextField(viewModel.measureTrackingMode == .pounds ? "lb" : "kg", text: $viewModel.selectedInitialPounds) { UIApplication.shared.endEditing()
+                            }
+                            .keyboardType(.numberPad)
+                            .fixedSize(horizontal: true, vertical: false)
+                            .font(.system(size: 18, weight: .medium))
+                            .foregroundColor(.primary)
+                            .multilineTextAlignment(.center)
+                            .accentColor(.green)
+                            if !viewModel.selectedInitialPounds.isEmpty {
+                                Text(viewModel.measureTrackingMode == .pounds ? " lb" : " kg")
+                                    .font(.system(size: 18, weight: .medium))
+                                    .foregroundColor(!viewModel.selectedInitialPounds.isEmpty ? .primary : .secondary)
                             }
                         }
-                        Picker(selection: $viewModel.selectedMinTime, label: Text("newRecord.screen.picker.timecount.title").foregroundColor(.secondary)){
-                            ForEach(0..<200) {
-                                Text("\(String($0)) min").foregroundColor(.primary)
+                    }
+
+                case .gymnastic:
+                    Section(header: Text("newRecord.screen.toggle.maxrep.title")) {
+                        HStack(alignment: .firstTextBaseline, spacing: 0) {
+                            TextField("Reps", text: $viewModel.selectedMaxReps) { UIApplication.shared.endEditing() }
+                                .keyboardType(.numberPad)
+                                .fixedSize(horizontal: true, vertical: false)
+                                .font(.system(size: 18, weight: .medium))
+                                .foregroundColor(.primary)
+                                .multilineTextAlignment(.center)
+                                .accentColor(.green)
+                            if !viewModel.selectedMaxReps.isEmpty {
+                                Text("reps")
+                                    .font(.system(size: 18, weight: .medium))
+                                    .foregroundColor(!viewModel.selectedMaxReps.isEmpty ? .primary : .secondary)
+                            }
+                        }
+                    }
+                    Section(header: Text("newRecord.screen.picker.timecount.title")) {
+                        HStack(alignment: .firstTextBaseline, spacing: 0) {
+                            TextField("Min", text: $viewModel.selectedMinTime) { UIApplication.shared.endEditing() }
+                                .keyboardType(.numberPad)
+                                .fixedSize(horizontal: true, vertical: false)
+                                .font(.system(size: 18, weight: .medium))
+                                .foregroundColor(.primary)
+                                .multilineTextAlignment(.center)
+                                .accentColor(.green)
+                            if !viewModel.selectedMinTime.isEmpty {
+                                Text("newRecord.screen.minutes.description")
+                                    .font(.system(size: 18, weight: .medium))
+                                    .foregroundColor(!viewModel.selectedMinTime.isEmpty ? .primary : .secondary)
                             }
                         }
                     }
                 case .endurance:
-                    Section(header: Text("newRecord.screen.toggle.mintime.title")) {
-                        Picker(selection: $viewModel.selectedDistance, label: Text("newRecord.screen.toggle.distance.title").foregroundColor(.secondary)){
-                            ForEach(0..<100) {
-                                Text("\(String($0)) km").foregroundColor(.primary)
+                    Section(header: Text("newRecord.screen.toggle.distance.title")) {
+                        HStack(alignment: .firstTextBaseline, spacing: 0) {
+                            TextField("Km", text: $viewModel.selectedDistance) { UIApplication.shared.endEditing() }
+                                .keyboardType(.numberPad)
+                                .fixedSize(horizontal: true, vertical: false)
+                                .font(.system(size: 18, weight: .medium))
+                                .foregroundColor(.primary)
+                                .multilineTextAlignment(.center)
+                                .accentColor(.green)
+                            if !viewModel.selectedDistance.isEmpty {
+                                Text("Km")
+                                    .font(.system(size: 18, weight: .medium))
+                                    .foregroundColor(!viewModel.selectedDistance.isEmpty ? .primary : .secondary)
                             }
                         }
-                        
-                        Picker(selection: $viewModel.selectedMinTime, label: Text("newRecord.screen.picker.timecount.title").foregroundColor(.secondary)){
-                            ForEach(0..<200) {
-                                Text("\(String($0)) min").foregroundColor(.primary)
+                    }
+                    
+                    Section(header: Text("newRecord.screen.picker.timecount.title")) {
+                        HStack(alignment: .firstTextBaseline, spacing: 0) {
+                            TextField("Min", text: $viewModel.selectedMinTime) { UIApplication.shared.endEditing() }
+                                .keyboardType(.numberPad)
+                                .fixedSize(horizontal: true, vertical: false)
+                                .font(.system(size: 18, weight: .medium))
+                                .foregroundColor(.primary)
+                                .multilineTextAlignment(.center)
+                                .accentColor(.green)
+                            if !viewModel.selectedMinTime.isEmpty {
+                                Text("newRecord.screen.minutes.description")
+                                    .font(.system(size: 18, weight: .medium))
+                                    .foregroundColor(!viewModel.selectedMinTime.isEmpty ? .primary : .secondary)
                             }
                         }
                     }
@@ -116,56 +166,38 @@ struct NewRecordView: View {
                 }
             }
             .navigationBarTitle(Text(viewModel.editingCategory.title), displayMode: .inline)
-            .navigationBarItems(leading: Button(action:{
+            .navigationBarItems(leading:
+                Button(action:{
                         self.presentation.wrappedValue.dismiss()
                     }, label: {
                         Text("newRecord.screen.cancel.button.title")
                             .foregroundColor(.green)
                             .bold()
-                    }),
-                trailing: Button(
-                    action: {
-                        viewModel.saveRecord()
-                        self.presentation.wrappedValue.dismiss()
-                    }) {
-                        Text("newRecord.screen.save.button.title")
-                            .foregroundColor(.green)
-                            .bold()
                     }
-            ).disabled(viewModel.isSaving)
+                )
+            )
+                
         }
+        
+        Spacer()
+        VStack {
+            Button("newRecord.screen.save.button.title"){
+                withAnimation() {
+                    self.viewModel.saveRecord()
+                    self.presentation.wrappedValue.dismiss()
+                }
+            }
+            .buttonStyle(FilledButton(widthSizeEnabled: true))
+            .disabled(!viewModel.isSaving)
+        }
+        .padding()
+
     }
 }
 
 struct NewPRRecordView_Previews: PreviewProvider {
     static var previews: some View {
         NewRecordView()
-    }
-}
-
-struct CategoryView: View {
-    let items: [String]
-    @Binding var selectedCategory: Int
-
-    var body: some View {
-        VStack(alignment: .center) {
-            Picker("What is your favorite color?", selection: $selectedCategory) {
-                ForEach(0..<items.count, id: \.self) { index in
-                    Text(LocalizedStringKey(self.items[index]))
-                        .tag(index)
-                        .foregroundColor(.green)
-                }
-            }
-            .pickerStyle(.segmented)
-        }
-        .padding([.bottom, .top], 14)
-    }
-}
-
-
-struct CategoryView_Previews: PreviewProvider {
-    static var previews: some View {
-        CategoryView(items: ["barbell", "gymnastic"], selectedCategory: .constant(1))
     }
 }
 

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4E07EA692A454272009C4A4D /* CategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E07EA682A454272009C4A4D /* CategoryView.swift */; };
+		4E07EA6B2A4542AE009C4A4D /* RecordMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E07EA6A2A4542AE009C4A4D /* RecordMode.swift */; };
 		4E26EC4A281B67B300A4F8C3 /* CategoryStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E26EC49281B67B300A4F8C3 /* CategoryStore.swift */; };
 		4E26EC4F281EE66600A4F8C3 /* PRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E26EC4E281EE66600A4F8C3 /* PRView.swift */; };
 		4E26EC51281EE6B200A4F8C3 /* DetailItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E26EC50281EE6B200A4F8C3 /* DetailItemView.swift */; };
@@ -81,6 +83,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4E07EA682A454272009C4A4D /* CategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryView.swift; sourceTree = "<group>"; };
+		4E07EA6A2A4542AE009C4A4D /* RecordMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordMode.swift; sourceTree = "<group>"; };
 		4E26EC49281B67B300A4F8C3 /* CategoryStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryStore.swift; sourceTree = "<group>"; };
 		4E26EC4E281EE66600A4F8C3 /* PRView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PRView.swift; sourceTree = "<group>"; };
 		4E26EC50281EE6B200A4F8C3 /* DetailItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailItemView.swift; sourceTree = "<group>"; };
@@ -299,6 +303,7 @@
 				4EB4313728F666A90086C0C8 /* UserIsProKey.swift */,
 				4EE5FA3B293BB8F400A28B8C /* UserPurchaseState.swift */,
 				4E8E912D2A09DB7300CF6C5C /* SettingStoreKeys.swift */,
+				4E07EA6A2A4542AE009C4A4D /* RecordMode.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -320,6 +325,7 @@
 			children = (
 				4E5805B127FB8B1C00F16219 /* NewRecordView.swift */,
 				4E5805AC27FB8B1C00F16219 /* NewRecordViewModel.swift */,
+				4E07EA682A454272009C4A4D /* CategoryView.swift */,
 			);
 			path = NewPR;
 			sourceTree = "<group>";
@@ -511,6 +517,7 @@
 				4E5805E7280CAA8700F16219 /* CrossfitPR.xcdatamodeld in Sources */,
 				4E5805BE27FB8B1C00F16219 /* NewRecordView.swift in Sources */,
 				4E5805EE280F8B0400F16219 /* RecordDetailView.swift in Sources */,
+				4E07EA692A454272009C4A4D /* CategoryView.swift in Sources */,
 				4E5805B827FB8B1C00F16219 /* App.swift in Sources */,
 				4E6154162978E31E00284E8E /* MyRecordsViewModel.swift in Sources */,
 				4E5805B627FB8B1C00F16219 /* PersonalRecord.swift in Sources */,
@@ -522,6 +529,7 @@
 				4E5805BC27FB8B1C00F16219 /* OnboardingView.swift in Sources */,
 				4E5805C127FB8B1C00F16219 /* SendablePublisher.swift in Sources */,
 				4EE666E828CE92370090BB35 /* NextView.swift in Sources */,
+				4E07EA6B2A4542AE009C4A4D /* RecordMode.swift in Sources */,
 				4E26EC53281EE6FC00A4F8C3 /* RingProgressView.swift in Sources */,
 				4E8D9113282C798F00C88BF2 /* LineViewGraph.swift in Sources */,
 				4E61541A298B515600284E8E /* MaxRecordItem.swift in Sources */,

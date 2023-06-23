@@ -13,7 +13,6 @@ struct SettingsView: View {
     @Environment(\.scenePhase) var scenePhase
     @Environment(\.openURL) var openURL
     @Environment(\.storeKitManager) var storeKitManager
-    @Environment(\.isPro) var isPRO
     @State var showPROsubsciptionView = false
     @State var showSubscriptionsSheet = false
     @State private var scheduleDate = Date()

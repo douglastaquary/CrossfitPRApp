@@ -8,7 +8,7 @@
 import Foundation
 
 enum CrossfitLevel: String, CaseIterable {
-    case rx = "Rx"
+    case beginner = "Beginner"
     case scale = "Scale"
-    case fitness = "Fitness"
+    case rx = "Rx"
 }

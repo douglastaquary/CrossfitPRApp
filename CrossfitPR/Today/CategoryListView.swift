@@ -14,7 +14,8 @@ struct CategoryListView: View {
     @State var showNewPRView = false
     @State var showAddNewPRView = false
     @State var selectedCategoryItem: Int = 0
-    @State var selectedCategory: Category? = nil
+    @State var selectedCategory: Category?
+    @State var selectedIndex: Int = 0
     @State var searchText = ""
     @State var categories: [Category] = []
     @State var categoryNames: [String] = [
@@ -44,15 +45,21 @@ struct CategoryListView: View {
                             .foregroundColor(.secondary)
                             .font(.subheadline)
                             .padding(.leading, 20)
+                        
                         ForEach(searchResults, id: \.self) { exercise in
                             CategoryItemView(title: exercise.title, group: exercise.group.rawValue)
                                 .onTapGesture {
                                     if let index = searchResults.firstIndex(where: { $0.id == exercise.id }) {
-                                        categoryBuilder(category: searchResults[index])
+                                        self.selectedCategory = Category.map(from: exercise)
+                                        self.selectedIndex = index
                                         impact.impactOccurred()
                                         self.showAddNewPRView.toggle()
                                     }
                                 }
+                        }
+                        .sheet(item: $selectedCategory) { item in
+                            NewRecordView()
+                                .environmentObject(NewRecordViewModel(category: item))
                         }
                     }
                 }
@@ -63,25 +70,16 @@ struct CategoryListView: View {
                 categories = store.searchExercise(for: searchText)
             }
             .onAppear {
-                UINavigationBar.appearance().tintColor = .green
+                //UINavigationBar.appearance().tintColor = .green
                 categories = store.fetchCategoryPerGroup(
                     recordGroup: RecordGroup(rawValue: categoryNames[selectedCategoryItem]) ?? RecordGroup.barbell
                 )
             }
-            .sheet(isPresented: $showAddNewPRView) {
-                NewRecordView()
-                    .environmentObject(NewRecordViewModel(category: selectedCategory))
-            }
+
         }
         .onChange(of: searchText) { searchText in
             categories = store.searchExercise(for: searchText)
         }
-    }
-    
-    private func categoryBuilder(category: Category) {
-        selectedCategory = category
-        selectedCategory?.group = category.group
-        selectedCategory?.type = category.type
     }
     
     var searchResults: [Category] {

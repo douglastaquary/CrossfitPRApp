@@ -100,6 +100,7 @@ final class InsightsViewModel: ObservableObject {
         performTopRankingGymnasticRecords()
         performTopRankingEnduranceRecords()
         buildLastPercentage()
+        updatePurchases()
     }
     
     // Call this early in the app's lifecycle.
@@ -356,7 +357,7 @@ final class InsightsViewModel: ObservableObject {
 }
 
 extension InsightsViewModel {
-    func updatePurchases() async {
+    func updatePurchases() {
         var isPRO: Bool { get { defaults.bool(forKey: SettingStoreKeys.pro) } }
         if isPRO {
             DispatchQueue.main.async {

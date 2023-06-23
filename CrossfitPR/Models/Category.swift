@@ -83,6 +83,12 @@ struct Category: Identifiable, Comparable, Hashable {
 }
 
 extension Category {
+    static func map(from item: Category) -> Self {
+        .init(title: item.title, type: item.type, group: item.group)
+    }
+}
+
+extension Category {
     static func < (lhs: Category, rhs: Category) -> Bool {
         lhs.title < rhs.title
     }

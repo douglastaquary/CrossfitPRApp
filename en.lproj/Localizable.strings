@@ -156,6 +156,7 @@
 "newRecord.screen.toggle.maxrep.title" = "Maximum repetitions";
 "newRecord.screen.picker.repetition.title" = "Repetitions";
 "newRecord.screen.picker.timecount.title" = "Time";
+"newRecord.screen.minutes.description" = "minutes";
 "newRecord.screen.toggle.distance.title" = "Distance";
 "newRecord.screen.section.informations.title" = "Informations";
 "newRecord.screen.section.informations.percentage.title" = "Percentage";
