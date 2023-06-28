@@ -93,10 +93,11 @@
 
 /* Insight screen */
 
-"insight.section.ranking.barbell.title" = "Top Recordes com Barra";
+"insight.section.topranking.barbell.title" = "Top ranking dos records com barra";
+"insight.section.section.barbell.title" = "Recordes com Barra";
 "insight.section.footer.rank.barbell.title" = "O Top ranking mostra o record mais alto, recordes em evolução e a menor performance.";
-"insight.section.ranking.gymnastic.title" = "Top Recordes Ginásticos";
-"insight.section.ranking.endurance.title"= "Top Recordes de Resistência";
+"insight.section.ranking.gymnastic.title" = "Recordes Ginásticos";
+"insight.section.ranking.endurance.title"= "Recordes de Resistência";
 "insight.section.graph.title" = "Percepções";
 
 "insight.section.information.title" = "Seu maior recorde";
@@ -144,4 +145,4 @@
 "emptyView.screen.message" = "Comece agora\nadicionando um novo record.\nOs poderosos insights são gerados a partir\ndos dados que você adiciona no app.\nPara melhor visualização dos gráficos,\n é necessário ao menos 8 registros de records.";
 
 /* Ranking screen view*/
-"ranking.screen.evolution.percentage %@" = "Evolution of %@ from last PR recored.";
+"ranking.screen.evolution.percentage %@" = "Você obteve uma evolução de %@ desde o último PR registrado.";

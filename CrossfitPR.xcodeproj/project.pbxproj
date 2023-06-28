@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		4E07EA692A454272009C4A4D /* CategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E07EA682A454272009C4A4D /* CategoryView.swift */; };
 		4E07EA6B2A4542AE009C4A4D /* RecordMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E07EA6A2A4542AE009C4A4D /* RecordMode.swift */; };
+		4E07EA6D2A4747A8009C4A4D /* LaunchScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E07EA6C2A4747A8009C4A4D /* LaunchScreenView.swift */; };
+		4E07EA6F2A47481B009C4A4D /* LaunchScreenStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E07EA6E2A47481B009C4A4D /* LaunchScreenStep.swift */; };
+		4E07EA712A474854009C4A4D /* LaunchScreenStateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E07EA702A474854009C4A4D /* LaunchScreenStateManager.swift */; };
 		4E26EC4A281B67B300A4F8C3 /* CategoryStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E26EC49281B67B300A4F8C3 /* CategoryStore.swift */; };
 		4E26EC4F281EE66600A4F8C3 /* PRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E26EC4E281EE66600A4F8C3 /* PRView.swift */; };
 		4E26EC51281EE6B200A4F8C3 /* DetailItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E26EC50281EE6B200A4F8C3 /* DetailItemView.swift */; };
@@ -85,6 +88,9 @@
 /* Begin PBXFileReference section */
 		4E07EA682A454272009C4A4D /* CategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryView.swift; sourceTree = "<group>"; };
 		4E07EA6A2A4542AE009C4A4D /* RecordMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordMode.swift; sourceTree = "<group>"; };
+		4E07EA6C2A4747A8009C4A4D /* LaunchScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenView.swift; sourceTree = "<group>"; };
+		4E07EA6E2A47481B009C4A4D /* LaunchScreenStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenStep.swift; sourceTree = "<group>"; };
+		4E07EA702A474854009C4A4D /* LaunchScreenStateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenStateManager.swift; sourceTree = "<group>"; };
 		4E26EC49281B67B300A4F8C3 /* CategoryStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryStore.swift; sourceTree = "<group>"; };
 		4E26EC4E281EE66600A4F8C3 /* PRView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PRView.swift; sourceTree = "<group>"; };
 		4E26EC50281EE6B200A4F8C3 /* DetailItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailItemView.swift; sourceTree = "<group>"; };
@@ -195,6 +201,7 @@
 				4E921702294BE11800D8BED2 /* OpaqueActionButton.swift */,
 				4E615417298225EE00284E8E /* PRPercentagesView.swift */,
 				4E615419298B515600284E8E /* MaxRecordItem.swift */,
+				4E07EA6C2A4747A8009C4A4D /* LaunchScreenView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -304,6 +311,7 @@
 				4EE5FA3B293BB8F400A28B8C /* UserPurchaseState.swift */,
 				4E8E912D2A09DB7300CF6C5C /* SettingStoreKeys.swift */,
 				4E07EA6A2A4542AE009C4A4D /* RecordMode.swift */,
+				4E07EA6E2A47481B009C4A4D /* LaunchScreenStep.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -316,6 +324,7 @@
 				4E5805B527FB8B1C00F16219 /* AppDependencies.swift */,
 				4E5805B027FB8B1C00F16219 /* CloudKitService.swift */,
 				4EB4313328E2977B0086C0C8 /* NetworkMonitor.swift */,
+				4E07EA702A474854009C4A4D /* LaunchScreenStateManager.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -501,6 +510,7 @@
 				4E26EC51281EE6B200A4F8C3 /* DetailItemView.swift in Sources */,
 				4E5805C427FBA91700F16219 /* LaunchView.swift in Sources */,
 				4E26EC4F281EE66600A4F8C3 /* PRView.swift in Sources */,
+				4E07EA712A474854009C4A4D /* LaunchScreenStateManager.swift in Sources */,
 				4EE666F428D35C800090BB35 /* LoadingState.swift in Sources */,
 				4E26EC55281EEB4700A4F8C3 /* HSubtitleView.swift in Sources */,
 				4E5805CD27FD2C0C00F16219 /* RootView.swift in Sources */,
@@ -514,6 +524,8 @@
 				4E26EC4A281B67B300A4F8C3 /* CategoryStore.swift in Sources */,
 				4E58059527FB8AEF00F16219 /* SceneDelegate.swift in Sources */,
 				4E5805C227FB8B1C00F16219 /* AppDependencies.swift in Sources */,
+				4E07EA6D2A4747A8009C4A4D /* LaunchScreenView.swift in Sources */,
+				4E07EA6F2A47481B009C4A4D /* LaunchScreenStep.swift in Sources */,
 				4E5805E7280CAA8700F16219 /* CrossfitPR.xcdatamodeld in Sources */,
 				4E5805BE27FB8B1C00F16219 /* NewRecordView.swift in Sources */,
 				4E5805EE280F8B0400F16219 /* RecordDetailView.swift in Sources */,

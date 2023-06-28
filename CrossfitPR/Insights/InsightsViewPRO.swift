@@ -15,7 +15,7 @@ struct InsightsViewPRO: View {
     var body: some View {
         VStack {
             Form {
-                Section(header: Text("insight.section.ranking.barbell.title"),
+                Section(header: Text("insight.section.topranking.barbell.title"),
                         footer: Text("insight.section.footer.rank.barbell.title")) {
                     if store.barbellRecords.isEmpty {
                         Text(LocalizedStringKey("insight.view.error.description"))
@@ -31,7 +31,7 @@ struct InsightsViewPRO: View {
                         }
                     }
                 }
-                Section("Barbell records") {
+                Section(LocalizedStringKey("insight.section.section.barbell.title")) {
                     if store.barbellRecords.isEmpty {
                         Text(LocalizedStringKey("insight.view.error.description"))
                     } else {
@@ -51,7 +51,7 @@ struct InsightsViewPRO: View {
                         .padding(.top, 12)
                     }
                 }
-                Section("Gymnastic records") {
+                Section(LocalizedStringKey("insight.section.ranking.gymnastic.title")) {
                     Chart {
                         ForEach(store.gymnasticRecords) { record in
                             BarMark(
@@ -68,7 +68,7 @@ struct InsightsViewPRO: View {
                     .frame(height: 240)
                     .padding(.top, 12)
                 }
-                Section("Endurance records") {
+                Section(LocalizedStringKey("insight.section.ranking.endurance.title")) {
                     Chart {
                         ForEach(store.enduranceRecords) { record in
                             BarMark(

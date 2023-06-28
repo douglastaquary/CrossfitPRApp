@@ -55,8 +55,10 @@ struct RankingView: View {
                 VStack(alignment: .trailing) {
                     Text(viewModel.marketValue).font(.headline)
                     HStack {
-                        Image(systemName: "arrow.up.forward").foregroundColor(.green)
-                        Text("\(viewModel.percentageEvolutionValue)")
+                        if !viewModel.percentageEvolutionValue.contains("0%") {
+                            Image(systemName: "arrow.up.forward").foregroundColor(.green)
+                            Text("\(viewModel.percentageEvolutionValue)")
+                        }
                     }
                 }
             }
@@ -77,14 +79,14 @@ struct RankingView: View {
             }
             .frame(height: 15)
             
-            if !(viewModel.percentageEvolutionValue == "0%") {
-                HStack {
-                    Text("ranking.screen.evolution.percentage \(viewModel.percentageEvolutionValue)")
-                        .font(.caption)
-                        .lineLimit(3)
-                        .foregroundColor(.secondary)
-                }
-            }
+//            if !(viewModel.percentageEvolutionValue == "0%") {
+//                HStack {
+//                    Text("ranking.screen.evolution.percentage \(viewModel.percentageEvolutionValue)")
+//                        .font(.caption)
+//                        .lineLimit(3)
+//                        .foregroundColor(.secondary)
+//                }
+//            }
         }
         
     }

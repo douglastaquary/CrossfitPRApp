@@ -108,11 +108,12 @@
 
 /* Insight screen */
 
-"insight.section.top.ranking.title" = "Top ranking";
+
 "insight.section.footer.rank.barbell.title" = "The top ranking shows the highest record, evolution records and lowest performing.";
 "insight.section.ranking.title" = "Top barbell ranking";
-"insight.section.ranking.barbell.title" = "Top Barbell Records";
-"insight.section.ranking.gymnastic.title" = "Top Gymnastic Records";
+"insight.section.topranking.barbell.title" = "Top Barbell Records";
+"insight.section.ranking.barbell.title" = "Barbell Records";
+"insight.section.ranking.gymnastic.title" = "Gymnastic Records";
 "insight.section.ranking.endurance.title"= "Top Endurance Records";
 "insight.section.graph.title" = "Graph Details";
 
