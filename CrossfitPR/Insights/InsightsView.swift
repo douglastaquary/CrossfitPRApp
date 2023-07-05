@@ -30,10 +30,16 @@ struct InsightsView: View {
     var body: some View {
         switch store.uiState {
         case .loading:
-            LoadingView()
-        case .isPRO:
-            InsightsViewPRO()
+            InsightsViewPRO(isShimmering: true)
                 .environmentObject(store)
+        case .isPRO:
+            InsightsViewPRO(isShimmering: false)
+                .environmentObject(store)
+//                .onAppear {
+//                    store.loadAllRecords()
+//                    store.setupMeasureForBarbellRecords()
+//                    store.configureRecordsRacking()
+//                }
         default:
             VStack {
                 Button {
@@ -58,8 +64,12 @@ struct InsightsView: View {
                 Spacer()
             }
             .padding(22)
+            
         }
+        
+            
     }
+    
     
 }
 

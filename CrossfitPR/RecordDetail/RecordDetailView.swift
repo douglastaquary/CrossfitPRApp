@@ -31,7 +31,7 @@ struct RecordDetailView: View {
             Form {
                 Group {
                     Section("record.biggest.section.title") {
-//                        HSubtitleView(title: "record.category.title", subtitle: store.category?.name ?? "")
+
                         let group = store.category?.group ?? .barbell
                         switch group {
                         case .barbell:
@@ -40,20 +40,20 @@ struct RecordDetailView: View {
                                 subtitle: isPounds ? "\(String(describing: record.poundValue)) lb" : "\(String(describing: record.kiloValue)) kg"
                             )
                         case .gymnastic:
-                            HSubtitleView(title: "record.maxReps.title", subtitle: "\(String(describing: record.maxReps))")
-                            HSubtitleView(title: "record.time.title", subtitle: "\(String(describing: record.minTime)) min")
+                            HSubtitleView(imageSystemName: "cellularbars", title: "record.maxReps.title", subtitle: "\(String(describing: record.maxReps))")
+                            HSubtitleView(imageSystemName: "watchface.applewatch.case", title: "record.time.title", subtitle: "\(String(describing: record.minTime)) min")
                         case .endurance:
-                            HSubtitleView(title: "record.distance.title", subtitle: "\(String(describing: record.distance))km")
-                            HSubtitleView(title: "record.time.title", subtitle: "\(String(describing: record.minTime)) min")
+                            HSubtitleView(imageSystemName: "chart.line.uptrend.xyaxis", title: "record.distance.title", subtitle: "\(String(describing: record.distance))km")
+                            HSubtitleView(imageSystemName: "watchface.applewatch.case", title: "record.time.title", subtitle: "\(String(describing: record.minTime)) min")
                         }
 
-                        HSubtitleView(title: "record.date.title", subtitle: "\(String(describing: record.dateFormatter))")
+                        HSubtitleView(imageSystemName: "calendar", title: "record.date.title", subtitle: "\(String(describing: record.dateFormatter))")
                     }
                     
                     if store.category?.group == .barbell {
                         Section("record.datail.section.percentage.title") {
                             NavigationLink(value: record) {
-                                HSubtitleView(
+                                HSubtitleView(imageSystemName: "percent",
                                     title: "record.datail.percentage.title",
                                     subtitle: "\(String(describing: record.percentage.clean))%"
                                 )
@@ -61,6 +61,25 @@ struct RecordDetailView: View {
                         }
                     }
                     
+                }
+                
+                
+                Section(header: Text("record.evolution.section.title \(store.category?.name ?? "")"), footer: Text("record.evolution.section.description \(store.category?.name ?? "")")) {
+                    Chart {
+                        ForEach(points, id: \.id) { point in
+                            BarMark(
+                                x: .value("Date", point.date),
+                                y: .value("Weight", point.value)
+                            )
+                            .position(by: .value("Date", point.date))
+                            .annotation {
+                                Text(verbatim: point.value.formatted())
+                                    .font(.caption)
+                            }
+                        }
+                    }
+                    .frame(height: 250)
+                    .padding(.top)
                 }
 
                 Group {
@@ -83,24 +102,6 @@ struct RecordDetailView: View {
                             Button("record.screen.cancel.button.title", role: .cancel) { }
                         }
                     }
-                }
-                
-                Section(header: Text("record.evolution.section.title \(store.category?.name ?? "")"), footer: Text("record.evolution.section.description \(store.category?.name ?? "")")) {
-                    Chart {
-                        ForEach(points, id: \.id) { point in
-                            BarMark(
-                                x: .value("Date", point.date),
-                                y: .value("Weight", point.value)
-                            )
-                            .position(by: .value("Date", point.date))
-                            .annotation {
-                                Text(verbatim: point.value.formatted())
-                                    .font(.caption)
-                            }
-                        }
-                    }
-                    .frame(height: 250)
-                    .padding(.top)
                 }
             }
         }

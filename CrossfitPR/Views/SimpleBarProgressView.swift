@@ -51,13 +51,17 @@ struct RankingView: View {
         VStack(alignment: .leading, spacing: 12) {
             HStack(alignment: .center) {
                 Text(viewModel.record.prName).font(.headline)
+                    .redacted(reason: .placeholder)
                 Spacer()
                 VStack(alignment: .trailing) {
                     Text(viewModel.marketValue).font(.headline)
+                        .redacted(reason: .placeholder)
                     HStack {
                         if !viewModel.percentageEvolutionValue.contains("0%") {
                             Image(systemName: "arrow.up.forward").foregroundColor(.green)
+                                .redacted(reason: .placeholder)
                             Text("\(viewModel.percentageEvolutionValue)")
+                                .redacted(reason: .placeholder)
                         }
                     }
                 }
@@ -66,6 +70,7 @@ struct RankingView: View {
             GeometryReader { bounds in
                 Capsule(style: .circular)
                     .fill(viewModel.legendBackground)
+                    .redacted(reason: .placeholder)
                     .overlay {
                         HStack {
                             Capsule(style: .circular)
@@ -78,24 +83,20 @@ struct RankingView: View {
                     .clipShape(Capsule(style: .circular))
             }
             .frame(height: 15)
-            
-//            if !(viewModel.percentageEvolutionValue == "0%") {
-//                HStack {
-//                    Text("ranking.screen.evolution.percentage \(viewModel.percentageEvolutionValue)")
-//                        .font(.caption)
-//                        .lineLimit(3)
-//                        .foregroundColor(.secondary)
-//                }
-//            }
         }
-        
     }
 }
 
 struct RankingView_Previews: PreviewProvider {
     static var previews: some View {
         RankingView()
-            .environmentObject(RankingViewModel(record: PersonalRecord.recordMock, measure: .pounds, legend: .yellow))
+            .environmentObject(
+                RankingViewModel(
+                    record: PersonalRecord.recordMock,
+                    measure: .pounds,
+                    legend: .yellow
+                )
+            )
     }
 }
 

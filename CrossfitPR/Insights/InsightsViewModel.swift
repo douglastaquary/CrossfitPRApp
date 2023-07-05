@@ -72,6 +72,10 @@ final class InsightsViewModel: ObservableObject {
         return []
     }
     
+    var isEmpty: Bool {
+        records.isEmpty
+    }
+    
     init(dataManager: DataManager = DataManager.shared, defaults: UserDefaults, storeKitService: StoreKitManager) {
         self.defaults = defaults
         self.dataManager = dataManager
@@ -85,18 +89,40 @@ final class InsightsViewModel: ObservableObject {
 //        Task {
 //            await updatePurchases()
 //        }
+//
+        loadAllRecords()
+        setupMeasureForBarbellRecords()
+        configureRecordsRacking()
+//
         
-        loadBarbellRecords()
+//        switch measureTrackingMode {
+//        case .pounds:
+//            performTopRankingBarbellRecordsForPounds()
+//        case .kilos:
+//            performTopRankingBarbellRecordsForKilos()
+//        }
+//
+//        performTopRankingGymnasticRecords()
+//        performTopRankingEnduranceRecords()
+//        buildLastPercentage()
+    }
+    
+    func loadAllRecords() {
         loadGymnasticRecords()
         loadEnduranceRecords()
-        
+        loadBarbellRecords()
+    }
+    
+    func setupMeasureForBarbellRecords() {
         switch measureTrackingMode {
         case .pounds:
             performTopRankingBarbellRecordsForPounds()
         case .kilos:
             performTopRankingBarbellRecordsForKilos()
         }
-        
+    }
+    
+    func configureRecordsRacking() {
         performTopRankingGymnasticRecords()
         performTopRankingEnduranceRecords()
         buildLastPercentage()

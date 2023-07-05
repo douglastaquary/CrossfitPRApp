@@ -118,7 +118,7 @@
 "insight.section.graph.title" = "Graph Details";
 
 "insight.section.information.title" = "The biggest PR";
-"insight.view.error.description" = "There is no data to display chart.";
+"insight.view.error.description" = "You don't have data to show yet.";
 
 "insight.view.biggestpr.description %@" = "the biggest pr is %@";
 

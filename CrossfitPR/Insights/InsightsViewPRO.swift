@@ -11,30 +11,35 @@ import SwiftUICharts
 
 struct InsightsViewPRO: View {
     @EnvironmentObject var store: InsightsViewModel
+    @State var isShimmering: Bool = false
     
     var body: some View {
         VStack {
             Form {
                 Section(header: Text("insight.section.topranking.barbell.title"),
                         footer: Text("insight.section.footer.rank.barbell.title")) {
-                    if store.barbellRecords.isEmpty {
-                        Text(LocalizedStringKey("insight.view.error.description"))
-                    } else {
+//                    if store.barbellRecords.isEmpty {
+//                        Text(LocalizedStringKey("insight.view.error.description"))
+//                    } else {
                         ForEach(store.topRakingBarbellRecords) { barbell in
                             RankingView()
+                                .shimmering(active: isShimmering)
                                 .environmentObject(
                                     RankingViewModel(
                                         record: barbell,
-                                        measure: store.measureTrackingMode, percentageEvolutionValue: "\(barbell.evolutionPercentage)", legend: barbell.legend)
+                                        measure: store.measureTrackingMode,
+                                        percentageEvolutionValue: "\(barbell.evolutionPercentage)",
+                                        legend: barbell.legend
+                                    )
                                 )
                             
                         }
-                    }
+                   // }
                 }
-                Section(LocalizedStringKey("insight.section.section.barbell.title")) {
-                    if store.barbellRecords.isEmpty {
-                        Text(LocalizedStringKey("insight.view.error.description"))
-                    } else {
+                Section(LocalizedStringKey("insight.section.ranking.barbell.title")) {
+//                    if store.barbellRecords.isEmpty {
+//                        Text(LocalizedStringKey("insight.view.error.description"))
+//                    } else {
                         Chart {
                             ForEach(store.barbellRecords) { record in
                                 BarMark(
@@ -47,44 +52,62 @@ struct InsightsViewPRO: View {
                                 }
                             }
                         }
+                        .shimmering(active: isShimmering)
                         .frame(height: 240)
+                        .padding(.top, 12)
+                        
+                    //}
+                }
+                Section(LocalizedStringKey("insight.section.ranking.gymnastic.title")) {
+                    
+//                    if store.gymnasticRecords.isEmpty {
+//                        Text(LocalizedStringKey("insight.view.error.description"))
+//                    } else {
+                        Chart {
+                            ForEach(store.gymnasticRecords) { record in
+                                BarMark(
+                                    x: .value("Record Name", record.dateFormatter),
+                                    y: .value("Reps", record.maxReps)
+                                )
+                                .foregroundStyle(by: .value("Record Name", record.prName))
+                                .annotation(position: .top) {
+                                    AnnotationView(recordValue: "\(record.maxReps) reps")
+                                }
+                                
+                            }
+                        }
+                        .frame(height: 240)
+                        .shimmering(active: isShimmering)
+                        .padding(.top, 12)
+                   // }
+                }
+                Section(LocalizedStringKey("insight.section.ranking.endurance.title")) {
+                    if store.gymnasticRecords.isEmpty {
+                        Text(LocalizedStringKey("insight.view.error.description"))
+                    } else {
+                        Chart {
+                            ForEach(store.enduranceRecords) { record in
+                                BarMark(
+                                    x: .value("Record Name", record.prName),
+                                    y: .value("Endurance", record.distance)
+                                )
+                                .foregroundStyle(by: .value("Record Name", record.prName))
+                                .annotation(position: .top) {
+                                    AnnotationView(recordValue: "\(record.distance) km")
+                                }
+                            }
+                        }
+                        .frame(height: 240)
+                        .shimmering(active: isShimmering)
                         .padding(.top, 12)
                     }
                 }
-                Section(LocalizedStringKey("insight.section.ranking.gymnastic.title")) {
-                    Chart {
-                        ForEach(store.gymnasticRecords) { record in
-                            BarMark(
-                                x: .value("Record Name", record.dateFormatter),
-                                y: .value("Reps", record.maxReps)
-                            )
-                            .foregroundStyle(by: .value("Record Name", record.prName))
-                            .annotation(position: .top) {
-                                AnnotationView(recordValue: "\(record.maxReps) reps")
-                            }
-                            
-                        }
-                    }
-                    .frame(height: 240)
-                    .padding(.top, 12)
-                }
-                Section(LocalizedStringKey("insight.section.ranking.endurance.title")) {
-                    Chart {
-                        ForEach(store.enduranceRecords) { record in
-                            BarMark(
-                                x: .value("Record Name", record.prName),
-                                y: .value("Endurance", record.distance)
-                            )
-                            .foregroundStyle(by: .value("Record Name", record.prName))
-                            .annotation(position: .top) {
-                                AnnotationView(recordValue: "\(record.distance) km")
-                            }
-                        }
-                    }
-                    .frame(height: 240)
-                    .padding(.top, 12)
-                }
             }
+//            .onAppear {
+//                store.loadAllRecords()
+//                store.setupMeasureForBarbellRecords()
+//                store.configureRecordsRacking()
+//            }
         }
     }
     

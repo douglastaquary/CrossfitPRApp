@@ -8,29 +8,70 @@
 import SwiftUI
 
 struct DetailItemView: View {
-    @State var sectionName: String
-    @State var descript: String
-    @State var imageName: String
-    
+    var model: RecordModel
+    var toggle: () -> ()
+
     var body: some View {
-        VStack {
-            HStack {
-                Text(sectionName)
-                Spacer()
+        VStack(spacing: 8) {
+            Button(action: { withAnimation { toggle() } }) {
+                Image(systemName: model.imageSystemName).foregroundColor(.green)
             }
-            HStack {
-                Image(systemName: imageName)
+            .frame(alignment: .leading)
+
+            Text(model.value)
+                .font(.title2)
+                .bold()
+                .multilineTextAlignment(.center)
+                .foregroundColor(.primary)
+
+           // if !reminder.markedCompleted {
+            Text(LocalizedStringKey(model.name))
+                    .font(.subheadline)
                     .foregroundColor(.secondary)
-                Text(descript)
-                Spacer()
-            }
+           // }
         }
-        
+        .accessibilityElement(children: .combine)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .padding(8)
+        .customBackground(color: .background)
+    }
+
+    private func getDate() -> String {
+        let format = DateFormatter()
+        format.dateFormat = "MMM, dd"
+        return format.string(from: model.date ?? Date())
     }
 }
 
 struct DetailItemView_Previews: PreviewProvider {
     static var previews: some View {
-        DetailItemView(sectionName: "SQUAT", descript: "Air squat", imageName: "")
+        DetailItemView(model: RecordModel(), toggle: {})
     }
+}
+
+
+
+struct RecordModel: Identifiable, Hashable {
+    var id = UUID()
+    var imageSystemName: String = ""
+    var name: String = ""
+    var value: String = ""
+    var date: Date?
+    var markedCompleted = false
+}
+
+extension RecordModel {
+    static func testRecordModels() -> [RecordModel] {
+        var models: [RecordModel] = []
+
+        for _ in 0..<12 {
+            models.append(RecordModel())
+        }
+
+        return models
+    }
+}
+
+extension RecordModel {
+    static let defaultReminderName = "Snatch"
 }

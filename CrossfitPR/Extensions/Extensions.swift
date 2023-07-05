@@ -254,6 +254,10 @@ extension View {
             impact.impactOccurred()
         }
     }
+    
+    func customBackground(color: Color = .background) -> some View {
+        self.background(RoundedRectangle(cornerRadius: 8).fill(color))
+    }
 }
 
 
@@ -262,3 +266,42 @@ extension UIApplication {
         sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
 }
+
+
+extension Color {
+    static var main: Color {
+        Color(.systemPurple)
+    }
+
+    static var background: Color {
+        Color(UIColor { (traits) -> UIColor in
+            if traits.userInterfaceStyle == .dark {
+                return UIColor.init(red: 50/255, green: 50/255, blue: 54/255, alpha: 1.0)
+            } else {
+                return UIColor.init(red: 239/255, green: 239/255, blue: 240/255, alpha: 1.0)
+            }
+        })
+    }
+
+    static var headerBackground: Color {
+        Color(UIColor { (traits) -> UIColor in
+            return traits.userInterfaceStyle == .dark ? UIColor.black : UIColor.white
+        })
+    }
+}
+
+struct CustomButtonStyle: ButtonStyle {
+    var status: Bool
+    func makeBody(configuration: Self.Configuration) -> some View {
+        configuration.label
+            .font(.body)
+            .foregroundColor(status ? .white : Color(.darkGray))
+            .padding()
+            .frame(maxWidth: .infinity, alignment: .center)
+            .customBackground(color: status ? .main : .background)
+            .padding()
+            .scaleEffect(configuration.isPressed ? 0.95 : 1.0)
+            .opacity(configuration.isPressed ? 0.8 : 1.0)
+    }
+}
+

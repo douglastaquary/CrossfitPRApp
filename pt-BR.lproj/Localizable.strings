@@ -94,14 +94,14 @@
 /* Insight screen */
 
 "insight.section.topranking.barbell.title" = "Top ranking dos records com barra";
-"insight.section.section.barbell.title" = "Recordes com Barra";
+"insight.section.ranking.barbell.title" = "Recordes com Barra";
 "insight.section.footer.rank.barbell.title" = "O Top ranking mostra o record mais alto, recordes em evolução e a menor performance.";
 "insight.section.ranking.gymnastic.title" = "Recordes Ginásticos";
 "insight.section.ranking.endurance.title"= "Recordes de Resistência";
 "insight.section.graph.title" = "Percepções";
 
 "insight.section.information.title" = "Seu maior recorde";
-"insight.view.error.description" = "No momento você ainda não tem dados para mostrar.";
+"insight.view.error.description" = "Você ainda não tem dados para mostrar.";
 
 "insight.view.intensity.title"= "Intensidade";
 "insight.view.card.pro.title"= "Os Poderosos Insights";

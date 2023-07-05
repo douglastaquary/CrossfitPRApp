@@ -24,4 +24,5 @@ enum UserPurchaseState: Equatable {
     case blockPro
     case failed(RequestError)
     case success
+    case isEmpty
 }
