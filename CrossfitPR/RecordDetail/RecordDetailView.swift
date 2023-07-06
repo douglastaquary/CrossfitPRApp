@@ -85,7 +85,7 @@ struct RecordDetailView: View {
                 Group {
                     Section("record.records.section.title") {
                         ForEach(store.filteredPrs, id: \.id) { pr in
-                            PRView(record: pr)
+                            PersonalRecordView(record: pr)
                         }
                         .onDelete { indexSet in
                             confirmationShow = true

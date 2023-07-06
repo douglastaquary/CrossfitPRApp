@@ -79,7 +79,7 @@ struct PersonalRecord: Identifiable, Hashable {
     
     var dateFormatter: String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MMM dd, yyyy"
+        dateFormatter.dateFormat = "MMM dd"//"MMM dd, yyyy"
         return dateFormatter.string(from: recordDate)
     }
     
