@@ -13,5 +13,7 @@
 
 ### Organize your personal records from crossfit workouts
 
+Organize and tracking your personal records evolution on CrossFit workouts. Coming soon to the App Store!! 📱📊🏋🏻‍♂️
+
 <a href=""><img src ="images/‎crossfirprapp_screenshots.png.‎1.png"></a>
 
