@@ -42,6 +42,7 @@
 "category.group.gymnastic.descript" = "Ginastico";
 "category.group.endurance.descript" = "Resistência";
 "category.search.descript" = "buscar por nome";
+"exercises.list.header.descript" = "Clique no exercício para criar um novo PR";
 
 /* Tabbar title screens */
 "tabbar.myrecords.title" = "meus records";

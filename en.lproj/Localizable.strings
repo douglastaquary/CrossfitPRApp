@@ -99,6 +99,8 @@
 "category.group.gymnastic.descript" = "Gymnastic";
 "category.group.endurance.descript" = "Endurance";
 "category.search.descript" = "search by name";
+"exercises.list.header.descript" = "Click on the exercise to create a new PR";
+
 
 /* Tabbar title screens */
 "tabbar.myrecords.title" = "my records";

@@ -41,10 +41,15 @@ struct CategoryListView: View {
                     }
                     .padding([.trailing, .leading], 16)
                     .padding(.bottom)
-                        Text("💡Clique no exercício para cadastrar um novo PR")
-                            .foregroundColor(.secondary)
-                            .font(.subheadline)
-                            .padding(.leading, 20)
+                        HStack {
+                            Text("💡")
+                                .foregroundColor(.secondary)
+                                .font(.subheadline)
+                                .padding(.leading, 20)
+                            Text(LocalizedStringKey("exercises.list.header.descript"))
+                        }
+                        Divider().padding([.leading, .trailing, .top])
+                        
                         
                         ForEach(searchResults, id: \.self) { exercise in
                             CategoryItemView(title: exercise.title, group: exercise.group.rawValue)

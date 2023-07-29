@@ -252,7 +252,7 @@
 				4E5805D327FD328200F16219 /* Models */,
 				4E5805D227FD326E00F16219 /* Extensions */,
 				4E5805D127FD324000F16219 /* Insights */,
-				4E5805D027FD323400F16219 /* Today */,
+				4E5805D027FD323400F16219 /* Exercises */,
 				4E5805C727FD297E00F16219 /* Settings */,
 				4E58059427FB8AEF00F16219 /* SceneDelegate.swift */,
 				4E58059827FB8AEF00F16219 /* Main.storyboard */,
@@ -276,13 +276,13 @@
 			path = Settings;
 			sourceTree = "<group>";
 		};
-		4E5805D027FD323400F16219 /* Today */ = {
+		4E5805D027FD323400F16219 /* Exercises */ = {
 			isa = PBXGroup;
 			children = (
 				4E8D91242835E23600C88BF2 /* CategoryListView.swift */,
 				4E26EC49281B67B300A4F8C3 /* CategoryStore.swift */,
 			);
-			path = Today;
+			path = Exercises;
 			sourceTree = "<group>";
 		};
 		4E5805D127FD324000F16219 /* Insights */ = {
