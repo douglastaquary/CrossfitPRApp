@@ -51,7 +51,7 @@ struct RankingView: View {
         VStack(alignment: .leading) {
             Rectangle()
                 .foregroundColor(viewModel.legend)
-                .frame(width: 200, height: 96)
+                .frame(width: 168, height: 96)
                 .clipShape(RoundedRectangle(cornerRadius: 12.0, style: .continuous))
                 .overlay {
                     VStack(alignment: .leading) {
@@ -59,7 +59,8 @@ struct RankingView: View {
                             Text(viewModel.record.prName)
                                 .foregroundColor(.white)
                                 .font(.headline)
-                            Spacer()
+                                .padding(.top, 6)
+                            
                         }
                         VStack {
                             HStack {
@@ -71,10 +72,11 @@ struct RankingView: View {
                                     .font(.subheadline)
                                     .bold()
                                     .foregroundColor(.white)
+                                Spacer()
                                 if !viewModel.percentageEvolutionValue.contains("0%") {
                                     Image(systemName: "arrow.up.forward")
                                         .frame(width: 12, height: 12)
-                                        .foregroundColor(.black)
+                                        .foregroundColor(.white)
                                         ///.opacity(0.2)
                                     Text("\(viewModel.percentageEvolutionValue)")
                                         .foregroundColor(.white)
@@ -97,7 +99,7 @@ struct RankingView: View {
                         }
                         .frame(height: 15)
                     }
-                    .padding([.leading, .trailing])
+                    .padding([.leading, .trailing, .bottom], 10)
             }
                 
             

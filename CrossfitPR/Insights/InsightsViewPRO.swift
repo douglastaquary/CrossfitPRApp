@@ -13,6 +13,8 @@ struct InsightsViewPRO: View {
     @EnvironmentObject var store: InsightsViewModel
     @State var isShimmering: Bool = false
     
+    private var gridItemLayout = [GridItem(.flexible()), GridItem(.flexible())]
+    
     var body: some View {
         NavigationStack {
             ScrollView(.vertical, showsIndicators: false) {
@@ -28,18 +30,20 @@ struct InsightsViewPRO: View {
                             .foregroundColor(.primary)
                         Spacer()
                     }
-                    ForEach(store.topRakingBarbellRecords) { barbell in
-                        RankingView()
-                        //.shimmering(active: isShimmering)
-                            .environmentObject(
-                                RankingViewModel(
-                                    record: barbell,
-                                    measure: store.measureTrackingMode,
-                                    percentageEvolutionValue: "\(barbell.evolutionPercentage)",
-                                    legend: barbell.legend
+                    LazyVGrid(columns: gridItemLayout, spacing: 14) {
+                        ForEach(store.topRakingBarbellRecords) { barbell in
+                            RankingView()
+                            //.shimmering(active: isShimmering)
+                                .environmentObject(
+                                    RankingViewModel(
+                                        record: barbell,
+                                        measure: store.measureTrackingMode,
+                                        percentageEvolutionValue: "\(barbell.evolutionPercentage)",
+                                        legend: barbell.legend
+                                    )
                                 )
-                            )
-                        
+                            
+                        }
                     }
                     
                     // Barbbell

@@ -30,10 +30,10 @@ struct InsightsView: View {
     var body: some View {
         switch store.uiState {
         case .loading:
-            InsightsViewPRO(isShimmering: true)
+            InsightsViewPRO()
                 .environmentObject(store)
         case .isPRO:
-            InsightsViewPRO(isShimmering: false)
+            InsightsViewPRO()
                 .environmentObject(store)
 //                .onAppear {
 //                    store.loadAllRecords()
