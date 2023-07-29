@@ -53,7 +53,6 @@ struct RootView: View {
             NavigationView {
                 VStack{
                     InsightsView()
-                        .navigationTitle(LocalizedStringKey("screen.insights.title"))
                         .environment(\.storeKitManager, storeManager)
                         .environmentObject(InsightsViewModel(defaults: appDefaults, storeKitService: storeManager))
                         .environmentObject(SettingsStore(defaults: appDefaults))

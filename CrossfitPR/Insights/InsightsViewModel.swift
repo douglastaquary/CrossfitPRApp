@@ -163,7 +163,7 @@ final class InsightsViewModel: ObservableObject {
         }.first
         
         guard var barbellRvolutionPR  = evolutionPR else { return }
-        barbellRvolutionPR.legend = .yellow
+        barbellRvolutionPR.legend = .orange
         topRakingBarbellRecords.append(barbellRvolutionPR)
         
         for barbell in barbellRecords {
@@ -210,7 +210,7 @@ final class InsightsViewModel: ObservableObject {
         
         
         guard var barbellRvolutionPR = evolutionPR else { return }
-        barbellRvolutionPR.legend = .yellow
+        barbellRvolutionPR.legend = .orange
         topRakingBarbellRecords.append(barbellRvolutionPR)
         
         for barbell in barbellRecords {

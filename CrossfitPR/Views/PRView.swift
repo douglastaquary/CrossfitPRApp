@@ -133,7 +133,7 @@ struct RecordImageInformationView: View {
             HStack {
                 Rectangle()
                     .foregroundColor(foregroundColor.opacity(0.1))
-                    .frame(width: .infinity , height: 28)
+                    .frame(width: 100, height: 28)
                     .clipShape(RoundedRectangle(cornerRadius: 16.0, style: .continuous))
                     .overlay(
                         HStack {
@@ -170,41 +170,74 @@ struct PersonalRecordView: View {
         VStack {
             VStack {
                 HStack {
-                    Rectangle()
-                        .foregroundColor(Color.black.opacity(0.1))
-                        .frame(width: 32 , height: 32)
-                        .clipShape(RoundedRectangle(cornerRadius: 12.0, style: .continuous))
-                        .overlay(Image(systemName: imageSystemName).foregroundColor(.black))
-                    
-                        .padding(.trailing, 4)
-
                     Text(LocalizedStringKey(record.prName))
                         .bold()
                     Spacer()
                 }
                 .frame(height: 42)
-                
             }
             HStack(spacing: 12) {
-                RecordImageInformationView(
-                    imageSystemName: "calendar",
-                    title: "\(record.dateFormatter)",
-                    foregroundColor: .yellow
-                )
-                RecordImageInformationView(
-                    imageSystemName: "bolt.fill",
-                    title: isPounds ? "\(record.poundValue)lb" : "\(record.kiloValue)kg",
-                    foregroundColor: .green
-                )
                 
-                RecordImageInformationView(
-                    imageSystemName: "chart.bar.fill",
-                    title: "\(Float(record.percentage))%",
-                    foregroundColor: .red
-                )
-                Spacer()
+                if let category = record.group {
+                    switch category {
+                    case .barbell:
+                        RecordImageInformationView(
+                            imageSystemName: "bolt.fill",
+                            title: isPounds ? "\(record.poundValue) lb" : "\(record.kiloValue)kg",
+                            foregroundColor: .purple
+                        )
+                        RecordImageInformationView(
+                            imageSystemName: "chart.bar.fill",
+                            title: "\(Int(record.percentage))%",
+                            foregroundColor: .orange
+                        )
+                        
+                        RecordImageInformationView(
+                            imageSystemName: "calendar",
+                            title: "\(record.dateFormatter)",
+                            foregroundColor: .gray
+                        )
+                        Spacer()
+                    case .endurance:
+                        RecordImageInformationView(
+                            imageSystemName: "point.filled.topleft.down.curvedto.point.bottomright.up",
+                            title: "\(record.distance) km",
+                            foregroundColor: .purple
+                        )
+                        RecordImageInformationView(
+                            imageSystemName: "timer",
+                            title: "\(Int(record.minTime)) min",
+                            foregroundColor: .orange
+                        )
+                        
+                        RecordImageInformationView(
+                            imageSystemName: "calendar",
+                            title: "\(record.dateFormatter)",
+                            foregroundColor: .gray
+                        )
+                        Spacer()
+                    case .gymnastic:
+                        RecordImageInformationView(
+                            imageSystemName: "flame",
+                            title: "\(Int(record.maxReps)) reps",
+                            foregroundColor: .purple
+                        )
+                        RecordImageInformationView(
+                            imageSystemName: "timer",
+                            title: "\(Int(record.minTime)) min",
+                            foregroundColor: .orange
+                        )
+                        RecordImageInformationView(
+                            imageSystemName: "calendar",
+                            title: "\(record.dateFormatter)",
+                            foregroundColor: .gray
+                        )
+                        Spacer()
+                    }
+                }
             }
         }
+        .padding(.leading, 12)
     }
 }
 

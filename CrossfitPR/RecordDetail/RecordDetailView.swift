@@ -37,17 +37,18 @@ struct RecordDetailView: View {
                         case .barbell:
                             HSubtitleView(
                                 title: "record.weight.title",
-                                subtitle: isPounds ? "\(String(describing: record.poundValue)) lb" : "\(String(describing: record.kiloValue)) kg"
+                                subtitle: isPounds ? "\(String(describing: record.poundValue)) lb" : "\(String(describing: record.kiloValue)) kg",
+                                foregroundColor: .purple
                             )
                         case .gymnastic:
-                            HSubtitleView(imageSystemName: "cellularbars", title: "record.maxReps.title", subtitle: "\(String(describing: record.maxReps))")
-                            HSubtitleView(imageSystemName: "watchface.applewatch.case", title: "record.time.title", subtitle: "\(String(describing: record.minTime)) min")
+                            HSubtitleView(imageSystemName: "flame", title: "record.maxReps.title", subtitle: "\(String(describing: record.maxReps))", foregroundColor: .purple)
+                            HSubtitleView(imageSystemName: "timer", title: "record.time.title", subtitle: "\(String(describing: record.minTime)) min", foregroundColor: .orange)
                         case .endurance:
-                            HSubtitleView(imageSystemName: "chart.line.uptrend.xyaxis", title: "record.distance.title", subtitle: "\(String(describing: record.distance))km")
-                            HSubtitleView(imageSystemName: "watchface.applewatch.case", title: "record.time.title", subtitle: "\(String(describing: record.minTime)) min")
+                            HSubtitleView(imageSystemName: "point.filled.topleft.down.curvedto.point.bottomright.up", title: "record.distance.title", subtitle: "\(String(describing: record.distance))km")
+                            HSubtitleView(imageSystemName: "watchface.applewatch.case", title: "timer", subtitle: "\(String(describing: record.minTime)) min", foregroundColor: .orange)
                         }
 
-                        HSubtitleView(imageSystemName: "calendar", title: "record.date.title", subtitle: "\(String(describing: record.dateFormatter))")
+                        HSubtitleView(imageSystemName: "calendar", title: "record.date.title", subtitle: "\(String(describing: record.dateFormatter))", foregroundColor: .gray)
                     }
                     
                     if store.category?.group == .barbell {

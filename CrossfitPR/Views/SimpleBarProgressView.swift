@@ -48,41 +48,59 @@ struct RankingView: View {
     @State var capsuleFillColor = Color.green
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            HStack(alignment: .center) {
-                Text(viewModel.record.prName).font(.headline)
-                    .redacted(reason: .placeholder)
-                Spacer()
-                VStack(alignment: .trailing) {
-                    Text(viewModel.marketValue).font(.headline)
-                        .redacted(reason: .placeholder)
-                    HStack {
-                        if !viewModel.percentageEvolutionValue.contains("0%") {
-                            Image(systemName: "arrow.up.forward").foregroundColor(.green)
-                                .redacted(reason: .placeholder)
-                            Text("\(viewModel.percentageEvolutionValue)")
-                                .redacted(reason: .placeholder)
+        VStack(alignment: .leading) {
+            Rectangle()
+                .foregroundColor(viewModel.legend)
+                .frame(width: 200, height: 96)
+                .clipShape(RoundedRectangle(cornerRadius: 12.0, style: .continuous))
+                .overlay {
+                    VStack(alignment: .leading) {
+                        HStack(alignment: .center) {
+                            Text(viewModel.record.prName)
+                                .foregroundColor(.white)
+                                .font(.headline)
+                            Spacer()
                         }
-                    }
-                }
-            }
-            
-            GeometryReader { bounds in
-                Capsule(style: .circular)
-                    .fill(viewModel.legendBackground)
-                    .redacted(reason: .placeholder)
-                    .overlay {
-                        HStack {
-                            Capsule(style: .circular)
-                                .fill(viewModel.legend)
-                                .frame(width: bounds.size.width * CGFloat(viewModel.marketValueDouble/100.0))
+                        VStack {
+                            HStack {
+                                Image(systemName: "dumbbell")
+                                    .foregroundColor(.white)
+                                    .frame(width: 16, height: 16)
                             
-                            Spacer(minLength: 0)
+                                Text(viewModel.marketValue)
+                                    .font(.subheadline)
+                                    .bold()
+                                    .foregroundColor(.white)
+                                if !viewModel.percentageEvolutionValue.contains("0%") {
+                                    Image(systemName: "arrow.up.forward")
+                                        .frame(width: 12, height: 12)
+                                        .foregroundColor(.black)
+                                        ///.opacity(0.2)
+                                    Text("\(viewModel.percentageEvolutionValue)")
+                                        .foregroundColor(.white)
+                                }
+                            }
                         }
+                        GeometryReader { bounds in
+                            Capsule(style: .circular)
+                                .fill(.white).opacity(0.3)
+                                .overlay {
+                                    HStack {
+                                        Capsule(style: .circular)
+                                            .fill(.white)
+                                            .frame(width: bounds.size.width * CGFloat(viewModel.marketValueDouble/100.0))
+                                        
+                                        Spacer(minLength: 0)
+                                    }
+                                }
+                                .clipShape(Capsule(style: .circular))
+                        }
+                        .frame(height: 15)
                     }
-                    .clipShape(Capsule(style: .circular))
+                    .padding([.leading, .trailing])
             }
-            .frame(height: 15)
+                
+            
         }
     }
 }
@@ -94,7 +112,7 @@ struct RankingView_Previews: PreviewProvider {
                 RankingViewModel(
                     record: PersonalRecord.recordMock,
                     measure: .pounds,
-                    legend: .yellow
+                    legend: .red
                 )
             )
     }

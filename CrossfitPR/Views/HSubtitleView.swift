@@ -12,14 +12,19 @@ struct HSubtitleView: View {
     var imageSystemName: String = "dumbbell"
     var title: String
     var subtitle: String
+    var foregroundColor: Color = .orange
     
     var body: some View {
         HStack {
             Rectangle()
-                .foregroundColor(Color.green.opacity(0.1))
+                .foregroundColor(foregroundColor.opacity(0.1))
                 .frame(width: 32 , height: 32)
                 .clipShape(RoundedRectangle(cornerRadius: 12.0, style: .continuous))
-                .overlay(Image(systemName: imageSystemName).foregroundColor(.green).opacity(0.5))
+                .overlay(
+                    Image(systemName: imageSystemName)
+                        .foregroundColor(foregroundColor)
+                        .opacity(0.5)
+                )
                 .padding(.trailing, 4)
 
             Text(LocalizedStringKey(title))
@@ -34,7 +39,7 @@ struct HSubtitleView: View {
 
 struct HSubtitleView_Previews: PreviewProvider {
     static var previews: some View {
-        HSubtitleView(title: "teste", subtitle: "teste")
+        HSubtitleView(title: "teste", subtitle: "teste", foregroundColor: .purple)
     }
 }
 

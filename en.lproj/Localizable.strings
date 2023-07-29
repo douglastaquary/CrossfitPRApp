@@ -61,7 +61,7 @@
 "record.view.category.lowest.title" = "Lowest";
 "record.item.view.default.title" = "Personal record";
 
-"record.records.section.title" = "record history";
+"record.records.section.title" = "Record history";
 "record.evolution.section.title %@" = " %@ evolution";
 "record.evolution.section.description %@" = "This analysis is based on the your PR list of %@ registered in the app.";
 "record.screen.delete.button.title" = "Delete";
@@ -111,11 +111,11 @@
 
 "insight.section.footer.rank.barbell.title" = "The top ranking shows the highest record, evolution records and lowest performing.";
 "insight.section.ranking.title" = "Top barbell ranking";
-"insight.section.topranking.barbell.title" = "Top Barbell Records";
-"insight.section.ranking.barbell.title" = "Barbell Records";
-"insight.section.ranking.gymnastic.title" = "Gymnastic Records";
-"insight.section.ranking.endurance.title"= "Top Endurance Records";
-"insight.section.graph.title" = "Graph Details";
+"insight.section.topranking.barbell.title" = "Top records with bar";
+"insight.section.ranking.barbell.title" = "Barbell exercises";
+"insight.section.ranking.gymnastic.title" = "Gymnastic exercises";
+"insight.section.ranking.endurance.title"= "Endurance exercises";
+"insight.section.graph.title" = "Insights";
 
 "insight.section.information.title" = "The biggest PR";
 "insight.view.error.description" = "You don't have data to show yet.";

@@ -14,32 +14,47 @@ struct InsightsViewPRO: View {
     @State var isShimmering: Bool = false
     
     var body: some View {
-        VStack {
-            Form {
-                Section(header: Text("insight.section.topranking.barbell.title"),
-                        footer: Text("insight.section.footer.rank.barbell.title")) {
-//                    if store.barbellRecords.isEmpty {
-//                        Text(LocalizedStringKey("insight.view.error.description"))
-//                    } else {
-                        ForEach(store.topRakingBarbellRecords) { barbell in
-                            RankingView()
-                                .shimmering(active: isShimmering)
-                                .environmentObject(
-                                    RankingViewModel(
-                                        record: barbell,
-                                        measure: store.measureTrackingMode,
-                                        percentageEvolutionValue: "\(barbell.evolutionPercentage)",
-                                        legend: barbell.legend
-                                    )
+        NavigationStack {
+            ScrollView(.vertical, showsIndicators: false) {
+                VStack {
+                    // Ranking
+                    HStack {
+                        Image(systemName: "trophy")
+                            .foregroundColor(.primary)
+                            .frame(width: 24, height: 24)
+                        Text(LocalizedStringKey("insight.section.topranking.barbell.title"))
+                            .font(.title2)
+                            .bold()
+                            .foregroundColor(.primary)
+                        Spacer()
+                    }
+                    ForEach(store.topRakingBarbellRecords) { barbell in
+                        RankingView()
+                        //.shimmering(active: isShimmering)
+                            .environmentObject(
+                                RankingViewModel(
+                                    record: barbell,
+                                    measure: store.measureTrackingMode,
+                                    percentageEvolutionValue: "\(barbell.evolutionPercentage)",
+                                    legend: barbell.legend
                                 )
-                            
+                            )
+                        
+                    }
+                    
+                    // Barbbell
+                    VStack {
+                        HStack {
+                            Image(systemName: "figure.strengthtraining.traditional")
+                                .foregroundColor(.primary)
+                                .frame(width: 24, height: 24)
+                            Text(LocalizedStringKey("insight.section.ranking.barbell.title"))
+                                .foregroundColor(.primary)
+                                .font(.title2)
+                                .bold()
+                            Spacer()
                         }
-                   // }
-                }
-                Section(LocalizedStringKey("insight.section.ranking.barbell.title")) {
-//                    if store.barbellRecords.isEmpty {
-//                        Text(LocalizedStringKey("insight.view.error.description"))
-//                    } else {
+                        
                         Chart {
                             ForEach(store.barbellRecords) { record in
                                 BarMark(
@@ -54,15 +69,22 @@ struct InsightsViewPRO: View {
                         }
                         .shimmering(active: isShimmering)
                         .frame(height: 240)
-                        .padding(.top, 12)
-                        
-                    //}
-                }
-                Section(LocalizedStringKey("insight.section.ranking.gymnastic.title")) {
+                    }
+                    .padding([.bottom, .top], 16)
                     
-//                    if store.gymnasticRecords.isEmpty {
-//                        Text(LocalizedStringKey("insight.view.error.description"))
-//                    } else {
+                    // Gynastic
+                    VStack {
+                        HStack {
+                            Image(systemName: "figure.play")
+                                .foregroundColor(.primary)
+                                .frame(width: 24, height: 24)
+                            Text(LocalizedStringKey("insight.section.ranking.gymnastic.title"))
+                                .font(.title2)
+                                .bold()
+                                .foregroundColor(.primary)
+                            Spacer()
+                        }
+                        
                         Chart {
                             ForEach(store.gymnasticRecords) { record in
                                 BarMark(
@@ -78,13 +100,20 @@ struct InsightsViewPRO: View {
                         }
                         .frame(height: 240)
                         .shimmering(active: isShimmering)
-                        .padding(.top, 12)
-                   // }
-                }
-                Section(LocalizedStringKey("insight.section.ranking.endurance.title")) {
-                    if store.gymnasticRecords.isEmpty {
-                        Text(LocalizedStringKey("insight.view.error.description"))
-                    } else {
+                    }
+                    .padding(.bottom, 16)
+                    //Endurence
+                    VStack {
+                        HStack {
+                            Image(systemName: "flame")
+                                .foregroundColor(.primary)
+                                .frame(width: 24, height: 24)
+                            Text(LocalizedStringKey("insight.section.ranking.endurance.title"))
+                                .font(.title2)
+                                .bold()
+                                .foregroundColor(.primary)
+                            Spacer()
+                        }
                         Chart {
                             ForEach(store.enduranceRecords) { record in
                                 BarMark(
@@ -99,15 +128,12 @@ struct InsightsViewPRO: View {
                         }
                         .frame(height: 240)
                         .shimmering(active: isShimmering)
-                        .padding(.top, 12)
                     }
+                    
                 }
+                .navigationBarTitle(LocalizedStringKey("screen.insights.title"), displayMode: .large)
+                .padding(16)
             }
-//            .onAppear {
-//                store.loadAllRecords()
-//                store.setupMeasureForBarbellRecords()
-//                store.configureRecordsRacking()
-//            }
         }
     }
     
