@@ -35,11 +35,6 @@ struct InsightsView: View {
         case .isPRO:
             InsightsViewPRO()
                 .environmentObject(store)
-//                .onAppear {
-//                    store.loadAllRecords()
-//                    store.setupMeasureForBarbellRecords()
-//                    store.configureRecordsRacking()
-//                }
         default:
             VStack {
                 Button {
@@ -64,18 +59,16 @@ struct InsightsView: View {
                 Spacer()
             }
             .padding(22)
-            
         }
-        
-            
     }
-    
     
 }
 
 
 struct InsightsView_Previews: PreviewProvider {
     static var previews: some View {
-        InsightsView().preferredColorScheme(.dark)
+        InsightsView()
+            .environmentObject(InsightsViewModel(defaults: UserDefaults.standard, storeKitService: StoreKitManager()))
+            .preferredColorScheme(.dark)
     }
 }
