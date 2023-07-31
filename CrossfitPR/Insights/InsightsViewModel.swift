@@ -72,6 +72,10 @@ final class InsightsViewModel: ObservableObject {
         return []
     }
     
+    var isEmpty: Bool {
+        records.isEmpty
+    }
+    
     init(dataManager: DataManager = DataManager.shared, defaults: UserDefaults, storeKitService: StoreKitManager) {
         self.defaults = defaults
         self.dataManager = dataManager
@@ -85,21 +89,44 @@ final class InsightsViewModel: ObservableObject {
 //        Task {
 //            await updatePurchases()
 //        }
+//
+        loadAllRecords()
+        setupMeasureForBarbellRecords()
+        configureRecordsRacking()
+//
         
-        loadBarbellRecords()
+//        switch measureTrackingMode {
+//        case .pounds:
+//            performTopRankingBarbellRecordsForPounds()
+//        case .kilos:
+//            performTopRankingBarbellRecordsForKilos()
+//        }
+//
+//        performTopRankingGymnasticRecords()
+//        performTopRankingEnduranceRecords()
+//        buildLastPercentage()
+    }
+    
+    func loadAllRecords() {
         loadGymnasticRecords()
         loadEnduranceRecords()
-        
+        loadBarbellRecords()
+    }
+    
+    func setupMeasureForBarbellRecords() {
         switch measureTrackingMode {
         case .pounds:
             performTopRankingBarbellRecordsForPounds()
         case .kilos:
             performTopRankingBarbellRecordsForKilos()
         }
-        
+    }
+    
+    func configureRecordsRacking() {
         performTopRankingGymnasticRecords()
         performTopRankingEnduranceRecords()
         buildLastPercentage()
+        updatePurchases()
     }
     
     // Call this early in the app's lifecycle.
@@ -136,7 +163,7 @@ final class InsightsViewModel: ObservableObject {
         }.first
         
         guard var barbellRvolutionPR  = evolutionPR else { return }
-        barbellRvolutionPR.legend = .yellow
+        barbellRvolutionPR.legend = .orange
         topRakingBarbellRecords.append(barbellRvolutionPR)
         
         for barbell in barbellRecords {
@@ -183,7 +210,7 @@ final class InsightsViewModel: ObservableObject {
         
         
         guard var barbellRvolutionPR = evolutionPR else { return }
-        barbellRvolutionPR.legend = .yellow
+        barbellRvolutionPR.legend = .orange
         topRakingBarbellRecords.append(barbellRvolutionPR)
         
         for barbell in barbellRecords {
@@ -356,7 +383,7 @@ final class InsightsViewModel: ObservableObject {
 }
 
 extension InsightsViewModel {
-    func updatePurchases() async {
+    func updatePurchases() {
         var isPRO: Bool { get { defaults.bool(forKey: SettingStoreKeys.pro) } }
         if isPRO {
             DispatchQueue.main.async {

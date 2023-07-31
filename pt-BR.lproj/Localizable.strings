@@ -23,7 +23,7 @@
 "onboarding.item3.description" = "Gráficos de forma simples e fácil de entender para mostrar sua evolução";
 
 "onboarding.item4.title" = "Os Poderosos Insights";
-"onboarding.item4.description" = "O Poderoso Insights permite que você entenda sua evolução, os maiores records através de poderosos gráficos";
+"onboarding.item4.description" = "O Poderoso Insights permite que você entenda sua evolução, analises dos records através de poderosos gráficos simplificados.";
 
 "onboarding.button.title" = "Começar";
 
@@ -33,27 +33,31 @@
   
 /* Screen titles*/
 "screen.records.title" = "Meus recordes";
-"screen.category.title" = "Categorias";
+"screen.category.title" = "Exercícios";
 "screen.insights.title" = "Percepções";
 "screen.settings.title" = "Configurações";
 
 /* Category searchbar descript */
+"category.group.barbell.descript" = "Barra";
+"category.group.gymnastic.descript" = "Ginastico";
+"category.group.endurance.descript" = "Resistência";
 "category.search.descript" = "buscar por nome";
+"exercises.list.header.descript" = "Clique no exercício para criar um novo PR";
 
 /* Tabbar title screens */
 "tabbar.myrecords.title" = "meus records";
-"tabbar.categories.title" = "categorias";
+"tabbar.categories.title" = "exercícios";
 "tabbar.insights.title" = "percepções";
 "tabbar.settings.title" = "configurações";
 
 /* Purchase screen */
 "purchase.item1.title" = "Gerencie seus recordes pessoais";
-"purchase.item1.description" = "Apague records, organize suas categorias de acordo com os seus treinos de alta performance.";
+"purchase.item1.description" = "Apague records, organize os exercícios de acordo com os seus treinos de alta performance.";
 
 "purchase.item2.title" = "Os Poderosos Insights";
-"purchase.item2.description" = "Os Poderosos Insights permitem que você acompanhe, entenda seus maiores records e evolução através de gráficos simplificados.";
-
-"purchase.item3.title" = "Top rank dos seus records";
+"purchase.item2.description" = "Os Poderosos Insights permitem que você acompanhe, analise, entenda seus maiores records e evolução através de gráficos simplificados.";
+"purchase.processing.description" = "Processando sua compra...";
+"purchase.item3.title" = "Top ranking dos seus records";
 "purchase.item3.description" = "Permite que você acompanhe a classificação dos seus principais recordes de alto desempenho";
 
 "purchase.tryfree.title" = "Experimente GRÁTIS por 7 dias";
@@ -78,26 +82,27 @@
 "record.view.category.lowest.title" = "Menor";
 "record.item.view.default.title" = "Record Pessoal";
 
-"record.records.section.title" = "Recordes";
+"record.records.section.title" = "Histórico dos recordes";
 "record.evolution.section.title %@" = "Evolução de %@";
 "record.evolution.section.description %@" = "Esta análise é baseada na sua lista de recordes de %@ cadastrada no aplicativo.";
 "record.screen.delete.button.title" = "Apagar";
 "record.screen.cancel.button.title" = "Cancelar";
 "record.screen.delete.confirmation.title" = "Você realmente deseja excluir?";
 "record.screen.maxReps.title" = "Máximo de repetições";
-"record.screen.empty.records.message" = "Começe agora mesmo\nadicionando um novo record.";
+"record.screen.empty.records.message" = "Voçê ainda não tem records salvos.\nComeçe acessando a aba exercícios\ne clique para adicionar um novo record.";
 "record.button.get.started.new.record" = "Novo record";
 
 /* Insight screen */
 
-"insight.section.ranking.barbell.title" = "Top Recordes com Barra";
+"insight.section.topranking.barbell.title" = "Top recordes com barra";
+"insight.section.ranking.barbell.title" = "Exercícios com barra";
 "insight.section.footer.rank.barbell.title" = "O Top ranking mostra o record mais alto, recordes em evolução e a menor performance.";
-"insight.section.ranking.gymnastic.title" = "Top Recordes Ginásticos";
-"insight.section.ranking.endurance.title"= "Top Recordes de Resistência";
+"insight.section.ranking.gymnastic.title" = "Exercícios ginásticos";
+"insight.section.ranking.endurance.title"= "Exercícios de resistência";
 "insight.section.graph.title" = "Percepções";
 
 "insight.section.information.title" = "Seu maior recorde";
-"insight.view.error.description" = "No momento você ainda não tem dados para mostrar.";
+"insight.view.error.description" = "Você ainda não tem dados para mostrar.";
 
 "insight.view.intensity.title"= "Intensidade";
 "insight.view.card.pro.title"= "Os Poderosos Insights";
@@ -114,6 +119,8 @@
 "newRecord.screen.toggle.maxrep.title" = "Máximo de repetições";
 "newRecord.screen.picker.repetition.title" = "Repetições";
 "newRecord.screen.picker.timecount.title" = "Tempo";
+"newRecord.screen.minutes.description" = "minutos";
+
 "newRecord.screen.toggle.distance.title" = "Distância";
 "newRecord.screen.section.informations.title" = "Informações";
 "newRecord.screen.section.informations.percentage.title" = "Porcentagem";
@@ -139,4 +146,4 @@
 "emptyView.screen.message" = "Comece agora\nadicionando um novo record.\nOs poderosos insights são gerados a partir\ndos dados que você adiciona no app.\nPara melhor visualização dos gráficos,\n é necessário ao menos 8 registros de records.";
 
 /* Ranking screen view*/
-"ranking.screen.evolution.percentage %@" = "Evolution of %@ from last PR recored.";
+"ranking.screen.evolution.percentage %@" = "Você obteve uma evolução de %@ desde o último PR registrado.";

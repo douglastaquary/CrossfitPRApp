@@ -120,6 +120,129 @@ struct CategoryItemView: View {
 
 struct CategoryItemView_Previews: PreviewProvider {
     static var previews: some View {
-        CategoryItemView(title: "DEADLIFT")
+        CategoryItemView(title: "Snatch", group: "Barra")
+    }
+}
+
+struct RecordImageInformationView: View {
+    var imageSystemName: String = "bolt.fill" //bolt.fill
+    var title: String
+    var foregroundColor: Color = .green
+    var body: some View {
+        ZStack {
+            HStack {
+                Rectangle()
+                    .foregroundColor(foregroundColor.opacity(0.1))
+                    .frame(width: 100, height: 28)
+                    .clipShape(RoundedRectangle(cornerRadius: 16.0, style: .continuous))
+                    .overlay(
+                        HStack {
+                            Image(systemName: imageSystemName)
+                                .foregroundColor(foregroundColor)
+                            Text(title)
+                                .font(.callout)
+                                .foregroundColor(foregroundColor)
+                                //.bold()
+                        }
+                        
+                    )
+
+            }
+        }
+    }
+}
+
+struct RecordImageInformationView_Previews: PreviewProvider {
+    static var previews: some View {
+        RecordImageInformationView(title: "180 lb")
+    }
+}
+
+
+struct PersonalRecordView: View {
+    var record: PersonalRecord
+    var isPounds: Bool {
+        UserDefaultsConfig.shared.measureTrackingMode == MeasureTrackingMode.pounds.rawValue
+    }
+    var imageSystemName: String = "figure.strengthtraining.traditional" //bolt.fill
+    
+    var body: some View {
+        VStack {
+            VStack {
+                HStack {
+                    Text(LocalizedStringKey(record.prName))
+                        .bold()
+                    Spacer()
+                }
+                .frame(height: 42)
+            }
+            HStack(spacing: 12) {
+                
+                if let category = record.group {
+                    switch category {
+                    case .barbell:
+                        RecordImageInformationView(
+                            imageSystemName: "bolt.fill",
+                            title: isPounds ? "\(record.poundValue) lb" : "\(record.kiloValue)kg",
+                            foregroundColor: .purple
+                        )
+                        RecordImageInformationView(
+                            imageSystemName: "chart.bar.fill",
+                            title: "\(Int(record.percentage))%",
+                            foregroundColor: .orange
+                        )
+                        
+                        RecordImageInformationView(
+                            imageSystemName: "calendar",
+                            title: "\(record.dateFormatter)",
+                            foregroundColor: .gray
+                        )
+                        Spacer()
+                    case .endurance:
+                        RecordImageInformationView(
+                            imageSystemName: "point.filled.topleft.down.curvedto.point.bottomright.up",
+                            title: "\(record.distance) km",
+                            foregroundColor: .purple
+                        )
+                        RecordImageInformationView(
+                            imageSystemName: "timer",
+                            title: "\(Int(record.minTime)) min",
+                            foregroundColor: .orange
+                        )
+                        
+                        RecordImageInformationView(
+                            imageSystemName: "calendar",
+                            title: "\(record.dateFormatter)",
+                            foregroundColor: .gray
+                        )
+                        Spacer()
+                    case .gymnastic:
+                        RecordImageInformationView(
+                            imageSystemName: "flame",
+                            title: "\(Int(record.maxReps)) reps",
+                            foregroundColor: .purple
+                        )
+                        RecordImageInformationView(
+                            imageSystemName: "timer",
+                            title: "\(Int(record.minTime)) min",
+                            foregroundColor: .orange
+                        )
+                        RecordImageInformationView(
+                            imageSystemName: "calendar",
+                            title: "\(record.dateFormatter)",
+                            foregroundColor: .gray
+                        )
+                        Spacer()
+                    }
+                }
+            }
+        }
+        .padding(.leading, 12)
+    }
+}
+
+struct PersonalRecordView_Previews: PreviewProvider {
+    static var previews: some View {
+        PersonalRecordView(record: PersonalRecord.recordMock)
     }
 }

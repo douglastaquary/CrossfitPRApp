@@ -67,6 +67,13 @@ final class SettingsStore: ObservableObject {
         set { defaults.set(newValue, forKey: SettingStoreKeys.trainingTargetGoal) }
         get { defaults.integer(forKey: SettingStoreKeys.trainingTargetGoal)}
     }
+    
+    var isPound: MeasureTrackingMode {
+        get {
+            return defaults.string(forKey: SettingStoreKeys.measureTrackingMode)
+                .flatMap { MeasureTrackingMode(rawValue: $0) } ?? .pounds
+        }
+    }
 
     var measureTrackingMode: MeasureTrackingMode {
         get {

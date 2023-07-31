@@ -26,17 +26,16 @@ struct PRPercentagesView: View {
             .padding()
 
             VStack(alignment: .leading) {
-                Text("Porcentagens do seu record")
-                    .foregroundColor(.secondary)
-                    .padding(.leading)
                 
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: 100))]) {
                     ForEach(1 ..< 11) { i in
                         Button(action: {}) {
                             VStack(spacing: 8) {
                                 let percentage = Int(i*10)
-                                let kiloValue = ((record.kiloValue)*percentage)/100
-                                Text("100 kg")
+                                let kiloValueXpercentage = ((record.kiloValue)*percentage)
+                                let kiloValue = kiloValueXpercentage/100
+                                let formatedvalue = String(format: "%.1f", kiloValue)
+                                Text("\(kiloValue)kg")
                                     .font(.title2)
                                     .foregroundColor(.green)
                                     .fontWeight(.bold)
@@ -51,7 +50,7 @@ struct PRPercentagesView: View {
                             .overlay(RoundedRectangle(cornerRadius: 5).stroke(.primary, lineWidth: 1))
                         }
                     }
-                    .padding()
+                    .padding([.leading,.trailing], 8)
                 }
             }
         }
@@ -61,7 +60,7 @@ struct PRPercentagesView: View {
 
 struct PRPercentagesView_Previews: PreviewProvider {
     static var previews: some View {
-        PRPercentagesView(record: PersonalRecord())
+        PRPercentagesView(record: PersonalRecord(kiloValue: 95, prName: "Clean"))
     }
 }
 

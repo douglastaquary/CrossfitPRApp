@@ -28,6 +28,17 @@ struct RootView: View {
         TabView(selection: $selectedTab) {
             NavigationView {
                 VStack {
+                    CategoryListView()
+                        .environmentObject(CategoryStore())
+                }
+            }
+            .tabItem {
+                Image(systemName: "square.grid.3x3")
+                Text(LocalizedStringKey("tabbar.categories.title"))
+            }
+            .tag(0)
+            NavigationView {
+                VStack {
                     MyRecordsView(appDefaults: appDefaults)
                         .environmentObject(RecordDetailViewModel())
                         .environmentObject(SettingsStore(defaults: self.appDefaults))
@@ -37,26 +48,11 @@ struct RootView: View {
                 Image(systemName: "trophy.circle.fill")
                 Text(LocalizedStringKey("tabbar.myrecords.title"))
             }
-            .tag(0)
-            
-            
-            NavigationView {
-                VStack {
-                    CategoryListView(selectedCategoryItem: $selectCategoryItemInitialize)
-                        .environmentObject(CategoryStore())
-                }
-            }
-            .tabItem {
-                Image(systemName: "square.grid.3x3")
-                Text(LocalizedStringKey("tabbar.categories.title"))
-            }
             .tag(1)
-            
-            
+
             NavigationView {
                 VStack{
                     InsightsView()
-                        .navigationTitle(LocalizedStringKey("screen.insights.title"))
                         .environment(\.storeKitManager, storeManager)
                         .environmentObject(InsightsViewModel(defaults: appDefaults, storeKitService: storeManager))
                         .environmentObject(SettingsStore(defaults: appDefaults))
@@ -68,7 +64,6 @@ struct RootView: View {
                 Text(LocalizedStringKey("tabbar.insights.title"))
             }
             .tag(2)
-            
             
             NavigationView {
                 SettingsView(appDefaults: self.appDefaults)
@@ -101,28 +96,23 @@ struct RootView: View {
                 }
             )
         }
-        
     }
     
 }
 
 extension RootView {
     func performSetupStatus() {
-        Task {
-            await storeManager.fetchAccountStatus()
-            if storeManager.accountStatus == .available {
-                _ = try await storeManager.updatePurchases()
-                if storeManager.transactionState == .purchased {
-                    self.appDefaults.set(true, forKey: SettingStoreKeys.pro)
-                } else {
-                    self.appDefaults.set(false, forKey: SettingStoreKeys.pro)
-                }
-            } else {
-                self.appDefaults.set(false, forKey: SettingStoreKeys.pro)
-                accountStatusAlertShown = true
-            }
-            throw RequestError.fail(message: "[LOG] purchase(), Unexpected result")
-        }
+        self.appDefaults.set(true, forKey: SettingStoreKeys.pro)
+
+//        Task {
+//            //_ = try await storeManager.updatePurchases()
+//            if storeManager.transactionState == .purchased {
+//                self.appDefaults.set(true, forKey: SettingStoreKeys.pro)
+//            } else {
+//                self.appDefaults.set(false, forKey: SettingStoreKeys.pro)
+//            }
+//            throw RequestError.fail(message: "[LOG] purchase(), Unexpected result")
+//        }
     }
 }
 

@@ -11,30 +11,54 @@ import SwiftUICharts
 
 struct InsightsViewPRO: View {
     @EnvironmentObject var store: InsightsViewModel
+    @State var isShimmering: Bool = false
+    
+    private var gridItemLayout = [GridItem(.flexible()), GridItem(.flexible())]
     
     var body: some View {
-        VStack {
-            Form {
-                Section(header: Text("insight.section.ranking.barbell.title"),
-                        footer: Text("insight.section.footer.rank.barbell.title")) {
-                    if store.barbellRecords.isEmpty {
-                        Text(LocalizedStringKey("insight.view.error.description"))
-                    } else {
+        NavigationStack {
+            ScrollView(.vertical, showsIndicators: false) {
+                VStack {
+                    // Ranking
+                    HStack {
+                        Image(systemName: "trophy")
+                            .foregroundColor(.primary)
+                            .frame(width: 24, height: 24)
+                        Text(LocalizedStringKey("insight.section.topranking.barbell.title"))
+                            .font(.title2)
+                            .bold()
+                            .foregroundColor(.primary)
+                        Spacer()
+                    }
+                    LazyVGrid(columns: gridItemLayout, spacing: 14) {
                         ForEach(store.topRakingBarbellRecords) { barbell in
                             RankingView()
+                            //.shimmering(active: isShimmering)
                                 .environmentObject(
                                     RankingViewModel(
                                         record: barbell,
-                                        measure: store.measureTrackingMode, percentageEvolutionValue: "\(barbell.evolutionPercentage)", legend: barbell.legend)
+                                        measure: store.measureTrackingMode,
+                                        percentageEvolutionValue: "\(barbell.evolutionPercentage)",
+                                        legend: barbell.legend
+                                    )
                                 )
                             
                         }
                     }
-                }
-                Section("Barbell records") {
-                    if store.barbellRecords.isEmpty {
-                        Text(LocalizedStringKey("insight.view.error.description"))
-                    } else {
+                    
+                    // Barbbell
+                    VStack {
+                        HStack {
+                            Image(systemName: "figure.strengthtraining.traditional")
+                                .foregroundColor(.primary)
+                                .frame(width: 24, height: 24)
+                            Text(LocalizedStringKey("insight.section.ranking.barbell.title"))
+                                .foregroundColor(.primary)
+                                .font(.title2)
+                                .bold()
+                            Spacer()
+                        }
+                        
                         Chart {
                             ForEach(store.barbellRecords) { record in
                                 BarMark(
@@ -47,43 +71,72 @@ struct InsightsViewPRO: View {
                                 }
                             }
                         }
+                        .shimmering(active: isShimmering)
                         .frame(height: 240)
-                        .padding(.top, 12)
                     }
-                }
-                Section("Gymnastic records") {
-                    Chart {
-                        ForEach(store.gymnasticRecords) { record in
-                            BarMark(
-                                x: .value("Record Name", record.dateFormatter),
-                                y: .value("Reps", record.maxReps)
-                            )
-                            .foregroundStyle(by: .value("Record Name", record.prName))
-                            .annotation(position: .top) {
-                                AnnotationView(recordValue: "\(record.maxReps) reps")
-                            }
-                            
+                    .padding([.bottom, .top], 16)
+                    
+                    // Gynastic
+                    VStack {
+                        HStack {
+                            Image(systemName: "figure.play")
+                                .foregroundColor(.primary)
+                                .frame(width: 24, height: 24)
+                            Text(LocalizedStringKey("insight.section.ranking.gymnastic.title"))
+                                .font(.title2)
+                                .bold()
+                                .foregroundColor(.primary)
+                            Spacer()
                         }
-                    }
-                    .frame(height: 240)
-                    .padding(.top, 12)
-                }
-                Section("Endurance records") {
-                    Chart {
-                        ForEach(store.enduranceRecords) { record in
-                            BarMark(
-                                x: .value("Record Name", record.prName),
-                                y: .value("Endurance", record.distance)
-                            )
-                            .foregroundStyle(by: .value("Record Name", record.prName))
-                            .annotation(position: .top) {
-                                AnnotationView(recordValue: "\(record.distance) km")
+                        
+                        Chart {
+                            ForEach(store.gymnasticRecords) { record in
+                                BarMark(
+                                    x: .value("Record Name", record.dateFormatter),
+                                    y: .value("Reps", record.maxReps)
+                                )
+                                .foregroundStyle(by: .value("Record Name", record.prName))
+                                .annotation(position: .top) {
+                                    AnnotationView(recordValue: "\(record.maxReps) reps")
+                                }
+                                
                             }
                         }
+                        .frame(height: 240)
+                        .shimmering(active: isShimmering)
                     }
-                    .frame(height: 240)
-                    .padding(.top, 12)
+                    .padding(.bottom, 16)
+                    //Endurence
+                    VStack {
+                        HStack {
+                            Image(systemName: "flame")
+                                .foregroundColor(.primary)
+                                .frame(width: 24, height: 24)
+                            Text(LocalizedStringKey("insight.section.ranking.endurance.title"))
+                                .font(.title2)
+                                .bold()
+                                .foregroundColor(.primary)
+                            Spacer()
+                        }
+                        Chart {
+                            ForEach(store.enduranceRecords) { record in
+                                BarMark(
+                                    x: .value("Record Name", record.prName),
+                                    y: .value("Endurance", record.distance)
+                                )
+                                .foregroundStyle(by: .value("Record Name", record.prName))
+                                .annotation(position: .top) {
+                                    AnnotationView(recordValue: "\(record.distance) km")
+                                }
+                            }
+                        }
+                        .frame(height: 240)
+                        .shimmering(active: isShimmering)
+                    }
+                    
                 }
+                .navigationBarTitle(LocalizedStringKey("screen.insights.title"), displayMode: .large)
+                .padding(16)
             }
         }
     }

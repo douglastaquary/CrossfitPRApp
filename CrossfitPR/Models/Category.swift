@@ -6,11 +6,24 @@
 //
 
 import Foundation
+import SwiftUI
 
-enum RecordGroup: String {
+enum RecordGroup: String, CaseIterable {
     case barbell = "Barbell"
     case gymnastic = "Gymnastic"
     case endurance = "Endurance"
+    
+    var localized: String {
+        switch self {
+        case .barbell:
+            return "category.group.barbell.descript"
+        case .gymnastic:
+            return "category.group.gymnastic.descript"
+        case .endurance:
+            return "category.group.endurance.descript"
+        }
+    }
+    
 }
 
 struct Category: Identifiable, Comparable, Hashable {
@@ -24,7 +37,7 @@ struct Category: Identifiable, Comparable, Hashable {
         Category(title: "Back squat", type: .maxWeight, group: .barbell),
         Category(title: "Single Unders", type: .maxRepetition, group: .gymnastic),
         Category(title: "Clean", type: .maxWeight, group: .barbell),
-        Category(title: "Clean & Jerk", type: .maxWeight, group: .barbell),
+        Category(title: "Jerk", type: .maxWeight, group: .barbell),
         Category(title: "Cluster", type: .maxWeight, group: .barbell),
         Category(title: "Deadlift", type: .maxWeight, group: .barbell),
         Category(title: "Front squat", type: .maxWeight, group: .barbell),
@@ -67,6 +80,12 @@ struct Category: Identifiable, Comparable, Hashable {
         Category(title: "Thruster", type: .maxWeight, group: .barbell),
         Category(title: "Wall Ball", type: .maxRepetition, group: .gymnastic),
     ]
+}
+
+extension Category {
+    static func map(from item: Category) -> Self {
+        .init(title: item.title, type: item.type, group: item.group)
+    }
 }
 
 extension Category {

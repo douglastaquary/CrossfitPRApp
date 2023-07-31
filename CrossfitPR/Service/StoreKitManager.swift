@@ -23,7 +23,6 @@ enum RequestError: Error {
 //https://blckbirds.com/post/how-to-use-in-app-purchases-in-swiftui-apps/
 class StoreKitManager: NSObject, ObservableObject {
     private static let logger = Logger(subsystem: "com.douglast.mycrossfitpr", category: String(describing: StoreKitManager.self))
-
     
     @Published var products = [Product]()
     @Published var newProducts = [Product]()

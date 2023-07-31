@@ -61,13 +61,13 @@
 "record.view.category.lowest.title" = "Lowest";
 "record.item.view.default.title" = "Personal record";
 
-"record.records.section.title" = "record history";
+"record.records.section.title" = "Record history";
 "record.evolution.section.title %@" = " %@ evolution";
 "record.evolution.section.description %@" = "This analysis is based on the your PR list of %@ registered in the app.";
 "record.screen.delete.button.title" = "Delete";
 "record.screen.cancel.button.title" = "Cancel";
 "record.screen.delete.confirmation.title" = "Do you really want to delete?";
-"record.screen.empty.records.message" = "Get started right now by\nadding a new record.";
+"record.screen.empty.records.message" = "You don't have saved records yet.\nGet started by accessing the exercises tab\nand click to add a new record.";
 "record.button.get.started.new.record" = "Add new record";
 
 
@@ -79,7 +79,7 @@
 
 "purchase.item2.title" = "The Powerful insights";
 "purchase.item2.description" = "The powerful insights elevator allows you to track and understand your evolution, the highest records through powerful graphics";
-
+"purchase.processing.description" = "Processing your purchase...";
 "purchase.item3.title" = "Ranks of your top records";
 "purchase.item3.description" = "Allows you to track the rank of your top high performance records";
 
@@ -90,31 +90,37 @@
   
 /* Screen titles*/
 "screen.records.title" = "My records";
-"screen.category.title" = "Categories";
+"screen.category.title" = "Exercises";
 "screen.insights.title" = "Insights";
 "screen.settings.title" = "Settings";
 
 /* Category searchbar descript */
+"category.group.barbell.descript" = "Barbell";
+"category.group.gymnastic.descript" = "Gymnastic";
+"category.group.endurance.descript" = "Endurance";
 "category.search.descript" = "search by name";
+"exercises.list.header.descript" = "Click on the exercise to create a new PR";
+
 
 /* Tabbar title screens */
 "tabbar.myrecords.title" = "my records";
-"tabbar.categories.title" = "categories";
+"tabbar.categories.title" = "exercises";
 "tabbar.insights.title" = "insights";
 "tabbar.settings.title" = "settings";
 
 /* Insight screen */
 
-"insight.section.top.ranking.title" = "Top ranking";
+
 "insight.section.footer.rank.barbell.title" = "The top ranking shows the highest record, evolution records and lowest performing.";
 "insight.section.ranking.title" = "Top barbell ranking";
-"insight.section.ranking.barbell.title" = "Top Barbell Records";
-"insight.section.ranking.gymnastic.title" = "Top Gymnastic Records";
-"insight.section.ranking.endurance.title"= "Top Endurance Records";
-"insight.section.graph.title" = "Graph Details";
+"insight.section.topranking.barbell.title" = "Top records with barbell";
+"insight.section.ranking.barbell.title" = "Barbell exercises";
+"insight.section.ranking.gymnastic.title" = "Gymnastic exercises";
+"insight.section.ranking.endurance.title"= "Endurance exercises";
+"insight.section.graph.title" = "Insights";
 
 "insight.section.information.title" = "The biggest PR";
-"insight.view.error.description" = "There is no data to display chart.";
+"insight.view.error.description" = "You don't have data to show yet.";
 
 "insight.view.biggestpr.description %@" = "the biggest pr is %@";
 
@@ -153,6 +159,7 @@
 "newRecord.screen.toggle.maxrep.title" = "Maximum repetitions";
 "newRecord.screen.picker.repetition.title" = "Repetitions";
 "newRecord.screen.picker.timecount.title" = "Time";
+"newRecord.screen.minutes.description" = "minutes";
 "newRecord.screen.toggle.distance.title" = "Distance";
 "newRecord.screen.section.informations.title" = "Informations";
 "newRecord.screen.section.informations.percentage.title" = "Percentage";

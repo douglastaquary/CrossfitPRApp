@@ -79,7 +79,7 @@ struct PersonalRecord: Identifiable, Hashable {
     
     var dateFormatter: String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MMM dd, yyyy"
+        dateFormatter.dateFormat = "MMM dd"//"MMM dd, yyyy"
         return dateFormatter.string(from: recordDate)
     }
     
@@ -99,7 +99,7 @@ struct PersonalRecord: Identifiable, Hashable {
     
     static let recordMock: PersonalRecord = PersonalRecord(
         kiloValue: 38,
-        poundValue: 90,
+        poundValue: 56,
         prName: "Air Squat",
         percentage: 80,
         recordMode: .maxWeight,

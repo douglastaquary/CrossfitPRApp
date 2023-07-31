@@ -72,6 +72,7 @@ struct LaunchView: View {
                 }
             }
         }
+        .navigationViewStyle(StackNavigationViewStyle())
     }
 }
 
@@ -85,4 +86,14 @@ class ViewLaunch: ObservableObject {
         }
     }
     @Published var currentPage: String
+}
+
+
+struct LaunchView_Previews: PreviewProvider {
+    static var previews: some View {
+        LaunchView(
+            storeKitManager: StoreKitManager(),
+            appDefaults: UserDefaults.standard
+        ).environmentObject(ViewLaunch())
+    }
 }

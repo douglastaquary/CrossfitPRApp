@@ -35,6 +35,8 @@ struct PurchaseView: View {
                         if self.products.isEmpty {
                             Spacer()
                             LoadingView()
+                        } else if store.state == .processing {
+                            LoadingView(message: "purchase.processing.description")
                         } else {
                             Spacer()
                             Text("CrossFitPR PRO")
@@ -111,5 +113,6 @@ struct PurchaseView: View {
 struct PurchaseView_Previews: PreviewProvider {
     static var previews: some View {
         PurchaseView(storeKitManager: StoreKitManager())
+            .environmentObject(PurchaseStore(storeKitManager: StoreKitManager()))
     }
 }

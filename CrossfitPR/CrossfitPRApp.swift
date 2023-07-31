@@ -21,6 +21,7 @@ struct CrossfitPRApp: App {
                 appDefaults: UserDefaults.standard
             )
             .environmentObject(ViewLaunch())
+            
         }
         .onChange(of: scenePhase) { phase in
             switch phase {

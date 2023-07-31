@@ -19,9 +19,10 @@ enum UserPurchaseState: Equatable {
     
     case unlockPro
     case isPRO
-    case marketing
+    case processing
     case loading
     case blockPro
     case failed(RequestError)
     case success
+    case isEmpty
 }

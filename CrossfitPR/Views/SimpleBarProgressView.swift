@@ -48,52 +48,75 @@ struct RankingView: View {
     @State var capsuleFillColor = Color.green
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            HStack(alignment: .center) {
-                Text(viewModel.record.prName).font(.headline)
-                Spacer()
-                VStack(alignment: .trailing) {
-                    Text(viewModel.marketValue).font(.headline)
-                    HStack {
-                        Image(systemName: "arrow.up.forward").foregroundColor(.green)
-                        Text("\(viewModel.percentageEvolutionValue)")
-                    }
-                }
-            }
-            
-            GeometryReader { bounds in
-                Capsule(style: .circular)
-                    .fill(viewModel.legendBackground)
-                    .overlay {
-                        HStack {
-                            Capsule(style: .circular)
-                                .fill(viewModel.legend)
-                                .frame(width: bounds.size.width * CGFloat(viewModel.marketValueDouble/100.0))
+        VStack(alignment: .leading) {
+            Rectangle()
+                .foregroundColor(viewModel.legend)
+                .frame(width: 168, height: 96)
+                .clipShape(RoundedRectangle(cornerRadius: 12.0, style: .continuous))
+                .overlay {
+                    VStack(alignment: .leading) {
+                        HStack(alignment: .center) {
+                            Text(viewModel.record.prName)
+                                .foregroundColor(.white)
+                                .font(.headline)
+                                .padding(.top, 6)
                             
-                            Spacer(minLength: 0)
                         }
+                        VStack {
+                            HStack {
+                                Image(systemName: "dumbbell")
+                                    .foregroundColor(.white)
+                                    .frame(width: 16, height: 16)
+                            
+                                Text(viewModel.marketValue)
+                                    .font(.subheadline)
+                                    .bold()
+                                    .foregroundColor(.white)
+                                Spacer()
+                                if !viewModel.percentageEvolutionValue.contains("0%") {
+                                    Image(systemName: "arrow.up.forward")
+                                        .frame(width: 12, height: 12)
+                                        .foregroundColor(.white)
+                                        ///.opacity(0.2)
+                                    Text("\(viewModel.percentageEvolutionValue)")
+                                        .foregroundColor(.white)
+                                }
+                            }
+                        }
+                        GeometryReader { bounds in
+                            Capsule(style: .circular)
+                                .fill(.white).opacity(0.3)
+                                .overlay {
+                                    HStack {
+                                        Capsule(style: .circular)
+                                            .fill(.white)
+                                            .frame(width: bounds.size.width * CGFloat(viewModel.marketValueDouble/100.0))
+                                        
+                                        Spacer(minLength: 0)
+                                    }
+                                }
+                                .clipShape(Capsule(style: .circular))
+                        }
+                        .frame(height: 15)
                     }
-                    .clipShape(Capsule(style: .circular))
+                    .padding([.leading, .trailing, .bottom], 10)
             }
-            .frame(height: 15)
+                
             
-            if !(viewModel.percentageEvolutionValue == "0%") {
-                HStack {
-                    Text("ranking.screen.evolution.percentage \(viewModel.percentageEvolutionValue)")
-                        .font(.caption)
-                        .lineLimit(3)
-                        .foregroundColor(.secondary)
-                }
-            }
         }
-        
     }
 }
 
 struct RankingView_Previews: PreviewProvider {
     static var previews: some View {
         RankingView()
-            .environmentObject(RankingViewModel(record: PersonalRecord.recordMock, measure: .pounds, legend: .yellow))
+            .environmentObject(
+                RankingViewModel(
+                    record: PersonalRecord.recordMock,
+                    measure: .pounds,
+                    legend: .red
+                )
+            )
     }
 }
 

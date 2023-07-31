@@ -30,7 +30,8 @@ struct InsightsView: View {
     var body: some View {
         switch store.uiState {
         case .loading:
-            LoadingView()
+            InsightsViewPRO()
+                .environmentObject(store)
         case .isPRO:
             InsightsViewPRO()
                 .environmentObject(store)
@@ -51,9 +52,9 @@ struct InsightsView: View {
 
                 }.onAppear {
                     UINavigationBar.appearance().tintColor = .green
-                    Task {
-                        await store.updatePurchases()
-                    }
+//                    Task {
+//                        await store.updatePurchases()
+//                    }
                 }
                 Spacer()
             }
@@ -66,6 +67,8 @@ struct InsightsView: View {
 
 struct InsightsView_Previews: PreviewProvider {
     static var previews: some View {
-        InsightsView().preferredColorScheme(.dark)
+        InsightsView()
+            .environmentObject(InsightsViewModel(defaults: UserDefaults.standard, storeKitService: StoreKitManager()))
+            .preferredColorScheme(.dark)
     }
 }

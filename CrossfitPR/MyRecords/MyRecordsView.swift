@@ -17,7 +17,6 @@ struct MyRecordsView: View {
     
     init(appDefaults: UserDefaults) {
         self.appDefaults = appDefaults
-        
     }
     
     var body: some View {
@@ -27,7 +26,7 @@ struct MyRecordsView: View {
                     ScrollView {
                         ForEach(searchSectionResults, id: \.id) { section in
                             NavigationLink(value: section) {
-                                CategoryItemView(title: section.name, group: section.group.rawValue)
+                                CategoryItemView(title: section.name, group: section.group.localized)
                             }
                         }
                     }
@@ -49,13 +48,14 @@ struct MyRecordsView: View {
                         .foregroundColor(.secondary)
                         .multilineTextAlignment(.center)
                         .padding(.bottom, 64)
-                    OpaqueActionButton(
-                        imageName: "figure.cross.training",
-                        title: "Add new record",
-                        completion: { self.showNewPRView.toggle() }
-                    ).sheet(isPresented: $showNewPRView) {
-                        NewRecordView(viewModel: NewRecordViewModel())
-                    }
+//                    OpaqueActionButton(
+//                        imageName: "figure.cross.training",
+//                        title: "Add new record",
+//                        completion: { self.showNewPRView.toggle() }
+//                    ).sheet(isPresented: $showNewPRView) {
+//                        NewRecordView()
+//                            .environmentObject(NewRecordViewModel())
+//                    }
                 }
             }
         }
@@ -73,5 +73,8 @@ struct MyRecordsView: View {
 struct MyRecordsView_Previews: PreviewProvider {
     static var previews: some View {
         MyRecordsView(appDefaults: .standard)
+            .environmentObject(SettingsStore(defaults: .standard))
+            .environmentObject(RecordDetailViewModel())
+        
     }
 }

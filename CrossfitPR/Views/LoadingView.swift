@@ -9,12 +9,17 @@ import SwiftUI
 import Charts
 
 struct LoadingView: View {
+    
+    @State var message: String = ""
+    
     var body: some View {
         VStack(alignment: .center, spacing: 8) {
-            ProgressView()
+            ProgressView(message.isEmpty ? message : "")
                 .foregroundColor(.gray)
-            Text("loading.view.title")
-                .foregroundColor(.gray)
+            if message.isEmpty {
+                Text("loading.view.title")
+                    .foregroundColor(.gray)
+            }
         }
     }
 }

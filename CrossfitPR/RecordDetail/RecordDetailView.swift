@@ -31,29 +31,30 @@ struct RecordDetailView: View {
             Form {
                 Group {
                     Section("record.biggest.section.title") {
-                        HSubtitleView(title: "record.category.title", subtitle: store.category?.name ?? "")
+
                         let group = store.category?.group ?? .barbell
                         switch group {
                         case .barbell:
                             HSubtitleView(
                                 title: "record.weight.title",
-                                subtitle: isPounds ? "\(String(describing: record.poundValue)) lb" : "\(String(describing: record.kiloValue)) kg"
+                                subtitle: isPounds ? "\(String(describing: record.poundValue)) lb" : "\(String(describing: record.kiloValue)) kg",
+                                foregroundColor: .purple
                             )
                         case .gymnastic:
-                            HSubtitleView(title: "record.maxReps.title", subtitle: "\(String(describing: record.maxReps))")
-                            HSubtitleView(title: "record.time.title", subtitle: "\(String(describing: record.minTime)) min")
+                            HSubtitleView(imageSystemName: "flame", title: "record.maxReps.title", subtitle: "\(String(describing: record.maxReps))", foregroundColor: .purple)
+                            HSubtitleView(imageSystemName: "timer", title: "record.time.title", subtitle: "\(String(describing: record.minTime)) min", foregroundColor: .orange)
                         case .endurance:
-                            HSubtitleView(title: "record.distance.title", subtitle: "\(String(describing: record.distance))km")
-                            HSubtitleView(title: "record.time.title", subtitle: "\(String(describing: record.minTime)) min")
+                            HSubtitleView(imageSystemName: "point.filled.topleft.down.curvedto.point.bottomright.up", title: "record.distance.title", subtitle: "\(String(describing: record.distance))km")
+                            HSubtitleView(imageSystemName: "watchface.applewatch.case", title: "timer", subtitle: "\(String(describing: record.minTime)) min", foregroundColor: .orange)
                         }
 
-                        HSubtitleView(title: "record.date.title", subtitle: "\(String(describing: record.dateFormatter))")
+                        HSubtitleView(imageSystemName: "calendar", title: "record.date.title", subtitle: "\(String(describing: record.dateFormatter))", foregroundColor: .gray)
                     }
                     
                     if store.category?.group == .barbell {
                         Section("record.datail.section.percentage.title") {
                             NavigationLink(value: record) {
-                                HSubtitleView(
+                                HSubtitleView(imageSystemName: "percent",
                                     title: "record.datail.percentage.title",
                                     subtitle: "\(String(describing: record.percentage.clean))%"
                                 )
@@ -62,28 +63,7 @@ struct RecordDetailView: View {
                     }
                     
                 }
-
-                Group {
-                    Section("record.records.section.title") {
-                        ForEach(store.filteredPrs, id: \.id) { pr in
-                            PRView(record: pr)
-                        }
-                        .onDelete { indexSet in
-                            confirmationShow = true
-                            self.indexSet = indexSet
-                        }
-                        .confirmationDialog(
-                            "record.screen.delete.confirmation.title",
-                            isPresented: $confirmationShow,
-                            titleVisibility: .visible
-                        ) {
-                            Button("record.screen.delete.button.title", role: .destructive) {
-                                validateIfPro()
-                            }
-                            Button("record.screen.cancel.button.title", role: .cancel) { }
-                        }
-                    }
-                }
+                
                 
                 Section(header: Text("record.evolution.section.title \(store.category?.name ?? "")"), footer: Text("record.evolution.section.description \(store.category?.name ?? "")")) {
                     Chart {
@@ -102,6 +82,28 @@ struct RecordDetailView: View {
                     .frame(height: 250)
                     .padding(.top)
                 }
+
+                Group {
+                    Section("record.records.section.title") {
+                        ForEach(store.filteredPrs, id: \.id) { pr in
+                            PersonalRecordView(record: pr)
+                        }
+                        .onDelete { indexSet in
+                            confirmationShow = true
+                            self.indexSet = indexSet
+                        }
+                        .confirmationDialog(
+                            "record.screen.delete.confirmation.title",
+                            isPresented: $confirmationShow,
+                            titleVisibility: .visible
+                        ) {
+                            Button("record.screen.delete.button.title", role: .destructive) {
+                                validateIfPro()
+                            }
+                            Button("record.screen.cancel.button.title", role: .cancel) { }
+                        }
+                    }
+                }
             }
         }
         .sheet(isPresented: $showPROsubsciptionView) {
@@ -109,7 +111,7 @@ struct RecordDetailView: View {
                 .environmentObject(PurchaseStore(storeKitManager: storeKitManager))
         }
         .navigationBarTitle(Text(prName))
-        .navigationBarTitleDisplayMode(.inline)
+        .navigationBarTitleDisplayMode(.large)
         .onAppear {
             UINavigationBar.appearance().tintColor = .green
             record = store.getMaxRecord(prs: store.filteredPrs)
