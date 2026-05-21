@@ -11,49 +11,46 @@ public struct OnboardingView: View {
 
     public var body: some View {
         VStack(spacing: 20) {
-            Spacer()
-            
             Text(Strings.Onboarding.title)
-                .font(.largeTitle.bold())
-                .multilineTextAlignment(.center)
-                .padding(.horizontal)
+                .font(AppDesign.Typography.screenTitle)
+                .frame(width: 300, alignment: .leading)
 
-            VStack(alignment: .leading, spacing: 16) {
-                featureRow(icon: "figure.strengthtraining.traditional", title: "Gerencie seus recordes")
-                featureRow(icon: "list.bullet", title: "Organize seus PRs")
-                featureRow(icon: "chart.line.uptrend.xyaxis", title: "Gráficos de evolução")
-                featureRow(icon: "chart.bar", title: "Insights poderosos")
+            VStack(alignment: .leading, spacing: 0) {
+                HViewImageAndText(
+                    image: "figure.strengthtraining.traditional",
+                    imageColor: AppDesign.Colors.brand,
+                    title: "onboarding.item1.title",
+                    description: "onboarding.item1.description"
+                )
+                HViewImageAndText(
+                    image: "list.bullet",
+                    imageColor: AppDesign.Colors.brand,
+                    title: "onboarding.item2.title",
+                    description: "onboarding.item2.description"
+                )
+                HViewImageAndText(
+                    image: "chart.line.uptrend.xyaxis",
+                    imageColor: AppDesign.Colors.brand,
+                    title: "onboarding.item3.title",
+                    description: "onboarding.item3.description"
+                )
+                HViewImageAndText(
+                    image: "chart.bar",
+                    imageColor: AppDesign.Colors.brand,
+                    title: "onboarding.item4.title",
+                    description: "onboarding.item4.description"
+                )
             }
-            .padding(.horizontal, 32)
 
             Spacer()
 
-            Button {
+            Button(Strings.Onboarding.cta) {
                 onComplete()
-            } label: {
-                Text(Strings.Onboarding.cta)
-                    .fontWeight(.semibold)
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, 16)
-                    .background(Color.green)
-                    .foregroundColor(.white)
-                    .cornerRadius(12)
             }
-            .padding(.horizontal, 24)
+            .buttonStyle(FilledButtonStyle(fullWidth: true))
+            .padding(.horizontal, AppDesign.Layout.horizontalPadding)
             .padding(.bottom, 40)
         }
-        .background(Color(.systemBackground))
-    }
-    
-    private func featureRow(icon: String, title: String) -> some View {
-        HStack(spacing: 16) {
-            Image(systemName: icon)
-                .font(.title2)
-                .foregroundColor(.green)
-                .frame(width: 32)
-            Text(title)
-                .font(.body)
-            Spacer()
-        }
+        .padding()
     }
 }
