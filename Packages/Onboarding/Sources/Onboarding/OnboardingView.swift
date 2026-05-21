@@ -15,15 +15,15 @@ public struct OnboardingView: View {
         VStack(spacing: 24) {
             Spacer()
 
-            Image(systemName: "figure.strengthtraining.traditional")
-                .font(.system(size: 64))
-                .foregroundStyle(.green)
+            Image(systemName: AppDesign.Icon.onboardingHero)
+                .font(.system(size: AppDesign.Layout.onboardingHeroSize))
+                .foregroundStyle(AppDesign.Colors.brand)
 
             VStack(spacing: 8) {
                 Text(Strings.Onboarding.title)
-                    .font(.title.bold())
+                    .font(AppDesign.Typography.screenTitle)
                 Text(Strings.Onboarding.subtitle)
-                    .font(.subheadline)
+                    .font(AppDesign.Typography.bodySecondary)
                     .foregroundStyle(.secondary)
                     .multilineTextAlignment(.center)
                     .padding(.horizontal)
@@ -45,7 +45,7 @@ public struct OnboardingView: View {
                 onContinue()
             }
             .buttonStyle(.borderedProminent)
-            .tint(.green)
+            .brandTint()
             .padding(.bottom, 32)
         }
         .padding()

@@ -42,7 +42,7 @@ public struct NewPRRecordView: View {
                     Section {
                         Text(saveErrorMessage)
                             .font(.caption)
-                            .foregroundStyle(.red)
+                            .foregroundStyle(AppDesign.Colors.error)
                     }
                 }
             }

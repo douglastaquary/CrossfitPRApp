@@ -32,7 +32,7 @@ public struct WorkoutInsightsView: View {
                     if workoutEngineClient.insights.isEmpty {
                         EmptyStateView(
                             title: Strings.Insights.emptyTitle,
-                            systemImage: "chart.line.uptrend.xyaxis",
+                            systemImage: AppDesign.Icon.emptyInsights,
                             message: Strings.Insights.emptyMessage
                         )
                     } else {
@@ -87,13 +87,13 @@ private struct InsightRow: View {
         VStack(alignment: .leading, spacing: 8) {
             HStack {
                 Text(insight.title)
-                    .font(.headline)
+                    .font(AppDesign.Typography.rowTitle)
                 if insight.requiresPro {
                     Text(Strings.Insights.proBadge)
-                        .font(.caption2.bold())
-                        .padding(.horizontal, 6)
-                        .padding(.vertical, 2)
-                        .background(Color.orange.opacity(0.2))
+                        .font(AppDesign.Typography.proBadge)
+                        .padding(.horizontal, AppDesign.Layout.proBadgeHorizontalPadding)
+                        .padding(.vertical, AppDesign.Layout.proBadgeVerticalPadding)
+                        .background(AppDesign.Colors.proAccent.opacity(0.2))
                         .clipShape(Capsule())
                 }
             }

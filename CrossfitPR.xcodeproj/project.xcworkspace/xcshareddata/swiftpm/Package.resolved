@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "crossfitpr",
+      "kind" : "localSourceControl",
+      "location" : "/Users/douglastaquary/Documents/Projects/Github/iOS/CrossfitPR",
+      "state" : {
+        "branch" : "main",
+        "revision" : "ac00a8c79b86bcf9601843fc12d02270fba54bb6"
+      }
+    }
+  ],
+  "version" : 2
+}

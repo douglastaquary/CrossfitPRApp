@@ -23,13 +23,14 @@ struct MainTabView: View {
         TabView {
             PRHistoriesListView()
                 .tabItem {
-                    Label(Strings.Tab.prs, systemImage: "list.bullet")
+                    Label(Strings.Tab.prs, systemImage: AppDesign.Icon.tabPRs)
                 }
 
             WorkoutInsightsView()
                 .tabItem {
-                    Label(Strings.Tab.evolution, systemImage: "chart.line.uptrend.xyaxis")
+                    Label(Strings.Tab.evolution, systemImage: AppDesign.Icon.tabInsights)
                 }
         }
+        .brandTint()
     }
 }

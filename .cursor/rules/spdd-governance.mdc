@@ -1,0 +1,54 @@
+---
+description: Governança SPDD — prompts como artefatos de primeira classe
+alwaysApply: true
+---
+
+# SPDD Governance — CrossfitPR
+
+Este projeto usa [Structured-Prompt-Driven Development (SPDD)](https://martinfowler.com/articles/structured-prompt-driven/).
+
+## Regra de ouro
+
+**Quando a realidade divergir da intenção, corrija o prompt primeiro — depois atualize o código.**
+
+## Antes de implementar
+
+1. Verificar se existe story em `spdd/stories/`.
+2. Verificar analysis em `spdd/analysis/`.
+3. Verificar REASONS Canvas em `spdd/prompt/*-[Feat]*.md`.
+4. Se não existir, executar workflow: `/spdd-analysis` → `/spdd-reasons-canvas` → confirmar → `/spdd-generate`.
+
+## Tipos de mudança
+
+| Tipo | Fluxo | Comando |
+|------|-------|---------|
+| Nova feature | story → analysis → canvas → code | `/spdd-reasons-canvas` → `/spdd-generate` |
+| Requisito mudou | prompt → code | `/spdd-prompt-update` → `/spdd-generate` |
+| Refactor (sem mudar comportamento) | code → prompt | `/spdd-sync` |
+
+## Skills obrigatórias (desenvolvimento Swift)
+
+| Contexto | Skills |
+|----------|--------|
+| Lógica / arquitetura | SPDD + iOS |
+| UI / layout / cores | SPDD + Design + iOS |
+
+| Skill | Caminho |
+|-------|---------|
+| SPDD | `.cursor/skills/crossfitpr-spdd/SKILL.md` |
+| Design | `.cursor/skills/design/skill-design.md` |
+| iOS | `.cursor/skills/ios-development-skill/skill-ios.md` |
+
+Regras Cursor: `spdd-governance.mdc`, `ios-swift-development.mdc`, `design-preservation.mdc`.
+
+## Artefatos baseline
+
+- Canvas master: `spdd/prompt/CPR-001-20260520-[Feat]-baseline-pr-tracking-and-insights.md`
+- Guia completo: `spdd/README.md` e `AGENTS.md`
+
+## Proibido
+
+- Implementar lógica de negócio nova sem Canvas aprovado.
+- Editar manualmente o Canvas — use comandos SPDD para manter rastreabilidade.
+- Criar ViewModels (Norms do projeto).
+- Alterar layout, cores ou fluxos de telas durante fase de arquitetura (ver skill design).

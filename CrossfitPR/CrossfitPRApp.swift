@@ -1,5 +1,6 @@
 import SwiftUI
 import Application
+import Localization
 
 @main
 struct CrossfitPRApp: App {
@@ -12,6 +13,7 @@ struct CrossfitPRApp: App {
     var body: some Scene {
         WindowGroup {
             RootView()
+                .brandTint()
                 .environmentObject(environment.value.subscriptionClient)
                 .environmentObject(environment.value.personalRecordClient)
                 .environmentObject(environment.value.workoutEngineClient)

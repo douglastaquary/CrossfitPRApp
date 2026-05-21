@@ -1,0 +1,4 @@
+module Onboarding {
+    header "/Users/douglastaquary/Documents/Projects/Github/iOS/CrossfitPR/.build/x86_64-apple-macosx/debug/Onboarding.build/Onboarding-Swift.h"
+    requires objc
+}

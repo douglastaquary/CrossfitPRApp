@@ -1,0 +1,4 @@
+module Localization {
+    header "/Users/douglastaquary/Documents/Projects/Github/iOS/CrossfitPR/.build/x86_64-apple-macosx/debug/Localization.build/Localization-Swift.h"
+    requires objc
+}

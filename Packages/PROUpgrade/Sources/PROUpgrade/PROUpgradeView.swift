@@ -17,7 +17,7 @@ public struct PROUpgradeView: View {
                 Section {
                     VStack(alignment: .leading, spacing: 8) {
                         Text(Strings.PRO.productName)
-                            .font(.title2.bold())
+                            .font(AppDesign.Typography.sectionTitle)
                         Text(Strings.PRO.subtitle)
                             .font(.subheadline)
                             .foregroundStyle(.secondary)
@@ -27,7 +27,7 @@ public struct PROUpgradeView: View {
 
                 Section(Strings.PRO.sectionBenefits) {
                     ForEach(ProFeature.allCases.filter { !$0.isAvailableInFreeTier }, id: \.self) { feature in
-                        Label(feature.localizedMarketingTitle, systemImage: "checkmark.seal.fill")
+                        Label(feature.localizedMarketingTitle, systemImage: AppDesign.Icon.proBenefit)
                     }
                 }
 
@@ -52,7 +52,7 @@ public struct PROUpgradeView: View {
                 if let errorMessage {
                     Section {
                         Text(errorMessage)
-                            .foregroundStyle(.red)
+                            .foregroundStyle(AppDesign.Colors.error)
                             .font(.caption)
                     }
                 }

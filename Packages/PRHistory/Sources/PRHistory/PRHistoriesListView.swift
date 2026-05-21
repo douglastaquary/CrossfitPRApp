@@ -28,7 +28,7 @@ public struct PRHistoriesListView: View {
                 case .error(let message):
                     EmptyStateView(
                         title: Strings.PRHistory.errorTitle,
-                        systemImage: "exclamationmark.triangle",
+                        systemImage: AppDesign.Icon.error,
                         message: message,
                         actionTitle: Strings.PRHistory.retry
                     ) {
@@ -39,7 +39,7 @@ public struct PRHistoriesListView: View {
                     if personalRecordClient.records.isEmpty {
                         EmptyStateView(
                             title: Strings.PRHistory.emptyTitle,
-                            systemImage: "figure.strengthtraining.traditional",
+                            systemImage: AppDesign.Icon.emptyPRs,
                             message: Strings.PRHistory.emptyMessage
                         )
                     } else {
@@ -47,14 +47,14 @@ public struct PRHistoriesListView: View {
                             HStack {
                                 VStack(alignment: .leading, spacing: 4) {
                                     Text(record.exercise.kind.localizedName)
-                                        .font(.headline)
+                                        .font(AppDesign.Typography.rowTitle)
                                     Text(record.date.formatted(date: .abbreviated, time: .omitted))
-                                        .font(.caption)
+                                        .font(AppDesign.Typography.rowSubtitle)
                                         .foregroundStyle(.secondary)
                                 }
                                 Spacer()
                                 Text(Strings.NewPR.weight(Int(record.pounds)))
-                                    .font(.subheadline.monospacedDigit())
+                                    .font(AppDesign.Typography.rowValue)
                                     .foregroundStyle(.secondary)
                             }
                         }
