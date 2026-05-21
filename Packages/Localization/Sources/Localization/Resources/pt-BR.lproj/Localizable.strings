@@ -1,0 +1,293 @@
+/* =============================================================
+   CrossfitPR — Strings pt-BR (Humanizadas)
+   ============================================================= */
+
+/* ─────────────────────────────────────────────────────────────
+   WORKOUT ENGINE — Insights inteligentes
+   ───────────────────────────────────────────────────────────── */
+
+"engine.consistency.message" = "Com %1$lld registros, seu histórico já conta uma história. Com PRO, veja projeções reais para as próximas 4 semanas.";
+"engine.consistency.title" = "Você está no caminho certo";
+"engine.empty.message" = "Registre seu primeiro PR e descubra tendências, padrões e o que fazer pra evoluir mais rápido.";
+"engine.empty.title" = "Seu histórico começa aqui";
+"engine.plateau.message" = "Seus últimos 3 PRs estão em %1$lld lb. Hora de variar volume ou intensidade pra destravar o próximo.";
+"engine.plateau.title" = "Bora mudar a estratégia — %1$@";
+"engine.summary.latestFormat" = "Último PR: %1$@ — %2$lld lb";
+"engine.summary.message" = "Você tem %1$lld PR(s) em %2$lld exercício(s). %3$@";
+"engine.summary.title" = "Visão geral";
+"engine.target.message" = "Pela sua curva, %1$lld lb nas próximas 2 semanas é realista. Foca na técnica e escuta o corpo.";
+"engine.target.title" = "Próximo alvo — %1$@";
+"engine.teaser.message" = "Encontramos %1$lld análise(s) avançada(s) esperando por você: metas, projeções e alertas de estagnação.";
+"engine.teaser.title" = "Tem mais evolução aqui";
+"engine.trend.declined" = "recuou";
+"engine.trend.encouragementDown" = "Ajusta carga, descanso ou técnica — você volta mais forte.";
+"engine.trend.encouragementUp" = "Continua nessa linha!";
+"engine.trend.improved" = "evoluiu";
+"engine.trend.message" = "Desde o primeiro registro, seu PR %1$@ %2$lld lb. %3$@";
+"engine.trend.title" = "%1$@: sua curva";
+
+/* ─────────────────────────────────────────────────────────────
+   ERRORS — Mensagens de erro amigáveis
+   ───────────────────────────────────────────────────────────── */
+
+"error.client.deleteGeneric" = "Não conseguimos remover esse PR. Tenta de novo?";
+"error.client.deletePersistence" = "Não foi possível remover agora. Tenta de novo.";
+"error.client.fetchGeneric" = "Não conseguimos carregar seus PRs. Puxa pra atualizar.";
+"error.client.fetchPersistence" = "Histórico temporariamente indisponível. Seus PRs estão seguros.";
+"error.client.saveGeneric" = "Não conseguimos salvar. Confere os dados e tenta de novo.";
+"error.client.savePersistence" = "Problema ao gravar. Verifica o espaço do iPhone.";
+"error.repo.invalidData" = "Alguns dados não parecem válidos. Confere exercício, carga e data.";
+"error.repo.notFound" = "PR não encontrado. Pode ter sido removido ou ainda não sincronizou.";
+"error.repo.syncFailed" = "Salvo no iPhone. iCloud vai sincronizar em breve.";
+"error.sub.pending" = "Assinatura pendente. Aguardando confirmação da App Store.";
+"error.sub.productUnavailable" = "PRO indisponível agora. Tenta de novo em instantes.";
+"error.sub.purchaseFailed" = "Não conseguimos finalizar. Verifica sua conexão.";
+
+/* ─────────────────────────────────────────────────────────────
+   EXERCISES
+   ───────────────────────────────────────────────────────────── */
+
+"exercise.airSquat" = "Air Squat";
+"exercise.backSquat" = "Back Squat";
+"exercise.barMuscleUp" = "Bar Muscle-Up";
+"exercise.benchPress" = "Bench Press";
+"exercise.boxJump" = "Box Jump";
+"exercise.burpee" = "Burpee";
+"exercise.clean" = "Clean";
+"exercise.cleanAndJerk" = "Clean & Jerk";
+"exercise.deadlift" = "Deadlift";
+"exercise.empty" = "Escolha um exercício";
+
+/* ─────────────────────────────────────────────────────────────
+   INSIGHTS — Tela de evolução
+   ───────────────────────────────────────────────────────────── */
+
+"insights.emptyMessage" = "Registre PRs e veja sua evolução tomar forma aqui.";
+"insights.emptyTitle" = "Sua jornada começa com um PR";
+"insights.loading" = "Analisando sua evolução…";
+"insights.proBadge" = "PRO";
+"insights.title" = "Evolução";
+"insights.unlockPro" = "Quero evoluir mais rápido";
+"insights.unlockProAccessibility" = "Desbloquear recursos PRO";
+
+/* ─────────────────────────────────────────────────────────────
+   NEW PR — Registrar novo record
+   ───────────────────────────────────────────────────────────── */
+
+"newPR.cancel" = "Cancelar";
+"newPR.dateLabel" = "Quando você bateu esse PR?";
+"newPR.pickerExercise" = "Exercício";
+"newPR.save" = "Salvar meu PR";
+"newPR.saveFallbackError" = "Não conseguimos salvar. Tenta de novo?";
+"newPR.sectionExercise" = "Exercício";
+"newPR.sectionPR" = "Seu PR";
+"newPR.title" = "Novo PR 💪";
+"newPR.weightFormat" = "%lld lb";
+
+/* ─────────────────────────────────────────────────────────────
+   ONBOARDING — Primeira experiência
+   ───────────────────────────────────────────────────────────── */
+
+"onboarding.cta" = "Bora começar";
+"onboarding.icloudMessage" = "Seus PRs ficam salvos e sincronizam com iCloud. Do box ao box, sua evolução vem junto.";
+"onboarding.loading" = "Preparando tudo pra você…";
+"onboarding.subtitle" = "Registre cada PR, acompanhe sua evolução e descubra exatamente onde melhorar.";
+"onboarding.title" = "Seu quadro de PRs, no bolso";
+
+"onboarding.view.title" = "O que há de novo";
+"onboarding.item1.title" = "Todos os seus PRs em um lugar";
+"onboarding.item1.description" = "Organize records por exercício e veja sua evolução de forma clara";
+"onboarding.item2.title" = "Simples e rápido de usar";
+"onboarding.item2.description" = "Registre um novo PR em segundos, direto do box";
+"onboarding.item3.title" = "Gráficos que fazem sentido";
+"onboarding.item3.description" = "Visualize sua progressão sem complicação";
+"onboarding.item4.title" = "Insights que te fazem evoluir";
+"onboarding.item4.description" = "Descubra padrões, identifique estagnação e saiba o próximo passo";
+"onboarding.button.title" = "Começar";
+"onboarding.alert.icloud.account.title" = "iCloud desativado";
+"onboarding.alert.icloud.account.message" = "Vá em Ajustes > Apple ID e faça login pra sincronizar seus PRs.";
+"onboarding.alert.cancel.button.title" = "Agora não";
+
+/* ─────────────────────────────────────────────────────────────
+   PR HISTORY — Lista de PRs
+   ───────────────────────────────────────────────────────────── */
+
+"prHistory.emptyMessage" = "Seu primeiro PR te espera. Bora registrar?";
+"prHistory.emptyTitle" = "Nenhum PR ainda";
+"prHistory.errorTitle" = "Ops, algo deu errado";
+"prHistory.loading" = "Carregando seus PRs…";
+"prHistory.registerButton" = "Registrar meu primeiro PR";
+"prHistory.retry" = "Tentar de novo";
+"prHistory.title" = "Meus PRs";
+
+/* ─────────────────────────────────────────────────────────────
+   PRO — Assinatura e benefícios
+   ───────────────────────────────────────────────────────────── */
+
+"pro.close" = "Fechar";
+"pro.productName" = "CrossfitPR PRO";
+"pro.purchaseFallbackError" = "Não conseguimos finalizar. Verifica a conexão e tenta de novo.";
+"pro.sectionBenefits" = "O que você desbloqueia";
+"pro.subtitle" = "Insights avançados, metas personalizadas e projeções — como ter um coach analisando seus treinos.";
+"pro.title" = "Evolua mais rápido";
+"pro.unlockButton" = "Quero o PRO";
+"pro.valueProposition" = "Menos que um café por mês";
+
+"proFeature.basicInsights" = "Visão completa da sua evolução";
+"proFeature.detailedAIAnalysis" = "Análises inteligentes dos seus treinos";
+"proFeature.exportHistory" = "Exporte seu histórico pra onde quiser";
+"proFeature.personalizedRecommendations" = "Metas feitas pro seu ritmo";
+"proFeature.trendCharts" = "Gráficos de progressão detalhados";
+"proFeature.workoutEngineAnalysis" = "Detecte estagnação e destrave novos PRs";
+
+/* ─────────────────────────────────────────────────────────────
+   TABS
+   ───────────────────────────────────────────────────────────── */
+
+"tab.evolution" = "Evolução";
+"tab.prs" = "PRs";
+"tabbar.myrecords.title" = "Meus PRs";
+"tabbar.categories.title" = "Exercícios";
+"tabbar.insights.title" = "Evolução";
+"tabbar.settings.title" = "Ajustes";
+
+/* ─────────────────────────────────────────────────────────────
+   LOADING
+   ───────────────────────────────────────────────────────────── */
+
+"loading.view.title" = "Carregando…";
+
+/* ─────────────────────────────────────────────────────────────
+   SCREEN TITLES
+   ───────────────────────────────────────────────────────────── */
+
+"screen.records.title" = "Meus PRs";
+"screen.category.title" = "Exercícios";
+"screen.insights.title" = "Evolução";
+"screen.settings.title" = "Ajustes";
+
+/* ─────────────────────────────────────────────────────────────
+   CATEGORIES
+   ───────────────────────────────────────────────────────────── */
+
+"category.group.barbell.descript" = "Barra";
+"category.group.gymnastic.descript" = "Ginástico";
+"category.group.endurance.descript" = "Resistência";
+"category.search.descript" = "Buscar exercício";
+"exercises.list.header.descript" = "Toque no exercício pra registrar um PR";
+
+/* ─────────────────────────────────────────────────────────────
+   PURCHASE — Tela de compra PRO
+   ───────────────────────────────────────────────────────────── */
+
+"purchase.item1.title" = "Controle total dos seus PRs";
+"purchase.item1.description" = "Edite, organize e acompanhe cada evolução do seu treino.";
+"purchase.item2.title" = "Insights que te fazem evoluir";
+"purchase.item2.description" = "Gráficos, tendências e análises pra você saber exatamente onde focar.";
+"purchase.item3.title" = "Ranking dos seus records";
+"purchase.item3.description" = "Veja seus melhores PRs e acompanhe sua progressão de perto.";
+"purchase.processing.description" = "Finalizando…";
+"purchase.tryfree.title" = "Experimente 7 dias grátis";
+"purchase.commitment.title" = "Cancele quando quiser.\nSem letras miúdas.\nApós o teste, renovação automática\na menos que você desative.";
+"purchase.lessthancoffe" = "Menos que um café por mês ☕";
+
+/* ─────────────────────────────────────────────────────────────
+   RECORD DETAIL — Detalhes do PR
+   ───────────────────────────────────────────────────────────── */
+
+"record.screen.title" = "Meus PRs";
+"record.biggest.section.title" = "Seu maior PR";
+"record.datail.section.percentage.title" = "Porcentagens do PR";
+"record.datail.percentage.title" = "Porcentagens";
+"record.category.title" = "Exercício";
+"record.percentage.title" = "Intensidade";
+"record.maxReps.title" = "Max reps";
+"record.time.title" = "Tempo";
+"record.distance.title" = "Distância";
+"record.weight.title" = "Peso";
+"record.date.title" = "Data";
+"record.view.category.recent.title" = "Mais recente";
+"record.view.category.evolution.title" = "Evolução";
+"record.view.category.lowest.title" = "Menor";
+"record.item.view.default.title" = "PR";
+"record.records.section.title" = "Histórico";
+"record.evolution.section.title %@" = "Evolução de %@";
+"record.evolution.section.description %@" = "Baseado nos seus records de %@.";
+"record.screen.delete.button.title" = "Apagar";
+"record.screen.cancel.button.title" = "Cancelar";
+"record.screen.delete.confirmation.title" = "Quer mesmo apagar esse PR?";
+"record.screen.maxReps.title" = "Max reps";
+"record.screen.empty.records.message" = "Você ainda não tem PRs.\nVá em Exercícios e registre o primeiro!";
+"record.button.get.started.new.record" = "Novo PR";
+
+/* ─────────────────────────────────────────────────────────────
+   INSIGHTS SCREEN
+   ───────────────────────────────────────────────────────────── */
+
+"insight.section.topranking.barbell.title" = "Seus top PRs com barra";
+"insight.section.ranking.barbell.title" = "Exercícios com barra";
+"insight.section.footer.rank.barbell.title" = "Ranking mostra seu melhor, sua evolução e onde focar.";
+"insight.section.ranking.gymnastic.title" = "Ginásticos";
+"insight.section.ranking.endurance.title" = "Resistência";
+"insight.section.graph.title" = "Sua evolução";
+"insight.section.information.title" = "Seu maior PR";
+"insight.view.error.description" = "Ainda não tem dados pra mostrar.";
+"insight.view.intensity.title" = "Intensidade";
+"insight.view.card.pro.title" = "Quer evoluir mais rápido?";
+"insight.view.card.pro.description" = "Com PRO você tem acesso a análises avançadas, metas personalizadas e sabe exatamente onde focar. Menos que um café por mês.";
+"insight.view.card.unlockprobutton.title" = "Conhecer o PRO";
+"insight.teaser.title" = "Um gostinho do que vem por aí";
+"insight.teaser.description" = "Com PRO, você vê tudo isso e muito mais:";
+"insight.teaser.feature1" = "Projeções de PR pras próximas semanas";
+"insight.teaser.feature2" = "Alertas de estagnação";
+"insight.teaser.feature3" = "Metas personalizadas pro seu ritmo";
+"insight.teaser.cta" = "Quero evoluir mais rápido";
+
+/* ─────────────────────────────────────────────────────────────
+   NEW RECORD SCREEN
+   ───────────────────────────────────────────────────────────── */
+
+"newRecord.screen.title" = "Novo PR";
+"newRecord.screen.save.button.title" = "Salvar";
+"newRecord.screen.cancel.button.title" = "Cancelar";
+"newRecord.screen.section.personal.title" = "Configuração";
+"newRecord.screen.toggle.maxreps.title" = "Max reps";
+"newRecord.screen.toggle.mintime.title" = "Distância máxima";
+"newRecord.screen.toggle.maxrep.title" = "Max reps";
+"newRecord.screen.picker.repetition.title" = "Repetições";
+"newRecord.screen.picker.timecount.title" = "Tempo";
+"newRecord.screen.minutes.description" = "min";
+"newRecord.screen.toggle.distance.title" = "Distância";
+"newRecord.screen.section.informations.title" = "Detalhes";
+"newRecord.screen.section.informations.percentage.title" = "Porcentagem";
+"newRecord.screen.section.informations.weight.title" = "Peso";
+"newRecord.screen.section.comment.title" = "Anotação";
+"newRecord.screen.section.comment.description" = "Adicione uma nota se quiser";
+
+/* ─────────────────────────────────────────────────────────────
+   SETTINGS
+   ───────────────────────────────────────────────────────────── */
+
+"settings.screen.title" = "Ajustes";
+"settings.screen.section.notification.title" = "Notificações";
+"settings.screen.section.notification.toggle.title" = "Lembrete de treino";
+"settings.screen.section.tracking.title" = "Preferências";
+"settings.screen.section.tracking.measure.title" = "Unidade de peso";
+"settings.screen.section.tracking.measure.pounds" = "Libras (lb)";
+"settings.screen.section.tracking.measure.kilograms" = "Quilos (kg)";
+"settings.screen.section.tracking.target.title" = "Treino";
+"settings.screen.section.unlockpro.title" = "Quero o PRO";
+"settings.screen.section.privacy.title" = "Privacidade e Termos";
+"settings.screen.section.about.title" = "Sobre";
+"settings.screen.section.crossfitpro.title" = "CrossfitPR PRO";
+"settings.screen.section.nocommitment.title" = "Cancele quando quiser. Sem compromisso.";
+"settings.pounds.title" = "libras";
+"settings.kilo.title" = "quilos";
+
+"emptyView.screen.message" = "Comece registrando um PR.\nOs insights aparecem conforme você\nadiciona mais records.";
+
+/* ─────────────────────────────────────────────────────────────
+   RANKING
+   ───────────────────────────────────────────────────────────── */
+
+"ranking.screen.evolution.percentage %@" = "Você evoluiu %@ desde o último PR!";
