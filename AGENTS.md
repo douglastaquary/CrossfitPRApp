@@ -59,7 +59,8 @@ AppLaunchContainer → LaunchView → MainTabView
 - **Sem ViewModels** — `@EnvironmentObject` clients + `@State`
 - **Clients:** `PersonalRecordClient`, `SubscriptionClient`, `SettingsClient`
 - **Tokens:** `AppDesign.Colors.*`, `Strings.*`
-- **iOS 17+**, Swift 6
+- **iOS 16+**, Swift 6
+- **Copy humanizado** — textos diretos e motivacionais via `Strings.*`
 
 ## Artefatos SPDD
 

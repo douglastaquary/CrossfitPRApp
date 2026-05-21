@@ -29,18 +29,20 @@ CrossfitPR é um app iOS desenvolvido para atletas de CrossFit que desejam acomp
 - ✅ Sincronização via iCloud
 - ✅ Notificações de lembrete de treino
 
-### PRO
+### PRO (Menos que um café por mês ☕)
 - 🏆 Ranking de melhores PRs
 - 📊 Insights avançados com múltiplos gráficos
+- 🎯 Metas personalizadas pro seu ritmo
+- ⚠️ Alertas de estagnação
+- 📈 Projeções de PR pras próximas semanas
 - 🗑️ Exclusão de registros
-- 📈 Análise de percentuais de carga
 
 ---
 
 ## Requisitos
 
-- **iOS 17.0+**
-- **Xcode 16+**
+- **iOS 16.0+**
+- **Xcode 14.2+**
 - **Swift 6**
 - Conta Apple Developer (para CloudKit)
 
@@ -114,6 +116,13 @@ Packages/
 - **Clients via `@EnvironmentObject`** — `PersonalRecordClient`, `SubscriptionClient`, `SettingsClient`
 - **Offline-first** — SwiftData local com sync CloudKit best-effort
 - **Swift Testing** — `import Testing` para testes unitários
+
+### UX & Copy
+
+- **Textos humanizados** — Comunicação direta e motivacional ("Bora começar", "Quer evoluir mais rápido?")
+- **Splash animado** — Estilo X/Twitter com logo que escala e desaparece
+- **Teaser PRO** — Tela de preview mostrando benefícios antes de assinar
+- **Proposta de valor clara** — "Menos que um café por mês"
 
 ---
 
