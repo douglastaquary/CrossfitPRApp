@@ -27,13 +27,8 @@ public struct PROUpgradeView: View {
     public var body: some View {
         NavigationView {
             ScrollView(.vertical, showsIndicators: false) {
-                VStack {
-                    HStack {
-                        Spacer()
-                        Button(Strings.NewPR.cancel) { dismiss() }
-                            .foregroundStyle(AppDesign.Colors.brand)
-                    }
-                    .padding([.top, .trailing], 24)
+                VStack(spacing: 0) {
+                    closeButton
 
                     if subscriptionClient.isLoadingProduct {
                         LoadingView(messageKey: "loading.view.title")
@@ -54,62 +49,183 @@ public struct PROUpgradeView: View {
         .brandTint()
     }
 
+    private var closeButton: some View {
+        HStack {
+            Spacer()
+            Button { dismiss() } label: {
+                Image(systemName: "xmark.circle.fill")
+                    .font(.title2)
+                    .foregroundStyle(.secondary)
+            }
+        }
+        .padding([.top, .trailing], 20)
+    }
+
     private var purchaseContent: some View {
-        VStack(spacing: 12) {
-            Text("CrossFitPR PRO")
-                .font(.title.weight(.semibold))
-                .foregroundStyle(AppDesign.Colors.brand)
-                .padding(.top)
+        VStack(spacing: 24) {
+            headerSection
 
-            HViewImageAndText(
-                image: "gearshape",
-                imageColor: AppDesign.Colors.brand,
-                title: "purchase.item1.title",
-                description: "purchase.item1.description"
-            )
-            HViewImageAndText(
-                image: AppDesign.Icon.tabInsights,
-                imageColor: AppDesign.Colors.brand,
-                title: "purchase.item2.title",
-                description: "purchase.item2.description"
-            )
-            HViewImageAndText(
-                image: "trophy",
-                imageColor: AppDesign.Colors.brand,
-                title: "purchase.item3.title",
-                description: "purchase.item3.description"
-            )
+            benefitsSection
 
-            Text(Strings.tr("purchase.tryfree.title"))
-                .fontWeight(.bold)
-                .padding()
-
-            if let monthly = monthlyProduct {
-                Button("\(monthly.displayPrice) / Month") {
-                    Task { await purchase(monthly.id) }
-                }
-                .buttonStyle(OutlineButtonStyle())
-            }
-
-            if let annual = annualProduct {
-                Button("\(annual.displayPrice) / Year") {
-                    Task { await purchase(annual.id) }
-                }
-                .buttonStyle(FilledButtonStyle(fullWidth: true))
-            }
-
-            Text(Strings.tr("purchase.commitment.title"))
-                .font(.footnote)
-                .multilineTextAlignment(.center)
-                .foregroundStyle(.secondary)
+            pricingSection
 
             if let errorMessage {
                 Text(errorMessage)
                     .font(.caption)
                     .foregroundStyle(AppDesign.Colors.error)
             }
+
+            commitmentSection
         }
-        .padding()
+        .padding(.horizontal, 24)
+        .padding(.bottom, 40)
+    }
+
+    private var headerSection: some View {
+        VStack(spacing: 12) {
+            Image(systemName: "sparkles")
+                .font(.system(size: 48))
+                .foregroundStyle(AppDesign.Colors.proAccent)
+
+            Text(Strings.tr("pro.title"))
+                .font(.title.bold())
+
+            Text(Strings.tr("pro.subtitle"))
+                .font(.subheadline)
+                .foregroundStyle(.secondary)
+                .multilineTextAlignment(.center)
+                .padding(.horizontal)
+        }
+    }
+
+    private var benefitsSection: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            Text(Strings.tr("pro.sectionBenefits"))
+                .font(.headline)
+                .padding(.leading, 4)
+
+            VStack(spacing: 0) {
+                benefitRow(
+                    icon: "chart.line.uptrend.xyaxis",
+                    title: Strings.tr("purchase.item1.title"),
+                    description: Strings.tr("purchase.item1.description"),
+                    color: AppDesign.Colors.brand
+                )
+                Divider().padding(.leading, 52)
+                benefitRow(
+                    icon: "sparkles",
+                    title: Strings.tr("purchase.item2.title"),
+                    description: Strings.tr("purchase.item2.description"),
+                    color: .purple
+                )
+                Divider().padding(.leading, 52)
+                benefitRow(
+                    icon: "trophy.fill",
+                    title: Strings.tr("purchase.item3.title"),
+                    description: Strings.tr("purchase.item3.description"),
+                    color: .orange
+                )
+            }
+            .padding()
+            .background(AppDesign.Colors.cardBackground)
+            .cornerRadius(12)
+        }
+    }
+
+    private func benefitRow(icon: String, title: String, description: String, color: Color) -> some View {
+        HStack(alignment: .top, spacing: 14) {
+            Image(systemName: icon)
+                .font(.title3)
+                .frame(width: 28, height: 28)
+                .foregroundStyle(color)
+
+            VStack(alignment: .leading, spacing: 4) {
+                Text(title)
+                    .font(.subheadline.weight(.semibold))
+                Text(description)
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
+            Spacer()
+        }
+        .padding(.vertical, 12)
+    }
+
+    private var pricingSection: some View {
+        VStack(spacing: 16) {
+            Text(Strings.tr("purchase.tryfree.title"))
+                .font(.headline)
+                .foregroundStyle(AppDesign.Colors.brand)
+
+            Text(Strings.tr("purchase.lessthancoffe"))
+                .font(.subheadline)
+                .foregroundStyle(.secondary)
+
+            if let monthly = monthlyProduct {
+                Button {
+                    Task { await purchase(monthly.id) }
+                } label: {
+                    HStack {
+                        VStack(alignment: .leading) {
+                            Text("Mensal")
+                                .font(.subheadline.weight(.semibold))
+                            Text(monthly.displayPrice)
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                        }
+                        Spacer()
+                        Image(systemName: "chevron.right")
+                            .foregroundStyle(.secondary)
+                    }
+                    .padding()
+                    .background(AppDesign.Colors.cardBackground)
+                    .cornerRadius(12)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 12)
+                            .stroke(Color.secondary.opacity(0.2), lineWidth: 1)
+                    )
+                }
+                .foregroundStyle(.primary)
+            }
+
+            if let annual = annualProduct {
+                Button {
+                    Task { await purchase(annual.id) }
+                } label: {
+                    HStack {
+                        VStack(alignment: .leading) {
+                            HStack {
+                                Text("Anual")
+                                    .font(.subheadline.weight(.semibold))
+                                Text("Melhor valor")
+                                    .font(.caption2.bold())
+                                    .padding(.horizontal, 6)
+                                    .padding(.vertical, 2)
+                                    .background(AppDesign.Colors.proAccent)
+                                    .foregroundStyle(.white)
+                                    .cornerRadius(4)
+                            }
+                            Text(annual.displayPrice)
+                                .font(.caption)
+                        }
+                        Spacer()
+                        Image(systemName: "chevron.right")
+                    }
+                    .padding()
+                    .background(AppDesign.Colors.brand)
+                    .foregroundStyle(.white)
+                    .cornerRadius(12)
+                }
+            }
+        }
+    }
+
+    private var commitmentSection: some View {
+        Text(Strings.tr("purchase.commitment.title"))
+            .font(.caption)
+            .multilineTextAlignment(.center)
+            .foregroundStyle(.secondary)
+            .padding(.top, 8)
     }
 
     private func purchase(_ productID: String) async {

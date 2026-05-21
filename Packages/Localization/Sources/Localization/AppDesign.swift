@@ -28,6 +28,13 @@ public enum AppDesign {
 
         /// Botão card escuro (#151E27).
         public static let cardButton = Color(red: 0.082, green: 0.118, blue: 0.153)
+
+        /// Fundo de cards/seções.
+        public static let cardBackground = Color(UIColor { traits in
+            traits.userInterfaceStyle == .dark
+                ? UIColor.secondarySystemBackground
+                : UIColor.systemBackground
+        })
     }
 
     public enum Icon {

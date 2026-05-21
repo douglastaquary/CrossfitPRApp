@@ -19,7 +19,7 @@ public struct WorkoutInsightsView: View {
                 if subscriptionClient.currentTier == .pro {
                     InsightsViewPRO()
                 } else {
-                    freeTeaserContent
+                    InsightsTeaserView(isPresentingPROUpgrade: $isPresentingPROUpgrade)
                 }
             }
             .navigationTitle(Strings.Screen.insights)
@@ -32,25 +32,10 @@ public struct WorkoutInsightsView: View {
             .refreshable {
                 await personalRecordClient.fetchRecords()
             }
+            .sheet(isPresented: $isPresentingPROUpgrade) {
+                PROUpgradeView()
+            }
         }
         .brandTint()
-    }
-
-    private var freeTeaserContent: some View {
-        VStack {
-            Button { isPresentingPROUpgrade = true } label: {
-                CardGroupView(
-                    cardTitle: "insight.view.card.pro.title",
-                    cardDescription: "insight.view.card.pro.description",
-                    buttonTitle: "insight.view.card.unlockprobutton.title",
-                    iconSystemName: "chart.bar.fill"
-                )
-            }
-            Spacer()
-        }
-        .padding(22)
-        .sheet(isPresented: $isPresentingPROUpgrade) {
-            PROUpgradeView()
-        }
     }
 }
