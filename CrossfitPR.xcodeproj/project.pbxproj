@@ -3,27 +3,32 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 55;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4E58055827F3C5AE00F16219 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E58055727F3C5AE00F16219 /* AppDelegate.swift */; };
-		4E58055A27F3C5AE00F16219 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E58055927F3C5AE00F16219 /* SceneDelegate.swift */; };
-		4E58055C27F3C5AE00F16219 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E58055B27F3C5AE00F16219 /* ViewController.swift */; };
-		4E58055F27F3C5AE00F16219 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4E58055D27F3C5AE00F16219 /* Main.storyboard */; };
 		4E58056127F3C5B100F16219 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4E58056027F3C5B100F16219 /* Assets.xcassets */; };
 		4E58056427F3C5B100F16219 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4E58056227F3C5B100F16219 /* LaunchScreen.storyboard */; };
+		4E58060127F3C5B100F16219 /* CrossfitPRApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E58060027F3C5B100F16219 /* CrossfitPRApp.swift */; };
+		4E58060327F3C5B100F16219 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E58060227F3C5B100F16219 /* RootView.swift */; };
+		4E58061127F3C5B100F16219 /* Domain in Frameworks */ = {isa = PBXBuildFile; productRef = 4E58061027F3C5B100F16219 /* Domain */; };
+		4E58061727F3C5B100F16219 /* Subscription in Frameworks */ = {isa = PBXBuildFile; productRef = 4E58061627F3C5B100F16219 /* Subscription */; };
+		4E58061927F3C5B100F16219 /* Application in Frameworks */ = {isa = PBXBuildFile; productRef = 4E58061827F3C5B100F16219 /* Application */; };
+		4E58063027F3C5B100F16219 /* PRHistory in Frameworks */ = {isa = PBXBuildFile; productRef = 4E58062C27F3C5B100F16219 /* PRHistory */; };
+		4E58063127F3C5B100F16219 /* Insights in Frameworks */ = {isa = PBXBuildFile; productRef = 4E58062D27F3C5B100F16219 /* Insights */; };
+		4E58063227F3C5B100F16219 /* PROUpgrade in Frameworks */ = {isa = PBXBuildFile; productRef = 4E58062E27F3C5B100F16219 /* PROUpgrade */; };
+		4E58063327F3C5B100F16219 /* Onboarding in Frameworks */ = {isa = PBXBuildFile; productRef = 4E58062F27F3C5B100F16219 /* Onboarding */; };
+		4E58063627F3C5B100F16219 /* Localization in Frameworks */ = {isa = PBXBuildFile; productRef = 4E58063527F3C5B100F16219 /* Localization */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		4E58055427F3C5AE00F16219 /* CrossfitPR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CrossfitPR.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		4E58055727F3C5AE00F16219 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		4E58055927F3C5AE00F16219 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		4E58055B27F3C5AE00F16219 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		4E58055E27F3C5AE00F16219 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4E58056027F3C5B100F16219 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4E58056327F3C5B100F16219 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4E58056527F3C5B100F16219 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4E58058527FA865F00F16219 /* CrossfitPR.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CrossfitPR.entitlements; sourceTree = "<group>"; };
+		4E58060027F3C5B100F16219 /* CrossfitPRApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrossfitPRApp.swift; sourceTree = "<group>"; };
+		4E58060227F3C5B100F16219 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +36,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E58061127F3C5B100F16219 /* Domain in Frameworks */,
+				4E58061727F3C5B100F16219 /* Subscription in Frameworks */,
+				4E58061927F3C5B100F16219 /* Application in Frameworks */,
+				4E58063027F3C5B100F16219 /* PRHistory in Frameworks */,
+				4E58063127F3C5B100F16219 /* Insights in Frameworks */,
+				4E58063227F3C5B100F16219 /* PROUpgrade in Frameworks */,
+				4E58063327F3C5B100F16219 /* Onboarding in Frameworks */,
+				4E58063627F3C5B100F16219 /* Localization in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,6 +53,7 @@
 		4E58054B27F3C5AE00F16219 = {
 			isa = PBXGroup;
 			children = (
+				4E58062027F3C5B100F16219 /* Packages */,
 				4E58055627F3C5AE00F16219 /* CrossfitPR */,
 				4E58055527F3C5AE00F16219 /* Products */,
 			);
@@ -56,15 +70,22 @@
 		4E58055627F3C5AE00F16219 /* CrossfitPR */ = {
 			isa = PBXGroup;
 			children = (
-				4E58055727F3C5AE00F16219 /* AppDelegate.swift */,
-				4E58055927F3C5AE00F16219 /* SceneDelegate.swift */,
-				4E58055B27F3C5AE00F16219 /* ViewController.swift */,
-				4E58055D27F3C5AE00F16219 /* Main.storyboard */,
+				4E58058527FA865F00F16219 /* CrossfitPR.entitlements */,
+				4E58060027F3C5B100F16219 /* CrossfitPRApp.swift */,
+				4E58060227F3C5B100F16219 /* RootView.swift */,
 				4E58056027F3C5B100F16219 /* Assets.xcassets */,
 				4E58056227F3C5B100F16219 /* LaunchScreen.storyboard */,
 				4E58056527F3C5B100F16219 /* Info.plist */,
 			);
 			path = CrossfitPR;
+			sourceTree = "<group>";
+		};
+		4E58062027F3C5B100F16219 /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Packages;
+			path = Packages;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -83,6 +104,16 @@
 			dependencies = (
 			);
 			name = CrossfitPR;
+			packageProductDependencies = (
+				4E58061027F3C5B100F16219 /* Domain */,
+				4E58061627F3C5B100F16219 /* Subscription */,
+				4E58061827F3C5B100F16219 /* Application */,
+				4E58062C27F3C5B100F16219 /* PRHistory */,
+				4E58062D27F3C5B100F16219 /* Insights */,
+				4E58062E27F3C5B100F16219 /* PROUpgrade */,
+				4E58062F27F3C5B100F16219 /* Onboarding */,
+				4E58063527F3C5B100F16219 /* Localization */,
+			);
 			productName = CrossfitPR;
 			productReference = 4E58055427F3C5AE00F16219 /* CrossfitPR.app */;
 			productType = "com.apple.product-type.application";
@@ -94,8 +125,8 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1300;
-				LastUpgradeCheck = 1300;
+				LastSwiftUpdateCheck = 1600;
+				LastUpgradeCheck = 1600;
 				TargetAttributes = {
 					4E58055327F3C5AE00F16219 = {
 						CreatedOnToolsVersion = 13.0;
@@ -103,14 +134,18 @@
 				};
 			};
 			buildConfigurationList = 4E58054F27F3C5AE00F16219 /* Build configuration list for PBXProject "CrossfitPR" */;
-			compatibilityVersion = "Xcode 13.0";
-			developmentRegion = en;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = "pt-BR";
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
+				"pt-BR",
 			);
 			mainGroup = 4E58054B27F3C5AE00F16219;
+			packageReferences = (
+				4E58062127F3C5B100F16219 /* XCRemoteSwiftPackageReference "CrossfitPRPackages" */,
+			);
 			productRefGroup = 4E58055527F3C5AE00F16219 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -127,7 +162,6 @@
 			files = (
 				4E58056427F3C5B100F16219 /* LaunchScreen.storyboard in Resources */,
 				4E58056127F3C5B100F16219 /* Assets.xcassets in Resources */,
-				4E58055F27F3C5AE00F16219 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,23 +172,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4E58055C27F3C5AE00F16219 /* ViewController.swift in Sources */,
-				4E58055827F3C5AE00F16219 /* AppDelegate.swift in Sources */,
-				4E58055A27F3C5AE00F16219 /* SceneDelegate.swift in Sources */,
+				4E58060127F3C5B100F16219 /* CrossfitPRApp.swift in Sources */,
+				4E58060327F3C5B100F16219 /* RootView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		4E58055D27F3C5AE00F16219 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				4E58055E27F3C5AE00F16219 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		4E58056227F3C5B100F16219 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -172,7 +197,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -217,13 +242,14 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -233,7 +259,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -272,12 +298,13 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -287,14 +314,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = CrossfitPR/CrossfitPR.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 6V95FQX348;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CrossfitPR/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = MyCrossfitPRs;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -315,14 +343,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = CrossfitPR/CrossfitPR.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 6V95FQX348;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CrossfitPR/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = MyCrossfitPRs;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -360,6 +389,60 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		4E58062127F3C5B100F16219 /* XCRemoteSwiftPackageReference "CrossfitPRPackages" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "file:///Users/douglastaquary/Documents/Projects/Github/iOS/CrossfitPR/";
+			requirement = {
+				kind = branch;
+				branch = main;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		4E58061027F3C5B100F16219 /* Domain */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4E58062127F3C5B100F16219 /* XCRemoteSwiftPackageReference "CrossfitPRPackages" */;
+			productName = Domain;
+		};
+		4E58061627F3C5B100F16219 /* Subscription */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4E58062127F3C5B100F16219 /* XCRemoteSwiftPackageReference "CrossfitPRPackages" */;
+			productName = Subscription;
+		};
+		4E58061827F3C5B100F16219 /* Application */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4E58062127F3C5B100F16219 /* XCRemoteSwiftPackageReference "CrossfitPRPackages" */;
+			productName = Application;
+		};
+		4E58062C27F3C5B100F16219 /* PRHistory */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4E58062127F3C5B100F16219 /* XCRemoteSwiftPackageReference "CrossfitPRPackages" */;
+			productName = PRHistory;
+		};
+		4E58062D27F3C5B100F16219 /* Insights */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4E58062127F3C5B100F16219 /* XCRemoteSwiftPackageReference "CrossfitPRPackages" */;
+			productName = Insights;
+		};
+		4E58062E27F3C5B100F16219 /* PROUpgrade */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4E58062127F3C5B100F16219 /* XCRemoteSwiftPackageReference "CrossfitPRPackages" */;
+			productName = PROUpgrade;
+		};
+		4E58062F27F3C5B100F16219 /* Onboarding */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4E58062127F3C5B100F16219 /* XCRemoteSwiftPackageReference "CrossfitPRPackages" */;
+			productName = Onboarding;
+		};
+		4E58063527F3C5B100F16219 /* Localization */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4E58062127F3C5B100F16219 /* XCRemoteSwiftPackageReference "CrossfitPRPackages" */;
+			productName = Localization;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 4E58054C27F3C5AE00F16219 /* Project object */;
 }
