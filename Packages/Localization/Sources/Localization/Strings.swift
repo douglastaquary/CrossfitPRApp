@@ -18,7 +18,7 @@ public enum Strings {
         public static var subtitle: String { tr("onboarding.subtitle") }
         public static var loading: String { tr("loading.view.title") }
         public static var icloudMessage: String { tr("onboarding.alert.icloud.account.message") }
-        public static var cta: String { tr("onboarding.button.title") }
+        public static var cta: String { tr("onboarding.cta") }
     }
 
     // MARK: - Tabs (beta — 4 tabs)
