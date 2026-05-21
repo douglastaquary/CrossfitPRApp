@@ -9,9 +9,11 @@ public final class LaunchScreenStateManager: ObservableObject {
 
     public func start() {
         Task {
-            try? await Task.sleep(nanoseconds: 900_000_000)
+            // Pulse animation
+            try? await Task.sleep(nanoseconds: 800_000_000) // 0.8s
             state = .secondStep
-            try? await Task.sleep(nanoseconds: 1_000_000_000)
+            // Explosion + fade
+            try? await Task.sleep(nanoseconds: 300_000_000) // 0.3s
             state = .finished
         }
     }

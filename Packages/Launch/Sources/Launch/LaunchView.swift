@@ -9,7 +9,7 @@ public struct LaunchView<MainContent: View>: View {
     @EnvironmentObject private var settingsClient: SettingsClient
     @StateObject private var networkMonitor = NetworkMonitor()
     @State private var showNetworkAlert = false
-    @State private var showOnboarding = true
+    @State private var didCompleteOnboarding = false
 
     private let mainContent: () -> MainContent
 
@@ -17,23 +17,31 @@ public struct LaunchView<MainContent: View>: View {
         self.mainContent = mainContent
     }
 
+    private var shouldShowOnboarding: Bool {
+        !didCompleteOnboarding && !settingsClient.hasCompletedLaunch
+    }
+
     public var body: some View {
-        Group {
+        ZStack {
             if !networkMonitor.isConnected {
                 offlineContent
-            } else if showOnboarding && !settingsClient.hasCompletedLaunch {
-                OnboardingView(isCompleted: $settingsClient.hasCompletedLaunch)
-                    .onChange(of: settingsClient.hasCompletedLaunch) { completed in
-                        if completed {
-                            withAnimation { showOnboarding = false }
-                        }
+            } else if shouldShowOnboarding {
+                OnboardingView {
+                    print("🟢 ONBOARDING COMPLETE CALLED!")
+                    settingsClient.hasCompletedLaunch = true
+                    withAnimation(.easeInOut(duration: 0.3)) {
+                        didCompleteOnboarding = true
                     }
+                }
+                .transition(.opacity)
             } else {
                 mainContent()
+                    .transition(.opacity)
             }
         }
+        .animation(.easeInOut(duration: 0.3), value: shouldShowOnboarding)
         .onAppear {
-            showOnboarding = !settingsClient.hasCompletedLaunch
+            didCompleteOnboarding = settingsClient.hasCompletedLaunch
         }
         .brandTint()
     }
