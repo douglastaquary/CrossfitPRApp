@@ -1,4 +1,0 @@
-module PRHistory {
-    header "/Users/douglastaquary/Documents/Projects/Github/iOS/CrossfitPR/.build/x86_64-apple-macosx/debug/PRHistory.build/PRHistory-Swift.h"
-    requires objc
-}
