@@ -153,7 +153,21 @@
 			);
 			mainGroup = 4E58054B27F3C5AE00F16219;
 			packageReferences = (
-				4E58062127F3C5B100F16219 /* XCLocalSwiftPackageReference "Packages" */,
+				4E580621A0000001 /* XCLocalSwiftPackageReference "Packages/Domain" */,
+				4E580621A0000002 /* XCLocalSwiftPackageReference "Packages/Localization" */,
+				4E580621A0000003 /* XCLocalSwiftPackageReference "Packages/Persistence" */,
+				4E580621A0000004 /* XCLocalSwiftPackageReference "Packages/Subscription" */,
+				4E580621A0000005 /* XCLocalSwiftPackageReference "Packages/WorkoutEngine" */,
+				4E580621A0000006 /* XCLocalSwiftPackageReference "Packages/Application" */,
+				4E580621A0000007 /* XCLocalSwiftPackageReference "Packages/SharedUI" */,
+				4E580621A0000008 /* XCLocalSwiftPackageReference "Packages/Launch" */,
+				4E580621A0000009 /* XCLocalSwiftPackageReference "Packages/Onboarding" */,
+				4E580621A000000A /* XCLocalSwiftPackageReference "Packages/Categories" */,
+				4E580621A000000B /* XCLocalSwiftPackageReference "Packages/PRHistory" */,
+				4E580621A000000C /* XCLocalSwiftPackageReference "Packages/RecordDetail" */,
+				4E580621A000000D /* XCLocalSwiftPackageReference "Packages/Insights" */,
+				4E580621A000000E /* XCLocalSwiftPackageReference "Packages/PROUpgrade" */,
+				4E580621A000000F /* XCLocalSwiftPackageReference "Packages/Settings" */,
 			);
 			productRefGroup = 4E58055527F3C5AE00F16219 /* Products */;
 			projectDirPath = "";
@@ -400,66 +414,111 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
-		4E58062127F3C5B100F16219 /* XCLocalSwiftPackageReference "Packages" */ = {
+		4E580621A0000001 /* XCLocalSwiftPackageReference "Packages/Domain" */ = {
 			isa = XCLocalSwiftPackageReference;
-			relativePath = Packages;
+			relativePath = Packages/Domain;
+		};
+		4E580621A0000002 /* XCLocalSwiftPackageReference "Packages/Localization" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/Localization;
+		};
+		4E580621A0000003 /* XCLocalSwiftPackageReference "Packages/Persistence" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/Persistence;
+		};
+		4E580621A0000004 /* XCLocalSwiftPackageReference "Packages/Subscription" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/Subscription;
+		};
+		4E580621A0000005 /* XCLocalSwiftPackageReference "Packages/WorkoutEngine" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/WorkoutEngine;
+		};
+		4E580621A0000006 /* XCLocalSwiftPackageReference "Packages/Application" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/Application;
+		};
+		4E580621A0000007 /* XCLocalSwiftPackageReference "Packages/SharedUI" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/SharedUI;
+		};
+		4E580621A0000008 /* XCLocalSwiftPackageReference "Packages/Launch" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/Launch;
+		};
+		4E580621A0000009 /* XCLocalSwiftPackageReference "Packages/Onboarding" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/Onboarding;
+		};
+		4E580621A000000A /* XCLocalSwiftPackageReference "Packages/Categories" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/Categories;
+		};
+		4E580621A000000B /* XCLocalSwiftPackageReference "Packages/PRHistory" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/PRHistory;
+		};
+		4E580621A000000C /* XCLocalSwiftPackageReference "Packages/RecordDetail" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/RecordDetail;
+		};
+		4E580621A000000D /* XCLocalSwiftPackageReference "Packages/Insights" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/Insights;
+		};
+		4E580621A000000E /* XCLocalSwiftPackageReference "Packages/PROUpgrade" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/PROUpgrade;
+		};
+		4E580621A000000F /* XCLocalSwiftPackageReference "Packages/Settings" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/Settings;
 		};
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
 		4E58061027F3C5B100F16219 /* Domain */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 4E58062127F3C5B100F16219 /* XCLocalSwiftPackageReference "Packages" */;
 			productName = Domain;
 		};
 		4E58061627F3C5B100F16219 /* Subscription */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 4E58062127F3C5B100F16219 /* XCLocalSwiftPackageReference "Packages" */;
 			productName = Subscription;
 		};
 		4E58061827F3C5B100F16219 /* Application */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 4E58062127F3C5B100F16219 /* XCLocalSwiftPackageReference "Packages" */;
 			productName = Application;
 		};
 		4E58062C27F3C5B100F16219 /* PRHistory */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 4E58062127F3C5B100F16219 /* XCLocalSwiftPackageReference "Packages" */;
 			productName = PRHistory;
 		};
 		4E58062D27F3C5B100F16219 /* Insights */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 4E58062127F3C5B100F16219 /* XCLocalSwiftPackageReference "Packages" */;
 			productName = Insights;
 		};
 		4E58062E27F3C5B100F16219 /* PROUpgrade */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 4E58062127F3C5B100F16219 /* XCLocalSwiftPackageReference "Packages" */;
 			productName = PROUpgrade;
 		};
 		4E58062F27F3C5B100F16219 /* Onboarding */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 4E58062127F3C5B100F16219 /* XCLocalSwiftPackageReference "Packages" */;
 			productName = Onboarding;
 		};
 		4E58063527F3C5B100F16219 /* Localization */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 4E58062127F3C5B100F16219 /* XCLocalSwiftPackageReference "Packages" */;
 			productName = Localization;
 		};
 		4E58063827F3C5B100F16219 /* Categories */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 4E58062127F3C5B100F16219 /* XCLocalSwiftPackageReference "Packages" */;
 			productName = Categories;
 		};
 		4E58063A27F3C5B100F16219 /* Settings */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 4E58062127F3C5B100F16219 /* XCLocalSwiftPackageReference "Packages" */;
 			productName = Settings;
 		};
 		4E58063C27F3C5B100F16219 /* Launch */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 4E58062127F3C5B100F16219 /* XCLocalSwiftPackageReference "Packages" */;
 			productName = Launch;
 		};
 /* End XCSwiftPackageProductDependency section */
