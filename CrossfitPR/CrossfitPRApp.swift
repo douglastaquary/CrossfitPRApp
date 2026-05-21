@@ -1,5 +1,6 @@
 import SwiftUI
 import Application
+import Launch
 import Localization
 
 @main
@@ -12,19 +13,22 @@ struct CrossfitPRApp: App {
 
     var body: some Scene {
         WindowGroup {
-            RootView()
-                .brandTint()
-                .environmentObject(environment.value.subscriptionClient)
-                .environmentObject(environment.value.personalRecordClient)
-                .environmentObject(environment.value.workoutEngineClient)
-                .task {
-                    await environment.value.bootstrapServices()
-                }
+            AppLaunchContainer {
+                MainTabView()
+            }
+            .brandTint()
+            .environmentObject(environment.value.subscriptionClient)
+            .environmentObject(environment.value.personalRecordClient)
+            .environmentObject(environment.value.workoutEngineClient)
+            .environmentObject(environment.value.settingsClient)
+            .environmentObject(environment.value.notificationManager)
+            .task {
+                await environment.value.bootstrapServices()
+            }
         }
     }
 }
 
-/// Wrapper `ObservableObject` para injetar `AppEnvironment` via `@StateObject`.
 @MainActor
 private final class AppEnvironmentHolder: ObservableObject {
     let value: AppEnvironment

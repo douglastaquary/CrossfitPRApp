@@ -10,7 +10,9 @@ public final class SubscriptionClient: SubscriptionStatusProviding, ObservableOb
 
     @Published public private(set) var currentTier: SubscriptionTier = .free
     @Published public private(set) var proProduct: SubscriptionProductInfo?
+    @Published public private(set) var subscriptionProducts: [SubscriptionProductInfo] = []
     @Published public private(set) var isLoadingProduct = false
+    @Published public private(set) var isPurchasing = false
 
     public init(store: any SubscriptionStoreProviding = StoreKitSubscriptionStore()) {
         self.store = store
@@ -31,8 +33,27 @@ public final class SubscriptionClient: SubscriptionStatusProviding, ObservableOb
         }
     }
 
+    public func loadSubscriptionProducts() async {
+        isLoadingProduct = true
+        defer { isLoadingProduct = false }
+
+        do {
+            subscriptionProducts = try await store.fetchSubscriptionProducts()
+            proProduct = subscriptionProducts.first
+        } catch {
+            subscriptionProducts = []
+            proProduct = nil
+        }
+    }
+
     public func purchasePro() async throws {
-        currentTier = try await store.purchase(productID: SubscriptionCatalog.proProductID)
+        try await purchase(productID: SubscriptionCatalog.proProductID)
+    }
+
+    public func purchase(productID: String) async throws {
+        isPurchasing = true
+        defer { isPurchasing = false }
+        currentTier = try await store.purchase(productID: productID)
     }
 
     public func restorePurchases() async {
@@ -49,7 +70,7 @@ public final class SubscriptionClient: SubscriptionStatusProviding, ObservableOb
                 guard let transaction = try? StoreKitSubscriptionStore.checkVerified(result) else {
                     continue
                 }
-                guard transaction.productID == SubscriptionCatalog.proProductID else {
+                guard SubscriptionCatalog.proProductIDs.contains(transaction.productID) else {
                     continue
                 }
                 await transaction.finish()

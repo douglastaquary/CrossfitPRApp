@@ -41,10 +41,60 @@
           "codeOffers" : [
 
           ],
-          "displayPrice" : "9.99",
+          "displayPrice" : "79.99",
           "familyShareable" : false,
           "groupNumber" : 1,
+          "internalID" : "crossfitpr-pro-annual",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "Insights avançados de treinos e PRs — plano anual",
+              "displayName" : "CrossfitPR PRO Anual",
+              "locale" : "pt_BR"
+            }
+          ],
+          "productID" : "com.taquarylab.crossfitprapp.subscription.annual",
+          "recurringSubscriptionPeriod" : "P1Y",
+          "referenceName" : "CrossfitPR PRO Annual",
+          "subscriptionGroupID" : "crossfitpr-pro-group",
+          "type" : "RecurringSubscription"
+        },
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "9.99",
+          "familyShareable" : false,
+          "groupNumber" : 2,
           "internalID" : "crossfitpr-pro-monthly",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "Insights avançados de treinos e PRs — plano mensal",
+              "displayName" : "CrossfitPR PRO Mensal",
+              "locale" : "pt_BR"
+            }
+          ],
+          "productID" : "com.taquarylab.crossfitprapp.subscription.monthly",
+          "recurringSubscriptionPeriod" : "P1M",
+          "referenceName" : "CrossfitPR PRO Monthly",
+          "subscriptionGroupID" : "crossfitpr-pro-group",
+          "type" : "RecurringSubscription"
+        },
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "9.99",
+          "familyShareable" : false,
+          "groupNumber" : 3,
+          "internalID" : "crossfitpr-pro-legacy",
           "introductoryOffer" : null,
           "localizations" : [
             {
@@ -55,7 +105,7 @@
           ],
           "productID" : "com.douglast.CrossfitPR.pro",
           "recurringSubscriptionPeriod" : "P1M",
-          "referenceName" : "CrossfitPR PRO Monthly",
+          "referenceName" : "CrossfitPR PRO Legacy",
           "subscriptionGroupID" : "crossfitpr-pro-group",
           "type" : "RecurringSubscription"
         }

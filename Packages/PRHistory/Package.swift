@@ -5,27 +5,26 @@ import PackageDescription
 let package = Package(
     name: "PRHistory",
     defaultLocalization: "pt-BR",
-    platforms: [
-        .iOS(.v16),
-    ],
+    platforms: [.iOS(.v16)],
     products: [
-        .library(
-            name: "PRHistory",
-            targets: ["PRHistory"]
-        ),
+        .library(name: "PRHistory", targets: ["PRHistory"]),
     ],
     dependencies: [
-        .package(name: "Domain", path: "../Domain"),
-        .package(name: "Application", path: "../Application"),
-        .package(name: "Localization", path: "../Localization"),
+        .package(path: "../Domain"),
+        .package(path: "../Application"),
+        .package(path: "../Localization"),
+        .package(path: "../SharedUI"),
+        .package(path: "../RecordDetail"),
     ],
     targets: [
         .target(
             name: "PRHistory",
             dependencies: [
-                .product(name: "Domain", package: "Domain"),
-                .product(name: "Application", package: "Application"),
-                .product(name: "Localization", package: "Localization"),
+                "Domain",
+                "Application",
+                "Localization",
+                "SharedUI",
+                "RecordDetail",
             ]
         ),
     ]

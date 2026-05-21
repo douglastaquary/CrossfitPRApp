@@ -1,94 +1,71 @@
 import SwiftUI
 import Domain
 import Application
+import SharedUI
+import RecordDetail
 import Localization
 
 public struct PRHistoriesListView: View {
     @EnvironmentObject private var personalRecordClient: PersonalRecordClient
-    @State private var isPresentingNewPR = false
-
-    public enum ViewState: Equatable {
-        case loading
-        case loaded
-        case error(String)
-    }
-
-    @State private var viewState: ViewState = .loading
+    @EnvironmentObject private var settingsClient: SettingsClient
+    @State private var searchText = ""
 
     public init() {}
+
+    private var sections: [PRSection] {
+        PersonalRecordGrouping.sections(from: personalRecordClient.records)
+    }
+
+    private var filteredSections: [PRSection] {
+        guard !searchText.isEmpty else { return sections }
+        return sections.filter { $0.name.localizedCaseInsensitiveContains(searchText) }
+    }
 
     public var body: some View {
         NavigationStack {
             Group {
-                switch viewState {
-                case .loading:
+                if personalRecordClient.isLoading && sections.isEmpty {
                     ProgressView(Strings.PRHistory.loading)
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
-
-                case .error(let message):
-                    EmptyStateView(
-                        title: Strings.PRHistory.errorTitle,
-                        systemImage: AppDesign.Icon.error,
-                        message: message,
-                        actionTitle: Strings.PRHistory.retry
-                    ) {
-                        Task { await loadRecords() }
+                } else if sections.isEmpty {
+                    VStack {
+                        Text(Strings.PRHistory.emptyMessage)
+                            .foregroundStyle(.secondary)
+                            .multilineTextAlignment(.center)
+                            .padding(.bottom, 64)
                     }
-
-                case .loaded:
-                    if personalRecordClient.records.isEmpty {
-                        EmptyStateView(
-                            title: Strings.PRHistory.emptyTitle,
-                            systemImage: AppDesign.Icon.emptyPRs,
-                            message: Strings.PRHistory.emptyMessage
-                        )
-                    } else {
-                        List(personalRecordClient.records) { record in
-                            HStack {
-                                VStack(alignment: .leading, spacing: 4) {
-                                    Text(record.exercise.kind.localizedName)
-                                        .font(AppDesign.Typography.rowTitle)
-                                    Text(record.date.formatted(date: .abbreviated, time: .omitted))
-                                        .font(AppDesign.Typography.rowSubtitle)
-                                        .foregroundStyle(.secondary)
-                                }
-                                Spacer()
-                                Text(Strings.NewPR.weight(Int(record.pounds)))
-                                    .font(AppDesign.Typography.rowValue)
-                                    .foregroundStyle(.secondary)
+                } else {
+                    ScrollView {
+                        ForEach(filteredSections) { section in
+                            NavigationLink(value: section) {
+                                CategoryItemView(
+                                    title: section.name,
+                                    groupKey: section.group.localizedKey
+                                )
                             }
                         }
-                        .refreshable {
-                            await loadRecords()
-                        }
                     }
                 }
             }
-            .navigationTitle(Strings.PRHistory.title)
-            .toolbar {
-                ToolbarItem(placement: .primaryAction) {
-                    Button(Strings.PRHistory.registerButton) {
-                        isPresentingNewPR = true
-                    }
-                }
+            .navigationTitle(Strings.Screen.records)
+            .navigationBarTitleDisplayMode(.large)
+            .searchable(text: $searchText, prompt: Strings.Category.searchPrompt)
+            .navigationDestination(for: PRSection.self) { section in
+                RecordDetailView(section: section)
             }
-            .sheet(isPresented: $isPresentingNewPR) {
-                NewPRRecordView()
-            }
-            .task {
-                await loadRecords()
-            }
-            .redacted(reason: personalRecordClient.isLoading ? .placeholder : [])
+            .task { await personalRecordClient.fetchRecords() }
+            .refreshable { await personalRecordClient.fetchRecords() }
         }
+        .brandTint()
     }
+}
 
-    private func loadRecords() async {
-        viewState = .loading
-        await personalRecordClient.fetchRecords()
-        if let error = personalRecordClient.lastError {
-            viewState = .error(error)
-        } else {
-            viewState = .loaded
+private extension RecordGroup {
+    var localizedKey: String {
+        switch self {
+        case .barbell: return "category.group.barbell.descript"
+        case .gymnastic: return "category.group.gymnastic.descript"
+        case .endurance: return "category.group.endurance.descript"
         }
     }
 }

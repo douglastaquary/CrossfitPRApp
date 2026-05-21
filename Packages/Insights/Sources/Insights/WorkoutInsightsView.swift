@@ -3,113 +3,54 @@ import Domain
 import Application
 import Subscription
 import PROUpgrade
+import SharedUI
 import Localization
 
 public struct WorkoutInsightsView: View {
     @EnvironmentObject private var personalRecordClient: PersonalRecordClient
-    @EnvironmentObject private var workoutEngineClient: WorkoutEngineClient
     @EnvironmentObject private var subscriptionClient: SubscriptionClient
     @State private var isPresentingPROUpgrade = false
-
-    public enum ViewState: Equatable {
-        case loading
-        case loaded
-    }
-
-    @State private var viewState: ViewState = .loading
 
     public init() {}
 
     public var body: some View {
         NavigationStack {
             Group {
-                switch viewState {
-                case .loading:
-                    ProgressView(Strings.Insights.loading)
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-
-                case .loaded:
-                    if workoutEngineClient.insights.isEmpty {
-                        EmptyStateView(
-                            title: Strings.Insights.emptyTitle,
-                            systemImage: AppDesign.Icon.emptyInsights,
-                            message: Strings.Insights.emptyMessage
-                        )
-                    } else {
-                        List(workoutEngineClient.insights) { insight in
-                            InsightRow(insight: insight) {
-                                isPresentingPROUpgrade = true
-                            }
-                        }
-                    }
+                if subscriptionClient.currentTier == .pro {
+                    InsightsViewPRO()
+                } else {
+                    freeTeaserContent
                 }
             }
-            .navigationTitle(Strings.Insights.title)
-            .toolbar {
-                if subscriptionClient.currentTier == .free {
-                    ToolbarItem(placement: .primaryAction) {
-                        Button(Strings.Insights.proBadge) {
-                            isPresentingPROUpgrade = true
-                        }
-                        .fontWeight(.semibold)
-                        .accessibilityLabel(Strings.Insights.unlockProAccessibility)
-                    }
-                }
-            }
-            .sheet(isPresented: $isPresentingPROUpgrade) {
-                PROUpgradeView()
-            }
+            .navigationTitle(Strings.Screen.insights)
+            .navigationBarTitleDisplayMode(.large)
             .task(id: personalRecordClient.records.count) {
-                await refreshAnalysis()
+                if personalRecordClient.records.isEmpty {
+                    await personalRecordClient.fetchRecords()
+                }
             }
             .refreshable {
                 await personalRecordClient.fetchRecords()
-                await refreshAnalysis()
             }
         }
+        .brandTint()
     }
 
-    private func refreshAnalysis() async {
-        viewState = .loading
-        if personalRecordClient.records.isEmpty {
-            await personalRecordClient.fetchRecords()
-        }
-        await workoutEngineClient.analyze(records: personalRecordClient.records)
-        viewState = .loaded
-    }
-}
-
-private struct InsightRow: View {
-    let insight: WorkoutInsight
-    let onUpgrade: () -> Void
-
-    var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            HStack {
-                Text(insight.title)
-                    .font(AppDesign.Typography.rowTitle)
-                if insight.requiresPro {
-                    Text(Strings.Insights.proBadge)
-                        .font(AppDesign.Typography.proBadge)
-                        .padding(.horizontal, AppDesign.Layout.proBadgeHorizontalPadding)
-                        .padding(.vertical, AppDesign.Layout.proBadgeVerticalPadding)
-                        .background(AppDesign.Colors.proAccent.opacity(0.2))
-                        .clipShape(Capsule())
-                }
+    private var freeTeaserContent: some View {
+        VStack {
+            Button { isPresentingPROUpgrade = true } label: {
+                CardGroupView(
+                    cardTitle: "insight.view.card.pro.title",
+                    cardDescription: "insight.view.card.pro.description",
+                    buttonTitle: "insight.view.card.unlockprobutton.title",
+                    iconSystemName: "chart.bar.fill"
+                )
             }
-
-            if insight.requiresPro && insight.category == .proTeaser {
-                Text(insight.message)
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
-                Button(Strings.Insights.unlockPro, action: onUpgrade)
-                    .font(.subheadline.bold())
-            } else {
-                Text(insight.message)
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
-            }
+            Spacer()
         }
-        .padding(.vertical, 4)
+        .padding(22)
+        .sheet(isPresented: $isPresentingPROUpgrade) {
+            PROUpgradeView()
+        }
     }
 }

@@ -5,8 +5,8 @@
       "kind" : "localSourceControl",
       "location" : "/Users/douglastaquary/Documents/Projects/Github/iOS/CrossfitPR",
       "state" : {
-        "branch" : "main",
-        "revision" : "ac00a8c79b86bcf9601843fc12d02270fba54bb6"
+        "branch" : "merge/beta-ui-spm-arch",
+        "revision" : "c89785db9f5abaea6635cfd0668c3fa4d3d51447"
       }
     }
   ],

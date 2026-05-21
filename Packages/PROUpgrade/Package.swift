@@ -5,28 +5,20 @@ import PackageDescription
 let package = Package(
     name: "PROUpgrade",
     defaultLocalization: "pt-BR",
-    platforms: [
-        .iOS(.v16),
-    ],
+    platforms: [.iOS(.v16)],
     products: [
-        .library(
-            name: "PROUpgrade",
-            targets: ["PROUpgrade"]
-        ),
+        .library(name: "PROUpgrade", targets: ["PROUpgrade"]),
     ],
     dependencies: [
-        .package(name: "Domain", path: "../Domain"),
-        .package(name: "Subscription", path: "../Subscription"),
-        .package(name: "Localization", path: "../Localization"),
+        .package(path: "../Domain"),
+        .package(path: "../Subscription"),
+        .package(path: "../Localization"),
+        .package(path: "../SharedUI"),
     ],
     targets: [
         .target(
             name: "PROUpgrade",
-            dependencies: [
-                .product(name: "Domain", package: "Domain"),
-                .product(name: "Subscription", package: "Subscription"),
-                .product(name: "Localization", package: "Localization"),
-            ]
+            dependencies: ["Domain", "Subscription", "Localization", "SharedUI"]
         ),
     ]
 )

@@ -82,3 +82,349 @@
 "proFeature.workoutEngineAnalysis" = "Detect plateaus and unlock PRs";
 "tab.evolution" = "Progress";
 "tab.prs" = "PRs";
+/* 
+  Localizable.strings
+  CrossfitPR
+
+  Created by Douglas Taquary on 25/05/22.
+ 
+ /* Loading screen */
+ "loading.view.title" = "Loading...";
+ 
+ /* Settings screen */
+ "settings.screen.title" = "Settings";
+ "settings.screen.section.notification.title" = "Notifications";
+ "settings.screen.section.notification.toggle.title" = "Training notification:";
+ "settings.screen.section.tracking.title" = "Crossfit settings";
+ "settings.screen.section.tracking.measure.title" = "Measurement option";
+ "settings.screen.section.tracking.target.title" = "Training target";
+ "settings.screen.section.unlockpro.title" = "Unlock PRO";
+ "settings.screen.section.privacy.title"= "Privacy policy and Terms of Use";
+"settings.screen.section.about.title" = "About";
+"settings.screen.section.crossfitpro.title" = "CrossFitPR PRO";
+"settings.screen.section.nocommitment.title" = "No Commitment. Cancel Anytime";
+"settings.pounds.title" = "pounds";
+"settings.kilo.title" = "kilos";
+ 
+ /* Onboarding screen */
+
+"onboarding.view.title" = "What's New";
+ 
+"onboarding.item1.title" = "Organizing your personal records";
+"onboarding.item1.description" = "Delete records, organize your categories according to your crossfit workouts.";
+
+"onboarding.item2.title" = "Manage your records";
+"onboarding.item2.description" = "Your high performance workouts now in one place simply and quickly.";
+
+"onboarding.item3.title" = "Easy graphics";
+"onboarding.item3.description" = "Simple, easy-to-understand graphics to show your evolution.";
+
+"onboarding.item4.title" = "The Powerful Insights";
+"onboarding.item4.description" = "The powerful insights allows you to track and understand your evolution, the highest records through powerful graphics.";
+
+"onboarding.button.title" = "Start";
+"onboarding.alert.icloud.account.title" = "iCloud account disabled";
+"onboarding.alert.icloud.account.message" = "Go to Settings, Apple ID, log in to your Apple account and try again.";
+"onboarding.alert.cancel.button.title" = "Cancel";
+
+/* Record detail screen */
+"record.screen.title" = "My Records";
+"record.biggest.section.title" = "Biggest record";
+"record.datail.section.percentage.title" = "PR percentages";
+"record.datail.percentage.title" = "Percentages";
+"record.category.title" = "Exercise";
+"record.percentage.title" = "Intensity";
+"record.maxReps.title" = "Repetitions";
+"record.distance.title" = "Distance";
+"record.time.title" = "Time";
+"record.weight.title" = "Weight";
+"record.date.title" = "Date";
+
+"record.view.category.recent.title" = "Most recent";
+"record.view.category.evolution.title" = "Evolution";
+"record.view.category.lowest.title" = "Lowest";
+"record.item.view.default.title" = "Personal record";
+
+"record.records.section.title" = "Record history";
+"record.evolution.section.title %@" = " %@ evolution";
+"record.evolution.section.description %@" = "This analysis is based on the your PR list of %@ registered in the app.";
+"record.screen.delete.button.title" = "Delete";
+"record.screen.cancel.button.title" = "Cancel";
+"record.screen.delete.confirmation.title" = "Do you really want to delete?";
+"record.screen.empty.records.message" = "You don't have saved records yet.\nGet started by accessing the exercises tab\nand click to add a new record.";
+"record.button.get.started.new.record" = "Add new record";
+
+
+
+/* Purchase screen */
+
+"purchase.item1.title" = "Manage your records easily and conveniently";
+"purchase.item1.description" = "Edit, delete records, organize your categories according to your crossfit workouts.";
+
+"purchase.item2.title" = "The Powerful insights";
+"purchase.item2.description" = "The powerful insights elevator allows you to track and understand your evolution, the highest records through powerful graphics";
+"purchase.processing.description" = "Processing your purchase...";
+"purchase.item3.title" = "Ranks of your top records";
+"purchase.item3.description" = "Allows you to track the rank of your top high performance records";
+
+
+"purchase.tryfree.title" = "Try FREE for 7 Days";
+
+"purchase.commitment.title"= "No commitment. Cancel Anytime.\nAfter 7 day free trial, this subscription automatically\n renews depending on witch pan you choose unless\nauto-renew is turned off.";
+  
+/* Screen titles*/
+"screen.records.title" = "My records";
+"screen.category.title" = "Exercises";
+"screen.insights.title" = "Insights";
+"screen.settings.title" = "Settings";
+
+/* Category searchbar descript */
+"category.group.barbell.descript" = "Barbell";
+"category.group.gymnastic.descript" = "Gymnastic";
+"category.group.endurance.descript" = "Endurance";
+"category.search.descript" = "search by name";
+"exercises.list.header.descript" = "Click on the exercise to create a new PR";
+
+
+/* Tabbar title screens */
+"tabbar.myrecords.title" = "my records";
+"tabbar.categories.title" = "exercises";
+"tabbar.insights.title" = "insights";
+"tabbar.settings.title" = "settings";
+
+/* Insight screen */
+
+
+"insight.section.footer.rank.barbell.title" = "The top ranking shows the highest record, evolution records and lowest performing.";
+"insight.section.ranking.title" = "Top barbell ranking";
+"insight.section.topranking.barbell.title" = "Top records with barbell";
+"insight.section.ranking.barbell.title" = "Barbell exercises";
+"insight.section.ranking.gymnastic.title" = "Gymnastic exercises";
+"insight.section.ranking.endurance.title"= "Endurance exercises";
+"insight.section.graph.title" = "Insights";
+
+"insight.section.information.title" = "The biggest PR";
+"insight.view.error.description" = "You don't have data to show yet.";
+
+"insight.view.biggestpr.description %@" = "the biggest pr is %@";
+
+"insight.view.intensity.title"= "Intensity";
+"insight.view.card.pro.title"= "The The Powerful Insights";
+"insight.view.card.pro.description"= "PRO subscription allows the analysis of historical data from your records that help you understand how to evolve faster in high performance training";
+"insight.view.card.unlockprobutton.title"= "Unlock CrossFitPR PRO";
+
+/* New Record screen */
+"newRecord.screen.title" = "New Record";
+"newRecord.screen.save.button.title" = "Save";
+"newRecord.screen.cancel.button.title" = "Cancel";
+"newRecord.screen.section.personal.title" = "Training configuration";
+"newRecord.screen.toggle.maxreps.title" = "Maximum repetitions";
+"newRecord.screen.toggle.mintime.title" = "Distance";
+"newRecord.screen.toggle.maxrep.title" = "Maximum repetitions";
+"newRecord.screen.picker.repetition.title" = "Repetitions";
+"newRecord.screen.picker.timecount.title" = "Time";
+"newRecord.screen.toggle.distance.title" = "Distance";
+"newRecord.screen.section.informations.title" = "Informations";
+"newRecord.screen.section.informations.percentage.title" = "Percentage";
+"newRecord.screen.section.informations.weight.title" = "Weight";
+"newRecord.screen.section.comment.title" = "Comment";
+"newRecord.screen.section.comment.description" = "Enter a comment if needed";
+
+/* EmptyView text*/
+"emptyView.screen.message" = "Get start now\nby adding a new record.\nThe Powerful insights are generated from\nthe data you add to the app. For better\nvisualization of the graphs, it is necessary\nat least 8 records.";
+
+/* Ranking screen view*/
+"ranking.screen.evolution.percentage %@" = "Evolution of %@ from last PR recored.";
+"newRecord.screen.save.button.title" = "Save";
+"newRecord.screen.cancel.button.title" = "Cancel";
+"newRecord.screen.section.personal.title" = "Training configuration";
+"newRecord.screen.toggle.maxreps.title" = "Maximum repetitions";
+"newRecord.screen.toggle.mintime.title" = "Distance";
+"newRecord.screen.toggle.maxrep.title" = "Maximum repetitions";
+"newRecord.screen.picker.repetition.title" = "Repetitions";
+"newRecord.screen.picker.timecount.title" = "Time";
+"newRecord.screen.minutes.description" = "minutes";
+"newRecord.screen.toggle.distance.title" = "Distance";
+"newRecord.screen.section.informations.title" = "Informations";
+"newRecord.screen.section.informations.percentage.title" = "Percentage";
+"newRecord.screen.section.informations.weight.title" = "Weight";
+"newRecord.screen.section.comment.title" = "Comment";
+"newRecord.screen.section.comment.description" = "Enter a comment if needed";
+
+
+
+
+
+/* 
+  Localizable.strings
+  CrossfitPR
+
+  Created by Douglas Taquary on 25/05/22.
+ 
+ /* Loading screen */
+ "loading.view.title" = "Loading...";
+ 
+ /* Settings screen */
+ "settings.screen.title" = "Settings";
+ "settings.screen.section.notification.title" = "Notifications";
+ "settings.screen.section.notification.toggle.title" = "Training notification:";
+ "settings.screen.section.tracking.title" = "Crossfit settings";
+ "settings.screen.section.tracking.measure.title" = "Measurement option";
+ "settings.screen.section.tracking.target.title" = "Training target";
+ "settings.screen.section.unlockpro.title" = "Unlock PRO";
+ "settings.screen.section.privacy.title"= "Privacy policy and Terms of Use";
+"settings.screen.section.about.title" = "About";
+"settings.screen.section.crossfitpro.title" = "CrossFitPR PRO";
+"settings.screen.section.nocommitment.title" = "No Commitment. Cancel Anytime";
+"settings.pounds.title" = "pounds";
+"settings.kilo.title" = "kilos";
+ 
+ /* Onboarding screen */
+
+"onboarding.view.title" = "What's New";
+ 
+"onboarding.item1.title" = "Organizing your personal records";
+"onboarding.item1.description" = "Delete records, organize your categories according to your crossfit workouts.";
+
+"onboarding.item2.title" = "Manage your records";
+"onboarding.item2.description" = "Your high performance workouts now in one place simply and quickly.";
+
+"onboarding.item3.title" = "Easy graphics";
+"onboarding.item3.description" = "Simple, easy-to-understand graphics to show your evolution.";
+
+"onboarding.item4.title" = "The Powerful Insights";
+"onboarding.item4.description" = "The powerful insights allows you to track and understand your evolution, the highest records through powerful graphics.";
+
+"onboarding.button.title" = "Start";
+"onboarding.alert.icloud.account.title" = "iCloud account disabled";
+"onboarding.alert.icloud.account.message" = "Go to Settings, Apple ID, log in to your Apple account and try again.";
+"onboarding.alert.cancel.button.title" = "Cancel";
+
+/* Record detail screen */
+"record.screen.title" = "My Records";
+"record.biggest.section.title" = "Biggest record";
+"record.datail.section.percentage.title" = "PR percentages";
+"record.datail.percentage.title" = "Percentages";
+"record.category.title" = "Exercise";
+"record.percentage.title" = "Intensity";
+"record.maxReps.title" = "Repetitions";
+"record.distance.title" = "Distance";
+"record.time.title" = "Time";
+"record.weight.title" = "Weight";
+"record.date.title" = "Date";
+
+"record.view.category.recent.title" = "Most recent";
+"record.view.category.evolution.title" = "Evolution";
+"record.view.category.lowest.title" = "Lowest";
+"record.item.view.default.title" = "Personal record";
+
+"record.records.section.title" = "Record history";
+"record.evolution.section.title %@" = " %@ evolution";
+"record.evolution.section.description %@" = "This analysis is based on the your PR list of %@ registered in the app.";
+"record.screen.delete.button.title" = "Delete";
+"record.screen.cancel.button.title" = "Cancel";
+"record.screen.delete.confirmation.title" = "Do you really want to delete?";
+"record.screen.empty.records.message" = "You don't have saved records yet.\nGet started by accessing the exercises tab\nand click to add a new record.";
+"record.button.get.started.new.record" = "Add new record";
+
+
+
+/* Purchase screen */
+
+"purchase.item1.title" = "Manage your records easily and conveniently";
+"purchase.item1.description" = "Edit, delete records, organize your categories according to your crossfit workouts.";
+
+"purchase.item2.title" = "The Powerful insights";
+"purchase.item2.description" = "The powerful insights elevator allows you to track and understand your evolution, the highest records through powerful graphics";
+"purchase.processing.description" = "Processing your purchase...";
+"purchase.item3.title" = "Ranks of your top records";
+"purchase.item3.description" = "Allows you to track the rank of your top high performance records";
+
+
+"purchase.tryfree.title" = "Try FREE for 7 Days";
+
+"purchase.commitment.title"= "No commitment. Cancel Anytime.\nAfter 7 day free trial, this subscription automatically\n renews depending on witch pan you choose unless\nauto-renew is turned off.";
+  
+/* Screen titles*/
+"screen.records.title" = "My records";
+"screen.category.title" = "Exercises";
+"screen.insights.title" = "Insights";
+"screen.settings.title" = "Settings";
+
+/* Category searchbar descript */
+"category.group.barbell.descript" = "Barbell";
+"category.group.gymnastic.descript" = "Gymnastic";
+"category.group.endurance.descript" = "Endurance";
+"category.search.descript" = "search by name";
+"exercises.list.header.descript" = "Click on the exercise to create a new PR";
+
+
+/* Tabbar title screens */
+"tabbar.myrecords.title" = "my records";
+"tabbar.categories.title" = "exercises";
+"tabbar.insights.title" = "insights";
+"tabbar.settings.title" = "settings";
+
+/* Insight screen */
+
+
+"insight.section.footer.rank.barbell.title" = "The top ranking shows the highest record, evolution records and lowest performing.";
+"insight.section.ranking.title" = "Top barbell ranking";
+"insight.section.topranking.barbell.title" = "Top records with barbell";
+"insight.section.ranking.barbell.title" = "Barbell exercises";
+"insight.section.ranking.gymnastic.title" = "Gymnastic exercises";
+"insight.section.ranking.endurance.title"= "Endurance exercises";
+"insight.section.graph.title" = "Insights";
+
+"insight.section.information.title" = "The biggest PR";
+"insight.view.error.description" = "You don't have data to show yet.";
+
+"insight.view.biggestpr.description %@" = "the biggest pr is %@";
+
+"insight.view.intensity.title"= "Intensity";
+"insight.view.card.pro.title"= "The The Powerful Insights";
+"insight.view.card.pro.description"= "PRO subscription allows the analysis of historical data from your records that help you understand how to evolve faster in high performance training";
+"insight.view.card.unlockprobutton.title"= "Unlock CrossFitPR PRO";
+
+/* New Record screen */
+"newRecord.screen.title" = "New Record";
+"newRecord.screen.save.button.title" = "Save";
+"newRecord.screen.cancel.button.title" = "Cancel";
+"newRecord.screen.section.personal.title" = "Training configuration";
+"newRecord.screen.toggle.maxreps.title" = "Maximum repetitions";
+"newRecord.screen.toggle.mintime.title" = "Distance";
+"newRecord.screen.toggle.maxrep.title" = "Maximum repetitions";
+"newRecord.screen.picker.repetition.title" = "Repetitions";
+"newRecord.screen.picker.timecount.title" = "Time";
+"newRecord.screen.toggle.distance.title" = "Distance";
+"newRecord.screen.section.informations.title" = "Informations";
+"newRecord.screen.section.informations.percentage.title" = "Percentage";
+"newRecord.screen.section.informations.weight.title" = "Weight";
+"newRecord.screen.section.comment.title" = "Comment";
+"newRecord.screen.section.comment.description" = "Enter a comment if needed";
+
+/* EmptyView text*/
+"emptyView.screen.message" = "Get start now\nby adding a new record.\nThe Powerful insights are generated from\nthe data you add to the app. For better\nvisualization of the graphs, it is necessary\nat least 8 records.";
+
+/* Ranking screen view*/
+"ranking.screen.evolution.percentage %@" = "Evolution of %@ from last PR recored.";
+"newRecord.screen.save.button.title" = "Save";
+"newRecord.screen.cancel.button.title" = "Cancel";
+"newRecord.screen.section.personal.title" = "Training configuration";
+"newRecord.screen.toggle.maxreps.title" = "Maximum repetitions";
+"newRecord.screen.toggle.mintime.title" = "Distance";
+"newRecord.screen.toggle.maxrep.title" = "Maximum repetitions";
+"newRecord.screen.picker.repetition.title" = "Repetitions";
+"newRecord.screen.picker.timecount.title" = "Time";
+"newRecord.screen.minutes.description" = "minutes";
+"newRecord.screen.toggle.distance.title" = "Distance";
+"newRecord.screen.section.informations.title" = "Informations";
+"newRecord.screen.section.informations.percentage.title" = "Percentage";
+"newRecord.screen.section.informations.weight.title" = "Weight";
+"newRecord.screen.section.comment.title" = "Comment";
+"newRecord.screen.section.comment.description" = "Enter a comment if needed";
+
+
+
+
+
