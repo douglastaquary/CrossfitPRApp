@@ -153,13 +153,35 @@ public struct PROUpgradeView: View {
 
     private var pricingSection: some View {
         VStack(spacing: 16) {
-            Text(Strings.tr("purchase.tryfree.title"))
-                .font(.headline)
-                .foregroundStyle(AppDesign.Colors.brand)
+            if let annual = annualProduct {
+                Button {
+                    Task { await purchase(annual.id) }
+                } label: {
+                    HStack {
+                        Image(systemName: "gift")
+                            .font(.title3)
+                        Text(Strings.tr("purchase.tryfree.title"))
+                            .fontWeight(.semibold)
+                    }
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 16)
+                    .background(Color.clear)
+                    .foregroundStyle(AppDesign.Colors.brand)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 12)
+                            .stroke(AppDesign.Colors.brand, lineWidth: 2)
+                    )
+                }
+            }
 
             Text(Strings.tr("purchase.lessthancoffe"))
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
+
+            Text("Escolha seu plano")
+                .font(.caption)
+                .foregroundStyle(.secondary)
+                .padding(.top, 8)
 
             if let monthly = monthlyProduct {
                 Button {
