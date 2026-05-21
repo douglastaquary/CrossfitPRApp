@@ -2,8 +2,18 @@ import Foundation
 
 /// Unidade de medida preferida pelo atleta.
 public enum MeasureTrackingMode: String, Codable, Sendable, CaseIterable, Hashable {
-    case pounds = "settings.screen.section.tracking.measure.pounds"
-    case kilograms = "settings.screen.section.tracking.measure.kilograms"
+    case pounds
+    case kilograms
+
+    // MARK: - Localization key
+
+    /// Chave de localização para o nome do modo.
+    public var localizationKey: String {
+        switch self {
+        case .pounds: return "settings.screen.section.tracking.measure.pounds"
+        case .kilograms: return "settings.screen.section.tracking.measure.kilograms"
+        }
+    }
 
     // MARK: - Conversion factors
 

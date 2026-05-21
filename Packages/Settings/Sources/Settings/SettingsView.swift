@@ -38,7 +38,7 @@ public struct SettingsView: View {
                     label: Text(Strings.Settings.measureTitle)
                 ) {
                     ForEach(MeasureTrackingMode.allCases, id: \.self) { mode in
-                        Text(Strings.tr(mode.rawValue)).tag(mode)
+                        Text(Strings.tr(mode.localizationKey)).tag(mode)
                     }
                 }
             }
