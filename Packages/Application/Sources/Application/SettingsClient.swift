@@ -21,16 +21,16 @@ public final class SettingsClient: ObservableObject {
         didSet { defaults.set(isNotificationEnabled, forKey: Keys.isNotificationEnabled) }
     }
 
+    @Published public var hasCompletedLaunch: Bool {
+        didSet { defaults.set(hasCompletedLaunch, forKey: Keys.launchBefore) }
+    }
+
     public init(defaults: UserDefaults = .standard) {
         self.defaults = defaults
         let storedMeasure = defaults.string(forKey: Keys.measureTrackingMode)
             .flatMap { MeasureTrackingMode(rawValue: $0) } ?? .pounds
         measureTrackingMode = storedMeasure
         isNotificationEnabled = defaults.bool(forKey: Keys.isNotificationEnabled)
-    }
-
-    public var hasCompletedLaunch: Bool {
-        get { defaults.bool(forKey: Keys.launchBefore) }
-        set { defaults.set(newValue, forKey: Keys.launchBefore) }
+        hasCompletedLaunch = defaults.bool(forKey: Keys.launchBefore)
     }
 }
