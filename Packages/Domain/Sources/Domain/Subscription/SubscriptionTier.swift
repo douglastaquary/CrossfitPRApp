@@ -17,8 +17,8 @@ public enum ProFeature: String, Sendable, CaseIterable {
 
     public var isAvailableInFreeTier: Bool {
         switch self {
-        case .basicInsights: true
-        default: false
+        case .basicInsights: return true
+        default: return false
         }
     }
 }
@@ -26,8 +26,8 @@ public enum ProFeature: String, Sendable, CaseIterable {
 public extension SubscriptionTier {
     func canAccess(_ feature: ProFeature) -> Bool {
         switch self {
-        case .pro: true
-        case .free: feature.isAvailableInFreeTier
+        case .pro: return true
+        case .free: return feature.isAvailableInFreeTier
         }
     }
 }
