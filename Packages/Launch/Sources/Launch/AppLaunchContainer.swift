@@ -7,16 +7,16 @@ public struct AppLaunchContainer<MainContent: View>: View {
     @StateObject private var launchScreenState = LaunchScreenStateManager()
     @State private var showSplash = true
 
-    private let mainContent: MainContent
+    private let mainContent: () -> MainContent
 
-    public init(@ViewBuilder mainContent: () -> MainContent) {
-        self.mainContent = mainContent()
+    public init(@ViewBuilder mainContent: @escaping () -> MainContent) {
+        self.mainContent = mainContent
     }
 
     public var body: some View {
         ZStack {
             LaunchView {
-                mainContent
+                mainContent()
             }
 
             if showSplash {

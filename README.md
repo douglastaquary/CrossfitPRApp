@@ -130,6 +130,34 @@ Consulte `AGENTS.md` para guia completo do workflow SPDD.
 
 ---
 
+## Desenvolvimento com AI Agents
+
+Este projeto é otimizado para desenvolvimento assistido por AI (Cursor, Claude, etc.).
+
+### Skills disponíveis
+
+| Skill | Arquivo | Uso |
+|-------|---------|-----|
+| SPDD | `.cursor/skills/crossfitpr-spdd/SKILL.md` | Canvas, arquitetura, workflow |
+| Design | `.cursor/skills/design/skill-design.md` | Tokens visuais, navegação |
+| iOS | `.cursor/skills/ios-development-skill/skill-ios.md` | Swift, SwiftUI, patterns |
+
+### Otimização de tokens
+
+As skills foram otimizadas para **reduzir uso de tokens**:
+
+- Skills concisas e focadas (< 100 linhas cada)
+- Tabelas em vez de parágrafos longos
+- Referências a arquivos em vez de duplicar conteúdo
+- Regras claras e diretas
+
+**Dica:** Ao usar AI agents, referencie as skills específicas para o contexto:
+- Lógica/arquitetura: `@SKILL.md` (SPDD)
+- UI/visual: `@skill-design.md` + `@SKILL.md`
+- Código Swift: `@skill-ios.md`
+
+---
+
 ## Localização
 
 O app suporta **Português (pt-BR)** e **Inglês (en-US)**.

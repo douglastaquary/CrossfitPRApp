@@ -9,24 +9,31 @@ public struct LaunchView<MainContent: View>: View {
     @EnvironmentObject private var settingsClient: SettingsClient
     @StateObject private var networkMonitor = NetworkMonitor()
     @State private var showNetworkAlert = false
+    @State private var hasCompletedOnboarding = false
 
-    private let mainContent: MainContent
+    private let mainContent: () -> MainContent
 
-    public init(@ViewBuilder mainContent: () -> MainContent) {
-        self.mainContent = mainContent()
+    public init(@ViewBuilder mainContent: @escaping () -> MainContent) {
+        self.mainContent = mainContent
     }
 
     public var body: some View {
         Group {
             if !networkMonitor.isConnected {
                 offlineContent
-            } else if !settingsClient.hasCompletedLaunch {
+            } else if !hasCompletedOnboarding {
                 OnboardingView {
-                    settingsClient.hasCompletedLaunch = true
+                    withAnimation {
+                        hasCompletedOnboarding = true
+                        settingsClient.hasCompletedLaunch = true
+                    }
                 }
             } else {
-                mainContent
+                mainContent()
             }
+        }
+        .onAppear {
+            hasCompletedOnboarding = settingsClient.hasCompletedLaunch
         }
         .brandTint()
     }
