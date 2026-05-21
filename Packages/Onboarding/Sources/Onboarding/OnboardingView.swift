@@ -1,63 +1,56 @@
 import SwiftUI
+import SharedUI
 import Localization
 
 public struct OnboardingView: View {
-    let onContinue: () -> Void
+    var onComplete: () -> Void
 
-    @State private var accountStatusMessage: String?
-    @State private var isCheckingAccount = true
-
-    public init(onContinue: @escaping () -> Void) {
-        self.onContinue = onContinue
+    public init(onComplete: @escaping () -> Void) {
+        self.onComplete = onComplete
     }
 
     public var body: some View {
-        VStack(spacing: 24) {
-            Spacer()
+        VStack(spacing: 20) {
+            Text(Strings.Onboarding.title)
+                .font(AppDesign.Typography.screenTitle)
+                .frame(width: 300, alignment: .leading)
 
-            Image(systemName: "figure.strengthtraining.traditional")
-                .font(.system(size: 64))
-                .foregroundStyle(.green)
-
-            VStack(spacing: 8) {
-                Text(Strings.Onboarding.title)
-                    .font(.title.bold())
-                Text(Strings.Onboarding.subtitle)
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
-                    .multilineTextAlignment(.center)
-                    .padding(.horizontal)
-            }
-
-            if isCheckingAccount {
-                ProgressView(Strings.Onboarding.loading)
-            } else if let accountStatusMessage {
-                Text(accountStatusMessage)
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
-                    .multilineTextAlignment(.center)
-                    .padding(.horizontal)
+            VStack(alignment: .leading, spacing: 0) {
+                HViewImageAndText(
+                    image: "figure.strengthtraining.traditional",
+                    imageColor: AppDesign.Colors.brand,
+                    title: "onboarding.item1.title",
+                    description: "onboarding.item1.description"
+                )
+                HViewImageAndText(
+                    image: "list.bullet",
+                    imageColor: AppDesign.Colors.brand,
+                    title: "onboarding.item2.title",
+                    description: "onboarding.item2.description"
+                )
+                HViewImageAndText(
+                    image: "chart.line.uptrend.xyaxis",
+                    imageColor: AppDesign.Colors.brand,
+                    title: "onboarding.item3.title",
+                    description: "onboarding.item3.description"
+                )
+                HViewImageAndText(
+                    image: "chart.bar",
+                    imageColor: AppDesign.Colors.brand,
+                    title: "onboarding.item4.title",
+                    description: "onboarding.item4.description"
+                )
             }
 
             Spacer()
 
             Button(Strings.Onboarding.cta) {
-                onContinue()
+                onComplete()
             }
-            .buttonStyle(.borderedProminent)
-            .tint(.green)
-            .padding(.bottom, 32)
+            .buttonStyle(FilledButtonStyle(fullWidth: true))
+            .padding(.horizontal, AppDesign.Layout.horizontalPadding)
+            .padding(.bottom, 40)
         }
         .padding()
-        .task {
-            await checkCloudAvailability()
-        }
-    }
-
-    private func checkCloudAvailability() async {
-        isCheckingAccount = true
-        defer { isCheckingAccount = false }
-
-        accountStatusMessage = Strings.Onboarding.icloudMessage
     }
 }

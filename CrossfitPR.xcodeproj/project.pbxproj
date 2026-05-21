@@ -19,6 +19,9 @@
 		4E58063227F3C5B100F16219 /* PROUpgrade in Frameworks */ = {isa = PBXBuildFile; productRef = 4E58062E27F3C5B100F16219 /* PROUpgrade */; };
 		4E58063327F3C5B100F16219 /* Onboarding in Frameworks */ = {isa = PBXBuildFile; productRef = 4E58062F27F3C5B100F16219 /* Onboarding */; };
 		4E58063627F3C5B100F16219 /* Localization in Frameworks */ = {isa = PBXBuildFile; productRef = 4E58063527F3C5B100F16219 /* Localization */; };
+		4E58063727F3C5B100F16219 /* Categories in Frameworks */ = {isa = PBXBuildFile; productRef = 4E58063827F3C5B100F16219 /* Categories */; };
+		4E58063927F3C5B100F16219 /* Settings in Frameworks */ = {isa = PBXBuildFile; productRef = 4E58063A27F3C5B100F16219 /* Settings */; };
+		4E58063B27F3C5B100F16219 /* Launch in Frameworks */ = {isa = PBXBuildFile; productRef = 4E58063C27F3C5B100F16219 /* Launch */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +47,9 @@
 				4E58063227F3C5B100F16219 /* PROUpgrade in Frameworks */,
 				4E58063327F3C5B100F16219 /* Onboarding in Frameworks */,
 				4E58063627F3C5B100F16219 /* Localization in Frameworks */,
+				4E58063727F3C5B100F16219 /* Categories in Frameworks */,
+				4E58063927F3C5B100F16219 /* Settings in Frameworks */,
+				4E58063B27F3C5B100F16219 /* Launch in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -113,6 +119,9 @@
 				4E58062E27F3C5B100F16219 /* PROUpgrade */,
 				4E58062F27F3C5B100F16219 /* Onboarding */,
 				4E58063527F3C5B100F16219 /* Localization */,
+				4E58063827F3C5B100F16219 /* Categories */,
+				4E58063A27F3C5B100F16219 /* Settings */,
+				4E58063C27F3C5B100F16219 /* Launch */,
 			);
 			productName = CrossfitPR;
 			productReference = 4E58055427F3C5AE00F16219 /* CrossfitPR.app */;
@@ -396,7 +405,7 @@
 			repositoryURL = "file:///Users/douglastaquary/Documents/Projects/Github/iOS/CrossfitPR/";
 			requirement = {
 				kind = branch;
-				branch = main;
+				branch = "merge/beta-ui-spm-arch";
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -441,6 +450,21 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 4E58062127F3C5B100F16219 /* XCRemoteSwiftPackageReference "CrossfitPRPackages" */;
 			productName = Localization;
+		};
+		4E58063827F3C5B100F16219 /* Categories */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4E58062127F3C5B100F16219 /* XCRemoteSwiftPackageReference "CrossfitPRPackages" */;
+			productName = Categories;
+		};
+		4E58063A27F3C5B100F16219 /* Settings */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4E58062127F3C5B100F16219 /* XCRemoteSwiftPackageReference "CrossfitPRPackages" */;
+			productName = Settings;
+		};
+		4E58063C27F3C5B100F16219 /* Launch */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4E58062127F3C5B100F16219 /* XCRemoteSwiftPackageReference "CrossfitPRPackages" */;
+			productName = Launch;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

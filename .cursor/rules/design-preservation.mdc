@@ -1,0 +1,39 @@
+---
+description: Preserva layout, cores e navegação baseline — carregar skill-design antes de alterar UI
+globs: "**/*.swift"
+alwaysApply: false
+---
+
+# Design Preservation — CrossfitPR
+
+Antes de alterar views SwiftUI, **ler e seguir**:
+
+`.cursor/skills/design/skill-design.md`
+
+## Regra absoluta
+
+Refactors de arquitetura (SPM, clients, persistência) **não** permitem mudar:
+
+- Número ou ordem de tabs
+- Cores de marca (`AppDesign.Colors.brand`, accent)
+- Estrutura de navegação (sheets, stacks)
+- Layout de listas, forms e onboarding
+- Ícones SF Symbols do baseline
+
+## Tokens obrigatórios
+
+| Tipo | Fonte |
+|------|--------|
+| Cores | `AppDesign.Colors.*` |
+| Ícones | `AppDesign.Icon.*` |
+| Tipografia | `AppDesign.Typography.*` |
+| Empty states | `EmptyStateView` |
+| Copy | `Strings.*` |
+
+## Skills em trio (UI)
+
+1. `crossfitpr-spdd/SKILL.md`
+2. `design/skill-design.md`
+3. `ios-development-skill/skill-ios.md`
+
+Mudança visual → canvas SPDD antes do código.

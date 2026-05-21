@@ -14,18 +14,67 @@ public enum Strings {
     // MARK: - Onboarding
 
     public enum Onboarding {
-        public static var title: String { tr("onboarding.title") }
+        public static var title: String { tr("onboarding.view.title") }
         public static var subtitle: String { tr("onboarding.subtitle") }
-        public static var loading: String { tr("onboarding.loading") }
-        public static var icloudMessage: String { tr("onboarding.icloudMessage") }
+        public static var loading: String { tr("loading.view.title") }
+        public static var icloudMessage: String { tr("onboarding.alert.icloud.account.message") }
         public static var cta: String { tr("onboarding.cta") }
     }
 
-    // MARK: - Tabs
+    // MARK: - Tabs (beta — 4 tabs)
 
     public enum Tab {
-        public static var prs: String { tr("tab.prs") }
-        public static var evolution: String { tr("tab.evolution") }
+        public static var categories: String { tr("tabbar.categories.title") }
+        public static var records: String { tr("tabbar.myrecords.title") }
+        public static var insights: String { tr("tabbar.insights.title") }
+        public static var settings: String { tr("tabbar.settings.title") }
+        // Legacy
+        public static var prs: String { records }
+        public static var evolution: String { insights }
+    }
+
+    // MARK: - Screens
+
+    public enum Screen {
+        public static var records: String { tr("screen.records.title") }
+        public static var category: String { tr("screen.category.title") }
+        public static var insights: String { tr("screen.insights.title") }
+        public static var settings: String { tr("screen.settings.title") }
+    }
+
+    public enum Category {
+        public static var searchPrompt: String { tr("category.search.descript") }
+        public static var listHeader: String { tr("exercises.list.header.descript") }
+    }
+
+    public enum Record {
+        public static var biggestSection: String { tr("record.biggest.section.title") }
+        public static var percentageSection: String { tr("record.datail.section.percentage.title") }
+        public static var recordsSection: String { tr("record.records.section.title") }
+        public static var deleteConfirmation: String { tr("record.screen.delete.confirmation.title") }
+        public static var deleteButton: String { tr("record.screen.delete.button.title") }
+
+        public static func evolutionSection(_ name: String) -> String {
+            format("record.evolution.section.title %@", name)
+        }
+    }
+
+    public enum Settings {
+        public static var notificationSection: String { tr("settings.screen.section.notification.title") }
+        public static var notificationToggle: String { tr("settings.screen.section.notification.toggle.title") }
+        public static var trackingSection: String { tr("settings.screen.section.tracking.title") }
+        public static var measureTitle: String { tr("settings.screen.section.tracking.measure.title") }
+        public static var proSection: String { tr("settings.screen.section.crossfitpro.title") }
+        public static var noCommitment: String { tr("settings.screen.section.nocommitment.title") }
+        public static var unlockPro: String { tr("settings.screen.section.unlockpro.title") }
+        public static var aboutSection: String { tr("settings.screen.section.about.title") }
+        public static var privacy: String { tr("settings.screen.section.privacy.title") }
+    }
+
+    public enum Launch {
+        public static var networkAlertTitle: String { "No Internet Connection" }
+        public static var networkAlertMessage: String { "Please enable Wifi or Celluar data" }
+        public static var networkAlertCancel: String { "Cancel" }
     }
 
     // MARK: - PR History
@@ -48,9 +97,16 @@ public enum Strings {
         public static var sectionPR: String { tr("newPR.sectionPR") }
         public static var pickerExercise: String { tr("newPR.pickerExercise") }
         public static var dateLabel: String { tr("newPR.dateLabel") }
-        public static var cancel: String { tr("newPR.cancel") }
-        public static var save: String { tr("newPR.save") }
+        public static var cancel: String { tr("newRecord.screen.cancel.button.title") }
+        public static var save: String { tr("newRecord.screen.save.button.title") }
         public static var saveFallbackError: String { tr("newPR.saveFallbackError") }
+        public static var sectionPercentage: String { tr("newRecord.screen.section.informations.percentage.title") }
+        public static var sectionWeight: String { tr("newRecord.screen.section.informations.weight.title") }
+        public static var sectionMaxReps: String { tr("newRecord.screen.toggle.maxrep.title") }
+        public static var sectionTime: String { tr("newRecord.screen.picker.timecount.title") }
+        public static var sectionDistance: String { tr("newRecord.screen.toggle.distance.title") }
+        public static var sectionComment: String { tr("newRecord.screen.section.comment.title") }
+        public static var commentPlaceholder: String { tr("newRecord.screen.section.comment.description") }
 
         public static func weight(_ pounds: Int) -> String {
             format("newPR.weightFormat", pounds)

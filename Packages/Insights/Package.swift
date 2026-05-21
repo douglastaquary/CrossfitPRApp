@@ -5,31 +5,28 @@ import PackageDescription
 let package = Package(
     name: "Insights",
     defaultLocalization: "pt-BR",
-    platforms: [
-        .iOS(.v16),
-    ],
+    platforms: [.iOS(.v16)],
     products: [
-        .library(
-            name: "Insights",
-            targets: ["Insights"]
-        ),
+        .library(name: "Insights", targets: ["Insights"]),
     ],
     dependencies: [
-        .package(name: "Domain", path: "../Domain"),
-        .package(name: "Application", path: "../Application"),
-        .package(name: "Subscription", path: "../Subscription"),
-        .package(name: "PROUpgrade", path: "../PROUpgrade"),
-        .package(name: "Localization", path: "../Localization"),
+        .package(path: "../Domain"),
+        .package(path: "../Application"),
+        .package(path: "../Subscription"),
+        .package(path: "../PROUpgrade"),
+        .package(path: "../Localization"),
+        .package(path: "../SharedUI"),
     ],
     targets: [
         .target(
             name: "Insights",
             dependencies: [
-                .product(name: "Domain", package: "Domain"),
-                .product(name: "Application", package: "Application"),
-                .product(name: "Subscription", package: "Subscription"),
-                .product(name: "PROUpgrade", package: "PROUpgrade"),
-                .product(name: "Localization", package: "Localization"),
+                "Domain",
+                "Application",
+                "Subscription",
+                "PROUpgrade",
+                "Localization",
+                "SharedUI",
             ]
         ),
     ]

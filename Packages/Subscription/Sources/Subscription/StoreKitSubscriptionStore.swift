@@ -7,13 +7,22 @@ public struct StoreKitSubscriptionStore: SubscriptionStoreProviding, Sendable {
     public init() {}
 
     public func fetchProProduct() async throws -> SubscriptionProductInfo? {
-        let products = try await Product.products(for: [SubscriptionCatalog.proProductID])
-        guard let product = products.first else { return nil }
-        return SubscriptionProductInfo(
-            id: product.id,
-            displayName: product.displayName,
-            displayPrice: product.displayPrice
-        )
+        let products = try await fetchSubscriptionProducts()
+        return products.first
+    }
+
+    public func fetchSubscriptionProducts() async throws -> [SubscriptionProductInfo] {
+        let products = try await Product.products(for: SubscriptionCatalog.proProductIDs)
+        let mapped = products.map { product in
+            SubscriptionProductInfo(
+                id: product.id,
+                displayName: product.displayName,
+                displayPrice: product.displayPrice
+            )
+        }
+        return mapped.sorted { lhs, rhs in
+            sortRank(for: lhs.id) < sortRank(for: rhs.id)
+        }
     }
 
     public func purchase(productID: String) async throws -> SubscriptionTier {
@@ -40,7 +49,7 @@ public struct StoreKitSubscriptionStore: SubscriptionStoreProviding, Sendable {
     public func resolveCurrentTier() async -> SubscriptionTier {
         for await result in Transaction.currentEntitlements {
             guard let transaction = try? Self.checkVerified(result) else { continue }
-            if transaction.productID == SubscriptionCatalog.proProductID {
+            if SubscriptionCatalog.proProductIDs.contains(transaction.productID) {
                 return .pro
             }
         }
@@ -53,6 +62,14 @@ public struct StoreKitSubscriptionStore: SubscriptionStoreProviding, Sendable {
             throw SubscriptionError.purchaseFailed
         case .verified(let value):
             return value
+        }
+    }
+
+    private func sortRank(for productID: String) -> Int {
+        switch productID {
+        case SubscriptionCatalog.proAnnualProductID: return 0
+        case SubscriptionCatalog.proMonthlyProductID: return 1
+        default: return 2
         }
     }
 }

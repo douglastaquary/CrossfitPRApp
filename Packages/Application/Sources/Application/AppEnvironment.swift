@@ -10,15 +10,21 @@ public struct AppEnvironment {
     public let personalRecordClient: PersonalRecordClient
     public let subscriptionClient: SubscriptionClient
     public let workoutEngineClient: WorkoutEngineClient
+    public let settingsClient: SettingsClient
+    public let notificationManager: LocalNotificationManager
 
     public init(
         personalRecordClient: PersonalRecordClient,
         subscriptionClient: SubscriptionClient,
-        workoutEngineClient: WorkoutEngineClient
+        workoutEngineClient: WorkoutEngineClient,
+        settingsClient: SettingsClient,
+        notificationManager: LocalNotificationManager
     ) {
         self.personalRecordClient = personalRecordClient
         self.subscriptionClient = subscriptionClient
         self.workoutEngineClient = workoutEngineClient
+        self.settingsClient = settingsClient
+        self.notificationManager = notificationManager
     }
 
     public static func make(
@@ -36,17 +42,21 @@ public struct AppEnvironment {
 
         let personalRecordClient = PersonalRecordClient(repository: resolvedRepository)
         let workoutEngineClient = WorkoutEngineClient(subscriptionClient: subscription)
+        let settingsClient = SettingsClient()
+        let notificationManager = LocalNotificationManager()
 
         return AppEnvironment(
             personalRecordClient: personalRecordClient,
             subscriptionClient: subscription,
-            workoutEngineClient: workoutEngineClient
+            workoutEngineClient: workoutEngineClient,
+            settingsClient: settingsClient,
+            notificationManager: notificationManager
         )
     }
 
     public func bootstrapServices() async {
         await subscriptionClient.refreshStatus()
-        await subscriptionClient.loadProProduct()
+        await subscriptionClient.loadSubscriptionProducts()
         subscriptionClient.observeTransactionUpdates()
     }
 }

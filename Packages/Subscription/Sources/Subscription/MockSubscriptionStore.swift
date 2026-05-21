@@ -24,6 +24,11 @@ public final class MockSubscriptionStore: SubscriptionStoreProviding, @unchecked
         product
     }
 
+    public func fetchSubscriptionProducts() async throws -> [SubscriptionProductInfo] {
+        if let product { return [product] }
+        return []
+    }
+
     public func purchase(productID: String) async throws -> SubscriptionTier {
         if shouldThrowCancelled {
             throw SubscriptionError.userCancelled

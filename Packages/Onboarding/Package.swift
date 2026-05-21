@@ -5,24 +5,18 @@ import PackageDescription
 let package = Package(
     name: "Onboarding",
     defaultLocalization: "pt-BR",
-    platforms: [
-        .iOS(.v16),
-    ],
+    platforms: [.iOS(.v16)],
     products: [
-        .library(
-            name: "Onboarding",
-            targets: ["Onboarding"]
-        ),
+        .library(name: "Onboarding", targets: ["Onboarding"]),
     ],
     dependencies: [
-        .package(name: "Localization", path: "../Localization"),
+        .package(path: "../Localization"),
+        .package(path: "../SharedUI"),
     ],
     targets: [
         .target(
             name: "Onboarding",
-            dependencies: [
-                .product(name: "Localization", package: "Localization"),
-            ]
+            dependencies: ["Localization", "SharedUI"]
         ),
     ]
 )

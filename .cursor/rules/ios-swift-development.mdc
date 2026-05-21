@@ -1,0 +1,36 @@
+---
+description: Swift/iOS — carregar skill-ios em conformidade com SPDD antes de codificar
+globs: "**/*.swift"
+alwaysApply: false
+---
+
+# iOS Development — CrossfitPR
+
+Antes de escrever ou alterar código Swift, **ler e seguir**:
+
+1. **SPDD (intenção):** `.cursor/skills/crossfitpr-spdd/SKILL.md`
+2. **Design (UI):** `.cursor/skills/design/skill-design.md` — se alterar views/layout/cores
+3. **Swift (implementação):** `.cursor/skills/ios-development-skill/skill-ios.md`
+
+## Ordem de precedência
+
+| Assunto | Fonte |
+|---------|--------|
+| Escopo, canvas, arquitetura SPM, safeguards | SPDD skill |
+| Layout, cores, tabs, navegação baseline | Design skill |
+| Idiomas Swift, concurrency, API design, testes | iOS skill |
+| Conflito | SPDD prevalece — ajustar canvas antes do código |
+
+## Overrides do projeto (obrigatório)
+
+- **Sem ViewModels** — `@EnvironmentObject` clients + `@State` + enum `ViewState`
+- **Design** — tokens `AppDesign`; skill design para mudanças visuais
+- **Swift Testing** (`import Testing`) — não XCTest em testes novos
+- **Domain** — sem SwiftUI/UIKit; tipos `Sendable`
+- **Views** — pacotes feature em `Packages/<Feature>/`, types `public`
+- **Composition root** — só `AppEnvironment` faz wiring entre pacotes
+
+## Ao concluir
+
+- Refactor estrutural → `/spdd-sync`
+- Lógica/requisito mudou → `/spdd-prompt-update` → `/spdd-generate`

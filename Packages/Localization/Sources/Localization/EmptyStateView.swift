@@ -1,6 +1,6 @@
 import SwiftUI
 
-/// Estado vazio/erro compatível com iOS 16 (substituto de `ContentUnavailableView`).
+/// Estado vazio/erro — aparência equivalente a `ContentUnavailableView` (baseline CPR-001, iOS 16+).
 public struct EmptyStateView: View {
     private let title: String
     private let systemImage: String
@@ -23,23 +23,46 @@ public struct EmptyStateView: View {
     }
 
     public var body: some View {
-        VStack(spacing: 12) {
-            Image(systemName: systemImage)
-                .font(.system(size: 44))
-                .foregroundStyle(.secondary)
+        ContentUnavailableLayout(
+            title: title,
+            systemImage: systemImage,
+            message: message,
+            actionTitle: actionTitle,
+            action: action
+        )
+    }
+}
 
-            Text(title)
-                .font(.title3.bold())
+/// Layout compartilhado — espelha `ContentUnavailableView` do iOS 17.
+struct ContentUnavailableLayout: View {
+    let title: String
+    let systemImage: String
+    let message: String
+    let actionTitle: String?
+    let action: (() -> Void)?
 
-            Text(message)
-                .font(.subheadline)
-                .foregroundStyle(.secondary)
-                .multilineTextAlignment(.center)
+    var body: some View {
+        VStack(spacing: 20) {
+            VStack(spacing: 8) {
+                Image(systemName: systemImage)
+                    .font(.system(size: AppDesign.Layout.emptyStateIconSize))
+                    .symbolRenderingMode(.hierarchical)
+                    .foregroundStyle(.secondary)
+
+                Text(title)
+                    .font(.title2)
+                    .multilineTextAlignment(.center)
+
+                Text(message)
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+                    .multilineTextAlignment(.center)
+            }
 
             if let actionTitle, let action {
                 Button(actionTitle, action: action)
                     .buttonStyle(.borderedProminent)
-                    .padding(.top, 4)
+                    .brandTint()
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)

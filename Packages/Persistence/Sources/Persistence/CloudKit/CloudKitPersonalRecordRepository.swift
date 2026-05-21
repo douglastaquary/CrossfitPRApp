@@ -55,8 +55,8 @@ public extension PersonalRecord {
             recordType: PersonalRecordField.recordType.rawValue,
             recordID: recordID
         )
-        ckRecord[PersonalRecordField.activity.rawValue] = exercise.kind.rawValue
-        ckRecord[PersonalRecordField.date.rawValue] = date
+        ckRecord[PersonalRecordField.activity.rawValue] = prName.isEmpty ? exercise.kind.rawValue : prName
+        ckRecord[PersonalRecordField.date.rawValue] = recordDate
         ckRecord[PersonalRecordField.pounds.rawValue] = pounds
         ckRecord[PersonalRecordField.goalDuration.rawValue] = goalDuration
         return ckRecord
@@ -65,8 +65,6 @@ public extension PersonalRecord {
     init?(cloudKitRecord record: CKRecord) {
         guard
             let activityRaw = record[PersonalRecordField.activity.rawValue] as? String,
-            let kind = ActivityKind(rawValue: activityRaw),
-            kind != .empty,
             let date = record[PersonalRecordField.date.rawValue] as? Date,
             let pounds = record[PersonalRecordField.pounds.rawValue] as? Double,
             let goalDuration = record[PersonalRecordField.goalDuration.rawValue] as? TimeInterval
@@ -77,10 +75,13 @@ public extension PersonalRecord {
         let id = UUID(uuidString: record.recordID.recordName) ?? UUID()
         self.init(
             id: id,
-            exercise: Exercise(id: id, kind: kind),
-            date: date,
-            pounds: pounds,
-            goalDuration: goalDuration
+            prName: activityRaw,
+            recordDate: date,
+            kiloValue: Int(pounds * 0.453592),
+            poundValue: Int(pounds),
+            recordMode: .maxWeight,
+            group: .barbell,
+            minTime: Int(goalDuration)
         )
     }
 }
