@@ -1,0 +1,83 @@
+{
+  "": {
+    "swift-dependencies": "/Users/douglastaquary/Documents/Projects/Github/iOS/CrossfitPR/Packages/Domain/.build/x86_64-apple-macosx/debug/Domain.build/master.swiftdeps"
+  },
+  "/Users/douglastaquary/Documents/Projects/Github/iOS/CrossfitPR/Packages/Domain/Sources/Domain/Catalog/CrossfitCatalog.swift": {
+    "dependencies": "/Users/douglastaquary/Documents/Projects/Github/iOS/CrossfitPR/Packages/Domain/.build/x86_64-apple-macosx/debug/Domain.build/Catalog/CrossfitCatalog.d",
+    "object": "/Users/douglastaquary/Documents/Projects/Github/iOS/CrossfitPR/Packages/Domain/.build/x86_64-apple-macosx/debug/Domain.build/Catalog/CrossfitCatalog.swift.o",
+    "swiftmodule": "/Users/douglastaquary/Documents/Projects/Github/iOS/CrossfitPR/Packages/Domain/.build/x86_64-apple-macosx/debug/Domain.build/Catalog/CrossfitCatalog~partial.swiftmodule",
+    "swift-dependencies": "/Users/douglastaquary/Documents/Projects/Github/iOS/CrossfitPR/Packages/Domain/.build/x86_64-apple-macosx/debug/Domain.build/Catalog/CrossfitCatalog.swiftdeps"
+  },
+  "/Users/douglastaquary/Documents/Projects/Github/iOS/CrossfitPR/Packages/Domain/Sources/Domain/Entities/Exercise.swift": {
+    "dependencies": "/Users/douglastaquary/Documents/Projects/Github/iOS/CrossfitPR/Packages/Domain/.build/x86_64-apple-macosx/debug/Domain.build/Entities/Exercise.d",
+    "object": "/Users/douglastaquary/Documents/Projects/Github/iOS/CrossfitPR/Packages/Domain/.build/x86_64-apple-macosx/debug/Domain.build/Entities/Exercise.swift.o",
+    "swiftmodule": "/Users/douglastaquary/Documents/Projects/Github/iOS/CrossfitPR/Packages/Domain/.build/x86_64-apple-macosx/debug/Domain.build/Entities/Exercise~partial.swiftmodule",
+    "swift-dependencies": "/Users/douglastaquary/Documents/Projects/Github/iOS/CrossfitPR/Packages/Domain/.build/x86_64-apple-macosx/debug/Domain.build/Entities/Exercise.swiftdeps"
+  },
+  "/Users/douglastaquary/Documents/Projects/Github/iOS/CrossfitPR/Packages/Domain/Sources/Domain/Entities/PersonalRecord.swift": {
+    "dependencies": "/Users/douglastaquary/Documents/Projects/Github/iOS/CrossfitPR/Packages/Domain/.build/x86_64-apple-macosx/debug/Domain.build/Entities/PersonalRecord.d",
+    "object": "/Users/douglastaquary/Documents/Projects/Github/iOS/CrossfitPR/Packages/Domain/.build/x86_64-apple-macosx/debug/Domain.build/Entities/PersonalRecord.swift.o",
+    "swiftmodule": "/Users/douglastaquary/Documents/Projects/Github/iOS/CrossfitPR/Packages/Domain/.build/x86_64-apple-macosx/debug/Domain.build/Entities/PersonalRecord~partial.swiftmodule",
+    "swift-dependencies": "/Users/douglastaquary/Documents/Projects/Github/iOS/CrossfitPR/Packages/Domain/.build/x86_64-apple-macosx/debug/Domain.build/Entities/PersonalRecord.swiftdeps"
+  },
+  "/Users/douglastaquary/Documents/Projects/Github/iOS/CrossfitPR/Packages/Domain/Sources/Domain/Repositories/PersonalRecordRepository.swift": {
+    "dependencies": "/Users/douglastaquary/Documents/Projects/Github/iOS/CrossfitPR/Packages/Domain/.build/x86_64-apple-macosx/debug/Domain.build/Repositories/PersonalRecordRepository.d",
+    "object": "/Users/douglastaquary/Documents/Projects/Github/iOS/CrossfitPR/Packages/Domain/.build/x86_64-apple-macosx/debug/Domain.build/Repositories/PersonalRecordRepository.swift.o",
+    "swiftmodule": "/Users/douglastaquary/Documents/Projects/Github/iOS/CrossfitPR/Packages/Domain/.build/x86_64-apple-macosx/debug/Domain.build/Repositories/PersonalRecordRepository~partial.swiftmodule",
+    "swift-dependencies": "/Users/douglastaquary/Documents/Projects/Github/iOS/CrossfitPR/Packages/Domain/.build/x86_64-apple-macosx/debug/Domain.build/Repositories/PersonalRecordRepository.swiftdeps"
+  },
+  "/Users/douglastaquary/Documents/Projects/Github/iOS/CrossfitPR/Packages/Domain/Sources/Domain/Services/WorkoutInsight.swift": {
+    "dependencies": "/Users/douglastaquary/Documents/Projects/Github/iOS/CrossfitPR/Packages/Domain/.build/x86_64-apple-macosx/debug/Domain.build/Services/WorkoutInsight.d",
+    "object": "/Users/douglastaquary/Documents/Projects/Github/iOS/CrossfitPR/Packages/Domain/.build/x86_64-apple-macosx/debug/Domain.build/Services/WorkoutInsight.swift.o",
+    "swiftmodule": "/Users/douglastaquary/Documents/Projects/Github/iOS/CrossfitPR/Packages/Domain/.build/x86_64-apple-macosx/debug/Domain.build/Services/WorkoutInsight~partial.swiftmodule",
+    "swift-dependencies": "/Users/douglastaquary/Documents/Projects/Github/iOS/CrossfitPR/Packages/Domain/.build/x86_64-apple-macosx/debug/Domain.build/Services/WorkoutInsight.swiftdeps"
+  },
+  "/Users/douglastaquary/Documents/Projects/Github/iOS/CrossfitPR/Packages/Domain/Sources/Domain/Services/WorkoutInsightsProviding.swift": {
+    "dependencies": "/Users/douglastaquary/Documents/Projects/Github/iOS/CrossfitPR/Packages/Domain/.build/x86_64-apple-macosx/debug/Domain.build/Services/WorkoutInsightsProviding.d",
+    "object": "/Users/douglastaquary/Documents/Projects/Github/iOS/CrossfitPR/Packages/Domain/.build/x86_64-apple-macosx/debug/Domain.build/Services/WorkoutInsightsProviding.swift.o",
+    "swiftmodule": "/Users/douglastaquary/Documents/Projects/Github/iOS/CrossfitPR/Packages/Domain/.build/x86_64-apple-macosx/debug/Domain.build/Services/WorkoutInsightsProviding~partial.swiftmodule",
+    "swift-dependencies": "/Users/douglastaquary/Documents/Projects/Github/iOS/CrossfitPR/Packages/Domain/.build/x86_64-apple-macosx/debug/Domain.build/Services/WorkoutInsightsProviding.swiftdeps"
+  },
+  "/Users/douglastaquary/Documents/Projects/Github/iOS/CrossfitPR/Packages/Domain/Sources/Domain/Subscription/SubscriptionCatalog.swift": {
+    "dependencies": "/Users/douglastaquary/Documents/Projects/Github/iOS/CrossfitPR/Packages/Domain/.build/x86_64-apple-macosx/debug/Domain.build/Subscription/SubscriptionCatalog.d",
+    "object": "/Users/douglastaquary/Documents/Projects/Github/iOS/CrossfitPR/Packages/Domain/.build/x86_64-apple-macosx/debug/Domain.build/Subscription/SubscriptionCatalog.swift.o",
+    "swiftmodule": "/Users/douglastaquary/Documents/Projects/Github/iOS/CrossfitPR/Packages/Domain/.build/x86_64-apple-macosx/debug/Domain.build/Subscription/SubscriptionCatalog~partial.swiftmodule",
+    "swift-dependencies": "/Users/douglastaquary/Documents/Projects/Github/iOS/CrossfitPR/Packages/Domain/.build/x86_64-apple-macosx/debug/Domain.build/Subscription/SubscriptionCatalog.swiftdeps"
+  },
+  "/Users/douglastaquary/Documents/Projects/Github/iOS/CrossfitPR/Packages/Domain/Sources/Domain/Subscription/SubscriptionProductInfo.swift": {
+    "dependencies": "/Users/douglastaquary/Documents/Projects/Github/iOS/CrossfitPR/Packages/Domain/.build/x86_64-apple-macosx/debug/Domain.build/Subscription/SubscriptionProductInfo.d",
+    "object": "/Users/douglastaquary/Documents/Projects/Github/iOS/CrossfitPR/Packages/Domain/.build/x86_64-apple-macosx/debug/Domain.build/Subscription/SubscriptionProductInfo.swift.o",
+    "swiftmodule": "/Users/douglastaquary/Documents/Projects/Github/iOS/CrossfitPR/Packages/Domain/.build/x86_64-apple-macosx/debug/Domain.build/Subscription/SubscriptionProductInfo~partial.swiftmodule",
+    "swift-dependencies": "/Users/douglastaquary/Documents/Projects/Github/iOS/CrossfitPR/Packages/Domain/.build/x86_64-apple-macosx/debug/Domain.build/Subscription/SubscriptionProductInfo.swiftdeps"
+  },
+  "/Users/douglastaquary/Documents/Projects/Github/iOS/CrossfitPR/Packages/Domain/Sources/Domain/Subscription/SubscriptionStatusProviding.swift": {
+    "dependencies": "/Users/douglastaquary/Documents/Projects/Github/iOS/CrossfitPR/Packages/Domain/.build/x86_64-apple-macosx/debug/Domain.build/Subscription/SubscriptionStatusProviding.d",
+    "object": "/Users/douglastaquary/Documents/Projects/Github/iOS/CrossfitPR/Packages/Domain/.build/x86_64-apple-macosx/debug/Domain.build/Subscription/SubscriptionStatusProviding.swift.o",
+    "swiftmodule": "/Users/douglastaquary/Documents/Projects/Github/iOS/CrossfitPR/Packages/Domain/.build/x86_64-apple-macosx/debug/Domain.build/Subscription/SubscriptionStatusProviding~partial.swiftmodule",
+    "swift-dependencies": "/Users/douglastaquary/Documents/Projects/Github/iOS/CrossfitPR/Packages/Domain/.build/x86_64-apple-macosx/debug/Domain.build/Subscription/SubscriptionStatusProviding.swiftdeps"
+  },
+  "/Users/douglastaquary/Documents/Projects/Github/iOS/CrossfitPR/Packages/Domain/Sources/Domain/Subscription/SubscriptionStoreProviding.swift": {
+    "dependencies": "/Users/douglastaquary/Documents/Projects/Github/iOS/CrossfitPR/Packages/Domain/.build/x86_64-apple-macosx/debug/Domain.build/Subscription/SubscriptionStoreProviding.d",
+    "object": "/Users/douglastaquary/Documents/Projects/Github/iOS/CrossfitPR/Packages/Domain/.build/x86_64-apple-macosx/debug/Domain.build/Subscription/SubscriptionStoreProviding.swift.o",
+    "swiftmodule": "/Users/douglastaquary/Documents/Projects/Github/iOS/CrossfitPR/Packages/Domain/.build/x86_64-apple-macosx/debug/Domain.build/Subscription/SubscriptionStoreProviding~partial.swiftmodule",
+    "swift-dependencies": "/Users/douglastaquary/Documents/Projects/Github/iOS/CrossfitPR/Packages/Domain/.build/x86_64-apple-macosx/debug/Domain.build/Subscription/SubscriptionStoreProviding.swiftdeps"
+  },
+  "/Users/douglastaquary/Documents/Projects/Github/iOS/CrossfitPR/Packages/Domain/Sources/Domain/Subscription/SubscriptionTier.swift": {
+    "dependencies": "/Users/douglastaquary/Documents/Projects/Github/iOS/CrossfitPR/Packages/Domain/.build/x86_64-apple-macosx/debug/Domain.build/Subscription/SubscriptionTier.d",
+    "object": "/Users/douglastaquary/Documents/Projects/Github/iOS/CrossfitPR/Packages/Domain/.build/x86_64-apple-macosx/debug/Domain.build/Subscription/SubscriptionTier.swift.o",
+    "swiftmodule": "/Users/douglastaquary/Documents/Projects/Github/iOS/CrossfitPR/Packages/Domain/.build/x86_64-apple-macosx/debug/Domain.build/Subscription/SubscriptionTier~partial.swiftmodule",
+    "swift-dependencies": "/Users/douglastaquary/Documents/Projects/Github/iOS/CrossfitPR/Packages/Domain/.build/x86_64-apple-macosx/debug/Domain.build/Subscription/SubscriptionTier.swiftdeps"
+  },
+  "/Users/douglastaquary/Documents/Projects/Github/iOS/CrossfitPR/Packages/Domain/Sources/Domain/ValueObjects/ActivityKind.swift": {
+    "dependencies": "/Users/douglastaquary/Documents/Projects/Github/iOS/CrossfitPR/Packages/Domain/.build/x86_64-apple-macosx/debug/Domain.build/ValueObjects/ActivityKind.d",
+    "object": "/Users/douglastaquary/Documents/Projects/Github/iOS/CrossfitPR/Packages/Domain/.build/x86_64-apple-macosx/debug/Domain.build/ValueObjects/ActivityKind.swift.o",
+    "swiftmodule": "/Users/douglastaquary/Documents/Projects/Github/iOS/CrossfitPR/Packages/Domain/.build/x86_64-apple-macosx/debug/Domain.build/ValueObjects/ActivityKind~partial.swiftmodule",
+    "swift-dependencies": "/Users/douglastaquary/Documents/Projects/Github/iOS/CrossfitPR/Packages/Domain/.build/x86_64-apple-macosx/debug/Domain.build/ValueObjects/ActivityKind.swiftdeps"
+  },
+  "/Users/douglastaquary/Documents/Projects/Github/iOS/CrossfitPR/Packages/Domain/Sources/Domain/ValueObjects/PersonalRecordField.swift": {
+    "dependencies": "/Users/douglastaquary/Documents/Projects/Github/iOS/CrossfitPR/Packages/Domain/.build/x86_64-apple-macosx/debug/Domain.build/ValueObjects/PersonalRecordField.d",
+    "object": "/Users/douglastaquary/Documents/Projects/Github/iOS/CrossfitPR/Packages/Domain/.build/x86_64-apple-macosx/debug/Domain.build/ValueObjects/PersonalRecordField.swift.o",
+    "swiftmodule": "/Users/douglastaquary/Documents/Projects/Github/iOS/CrossfitPR/Packages/Domain/.build/x86_64-apple-macosx/debug/Domain.build/ValueObjects/PersonalRecordField~partial.swiftmodule",
+    "swift-dependencies": "/Users/douglastaquary/Documents/Projects/Github/iOS/CrossfitPR/Packages/Domain/.build/x86_64-apple-macosx/debug/Domain.build/ValueObjects/PersonalRecordField.swiftdeps"
+  }
+}

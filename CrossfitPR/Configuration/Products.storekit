@@ -1,0 +1,69 @@
+{
+  "identifier" : "CrossfitPRProducts",
+  "nonRenewingSubscriptions" : [
+
+  ],
+  "products" : [
+
+  ],
+  "settings" : {
+    "_applicationInternalID" : "0",
+    "_developerTeamID" : "6V95FQX348",
+    "_failTransactionsEnabled" : false,
+    "_lastSynchronizedDate" : 768614400,
+    "_locale" : "pt_BR",
+    "_storefront" : "BRA",
+    "_storeKitErrors" : [
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Load Products"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Purchase"
+      }
+    ]
+  },
+  "subscriptionGroups" : [
+    {
+      "id" : "crossfitpr-pro-group",
+      "localizations" : [
+
+      ],
+      "name" : "PRO",
+      "subscriptions" : [
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "9.99",
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "crossfitpr-pro-monthly",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "Insights avançados de treinos e PRs",
+              "displayName" : "CrossfitPR PRO",
+              "locale" : "pt_BR"
+            }
+          ],
+          "productID" : "com.douglast.CrossfitPR.pro",
+          "recurringSubscriptionPeriod" : "P1M",
+          "referenceName" : "CrossfitPR PRO Monthly",
+          "subscriptionGroupID" : "crossfitpr-pro-group",
+          "type" : "RecurringSubscription"
+        }
+      ]
+    }
+  ],
+  "version" : {
+    "major" : 3,
+    "minor" : 0
+  }
+}
