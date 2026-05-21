@@ -11,6 +11,7 @@ public struct SettingsView: View {
     @EnvironmentObject private var subscriptionClient: SubscriptionClient
     @EnvironmentObject private var notificationManager: LocalNotificationManager
     @State private var showPROUpgrade = false
+    @State private var showCancelAlert = false
     @State private var scheduleDate = Date()
 
     public init() {}
@@ -45,21 +46,63 @@ public struct SettingsView: View {
 
             Section(Strings.Settings.proSection) {
                 if subscriptionClient.currentTier == .pro {
-                    Text(Strings.Settings.noCommitment)
-                } else {
-                    Button(Strings.Settings.unlockPro) {
-                        showPROUpgrade = true
+                    HStack {
+                        Image(systemName: "checkmark.seal.fill")
+                            .foregroundStyle(AppDesign.Colors.proAccent)
+                        Text("Assinatura PRO ativa")
+                            .foregroundStyle(.primary)
                     }
+
+                    Button(role: .destructive) {
+                        showCancelAlert = true
+                    } label: {
+                        HStack {
+                            Image(systemName: "xmark.circle")
+                            Text("Cancelar assinatura")
+                        }
+                    }
+                } else {
+                    Button {
+                        showPROUpgrade = true
+                    } label: {
+                        HStack {
+                            Image(systemName: "sparkles")
+                                .foregroundStyle(AppDesign.Colors.proAccent)
+                            Text(Strings.Settings.unlockPro)
+                        }
+                    }
+
+                    Text(Strings.Settings.noCommitment)
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
                 }
             }
 
             Section(Strings.Settings.aboutSection) {
-                Link(Strings.Settings.privacy, destination: URL(string: "https://www.apple.com/legal/privacy/")!)
+                Link(destination: URL(string: "https://www.apple.com/legal/privacy/")!) {
+                    HStack {
+                        Text(Strings.Settings.privacy)
+                        Spacer()
+                        Image(systemName: "arrow.up.right.square")
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                    }
+                }
             }
         }
         .navigationTitle(Strings.Screen.settings)
         .sheet(isPresented: $showPROUpgrade) {
             PROUpgradeView()
+        }
+        .alert("Cancelar assinatura?", isPresented: $showCancelAlert) {
+            Button("Manter PRO", role: .cancel) {}
+            Button("Sim, cancelar", role: .destructive) {
+                Task {
+                    await cancelSubscription()
+                }
+            }
+        } message: {
+            Text("Ao cancelar, você perderá acesso aos insights avançados, metas personalizadas e projeções de PR. Tem certeza?")
         }
         .task {
             try? await notificationManager.requestAuthorization()
@@ -97,5 +140,9 @@ public struct SettingsView: View {
             repeats: false
         )
         await notificationManager.schedule(localNotification: notification)
+    }
+
+    private func cancelSubscription() async {
+        await subscriptionClient.cancelSubscription()
     }
 }

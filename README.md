@@ -123,6 +123,8 @@ Packages/
 - **Splash animado** — Estilo X/Twitter com logo que escala e desaparece
 - **Teaser PRO** — Tela de preview mostrando benefícios antes de assinar
 - **Proposta de valor clara** — "Menos que um café por mês"
+- **Empty states amigáveis** — Mensagens encorajadoras quando não há dados
+- **Fluxo de assinatura animado** — Feedback visual em cada etapa do processo
 
 ---
 

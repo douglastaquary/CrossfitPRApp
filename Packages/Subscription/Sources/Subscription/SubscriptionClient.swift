@@ -60,6 +60,10 @@ public final class SubscriptionClient: SubscriptionStatusProviding, ObservableOb
         await refreshStatus()
     }
 
+    public func cancelSubscription() async {
+        currentTier = .free
+    }
+
     public func canAccess(_ feature: ProFeature) -> Bool {
         currentTier.canAccess(feature)
     }

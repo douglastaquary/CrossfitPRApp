@@ -21,11 +21,19 @@ struct InsightsTeaserView: View {
         personalRecordClient.records.max { $0.poundValue < $1.poundValue }
     }
 
+    private var categoriesWithRecords: [RecordGroup] {
+        let groups = Set(personalRecordClient.records.map(\.group))
+        return RecordGroup.allCases.filter { groups.contains($0) }
+    }
+
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
             VStack(spacing: 24) {
                 if hasRecords {
                     previewSection
+                    categoriesSection
+                } else {
+                    emptyStateSection
                 }
 
                 teaserCard
@@ -38,6 +46,44 @@ struct InsightsTeaserView: View {
         }
     }
 
+    // MARK: - Empty State
+
+    private var emptyStateSection: some View {
+        VStack(spacing: 20) {
+            Image(systemName: "figure.strengthtraining.traditional")
+                .font(.system(size: 64))
+                .foregroundStyle(AppDesign.Colors.brand.opacity(0.6))
+
+            VStack(spacing: 8) {
+                Text("Sua jornada começa aqui")
+                    .font(.title2.bold())
+
+                Text("Registre seu primeiro PR e veja sua evolução ganhar forma. Cada record conta uma história de superação.")
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+                    .multilineTextAlignment(.center)
+            }
+
+            Button {
+                NotificationCenter.default.post(name: .navigateToCategories, object: nil)
+            } label: {
+                HStack {
+                    Image(systemName: "plus.circle.fill")
+                    Text("Registrar meu primeiro PR")
+                }
+                .fontWeight(.semibold)
+                .frame(maxWidth: .infinity)
+                .padding()
+                .background(AppDesign.Colors.brand)
+                .foregroundStyle(.white)
+                .cornerRadius(12)
+            }
+        }
+        .padding(.vertical, 20)
+    }
+
+    // MARK: - Preview Section (com PRs)
+
     private var previewSection: some View {
         VStack(alignment: .leading, spacing: 12) {
             HStack {
@@ -48,31 +94,15 @@ struct InsightsTeaserView: View {
                 Spacer()
             }
 
-            VStack(spacing: 8) {
-                HStack {
-                    VStack(alignment: .leading, spacing: 4) {
-                        Text("\(recordCount)")
-                            .font(.system(size: 36, weight: .bold))
-                            .foregroundStyle(AppDesign.Colors.brand)
-                        Text("PRs registrados")
-                            .font(.subheadline)
-                            .foregroundStyle(.secondary)
-                    }
-                    Spacer()
-                    if let top = topRecord {
-                        VStack(alignment: .trailing, spacing: 4) {
-                            let weight = settingsClient.measureTrackingMode == .pounds
-                                ? top.poundValue
-                                : top.kiloValue
-                            let suffix = settingsClient.measureTrackingMode.suffix
-                            Text("\(weight) \(suffix)")
-                                .font(.system(size: 36, weight: .bold))
-                                .foregroundStyle(AppDesign.Colors.brand)
-                            Text("Maior PR")
-                                .font(.subheadline)
-                                .foregroundStyle(.secondary)
-                        }
-                    }
+            HStack {
+                statCard(value: "\(recordCount)", label: "PRs registrados")
+                Spacer()
+                if let top = topRecord {
+                    let weight = settingsClient.measureTrackingMode == .pounds
+                        ? top.poundValue
+                        : top.kiloValue
+                    let suffix = settingsClient.measureTrackingMode.suffix
+                    statCard(value: "\(weight) \(suffix)", label: "Maior PR", alignment: .trailing)
                 }
             }
             .padding()
@@ -80,6 +110,60 @@ struct InsightsTeaserView: View {
             .cornerRadius(12)
         }
     }
+
+    private func statCard(value: String, label: String, alignment: HorizontalAlignment = .leading) -> some View {
+        VStack(alignment: alignment, spacing: 4) {
+            Text(value)
+                .font(.system(size: 32, weight: .bold))
+                .foregroundStyle(AppDesign.Colors.brand)
+            Text(label)
+                .font(.caption)
+                .foregroundStyle(.secondary)
+        }
+    }
+
+    // MARK: - Categories Section
+
+    private var categoriesSection: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            Text("Categorias com PRs")
+                .font(.headline)
+
+            HStack(spacing: 12) {
+                ForEach(categoriesWithRecords, id: \.self) { group in
+                    categoryChip(for: group)
+                }
+            }
+        }
+    }
+
+    private func categoryChip(for group: RecordGroup) -> some View {
+        let count = personalRecordClient.records.filter { $0.group == group }.count
+        return HStack(spacing: 6) {
+            Image(systemName: iconFor(group))
+                .font(.caption)
+            Text("\(group.rawValue.capitalized)")
+                .font(.caption.weight(.medium))
+            Text("(\(count))")
+                .font(.caption2)
+                .foregroundStyle(.secondary)
+        }
+        .padding(.horizontal, 12)
+        .padding(.vertical, 8)
+        .background(AppDesign.Colors.brand.opacity(0.1))
+        .foregroundStyle(AppDesign.Colors.brand)
+        .cornerRadius(20)
+    }
+
+    private func iconFor(_ group: RecordGroup) -> String {
+        switch group {
+        case .barbell: return "figure.strengthtraining.traditional"
+        case .gymnastic: return "figure.gymnastics"
+        case .endurance: return "figure.run"
+        }
+    }
+
+    // MARK: - Teaser Card
 
     private var teaserCard: some View {
         VStack(alignment: .leading, spacing: 16) {
@@ -131,6 +215,8 @@ struct InsightsTeaserView: View {
         }
     }
 
+    // MARK: - Features Section
+
     private var featuresSection: some View {
         VStack(alignment: .leading, spacing: 16) {
             Text("O que você ganha")
@@ -174,6 +260,8 @@ struct InsightsTeaserView: View {
         .padding(.vertical, 4)
     }
 
+    // MARK: - CTA
+
     private var ctaButton: some View {
         VStack(spacing: 8) {
             Button {
@@ -196,4 +284,10 @@ struct InsightsTeaserView: View {
                 .foregroundStyle(.secondary)
         }
     }
+}
+
+// MARK: - Notification Extension
+
+extension Notification.Name {
+    static let navigateToCategories = Notification.Name("navigateToCategories")
 }
