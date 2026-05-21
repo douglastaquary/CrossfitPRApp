@@ -16,6 +16,7 @@ DerivedData/
 *.perspectivev3
 !default.perspectivev3
 xcuserdata/
+.DS_Store
 
 ## Other
 *.moved-aside
@@ -24,6 +25,11 @@ xcuserdata/
 
 ## Obj-C/Swift specific
 *.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+## App packaging
 *.ipa
 *.dSYM.zip
 *.dSYM
@@ -37,10 +43,11 @@ playground.xcworkspace
 # Add this line if you want to avoid checking in source code from Swift Package Manager dependencies.
 # Packages/
 # Package.pins
-# Package.resolved
+*.resolved
 .build/
 *.build/
-
+.derivedData/
+.swiftpm/
 # CocoaPods
 #
 # We recommend against adding the Pods directory to your .gitignore. However
