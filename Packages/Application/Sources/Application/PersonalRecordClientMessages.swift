@@ -23,17 +23,17 @@ enum PersonalRecordClientMessages {
 
         var genericFailureMessage: String {
             switch self {
-            case .fetch: Strings.ErrorCopy.ClientOperation.fetch.generic
-            case .save: Strings.ErrorCopy.ClientOperation.save.generic
-            case .delete: Strings.ErrorCopy.ClientOperation.delete.generic
+            case .fetch: return Strings.ErrorCopy.ClientOperation.fetch.generic
+            case .save: return Strings.ErrorCopy.ClientOperation.save.generic
+            case .delete: return Strings.ErrorCopy.ClientOperation.delete.generic
             }
         }
 
         var persistenceFailureMessage: String {
             switch self {
-            case .fetch: Strings.ErrorCopy.ClientOperation.fetch.persistence
-            case .save: Strings.ErrorCopy.ClientOperation.save.persistence
-            case .delete: Strings.ErrorCopy.ClientOperation.delete.persistence
+            case .fetch: return Strings.ErrorCopy.ClientOperation.fetch.persistence
+            case .save: return Strings.ErrorCopy.ClientOperation.save.persistence
+            case .delete: return Strings.ErrorCopy.ClientOperation.delete.persistence
             }
         }
     }
