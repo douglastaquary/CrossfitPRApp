@@ -86,16 +86,16 @@ public enum Strings {
     public enum Exercise {
         public static func name(_ kind: ActivityKind) -> String {
             switch kind {
-            case .empty: tr("exercise.empty")
-            case .airSquat: tr("exercise.airSquat")
-            case .backSquat: tr("exercise.backSquat")
-            case .barMuscleUp: tr("exercise.barMuscleUp")
-            case .benchPress: tr("exercise.benchPress")
-            case .boxJump: tr("exercise.boxJump")
-            case .burpee: tr("exercise.burpee")
-            case .clean: tr("exercise.clean")
-            case .cleanAndJerk: tr("exercise.cleanAndJerk")
-            case .deadlift: tr("exercise.deadlift")
+            case .empty: return tr("exercise.empty")
+            case .airSquat: return tr("exercise.airSquat")
+            case .backSquat: return tr("exercise.backSquat")
+            case .barMuscleUp: return tr("exercise.barMuscleUp")
+            case .benchPress: return tr("exercise.benchPress")
+            case .boxJump: return tr("exercise.boxJump")
+            case .burpee: return tr("exercise.burpee")
+            case .clean: return tr("exercise.clean")
+            case .cleanAndJerk: return tr("exercise.cleanAndJerk")
+            case .deadlift: return tr("exercise.deadlift")
             }
         }
     }
@@ -105,12 +105,12 @@ public enum Strings {
     public enum ProFeatureCopy {
         public static func marketingTitle(_ feature: ProFeature) -> String {
             switch feature {
-            case .basicInsights: tr("proFeature.basicInsights")
-            case .detailedAIAnalysis: tr("proFeature.detailedAIAnalysis")
-            case .trendCharts: tr("proFeature.trendCharts")
-            case .workoutEngineAnalysis: tr("proFeature.workoutEngineAnalysis")
-            case .personalizedRecommendations: tr("proFeature.personalizedRecommendations")
-            case .exportHistory: tr("proFeature.exportHistory")
+            case .basicInsights: return tr("proFeature.basicInsights")
+            case .detailedAIAnalysis: return tr("proFeature.detailedAIAnalysis")
+            case .trendCharts: return tr("proFeature.trendCharts")
+            case .workoutEngineAnalysis: return tr("proFeature.workoutEngineAnalysis")
+            case .personalizedRecommendations: return tr("proFeature.personalizedRecommendations")
+            case .exportHistory: return tr("proFeature.exportHistory")
             }
         }
     }
@@ -120,18 +120,18 @@ public enum Strings {
     public enum ErrorCopy {
         public static func repository(_ error: PersonalRecordRepositoryError) -> String {
             switch error {
-            case .notFound: tr("error.repo.notFound")
-            case .syncFailed: tr("error.repo.syncFailed")
-            case .invalidData: tr("error.repo.invalidData")
+            case .notFound: return tr("error.repo.notFound")
+            case .syncFailed: return tr("error.repo.syncFailed")
+            case .invalidData: return tr("error.repo.invalidData")
             }
         }
 
         public static func subscription(_ error: SubscriptionError) -> String {
             switch error {
-            case .purchaseFailed: tr("error.sub.purchaseFailed")
-            case .productUnavailable: tr("error.sub.productUnavailable")
-            case .userCancelled: ""
-            case .pending: tr("error.sub.pending")
+            case .purchaseFailed: return tr("error.sub.purchaseFailed")
+            case .productUnavailable: return tr("error.sub.productUnavailable")
+            case .userCancelled: return ""
+            case .pending: return tr("error.sub.pending")
             }
         }
 
@@ -140,17 +140,17 @@ public enum Strings {
 
             public var generic: String {
                 switch self {
-                case .fetch: tr("error.client.fetchGeneric")
-                case .save: tr("error.client.saveGeneric")
-                case .delete: tr("error.client.deleteGeneric")
+                case .fetch: return tr("error.client.fetchGeneric")
+                case .save: return tr("error.client.saveGeneric")
+                case .delete: return tr("error.client.deleteGeneric")
                 }
             }
 
             public var persistence: String {
                 switch self {
-                case .fetch: tr("error.client.fetchPersistence")
-                case .save: tr("error.client.savePersistence")
-                case .delete: tr("error.client.deletePersistence")
+                case .fetch: return tr("error.client.fetchPersistence")
+                case .save: return tr("error.client.savePersistence")
+                case .delete: return tr("error.client.deletePersistence")
                 }
             }
         }
