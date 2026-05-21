@@ -153,7 +153,7 @@
 			);
 			mainGroup = 4E58054B27F3C5AE00F16219;
 			packageReferences = (
-				4E58062127F3C5B100F16219 /* XCRemoteSwiftPackageReference "CrossfitPRPackages" */,
+				4E58062127F3C5B100F16219 /* XCLocalSwiftPackageReference "Packages" */,
 			);
 			productRefGroup = 4E58055527F3C5AE00F16219 /* Products */;
 			projectDirPath = "";
@@ -399,71 +399,67 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCRemoteSwiftPackageReference section */
-		4E58062127F3C5B100F16219 /* XCRemoteSwiftPackageReference "CrossfitPRPackages" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "file:///Users/douglastaquary/Documents/Projects/Github/iOS/CrossfitPR/";
-			requirement = {
-				kind = branch;
-				branch = "merge/beta-ui-spm-arch";
-			};
+/* Begin XCLocalSwiftPackageReference section */
+		4E58062127F3C5B100F16219 /* XCLocalSwiftPackageReference "Packages" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages;
 		};
-/* End XCRemoteSwiftPackageReference section */
+/* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
 		4E58061027F3C5B100F16219 /* Domain */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 4E58062127F3C5B100F16219 /* XCRemoteSwiftPackageReference "CrossfitPRPackages" */;
+			package = 4E58062127F3C5B100F16219 /* XCLocalSwiftPackageReference "Packages" */;
 			productName = Domain;
 		};
 		4E58061627F3C5B100F16219 /* Subscription */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 4E58062127F3C5B100F16219 /* XCRemoteSwiftPackageReference "CrossfitPRPackages" */;
+			package = 4E58062127F3C5B100F16219 /* XCLocalSwiftPackageReference "Packages" */;
 			productName = Subscription;
 		};
 		4E58061827F3C5B100F16219 /* Application */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 4E58062127F3C5B100F16219 /* XCRemoteSwiftPackageReference "CrossfitPRPackages" */;
+			package = 4E58062127F3C5B100F16219 /* XCLocalSwiftPackageReference "Packages" */;
 			productName = Application;
 		};
 		4E58062C27F3C5B100F16219 /* PRHistory */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 4E58062127F3C5B100F16219 /* XCRemoteSwiftPackageReference "CrossfitPRPackages" */;
+			package = 4E58062127F3C5B100F16219 /* XCLocalSwiftPackageReference "Packages" */;
 			productName = PRHistory;
 		};
 		4E58062D27F3C5B100F16219 /* Insights */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 4E58062127F3C5B100F16219 /* XCRemoteSwiftPackageReference "CrossfitPRPackages" */;
+			package = 4E58062127F3C5B100F16219 /* XCLocalSwiftPackageReference "Packages" */;
 			productName = Insights;
 		};
 		4E58062E27F3C5B100F16219 /* PROUpgrade */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 4E58062127F3C5B100F16219 /* XCRemoteSwiftPackageReference "CrossfitPRPackages" */;
+			package = 4E58062127F3C5B100F16219 /* XCLocalSwiftPackageReference "Packages" */;
 			productName = PROUpgrade;
 		};
 		4E58062F27F3C5B100F16219 /* Onboarding */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 4E58062127F3C5B100F16219 /* XCRemoteSwiftPackageReference "CrossfitPRPackages" */;
+			package = 4E58062127F3C5B100F16219 /* XCLocalSwiftPackageReference "Packages" */;
 			productName = Onboarding;
 		};
 		4E58063527F3C5B100F16219 /* Localization */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 4E58062127F3C5B100F16219 /* XCRemoteSwiftPackageReference "CrossfitPRPackages" */;
+			package = 4E58062127F3C5B100F16219 /* XCLocalSwiftPackageReference "Packages" */;
 			productName = Localization;
 		};
 		4E58063827F3C5B100F16219 /* Categories */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 4E58062127F3C5B100F16219 /* XCRemoteSwiftPackageReference "CrossfitPRPackages" */;
+			package = 4E58062127F3C5B100F16219 /* XCLocalSwiftPackageReference "Packages" */;
 			productName = Categories;
 		};
 		4E58063A27F3C5B100F16219 /* Settings */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 4E58062127F3C5B100F16219 /* XCRemoteSwiftPackageReference "CrossfitPRPackages" */;
+			package = 4E58062127F3C5B100F16219 /* XCLocalSwiftPackageReference "Packages" */;
 			productName = Settings;
 		};
 		4E58063C27F3C5B100F16219 /* Launch */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 4E58062127F3C5B100F16219 /* XCRemoteSwiftPackageReference "CrossfitPRPackages" */;
+			package = 4E58062127F3C5B100F16219 /* XCLocalSwiftPackageReference "Packages" */;
 			productName = Launch;
 		};
 /* End XCSwiftPackageProductDependency section */
