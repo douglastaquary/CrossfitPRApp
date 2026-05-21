@@ -37,7 +37,11 @@ public struct AppEnvironment {
         if let store = subscriptionStore {
             subscription = SubscriptionClient(store: store)
         } else {
+            #if targetEnvironment(simulator)
+            subscription = SubscriptionClient(store: MockSubscriptionStore())
+            #else
             subscription = SubscriptionClient()
+            #endif
         }
 
         let personalRecordClient = PersonalRecordClient(repository: resolvedRepository)
