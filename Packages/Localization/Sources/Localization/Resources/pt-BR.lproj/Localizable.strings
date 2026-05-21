@@ -216,8 +216,10 @@
 "settings.screen.title" = "Configurações";
 "settings.screen.section.notification.title" = "Notificações";
 "settings.screen.section.notification.toggle.title" = "Notificação de treino:";
-"settings.screen.section.tracking.title" = "Configuração de Crossfit";
-"settings.screen.section.tracking.measure.title" = "Informação de força";
+"settings.screen.section.tracking.title" = "Configurações de treino";
+"settings.screen.section.tracking.measure.title" = "Unidade de peso/força";
+"settings.screen.section.tracking.measure.pounds" = "Libras (lb)";
+"settings.screen.section.tracking.measure.kilograms" = "Quilogramas (kg)";
 "settings.screen.section.tracking.target.title" = "Treino";
 "settings.screen.section.unlockpro.title" = "Desbloquear CrossFitPR PRO";
 "settings.screen.section.privacy.title" = "Política de privacidade e Termos de Uso";

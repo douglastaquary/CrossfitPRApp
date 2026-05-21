@@ -95,8 +95,10 @@
  "settings.screen.title" = "Settings";
  "settings.screen.section.notification.title" = "Notifications";
  "settings.screen.section.notification.toggle.title" = "Training notification:";
- "settings.screen.section.tracking.title" = "Crossfit settings";
- "settings.screen.section.tracking.measure.title" = "Measurement option";
+ "settings.screen.section.tracking.title" = "Workout settings";
+ "settings.screen.section.tracking.measure.title" = "Weight/force unit";
+ "settings.screen.section.tracking.measure.pounds" = "Pounds (lb)";
+ "settings.screen.section.tracking.measure.kilograms" = "Kilograms (kg)";
  "settings.screen.section.tracking.target.title" = "Training target";
  "settings.screen.section.unlockpro.title" = "Unlock PRO";
  "settings.screen.section.privacy.title"= "Privacy policy and Terms of Use";
@@ -268,8 +270,10 @@
  "settings.screen.title" = "Settings";
  "settings.screen.section.notification.title" = "Notifications";
  "settings.screen.section.notification.toggle.title" = "Training notification:";
- "settings.screen.section.tracking.title" = "Crossfit settings";
- "settings.screen.section.tracking.measure.title" = "Measurement option";
+ "settings.screen.section.tracking.title" = "Workout settings";
+ "settings.screen.section.tracking.measure.title" = "Weight/force unit";
+ "settings.screen.section.tracking.measure.pounds" = "Pounds (lb)";
+ "settings.screen.section.tracking.measure.kilograms" = "Kilograms (kg)";
  "settings.screen.section.tracking.target.title" = "Training target";
  "settings.screen.section.unlockpro.title" = "Unlock PRO";
  "settings.screen.section.privacy.title"= "Privacy policy and Terms of Use";
