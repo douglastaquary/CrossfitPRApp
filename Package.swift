@@ -46,7 +46,7 @@ let package = Package(
         ),
         .target(
             name: "WorkoutEngine",
-            dependencies: ["Domain"],
+            dependencies: ["Domain", "Localization"],
             path: "Packages/WorkoutEngine/Sources/WorkoutEngine"
         ),
         .target(
