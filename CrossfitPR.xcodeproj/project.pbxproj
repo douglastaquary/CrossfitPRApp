@@ -404,8 +404,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "file:///Users/douglastaquary/Documents/Projects/Github/iOS/CrossfitPR/";
 			requirement = {
-				kind = revision;
-				revision = c2cded85525b235af10145bc06d9a8e12d5267a5;
+				kind = branch;
+				branch = "merge/beta-ui-spm-arch";
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

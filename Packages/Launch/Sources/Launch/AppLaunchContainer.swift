@@ -22,6 +22,7 @@ public struct AppLaunchContainer<MainContent: View>: View {
             if showSplash {
                 LaunchScreenView()
                     .environmentObject(launchScreenState)
+                    .allowsHitTesting(false)
                     .transition(.opacity)
                     .zIndex(1)
             }
