@@ -9,7 +9,7 @@ public struct LaunchView<MainContent: View>: View {
     @EnvironmentObject private var settingsClient: SettingsClient
     @StateObject private var networkMonitor = NetworkMonitor()
     @State private var showNetworkAlert = false
-    @State private var hasCompletedOnboarding = false
+    @State private var showOnboarding = true
 
     private let mainContent: () -> MainContent
 
@@ -21,19 +21,19 @@ public struct LaunchView<MainContent: View>: View {
         Group {
             if !networkMonitor.isConnected {
                 offlineContent
-            } else if !hasCompletedOnboarding {
-                OnboardingView {
-                    withAnimation {
-                        hasCompletedOnboarding = true
-                        settingsClient.hasCompletedLaunch = true
+            } else if showOnboarding && !settingsClient.hasCompletedLaunch {
+                OnboardingView(isCompleted: $settingsClient.hasCompletedLaunch)
+                    .onChange(of: settingsClient.hasCompletedLaunch) { completed in
+                        if completed {
+                            withAnimation { showOnboarding = false }
+                        }
                     }
-                }
             } else {
                 mainContent()
             }
         }
         .onAppear {
-            hasCompletedOnboarding = settingsClient.hasCompletedLaunch
+            showOnboarding = !settingsClient.hasCompletedLaunch
         }
         .brandTint()
     }

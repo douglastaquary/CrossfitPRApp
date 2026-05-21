@@ -3,10 +3,10 @@ import SharedUI
 import Localization
 
 public struct OnboardingView: View {
-    let onComplete: () -> Void
+    @Binding var isCompleted: Bool
 
-    public init(onComplete: @escaping () -> Void) {
-        self.onComplete = onComplete
+    public init(isCompleted: Binding<Bool>) {
+        self._isCompleted = isCompleted
     }
 
     public var body: some View {
@@ -44,7 +44,7 @@ public struct OnboardingView: View {
             Spacer()
 
             Button(Strings.Onboarding.cta) {
-                onComplete()
+                isCompleted = true
             }
             .buttonStyle(FilledButtonStyle(fullWidth: true))
             .padding()
