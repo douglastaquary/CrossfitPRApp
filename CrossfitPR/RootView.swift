@@ -42,5 +42,12 @@ struct MainTabView: View {
         .onChange(of: selectedTab) { _ in
             UIImpactFeedbackGenerator(style: .light).impactOccurred()
         }
+        .onReceive(NotificationCenter.default.publisher(for: .navigateToCategories)) { _ in
+            selectedTab = 0
+        }
     }
+}
+
+extension Notification.Name {
+    static let navigateToCategories = Notification.Name("navigateToCategories")
 }
