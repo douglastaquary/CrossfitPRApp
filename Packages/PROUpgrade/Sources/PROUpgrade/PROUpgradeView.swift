@@ -9,19 +9,24 @@ public struct PROUpgradeView: View {
     @Environment(\.dismiss) private var dismiss
 
     @State private var errorMessage: String?
+    @State private var selectedProductID: String?
 
     public init() {}
 
     private var annualProduct: SubscriptionProductInfo? {
         subscriptionClient.subscriptionProducts.first {
             $0.id == SubscriptionCatalog.proAnnualProductID
-        } ?? subscriptionClient.subscriptionProducts.first
+        }
     }
 
     private var monthlyProduct: SubscriptionProductInfo? {
         subscriptionClient.subscriptionProducts.first {
             $0.id == SubscriptionCatalog.proMonthlyProductID
-        } ?? subscriptionClient.subscriptionProducts.dropFirst().first
+        }
+    }
+
+    private var hasProducts: Bool {
+        !subscriptionClient.subscriptionProducts.isEmpty
     }
 
     public var body: some View {
@@ -41,6 +46,9 @@ public struct PROUpgradeView: View {
             }
             .task {
                 await subscriptionClient.loadSubscriptionProducts()
+                if selectedProductID == nil, let annual = annualProduct {
+                    selectedProductID = annual.id
+                }
             }
             .onChange(of: subscriptionClient.currentTier) { tier in
                 if tier == .pro { dismiss() }
@@ -67,12 +75,17 @@ public struct PROUpgradeView: View {
 
             benefitsSection
 
-            pricingSection
+            if hasProducts {
+                pricingSection
+            } else {
+                noProductsSection
+            }
 
             if let errorMessage {
                 Text(errorMessage)
                     .font(.caption)
                     .foregroundStyle(AppDesign.Colors.error)
+                    .padding(.horizontal)
             }
 
             commitmentSection
@@ -152,94 +165,141 @@ public struct PROUpgradeView: View {
     }
 
     private var pricingSection: some View {
-        VStack(spacing: 16) {
-            if let annual = annualProduct {
-                Button {
-                    Task { await purchase(annual.id) }
-                } label: {
-                    HStack {
-                        Image(systemName: "gift")
-                            .font(.title3)
-                        Text(Strings.tr("purchase.tryfree.title"))
-                            .fontWeight(.semibold)
-                    }
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, 16)
-                    .background(Color.clear)
-                    .foregroundStyle(AppDesign.Colors.brand)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 12)
-                            .stroke(AppDesign.Colors.brand, lineWidth: 2)
-                    )
-                }
-            }
+        VStack(spacing: 20) {
+            trialButton
 
             Text(Strings.tr("purchase.lessthancoffe"))
-                .font(.subheadline)
-                .foregroundStyle(.secondary)
-
-            Text("Escolha seu plano")
                 .font(.caption)
                 .foregroundStyle(.secondary)
-                .padding(.top, 8)
 
-            if let monthly = monthlyProduct {
-                Button {
-                    Task { await purchase(monthly.id) }
-                } label: {
-                    HStack {
-                        VStack(alignment: .leading) {
-                            Text("Mensal")
-                                .font(.subheadline.weight(.semibold))
-                            Text(monthly.displayPrice)
-                                .font(.caption)
-                                .foregroundStyle(.secondary)
-                        }
-                        Spacer()
-                        Image(systemName: "chevron.right")
-                            .foregroundStyle(.secondary)
-                    }
-                    .padding()
-                    .background(AppDesign.Colors.cardBackground)
-                    .cornerRadius(12)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 12)
-                            .stroke(Color.secondary.opacity(0.2), lineWidth: 1)
+            VStack(spacing: 12) {
+                Text("Escolha seu plano")
+                    .font(.subheadline.weight(.medium))
+                    .foregroundStyle(.secondary)
+
+                if let monthly = monthlyProduct {
+                    productOption(
+                        product: monthly,
+                        label: "Mensal",
+                        badge: nil,
+                        isSelected: selectedProductID == monthly.id
                     )
                 }
-                .foregroundStyle(.primary)
-            }
 
-            if let annual = annualProduct {
-                Button {
-                    Task { await purchase(annual.id) }
-                } label: {
-                    HStack {
-                        VStack(alignment: .leading) {
-                            HStack {
-                                Text("Anual")
-                                    .font(.subheadline.weight(.semibold))
-                                Text("Melhor valor")
-                                    .font(.caption2.bold())
-                                    .padding(.horizontal, 6)
-                                    .padding(.vertical, 2)
-                                    .background(AppDesign.Colors.proAccent)
-                                    .foregroundStyle(.white)
-                                    .cornerRadius(4)
-                            }
-                            Text(annual.displayPrice)
-                                .font(.caption)
-                        }
-                        Spacer()
-                        Image(systemName: "chevron.right")
-                    }
-                    .padding()
-                    .background(AppDesign.Colors.brand)
-                    .foregroundStyle(.white)
-                    .cornerRadius(12)
+                if let annual = annualProduct {
+                    productOption(
+                        product: annual,
+                        label: "Anual",
+                        badge: "Melhor valor",
+                        isSelected: selectedProductID == annual.id
+                    )
                 }
             }
+
+            subscribeButton
         }
+    }
+
+    private var trialButton: some View {
+        Button {
+            if let annual = annualProduct {
+                selectedProductID = annual.id
+                Task { await purchase(annual.id) }
+            }
+        } label: {
+            HStack(spacing: 10) {
+                Image(systemName: "gift")
+                    .font(.title3)
+                Text(Strings.tr("purchase.tryfree.title"))
+                    .fontWeight(.semibold)
+            }
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, 16)
+            .foregroundStyle(AppDesign.Colors.brand)
+            .overlay(
+                RoundedRectangle(cornerRadius: 12)
+                    .stroke(AppDesign.Colors.brand, lineWidth: 2)
+            )
+        }
+    }
+
+    private func productOption(
+        product: SubscriptionProductInfo,
+        label: String,
+        badge: String?,
+        isSelected: Bool
+    ) -> some View {
+        Button {
+            selectedProductID = product.id
+        } label: {
+            HStack {
+                VStack(alignment: .leading, spacing: 2) {
+                    HStack(spacing: 8) {
+                        Text(label)
+                            .font(.subheadline.weight(.semibold))
+                        if let badge {
+                            Text(badge)
+                                .font(.caption2.bold())
+                                .padding(.horizontal, 6)
+                                .padding(.vertical, 2)
+                                .background(AppDesign.Colors.proAccent)
+                                .foregroundStyle(.white)
+                                .cornerRadius(4)
+                        }
+                    }
+                    Text(product.displayPrice)
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
+                Spacer()
+                Image(systemName: isSelected ? "checkmark.circle.fill" : "circle")
+                    .font(.title3)
+                    .foregroundStyle(isSelected ? AppDesign.Colors.brand : .secondary)
+            }
+            .padding()
+            .background(AppDesign.Colors.cardBackground)
+            .cornerRadius(12)
+            .overlay(
+                RoundedRectangle(cornerRadius: 12)
+                    .stroke(isSelected ? AppDesign.Colors.brand : Color.secondary.opacity(0.2), lineWidth: isSelected ? 2 : 1)
+            )
+        }
+        .foregroundStyle(.primary)
+    }
+
+    private var subscribeButton: some View {
+        Button {
+            guard let productID = selectedProductID else { return }
+            Task { await purchase(productID) }
+        } label: {
+            Text("Assinar agora")
+                .fontWeight(.semibold)
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 16)
+                .background(AppDesign.Colors.brand)
+                .foregroundStyle(.white)
+                .cornerRadius(12)
+        }
+        .disabled(selectedProductID == nil)
+    }
+
+    private var noProductsSection: some View {
+        VStack(spacing: 12) {
+            Image(systemName: "exclamationmark.triangle")
+                .font(.largeTitle)
+                .foregroundStyle(.secondary)
+            Text("Produtos indisponíveis")
+                .font(.headline)
+            Text("Não foi possível carregar os planos. Tente novamente.")
+                .font(.caption)
+                .foregroundStyle(.secondary)
+                .multilineTextAlignment(.center)
+            Button("Tentar novamente") {
+                Task { await subscriptionClient.loadSubscriptionProducts() }
+            }
+            .buttonStyle(.bordered)
+        }
+        .padding()
     }
 
     private var commitmentSection: some View {
