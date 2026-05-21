@@ -166,6 +166,8 @@ public struct RecordDetailView: View {
 }
 
 public struct PRPercentagesView: View {
+    @EnvironmentObject private var settingsClient: SettingsClient
+
     let record: PersonalRecord
 
     public init(record: PersonalRecord) {
@@ -176,13 +178,21 @@ public struct PRPercentagesView: View {
         Array(stride(from: 10, through: 100, by: 10))
     }
 
+    private var measureMode: MeasureTrackingMode {
+        settingsClient.measureTrackingMode
+    }
+
+    private var baseWeight: Int {
+        measureMode.weightValue(poundValue: record.poundValue, kiloValue: record.kiloValue)
+    }
+
     public var body: some View {
         List {
             ForEach(percentages, id: \.self) { pct in
                 HStack {
                     Text("\(pct)%")
                     Spacer()
-                    Text("\(Int(Double(record.poundValue) * Double(pct) / 100.0)) lb")
+                    Text("\(Int(Double(baseWeight) * Double(pct) / 100.0)) \(measureMode.suffix)")
                         .foregroundStyle(.secondary)
                 }
             }

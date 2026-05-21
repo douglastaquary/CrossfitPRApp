@@ -67,9 +67,7 @@ public enum InsightsRanking {
     public static func chartAnnotation(for record: PersonalRecord, measureMode: MeasureTrackingMode) -> String {
         switch record.group {
         case .barbell:
-            return measureMode == .pounds
-                ? "\(record.poundValue) lbs"
-                : "\(record.kiloValue) kg"
+            return measureMode.formatWeight(poundValue: record.poundValue, kiloValue: record.kiloValue)
         case .gymnastic:
             return "\(record.maxReps) reps"
         case .endurance:
@@ -80,10 +78,8 @@ public enum InsightsRanking {
     public static func marketValue(for record: PersonalRecord, measureMode: MeasureTrackingMode) -> (text: String, numeric: Double) {
         switch record.group {
         case .barbell:
-            if measureMode == .pounds {
-                return ("\(record.poundValue) lb", Double(record.poundValue))
-            }
-            return ("\(record.kiloValue) kg", Double(record.kiloValue))
+            let value = measureMode.weightValue(poundValue: record.poundValue, kiloValue: record.kiloValue)
+            return ("\(value) \(measureMode.suffix)", Double(value))
         case .gymnastic:
             return ("\(record.maxReps) reps", Double(record.maxReps))
         case .endurance:
