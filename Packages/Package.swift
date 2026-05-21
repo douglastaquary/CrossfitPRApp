@@ -1,0 +1,62 @@
+// swift-tools-version: 5.7
+
+import PackageDescription
+
+let package = Package(
+    name: "CrossfitPRPackages",
+    defaultLocalization: "pt-BR",
+    platforms: [
+        .iOS(.v16),
+    ],
+    products: [
+        .library(name: "Domain", targets: ["DomainExport"]),
+        .library(name: "Localization", targets: ["LocalizationExport"]),
+        .library(name: "Persistence", targets: ["PersistenceExport"]),
+        .library(name: "Subscription", targets: ["SubscriptionExport"]),
+        .library(name: "WorkoutEngine", targets: ["WorkoutEngineExport"]),
+        .library(name: "Application", targets: ["ApplicationExport"]),
+        .library(name: "SharedUI", targets: ["SharedUIExport"]),
+        .library(name: "Launch", targets: ["LaunchExport"]),
+        .library(name: "Onboarding", targets: ["OnboardingExport"]),
+        .library(name: "Categories", targets: ["CategoriesExport"]),
+        .library(name: "PRHistory", targets: ["PRHistoryExport"]),
+        .library(name: "RecordDetail", targets: ["RecordDetailExport"]),
+        .library(name: "Insights", targets: ["InsightsExport"]),
+        .library(name: "PROUpgrade", targets: ["PROUpgradeExport"]),
+        .library(name: "Settings", targets: ["SettingsExport"]),
+    ],
+    dependencies: [
+        .package(path: "Domain"),
+        .package(path: "Localization"),
+        .package(path: "Persistence"),
+        .package(path: "Subscription"),
+        .package(path: "WorkoutEngine"),
+        .package(path: "Application"),
+        .package(path: "SharedUI"),
+        .package(path: "Launch"),
+        .package(path: "Onboarding"),
+        .package(path: "Categories"),
+        .package(path: "PRHistory"),
+        .package(path: "RecordDetail"),
+        .package(path: "Insights"),
+        .package(path: "PROUpgrade"),
+        .package(path: "Settings"),
+    ],
+    targets: [
+        .target(name: "DomainExport", dependencies: [.product(name: "Domain", package: "Domain")], path: "Sources/DomainExport"),
+        .target(name: "LocalizationExport", dependencies: [.product(name: "Localization", package: "Localization")], path: "Sources/LocalizationExport"),
+        .target(name: "PersistenceExport", dependencies: [.product(name: "Persistence", package: "Persistence")], path: "Sources/PersistenceExport"),
+        .target(name: "SubscriptionExport", dependencies: [.product(name: "Subscription", package: "Subscription")], path: "Sources/SubscriptionExport"),
+        .target(name: "WorkoutEngineExport", dependencies: [.product(name: "WorkoutEngine", package: "WorkoutEngine")], path: "Sources/WorkoutEngineExport"),
+        .target(name: "ApplicationExport", dependencies: [.product(name: "Application", package: "Application")], path: "Sources/ApplicationExport"),
+        .target(name: "SharedUIExport", dependencies: [.product(name: "SharedUI", package: "SharedUI")], path: "Sources/SharedUIExport"),
+        .target(name: "LaunchExport", dependencies: [.product(name: "Launch", package: "Launch")], path: "Sources/LaunchExport"),
+        .target(name: "OnboardingExport", dependencies: [.product(name: "Onboarding", package: "Onboarding")], path: "Sources/OnboardingExport"),
+        .target(name: "CategoriesExport", dependencies: [.product(name: "Categories", package: "Categories")], path: "Sources/CategoriesExport"),
+        .target(name: "PRHistoryExport", dependencies: [.product(name: "PRHistory", package: "PRHistory")], path: "Sources/PRHistoryExport"),
+        .target(name: "RecordDetailExport", dependencies: [.product(name: "RecordDetail", package: "RecordDetail")], path: "Sources/RecordDetailExport"),
+        .target(name: "InsightsExport", dependencies: [.product(name: "Insights", package: "Insights")], path: "Sources/InsightsExport"),
+        .target(name: "PROUpgradeExport", dependencies: [.product(name: "PROUpgrade", package: "PROUpgrade")], path: "Sources/PROUpgradeExport"),
+        .target(name: "SettingsExport", dependencies: [.product(name: "Settings", package: "Settings")], path: "Sources/SettingsExport"),
+    ]
+)
