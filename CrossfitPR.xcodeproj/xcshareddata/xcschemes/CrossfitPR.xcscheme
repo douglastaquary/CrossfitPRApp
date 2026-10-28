@@ -14,9 +14,23 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "4E7F0B0627F3C51E00D8B5C9"
+               BlueprintIdentifier = "4E58055327F3C5AE00F16219"
                BuildableName = "CrossfitPR.app"
                BlueprintName = "CrossfitPR"
+               ReferencedContainer = "container:CrossfitPR.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "4E58070127F3C5AE00F16219"
+               BuildableName = "CrossfitPRUITests.xctest"
+               BlueprintName = "CrossfitPRUITests"
                ReferencedContainer = "container:CrossfitPR.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -28,6 +42,26 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES"
       shouldAutocreateTestPlan = "YES">
+      <EnvironmentVariables>
+         <EnvironmentVariable
+            key = "CROSSFITPR_DOCS_ROOT"
+            value = "$(SRCROOT)/docs"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+      </EnvironmentVariables>
+      <Testables>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "4E58070127F3C5AE00F16219"
+               BuildableName = "CrossfitPRUITests.xctest"
+               BlueprintName = "CrossfitPRUITests"
+               ReferencedContainer = "container:CrossfitPR.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+      </Testables>
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug"
@@ -43,7 +77,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "4E7F0B0627F3C51E00D8B5C9"
+            BlueprintIdentifier = "4E58055327F3C5AE00F16219"
             BuildableName = "CrossfitPR.app"
             BlueprintName = "CrossfitPR"
             ReferencedContainer = "container:CrossfitPR.xcodeproj">
@@ -60,7 +94,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "4E7F0B0627F3C51E00D8B5C9"
+            BlueprintIdentifier = "4E58055327F3C5AE00F16219"
             BuildableName = "CrossfitPR.app"
             BlueprintName = "CrossfitPR"
             ReferencedContainer = "container:CrossfitPR.xcodeproj">

@@ -179,6 +179,7 @@ public struct PROUpgradeView: View {
                     .font(.title2)
                     .foregroundStyle(.secondary)
             }
+            .accessibilityIdentifier("pro.upgrade.close")
         }
         .padding([.top, .trailing], 20)
     }

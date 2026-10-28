@@ -1,221 +1,155 @@
 # CrossfitPR 🏋️
 
-**Seu companheiro de treino para registrar e acompanhar seus PRs de CrossFit.**
+**Registre seus PRs, veja sua evolução e entenda quando vale a pena ir mais pesado.**
 
-CrossfitPR é um app iOS desenvolvido para atletas de CrossFit que desejam acompanhar sua evolução de forma simples e intuitiva. Registre seus Personal Records (PRs), visualize gráficos de progresso e receba insights personalizados sobre seu desempenho.
+CrossfitPR é um app iOS feito para quem treina CrossFit e quer histórico claro de Personal Records — sem planilha, sem adivinhar se aquele snatch de ontem foi PR ou não. Quatro abas, fluxo direto: categorias → PRs → insights → ajustes.
 
 ---
 
-## Screenshots
+## Demo
 
 <p align="center">
-  <img src="docs/screenshots/onboarding.png" width="200" alt="Onboarding">
-  <img src="docs/screenshots/categories.png" width="200" alt="Categorias">
-  <img src="docs/screenshots/records.png" width="200" alt="Registros">
-  <img src="docs/screenshots/insights.png" width="200" alt="Insights">
+  <img src="docs/media/crossfitpr-demo.gif" width="320" alt="Demonstração do CrossfitPR">
 </p>
 
-> **Nota:** Para adicionar screenshots, capture as telas do simulador e salve em `docs/screenshots/`.
+> GIF e prints vêm de `docs/media/` e `docs/screenshots/`. Para atualizar após mudanças de UI, rode `./scripts/capture-readme-media-auto.sh` (Xcode 14.2: `./scripts/configure-spm-xcode14.sh` na primeira vez).
 
 ---
 
-## Funcionalidades
+## Telas
 
-### Gratuito
-- ✅ Registrar PRs de exercícios (Barbell, Gymnastic, Endurance)
-- ✅ Visualizar histórico de PRs por categoria
-- ✅ Gráficos de evolução por exercício
-- ✅ Suporte a Kilos e Libras (configurável)
-- ✅ Sincronização via iCloud
-- ✅ Notificações de lembrete de treino
+<p align="center">
+  <img src="docs/screenshots/onboarding.png" width="180" alt="Onboarding">
+  <img src="docs/screenshots/categories.png" width="180" alt="Categorias">
+  <img src="docs/screenshots/records-empty.png" width="180" alt="Meus PRs">
+  <img src="docs/screenshots/insights-free.png" width="180" alt="Insights">
+  <img src="docs/screenshots/pro-upgrade.png" width="180" alt="CrossfitPR PRO">
+  <img src="docs/screenshots/settings.png" width="180" alt="Ajustes">
+</p>
 
-### PRO (Menos que um café por mês ☕)
-- 🏆 Ranking de melhores PRs
-- 📊 Insights avançados com múltiplos gráficos
-- 🎯 Metas personalizadas pro seu ritmo
-- ⚠️ Alertas de estagnação
-- 📈 Projeções de PR pras próximas semanas
-- 🗑️ Exclusão de registros
+---
+
+## O que você ganha
+
+### Grátis — registrar e acompanhar o básico
+
+- **PRs por categoria** — Barbell, Gymnastic, Endurance e mais
+- **Histórico** — lista dos seus registros com detalhe por exercício
+- **Insights essenciais** — visão inicial da evolução (teaser do que o PRO desbloqueia)
+- **Unidade kg ou lb** — escolha em Ajustes
+- **Offline-first** — dados salvos no aparelho; sync com iCloud quando disponível
+- **Onboarding rápido** — splash + boas-vindas, já cai nas tabs
+
+### CrossfitPR PRO — menos que um café por mês ☕
+
+O PRO é para quem quer **interpretação**, não só números na tela:
+
+| Benefício | Por que importa |
+|-----------|-----------------|
+| **Análises inteligentes dos treinos** | Padrões no seu histórico explicados em linguagem clara — o que melhorou, o que travou |
+| **Motor de treino (WorkoutEngine)** | Estagnação, tendências e gatilhos para destravar PRs |
+| **Gráficos de progressão** | Evolução por movimento, não só o último valor |
+| **Metas no seu ritmo** | Recomendações alinhadas ao que você já registrou |
+| **Exportar histórico** | Leve seus dados para onde quiser |
+
+#### Por que a assinatura PRO inclui IA?
+
+Interpretar meses de PRs com contexto (volume, platôs, categorias diferentes) **não roda de graça**: modelos de IA em nuvem têm custo por análise — tokens, inferência e manutenção do pipeline que transforma seu histórico em texto útil.
+
+**Parte do valor do PRO cobre exatamente isso:** infraestrutura de IA para ler seus dados de treino com segurança e devolver análises que um resumo local não consegue dar. No plano Free você continua registrando PRs e vendo o básico; no PRO você financia análises mais profundas — como ter um coach olhando seus números entre os treinos.
+
+> **Transparência:** hoje o app já usa heurísticas locais (WorkoutEngine) e destrava a experiência PRO completa na interface. A camada de **IA generativa** para análises detalhadas está no roadmap ([CPR-005](spdd/analysis/CPR-001-20260520-%5BAnalysis%5D-baseline-pr-tracking-and-insights.md)); a assinatura PRO já reflete esse custo futuro e o posicionamento do produto.
 
 ---
 
 ## Requisitos
 
-- **iOS 16.0+**
-- **Xcode 14.2+**
-- **Swift 6**
-- Conta Apple Developer (para CloudKit)
+| Item | Versão |
+|------|--------|
+| iOS | 16.0+ |
+| Xcode | 14.2+ (Swift 5.7) ou Xcode 16+ |
+| Conta Apple Developer | Recomendada para CloudKit / TestFlight |
 
 ---
 
-## Como Executar
-
-### 1. Clone o repositório
+## Rodar o projeto
 
 ```bash
 git clone https://github.com/douglastaquary/CrossfitPR.git
 cd CrossfitPR
-```
-
-### 2. Abra no Xcode
-
-```bash
 open CrossfitPR.xcodeproj
 ```
 
-### 3. Configure o Signing
+1. Em **Signing & Capabilities**, escolha seu Team (`com.douglast.CrossfitPR`).
+2. Simulador **iPhone 14 Pro** (ou superior) → `⌘R`.
 
-- Selecione seu Team de desenvolvimento em **Signing & Capabilities**
-- O Bundle ID padrão é `com.douglast.CrossfitPR`
-
-### 4. Execute
-
-- Selecione um simulador (iPhone 14 Pro ou superior recomendado)
-- Pressione `Cmd + R` para compilar e executar
-
-### Via linha de comando
+**Linha de comando:**
 
 ```bash
-# Build
-xcodebuild -scheme CrossfitPR -destination 'platform=iOS Simulator,name=iPhone 16' build
+xcodebuild -scheme CrossfitPR \
+  -destination 'platform=iOS Simulator,name=iPhone 14 Pro' build
 
-# Testes
 cd Packages/Domain && swift test
-cd Packages/WorkoutEngine && swift test
+cd ../WorkoutEngine && swift test
+```
+
+**Atualizar GIF e screenshots do README:**
+
+```bash
+./scripts/configure-spm-xcode14.sh   # Xcode 14.2 — aponta SPM local file URL
+./scripts/capture-readme-media-auto.sh
 ```
 
 ---
 
-## Arquitetura
+## Arquitetura (SPDD + SPM)
 
-O projeto segue **[SPDD (Structured-Prompt-Driven Development)](https://martinfowler.com/articles/structured-prompt-driven/)** com módulos SPM:
+Desenvolvimento guiado por [SPDD](https://martinfowler.com/articles/structured-prompt-driven/) — intenção no canvas, código rastreável. Detalhes em [`AGENTS.md`](AGENTS.md) e [`spdd/README.md`](spdd/README.md).
 
 ```
-CrossfitPR/                  # App shell (SwiftUI)
+CrossfitPR/              # App shell (SwiftUI, 4 tabs)
+Package.swift            # Pacotes locais (monorepo SPM)
 Packages/
-├── Domain/                  # Entidades e lógica de negócio pura
-├── Persistence/             # SwiftData + CloudKit
-├── Subscription/            # StoreKit 2 (PRO)
-├── WorkoutEngine/           # Engine de insights
-├── Application/             # Clients + AppEnvironment
-├── Localization/            # Strings + Design tokens
-├── SharedUI/                # Componentes visuais reutilizáveis
-├── PRHistory/               # Feature: histórico de PRs
-├── Categories/              # Feature: lista de categorias
-├── RecordDetail/            # Feature: detalhe do registro
-├── Insights/                # Feature: insights de treino
-├── PROUpgrade/              # Feature: upgrade PRO
-├── Settings/                # Feature: configurações
-├── Launch/                  # Feature: splash + onboarding
-└── Onboarding/              # Feature: tela de boas-vindas
+├── Domain               # Entidades, ProFeature, ports
+├── Persistence          # JSON local + CloudKit (best-effort)
+├── Subscription         # StoreKit 2
+├── WorkoutEngine        # Insights heurísticos
+├── Application          # Clients + AppEnvironment
+├── Localization         # Strings + AppDesign
+├── SharedUI             # Componentes compartilhados
+├── Launch / Onboarding  # Splash + primeira execução
+├── Categories           # Exercícios por categoria
+├── PRHistory            # Lista e novo PR
+├── RecordDetail         # Detalhe e percentuais
+├── Insights             # Free teaser + PRO completo
+├── PROUpgrade           # Assinatura
+└── Settings             # Preferências
 ```
 
-### Padrões
-
-- **SwiftUI sem ViewModels** — seguindo [Dimillian 2025](https://dimillian.medium.com/swiftui-in-2025-forget-mvvm-262ff2bbd2ed)
-- **Clients via `@EnvironmentObject`** — `PersonalRecordClient`, `SubscriptionClient`, `SettingsClient`
-- **Offline-first** — SwiftData local com sync CloudKit best-effort
-- **Swift Testing** — `import Testing` para testes unitários
-
-### UX & Copy
-
-- **Textos humanizados** — Comunicação direta e motivacional ("Bora começar", "Quer evoluir mais rápido?")
-- **Splash animado** — Estilo X/Twitter com logo que escala e desaparece
-- **Teaser PRO** — Tela de preview mostrando benefícios antes de assinar
-- **Proposta de valor clara** — "Menos que um café por mês"
-- **Empty states amigáveis** — Mensagens encorajadoras quando não há dados
-- **Fluxo de assinatura animado** — Feedback visual em cada etapa do processo
+**Padrões:** SwiftUI **sem ViewModels**; `@EnvironmentObject` (`PersonalRecordClient`, `SubscriptionClient`, `SettingsClient`, …); copy e cores via `Strings.*` e `AppDesign.*`.
 
 ---
 
-## Estrutura SPDD
+## Idiomas
 
-```
-spdd/
-├── stories/                 # User stories
-├── analysis/                # Análises estratégicas
-└── prompt/                  # REASONS Canvas (Feat, Test, Fix)
-```
-
-Consulte `AGENTS.md` para guia completo do workflow SPDD.
+Português (pt-BR) e inglês — `Packages/Localization/Sources/Localization/Resources/`.
 
 ---
 
-## Desenvolvimento com AI Agents
+## Contribuir
 
-Este projeto é otimizado para desenvolvimento assistido por AI (Cursor, Claude, etc.).
-
-### Skills disponíveis
-
-| Skill | Arquivo | Uso |
-|-------|---------|-----|
-| SPDD | `.cursor/skills/crossfitpr-spdd/SKILL.md` | Canvas, arquitetura, workflow |
-| Design | `.cursor/skills/design/skill-design.md` | Tokens visuais, navegação |
-| iOS | `.cursor/skills/ios-development-skill/skill-ios.md` | Swift, SwiftUI, patterns |
-
-### Otimização de tokens
-
-As skills foram otimizadas para **reduzir uso de tokens**:
-
-- Skills concisas e focadas (< 100 linhas cada)
-- Tabelas em vez de parágrafos longos
-- Referências a arquivos em vez de duplicar conteúdo
-- Regras claras e diretas
-
-**Dica:** Ao usar AI agents, referencie as skills específicas para o contexto:
-- Lógica/arquitetura: `@SKILL.md` (SPDD)
-- UI/visual: `@skill-design.md` + `@SKILL.md`
-- Código Swift: `@skill-ios.md`
-
----
-
-## Localização
-
-O app suporta **Português (pt-BR)** e **Inglês (en-US)**.
-
-Strings localizadas em:
-```
-Packages/Localization/Sources/Localization/Resources/
-├── pt-BR.lproj/Localizable.strings
-└── en.lproj/Localizable.strings
-```
-
----
-
-## Próximos Passos
-
-- [ ] Widget iOS para visualização rápida do último PR
-- [ ] Integração com Apple Watch para registro durante treino
-- [ ] Exportação de dados (CSV/JSON)
-- [ ] Compartilhamento de PRs nas redes sociais
-- [ ] Comparação com médias da comunidade
-- [ ] Suporte a WODs (Workout of the Day)
-
----
-
-## Contribuindo
-
-1. Fork o repositório
-2. Crie uma branch para sua feature (`git checkout -b feature/nova-funcionalidade`)
-3. Siga o workflow SPDD: story → analysis → canvas → implementação
-4. Faça commit referenciando o ID do canvas (`CPR-NNN`)
-5. Abra um Pull Request
+1. Fork → branch `feature/...`
+2. Workflow SPDD: story → analysis → canvas → código (ID `CPR-NNN`)
+3. Pull Request com test plan
 
 ---
 
 ## Licença
 
-Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+[MIT](LICENSE)
 
 ---
 
-## Autor
+**Douglas Taquary** · [@douglastaquary](https://github.com/douglastaquary)
 
-**Douglas Taquary**  
-[@douglastaquary](https://github.com/douglastaquary)
-
----
-
-<p align="center">
-  <i>Feito com ❤️ para a comunidade CrossFit</i>
-</p>
+<p align="center"><i>Feito com carinho para a comunidade CrossFit</i></p>
