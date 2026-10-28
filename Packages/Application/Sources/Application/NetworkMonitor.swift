@@ -10,6 +10,11 @@ public final class NetworkMonitor: ObservableObject {
     @Published public private(set) var isConnected = true
 
     public init() {
+        // CI/simulador: NWPathMonitor costuma reportar offline e bloqueia LaunchView.
+        if UITestLaunchSupport.isUITestMode {
+            isConnected = true
+            return
+        }
         monitor.pathUpdateHandler = { [weak self] path in
             Task { @MainActor in
                 self?.isConnected = path.status == .satisfied

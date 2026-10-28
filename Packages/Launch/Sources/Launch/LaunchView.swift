@@ -23,7 +23,7 @@ public struct LaunchView<MainContent: View>: View {
 
     public var body: some View {
         ZStack {
-            if !networkMonitor.isConnected {
+            if !UITestLaunchSupport.isUITestMode && !networkMonitor.isConnected {
                 LaunchOfflineContent(showNetworkAlert: $showNetworkAlert)
             } else if shouldShowOnboarding {
                 OnboardingView {

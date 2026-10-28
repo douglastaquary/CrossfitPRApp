@@ -22,7 +22,10 @@ public final class SettingsClient: ObservableObject {
     }
 
     @Published public var hasCompletedLaunch: Bool {
-        didSet { defaults.set(hasCompletedLaunch, forKey: Keys.launchBefore) }
+        didSet {
+            guard !UITestLaunchSupport.isUITestMode else { return }
+            defaults.set(hasCompletedLaunch, forKey: Keys.launchBefore)
+        }
     }
 
     public init(defaults: UserDefaults = .standard) {

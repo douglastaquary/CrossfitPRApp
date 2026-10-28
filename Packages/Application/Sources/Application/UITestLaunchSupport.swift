@@ -17,4 +17,9 @@ public enum UITestLaunchSupport {
     public static var shouldForceOnboarding: Bool {
         ProcessInfo.processInfo.environment[forceOnboardingKey] == "1"
     }
+
+    /// App lançado pelos UI tests (`UITEST_SKIP_SPLASH=1` em `AppLocalizationQATests`).
+    public static var isUITestMode: Bool {
+        shouldSkipSplash
+    }
 }

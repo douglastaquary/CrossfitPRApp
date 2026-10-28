@@ -14,7 +14,7 @@ Target `CrossfitPRUITests` → `AppLocalizationQATests`:
 
 | Environment | Efeito |
 |-------------|--------|
-| `UITEST_SKIP_SPLASH=1` | Pula splash animado |
+| `UITEST_SKIP_SPLASH=1` | Pula splash animado; também **modo UI test** (ignora gate de rede no CI) |
 | `UITEST_SKIP_ONBOARDING=1` | Marca onboarding como concluído |
 | `UITEST_FORCE_ONBOARDING=1` | Força tela de onboarding |
 
