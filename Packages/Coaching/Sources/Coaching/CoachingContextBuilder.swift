@@ -43,7 +43,14 @@ public struct CoachingContextBuilder: Sendable {
         let stalled = summaries.filter { $0.deltaPercent <= 2 }.map(\.name).prefix(3).map { $0 }
         let rising = summaries.filter { $0.deltaPercent >= 8 }.map(\.name).prefix(3).map { $0 }
         let tags = engineInsights
-            .filter { $0.category == .workoutEngine || $0.category == .trend }
+            .filter {
+                switch $0.category {
+                case .workoutEngine, .trend, .eliteAssessment, .eliteLimitingFactor:
+                    return true
+                default:
+                    return false
+                }
+            }
             .prefix(6)
             .map { shortTag($0) }
 

@@ -27,7 +27,7 @@ public struct SettingsView: View {
             SettingsTrackingSection(measureTrackingMode: $settingsClient.measureTrackingMode)
 
             SettingsProSection(
-                isPro: subscriptionClient.currentTier == .pro,
+                tier: subscriptionClient.currentTier,
                 onShowUpgrade: { showPROUpgrade = true },
                 onShowCancelAlert: { showCancelAlert = true }
             )
@@ -126,18 +126,27 @@ private struct SettingsTrackingSection: View {
 }
 
 private struct SettingsProSection: View {
-    let isPro: Bool
+    let tier: SubscriptionTier
     let onShowUpgrade: () -> Void
     let onShowCancelAlert: () -> Void
 
     var body: some View {
         Section(Strings.Settings.proSection) {
-            if isPro {
+            switch tier {
+            case .elite:
                 HStack {
-                    Image(systemName: "checkmark.seal.fill")
-                        .foregroundStyle(AppDesign.Colors.proAccent)
-                    Text(Strings.Settings.Pro.subscriptionActive)
+                    Image(systemName: AppDesign.Icon.eliteBadge)
+                        .foregroundStyle(AppDesign.Colors.eliteAccent)
+                    Text(Strings.Settings.Pro.eliteSubscriptionActive)
                         .foregroundStyle(.primary)
+                }
+
+                Button(action: onShowUpgrade) {
+                    HStack {
+                        Image(systemName: "arrow.up.circle")
+                            .foregroundStyle(AppDesign.Colors.eliteAccent)
+                        Text(Strings.Settings.Pro.managePlan)
+                    }
                 }
 
                 Button(role: .destructive, action: onShowCancelAlert) {
@@ -146,7 +155,31 @@ private struct SettingsProSection: View {
                         Text(Strings.Settings.Pro.cancelSubscription)
                     }
                 }
-            } else {
+
+            case .pro:
+                HStack {
+                    Image(systemName: "checkmark.seal.fill")
+                        .foregroundStyle(AppDesign.Colors.proAccent)
+                    Text(Strings.Settings.Pro.subscriptionActive)
+                        .foregroundStyle(.primary)
+                }
+
+                Button(action: onShowUpgrade) {
+                    HStack {
+                        Image(systemName: AppDesign.Icon.eliteBadge)
+                            .foregroundStyle(AppDesign.Colors.eliteAccent)
+                        Text(Strings.Settings.Pro.unlockElite)
+                    }
+                }
+
+                Button(role: .destructive, action: onShowCancelAlert) {
+                    HStack {
+                        Image(systemName: "xmark.circle")
+                        Text(Strings.Settings.Pro.cancelSubscription)
+                    }
+                }
+
+            case .free:
                 Button(action: onShowUpgrade) {
                     HStack {
                         Image(systemName: "sparkles")

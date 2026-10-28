@@ -40,11 +40,15 @@ public struct AppEnvironment {
         let subscription: SubscriptionClient
         if let store = subscriptionStore {
             subscription = SubscriptionClient(store: store)
+        } else if UITestLaunchSupport.prefersStoreKitConfiguration {
+            // Validação manual / UI com Products.storekit (scheme + StoreKit Configuration).
+            subscription = SubscriptionClient(store: StoreKitSubscriptionStore())
         } else if let tier = UITestLaunchSupport.subscriptionTierOverride {
-            subscription = SubscriptionClient(store: MockSubscriptionStore(tier: tier))
+            subscription = SubscriptionClient(store: makeUITestMockStore(tier: tier))
         } else {
             #if targetEnvironment(simulator)
-            subscription = SubscriptionClient(store: MockSubscriptionStore())
+            // Simulador: mock determinístico (CI/UI). Sheet Apple real = device ou UITEST_USE_STOREKIT=1.
+            subscription = SubscriptionClient(store: makeUITestMockStore(tier: .free))
             #else
             subscription = SubscriptionClient()
             #endif
@@ -83,5 +87,12 @@ public struct AppEnvironment {
         await subscriptionClient.refreshStatus()
         await subscriptionClient.loadSubscriptionProducts()
         subscriptionClient.observeTransactionUpdates()
+    }
+
+    private static func makeUITestMockStore(tier: SubscriptionTier) -> MockSubscriptionStore {
+        MockSubscriptionStore(
+            tier: tier,
+            simulatedPurchaseOutcome: UITestLaunchSupport.simulatedPurchaseOutcome
+        )
     }
 }

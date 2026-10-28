@@ -25,6 +25,18 @@
 "engine.trend.improved" = "improved by";
 "engine.trend.message" = "Since your first log, your PR %1$@ %2$lld lb. %3$@";
 "engine.trend.title" = "%1$@: your curve";
+"engine.assessment.title" = "Athlete assessment";
+"engine.assessment.message" = "How you stack up across domains:\n%1$@";
+"engine.assessment.domainLine" = "• %1$@ — %2$lld%%";
+"engine.assessment.genericDomain" = "your weakest domain";
+"engine.limitingFactor.title" = "Your ceiling right now";
+"engine.limitingFactor.message" = "Your limiting factor is %1$@. Bias the next cycle toward that domain — quality over volume.";
+"engine.eliteTeaser.title" = "Elite sees your ceiling";
+"engine.eliteTeaser.message" = "Unlock full assessment and limiting-factor coaching. Hint: watch %1$@.";
+"engine.domain.strength" = "Strength";
+"engine.domain.olympic" = "Olympic lifting";
+"engine.domain.gymnastics" = "Gymnastics";
+"engine.domain.engine" = "Engine / endurance";
 
 /* ─────────────────────────────────────────────────────────────
    ERRORS — Friendly error messages
@@ -39,9 +51,9 @@
 "error.repo.invalidData" = "Some data doesn't look valid. Check exercise, weight, and date.";
 "error.repo.notFound" = "PR not found. It may have been removed or hasn't synced yet.";
 "error.repo.syncFailed" = "Saved on iPhone. iCloud will sync soon.";
-"error.sub.pending" = "Subscription pending. Waiting for App Store confirmation.";
-"error.sub.productUnavailable" = "PRO unavailable right now. Try again in a moment.";
-"error.sub.purchaseFailed" = "Couldn't complete. Check your connection.";
+"error.sub.pending" = "Payment is waiting for App Store approval (Ask to Buy or review). We'll unlock PRO/Elite as soon as it's confirmed.";
+"error.sub.productUnavailable" = "This plan isn't available right now. Check your connection and try again.";
+"error.sub.purchaseFailed" = "We couldn't complete the payment with the App Store. Check your network and payment method, then try again.";
 
 /* ─────────────────────────────────────────────────────────────
    EXERCISES
@@ -186,6 +198,26 @@
 "proFeature.personalizedRecommendations" = "Goals tailored to your pace";
 "proFeature.trendCharts" = "Detailed progression charts";
 "proFeature.workoutEngineAnalysis" = "Detect plateaus and unlock new PRs";
+"proFeature.athleteAssessment" = "Athlete assessment across domains";
+"proFeature.limitingFactorAnalysis" = "Limiting-factor coaching";
+
+"elite.title" = "Train like a competitor";
+"elite.subtitle" = "Assessment, limiting factors, and denser feedback — built for athletes who treat this like a sport.";
+"elite.competitorMode" = "Competitor mode";
+"elite.badge" = "Elite";
+"elite.plan.free" = "Free";
+"elite.plan.pro" = "PRO";
+"elite.plan.elite" = "Elite";
+"elite.benefit.assessment" = "Domain assessment (strength, Oly, gymnastics, engine)";
+"elite.benefit.limiting" = "Limiting-factor card after every analysis";
+"elite.benefit.dense" = "Denser coach window and Elite prompts";
+"elite.choosePlan" = "Choose Elite";
+"elite.monthlyPlan" = "Elite monthly";
+"elite.annualPlan" = "Elite annual";
+"elite.sectionCompare" = "Compare plans";
+"elite.unlockCTA" = "Get Elite";
+"elite.insights.header" = "Competitor";
+"elite.teaser.cta" = "See Elite assessment";
 
 /* ─────────────────────────────────────────────────────────────
    TABS
@@ -234,8 +266,8 @@
 "purchase.item3.title" = "Ranking of your records";
 "purchase.item3.description" = "See your best PRs and track your progression closely.";
 "purchase.processing.description" = "Finishing up…";
-"purchase.tryfree.title" = "Try 7 days free";
-"purchase.commitment.title" = "Cancel anytime.\nNo fine print.\nAfter trial, auto-renews\nunless you turn it off.";
+"purchase.tryfree.title" = "Continue to payment";
+"purchase.commitment.title" = "Cancel anytime in Apple ID → Subscriptions.\nNo fine print in the app.\nAfter any trial, auto-renews unless you turn it off.";
 "purchase.lessthancoffe" = "Less than a coffee per month ☕";
 
 /* ─────────────────────────────────────────────────────────────
@@ -374,6 +406,9 @@
 "settings.pro.cancelAlert.message" = "You'll lose access to advanced insights, personalized goals, and PR projections. Are you sure?";
 "settings.pro.cancelAlert.keep" = "Keep PRO";
 "settings.pro.cancelAlert.confirm" = "Yes, cancel";
+"settings.elite.subscriptionActive" = "Elite subscription active";
+"settings.elite.unlock" = "Upgrade to Elite";
+"settings.elite.managePlan" = "Manage plan";
 
 "pro.upgrade.choosePlan" = "Choose your plan";
 "pro.upgrade.productsUnavailable.title" = "Products unavailable";
@@ -385,10 +420,24 @@
 "purchase.plan.bestValue" = "Best value";
 "purchase.selectPlan.required" = "Select a plan to continue";
 "purchase.retry" = "Try again";
+"purchase.close" = "Close";
+"purchase.continueToPayment" = "Continue to payment";
+"purchase.restore" = "Restore purchases";
+"purchase.restore.hint" = "Already subscribed on this Apple ID? Restore here.";
+"purchase.restore.nothingFound" = "No subscription found";
+"purchase.restore.nothingFound.detail" = "We couldn't find an active PRO or Elite plan for this Apple ID. If you just purchased, wait a moment and try Restore again.";
 "purchase.state.connecting" = "Connecting to the App Store…";
-"purchase.state.processing" = "Processing payment…";
-"purchase.state.confirming" = "Confirming subscription…";
-"purchase.state.success" = "Subscription activated!";
+"purchase.state.connecting.detail" = "Preparing a secure checkout.";
+"purchase.state.processing" = "Confirm payment in the App Store…";
+"purchase.state.processing.detail" = "Use Face ID, Touch ID, or your password when Apple asks. Don't close the app.";
+"purchase.state.confirming" = "Registering your subscription…";
+"purchase.state.confirming.detail" = "Syncing with the App Store and unlocking your plan in CrossfitPR.";
+"purchase.state.success" = "You're all set!";
+"purchase.state.success.detail" = "Payment confirmed. Your plan is active in the App Store and in the app.";
+"purchase.state.pending" = "Waiting for App Store approval";
+"purchase.state.pending.detail" = "Your request is pending (for example Ask to Buy). CrossfitPR will unlock automatically once Apple confirms.";
+"purchase.error.title" = "Payment didn't go through";
+"purchase.renew.note" = "First purchase or renew: Apple handles billing. Plans renew automatically until you cancel in Apple ID subscriptions.";
 
 "settings.notification.reminder.title1" = "Time to train! 💪🏼";
 "settings.notification.reminder.title2" = "Ready to catch up on training?";

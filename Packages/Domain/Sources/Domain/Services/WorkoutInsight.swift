@@ -8,6 +8,9 @@ public struct WorkoutInsight: Identifiable, Hashable, Sendable {
         case workoutEngine
         case recommendation
         case proTeaser
+        case eliteAssessment
+        case eliteLimitingFactor
+        case eliteTeaser
     }
 
     public var id: UUID
@@ -15,6 +18,7 @@ public struct WorkoutInsight: Identifiable, Hashable, Sendable {
     public var message: String
     public var category: Category
     public var requiresPro: Bool
+    public var requiresElite: Bool
     public var relatedExercise: ActivityKind?
 
     public init(
@@ -23,6 +27,7 @@ public struct WorkoutInsight: Identifiable, Hashable, Sendable {
         message: String,
         category: Category,
         requiresPro: Bool = false,
+        requiresElite: Bool = false,
         relatedExercise: ActivityKind? = nil
     ) {
         self.id = id
@@ -30,6 +35,7 @@ public struct WorkoutInsight: Identifiable, Hashable, Sendable {
         self.message = message
         self.category = category
         self.requiresPro = requiresPro
+        self.requiresElite = requiresElite
         self.relatedExercise = relatedExercise
     }
 }

@@ -42,5 +42,24 @@ struct WorkoutEngineTests {
 
         let insights = await engine.generateInsights(from: records, tier: .pro)
         #expect(insights.contains { $0.category == .workoutEngine })
+        #expect(insights.contains { $0.category == .eliteTeaser })
+        #expect(!insights.contains { $0.category == .eliteAssessment })
+    }
+
+    @Test("Elite recebe assessment e limiting factor")
+    func eliteTierGetsAssessment() async {
+        let records = (0..<3).map { index in
+            PersonalRecord(
+                exercise: Exercise(kind: .backSquat),
+                date: Date(timeIntervalSince1970: Double(index) * 86_400),
+                pounds: 135 + Double(index * 10),
+                goalDuration: 0
+            )
+        }
+
+        let insights = await engine.generateInsights(from: records, tier: .elite)
+        #expect(insights.contains { $0.category == .eliteAssessment })
+        #expect(insights.contains { $0.category == .eliteLimitingFactor || $0.category == .eliteAssessment })
+        #expect(!insights.contains { $0.category == .eliteTeaser })
     }
 }

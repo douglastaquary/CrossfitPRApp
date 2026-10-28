@@ -1,19 +1,29 @@
 # CPR-008 — Tier Elite (atletas avançados)
 
+**Personas:** Compete / Freedom ([skill crossfit-athlete-personas](../../.cursor/skills/crossfit-athlete-personas/SKILL.md))  
+**Backlog:** Athlete Assessment (#6) + Limiting factor (#7) — CPR-010
+
 ## Como competidor / atleta avançado
 
-Quero análises densas, periodização e comparativos além do PRO,
+Quero análises densas, assessment por domínio (força / Oly / ginástica / engine),
+limiting factor claro e comparativos além do PRO,
 
-para preparar competições e ciclos de treino longos.
+para preparar competições e ciclos de treino longos — sem virar app de programming diário.
 
 ## Critérios de aceite
 
-- [ ] `SubscriptionTier.elite` (ou produto StoreKit dedicado) + flags `ProFeature` elite
-- [ ] Paywall multi-plano em PROUpgrade (Design canvas)
-- [ ] UI distinta “modo competidor” — canvas [`CPR-008 Design`](../prompt/CPR-008-20261028-[Design]-elite-tier-ui.md)
-- [ ] `TokenBudgetPolicy` com limites Elite (K maior, janela temporal maior, TTL cache menor)
-- [ ] Coach usa mesma infra CPR-007 com prompts Elite
+- [x] `SubscriptionTier.elite` + `ProFeature` elite-only + StoreKit IDs Elite
+- [x] Paywall multi-plano em PROUpgrade (Free/PRO/Elite)
+- [x] UI distinta “modo competidor” — Insights + Settings + tokens Design
+- [x] `TokenBudgetPolicy` com limites Elite (window 180 no builder = wiring follow-up)
+- [ ] Coach prompts Elite dedicados (budget Elite já em TokenBudgetPolicy)
+- [x] **Athlete Assessment** — scores + cards UI
+- [x] **Limiting factor** + teaser PRO → Elite
+- [x] Free/PRO gating; `isPaid` inclui Elite
 
 ## Fora de escopo
 
 - watchOS (CPR-009)
+- Programming diário estilo Mayhem Athlete
+- Season mode completo (P1 — story/canvas follow-up)
+- Volume/readiness avançado (P2)

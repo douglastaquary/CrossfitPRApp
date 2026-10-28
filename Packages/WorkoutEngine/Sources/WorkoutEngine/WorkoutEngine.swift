@@ -2,9 +2,13 @@ import Foundation
 import Domain
 import Localization
 
-/// Motor WorkoutEngine — gera insights Free e PRO a partir dos PRs.
+/// Motor WorkoutEngine — gera insights Free, PRO e Elite a partir dos PRs.
 public struct WorkoutEngine: WorkoutInsightsProviding, Sendable {
-    public init() {}
+    private let assessmentService: AthleteAssessmentService
+
+    public init(assessmentService: AthleteAssessmentService = AthleteAssessmentService()) {
+        self.assessmentService = assessmentService
+    }
 
     public func generateInsights(
         from records: [PersonalRecord],
@@ -32,6 +36,13 @@ public struct WorkoutEngine: WorkoutInsightsProviding, Sendable {
             insights.append(contentsOf: proInsights)
         } else {
             insights.append(makeProTeaser(from: proInsights))
+        }
+
+        let assessment = assessmentService.assess(records: records)
+        if tier.canAccess(.athleteAssessment) {
+            insights.append(contentsOf: makeEliteAssessmentInsights(assessment))
+        } else if tier.canAccess(.detailedAIAnalysis), !assessment.scores.isEmpty {
+            insights.append(makeEliteTeaser(assessment: assessment))
         }
 
         return insights
@@ -142,5 +153,63 @@ public struct WorkoutEngine: WorkoutInsightsProviding, Sendable {
             category: .proTeaser,
             requiresPro: true
         )
+    }
+
+    private func makeEliteAssessmentInsights(_ assessment: AthleteAssessment) -> [WorkoutInsight] {
+        var insights: [WorkoutInsight] = []
+
+        let lines = assessment.scores
+            .sorted { $0.score > $1.score }
+            .map { score in
+                Strings.Engine.assessmentDomainLine(
+                    domain: localizedDomain(score.domain),
+                    percent: Int((score.score * 100).rounded())
+                )
+            }
+            .joined(separator: "\n")
+
+        insights.append(
+            WorkoutInsight(
+                title: Strings.Engine.assessmentTitle,
+                message: Strings.Engine.assessmentMessage(lines: lines),
+                category: .eliteAssessment,
+                requiresPro: true,
+                requiresElite: true
+            )
+        )
+
+        if let domain = assessment.limitingFactor {
+            insights.append(
+                WorkoutInsight(
+                    title: Strings.Engine.limitingFactorTitle,
+                    message: Strings.Engine.limitingFactorMessage(domain: localizedDomain(domain)),
+                    category: .eliteLimitingFactor,
+                    requiresPro: true,
+                    requiresElite: true
+                )
+            )
+        }
+
+        return insights
+    }
+
+    private func makeEliteTeaser(assessment: AthleteAssessment) -> WorkoutInsight {
+        let domainHint = assessment.limitingFactor.map(localizedDomain) ?? Strings.Engine.assessmentGenericDomain
+        return WorkoutInsight(
+            title: Strings.Engine.eliteTeaserTitle,
+            message: Strings.Engine.eliteTeaserMessage(domainHint: domainHint),
+            category: .eliteTeaser,
+            requiresPro: true,
+            requiresElite: true
+        )
+    }
+
+    private func localizedDomain(_ domain: AthleteDomain) -> String {
+        switch domain {
+        case .strength: return Strings.Engine.domainStrength
+        case .olympic: return Strings.Engine.domainOlympic
+        case .gymnastics: return Strings.Engine.domainGymnastics
+        case .engine: return Strings.Engine.domainEngine
+        }
     }
 }

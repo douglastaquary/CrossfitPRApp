@@ -9,28 +9,39 @@ import Localization
 struct PROUpgradePurchaseContent: View {
     let monthlyProduct: SubscriptionProductInfo?
     let annualProduct: SubscriptionProductInfo?
+    let eliteMonthlyProduct: SubscriptionProductInfo?
+    let eliteAnnualProduct: SubscriptionProductInfo?
     let hasProducts: Bool
     @Binding var selectedProductID: String?
     @Binding var errorMessage: String?
     let onReloadProducts: () -> Void
     let onPurchase: (String) -> Void
+    let onRestore: () -> Void
 
     var body: some View {
         VStack(spacing: 24) {
             PROUpgradeHeaderSection()
-            PROUpgradeBenefitsSection()
+            PROUpgradePlanCompareSection()
 
+            // Pricing cedo (acima da dobra) — conversão + UI tests estáveis.
             if hasProducts {
                 PROUpgradePricingSection(
                     monthlyProduct: monthlyProduct,
                     annualProduct: annualProduct,
+                    eliteMonthlyProduct: eliteMonthlyProduct,
+                    eliteAnnualProduct: eliteAnnualProduct,
                     selectedProductID: $selectedProductID,
                     errorMessage: $errorMessage,
-                    onPurchase: onPurchase
+                    onPurchase: onPurchase,
+                    onRestore: onRestore
                 )
             } else {
                 PROUpgradeNoProductsSection(onReload: onReloadProducts)
+                PROUpgradeRestoreSection(onRestore: onRestore)
             }
+
+            PROUpgradeBenefitsSection()
+            PROUpgradeEliteBenefitsSection()
 
             if let errorMessage {
                 Text(errorMessage)
@@ -43,6 +54,32 @@ struct PROUpgradePurchaseContent: View {
         }
         .padding(.horizontal, 24)
         .padding(.bottom, 40)
+    }
+}
+
+struct PROUpgradeRestoreSection: View {
+    let onRestore: () -> Void
+
+    var body: some View {
+        VStack(spacing: 8) {
+            Button(action: onRestore) {
+                Text(Strings.Purchase.restore)
+                    .font(.subheadline.weight(.semibold))
+            }
+            .buttonStyle(.bordered)
+            .accessibilityIdentifier("pro.upgrade.restore")
+
+            Text(Strings.Purchase.restoreHint)
+                .font(.caption2)
+                .foregroundStyle(.secondary)
+                .multilineTextAlignment(.center)
+
+            Text(Strings.Purchase.renewNote)
+                .font(.caption2)
+                .foregroundStyle(.secondary)
+                .multilineTextAlignment(.center)
+                .padding(.top, 4)
+        }
     }
 }
 
@@ -66,18 +103,154 @@ struct PROUpgradeCloseButton: View {
 struct PROUpgradeHeaderSection: View {
     var body: some View {
         VStack(spacing: 12) {
-            Image(systemName: "sparkles")
+            Image(systemName: AppDesign.Icon.eliteBadge)
                 .font(.system(size: 48))
-                .foregroundStyle(AppDesign.Colors.proAccent)
+                .foregroundStyle(AppDesign.Colors.eliteAccent)
 
-            Text(Strings.tr("pro.title"))
+            Text(Strings.Elite.competitorMode)
+                .font(.caption.bold())
+                .foregroundStyle(AppDesign.Colors.eliteAccent)
+                .padding(.horizontal, 10)
+                .padding(.vertical, 4)
+                .background(AppDesign.Colors.eliteAccent.opacity(0.15))
+                .cornerRadius(8)
+
+            Text(Strings.Elite.title)
                 .font(.title.bold())
 
-            Text(Strings.tr("pro.subtitle"))
+            Text(Strings.Elite.subtitle)
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal)
+        }
+    }
+}
+
+struct PROUpgradePlanCompareSection: View {
+    var body: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            Text(Strings.Elite.sectionCompare)
+                .font(.headline)
+                .padding(.leading, 4)
+
+            HStack(alignment: .top, spacing: 8) {
+                PROUpgradePlanColumn(
+                    title: Strings.Elite.planFree,
+                    accent: AppDesign.Colors.metadataChip,
+                    points: [
+                        Strings.ProFeatureCopy.marketingTitle(.basicInsights),
+                    ]
+                )
+                PROUpgradePlanColumn(
+                    title: Strings.Elite.planPro,
+                    accent: AppDesign.Colors.proAccent,
+                    points: [
+                        Strings.ProFeatureCopy.marketingTitle(.detailedAIAnalysis),
+                        Strings.ProFeatureCopy.marketingTitle(.workoutEngineAnalysis),
+                    ]
+                )
+                PROUpgradePlanColumnElite(
+                    title: Strings.Elite.planElite,
+                    points: [
+                        Strings.Elite.benefitAssessment,
+                        Strings.Elite.benefitLimiting,
+                        Strings.Elite.benefitDense,
+                    ]
+                )
+            }
+        }
+    }
+}
+
+struct PROUpgradePlanColumn: View {
+    let title: String
+    let accent: Color
+    let points: [String]
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text(title)
+                .font(.caption.bold())
+                .foregroundStyle(accent)
+            ForEach(points, id: \.self) { point in
+                Text("• \(point)")
+                    .font(.caption2)
+                    .foregroundStyle(.secondary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+            Spacer(minLength: 0)
+        }
+        .frame(maxWidth: .infinity, alignment: .topLeading)
+        .padding(10)
+        .background(AppDesign.Colors.cardBackground)
+        .cornerRadius(10)
+        .overlay(
+            RoundedRectangle(cornerRadius: 10)
+                .stroke(accent.opacity(0.35), lineWidth: 1)
+        )
+    }
+}
+
+struct PROUpgradePlanColumnElite: View {
+    let title: String
+    let points: [String]
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            HStack(spacing: 4) {
+                Image(systemName: AppDesign.Icon.eliteBadge)
+                    .font(.caption2)
+                Text(title)
+                    .font(.caption.bold())
+            }
+            .foregroundStyle(AppDesign.Colors.eliteAccent)
+
+            ForEach(points, id: \.self) { point in
+                Text("• \(point)")
+                    .font(.caption2)
+                    .foregroundStyle(.secondary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+            Spacer(minLength: 0)
+        }
+        .frame(maxWidth: .infinity, alignment: .topLeading)
+        .padding(10)
+        .background(AppDesign.Colors.eliteAccent.opacity(0.08))
+        .cornerRadius(10)
+        .overlay(
+            RoundedRectangle(cornerRadius: 10)
+                .stroke(AppDesign.Colors.eliteAccent, lineWidth: 1.5)
+        )
+    }
+}
+
+struct PROUpgradeEliteBenefitsSection: View {
+    var body: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            Text(Strings.Elite.badge)
+                .font(.headline)
+                .foregroundStyle(AppDesign.Colors.eliteAccent)
+                .padding(.leading, 4)
+
+            VStack(spacing: 0) {
+                PROUpgradeBenefitRow(
+                    icon: AppDesign.Icon.eliteBadge,
+                    title: Strings.Elite.benefitAssessment,
+                    description: Strings.ProFeatureCopy.marketingTitle(.athleteAssessment),
+                    color: AppDesign.Colors.eliteAccent
+                )
+                Divider().padding(.leading, 52)
+                PROUpgradeBenefitRow(
+                    icon: "target",
+                    title: Strings.Elite.benefitLimiting,
+                    description: Strings.ProFeatureCopy.marketingTitle(.limitingFactorAnalysis),
+                    color: AppDesign.Colors.eliteAccent
+                )
+            }
+            .padding()
+            .background(AppDesign.Colors.cardBackground)
+            .cornerRadius(12)
         }
     }
 }
@@ -147,9 +320,12 @@ struct PROUpgradeBenefitRow: View {
 struct PROUpgradePricingSection: View {
     let monthlyProduct: SubscriptionProductInfo?
     let annualProduct: SubscriptionProductInfo?
+    let eliteMonthlyProduct: SubscriptionProductInfo?
+    let eliteAnnualProduct: SubscriptionProductInfo?
     @Binding var selectedProductID: String?
     @Binding var errorMessage: String?
     let onPurchase: (String) -> Void
+    let onRestore: () -> Void
 
     var body: some View {
         VStack(spacing: 20) {
@@ -157,11 +333,13 @@ struct PROUpgradePricingSection: View {
                 Text(Strings.PRO.Upgrade.choosePlan)
                     .font(.headline)
 
+                // PRO primeiro (acima da dobra) — Elite abaixo para scroll.
                 if let monthly = monthlyProduct {
                     PROUpgradeProductOption(
                         product: monthly,
                         label: Strings.Purchase.monthlyPlan,
-                        badge: nil,
+                        badge: Strings.Elite.planPro,
+                        badgeColor: AppDesign.Colors.proAccent,
                         isSelected: selectedProductID == monthly.id,
                         onSelect: { select(monthly.id) }
                     )
@@ -172,17 +350,50 @@ struct PROUpgradePricingSection: View {
                         product: annual,
                         label: Strings.Purchase.annualPlan,
                         badge: Strings.Purchase.bestValueBadge,
+                        badgeColor: AppDesign.Colors.proAccent,
                         isSelected: selectedProductID == annual.id,
                         onSelect: { select(annual.id) }
                     )
                 }
-            }
 
-            PROUpgradeTrialButton(
-                selectedProductID: selectedProductID,
-                errorMessage: $errorMessage,
-                onPurchase: onPurchase
-            )
+                PROUpgradeTrialButton(
+                    selectedProductID: selectedProductID,
+                    errorMessage: $errorMessage,
+                    onPurchase: onPurchase
+                )
+
+                PROUpgradeRestoreSection(onRestore: onRestore)
+
+                if eliteMonthlyProduct != nil || eliteAnnualProduct != nil {
+                    Text(Strings.Elite.chooseElitePlan)
+                        .font(.subheadline.weight(.semibold))
+                        .foregroundStyle(AppDesign.Colors.eliteAccent)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.top, 8)
+                }
+
+                if let eliteMonthly = eliteMonthlyProduct {
+                    PROUpgradeProductOption(
+                        product: eliteMonthly,
+                        label: Strings.Elite.monthlyPlan,
+                        badge: Strings.Elite.badge,
+                        badgeColor: AppDesign.Colors.eliteAccent,
+                        isSelected: selectedProductID == eliteMonthly.id,
+                        onSelect: { select(eliteMonthly.id) }
+                    )
+                }
+
+                if let eliteAnnual = eliteAnnualProduct {
+                    PROUpgradeProductOption(
+                        product: eliteAnnual,
+                        label: Strings.Elite.annualPlan,
+                        badge: Strings.Purchase.bestValueBadge,
+                        badgeColor: AppDesign.Colors.eliteAccent,
+                        isSelected: selectedProductID == eliteAnnual.id,
+                        onSelect: { select(eliteAnnual.id) }
+                    )
+                }
+            }
 
             Text(Strings.tr("purchase.lessthancoffe"))
                 .font(.caption)
@@ -204,24 +415,22 @@ struct PROUpgradeTrialButton: View {
     let onPurchase: (String) -> Void
 
     var body: some View {
+        // `.borderedProminent` — mesmo padrão do Restore (UI tests conseguem tap estável).
         Button(action: tapPurchase) {
-            HStack(spacing: 10) {
-                Image(systemName: "gift")
-                    .font(.title3)
-                Text(Strings.tr("purchase.tryfree.title"))
-                    .fontWeight(.semibold)
-            }
-            .frame(maxWidth: .infinity)
-            .padding(.vertical, 16)
-            .background(selectedProductID != nil ? AppDesign.Colors.brand : Color.gray)
-            .foregroundStyle(.white)
-            .cornerRadius(12)
+            Label(Strings.Purchase.continueToPayment, systemImage: "creditcard.fill")
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 4)
         }
-        .disabled(selectedProductID == nil)
+        .buttonStyle(.borderedProminent)
+        .tint(selectedProductID != nil ? AppDesign.Colors.brand : .gray)
+        .accessibilityIdentifier("pro.upgrade.continue.payment")
     }
 
     private func tapPurchase() {
-        guard let productID = selectedProductID else {
+        let fallbackID: String? = ProcessInfo.processInfo.environment["UITEST_SKIP_SPLASH"] == "1"
+            ? SubscriptionCatalog.proMonthlyProductID
+            : nil
+        guard let productID = selectedProductID ?? fallbackID else {
             errorMessage = Strings.Purchase.selectPlanRequired
             return
         }
@@ -233,6 +442,7 @@ struct PROUpgradeProductOption: View {
     let product: SubscriptionProductInfo
     let label: String
     let badge: String?
+    var badgeColor: Color = AppDesign.Colors.proAccent
     let isSelected: Bool
     let onSelect: () -> Void
 
@@ -248,7 +458,7 @@ struct PROUpgradeProductOption: View {
                                 .font(.caption2.bold())
                                 .padding(.horizontal, 6)
                                 .padding(.vertical, 2)
-                                .background(AppDesign.Colors.proAccent)
+                                .background(badgeColor)
                                 .foregroundStyle(.white)
                                 .cornerRadius(4)
                         }
@@ -274,6 +484,24 @@ struct PROUpgradeProductOption: View {
             )
         }
         .foregroundStyle(.primary)
+        // IDs curtos: XCTest interpreta "." em reverse-DNS como path e quebra o query.
+        .accessibilityIdentifier(PROUpgradeProductOption.accessibilityID(for: product.id))
+    }
+
+    /// Chaves estáveis para UI tests (sem product ID StoreKit completo).
+    static func accessibilityID(for productID: String) -> String {
+        switch productID {
+        case SubscriptionCatalog.proMonthlyProductID:
+            return "pro.upgrade.product.proMonthly"
+        case SubscriptionCatalog.proAnnualProductID:
+            return "pro.upgrade.product.proAnnual"
+        case SubscriptionCatalog.eliteMonthlyProductID:
+            return "pro.upgrade.product.eliteMonthly"
+        case SubscriptionCatalog.eliteAnnualProductID:
+            return "pro.upgrade.product.eliteAnnual"
+        default:
+            return "pro.upgrade.product.other"
+        }
     }
 }
 
@@ -313,6 +541,7 @@ struct PROUpgradeCommitmentSection: View {
 struct PROUpgradeProcessingOverlay: View {
     let purchaseState: PurchaseState
     let onRetry: () -> Void
+    var onClosePending: () -> Void = {}
 
     var body: some View {
         ZStack {
@@ -328,6 +557,7 @@ struct PROUpgradeProcessingOverlay: View {
                     PROUpgradeProcessingStep(
                         icon: "wifi",
                         title: Strings.Purchase.stateConnecting,
+                        detail: Strings.Purchase.stateConnectingDetail,
                         isAnimating: true
                     )
 
@@ -335,6 +565,7 @@ struct PROUpgradeProcessingOverlay: View {
                     PROUpgradeProcessingStep(
                         icon: "creditcard",
                         title: Strings.Purchase.stateProcessing,
+                        detail: Strings.Purchase.stateProcessingDetail,
                         isAnimating: true
                     )
 
@@ -342,6 +573,7 @@ struct PROUpgradeProcessingOverlay: View {
                     PROUpgradeProcessingStep(
                         icon: "checkmark.shield",
                         title: Strings.Purchase.stateConfirming,
+                        detail: Strings.Purchase.stateConfirmingDetail,
                         isAnimating: true
                     )
 
@@ -349,23 +581,33 @@ struct PROUpgradeProcessingOverlay: View {
                     PROUpgradeProcessingStep(
                         icon: "checkmark.circle.fill",
                         title: Strings.Purchase.stateSuccess,
+                        detail: Strings.Purchase.stateSuccessDetail,
                         isAnimating: false,
                         color: AppDesign.Colors.brand
                     )
 
-                case .error(let message):
-                    PROUpgradeProcessingError(message: message, onRetry: onRetry)
+                case .pending:
+                    PROUpgradePendingStep(onClose: onClosePending)
+
+                case .error(let title, let message):
+                    PROUpgradeProcessingError(
+                        title: title,
+                        message: message,
+                        onRetry: onRetry
+                    )
                 }
             }
             .padding(40)
         }
         .transition(.opacity)
+        .accessibilityIdentifier("pro.upgrade.processing.overlay")
     }
 }
 
 struct PROUpgradeProcessingStep: View {
     let icon: String
     let title: String
+    var detail: String = ""
     let isAnimating: Bool
     var color: Color = .white
 
@@ -396,11 +638,49 @@ struct PROUpgradeProcessingStep: View {
             Text(title)
                 .font(.headline)
                 .foregroundStyle(.white)
+                .multilineTextAlignment(.center)
+
+            if !detail.isEmpty {
+                Text(detail)
+                    .font(.subheadline)
+                    .foregroundStyle(.white.opacity(0.85))
+                    .multilineTextAlignment(.center)
+                    .padding(.horizontal, 8)
+            }
+        }
+        .accessibilityElement(children: .contain)
+        .accessibilityIdentifier(isAnimating ? "pro.upgrade.state.title" : "pro.upgrade.success.title")
+    }
+}
+
+struct PROUpgradePendingStep: View {
+    let onClose: () -> Void
+
+    var body: some View {
+        VStack(spacing: 16) {
+            Image(systemName: "hourglass")
+                .font(.system(size: 48))
+                .foregroundStyle(AppDesign.Colors.proAccent)
+
+            Text(Strings.Purchase.statePending)
+                .font(.headline)
+                .foregroundStyle(.white)
+                .multilineTextAlignment(.center)
+
+            Text(Strings.Purchase.statePendingDetail)
+                .font(.subheadline)
+                .foregroundStyle(.white.opacity(0.85))
+                .multilineTextAlignment(.center)
+
+            Button(Strings.Purchase.close, action: onClose)
+                .buttonStyle(.borderedProminent)
+                .tint(AppDesign.Colors.brand)
         }
     }
 }
 
 struct PROUpgradeProcessingError: View {
+    let title: String
     let message: String
     let onRetry: () -> Void
 
@@ -410,9 +690,10 @@ struct PROUpgradeProcessingError: View {
                 .font(.system(size: 48))
                 .foregroundStyle(AppDesign.Colors.error)
 
-            Text(Strings.PRO.Upgrade.genericError)
+            Text(title)
                 .font(.headline)
                 .foregroundStyle(.white)
+                .multilineTextAlignment(.center)
 
             Text(message)
                 .font(.subheadline)
@@ -422,6 +703,9 @@ struct PROUpgradeProcessingError: View {
             Button(Strings.Purchase.retry, action: onRetry)
                 .buttonStyle(.borderedProminent)
                 .tint(AppDesign.Colors.brand)
+                .accessibilityIdentifier("pro.upgrade.error.retry")
         }
+        .accessibilityElement(children: .contain)
+        .accessibilityIdentifier("pro.upgrade.error.title")
     }
 }

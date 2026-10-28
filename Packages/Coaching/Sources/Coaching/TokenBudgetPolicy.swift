@@ -36,6 +36,15 @@ public struct TokenBudgetPolicy: Sendable {
             case .summarizedLocal:
                 return TokenBudgetLimits(maxInputTokens: 512, maxOutputTokens: 160, maxMovements: 6, maxRationaleChars: 160)
             }
+        case .elite:
+            switch runtime {
+            case .onDeviceApple:
+                return TokenBudgetLimits(maxInputTokens: 3_072, maxOutputTokens: 768, maxMovements: 16, maxRationaleChars: 360)
+            case .cloud:
+                return TokenBudgetLimits(maxInputTokens: 1_536, maxOutputTokens: 480, maxMovements: 14, maxRationaleChars: 280)
+            case .summarizedLocal:
+                return TokenBudgetLimits(maxInputTokens: 768, maxOutputTokens: 240, maxMovements: 10, maxRationaleChars: 200)
+            }
         }
     }
 

@@ -12,40 +12,41 @@ Diferenciar **Elite** visualmente do PRO — “modo competidor” — sem quebr
 
 | Superfície | Mudança Elite |
 |------------|----------------|
-| PROUpgrade paywall | Três colunas/planos: Free · PRO · Elite; badge Elite distinto de `proAccent` |
-| Insights (Elite) | Header compacto “Competidor”; densidade maior de cards (periodização placeholder) |
-| Settings | Linha de assinatura Elite + gerenciar plano |
+| PROUpgrade paywall | Três colunas Free · PRO · Elite; pricing PRO + Elite; badge Elite |
+| Insights (Elite) | Header “Competidor”; `EliteAssessmentCard` + `EliteLimitingFactorCard` |
+| Insights (PRO) | Teaser Elite + CTA upsell |
+| Settings | Linha Elite ativa / Upgrade to Elite / gerenciar plano |
 
-## Tokens (proposta — aprovar antes de implementar)
+## Tokens (aprovados)
 
-| Token | PRO hoje | Elite (proposto) |
-|-------|----------|------------------|
-| Accent secundário | `AppDesign.Colors.proAccent` | **Novo** `AppDesign.Colors.eliteAccent` (canvas aprova hex via AppDesign — ex. bronze/dourado escuro, contraste WCAG) |
-| Badge | “PRO” | “Elite” com ícone `medal.fill` |
-| Tipografia título paywall | `.title2.bold()` | `.title.bold()` + subtítulo “Modo competidor” |
+| Token | Valor |
+|-------|-------|
+| `AppDesign.Colors.eliteAccent` | RGB(0.72, 0.53, 0.24) bronze-dourado |
+| `AppDesign.Icon.eliteBadge` | `medal.fill` |
+| Badge copy | `Strings.Elite.badge` |
 
-**Regra:** não alterar `brand` global; Elite usa accent **adicional**, não substitui tabs.
+**Regra:** não altera `brand` global; Elite é accent adicional.
 
-## Copy (pt-BR / en)
+## Copy
 
-- Tom: competidor, periodização, comparativos — **sem** hype genérico de gym app.
-- Strings via `Strings.Elite.*` + `Localizable.strings` (en + pt-BR).
+- `Strings.Elite.*` + `Strings.Engine.*` (assessment) — en + pt-BR
 
 ## Componentes
 
-- Reutilizar `FilledButtonStyle`, cards estilo `RankingCardView`.
-- Novo subview `PROUpgradePlanColumnElite` (MV — struct, sem ViewModel).
+- `PROUpgradePlanColumn` / `PROUpgradePlanColumnElite`
+- `InsightsEliteSection` / `EliteAssessmentCard` / `EliteLimitingFactorCard`
 
 ## Fora de escopo Design
 
 - watchOS (CPR-009)
-- Gráficos novos (engine) — placeholder até canvas Feat
+- Season mode UI (P1)
+- Programming / WOD do dia
 
 ## DoD Design
 
-- [ ] Tokens `eliteAccent` em `AppDesign` aprovados
-- [ ] Mock screenshots paywall 3 planos (Figma ou SwiftUI preview documentado)
-- [ ] Checklist skill Design em PR Elite UI
+- [x] Tokens `eliteAccent` em `AppDesign`
+- [x] Paywall 3 planos + assessment cards no código
+- [ ] Checklist skill Design em PR Elite UI (revisão humana / screenshots)
 
 ## Safeguards
 

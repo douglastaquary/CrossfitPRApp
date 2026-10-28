@@ -10,6 +10,9 @@ public enum AppDesign {
         /// Badge PRO e destaques premium.
         public static let proAccent = Color.orange
 
+        /// Badge Elite / modo competidor (bronze-dourado escuro — CPR-008 Design).
+        public static let eliteAccent = Color(red: 0.72, green: 0.53, blue: 0.24)
+
         /// Mensagens de erro inline.
         public static let error = Color.red
 
@@ -47,6 +50,8 @@ public enum AppDesign {
         public static let emptyInsights = "chart.xyaxis.line"
         public static let error = "exclamationmark.triangle"
         public static let proBenefit = "checkmark.seal.fill"
+        /// Badge Elite (CPR-008 Design).
+        public static let eliteBadge = "medal.fill"
         // Legacy aliases
         public static let tabPRs = tabRecords
     }
