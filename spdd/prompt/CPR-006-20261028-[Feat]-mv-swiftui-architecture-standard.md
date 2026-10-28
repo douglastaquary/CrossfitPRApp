@@ -3,7 +3,7 @@
 **Tipo:** Feat (Norms / arquitetura de presentation)  
 **Story:** `spdd/stories/CPR-006-mv-swiftui-architecture.md`  
 **Analysis:** `spdd/analysis/CPR-006-mv-swiftui-architecture.md`  
-**Último sync (code → prompt):** 2026-10-28 — CI advisory (grafo SPM, MV, SwiftLint, review LLM em PR); ver `docs/CI.md`
+**Último sync (code → prompt):** 2026-10-28 — MV ondas 1–5 (SharedUI split); CI advisory + review LLM; ver `docs/CI.md`
 
 ## R — Requirements
 

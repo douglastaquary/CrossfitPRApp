@@ -102,11 +102,15 @@ public struct WorkoutInsightsView: View {
 
 Ondas 1–4 concluídas (ver histórico no canvas CPR-006).
 
-**Backlog:** `SharedUI` (formatos); catálogo de exercícios.
+**Backlog:** catálogo de exercícios (L10n).
 
 **Onda 5 — arquivo por view raiz**
 
 - ~~`PROUpgradeView` + `PROUpgradeSubviews.swift`~~ ✅ (view raiz ~120 linhas)
 - ~~`InsightsTeaserView` + `InsightsTeaserSubviews.swift`~~ ✅
+
+**Onda 5 — SharedUI (P2)**
+
+- ~~`SharedButtonStyles.swift`, `PersonalRecordRowView.swift`, `SharedComponents.swift`~~ ✅
 
 Um arquivo por PR; reorder + extract + `/spdd-sync` quando norma mudar.
