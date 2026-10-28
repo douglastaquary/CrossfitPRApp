@@ -28,7 +28,7 @@ public struct RankingCardView: View {
                 .frame(width: 168, height: 96)
                 .overlay {
                     VStack(alignment: .leading) {
-                        Text(record.prName)
+                        Text(record.prName.localizedWorkoutTitle)
                             .foregroundStyle(.white)
                             .font(.headline)
                             .padding(.top, 6)

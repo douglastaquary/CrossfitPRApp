@@ -67,7 +67,7 @@ private struct CategoryListScrollContent: View {
 
                 ForEach(categories) { category in
                     CategoryItemView(
-                        title: category.title,
+                        title: category.localizedTitle,
                         groupKey: category.group.localizationKey
                     )
                     .onTapGesture {

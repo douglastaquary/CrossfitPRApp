@@ -1,5 +1,18 @@
 import Domain
 
+public extension WorkoutCategory {
+    var localizedTitle: String {
+        Strings.tr(titleKey)
+    }
+}
+
+public extension String {
+    /// Localiza nome de exercício a partir do título canônico em `PersonalRecord.prName`.
+    var localizedWorkoutTitle: String {
+        CrossfitCatalog.category(forStoredTitle: self).map { Strings.tr($0.titleKey) } ?? self
+    }
+}
+
 public extension RecordGroup {
     /// Nome curto do grupo para chips e listas.
     var localizedDisplayName: String {

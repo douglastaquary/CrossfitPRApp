@@ -28,4 +28,4 @@
 2. ~~Refactor views feature (ondas 1–3)~~ ✅ — ver canvas CPR-006 sync
 3. ~~Varredura L10n en/pt-BR em Packages~~ ✅ — PROUpgrade, Settings notifications, `RecordGroup.localizationKey`
 4. ~~Remover sources legados `CrossfitPR/`~~ ✅ (PR `chore/remove-legacy-crossfitpr-sources`, tag `pre-legacy-purge`)
-5. **Backlog:** localizar nomes de exercícios no catálogo (`CrossfitCatalog`)
+5. ~~Localizar catálogo `CrossfitCatalog` (titleKey + UI)~~ ✅

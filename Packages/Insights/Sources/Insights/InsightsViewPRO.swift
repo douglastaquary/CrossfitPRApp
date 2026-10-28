@@ -272,7 +272,7 @@ private struct InsightsViewPROChartSection: View {
                         x: .value("Date", record.formattedShortDate),
                         y: .value("Value", value(record))
                     )
-                    .foregroundStyle(by: .value("Name", record.prName))
+                    .foregroundStyle(by: .value("Name", record.prName.localizedWorkoutTitle))
                     .annotation(position: .top) {
                         Text(annotation(record))
                             .font(.caption)

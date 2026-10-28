@@ -35,7 +35,7 @@ public struct NewPRRecordView: View {
             Form {
                 NewPRRecordPRSection(
                     category: category,
-                    activeCategoryTitle: activeCategory.title,
+                    activeCategoryTitle: activeCategory.localizedTitle,
                     selectedLevelIndex: $selectedLevelIndex,
                     selectedExerciseIndex: $selectedExerciseIndex
                 )
@@ -59,7 +59,7 @@ public struct NewPRRecordView: View {
                     NewPRRecordErrorSection(message: saveErrorMessage)
                 }
             }
-            .navigationTitle(activeCategory.title)
+            .navigationTitle(activeCategory.localizedTitle)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
@@ -122,7 +122,7 @@ private struct NewPRRecordPRSection: View {
             if category == nil {
                 Picker(Strings.NewPR.pickerExercise, selection: $selectedExerciseIndex) {
                     ForEach(CrossfitCatalog.allCategories.indices, id: \.self) { index in
-                        Text(CrossfitCatalog.allCategories[index].title).tag(index)
+                        Text(CrossfitCatalog.allCategories[index].localizedTitle).tag(index)
                     }
                 }
             } else {

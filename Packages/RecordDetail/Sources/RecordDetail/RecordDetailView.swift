@@ -65,7 +65,7 @@ public struct RecordDetailView: View {
             }
 
             RecordDetailEvolutionSection(
-                sectionName: section.name,
+                sectionName: section.name.localizedWorkoutTitle,
                 chartPoints: chartPoints
             )
 
@@ -78,7 +78,7 @@ public struct RecordDetailView: View {
                 }
             )
         }
-        .navigationTitle(section.name)
+        .navigationTitle(section.name.localizedWorkoutTitle)
         .navigationBarTitleDisplayMode(.large)
         .navigationDestination(for: PersonalRecord.self) { record in
             PRPercentagesView(record: record)

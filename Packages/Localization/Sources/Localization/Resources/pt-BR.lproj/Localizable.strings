@@ -58,6 +58,53 @@
 "exercise.deadlift" = "Deadlift";
 "exercise.empty" = "Escolha um exercício";
 
+"workout.airSquat" = "Agachamento livre (AS)";
+"workout.backSquat" = "Back squat";
+"workout.singleUnders" = "Single unders";
+"workout.clean" = "Clean";
+"workout.jerk" = "Jerk";
+"workout.cluster" = "Cluster";
+"workout.deadlift" = "Levantamento terra";
+"workout.frontSquat" = "Front squat";
+"workout.toesToBar" = "Toes to bar (T2B)";
+"workout.barMuscleUp" = "Bar muscle-up";
+"workout.benchPress" = "Supino";
+"workout.boxJump" = "Box jump";
+"workout.burpeeOverTheBar" = "Burpee over the bar";
+"workout.butterfly" = "Butterfly";
+"workout.doubleUnders" = "Double unders";
+"workout.hspu" = "Handstand push-up (HSPU)";
+"workout.handstandWalk" = "Handstand walk";
+"workout.hangPowerSnatch" = "Hang power snatch";
+"workout.hangPowerClean" = "Hang power clean";
+"workout.kbs" = "Kettlebell swing (KBS)";
+"workout.ohs" = "Overhead squat (OHS)";
+"workout.pistol" = "Pistol";
+"workout.pistolSquat" = "Pistol squat";
+"workout.powerSnatch" = "Power snatch";
+"workout.powerClean" = "Power clean";
+"workout.pullUp" = "Pull-up";
+"workout.pullUpChestToBar" = "Pull-up (chest to bar)";
+"workout.pullUpStrict" = "Pull-up (strict)";
+"workout.pushJerk" = "Push jerk";
+"workout.pushPress" = "Push press";
+"workout.pushUp" = "Flexão";
+"workout.ringMuscleUps" = "Ring muscle-ups";
+"workout.ringDips" = "Ring dips";
+"workout.ringRow" = "Ring row";
+"workout.snatch" = "Snatch";
+"workout.squatClean" = "Squat clean";
+"workout.squatSnatch" = "Squat snatch";
+"workout.shoulderPress" = "Shoulder press";
+"workout.sitUp" = "Abdominal";
+"workout.run" = "Corrida";
+"workout.row" = "Remo";
+"workout.bike" = "Bike";
+"workout.sumoDeadlift" = "Levantamento terra sumô";
+"workout.sdhp" = "Sumo deadlift high pull (SDHP)";
+"workout.thruster" = "Thruster";
+"workout.wallBall" = "Wall ball";
+
 /* ─────────────────────────────────────────────────────────────
    INSIGHTS — Tela de evolução
    ───────────────────────────────────────────────────────────── */

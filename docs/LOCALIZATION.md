@@ -30,3 +30,9 @@ Strings do app shell (se houver) devem usar o módulo `Localization`; o target a
 ## Norma (CPR-006 N-07)
 
 Views em `Packages/*` não devem usar `Text("…")` com frases de produto — usar `Strings.tr` ou propriedades tipadas.
+
+## Catálogo de exercícios
+
+- `WorkoutCategory.titleKey` + `title` canônico (persistência em `prName`).
+- UI: `category.localizedTitle` ou `prName.localizedWorkoutTitle` (`Domain+Localized.swift`).
+- Chaves: `workout.*` em `Localizable.strings` (en / pt-BR).

@@ -58,6 +58,53 @@
 "exercise.deadlift" = "Deadlift";
 "exercise.empty" = "Choose an exercise";
 
+"workout.airSquat" = "Air squat (AS)";
+"workout.backSquat" = "Back squat";
+"workout.singleUnders" = "Single Unders";
+"workout.clean" = "Clean";
+"workout.jerk" = "Jerk";
+"workout.cluster" = "Cluster";
+"workout.deadlift" = "Deadlift";
+"workout.frontSquat" = "Front squat";
+"workout.toesToBar" = "Toes to bar (T2B)";
+"workout.barMuscleUp" = "Bar Muscle-Up";
+"workout.benchPress" = "Bench press";
+"workout.boxJump" = "Box jump";
+"workout.burpeeOverTheBar" = "Burpee over the bar";
+"workout.butterfly" = "Butterfly";
+"workout.doubleUnders" = "Double Unders";
+"workout.hspu" = "Handstand push up (HSPU)";
+"workout.handstandWalk" = "Handstand walk";
+"workout.hangPowerSnatch" = "Hang Power Snatch";
+"workout.hangPowerClean" = "Hang Power Clean";
+"workout.kbs" = "Kettlebell swing (KBS)";
+"workout.ohs" = "Overhead Squat (OHS)";
+"workout.pistol" = "Pistol";
+"workout.pistolSquat" = "Pistol Squat";
+"workout.powerSnatch" = "Power Snatch";
+"workout.powerClean" = "Power Clean";
+"workout.pullUp" = "Pull Up";
+"workout.pullUpChestToBar" = "Pull Up (Chest To Bar)";
+"workout.pullUpStrict" = "Pull Up (Strict)";
+"workout.pushJerk" = "Push Jerk";
+"workout.pushPress" = "Push Press";
+"workout.pushUp" = "Push Up";
+"workout.ringMuscleUps" = "Ring Muscle-Ups";
+"workout.ringDips" = "Ring dips";
+"workout.ringRow" = "Ring Row";
+"workout.snatch" = "Snatch";
+"workout.squatClean" = "Squat Clean";
+"workout.squatSnatch" = "Squat Snatch";
+"workout.shoulderPress" = "Shoulder Press";
+"workout.sitUp" = "Sit Up";
+"workout.run" = "Run";
+"workout.row" = "Row";
+"workout.bike" = "Bike";
+"workout.sumoDeadlift" = "Sumo Deadlift";
+"workout.sdhp" = "Sumo Deadlift High Pull (SDHP)";
+"workout.thruster" = "Thruster";
+"workout.wallBall" = "Wall Ball";
+
 /* ─────────────────────────────────────────────────────────────
    INSIGHTS — Progress screen
    ───────────────────────────────────────────────────────────── */

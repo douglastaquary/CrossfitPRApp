@@ -247,7 +247,7 @@ public struct PersonalRecordRowView: View {
     public var body: some View {
         VStack {
             HStack {
-                Text(record.prName)
+                Text(record.prName.localizedWorkoutTitle)
                     .bold()
                 Spacer()
             }

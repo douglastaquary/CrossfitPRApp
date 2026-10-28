@@ -85,7 +85,7 @@ private struct PRHistoriesSectionsList: View {
             ForEach(sections) { section in
                 NavigationLink(value: section) {
                     CategoryItemView(
-                        title: section.name,
+                        title: section.name.localizedWorkoutTitle,
                         groupKey: section.group.localizationKey
                     )
                 }
