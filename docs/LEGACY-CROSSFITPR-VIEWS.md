@@ -1,46 +1,30 @@
-# Views legadas em `CrossfitPR/` (fora do build)
+# Legado `CrossfitPR/` — removido
 
-## Situação atual
+> **Tag de arquivo:** `pre-legacy-purge` (estado imediatamente antes da limpeza).
 
-O target **CrossfitPR** (Xcode) compila apenas:
+## App shell atual (único conteúdo em `CrossfitPR/`)
 
-- `CrossfitPR/CrossfitPRApp.swift`
-- `CrossfitPR/RootView.swift`
-- Recursos: `Assets.xcassets`, `LaunchScreen.storyboard`, `Info.plist`
+| Arquivo / pasta | Função |
+|-----------------|--------|
+| `CrossfitPRApp.swift` | `@main`, `AppEnvironment`, injection |
+| `RootView.swift` | `MainTabView` (4 tabs) |
+| `Assets.xcassets` | Ícones, splash `216`, imagens |
+| `Base.lproj/LaunchScreen.storyboard` | Launch storyboard do target |
+| `Configuration/Products.storekit` | StoreKit local (testes de assinatura) |
+| `Info.plist`, `CrossfitPR.entitlements` | Configuração do target |
 
-Toda a UI de produto vive nos pacotes SPM (`Packages/Categories`, `PRHistory`, `Insights`, etc.).
+Toda UI e domínio de produto estão em **`Packages/*`** (SPM).
 
-## Pastas duplicadas / legado
+## O que foi removido
 
-Estes caminhos **não** entram no `PBXSourcesBuildPhase` — são resquício da arquitetura pré-SPM (ViewModels, Core Data, stores locais):
+Monólito pré-SPM: ViewModels, Core Data (`DB/`, `*.xcdatamodeld`), `Views/`, `Insights/`, `Service/`, etc.
 
-| Legado | Substituto SPM |
-|--------|----------------|
-| `CrossfitPR/Views/*` | `Packages/SharedUI`, componentes em features |
-| `CrossfitPR/Insights/InsightsView*.swift` | `Packages/Insights` |
-| `CrossfitPR/RecordDetail/RecordDetailView*.swift` | `Packages/RecordDetail` |
-| `CrossfitPR/NewPR/NewRecordView*.swift` | `Packages/PRHistory/NewPRRecordView.swift` |
-| `CrossfitPR/Settings/SettingsView.swift` | `Packages/Settings` |
-| `CrossfitPR/Onboarding/OnboardingView.swift` | `Packages/Onboarding` |
-| `CrossfitPR/LaunchViewApp/LaunchView.swift` | `Packages/Launch/LaunchView.swift` |
-| `CrossfitPR/Exercises/CategoryListView.swift` | `Packages/Categories` |
-| `CrossfitPR/Service/*`, `CrossfitPR/Models/*` | `Packages/Application`, `Domain`, `Persistence` |
+Cópias órfãs de strings: `en.lproj/` e `pt-BR.lproj` na **raiz do repo** e dentro de `CrossfitPR/`.
 
-## Recomendações
+**Fonte de verdade de localização:** `Packages/Localization/Sources/Localization/Resources/{en,pt-BR}.lproj/`.
 
-1. **Não editar** legado para features novas — implementar sempre no pacote feature.
-2. Antes de apagar: confirmar que nenhum script/ferramenta referencia esses arquivos.
-3. Remoção futura pode ser um PR dedicado (“delete dead CrossfitPR monolith sources”) após backup/tag.
+## Recuperar código antigo
 
-## Checklist antes de deletar
-
-- [ ] `git tag pre-legacy-purge` ou branch de arquivo
-- [ ] Confirmar `grep -r CrossfitPR/Views` no `project.pbxproj` vazio
-- [ ] CI + UITests screenshots verdes
-- [ ] README não referencia paths legados
-
-## `Localizable.strings` na raiz do repo
-
-Existem `en.lproj/` e `pt-BR.lproj/` na raiz e em `CrossfitPR/` que **não** alimentam o app atual. A fonte de verdade é:
-
-`Packages/Localization/Sources/Localization/Resources/{en,pt-BR}.lproj/Localizable.strings`
+```bash
+git checkout pre-legacy-purge -- CrossfitPR/Views   # exemplo
+```
