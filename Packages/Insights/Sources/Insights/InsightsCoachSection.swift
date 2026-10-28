@@ -29,6 +29,16 @@ struct InsightsCoachSection: View {
             }
 
             if let insight = coachingClient.latestInsight {
+                HStack(spacing: 6) {
+                    Text(runtimeLabel(for: insight.runtime))
+                        .font(.caption2)
+                        .foregroundStyle(AppDesign.Colors.proAccent)
+                    if insight.cacheHit {
+                        Text(Strings.Insights.Coach.cacheHit)
+                            .font(.caption2)
+                            .foregroundStyle(.secondary)
+                    }
+                }
                 Text(insight.workoutSuggestion)
                     .font(.subheadline.bold())
                 if !insight.focusLifts.isEmpty {
@@ -53,6 +63,14 @@ struct InsightsCoachSection: View {
         .accessibilityIdentifier("insights.coach.section")
         .task(id: personalRecordClient.records.count) {
             await reload(force: false)
+        }
+    }
+
+    private func runtimeLabel(for runtime: CoachingRuntime) -> String {
+        switch runtime {
+        case .onDeviceApple: return Strings.Insights.Coach.runtimeOnDevice
+        case .cloud: return Strings.Insights.Coach.runtimeCloud
+        case .summarizedLocal: return Strings.Insights.Coach.runtimeSummarized
         }
     }
 

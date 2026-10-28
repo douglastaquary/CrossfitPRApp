@@ -56,6 +56,11 @@ Legado: `COACHING_CLOUD_BEARER` / `CoachingCloudBearerToken` ainda mapeiam para 
 
 UI tests (`UITEST_SKIP_SPLASH=1`) **bloqueiam** chamadas cloud.
 
+## Observabilidade (fase 3)
+
+- `CoachingDiagnostics` registra no Console (subsystem `com.douglast.CrossfitPR`, category `Coaching`): `runtime`, `estimatedInputTokens`, `cacheHit`.
+- UI PRO mostra origem da análise (on-device / OpenAI / resumo) e indicação de cache.
+
 ## CI
 
 Sem `OPENAI_API_KEY` → cloud indisponível → resumo local. Testes unitários não usam rede real.

@@ -7,6 +7,7 @@ public final class CoachingClient: ObservableObject {
     @Published public private(set) var latestInsight: CoachingInsight?
     @Published public private(set) var isLoading = false
     @Published public private(set) var lastError: CoachingError?
+    @Published public private(set) var lastDiagnostics: CoachingRefreshDiagnostics?
 
     private let builder: CoachingContextBuilder
     private let budget: TokenBudgetPolicy
@@ -45,7 +46,7 @@ public final class CoachingClient: ObservableObject {
 
         let snapshot = builder.build(from: records, engineInsights: engineInsights)
         if !force, let cached = cache.insight(for: snapshot.contextHash) {
-            latestInsight = CoachingInsight(
+            let insight = CoachingInsight(
                 workoutSuggestion: cached.workoutSuggestion,
                 focusLifts: cached.focusLifts,
                 repScheme: cached.repScheme,
@@ -54,6 +55,14 @@ public final class CoachingClient: ObservableObject {
                 estimatedInputTokens: cached.estimatedInputTokens,
                 cacheHit: true
             )
+            latestInsight = insight
+            let diagnostics = CoachingRefreshDiagnostics(
+                runtime: insight.runtime,
+                estimatedInputTokens: insight.estimatedInputTokens,
+                cacheHit: true
+            )
+            lastDiagnostics = diagnostics
+            CoachingDiagnostics.record(diagnostics)
             return
         }
 
@@ -70,6 +79,13 @@ public final class CoachingClient: ObservableObject {
             )
             cache.store(result.insight, contextHash: snapshot.contextHash)
             latestInsight = result.insight
+            let diagnostics = CoachingRefreshDiagnostics(
+                runtime: result.insight.runtime,
+                estimatedInputTokens: result.insight.estimatedInputTokens,
+                cacheHit: result.insight.cacheHit
+            )
+            lastDiagnostics = diagnostics
+            CoachingDiagnostics.record(diagnostics)
         } catch let error as CoachingError {
             lastError = error
         } catch {

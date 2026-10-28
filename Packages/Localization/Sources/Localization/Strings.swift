@@ -178,6 +178,10 @@ public enum Strings {
             public static var title: String { tr("insight.coach.title") }
             public static var refresh: String { tr("insight.coach.refresh") }
             public static var placeholder: String { tr("insight.coach.placeholder") }
+            public static var runtimeOnDevice: String { tr("insight.coach.runtime.onDevice") }
+            public static var runtimeCloud: String { tr("insight.coach.runtime.cloud") }
+            public static var runtimeSummarized: String { tr("insight.coach.runtime.summarized") }
+            public static var cacheHit: String { tr("insight.coach.cacheHit") }
         }
 
         public enum ProEmpty {
