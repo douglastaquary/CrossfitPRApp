@@ -8,7 +8,7 @@
 
 - Coach PRO especialista CrossFit: evolução de PRs, platôs, rep schemes, foco em movimentos.
 - Free: WorkoutEngine apenas.
-- PRO: Apple Intelligence on-device quando suportado; senão cloud com mesmo snapshot comprimido.
+- PRO: Apple Intelligence on-device quando suportado; senão **OpenAI Chat Completions** com o mesmo snapshot comprimido (sem backend CrossfitPR).
 - Transparência de custo inferência (README + observabilidade local).
 - Refresh manual; cache incremental por hash de contexto.
 
@@ -36,7 +36,7 @@ Packages/Insights/InsightsCoachSection.swift
 
 ## O — Operations
 
-- Adapters reais Apple/cloud substituem mocks em PRs futuros pós-validação dispositivo.
+- On-device: Foundation Models (iOS 26+). Cloud: OpenAI API direta; key via env/plist (não commitar).
 - `/spdd-sync` ao alterar budget ou schema de saída.
 
 ## N — Norms

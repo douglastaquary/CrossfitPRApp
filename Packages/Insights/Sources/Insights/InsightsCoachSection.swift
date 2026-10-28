@@ -1,6 +1,7 @@
 import SwiftUI
 import Domain
 import Application
+import Subscription
 import Localization
 import SharedUI
 
@@ -49,6 +50,7 @@ struct InsightsCoachSection: View {
         .padding()
         .background(AppDesign.Colors.brand.opacity(0.08))
         .cornerRadius(12)
+        .accessibilityIdentifier("insights.coach.section")
         .task(id: personalRecordClient.records.count) {
             await reload(force: false)
         }

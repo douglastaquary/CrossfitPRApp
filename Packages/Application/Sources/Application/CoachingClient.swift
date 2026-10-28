@@ -57,28 +57,21 @@ public final class CoachingClient: ObservableObject {
             return
         }
 
-        let runtime = router.preferredRuntime(isOnDeviceAvailable: isOnDeviceAvailable())
-        let applied = budget.apply(snapshot, tier: tier, runtime: runtime)
-        if applied.limits.maxInputTokens == 0 {
-            lastError = .tierNotEligible
-            return
-        }
+        let orchestrator = CoachingInferenceOrchestrator(
+            router: router,
+            isOnDeviceAvailable: isOnDeviceAvailable
+        )
 
-        let adapter = router.adapter(for: runtime)
         do {
-            var insight = try await adapter.generateCoaching(snapshot: applied.snapshot, tier: tier)
-            if insight.rationale.count > applied.limits.maxRationaleChars {
-                insight.rationale = String(insight.rationale.prefix(applied.limits.maxRationaleChars))
-            }
-            insight.estimatedInputTokens = applied.estimatedInputTokens
-            cache.store(insight, contextHash: snapshot.contextHash)
-            latestInsight = insight
+            let result = try await orchestrator.generateInsight(
+                snapshot: snapshot,
+                tier: tier,
+                budget: budget
+            )
+            cache.store(result.insight, contextHash: snapshot.contextHash)
+            latestInsight = result.insight
         } catch let error as CoachingError {
             lastError = error
-            let fallback = router.adapter(for: .summarizedLocal)
-            if let summarized = try? await fallback.generateCoaching(snapshot: applied.snapshot, tier: tier) {
-                latestInsight = summarized
-            }
         } catch {
             lastError = .adapterUnavailable
         }

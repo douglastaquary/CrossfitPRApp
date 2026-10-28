@@ -26,6 +26,7 @@ Domain                         (sem dependências)
   ├── Persistence              (infra: JSON local, CloudKit)
   ├── Subscription             (infra: StoreKit)
   └── WorkoutEngine            (domínio: engine de insights)
+  └── Coaching                 (snapshot, TokenBudget, adapters — CPR-007)
         ↑
 Application                    (clients + AppEnvironment — ÚNICO wiring)
   ↑
@@ -41,7 +42,8 @@ CrossfitPR App                 (shell: CrossfitPRApp + RootView)
 | `Persistence` | Domain | Repositories, `PersistenceFactory` |
 | `Subscription` | Domain | `SubscriptionClient`, stores StoreKit |
 | `WorkoutEngine` | Domain | `WorkoutEngine` |
-| `Application` | Domain, Persistence, Subscription, WorkoutEngine | Clients, `AppEnvironment` |
+| `Coaching` | Domain | Snapshot, `TokenBudgetPolicy`, Foundation Models + cloud HTTP ([`COACHING-INFERENCE.md`](COACHING-INFERENCE.md)) |
+| `Application` | Domain, Persistence, Subscription, WorkoutEngine, Coaching | Clients, `AppEnvironment` |
 | `PRHistory` | Domain, Application | `PRHistoriesListView`, `NewPRRecordView` |
 | `Insights` | Domain, Application, Subscription, PROUpgrade | `WorkoutInsightsView` |
 | `PROUpgrade` | Domain, Subscription | `PROUpgradeView` |

@@ -82,6 +82,17 @@ final class AppLocalizationQATests: XCTestCase {
         close.tap()
     }
 
+    func testProCoachSectionPortuguese() throws {
+        let app = configuredApp(languageCode: "pt-BR")
+        app.launchEnvironment["UITEST_SUBSCRIPTION_TIER"] = "pro"
+        app.launch()
+
+        waitForMainShell(app)
+        app.tabBars.buttons["Evolução"].tap()
+        XCTAssertTrue(app.navigationBars["Evolução"].waitForExistence(timeout: 8))
+        XCTAssertTrue(element(app, identifier: "insights.coach.section").waitForExistence(timeout: 10))
+    }
+
     func testSettingsTrackingSectionSmokePortuguese() throws {
         let app = configuredApp(languageCode: "pt-BR")
         app.launch()

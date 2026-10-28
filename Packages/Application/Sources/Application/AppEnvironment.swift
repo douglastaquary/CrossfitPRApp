@@ -3,6 +3,7 @@ import Domain
 import Persistence
 import Subscription
 import WorkoutEngine
+import Coaching
 
 /// Composition root — monta dependências entre módulos SPM (único ponto de wiring).
 @MainActor
@@ -58,7 +59,15 @@ public struct AppEnvironment {
             settingsClient.hasCompletedLaunch = false
         }
         let notificationManager = LocalNotificationManager()
-        let coachingClient = CoachingClient()
+        let cloudAdapter = CloudCoachAdapter(
+            settings: CoachingOpenAIConfiguration.resolvedSettings(),
+            allowsNetwork: !UITestLaunchSupport.isUITestMode
+        )
+        let coachingClient = CoachingClient(
+            cache: UserDefaultsCoachingInsightCache(),
+            router: CoachingAdapterRouter(cloud: cloudAdapter),
+            isOnDeviceAvailable: { CoachingRuntimeAvailability.isOnDeviceAppleIntelligenceAvailable }
+        )
 
         return AppEnvironment(
             personalRecordClient: personalRecordClient,

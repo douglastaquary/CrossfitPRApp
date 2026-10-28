@@ -37,4 +37,6 @@ public enum CoachingError: Error, Equatable {
     case tierNotEligible
     case budgetExceeded
     case adapterUnavailable
+    case cloudNotConfigured
+    case inferenceFailed
 }

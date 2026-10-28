@@ -14,7 +14,7 @@ Atletas intermediários precisam interpretação além das heurísticas do Worko
 | Tier | On-device | Cloud | Degradação |
 |------|-----------|-------|------------|
 | Free | — | — | WorkoutEngine only |
-| PRO | Preferencial | Fallback | `SummarizedLocalCoachAdapter` |
+| PRO | Preferencial (Foundation Models) | Fallback **OpenAI Chat Completions** (sem backend próprio) | `SummarizedLocalCoachAdapter` |
 
 ## Token budget (PRO)
 
@@ -41,8 +41,16 @@ Degradação: reduzir K → encurtar tags → adapter resumido sem LLM.
 - Tokens estimados por refresh (calibrar preço PRO)
 - Fallback rate cloud vs on-device
 
+## Cloud (OpenAI)
+
+- Endpoint padrão: `POST /v1/chat/completions`
+- Credencial: `OPENAI_API_KEY` (env ou plist dev) — **não** versionar
+- Modelo default: `gpt-4o-mini` (custo/latência alinhados ao tier PRO)
+- Payload: system + user (snapshot JSON); `response_format: json_object`
+- Sem key: orchestrator cai no resumo local (CI)
+
 ## Testes
 
 - Golden JSON de snapshot (tamanho máximo)
 - Budget trunca K quando estimate > limit
-- CI: `MockCrossFitCoachAdapter` apenas
+- CI: sem rede; OpenAI mockado via `URLProtocol` ou adapters que falham
