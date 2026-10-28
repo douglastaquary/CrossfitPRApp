@@ -107,5 +107,6 @@ Ondas 1–4 concluídas (ver histórico no canvas CPR-006).
 **Onda 5 — arquivo por view raiz**
 
 - ~~`PROUpgradeView` + `PROUpgradeSubviews.swift`~~ ✅ (view raiz ~120 linhas)
+- ~~`InsightsTeaserView` + `InsightsTeaserSubviews.swift`~~ ✅
 
 Um arquivo por PR; reorder + extract + `/spdd-sync` quando norma mudar.
