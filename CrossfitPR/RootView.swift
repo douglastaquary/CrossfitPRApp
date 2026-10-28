@@ -13,18 +13,21 @@ struct MainTabView: View {
     var body: some View {
         TabView(selection: $selectedTab) {
             CategoryListView()
+                .accessibilityIdentifier("tab.categories")
                 .tabItem {
                     Label(Strings.Tab.categories, systemImage: AppDesign.Icon.tabCategories)
                 }
                 .tag(0)
 
             PRHistoriesListView()
+                .accessibilityIdentifier("tab.records")
                 .tabItem {
                     Label(Strings.Tab.records, systemImage: AppDesign.Icon.tabRecords)
                 }
                 .tag(1)
 
             WorkoutInsightsView()
+                .accessibilityIdentifier("tab.insights")
                 .tabItem {
                     Label(Strings.Tab.insights, systemImage: AppDesign.Icon.tabInsights)
                 }
@@ -33,6 +36,7 @@ struct MainTabView: View {
             NavigationStack {
                 SettingsView()
             }
+            .accessibilityIdentifier("tab.settings")
             .tabItem {
                 Label(Strings.Tab.settings, systemImage: AppDesign.Icon.tabSettings)
             }

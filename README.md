@@ -100,6 +100,8 @@ cd ../WorkoutEngine && swift test
 ./scripts/capture-readme-media-auto.sh
 ```
 
+**QA (CI):** `./scripts/run-qa.sh` — UI tests de localização pt/en. Ver [`docs/QA.md`](docs/QA.md).
+
 ---
 
 ## Arquitetura (SPDD + SPM)

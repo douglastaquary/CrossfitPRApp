@@ -12,6 +12,7 @@
 		4E58060127F3C5B100F16219 /* CrossfitPRApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E58060027F3C5B100F16219 /* CrossfitPRApp.swift */; };
 		4E58060327F3C5B100F16219 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E58060227F3C5B100F16219 /* RootView.swift */; };
 		4E58070427F3C5B100F16219 /* ReadmeScreenshotsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E58070327F3C5B100F16219 /* ReadmeScreenshotsUITests.swift */; };
+		4E58072027F3C5B100F16219 /* AppLocalizationQATests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E58072127F3C5B100F16219 /* AppLocalizationQATests.swift */; };
 		4E58061127F3C5B100F16219 /* Domain in Frameworks */ = {isa = PBXBuildFile; productRef = 4E58061027F3C5B100F16219 /* Domain */; };
 		4E58061727F3C5B100F16219 /* Subscription in Frameworks */ = {isa = PBXBuildFile; productRef = 4E58061627F3C5B100F16219 /* Subscription */; };
 		4E58061927F3C5B100F16219 /* Application in Frameworks */ = {isa = PBXBuildFile; productRef = 4E58061827F3C5B100F16219 /* Application */; };
@@ -35,6 +36,7 @@
 		4E58060227F3C5B100F16219 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		4E58070227F3C5AE00F16219 /* CrossfitPRUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CrossfitPRUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E58070327F3C5B100F16219 /* ReadmeScreenshotsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadmeScreenshotsUITests.swift; sourceTree = "<group>"; };
+		4E58072127F3C5B100F16219 /* AppLocalizationQATests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLocalizationQATests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +122,7 @@
 			isa = PBXGroup;
 			children = (
 				4E58070327F3C5B100F16219 /* ReadmeScreenshotsUITests.swift */,
+				4E58072127F3C5B100F16219 /* AppLocalizationQATests.swift */,
 			);
 			path = CrossfitPRUITests;
 			sourceTree = "<group>";
@@ -251,6 +254,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4E58070427F3C5B100F16219 /* ReadmeScreenshotsUITests.swift in Sources */,
+				4E58072027F3C5B100F16219 /* AppLocalizationQATests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

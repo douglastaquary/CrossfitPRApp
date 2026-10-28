@@ -61,6 +61,7 @@ private struct OnboardingCompleteButton: View {
 
     var body: some View {
         Button(Strings.Onboarding.cta, action: onComplete)
+            .accessibilityIdentifier("onboarding.cta")
             .buttonStyle(FilledButtonStyle(fullWidth: true))
             .padding(.horizontal, AppDesign.Layout.horizontalPadding)
             .padding(.bottom, 40)

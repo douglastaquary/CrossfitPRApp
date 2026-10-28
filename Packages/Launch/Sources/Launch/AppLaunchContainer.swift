@@ -28,7 +28,11 @@ public struct AppLaunchContainer<MainContent: View>: View {
             }
         }
         .onAppear {
-            launchScreenState.start()
+            if UITestLaunchSupport.shouldSkipSplash {
+                showSplash = false
+            } else {
+                launchScreenState.start()
+            }
         }
         .onChange(of: launchScreenState.state) { step in
             if step == .finished {

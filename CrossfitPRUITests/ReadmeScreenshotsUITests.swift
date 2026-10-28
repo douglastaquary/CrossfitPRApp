@@ -24,9 +24,11 @@ final class ReadmeScreenshotsUITests: XCTestCase {
 
     func testCaptureReadmeScreenshots() throws {
         let app = XCUIApplication()
+        app.launchArguments += ["-AppleLanguages", "(pt-BR)", "-AppleLocale", "pt_BR"]
+        app.launchEnvironment["UITEST_SKIP_SPLASH"] = "1"
         app.launch()
 
-        let onboardingCTA = app.buttons["Bora começar"]
+        let onboardingCTA = app.buttons["onboarding.cta"]
         XCTAssertTrue(onboardingCTA.waitForExistence(timeout: 20), "Onboarding não apareceu")
         saveScreenshot(named: "onboarding")
         onboardingCTA.tap()
