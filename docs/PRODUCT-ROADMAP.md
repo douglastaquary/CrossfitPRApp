@@ -17,11 +17,13 @@ Visão pública do que já está no app versus o que está **planejado** (SPDD `
 - Escada: on-device (iOS 26+) → OpenAI → resumo local; ver [`COACHING-INFERENCE.md`](COACHING-INFERENCE.md).
 - Pendente validação em hardware real e tuning de prompts/custo.
 
-## Planned — Elite (CPR-008)
+## In progress — Elite (CPR-008)
 
-- Tier acima do PRO para atletas avançados: periodização, comparativos, análises mais densas.
-- UI distinta (“modo competidor”) e paywall multi-plano (StoreKit).
-- Orçamento de tokens maior que PRO (janela temporal e top-K de movimentos ampliados).
+- Tier Elite + assessment / limiting factor (Domain + WorkoutEngine).
+- UI modo competidor: paywall 3 planos, Insights cards, Settings Elite.
+- StoreKit: IDs Elite em `SubscriptionCatalog` + `Products.storekit`.
+- Pendente: prompts coach Elite dedicados; App Store Connect produtos reais; screenshots Design.
+- UX pagamento: feedback por etapa + restore — ver [`STOREKIT-PAYMENTS.md`](STOREKIT-PAYMENTS.md).
 
 ## Planned — Apple Watch (CPR-009)
 
@@ -34,10 +36,12 @@ Visão pública do que já está no app versus o que está **planejado** (SPDD `
 
 1. **CPR-007:** testar iOS 26+ on-device + `OPENAI_API_KEY` em device; revisar logs `Coaching` no Console.
 2. **Mídia README:** `./scripts/capture-readme-media-auto.sh` → commit PNG/GIF.
-3. **CPR-008:** aprovar [`CPR-008 Design canvas`](spdd/prompt/CPR-008-20261028-[Design]-elite-tier-ui.md) → StoreKit + `SubscriptionTier.elite`.
+3. **CPR-008:** UI/StoreKit Elite shipped no código → registrar produtos no App Store Connect + screenshots.
 4. **CPR-009:** story/analysis → POC watchOS.
+5. **Personas:** skill [`.cursor/skills/crossfit-athlete-personas`](../.cursor/skills/crossfit-athlete-personas/SKILL.md) · analysis [CPR-010](../spdd/analysis/CPR-010-crossfit-market-mayhem-personas.md).
 
 ## Como acompanhar
 
 - Stories e canvas: `spdd/stories/`, `spdd/prompt/`
 - Arquitetura: [`ARCHITECTURE.md`](ARCHITECTURE.md), [`APP-WIRING.md`](APP-WIRING.md)
+- Pagamentos StoreKit (fluxo, erros, dual registration): [`STOREKIT-PAYMENTS.md`](STOREKIT-PAYMENTS.md)

@@ -83,14 +83,17 @@ final class AppLocalizationQATests: XCTestCase {
     }
 
     func testProCoachSectionPortuguese() throws {
-        let app = configuredApp(languageCode: "pt-BR")
-        app.launchEnvironment["UITEST_SUBSCRIPTION_TIER"] = "pro"
+        let app = configuredApp(languageCode: "pt-BR", subscriptionTier: "pro")
         app.launch()
 
         waitForMainShell(app)
         app.tabBars.buttons["Evolução"].tap()
         XCTAssertTrue(app.navigationBars["Evolução"].waitForExistence(timeout: 8))
-        XCTAssertTrue(element(app, identifier: "insights.coach.section").waitForExistence(timeout: 10))
+        let coach = element(app, identifier: "insights.coach.section")
+        if !coach.waitForExistence(timeout: 8) {
+            app.swipeUp()
+        }
+        XCTAssertTrue(coach.waitForExistence(timeout: 20))
     }
 
     func testSettingsTrackingSectionSmokePortuguese() throws {
@@ -105,16 +108,25 @@ final class AppLocalizationQATests: XCTestCase {
 
     // MARK: - Helpers
 
-    private func configuredApp(languageCode: String, skipOnboarding: Bool = true) -> XCUIApplication {
+    private func configuredApp(
+        languageCode: String,
+        skipOnboarding: Bool = true,
+        subscriptionTier: String? = nil
+    ) -> XCUIApplication {
         let app = XCUIApplication()
-        app.launchArguments += ["-AppleLanguages", "(\(languageCode))"]
         let locale = languageCode == "en" ? "en_US" : "pt_BR"
-        app.launchArguments += ["-AppleLocale", locale]
+        app.launchArguments += ["-AppleLanguages", "(\(languageCode))", "-AppleLocale", locale]
+        app.launchEnvironment["AppleLanguages"] = "(\(languageCode))"
+        app.launchEnvironment["AppleLocale"] = locale
         app.launchEnvironment["UITEST_SKIP_SPLASH"] = "1"
         if skipOnboarding {
             app.launchEnvironment["UITEST_SKIP_ONBOARDING"] = "1"
         } else {
             app.launchEnvironment["UITEST_FORCE_ONBOARDING"] = "1"
+        }
+        if let subscriptionTier {
+            app.launchEnvironment["UITEST_SUBSCRIPTION_TIER"] = subscriptionTier
+            app.launchArguments += ["-UITEST_SUBSCRIPTION_TIER", subscriptionTier]
         }
         return app
     }
@@ -144,17 +156,14 @@ final class AppLocalizationQATests: XCTestCase {
     ) {
         let tabBar = app.tabBars.firstMatch
         XCTAssertTrue(tabBar.waitForExistence(timeout: 8))
-        XCTAssertTrue(tabBar.buttons[categories].waitForExistence(timeout: 5))
-        XCTAssertTrue(tabBar.buttons[records].exists)
-        XCTAssertTrue(tabBar.buttons[insights].exists)
-        XCTAssertTrue(tabBar.buttons[settings].exists)
+        for label in [categories, records, insights, settings] {
+            XCTAssertTrue(tabBar.buttons[label].waitForExistence(timeout: 5), "Tab “\(label)”")
+        }
     }
 
     private func assertRootIdentifiers(_ app: XCUIApplication) {
+        // Só a tab selecionada está na hierarquia de acessibilidade; as demais são validadas ao trocar de aba.
         XCTAssertTrue(element(app, identifier: "tab.categories").waitForExistence(timeout: 8))
-        XCTAssertTrue(element(app, identifier: "tab.records").exists)
-        XCTAssertTrue(element(app, identifier: "tab.insights").exists)
-        XCTAssertTrue(element(app, identifier: "tab.settings").exists)
     }
 
     private func element(_ app: XCUIApplication, identifier: String) -> XCUIElement {

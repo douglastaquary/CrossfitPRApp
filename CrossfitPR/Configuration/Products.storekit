@@ -110,6 +110,90 @@
           "type" : "RecurringSubscription"
         }
       ]
+    },
+    {
+      "id" : "crossfitpr-elite-group",
+      "localizations" : [
+
+      ],
+      "name" : "Elite",
+      "subscriptions" : [
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "149.99",
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "crossfitpr-elite-annual",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "Assessment, limiting factor e modo competidor — anual",
+              "displayName" : "CrossfitPR Elite Anual",
+              "locale" : "pt_BR"
+            }
+          ],
+          "productID" : "com.taquarylab.crossfitprapp.subscription.elite.annual",
+          "recurringSubscriptionPeriod" : "P1Y",
+          "referenceName" : "CrossfitPR Elite Annual",
+          "subscriptionGroupID" : "crossfitpr-elite-group",
+          "type" : "RecurringSubscription"
+        },
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "19.99",
+          "familyShareable" : false,
+          "groupNumber" : 2,
+          "internalID" : "crossfitpr-elite-monthly",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "Assessment, limiting factor e modo competidor — mensal",
+              "displayName" : "CrossfitPR Elite Mensal",
+              "locale" : "pt_BR"
+            }
+          ],
+          "productID" : "com.taquarylab.crossfitprapp.subscription.elite.monthly",
+          "recurringSubscriptionPeriod" : "P1M",
+          "referenceName" : "CrossfitPR Elite Monthly",
+          "subscriptionGroupID" : "crossfitpr-elite-group",
+          "type" : "RecurringSubscription"
+        },
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "19.99",
+          "familyShareable" : false,
+          "groupNumber" : 3,
+          "internalID" : "crossfitpr-elite-legacy",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "Assessment e modo competidor",
+              "displayName" : "CrossfitPR Elite",
+              "locale" : "pt_BR"
+            }
+          ],
+          "productID" : "com.douglast.CrossfitPR.elite",
+          "recurringSubscriptionPeriod" : "P1M",
+          "referenceName" : "CrossfitPR Elite Legacy",
+          "subscriptionGroupID" : "crossfitpr-elite-group",
+          "type" : "RecurringSubscription"
+        }
+      ]
     }
   ],
   "version" : {

@@ -16,7 +16,7 @@ public struct WorkoutInsightsView: View {
     public var body: some View {
         NavigationStack {
             WorkoutInsightsTierContent(
-                isPro: subscriptionClient.currentTier == .pro,
+                isPro: subscriptionClient.currentTier.isPaid,
                 isPresentingPROUpgrade: $isPresentingPROUpgrade
             )
             .navigationTitle(Strings.Screen.insights)

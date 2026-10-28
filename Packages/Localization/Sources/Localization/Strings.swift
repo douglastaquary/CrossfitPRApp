@@ -54,10 +54,24 @@ public enum Strings {
         public static var bestValueBadge: String { tr("purchase.plan.bestValue") }
         public static var selectPlanRequired: String { tr("purchase.selectPlan.required") }
         public static var retry: String { tr("purchase.retry") }
+        public static var close: String { tr("purchase.close") }
+        public static var continueToPayment: String { tr("purchase.continueToPayment") }
+        public static var restore: String { tr("purchase.restore") }
+        public static var restoreHint: String { tr("purchase.restore.hint") }
+        public static var restoreNothingFound: String { tr("purchase.restore.nothingFound") }
+        public static var restoreNothingFoundDetail: String { tr("purchase.restore.nothingFound.detail") }
         public static var stateConnecting: String { tr("purchase.state.connecting") }
+        public static var stateConnectingDetail: String { tr("purchase.state.connecting.detail") }
         public static var stateProcessing: String { tr("purchase.state.processing") }
+        public static var stateProcessingDetail: String { tr("purchase.state.processing.detail") }
         public static var stateConfirming: String { tr("purchase.state.confirming") }
+        public static var stateConfirmingDetail: String { tr("purchase.state.confirming.detail") }
         public static var stateSuccess: String { tr("purchase.state.success") }
+        public static var stateSuccessDetail: String { tr("purchase.state.success.detail") }
+        public static var statePending: String { tr("purchase.state.pending") }
+        public static var statePendingDetail: String { tr("purchase.state.pending.detail") }
+        public static var errorTitle: String { tr("purchase.error.title") }
+        public static var renewNote: String { tr("purchase.renew.note") }
     }
 
     public enum Record {
@@ -100,6 +114,9 @@ public enum Strings {
             public static var cancelAlertMessage: String { tr("settings.pro.cancelAlert.message") }
             public static var cancelAlertKeep: String { tr("settings.pro.cancelAlert.keep") }
             public static var cancelAlertConfirm: String { tr("settings.pro.cancelAlert.confirm") }
+            public static var eliteSubscriptionActive: String { tr("settings.elite.subscriptionActive") }
+            public static var unlockElite: String { tr("settings.elite.unlock") }
+            public static var managePlan: String { tr("settings.elite.managePlan") }
         }
     }
 
@@ -216,6 +233,28 @@ public enum Strings {
         }
     }
 
+    // MARK: - Elite (CPR-008)
+
+    public enum Elite {
+        public static var title: String { tr("elite.title") }
+        public static var subtitle: String { tr("elite.subtitle") }
+        public static var competitorMode: String { tr("elite.competitorMode") }
+        public static var badge: String { tr("elite.badge") }
+        public static var planFree: String { tr("elite.plan.free") }
+        public static var planPro: String { tr("elite.plan.pro") }
+        public static var planElite: String { tr("elite.plan.elite") }
+        public static var benefitAssessment: String { tr("elite.benefit.assessment") }
+        public static var benefitLimiting: String { tr("elite.benefit.limiting") }
+        public static var benefitDense: String { tr("elite.benefit.dense") }
+        public static var chooseElitePlan: String { tr("elite.choosePlan") }
+        public static var monthlyPlan: String { tr("elite.monthlyPlan") }
+        public static var annualPlan: String { tr("elite.annualPlan") }
+        public static var sectionCompare: String { tr("elite.sectionCompare") }
+        public static var unlockCTA: String { tr("elite.unlockCTA") }
+        public static var insightsHeader: String { tr("elite.insights.header") }
+        public static var teaserCTA: String { tr("elite.teaser.cta") }
+    }
+
     // MARK: - Exercises
 
     public enum Exercise {
@@ -246,6 +285,8 @@ public enum Strings {
             case .workoutEngineAnalysis: return tr("proFeature.workoutEngineAnalysis")
             case .personalizedRecommendations: return tr("proFeature.personalizedRecommendations")
             case .exportHistory: return tr("proFeature.exportHistory")
+            case .athleteAssessment: return tr("proFeature.athleteAssessment")
+            case .limitingFactorAnalysis: return tr("proFeature.limitingFactorAnalysis")
             }
         }
     }
@@ -346,6 +387,31 @@ public enum Strings {
 
         public static func teaserMessage(count: Int) -> String {
             format("engine.teaser.message", count)
+        }
+
+        public static var assessmentTitle: String { tr("engine.assessment.title") }
+        public static var limitingFactorTitle: String { tr("engine.limitingFactor.title") }
+        public static var eliteTeaserTitle: String { tr("engine.eliteTeaser.title") }
+        public static var domainStrength: String { tr("engine.domain.strength") }
+        public static var domainOlympic: String { tr("engine.domain.olympic") }
+        public static var domainGymnastics: String { tr("engine.domain.gymnastics") }
+        public static var domainEngine: String { tr("engine.domain.engine") }
+        public static var assessmentGenericDomain: String { tr("engine.assessment.genericDomain") }
+
+        public static func assessmentMessage(lines: String) -> String {
+            format("engine.assessment.message", lines)
+        }
+
+        public static func assessmentDomainLine(domain: String, percent: Int) -> String {
+            format("engine.assessment.domainLine", domain, percent)
+        }
+
+        public static func limitingFactorMessage(domain: String) -> String {
+            format("engine.limitingFactor.message", domain)
+        }
+
+        public static func eliteTeaserMessage(domainHint: String) -> String {
+            format("engine.eliteTeaser.message", domainHint)
         }
     }
 }

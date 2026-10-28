@@ -49,13 +49,56 @@ struct SubscriptionTierTests {
     func freeTierGating() {
         #expect(SubscriptionTier.free.canAccess(.basicInsights))
         #expect(!SubscriptionTier.free.canAccess(.detailedAIAnalysis))
+        #expect(!SubscriptionTier.free.canAccess(.athleteAssessment))
     }
 
-    @Test("PRO acessa todas as features")
+    @Test("PRO acessa features não-Elite")
     func proTierAccess() {
-        for feature in ProFeature.allCases {
+        for feature in ProFeature.allCases where !feature.isEliteOnly {
             #expect(SubscriptionTier.pro.canAccess(feature))
         }
+        #expect(!SubscriptionTier.pro.canAccess(.athleteAssessment))
+        #expect(!SubscriptionTier.pro.canAccess(.limitingFactorAnalysis))
+    }
+
+    @Test("Elite acessa assessment e limiting factor")
+    func eliteTierAccess() {
+        for feature in ProFeature.allCases {
+            #expect(SubscriptionTier.elite.canAccess(feature))
+        }
+    }
+}
+
+@Suite("Athlete Assessment")
+struct AthleteAssessmentServiceTests {
+    let service = AthleteAssessmentService()
+
+    @Test("Assessment vazio sem PRs")
+    func emptyRecords() {
+        let result = service.assess(records: [])
+        #expect(result.scores.isEmpty)
+        #expect(result.limitingFactor == nil)
+    }
+
+    @Test("Força forte e ginástica vazia aponta limiting factor")
+    func limitingFactorWhenDomainMissing() {
+        let strength = (0..<3).map { index in
+            PersonalRecord(
+                prName: "BACK SQUAT",
+                recordDate: Date(timeIntervalSince1970: Double(index) * 86_400),
+                poundValue: 200 + (index * 10),
+                group: .barbell
+            )
+        }
+        let deadlift = PersonalRecord(
+            prName: "DEADLIFT",
+            recordDate: Date(),
+            poundValue: 315,
+            group: .barbell
+        )
+        let result = service.assess(records: strength + [deadlift])
+        #expect(result.scores.contains { $0.domain == .strength && $0.coverage > 0 })
+        #expect(result.limitingFactor == .gymnastics || result.limitingFactor == .engine || result.limitingFactor == .olympic)
     }
 }
 

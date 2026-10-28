@@ -20,11 +20,12 @@ Story → /spdd-analysis → /spdd-reasons-canvas → /spdd-generate → Testes
 | SPDD | `.cursor/skills/crossfitpr-spdd/SKILL.md` | Sempre |
 | Design | `.cursor/skills/design/skill-design.md` | Alterando UI |
 | **MV SwiftUI** | `.cursor/skills/swiftui-mv/SKILL.md` | Views, refactors, estrutura de telas |
+| **Personas / Mayhem** | `.cursor/skills/crossfit-athlete-personas/SKILL.md` | Elite, Watch, retenção, níveis Liberty→Compete |
 | **Architecture review** | `.cursor/skills/architecture-review/SKILL.md` | PR/CI, grafo SPM, MV |
 | **App wiring** | `.cursor/skills/app-wiring/SKILL.md` | Shell, tabs, injeção global |
 | iOS | `.cursor/skills/ios-development-skill/skill-ios.md` | Código Swift |
 
-**Precedência:** SPDD → Design → **MV** → iOS
+**Precedência:** SPDD → Personas (produto) → Design → **MV** → iOS
 
 **Padrão MV:** [`docs/MV-ARCHITECTURE.md`](docs/MV-ARCHITECTURE.md) · Canvas CPR-006 · [`mv-patterns-crossfitpr.md`](.cursor/skills/swiftui-mv/references/mv-patterns-crossfitpr.md)
 
@@ -86,7 +87,8 @@ xcodebuild -scheme CrossfitPR -destination 'platform=iOS Simulator,name=iPhone 1
 CODE_SIGNING_ALLOWED=NO ./scripts/ci-modern.sh
 ```
 
-CI: [`docs/CI.md`](docs/CI.md) · build `.github/workflows/ios.yml` · review `.github/workflows/pr-architecture-review.yml`
+CI: [`docs/CI.md`](docs/CI.md) · build `.github/workflows/ios.yml` · review `.github/workflows/pr-architecture-review.yml`  
+Pagamentos: [`docs/STOREKIT-PAYMENTS.md`](docs/STOREKIT-PAYMENTS.md)
 
 ## Refs
 

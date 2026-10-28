@@ -25,6 +25,18 @@
 "engine.trend.improved" = "evoluiu";
 "engine.trend.message" = "Desde o primeiro registro, seu PR %1$@ %2$lld lb. %3$@";
 "engine.trend.title" = "%1$@: sua curva";
+"engine.assessment.title" = "Assessment do atleta";
+"engine.assessment.message" = "Como você está nos domínios:\n%1$@";
+"engine.assessment.domainLine" = "• %1$@ — %2$lld%%";
+"engine.assessment.genericDomain" = "seu ponto mais fraco";
+"engine.limitingFactor.title" = "Seu teto agora";
+"engine.limitingFactor.message" = "Seu limiting factor é %1$@. Viés o próximo ciclo nesse domínio — qualidade acima de volume.";
+"engine.eliteTeaser.title" = "Elite enxerga o seu teto";
+"engine.eliteTeaser.message" = "Desbloqueie assessment completo e coaching de limiting factor. Dica: olhe %1$@.";
+"engine.domain.strength" = "Força";
+"engine.domain.olympic" = "Levantamento olímpico";
+"engine.domain.gymnastics" = "Ginástica";
+"engine.domain.engine" = "Engine / endurance";
 
 /* ─────────────────────────────────────────────────────────────
    ERRORS — Mensagens de erro amigáveis
@@ -39,9 +51,9 @@
 "error.repo.invalidData" = "Alguns dados não parecem válidos. Confere exercício, carga e data.";
 "error.repo.notFound" = "PR não encontrado. Pode ter sido removido ou ainda não sincronizou.";
 "error.repo.syncFailed" = "Salvo no iPhone. iCloud vai sincronizar em breve.";
-"error.sub.pending" = "Assinatura pendente. Aguardando confirmação da App Store.";
-"error.sub.productUnavailable" = "PRO indisponível agora. Tenta de novo em instantes.";
-"error.sub.purchaseFailed" = "Não conseguimos finalizar. Verifica sua conexão.";
+"error.sub.pending" = "Pagamento aguardando aprovação da App Store (Ask to Buy ou revisão). Liberamos PRO/Elite assim que confirmar.";
+"error.sub.productUnavailable" = "Este plano não está disponível agora. Verifica a conexão e tenta de novo.";
+"error.sub.purchaseFailed" = "Não concluímos o pagamento com a App Store. Verifica rede e forma de pagamento e tenta novamente.";
 
 /* ─────────────────────────────────────────────────────────────
    EXERCISES
@@ -186,6 +198,26 @@
 "proFeature.personalizedRecommendations" = "Metas feitas pro seu ritmo";
 "proFeature.trendCharts" = "Gráficos de progressão detalhados";
 "proFeature.workoutEngineAnalysis" = "Detecte estagnação e destrave novos PRs";
+"proFeature.athleteAssessment" = "Assessment por domínio de atleta";
+"proFeature.limitingFactorAnalysis" = "Coaching de limiting factor";
+
+"elite.title" = "Treine como competidor";
+"elite.subtitle" = "Assessment, limiting factors e feedback denso — para quem trata o CrossFit como esporte.";
+"elite.competitorMode" = "Modo competidor";
+"elite.badge" = "Elite";
+"elite.plan.free" = "Free";
+"elite.plan.pro" = "PRO";
+"elite.plan.elite" = "Elite";
+"elite.benefit.assessment" = "Assessment por domínio (força, Oly, ginástica, engine)";
+"elite.benefit.limiting" = "Card de limiting factor após cada análise";
+"elite.benefit.dense" = "Janela de coach mais densa e prompts Elite";
+"elite.choosePlan" = "Escolha o Elite";
+"elite.monthlyPlan" = "Elite mensal";
+"elite.annualPlan" = "Elite anual";
+"elite.sectionCompare" = "Compare os planos";
+"elite.unlockCTA" = "Quero o Elite";
+"elite.insights.header" = "Competidor";
+"elite.teaser.cta" = "Ver assessment Elite";
 
 /* ─────────────────────────────────────────────────────────────
    TABS
@@ -234,8 +266,8 @@
 "purchase.item3.title" = "Ranking dos seus records";
 "purchase.item3.description" = "Veja seus melhores PRs e acompanhe sua progressão de perto.";
 "purchase.processing.description" = "Finalizando…";
-"purchase.tryfree.title" = "Experimente 7 dias grátis";
-"purchase.commitment.title" = "Cancele quando quiser.\nSem letras miúdas.\nApós o teste, renovação automática\na menos que você desative.";
+"purchase.tryfree.title" = "Continuar para o pagamento";
+"purchase.commitment.title" = "Cancele quando quiser em Apple ID → Assinaturas.\nSem letras miúdas no app.\nApós o teste, renovação automática\nse você não desativar.";
 "purchase.lessthancoffe" = "Menos que um café por mês ☕";
 
 /* ─────────────────────────────────────────────────────────────
@@ -374,6 +406,9 @@
 "settings.pro.cancelAlert.message" = "Ao cancelar, você perderá acesso aos insights avançados, metas personalizadas e projeções de PR. Tem certeza?";
 "settings.pro.cancelAlert.keep" = "Manter PRO";
 "settings.pro.cancelAlert.confirm" = "Sim, cancelar";
+"settings.elite.subscriptionActive" = "Assinatura Elite ativa";
+"settings.elite.unlock" = "Upgrade para Elite";
+"settings.elite.managePlan" = "Gerenciar plano";
 
 "pro.upgrade.choosePlan" = "Escolha seu plano";
 "pro.upgrade.productsUnavailable.title" = "Produtos indisponíveis";
@@ -385,10 +420,24 @@
 "purchase.plan.bestValue" = "Melhor valor";
 "purchase.selectPlan.required" = "Selecione um plano para continuar";
 "purchase.retry" = "Tentar novamente";
+"purchase.close" = "Fechar";
+"purchase.continueToPayment" = "Continuar para o pagamento";
+"purchase.restore" = "Restaurar compras";
+"purchase.restore.hint" = "Já assinou com este Apple ID? Restaure aqui.";
+"purchase.restore.nothingFound" = "Nenhuma assinatura encontrada";
+"purchase.restore.nothingFound.detail" = "Não achamos um plano PRO ou Elite ativo neste Apple ID. Se você acabou de comprar, aguarde um instante e toque em Restaurar de novo.";
 "purchase.state.connecting" = "Conectando à App Store…";
-"purchase.state.processing" = "Processando pagamento…";
-"purchase.state.confirming" = "Confirmando assinatura…";
-"purchase.state.success" = "Assinatura ativada!";
+"purchase.state.connecting.detail" = "Preparando um checkout seguro.";
+"purchase.state.processing" = "Confirme o pagamento na App Store…";
+"purchase.state.processing.detail" = "Use Face ID, Touch ID ou senha quando a Apple pedir. Não feche o app.";
+"purchase.state.confirming" = "Registrando sua assinatura…";
+"purchase.state.confirming.detail" = "Sincronizando com a App Store e liberando o plano no CrossfitPR.";
+"purchase.state.success" = "Tudo certo!";
+"purchase.state.success.detail" = "Pagamento confirmado. Seu plano está ativo na App Store e no app.";
+"purchase.state.pending" = "Aguardando aprovação da App Store";
+"purchase.state.pending.detail" = "Seu pedido está pendente (por exemplo Ask to Buy). O CrossfitPR libera sozinho quando a Apple confirmar.";
+"purchase.error.title" = "O pagamento não foi concluído";
+"purchase.renew.note" = "Primeira compra ou renovação: a Apple cuida da cobrança. O plano renova automaticamente até você cancelar em Assinaturas do Apple ID.";
 
 "settings.notification.reminder.title1" = "Hora de treinar! 💪🏼";
 "settings.notification.reminder.title2" = "E aí?? Bora tirar o atraso?!";

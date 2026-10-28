@@ -58,7 +58,11 @@ private struct InsightsViewPROEmptySection: View {
     var body: some View {
         ScrollView {
             VStack(spacing: 32) {
-                Spacer(minLength: 40)
+                InsightsCoachSection()
+                    .padding(.horizontal, 24)
+                    .padding(.top, 16)
+
+                Spacer(minLength: 24)
 
                 VStack(spacing: 20) {
                     ZStack {
@@ -172,6 +176,7 @@ private struct InsightsViewPROContent: View {
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
             VStack(spacing: 16) {
+                InsightsEliteSection()
                 InsightsCoachSection()
 
                 if !topBarbell.isEmpty {

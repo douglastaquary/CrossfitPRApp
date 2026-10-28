@@ -100,7 +100,7 @@ public struct RecordDetailView: View {
     }
 
     private func deleteRecords() async {
-        guard subscriptionClient.currentTier == .pro else {
+        guard subscriptionClient.currentTier.isPaid else {
             showPROUpgrade = true
             return
         }

@@ -14,6 +14,7 @@
 		4E58072227F3C5B100F16219 /* AppDependencyGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E58072127F3C5B100F16220 /* AppDependencyGraph.swift */; };
 		4E58070427F3C5B100F16219 /* ReadmeScreenshotsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E58070327F3C5B100F16219 /* ReadmeScreenshotsUITests.swift */; };
 		4E58072027F3C5B100F16219 /* AppLocalizationQATests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E58072127F3C5B100F16219 /* AppLocalizationQATests.swift */; };
+		4E58073027F3C5B100F16219 /* PaymentFlowUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E58073127F3C5B100F16219 /* PaymentFlowUITests.swift */; };
 		4E58061127F3C5B100F16219 /* Domain in Frameworks */ = {isa = PBXBuildFile; productRef = 4E58061027F3C5B100F16219 /* Domain */; };
 		4E58061727F3C5B100F16219 /* Subscription in Frameworks */ = {isa = PBXBuildFile; productRef = 4E58061627F3C5B100F16219 /* Subscription */; };
 		4E58061927F3C5B100F16219 /* Application in Frameworks */ = {isa = PBXBuildFile; productRef = 4E58061827F3C5B100F16219 /* Application */; };
@@ -39,6 +40,7 @@
 		4E58070227F3C5AE00F16219 /* CrossfitPRUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CrossfitPRUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E58070327F3C5B100F16219 /* ReadmeScreenshotsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadmeScreenshotsUITests.swift; sourceTree = "<group>"; };
 		4E58072127F3C5B100F16219 /* AppLocalizationQATests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLocalizationQATests.swift; sourceTree = "<group>"; };
+		4E58073127F3C5B100F16219 /* PaymentFlowUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentFlowUITests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +128,7 @@
 			children = (
 				4E58070327F3C5B100F16219 /* ReadmeScreenshotsUITests.swift */,
 				4E58072127F3C5B100F16219 /* AppLocalizationQATests.swift */,
+				4E58073127F3C5B100F16219 /* PaymentFlowUITests.swift */,
 			);
 			path = CrossfitPRUITests;
 			sourceTree = "<group>";
@@ -259,6 +262,7 @@
 			files = (
 				4E58070427F3C5B100F16219 /* ReadmeScreenshotsUITests.swift in Sources */,
 				4E58072027F3C5B100F16219 /* AppLocalizationQATests.swift in Sources */,
+				4E58073027F3C5B100F16219 /* PaymentFlowUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

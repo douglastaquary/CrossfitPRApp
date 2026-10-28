@@ -2,17 +2,17 @@ import Foundation
 import StoreKit
 import Domain
 
-/// Adapter StoreKit 2 — compra e entitlements PRO.
+/// Adapter StoreKit 2 — compra e entitlements PRO / Elite.
 public struct StoreKitSubscriptionStore: SubscriptionStoreProviding, Sendable {
     public init() {}
 
     public func fetchProProduct() async throws -> SubscriptionProductInfo? {
         let products = try await fetchSubscriptionProducts()
-        return products.first
+        return products.first { SubscriptionCatalog.proProductIDs.contains($0.id) }
     }
 
     public func fetchSubscriptionProducts() async throws -> [SubscriptionProductInfo] {
-        let products = try await Product.products(for: SubscriptionCatalog.proProductIDs)
+        let products = try await Product.products(for: SubscriptionCatalog.allProductIDs)
         let mapped = products.map { product in
             SubscriptionProductInfo(
                 id: product.id,
@@ -36,7 +36,7 @@ public struct StoreKitSubscriptionStore: SubscriptionStoreProviding, Sendable {
         case .success(let verification):
             let transaction = try Self.checkVerified(verification)
             await transaction.finish()
-            return .pro
+            return SubscriptionCatalog.tier(forProductID: transaction.productID) ?? .pro
         case .userCancelled:
             throw SubscriptionError.userCancelled
         case .pending:
@@ -47,13 +47,18 @@ public struct StoreKitSubscriptionStore: SubscriptionStoreProviding, Sendable {
     }
 
     public func resolveCurrentTier() async -> SubscriptionTier {
+        var resolved: SubscriptionTier = .free
         for await result in Transaction.currentEntitlements {
             guard let transaction = try? Self.checkVerified(result) else { continue }
-            if SubscriptionCatalog.proProductIDs.contains(transaction.productID) {
-                return .pro
+            guard let tier = SubscriptionCatalog.tier(forProductID: transaction.productID) else { continue }
+            if tier == .elite {
+                return .elite
+            }
+            if tier == .pro {
+                resolved = .pro
             }
         }
-        return .free
+        return resolved
     }
 
     static func checkVerified<T>(_ result: VerificationResult<T>) throws -> T {
@@ -67,9 +72,13 @@ public struct StoreKitSubscriptionStore: SubscriptionStoreProviding, Sendable {
 
     private func sortRank(for productID: String) -> Int {
         switch productID {
-        case SubscriptionCatalog.proAnnualProductID: return 0
-        case SubscriptionCatalog.proMonthlyProductID: return 1
-        default: return 2
+        case SubscriptionCatalog.eliteAnnualProductID: return 0
+        case SubscriptionCatalog.eliteMonthlyProductID: return 1
+        case SubscriptionCatalog.eliteProductID: return 2
+        case SubscriptionCatalog.proAnnualProductID: return 3
+        case SubscriptionCatalog.proMonthlyProductID: return 4
+        case SubscriptionCatalog.proProductID: return 5
+        default: return 6
         }
     }
 }

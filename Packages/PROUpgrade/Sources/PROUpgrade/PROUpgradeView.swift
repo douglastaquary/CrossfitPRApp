@@ -26,6 +26,18 @@ public struct PROUpgradeView: View {
         }
     }
 
+    private var eliteAnnualProduct: SubscriptionProductInfo? {
+        subscriptionClient.subscriptionProducts.first {
+            $0.id == SubscriptionCatalog.eliteAnnualProductID
+        }
+    }
+
+    private var eliteMonthlyProduct: SubscriptionProductInfo? {
+        subscriptionClient.subscriptionProducts.first {
+            $0.id == SubscriptionCatalog.eliteMonthlyProductID
+        }
+    }
+
     private var hasProducts: Bool {
         !subscriptionClient.subscriptionProducts.isEmpty
     }
@@ -43,6 +55,8 @@ public struct PROUpgradeView: View {
                             PROUpgradePurchaseContent(
                                 monthlyProduct: monthlyProduct,
                                 annualProduct: annualProduct,
+                                eliteMonthlyProduct: eliteMonthlyProduct,
+                                eliteAnnualProduct: eliteAnnualProduct,
                                 hasProducts: hasProducts,
                                 selectedProductID: $selectedProductID,
                                 errorMessage: $errorMessage,
@@ -51,22 +65,34 @@ public struct PROUpgradeView: View {
                                 },
                                 onPurchase: { productID in
                                     Task { await startPurchase(productID) }
+                                },
+                                onRestore: {
+                                    Task { await startRestore() }
                                 }
                             )
                         }
                     }
                 }
+                .accessibilityIdentifier("pro.upgrade.scroll")
                 .disabled(purchaseState != .idle)
 
                 if purchaseState != .idle {
                     PROUpgradeProcessingOverlay(
                         purchaseState: purchaseState,
-                        onRetry: { purchaseState = .idle }
+                        onRetry: { purchaseState = .idle },
+                        onClosePending: { dismiss() }
                     )
                 }
             }
             .task {
                 await subscriptionClient.loadSubscriptionProducts()
+                // UI tests: pré-seleciona PRO mensal (SwiftUI .disabled mente isEnabled no XCTest).
+                if ProcessInfo.processInfo.environment["UITEST_SKIP_SPLASH"] == "1",
+                   selectedProductID == nil {
+                    selectedProductID = monthlyProduct?.id
+                        ?? annualProduct?.id
+                        ?? subscriptionClient.subscriptionProducts.first?.id
+                }
             }
             .onChange(of: subscriptionClient.currentTier) { tier in
                 handleTierChange(tier)
@@ -76,41 +102,105 @@ public struct PROUpgradeView: View {
     }
 
     private func handleTierChange(_ tier: SubscriptionTier) {
-        guard tier == .pro else { return }
-        purchaseState = .success
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+        guard tier.isPaid else { return }
+        guard purchaseState.isInFlight || purchaseState == .pending else { return }
+        withAnimation {
+            purchaseState = .success
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.8) {
             dismiss()
         }
     }
 
+    /// Fluxo alinhado ao StoreKit: conectar → sheet Apple → confirmar entitlements → sucesso.
     private func startPurchase(_ productID: String) async {
         errorMessage = nil
 
         withAnimation {
             purchaseState = .connecting
         }
-
-        try? await Task.sleep(nanoseconds: 800_000_000)
+        // Breve feedback visual antes do sheet Apple (sem delays artificiais longos).
+        try? await Task.sleep(nanoseconds: 250_000_000)
 
         withAnimation {
             purchaseState = .processing
         }
 
-        try? await Task.sleep(nanoseconds: 600_000_000)
+        do {
+            try await subscriptionClient.purchase(productID: productID)
 
+            withAnimation {
+                purchaseState = .confirming
+            }
+
+            // Garante sync dual (cliente ↔ entitlements) mesmo se o onChange atrasar.
+            await subscriptionClient.refreshStatus()
+
+            if subscriptionClient.currentTier.isPaid {
+                withAnimation {
+                    purchaseState = .success
+                }
+                try? await Task.sleep(nanoseconds: 1_800_000_000)
+                dismiss()
+            } else {
+                withAnimation {
+                    purchaseState = .pending
+                }
+            }
+        } catch let error as SubscriptionError {
+            await handleSubscriptionError(error)
+        } catch {
+            withAnimation {
+                purchaseState = .error(
+                    title: Strings.Purchase.errorTitle,
+                    message: Strings.PRO.purchaseFallbackError
+                )
+            }
+        }
+    }
+
+    private func startRestore() async {
+        errorMessage = nil
         withAnimation {
             purchaseState = .confirming
         }
 
-        do {
-            try await subscriptionClient.purchase(productID: productID)
-        } catch let error as SubscriptionError {
+        let tier = await subscriptionClient.restorePurchases()
+        if tier.isPaid {
             withAnimation {
-                purchaseState = .error(error.localizedMessage)
+                purchaseState = .success
             }
-        } catch {
+            try? await Task.sleep(nanoseconds: 1_800_000_000)
+            dismiss()
+        } else {
             withAnimation {
-                purchaseState = .error(Strings.PRO.purchaseFallbackError)
+                purchaseState = .error(
+                    title: Strings.Purchase.restoreNothingFound,
+                    message: Strings.Purchase.restoreNothingFoundDetail
+                )
+            }
+        }
+    }
+
+    private func handleSubscriptionError(_ error: SubscriptionError) async {
+        switch error {
+        case .userCancelled:
+            withAnimation {
+                purchaseState = .idle
+            }
+        case .pending:
+            withAnimation {
+                purchaseState = .pending
+            }
+        case .productUnavailable, .purchaseFailed:
+            let message = error.localizedMessage.isEmpty
+                ? Strings.PRO.purchaseFallbackError
+                : error.localizedMessage
+            withAnimation {
+                purchaseState = .error(
+                    title: Strings.Purchase.errorTitle,
+                    message: message
+                )
             }
         }
     }
@@ -122,5 +212,15 @@ enum PurchaseState: Equatable {
     case processing
     case confirming
     case success
-    case error(String)
+    case pending
+    case error(title: String, message: String)
+
+    var isInFlight: Bool {
+        switch self {
+        case .connecting, .processing, .confirming:
+            return true
+        default:
+            return false
+        }
+    }
 }

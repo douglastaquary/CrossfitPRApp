@@ -116,7 +116,7 @@ struct SubscriptionClientTests {
 
         await client.loadSubscriptionProducts()
 
-        #expect(client.subscriptionProducts.count == 2)
+        #expect(client.subscriptionProducts.count == 4)
         #expect(client.proProduct != nil)
     }
 
@@ -131,6 +131,8 @@ struct SubscriptionClientTests {
         let ids = client.subscriptionProducts.map(\.id)
         #expect(ids.contains(SubscriptionCatalog.proAnnualProductID))
         #expect(ids.contains(SubscriptionCatalog.proMonthlyProductID))
+        #expect(ids.contains(SubscriptionCatalog.eliteAnnualProductID))
+        #expect(ids.contains(SubscriptionCatalog.eliteMonthlyProductID))
     }
 
     @Test("Load products exibe preços formatados")
@@ -185,11 +187,13 @@ struct MockSubscriptionStoreTests {
     @Test("Default products inclui mensal e anual")
     func defaultProductsHasMonthlyAndAnnual() {
         let products = MockSubscriptionStore.defaultProducts
-        #expect(products.count == 2)
+        #expect(products.count == 4)
 
         let ids = products.map(\.id)
         #expect(ids.contains(SubscriptionCatalog.proAnnualProductID))
         #expect(ids.contains(SubscriptionCatalog.proMonthlyProductID))
+        #expect(ids.contains(SubscriptionCatalog.eliteAnnualProductID))
+        #expect(ids.contains(SubscriptionCatalog.eliteMonthlyProductID))
     }
 
     @Test("Falha de compra propaga erro")
@@ -270,10 +274,44 @@ struct SubscriptionCatalogTests {
         #expect(ids.contains(SubscriptionCatalog.proAnnualProductID))
     }
 
+    @Test("eliteProductIDs e tier mapping")
+    func eliteProductIDsAndTier() {
+        #expect(SubscriptionCatalog.eliteProductIDs.contains(SubscriptionCatalog.eliteMonthlyProductID))
+        #expect(SubscriptionCatalog.tier(forProductID: SubscriptionCatalog.eliteAnnualProductID) == .elite)
+        #expect(SubscriptionCatalog.tier(forProductID: SubscriptionCatalog.proMonthlyProductID) == .pro)
+        #expect(SubscriptionCatalog.allProductIDs.count == SubscriptionCatalog.proProductIDs.count + SubscriptionCatalog.eliteProductIDs.count)
+    }
+
     @Test("IDs são únicos")
     func productIDsAreUnique() {
-        let ids = SubscriptionCatalog.proProductIDs
+        let ids = SubscriptionCatalog.allProductIDs
         let uniqueIDs = Set(ids)
         #expect(ids.count == uniqueIDs.count)
+    }
+}
+
+@Suite("Mock Elite purchase")
+struct MockElitePurchaseTests {
+    @Test("Compra Elite mensal resolve tier elite")
+    func purchaseEliteMonthly() async throws {
+        let mock = MockSubscriptionStore(tier: .free)
+        let tier = try await mock.purchase(productID: SubscriptionCatalog.eliteMonthlyProductID)
+        #expect(tier == .elite)
+        #expect(mock.tier == .elite)
+    }
+}
+
+@Suite("Tier reconciliation")
+struct TierReconciliationTests {
+    @Test("Confia na compra se entitlements atrasarem")
+    func prefersPurchaseWhenEntitlementsLag() {
+        let tier = SubscriptionClient.reconciledTier(purchaseResult: .pro, entitlements: .free)
+        #expect(tier == .pro)
+    }
+
+    @Test("Elite nos entitlements vence PRO da compra")
+    func prefersEliteEntitlements() {
+        let tier = SubscriptionClient.reconciledTier(purchaseResult: .pro, entitlements: .elite)
+        #expect(tier == .elite)
     }
 }

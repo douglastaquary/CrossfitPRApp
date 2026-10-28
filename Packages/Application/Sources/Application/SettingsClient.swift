@@ -34,6 +34,12 @@ public final class SettingsClient: ObservableObject {
             .flatMap { MeasureTrackingMode(rawValue: $0) } ?? .pounds
         measureTrackingMode = storedMeasure
         isNotificationEnabled = defaults.bool(forKey: Keys.isNotificationEnabled)
-        hasCompletedLaunch = defaults.bool(forKey: Keys.launchBefore)
+        if UITestLaunchSupport.shouldSkipOnboarding {
+            hasCompletedLaunch = true
+        } else if UITestLaunchSupport.shouldForceOnboarding {
+            hasCompletedLaunch = false
+        } else {
+            hasCompletedLaunch = defaults.bool(forKey: Keys.launchBefore)
+        }
     }
 }

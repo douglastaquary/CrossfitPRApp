@@ -66,10 +66,18 @@ echo "==> UI tests (AppLocalizationQATests)"
   -skip-testing:CrossfitPRUITests/ReadmeScreenshotsUITests \
   -skip-testing:CrossfitPRUITests/testDemoTabTour
 
+echo "==> UI tests (PaymentFlowUITests)"
+"${XCB[@]}" test \
+  -only-testing:CrossfitPRUITests/PaymentFlowUITests \
+  -skip-testing:CrossfitPRUITests/ReadmeScreenshotsUITests
+
 echo "==> Unit tests — Localization (catálogo workout.*)"
 (cd Packages/Localization && swift test)
 
 echo "==> Unit tests — Domain"
 (cd Packages/Domain && swift test)
+
+echo "==> Unit tests — Subscription (PaymentFlow)"
+(cd Packages/Subscription && swift test)
 
 echo "CI moderno concluído com sucesso."
