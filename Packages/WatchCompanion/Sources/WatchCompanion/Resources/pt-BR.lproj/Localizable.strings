@@ -5,3 +5,7 @@
 "watch.breath.title" = "Respiração";
 "watch.breath.pattern" = "4 · 4 · 4 · 4";
 "watch.breath.inhale" = "Inspire";
+"watch.breath.exhale" = "Expire";
+"watch.breath.haptics" = "Haptic";
+"watch.rest.start" = "Iniciar";
+"watch.rest.pause" = "Pausar";

@@ -10,9 +10,9 @@ para manter foco no box sem abrir o iPhone a todo momento.
 
 - [x] Target watchOS companion (`CrossfitPRWatch` + `WatchCompanion`)
 - [x] Sync com iPhone (WatchConnectivity — eventos compactos → `WatchSessionEventStore` → coach)
-- [ ] Timer de descanso + mensagem motivacional curta
-- [ ] Respiração visual/haptic em treinos intensos (opt-in na sessão)
-- [ ] Eventos compactos (série, RPE, descanso) → `CoachingContextBuilder` no iPhone
+- [x] Timer de descanso + mensagem motivacional curta (`WatchRestTimerView`)
+- [x] Respiração visual/haptic em treinos intensos (opt-in — toggle na tab Respiração)
+- [x] Eventos compactos (série, RPE, descanso) → `CoachingContextBuilder.sessionEvents`
 - [ ] Sem spam de notificações push
 - [ ] Comercial: add-on ou bundle PRO+Watch (canvas)
 

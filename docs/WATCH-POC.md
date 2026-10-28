@@ -11,7 +11,9 @@ Companion na sessão: dica contextual, timer de descanso e respiração. **Sem L
 | SPM | produto `WatchCompanion` no monorepo (sem dep de `Localization`; strings em `Resources/`) |
 | Sync | `WatchLinkBootstrap` (watch) + `iPhoneWatchConnectivityBridge` (iPhone) — handshake WCSession |
 | Coach | `WatchSessionEvent` → `WatchSessionEventStore` → `CoachingContextBuilder.sessionEvents` |
-| Próximo | Timer descanso real + haptics (Design CPR-009) |
+| Timer | `WatchRestTimerView` — countdown 1:30, evento `rest` ao fim |
+| Respiração | Animação 4-4 + toggle haptic (`watch.breath.hapticsEnabled`) |
+| Próximo | Design CPR-009 + capturas README atualizadas |
 
 ## Build local
 
