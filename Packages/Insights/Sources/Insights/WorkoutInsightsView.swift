@@ -15,27 +15,33 @@ public struct WorkoutInsightsView: View {
 
     public var body: some View {
         NavigationStack {
-            Group {
-                if subscriptionClient.currentTier == .pro {
-                    InsightsViewPRO()
-                } else {
-                    InsightsTeaserView(isPresentingPROUpgrade: $isPresentingPROUpgrade)
+            insightsContent
+                .navigationTitle(Strings.Screen.insights)
+                .navigationBarTitleDisplayMode(.large)
+                .task(id: personalRecordClient.records.count) {
+                    await loadRecordsIfNeeded()
                 }
-            }
-            .navigationTitle(Strings.Screen.insights)
-            .navigationBarTitleDisplayMode(.large)
-            .task(id: personalRecordClient.records.count) {
-                if personalRecordClient.records.isEmpty {
+                .refreshable {
                     await personalRecordClient.fetchRecords()
                 }
-            }
-            .refreshable {
-                await personalRecordClient.fetchRecords()
-            }
-            .sheet(isPresented: $isPresentingPROUpgrade) {
-                PROUpgradeView()
-            }
+                .sheet(isPresented: $isPresentingPROUpgrade) {
+                    PROUpgradeView()
+                }
         }
         .brandTint()
+    }
+
+    @ViewBuilder
+    private var insightsContent: some View {
+        if subscriptionClient.currentTier == .pro {
+            InsightsViewPRO()
+        } else {
+            InsightsTeaserView(isPresentingPROUpgrade: $isPresentingPROUpgrade)
+        }
+    }
+
+    private func loadRecordsIfNeeded() async {
+        guard personalRecordClient.records.isEmpty else { return }
+        await personalRecordClient.fetchRecords()
     }
 }

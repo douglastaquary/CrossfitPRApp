@@ -104,7 +104,7 @@ cd ../WorkoutEngine && swift test
 
 ## Arquitetura (SPDD + SPM)
 
-Desenvolvimento guiado por [SPDD](https://martinfowler.com/articles/structured-prompt-driven/) — intenção no canvas, código rastreável. Detalhes em [`AGENTS.md`](AGENTS.md) e [`spdd/README.md`](spdd/README.md).
+Desenvolvimento guiado por [SPDD](https://martinfowler.com/articles/structured-prompt-driven/) — intenção no canvas, código rastreável. Camadas em [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md); UI **MV** em [`docs/MV-ARCHITECTURE.md`](docs/MV-ARCHITECTURE.md) (CPR-006, [Dimillian](https://github.com/Dimillian/Skills/blob/main/swiftui-view-refactor/SKILL.md)).
 
 ```
 CrossfitPR/              # App shell (SwiftUI, 4 tabs)
@@ -126,7 +126,7 @@ Packages/
 └── Settings             # Preferências
 ```
 
-**Padrões:** SwiftUI **sem ViewModels**; `@EnvironmentObject` (`PersonalRecordClient`, `SubscriptionClient`, `SettingsClient`, …); copy e cores via `Strings.*` e `AppDesign.*`.
+**Padrões:** SwiftUI **MV** (Model + View; sem ViewModels); `@EnvironmentObject` clients; copy/cores via `Strings.*` e `AppDesign.*`.
 
 ---
 

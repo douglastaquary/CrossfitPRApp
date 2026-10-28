@@ -2,7 +2,7 @@
 name: crossfitpr-design
 description: >-
   Preserva design baseline CrossfitPR: cores, navegação, componentes.
-  Use em views SwiftUI, tokens visuais, tabs. Obrigatória com SPDD + iOS.
+  Use em views SwiftUI, tokens visuais, tabs. Obrigatória com SPDD + MV + iOS.
 ---
 
 # CrossfitPR — Design Skill

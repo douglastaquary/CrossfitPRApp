@@ -31,15 +31,19 @@ Este projeto usa [Structured-Prompt-Driven Development (SPDD)](https://martinfow
 | Contexto | Skills |
 |----------|--------|
 | Lógica / arquitetura | SPDD + iOS |
-| UI / layout / cores | SPDD + Design + iOS |
+| UI / layout / cores | SPDD + Design + MV + iOS |
+| Refactor de views | SPDD + MV + Design |
 
 | Skill | Caminho |
 |-------|---------|
 | SPDD | `.cursor/skills/crossfitpr-spdd/SKILL.md` |
 | Design | `.cursor/skills/design/skill-design.md` |
+| MV SwiftUI | `.cursor/skills/swiftui-mv/SKILL.md` |
 | iOS | `.cursor/skills/ios-development-skill/skill-ios.md` |
 
-Regras Cursor: `spdd-governance.mdc`, `ios-swift-development.mdc`, `design-preservation.mdc`.
+Regras Cursor: `spdd-governance.mdc`, `swiftui-mv-architecture.mdc`, `ios-swift-development.mdc`, `design-preservation.mdc`.
+
+Canvas MV: `spdd/prompt/CPR-006-*-mv-swiftui-architecture-standard.md` · `docs/MV-ARCHITECTURE.md`
 
 ## Artefatos baseline
 

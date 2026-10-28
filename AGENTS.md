@@ -19,9 +19,12 @@ Story → /spdd-analysis → /spdd-reasons-canvas → /spdd-generate → Testes
 |-------|---------|-------------|
 | SPDD | `.cursor/skills/crossfitpr-spdd/SKILL.md` | Sempre |
 | Design | `.cursor/skills/design/skill-design.md` | Alterando UI |
+| **MV SwiftUI** | `.cursor/skills/swiftui-mv/SKILL.md` | Views, refactors, estrutura de telas |
 | iOS | `.cursor/skills/ios-development-skill/skill-ios.md` | Código Swift |
 
-**Precedência:** SPDD → Design → iOS
+**Precedência:** SPDD → Design → **MV** → iOS
+
+**Padrão MV:** [`docs/MV-ARCHITECTURE.md`](docs/MV-ARCHITECTURE.md) · Canvas CPR-006 · [Dimillian swiftui-view-refactor](https://github.com/Dimillian/Skills/blob/main/swiftui-view-refactor/SKILL.md)
 
 ## Estrutura SPM
 
@@ -56,7 +59,7 @@ AppLaunchContainer → LaunchView → MainTabView
 
 ## Padrões obrigatórios
 
-- **Sem ViewModels** — `@EnvironmentObject` clients + `@State`
+- **MV (Model-View)** — clients + `@State`; **sem ViewModels** (equivalente a MV Dimillian, não MVVM)
 - **Clients:** `PersonalRecordClient`, `SubscriptionClient`, `SettingsClient`
 - **Tokens:** `AppDesign.Colors.*`, `Strings.*`
 - **iOS 16+**, Swift 6

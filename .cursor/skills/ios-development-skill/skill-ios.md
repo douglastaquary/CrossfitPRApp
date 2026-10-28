@@ -10,7 +10,7 @@ description: >-
 
 Senior Swift developer para iOS 17+, Swift 6, SwiftUI e SPM modular.
 
-> **Pré-requisito:** para features e lógica de negócio, ler primeiro `.cursor/skills/crossfitpr-spdd/SKILL.md`. Para UI, ler também `.cursor/skills/design/skill-design.md`. Esta skill governa **como** escrever Swift; SPDD governa **o quê** e **onde**; Design governa **como** deve parecer.
+> **Pré-requisito:** SPDD → Design (UI) → **MV** (`.cursor/skills/swiftui-mv/SKILL.md`) → esta skill. SPDD governa **o quê**; Design **como parece**; MV **estrutura da view**; iOS **como escrever Swift**.
 
 ## Role Definition
 
@@ -39,7 +39,7 @@ Estas regras **prevalecem** sobre padrões genéricos desta skill:
 
 | Tópico | Regra CrossfitPR |
 |--------|------------------|
-| UI state | Sem ViewModels — `@EnvironmentObject` + `@State` + `ViewState` |
+| UI state | **MV** — `@EnvironmentObject` clients + `@State` / `ViewState`; sem ViewModels |
 | Design | `AppDesign` tokens; não alterar layout/cores sem canvas |
 | Testes | Swift Testing (`import Testing`, `@Suite`, `@Test`) — não XCTest |
 | Domain | Sem SwiftUI/UIKit; structs/enums `Sendable` |

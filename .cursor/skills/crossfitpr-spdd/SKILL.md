@@ -1,7 +1,7 @@
 ---
 name: crossfitpr-spdd
 description: >-
-  CrossfitPR + SPDD: canvas REASONS, módulos SPM, SwiftUI sem ViewModels.
+  CrossfitPR + SPDD: canvas REASONS, módulos SPM, SwiftUI MV (sem ViewModels).
   Use em features, refatorar, testes, ou menção a SPDD/CPR-00N.
 ---
 
@@ -42,8 +42,9 @@ Onboarding/     → Boas-vindas
 
 ## Padrões (Norms)
 
-- **Sem ViewModels** — `@EnvironmentObject` clients + `@State`
-- **Clients:** `PersonalRecordClient`, `SubscriptionClient`, `SettingsClient`
+- **MV SwiftUI** — `.cursor/skills/swiftui-mv/SKILL.md` · CPR-006 · `docs/MV-ARCHITECTURE.md`
+- **Sem ViewModels** — `@EnvironmentObject` clients + `@State` (+ enum `ViewState` se necessário)
+- **Clients:** `PersonalRecordClient`, `SubscriptionClient`, `SettingsClient`, …
 - **Tokens visuais:** `AppDesign.Colors.*`, `AppDesign.Typography.*`
 - **Strings:** `Strings.*` — nunca hardcode
 - **iOS 17+**, Swift 6, Swift Testing

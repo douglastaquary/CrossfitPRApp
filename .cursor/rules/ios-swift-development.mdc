@@ -10,7 +10,8 @@ Antes de escrever ou alterar código Swift, **ler e seguir**:
 
 1. **SPDD (intenção):** `.cursor/skills/crossfitpr-spdd/SKILL.md`
 2. **Design (UI):** `.cursor/skills/design/skill-design.md` — se alterar views/layout/cores
-3. **Swift (implementação):** `.cursor/skills/ios-development-skill/skill-ios.md`
+3. **MV (estrutura):** `.cursor/skills/swiftui-mv/SKILL.md` — views SwiftUI
+4. **Swift (implementação):** `.cursor/skills/ios-development-skill/skill-ios.md`
 
 ## Ordem de precedência
 
@@ -20,10 +21,11 @@ Antes de escrever ou alterar código Swift, **ler e seguir**:
 | Layout, cores, tabs, navegação baseline | Design skill |
 | Idiomas Swift, concurrency, API design, testes | iOS skill |
 | Conflito | SPDD prevalece — ajustar canvas antes do código |
+| Views / refactor UI | MV skill + Design; ver `docs/MV-ARCHITECTURE.md` |
 
 ## Overrides do projeto (obrigatório)
 
-- **Sem ViewModels** — `@EnvironmentObject` clients + `@State` + enum `ViewState`
+- **MV** — `@EnvironmentObject` clients + `@State`; sem ViewModels (CPR-006)
 - **Design** — tokens `AppDesign`; skill design para mudanças visuais
 - **Swift Testing** (`import Testing`) — não XCTest em testes novos
 - **Domain** — sem SwiftUI/UIKit; tipos `Sendable`

@@ -6,6 +6,7 @@ Este projeto é guiado por **[SPDD](https://martinfowler.com/articles/structured
 
 Canvas baseline: [`spdd/prompt/CPR-001-20260520-[Feat]-baseline-pr-tracking-and-insights.md`](../spdd/prompt/CPR-001-20260520-%5BFeat%5D-baseline-pr-tracking-and-insights.md)  
 Skill: [`.cursor/skills/crossfitpr-spdd/SKILL.md`](../.cursor/skills/crossfitpr-spdd/SKILL.md)  
+MV UI: [`.cursor/skills/swiftui-mv/SKILL.md`](../.cursor/skills/swiftui-mv/SKILL.md) · [`MV-ARCHITECTURE.md`](MV-ARCHITECTURE.md)  
 iOS: [`.cursor/skills/ios-development-skill/skill-ios.md`](../.cursor/skills/ios-development-skill/skill-ios.md)
 
 ## Princípios (fase atual)
@@ -14,14 +15,15 @@ iOS: [`.cursor/skills/ios-development-skill/skill-ios.md`](../.cursor/skills/ios
 2. **Prompt first** — corrigir canvas antes de alterar lógica de negócio
 3. **Views estáveis** — UI/fluxos congelados nesta fase; mudanças só via clients
 4. **Composition root único** — `AppEnvironment` faz wiring entre pacotes
-5. **Offline-first** — SwiftData local, CloudKit sync assíncrono
+5. **Offline-first** — persistência local JSON + CloudKit best-effort via clients
+6. **MV SwiftUI** — CPR-006; sem ViewModels; Dimillian + Clients
 
 ## Grafo de dependências SPM
 
 ```
 Domain                         (sem dependências)
   ↑
-  ├── Persistence              (infra: SwiftData, CloudKit)
+  ├── Persistence              (infra: JSON local, CloudKit)
   ├── Subscription             (infra: StoreKit)
   └── WorkoutEngine            (domínio: engine de insights)
         ↑
@@ -52,7 +54,7 @@ CrossfitPR App                 (shell: CrossfitPRApp + RootView)
 
 | Camada | Pacote | Responsabilidade |
 |--------|--------|------------------|
-| Presentation | Feature packages + `CrossfitPR/` | SwiftUI — sem lógica de negócio |
+| Presentation | Feature packages + `CrossfitPR/` | SwiftUI **MV** — views finas; lógica nos clients/domain ([MV-ARCHITECTURE.md](MV-ARCHITECTURE.md)) |
 | Application | `Packages/Application` | Clients, composition root |
 | Domain | `Packages/Domain` | Entidades e ports |
 | Infrastructure | Persistence, Subscription | Adapters externos |
@@ -71,6 +73,6 @@ await environment.bootstrapServices()
 
 ## Requisitos de build
 
-- Xcode 16+
-- iOS 17+
-- Swift 6
+- Xcode 14.2+ (SPM file URL local) ou 16+
+- iOS 16+
+- Swift 5.7+ no app (Swift 6 em roadmap)

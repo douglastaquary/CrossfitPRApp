@@ -1,0 +1,29 @@
+---
+description: SwiftUI MV — Dimillian + Clients CrossfitPR; aplicar em views e refactors de UI
+globs: "**/*.swift"
+alwaysApply: false
+---
+
+# SwiftUI MV — CrossfitPR
+
+Antes de criar ou refatorar **views SwiftUI**, ler:
+
+`.cursor/skills/swiftui-mv/SKILL.md`
+
+## Precedência (UI)
+
+SPDD → Design → **MV** → iOS skill
+
+## Regras rápidas
+
+- **Sem ViewModels** (MV, não MVVM).
+- **Clients** via `@EnvironmentObject`; lógica async nos clients/domain.
+- **Subviews** (`private struct`) em vez de muitos `some View` computados.
+- Ações e `.task` chamam **métodos privados**, não lógica inline no `body`.
+- Refactor sem mudar layout → skill Design + `/spdd-sync`.
+- Canvas **CPR-006** governa esta norma; features novas ainda exigem canvas de produto quando aplicável.
+
+## Docs
+
+- `docs/MV-ARCHITECTURE.md`
+- `spdd/prompt/CPR-006-*-mv-swiftui-architecture-standard.md`
