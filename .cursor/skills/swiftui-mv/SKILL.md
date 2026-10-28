@@ -1,25 +1,24 @@
 ---
 name: crossfitpr-swiftui-mv
 description: >-
-  Padrão MV (Model-View) para SwiftUI no CrossfitPR — alinhado a Dimillian
-  swiftui-view-refactor + clients Application. Use em views, refactors de UI,
-  split de telas, ou quando alguém mencionar MV/MVVM/ViewModel.
+  Padrão MV (Model-View) para SwiftUI no CrossfitPR — clients Application + CPR-006.
+  Use em views, refactors de UI, split de telas, ou MV/MVVM/ViewModel.
 ---
 
 # CrossfitPR — SwiftUI MV
 
 > **Default:** MV, não MVVM. ViewModels são exceção (quase nunca neste projeto).
 
-Baseado em [Dimillian — swiftui-view-refactor](https://github.com/Dimillian/Skills/blob/main/swiftui-view-refactor/SKILL.md) e [Forget MVVM (2025)](https://dimillian.medium.com/swiftui-in-2025-forget-mvvm-262ff2bbd2ed), adaptado às **Norms CrossfitPR** (SPDD + iOS 16 + `EnvironmentObject` clients).
+Normas **CrossfitPR** (SPDD + iOS 16 + `EnvironmentObject` clients). Detalhes: `references/mv-patterns-crossfitpr.md`.
 
 ## Mapa MV → CrossfitPR
 
-| Dimillian MV | CrossfitPR |
-|--------------|------------|
-| `@Environment(Service.self)` | `@EnvironmentObject` **Clients** (`PersonalRecordClient`, `SubscriptionClient`, …) |
-| Services / models | `Domain` (puro) + `WorkoutEngine` + **Clients** em `Application` |
+| MV genérico | CrossfitPR |
+|-------------|------------|
+| `@Environment(Service.self)` | `@EnvironmentObject` **Clients** |
+| Services / models | `Domain` + `WorkoutEngine` + **Clients** em `Application` |
 | `@State` / enum `ViewState` | Estado local de UI na view |
-| `@Query` / SwiftData | **Não** — persistência via clients → repositories JSON/CloudKit |
+| Persistência na view | **Não** — clients → repositories JSON/CloudKit |
 | ViewModel | **Proibido** salvo pedido explícito + canvas SPDD |
 
 ## Ordem de precedência
@@ -29,7 +28,7 @@ Baseado em [Dimillian — swiftui-view-refactor](https://github.com/Dimillian/Sk
 3. **Esta skill (MV)** — estrutura de views  
 4. **skill-ios** — Swift/concurrency/testes  
 
-Refactor de view **sem** mudar comportamento → MV skill + `/spdd-sync`.  
+Refactor sem mudar comportamento → MV skill + `/spdd-sync`.  
 Mudança visual → canvas Design antes do código.
 
 ## Ordem dentro do arquivo View (top → bottom)
@@ -48,42 +47,42 @@ Mudança visual → canvas Design antes do código.
 ### Estado e dependências
 
 - Lógica de **negócio** → `Domain`, `WorkoutEngine`, métodos async nos **Clients**.
-- Views **orquestram** UI: `.task`, `.refreshable`, `Button(action:)` chamando `private func`.
-- **Não** embutir regras de PR/assinatura/insights no `body`.
+- Views **orquestram** UI: `.task`, `.refreshable`, `Button(action:)` → `private func`.
 - Preferir `@State private enum ViewState` para loading/empty/loaded quando fizer sentido.
 
 ### Subviews vs `some View` computado
 
-- **Preferir** `private struct FooSection: View` com inputs explícitos (dados, `Binding`, closures).
-- Reservar `private var x: some View` a trechos **pequenos** (&lt; ~15 linhas, uma responsabilidade).
-- Arquivo &gt; ~300 linhas → extrair seções para structs (mesmo arquivo ou novo arquivo no pacote feature).
+- **Preferir** `private struct FooSection: View` com inputs explícitos.
+- Reservar `private var x: some View` a trechos **pequenos** (< ~15 linhas).
+- Arquivo > ~300 linhas → extrair subviews (mesmo pacote, arquivo irmão se necessário).
 
 ### Árvore estável
 
-- Evitar trocar a **raiz** inteira com `if/else` quando dá para usar toolbar/overlay/seções internas.
-- Exceção documentada: gate Free/PRO em `WorkoutInsightsView` (duas experiências distintas).
+- Evitar trocar a **raiz** inteira com `if/else` quando toolbar/overlay bastam.
+- Exceção documentada: gate Free/PRO em `WorkoutInsightsView`.
 
 ### iOS 16 (este projeto)
 
-- Clients: `ObservableObject` + `@EnvironmentObject` (não `@Observable` / `@Environment(Client.self)` até subir deployment).
-- `@MainActor` nos clients; views chamam `await` nos métodos públicos dos clients.
+- Clients: `ObservableObject` + `@EnvironmentObject`.
+- `@MainActor` nos clients; views usam `await` nos métodos públicos.
 
 ### Proibido (Norms)
 
-- Criar **ViewModels** para espelhar `@EnvironmentObject` ou `@State` local.
+- **ViewModels** espelhando clients ou `@State` local.
 - `import SwiftUI` em `Domain`.
 - Hardcode de strings/cores — `Strings.*`, `AppDesign.*`.
 
 ## Workflow de refactor
 
-1. Reordenar propriedades conforme lista acima.
-2. Extrair ações de `body` → `private func` / async nos clients.
-3. Substituir helpers grandes `some View` por structs dedicadas.
-4. Manter layout e copy idênticos (skill Design).
-5. Testes: **Domain**, **WorkoutEngine**, **Clients** — não testar view model inexistente.
+1. Reordenar propriedades.
+2. Extrair ações do `body` → `private func` / clients.
+3. Substituir helpers grandes `some View` por structs.
+4. Layout/copy idênticos (skill Design).
+5. Testes: **Domain**, **WorkoutEngine**, **Clients**.
 
 ## Referências no repo
 
-- Detalhes e checklist: `references/mv-patterns-crossfitpr.md`
+- Checklist completo: `references/mv-patterns-crossfitpr.md`
+- Review CI: `.cursor/skills/architecture-review/SKILL.md`
 - Arquitetura SPM: `docs/ARCHITECTURE.md`, `docs/MV-ARCHITECTURE.md`
 - Canvas: `spdd/prompt/CPR-006-*-mv-swiftui-architecture-standard.md`

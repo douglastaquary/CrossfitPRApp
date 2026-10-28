@@ -20,11 +20,12 @@ Story → /spdd-analysis → /spdd-reasons-canvas → /spdd-generate → Testes
 | SPDD | `.cursor/skills/crossfitpr-spdd/SKILL.md` | Sempre |
 | Design | `.cursor/skills/design/skill-design.md` | Alterando UI |
 | **MV SwiftUI** | `.cursor/skills/swiftui-mv/SKILL.md` | Views, refactors, estrutura de telas |
+| **Architecture review** | `.cursor/skills/architecture-review/SKILL.md` | PR/CI, grafo SPM, MV |
 | iOS | `.cursor/skills/ios-development-skill/skill-ios.md` | Código Swift |
 
 **Precedência:** SPDD → Design → **MV** → iOS
 
-**Padrão MV:** [`docs/MV-ARCHITECTURE.md`](docs/MV-ARCHITECTURE.md) · Canvas CPR-006 · [Dimillian swiftui-view-refactor](https://github.com/Dimillian/Skills/blob/main/swiftui-view-refactor/SKILL.md)
+**Padrão MV:** [`docs/MV-ARCHITECTURE.md`](docs/MV-ARCHITECTURE.md) · Canvas CPR-006 · [`mv-patterns-crossfitpr.md`](.cursor/skills/swiftui-mv/references/mv-patterns-crossfitpr.md)
 
 ## Estrutura SPM
 
@@ -59,7 +60,7 @@ AppLaunchContainer → LaunchView → MainTabView
 
 ## Padrões obrigatórios
 
-- **MV (Model-View)** — clients + `@State`; **sem ViewModels** (equivalente a MV Dimillian, não MVVM)
+- **MV (Model-View)** — clients + `@State`; **sem ViewModels** (CPR-006, não MVVM)
 - **Clients:** `PersonalRecordClient`, `SubscriptionClient`, `SettingsClient`
 - **Tokens:** `AppDesign.Colors.*`, `Strings.*`
 - **iOS 16+**, Swift 6
@@ -84,9 +85,8 @@ xcodebuild -scheme CrossfitPR -destination 'platform=iOS Simulator,name=iPhone 1
 CODE_SIGNING_ALLOWED=NO ./scripts/ci-modern.sh
 ```
 
-CI: [`docs/CI.md`](docs/CI.md) · workflow `.github/workflows/ios.yml`
+CI: [`docs/CI.md`](docs/CI.md) · build `.github/workflows/ios.yml` · review `.github/workflows/pr-architecture-review.yml`
 
 ## Refs
 
 - [SPDD — Martin Fowler](https://martinfowler.com/articles/structured-prompt-driven/)
-- [SwiftUI 2025 — Dimillian](https://dimillian.medium.com/swiftui-in-2025-forget-mvvm-262ff2bbd2ed)

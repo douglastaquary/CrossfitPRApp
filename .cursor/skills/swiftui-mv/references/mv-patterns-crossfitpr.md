@@ -1,37 +1,45 @@
 # MV Patterns — CrossfitPR
 
-Síntese de [mv-patterns.md](https://github.com/Dimillian/Skills/blob/main/swiftui-view-refactor/references/mv-patterns.md) aplicada ao app.
+Norma interna de **MV SwiftUI moderno** (CPR-006). Referência para skills, code review e CI.
 
-## Stack padrão (Modern SwiftUI MV)
+## Postura padrão
+
+- Default **MV**: views leves, orquestração local, lógica nos clients/domain.
+- Preferir `@State`, `@EnvironmentObject`, `.task` / `.task(id:)`, `.onChange`, `.refreshable` antes de ViewModel.
+- Lógica de negócio em **services, models, clients** — não no `body`.
+- Telas grandes → **subviews `struct`** antes de nova camada.
+- Testar **Domain**, **WorkoutEngine**, **clients**; views permanecem declarativas.
+
+## Stack CrossfitPR
 
 | Camada | Onde | Exemplo |
 |--------|------|---------|
 | **Model** | `Domain`, engines, repositories | `PersonalRecord`, `WorkoutEngine`, ports |
-| **Application services** | `Packages/Application` | `PersonalRecordClient.fetchRecords()` |
+| **Application** | `Packages/Application` | `PersonalRecordClient.fetchRecords()` |
 | **View** | `Packages/<Feature>/` | `PRHistoriesListView`, subviews |
-
-Fluxo de dados típico:
 
 ```
 User action → View (private func) → Client (@MainActor) → Repository / Engine → Domain
                 ↑________________ @Published / objectWillChange ________________|
 ```
 
+Persistência: **clients → repositories** (JSON/CloudKit). Não usar ViewModel para espelhar fetch.
+
 ## Quando **não** usar ViewModel
 
-- Espelhar `records` do `PersonalRecordClient` em um VM.
+- Espelhar `@Published` de um client.
 - Encapsular só `@State` de sheet/navigation.
-- Substituir `.task { await client.fetch… }` por VM “loader”.
-- View grande → **split em subviews**, não nova camada VM.
+- Substituir `.task { await client.fetch… }` por “loader VM”.
+- View longa → **split em subviews**, não indireção.
 
 ## Quando ViewModel *poderia* ser discutido (raro)
 
-- Bridge explícita para API não-SwiftUI (legacy).
-- Pedido explícito do produto **e** canvas CPR aprovado.
+- Bridge para API não-SwiftUI legada.
+- Pedido explícito **e** canvas CPR aprovado.
 
-Default do projeto: **recusar** e aplicar MV.
+Default: **recusar** e aplicar MV.
 
-## Exemplo CrossfitPR (Insights)
+## Padrão: estado local + clients
 
 ```swift
 public struct WorkoutInsightsView: View {
@@ -43,26 +51,15 @@ public struct WorkoutInsightsView: View {
         NavigationStack {
             insightsContent
                 .navigationTitle(Strings.Screen.insights)
-                .navigationBarTitleDisplayMode(.large)
                 .task(id: personalRecordClient.records.count) {
                     await loadRecordsIfNeeded()
                 }
                 .refreshable { await personalRecordClient.fetchRecords() }
-                .sheet(isPresented: $isPresentingPROUpgrade) {
-                    PROUpgradeView()
-                }
         }
-        .brandTint()
     }
 
     @ViewBuilder
-    private var insightsContent: some View {
-        if subscriptionClient.currentTier == .pro {
-            InsightsViewPRO()
-        } else {
-            InsightsTeaserView(isPresentingPROUpgrade: $isPresentingPROUpgrade)
-        }
-    }
+    private var insightsContent: some View { /* gate Free/PRO */ }
 
     private func loadRecordsIfNeeded() async {
         guard personalRecordClient.records.isEmpty else { return }
@@ -71,43 +68,43 @@ public struct WorkoutInsightsView: View {
 }
 ```
 
-## Checklist de PR (views)
+## Padrão: modifiers como orquestração
 
-- [ ] Sem ViewModel novo
-- [ ] Ações fora do `body` (métodos privados)
-- [ ] Strings/cores via `Strings` / `AppDesign` (en + pt-BR — ver `docs/LOCALIZATION.md`)
-- [ ] Seções grandes extraídas como `View` struct
-- [ ] Comportamento e layout unchanged (refactor) ou canvas Design (feature)
+- `.task(id: searchText) { … }` para reload derivado.
+- `.onChange(of: …) { Task { await … } }` para fluxos simples.
+- Não promover isso a ViewModel sem motivo claro.
+
+## Testes
+
+- Services, regras de domínio, workflows async nos clients.
+- UI tests pontuais (localização, fluxos críticos).
+- **Não** criar ViewModel só para “testar view”.
+
+## Checklist de PR (views) — espelho do CI
+
+- [ ] Sem tipo `*ViewModel` novo
+- [ ] Ações fora do `body` (`private func`)
+- [ ] `Strings.*` / `AppDesign.*` (en + pt-BR — `docs/LOCALIZATION.md`)
+- [ ] Seções grandes como `View` struct
+- [ ] Refactor: layout/comportamento unchanged; feature: canvas Design
 - [ ] Testes de domínio/client se lógica mudou
+- [ ] Respeito ao grafo SPM (`docs/ARCHITECTURE.md`, `scripts/architecture/check-spm-graph.rb`)
+
+## Checklist de refactor (MV)
+
+- [ ] Remover VMs que só espelham environment ou `@State`
+- [ ] Lógica de negócio fora do `body` → clients/domain
+- [ ] View como coordenador fino de UI
+- [ ] Split de `some View` grandes antes de novas abstrações
 
 ## Migração gradual
 
-Prioridade sugerida (arquivos com muitos `private var …: some View`):
+Ondas 1–4 concluídas (ver histórico no canvas CPR-006).
 
-1. ~~`PROUpgradeView.swift`~~ ✅ (subviews extraídas)
-2. ~~`InsightsTeaserView.swift`~~ ✅
-3. ~~`InsightsViewPRO.swift`~~ ✅
-4. ~~`NewPRRecordView.swift`~~ ✅
+**Backlog:** `SharedUI` (formatos); catálogo de exercícios.
 
-**Onda 2**
+**Onda 5 — arquivo por view raiz**
 
-5. ~~`RecordDetailView.swift`~~ ✅
-6. ~~`SettingsView.swift`~~ ✅
-7. ~~`PRHistoriesListView.swift`~~ ✅
-8. ~~`WorkoutInsightsView.swift`~~ ✅ (gate Free/PRO em struct)
+- ~~`PROUpgradeView` + `PROUpgradeSubviews.swift`~~ ✅ (view raiz ~120 linhas)
 
-**Onda 3**
-
-9. ~~`CategoryListView.swift`~~ ✅
-10. ~~`OnboardingView.swift`~~ ✅
-11. ~~`LaunchView.swift`~~ ✅ (+ `LaunchScreenView` logo/animação)
-
-**Onda 4 — L10n (en/pt-BR)**
-
-12. ~~PROUpgrade (planos, estados de compra, retry)~~ ✅
-13. ~~Settings (lembretes push)~~ ✅
-14. ~~`RecordGroup.localizationKey` centralizado~~ ✅
-
-**Backlog:** `SharedUI` (só formatos numéricos); catálogo de exercícios; PR de remoção do legado `CrossfitPR/*`.
-
-Um arquivo por PR; cada um: reorder + extract structs + `/spdd-sync`.
+Um arquivo por PR; reorder + extract + `/spdd-sync` quando norma mudar.

@@ -39,6 +39,7 @@ Este projeto usa [Structured-Prompt-Driven Development (SPDD)](https://martinfow
 | SPDD | `.cursor/skills/crossfitpr-spdd/SKILL.md` |
 | Design | `.cursor/skills/design/skill-design.md` |
 | MV SwiftUI | `.cursor/skills/swiftui-mv/SKILL.md` |
+| Architecture review | `.cursor/skills/architecture-review/SKILL.md` |
 | iOS | `.cursor/skills/ios-development-skill/skill-ios.md` |
 
 Regras Cursor: `spdd-governance.mdc`, `swiftui-mv-architecture.mdc`, `ios-swift-development.mdc`, `design-preservation.mdc`.

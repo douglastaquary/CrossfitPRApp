@@ -74,3 +74,7 @@ fastlane/report.xml
 fastlane/Preview.html
 fastlane/screenshots/**/*.png
 fastlane/test_output
+
+# CI local (architecture review)
+architecture-report.md
+architecture-report.partial.md

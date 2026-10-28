@@ -7,19 +7,17 @@ Este documento é o **padrão oficial de UI** do projeto, junto com [`ARCHITECTU
 - **Model:** entidades e regras em `Domain`; persistência e StoreKit nos adapters; orquestração reativa nos **Clients** (`Application`).
 - **View:** SwiftUI fina — estado local, injeção de clients, subviews explícitas.
 
-**Não** usamos MVVM por padrão. “Sem ViewModels” nos guias antigos **significa** adotar MV moderno (Dimillian / Ricouard), não ausência de arquitetura.
+**Não** usamos MVVM por padrão. “Sem ViewModels” significa **MV SwiftUI moderno** (clients + `@State`), não ausência de arquitetura.
 
-## Referências externas
+## Referências no repositório
 
-| Fonte | Uso |
-|-------|-----|
-| [Dimillian — swiftui-view-refactor SKILL](https://github.com/Dimillian/Skills/blob/main/swiftui-view-refactor/SKILL.md) | Ordem de view, subviews, árvore estável |
-| [mv-patterns.md](https://github.com/Dimillian/Skills/blob/main/swiftui-view-refactor/references/mv-patterns.md) | Quando evitar ViewModel |
-| [Forget MVVM (2025)](https://dimillian.medium.com/swiftui-in-2025-forget-mvvm-262ff2bbd2ed) | Contexto |
+| Documento | Uso |
+|-----------|-----|
+| [`.cursor/skills/swiftui-mv/SKILL.md`](../.cursor/skills/swiftui-mv/SKILL.md) | Ordem de view, subviews, workflow |
+| [`mv-patterns-crossfitpr.md`](../.cursor/skills/swiftui-mv/references/mv-patterns-crossfitpr.md) | Quando evitar ViewModel, checklist PR/CI |
+| Canvas **CPR-006** | Norms oficiais SPDD |
 
-Adaptação CrossfitPR: `.cursor/skills/swiftui-mv/SKILL.md`
-
-Copy de UI: `Strings.*` + [`LOCALIZATION.md`](LOCALIZATION.md) (en / pt-BR via preferência do sistema).
+Copy de UI: `Strings.*` + [`LOCALIZATION.md`](LOCALIZATION.md) (en / pt-BR).
 
 ## Clients = serviços de aplicação
 
@@ -47,10 +45,13 @@ Views **não** instanciam repositories nem StoreKit diretamente.
 3. **Extraia subviews** antes de criar ViewModel.
 4. **Teste Model**, não ViewModel: `Packages/Domain`, `WorkoutEngine`, testes de client quando existirem.
 
+## Code review e CI
+
+- PRs: workflow [`pr-architecture-review.yml`](../.github/workflows/pr-architecture-review.yml) (advisory).
+- Detalhes: [`CI.md`](CI.md).
+
 ## Migração
 
-Estado: **norma adotada**; código legado pode ter `private var section: some View` extensos.
-
-Plano: refatorar por feature package, um PR por tela grande (lista em `mv-patterns-crossfitpr.md`).
+Estado: **norma adotada** (CPR-006). Backlog pontual em `mv-patterns-crossfitpr.md`.
 
 Artefato SPDD: `spdd/prompt/CPR-006-*-mv-swiftui-architecture-standard.md`
