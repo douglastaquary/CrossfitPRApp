@@ -10,8 +10,8 @@ public struct CoachingAdapterRouter: Sendable {
 
     public init(
         prefersOnDevice: Bool = true,
-        onDevice: any CrossFitCoachingProviding = MockCrossFitCoachAdapter(runtime: .onDeviceApple),
-        cloud: any CrossFitCoachingProviding = MockCrossFitCoachAdapter(runtime: .cloud),
+        onDevice: any CrossFitCoachingProviding = AppleIntelligenceCoachAdapter(),
+        cloud: any CrossFitCoachingProviding = CloudCoachAdapter(),
         summarized: any CrossFitCoachingProviding = SummarizedLocalCoachAdapter()
     ) {
         self.prefersOnDevice = prefersOnDevice

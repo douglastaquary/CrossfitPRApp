@@ -8,13 +8,13 @@ para destravar platôs sem planilha ou coach presencial todo dia.
 
 ## Critérios de aceite
 
-- [ ] Free continua só WorkoutEngine — nunca chama LLM
-- [ ] PRO: inferência on-device (Apple Intelligence) quando disponível; fallback cloud caso contrário
-- [ ] Contexto compacto (`CoachingContextSnapshot`) + `TokenBudgetPolicy` antes de qualquer adapter
-- [ ] Cache local por `contextHash`; botão “Atualizar análise” força refresh
-- [ ] Resposta JSON/schema fixo (`CoachingInsight`) — rationale limitado por tier/runtime
-- [ ] Testes unitários: builder, budget, cache, adapters mock — sem LLM real no CI
-- [ ] Copy PRO na aba Evolução alinhada ao canvas Design
+- [x] Free continua só WorkoutEngine — nunca chama LLM
+- [x] PRO: inferência on-device (Foundation Models / iOS 26+) quando disponível; fallback cloud HTTP + resumo local *(validar em hardware real; CI sem rede)*
+- [x] Contexto compacto (`CoachingContextSnapshot`) + `TokenBudgetPolicy` antes de qualquer adapter
+- [x] Cache local por `contextHash`; botão “Atualizar análise” força refresh *(UserDefaults + in-memory em testes)*
+- [x] Resposta JSON/schema fixo (`CoachingInsight`) — rationale limitado por tier/runtime
+- [x] Testes unitários: builder, budget, cache, adapters mock — sem LLM real no CI
+- [x] Copy PRO na aba Evolução alinhada ao canvas Design *(card coach; Design fino em PR futuro)*
 
 ## Fora de escopo (CPR-007)
 

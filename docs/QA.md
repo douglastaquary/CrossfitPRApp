@@ -12,6 +12,7 @@ Target `CrossfitPRUITests` → `AppLocalizationQATests`:
 | `testInsightsPROUpgradeSheetPortuguese` | Teaser → sheet PRO → `pro.upgrade.close` |
 | `testInsightsPROUpgradeSheetEnglish` | Idem em EN |
 | `testSettingsTrackingSectionSmokePortuguese` | Ajustes + label “Unidade de peso” |
+| `testProCoachSectionPortuguese` | Tier PRO mock + `insights.coach.section` |
 
 **Launch flags** (app under test):
 
@@ -21,10 +22,11 @@ Target `CrossfitPRUITests` → `AppLocalizationQATests`:
 | `UITEST_SKIP_ONBOARDING=1` | Marca onboarding como concluído |
 | `UITEST_FORCE_ONBOARDING=1` | Força tela de onboarding |
 | `UITEST_SUBSCRIPTION_TIER` | `free` \| `pro` — mock StoreKit no simulador (opcional) |
+| `OPENAI_API_KEY` | Só builds locais/prod manual — cloud coach; **nunca** no CI |
 
 Idioma: `-AppleLanguages (en)` ou `(pt-BR)` via `XCUIApplication.launchArguments`.
 
-**Accessibility IDs:** `tab.categories`, `tab.records`, `tab.insights`, `tab.settings`, `insights.teaser.pro.cta`, `pro.upgrade.close`.
+**Accessibility IDs:** `tab.categories`, `tab.records`, `tab.insights`, `tab.settings`, `insights.teaser.pro.cta`, `insights.coach.section`, `pro.upgrade.close`.
 
 ## Unit — catálogo de exercícios
 

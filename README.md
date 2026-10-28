@@ -57,7 +57,7 @@ O PRO é para quem quer **interpretação**, não só números na tela:
 | | **Hoje (shipped)** | **Próximo (CPR-007)** |
 |---|-------------------|------------------------|
 | Free | WorkoutEngine — heurísticas locais, teaser PRO | Igual — **sem LLM** |
-| PRO | Rankings, gráficos, análises WorkoutEngine na UI; card coach com **adapters mock** até inferência real | Coach CrossFit: **on-device** quando disponível, **cloud** como fallback; contexto compacto + cache |
+| PRO | Rankings, gráficos, WorkoutEngine + card coach (on-device iOS 26+ ou **OpenAI** — [`COACHING-INFERENCE.md`](docs/COACHING-INFERENCE.md)) | Refino de prompts, custo/token, validação em hardware Apple Intelligence |
 
 Interpretar meses de PRs (volume, platôs, movimentos diferentes) tem **custo de inferência** — tokens e pipeline. Parte do valor PRO cobre isso: dados agregados, sem planilha, linguagem de coach.
 
