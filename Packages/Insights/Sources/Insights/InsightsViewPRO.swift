@@ -36,16 +36,26 @@ struct InsightsViewPRO: View {
     var body: some View {
         Group {
             if hasRecords {
-                insightsContent
+                InsightsViewPROContent(
+                    gridColumns: gridColumns,
+                    measureMode: settingsClient.measureTrackingMode,
+                    topBarbell: topBarbell,
+                    barbellRecords: barbellRecords,
+                    gymnasticRecords: gymnasticRecords,
+                    enduranceRecords: enduranceRecords,
+                    isShimmering: isShimmering
+                )
             } else {
-                emptyStateView
+                InsightsViewPROEmptySection()
             }
         }
     }
+}
 
-    // MARK: - Empty State
+// MARK: - Empty State
 
-    private var emptyStateView: some View {
+private struct InsightsViewPROEmptySection: View {
+    var body: some View {
         ScrollView {
             VStack(spacing: 32) {
                 Spacer(minLength: 40)
@@ -74,19 +84,19 @@ struct InsightsViewPRO: View {
                 }
 
                 VStack(spacing: 16) {
-                    featurePreview(
+                    InsightsViewPROFeaturePreviewRow(
                         icon: "trophy.fill",
                         title: "Ranking de PRs",
                         description: "Veja seus melhores records organizados",
                         color: .orange
                     )
-                    featurePreview(
+                    InsightsViewPROFeaturePreviewRow(
                         icon: "chart.bar.fill",
                         title: "Gráficos por categoria",
                         description: "Barbell, ginástico e resistência",
                         color: AppDesign.Colors.brand
                     )
-                    featurePreview(
+                    InsightsViewPROFeaturePreviewRow(
                         icon: "target",
                         title: "Metas personalizadas",
                         description: "Projeções baseadas no seu ritmo",
@@ -115,8 +125,15 @@ struct InsightsViewPRO: View {
             }
         }
     }
+}
 
-    private func featurePreview(icon: String, title: String, description: String, color: Color) -> some View {
+private struct InsightsViewPROFeaturePreviewRow: View {
+    let icon: String
+    let title: String
+    let description: String
+    let color: Color
+
+    var body: some View {
         HStack(spacing: 16) {
             Image(systemName: icon)
                 .font(.title2)
@@ -139,81 +156,95 @@ struct InsightsViewPRO: View {
         .background(AppDesign.Colors.cardBackground)
         .cornerRadius(12)
     }
+}
 
-    // MARK: - Insights Content
+// MARK: - Insights Content
 
-    private var insightsContent: some View {
+private struct InsightsViewPROContent: View {
+    let gridColumns: [GridItem]
+    let measureMode: MeasureTrackingMode
+    let topBarbell: [PersonalRecord]
+    let barbellRecords: [PersonalRecord]
+    let gymnasticRecords: [PersonalRecord]
+    let enduranceRecords: [PersonalRecord]
+    let isShimmering: Bool
+
+    var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
             VStack(spacing: 16) {
                 if !topBarbell.isEmpty {
-                    rankingSection
+                    InsightsViewPRORankingSection(
+                        gridColumns: gridColumns,
+                        topBarbell: topBarbell,
+                        measureMode: measureMode
+                    )
                 }
                 if !barbellRecords.isEmpty {
-                    barbellChartSection
+                    InsightsViewPROChartSection(
+                        icon: "figure.strengthtraining.traditional",
+                        titleKey: "insight.section.ranking.barbell.title",
+                        records: barbellRecords,
+                        isShimmering: isShimmering,
+                        annotation: { record in
+                            InsightsRanking.chartAnnotation(for: record, measureMode: measureMode)
+                        },
+                        value: { record in
+                            Double(measureMode == .pounds ? record.poundValue : record.kiloValue)
+                        }
+                    )
                 }
                 if !gymnasticRecords.isEmpty {
-                    gymnasticChartSection
+                    InsightsViewPROChartSection(
+                        icon: "figure.play",
+                        titleKey: "insight.section.ranking.gymnastic.title",
+                        records: gymnasticRecords,
+                        isShimmering: isShimmering,
+                        annotation: { record in "\(record.maxReps) reps" },
+                        value: { record in Double(record.maxReps) }
+                    )
                 }
                 if !enduranceRecords.isEmpty {
-                    enduranceChartSection
+                    InsightsViewPROChartSection(
+                        icon: "flame",
+                        titleKey: "insight.section.ranking.endurance.title",
+                        records: enduranceRecords,
+                        isShimmering: isShimmering,
+                        annotation: { record in "\(record.distance) km" },
+                        value: { record in Double(record.distance) }
+                    )
                 }
             }
             .padding(16)
         }
     }
+}
 
-    private var rankingSection: some View {
+private struct InsightsViewPRORankingSection: View {
+    let gridColumns: [GridItem]
+    let topBarbell: [PersonalRecord]
+    let measureMode: MeasureTrackingMode
+
+    var body: some View {
         VStack(alignment: .leading, spacing: 14) {
-            sectionHeader(icon: "trophy", titleKey: "insight.section.topranking.barbell.title")
+            InsightsViewPROSectionHeader(icon: "trophy", titleKey: "insight.section.topranking.barbell.title")
             LazyVGrid(columns: gridColumns, spacing: 14) {
                 ForEach(Array(topBarbell.enumerated()), id: \.element.id) { index, record in
                     RankingCardView(
                         record: record,
-                        measureMode: settingsClient.measureTrackingMode,
+                        measureMode: measureMode,
                         accentColor: RankingAccent.color(for: index)
                     )
                 }
             }
         }
     }
+}
 
-    private var barbellChartSection: some View {
-        chartSection(
-            icon: "figure.strengthtraining.traditional",
-            titleKey: "insight.section.ranking.barbell.title",
-            records: barbellRecords
-        ) { record in
-            InsightsRanking.chartAnnotation(for: record, measureMode: settingsClient.measureTrackingMode)
-        } value: { record in
-            Double(settingsClient.measureTrackingMode == .pounds ? record.poundValue : record.kiloValue)
-        }
-    }
+private struct InsightsViewPROSectionHeader: View {
+    let icon: String
+    let titleKey: String
 
-    private var gymnasticChartSection: some View {
-        chartSection(
-            icon: "figure.play",
-            titleKey: "insight.section.ranking.gymnastic.title",
-            records: gymnasticRecords
-        ) { record in
-            "\(record.maxReps) reps"
-        } value: { record in
-            Double(record.maxReps)
-        }
-    }
-
-    private var enduranceChartSection: some View {
-        chartSection(
-            icon: "flame",
-            titleKey: "insight.section.ranking.endurance.title",
-            records: enduranceRecords
-        ) { record in
-            "\(record.distance) km"
-        } value: { record in
-            Double(record.distance)
-        }
-    }
-
-    private func sectionHeader(icon: String, titleKey: String) -> some View {
+    var body: some View {
         HStack {
             Image(systemName: icon)
                 .frame(width: 24, height: 24)
@@ -222,16 +253,19 @@ struct InsightsViewPRO: View {
             Spacer()
         }
     }
+}
 
-    private func chartSection(
-        icon: String,
-        titleKey: String,
-        records: [PersonalRecord],
-        annotation: @escaping (PersonalRecord) -> String,
-        value: @escaping (PersonalRecord) -> Double
-    ) -> some View {
+private struct InsightsViewPROChartSection: View {
+    let icon: String
+    let titleKey: String
+    let records: [PersonalRecord]
+    let isShimmering: Bool
+    let annotation: (PersonalRecord) -> String
+    let value: (PersonalRecord) -> Double
+
+    var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            sectionHeader(icon: icon, titleKey: titleKey)
+            InsightsViewPROSectionHeader(icon: icon, titleKey: titleKey)
             Chart {
                 ForEach(records) { record in
                     BarMark(
