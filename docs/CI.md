@@ -70,7 +70,7 @@ Skills agentes: [architecture-review](../.cursor/skills/architecture-review/SKIL
 1. **Secret LLM** — em GitHub → Settings → Secrets → Actions, criar `ANTHROPIC_API_KEY` ou `OPENAI_API_KEY`; abrir um PR de teste e confirmar comentário `architecture-review-bot`.
 2. **Monitorar** workflow [`ios.yml`](../.github/workflows/ios.yml) no push em `main` (build + `AppLocalizationQATests`).
 3. **Gate blocking (opcional)** — quando o ruído do SwiftLint estiver aceitável: `STRICT=1` em `run-static-checks.sh` / workflow e marcar jobs como required em branch protection.
-4. **MV backlog** — `SharedUI/SharedComponents.swift` (P2); ver `mv-patterns-crossfitpr.md`.
+4. **MV backlog** — ondas 1–5 concluídas; ver `mv-patterns-crossfitpr.md`.
 
 ## Referências
 
