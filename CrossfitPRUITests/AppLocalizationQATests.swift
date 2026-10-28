@@ -47,6 +47,51 @@ final class AppLocalizationQATests: XCTestCase {
         try assertOnboardingCTA(languageCode: "pt-BR", expectedLabel: "Bora começar")
     }
 
+    func testInsightsPROUpgradeSheetPortuguese() throws {
+        let app = configuredApp(languageCode: "pt-BR")
+        app.launch()
+
+        waitForMainShell(app)
+        app.tabBars.buttons["Evolução"].tap()
+        XCTAssertTrue(app.navigationBars["Evolução"].waitForExistence(timeout: 8))
+
+        let cta = element(app, identifier: "insights.teaser.pro.cta")
+        XCTAssertTrue(cta.waitForExistence(timeout: 8))
+        cta.tap()
+
+        let close = element(app, identifier: "pro.upgrade.close")
+        XCTAssertTrue(close.waitForExistence(timeout: 8))
+        close.tap()
+        XCTAssertTrue(app.navigationBars["Evolução"].waitForExistence(timeout: 5))
+    }
+
+    func testInsightsPROUpgradeSheetEnglish() throws {
+        let app = configuredApp(languageCode: "en")
+        app.launch()
+
+        waitForMainShell(app)
+        app.tabBars.buttons["Progress"].tap()
+        XCTAssertTrue(app.navigationBars["Progress"].waitForExistence(timeout: 8))
+
+        let cta = element(app, identifier: "insights.teaser.pro.cta")
+        XCTAssertTrue(cta.waitForExistence(timeout: 8))
+        cta.tap()
+
+        let close = element(app, identifier: "pro.upgrade.close")
+        XCTAssertTrue(close.waitForExistence(timeout: 8))
+        close.tap()
+    }
+
+    func testSettingsTrackingSectionSmokePortuguese() throws {
+        let app = configuredApp(languageCode: "pt-BR")
+        app.launch()
+
+        waitForMainShell(app)
+        app.tabBars.buttons["Ajustes"].tap()
+        XCTAssertTrue(app.navigationBars["Ajustes"].waitForExistence(timeout: 8))
+        XCTAssertTrue(app.staticTexts["Unidade de peso"].waitForExistence(timeout: 5))
+    }
+
     // MARK: - Helpers
 
     private func configuredApp(languageCode: String, skipOnboarding: Bool = true) -> XCUIApplication {

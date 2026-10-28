@@ -5,6 +5,8 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 PBX="$ROOT/CrossfitPR.xcodeproj/project.pbxproj"
 FILE_URL="file://${ROOT}/"
+SPM_BRANCH="$(git -C "$ROOT" rev-parse --abbrev-ref HEAD 2>/dev/null || echo main)"
+SPM_REVISION="$(git -C "$ROOT" rev-parse HEAD 2>/dev/null || echo main)"
 
 python3 <<PY
 from pathlib import Path
@@ -13,6 +15,7 @@ import re
 pbx_path = Path("$PBX")
 pbx = pbx_path.read_text()
 file_url = "$FILE_URL"
+spm_revision = "$SPM_REVISION"
 
 local_pattern = re.compile(
     r"/\\* Begin XCLocalSwiftPackageReference section \\*/.*?/\\* End XCLocalSwiftPackageReference section \\*/",
@@ -23,8 +26,8 @@ remote_block = f'''/* Begin XCRemoteSwiftPackageReference section */
 \t\t\tisa = XCRemoteSwiftPackageReference;
 \t\t\trepositoryURL = "{file_url}";
 \t\t\trequirement = {{
-\t\t\t\tkind = branch;
-\t\t\t\tbranch = main;
+\t\t\t\tkind = revision;
+\t\t\t\trevision = {spm_revision};
 \t\t\t}};
 \t\t}};
 /* End XCRemoteSwiftPackageReference section */'''
@@ -43,7 +46,16 @@ else:
         pbx,
         count=1,
     )
-    print(f"Atualizado file URL → {file_url}")
+    pbx = re.sub(
+        r"requirement = \\{[^}]+\\};",
+        f'''requirement = {{
+\t\t\t\tkind = revision;
+\t\t\t\trevision = {spm_revision};
+\t\t\t}};''',
+        pbx,
+        count=1,
+    )
+    print(f"Atualizado file URL → {file_url} (revision {spm_revision[:8]})")
 
 pbx_path.write_text(pbx)
 PY

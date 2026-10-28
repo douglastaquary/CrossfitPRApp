@@ -16,6 +16,7 @@ let package = Package(
         .library(name: "Persistence", targets: ["Persistence"]),
         .library(name: "Subscription", targets: ["Subscription"]),
         .library(name: "WorkoutEngine", targets: ["WorkoutEngine"]),
+        .library(name: "Coaching", targets: ["Coaching"]),
         .library(name: "Application", targets: ["Application"]),
         .library(name: "RecordDetail", targets: ["RecordDetail"]),
         .library(name: "PRHistory", targets: ["PRHistory"]),
@@ -60,6 +61,11 @@ let package = Package(
             path: "Packages/WorkoutEngine/Sources/WorkoutEngine"
         ),
         .target(
+            name: "Coaching",
+            dependencies: ["Domain"],
+            path: "Packages/Coaching/Sources/Coaching"
+        ),
+        .target(
             name: "Application",
             dependencies: [
                 "Domain",
@@ -67,6 +73,7 @@ let package = Package(
                 "Persistence",
                 "Subscription",
                 "WorkoutEngine",
+                "Coaching",
             ],
             path: "Packages/Application/Sources/Application"
         ),

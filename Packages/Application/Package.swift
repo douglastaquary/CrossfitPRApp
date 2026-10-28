@@ -20,6 +20,7 @@ let package = Package(
         .package(name: "Persistence", path: "../Persistence"),
         .package(name: "Subscription", path: "../Subscription"),
         .package(name: "WorkoutEngine", path: "../WorkoutEngine"),
+        .package(name: "Coaching", path: "../Coaching"),
     ],
     targets: [
         .target(
@@ -30,6 +31,7 @@ let package = Package(
                 .product(name: "Persistence", package: "Persistence"),
                 .product(name: "Subscription", package: "Subscription"),
                 .product(name: "WorkoutEngine", package: "WorkoutEngine"),
+                .product(name: "Coaching", package: "Coaching"),
             ]
         ),
         .testTarget(
@@ -37,6 +39,7 @@ let package = Package(
             dependencies: [
                 "Application",
                 .product(name: "Subscription", package: "Subscription"),
+                .product(name: "Coaching", package: "Coaching"),
             ]
         ),
     ]

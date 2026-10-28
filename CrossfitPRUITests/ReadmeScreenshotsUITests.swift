@@ -45,7 +45,7 @@ final class ReadmeScreenshotsUITests: XCTestCase {
         _ = app.navigationBars["Evolução"].waitForExistence(timeout: 5)
         saveScreenshot(named: "insights-free")
 
-        let proCTA = app.buttons["Quero evoluir mais rápido"]
+        let proCTA = app.descendants(matching: .any).matching(identifier: "insights.teaser.pro.cta").firstMatch
         XCTAssertTrue(proCTA.waitForExistence(timeout: 5))
         proCTA.tap()
 

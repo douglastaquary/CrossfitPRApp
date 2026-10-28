@@ -172,6 +172,8 @@ private struct InsightsViewPROContent: View {
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
             VStack(spacing: 16) {
+                InsightsCoachSection()
+
                 if !topBarbell.isEmpty {
                     InsightsViewPRORankingSection(
                         gridColumns: gridColumns,

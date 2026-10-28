@@ -281,6 +281,7 @@ struct InsightsTeaserCTASection: View {
                 .foregroundStyle(.white)
                 .cornerRadius(12)
             }
+            .accessibilityIdentifier("insights.teaser.pro.cta")
 
             Text(Strings.tr("purchase.lessthancoffe"))
                 .font(.caption)

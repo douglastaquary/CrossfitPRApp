@@ -12,7 +12,7 @@ CrossfitPR é um app iOS feito para quem treina CrossFit e quer histórico claro
   <img src="docs/media/crossfitpr-demo.gif" width="320" alt="Demonstração do CrossfitPR">
 </p>
 
-> GIF e prints vêm de `docs/media/` e `docs/screenshots/`. Para atualizar após mudanças de UI, rode `./scripts/capture-readme-media-auto.sh` (Xcode 14.2: `./scripts/configure-spm-xcode14.sh` na primeira vez).
+> GIF e prints vêm de `docs/media/` e `docs/screenshots/` (capturas em **pt-BR**). Para atualizar após mudanças de UI, rode `./scripts/capture-readme-media-auto.sh` — o script escolhe simulador via `scripts/pick-ios-simulator.rb` (mesma lógica do CI). Xcode 14.2: `./scripts/configure-spm-xcode14.sh` na primeira vez.
 
 ---
 
@@ -52,13 +52,16 @@ O PRO é para quem quer **interpretação**, não só números na tela:
 | **Metas no seu ritmo** | Recomendações alinhadas ao que você já registrou |
 | **Exportar histórico** | Leve seus dados para onde quiser |
 
-#### Por que a assinatura PRO inclui IA?
+#### Hoje vs coach IA (honesto)
 
-Interpretar meses de PRs com contexto (volume, platôs, categorias diferentes) **não roda de graça**: modelos de IA em nuvem têm custo por análise — tokens, inferência e manutenção do pipeline que transforma seu histórico em texto útil.
+| | **Hoje (shipped)** | **Próximo (CPR-007)** |
+|---|-------------------|------------------------|
+| Free | WorkoutEngine — heurísticas locais, teaser PRO | Igual — **sem LLM** |
+| PRO | Rankings, gráficos, análises WorkoutEngine na UI; card coach com **adapters mock** até inferência real | Coach CrossFit: **on-device** quando disponível, **cloud** como fallback; contexto compacto + cache |
 
-**Parte do valor do PRO cobre exatamente isso:** infraestrutura de IA para ler seus dados de treino com segurança e devolver análises que um resumo local não consegue dar. No plano Free você continua registrando PRs e vendo o básico; no PRO você financia análises mais profundas — como ter um coach olhando seus números entre os treinos.
+Interpretar meses de PRs (volume, platôs, movimentos diferentes) tem **custo de inferência** — tokens e pipeline. Parte do valor PRO cobre isso: dados agregados, sem planilha, linguagem de coach.
 
-> **Transparência:** hoje o app já usa heurísticas locais (WorkoutEngine) e destrava a experiência PRO completa na interface. A camada de **IA generativa** para análises detalhadas está no roadmap ([CPR-005](spdd/analysis/CPR-001-20260520-%5BAnalysis%5D-baseline-pr-tracking-and-insights.md)); a assinatura PRO já reflete esse custo futuro e o posicionamento do produto.
+> **Transparência:** IA generativa completa ainda está em rollout ([`CPR-007`](spdd/stories/CPR-007-ai-crossfit-coach-pro.md)). Roadmap público: [`docs/PRODUCT-ROADMAP.md`](docs/PRODUCT-ROADMAP.md) (Elite CPR-008, Apple Watch CPR-009).
 
 ---
 
@@ -108,31 +111,58 @@ cd ../WorkoutEngine && swift test
 
 ---
 
-## Arquitetura (SPDD + SPM)
+## Arquitetura e como o app é montado
 
-Desenvolvimento guiado por [SPDD](https://martinfowler.com/articles/structured-prompt-driven/) — intenção no canvas, código rastreável. Camadas em [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md); UI **MV** em [`docs/MV-ARCHITECTURE.md`](docs/MV-ARCHITECTURE.md) (CPR-006).
+Desenvolvimento guiado por [SPDD](https://martinfowler.com/articles/structured-prompt-driven/) — intenção no canvas, código rastreável. Detalhes: [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md), UI **MV** [`docs/MV-ARCHITECTURE.md`](docs/MV-ARCHITECTURE.md), wiring [`docs/APP-WIRING.md`](docs/APP-WIRING.md), CI [`docs/CI.md`](docs/CI.md).
+
+```mermaid
+flowchart TB
+  App[CrossfitPRApp]
+  Env[AppEnvironment.make]
+  Graph[withCrossfitPRDependencyGraph]
+  Launch[LaunchView / onboarding gate]
+  Tabs[MainTabView — 4 abas]
+  Feat[Packages de feature]
+
+  App --> Env --> Graph --> Launch --> Tabs --> Feat
+  Graph -.->|environmentObject clients| Feat
+```
 
 ```
-CrossfitPR/              # App shell (App + MainTabView + assets; ver docs/LEGACY-CROSSFITPR-VIEWS.md)
-Package.swift            # Pacotes locais (monorepo SPM)
+CrossfitPR/              # @main, tabs, AppDependencyGraph
+Package.swift            # Monorepo SPM na raiz
 Packages/
-├── Domain               # Entidades, ProFeature, ports
-├── Persistence          # JSON local + CloudKit (best-effort)
+├── Domain               # Entidades, ports (incl. coaching)
+├── Coaching             # Snapshot, TokenBudget, adapters (CPR-007)
+├── Persistence          # JSON + CloudKit
 ├── Subscription         # StoreKit 2
-├── WorkoutEngine        # Insights heurísticos
-├── Application          # Clients + AppEnvironment
+├── WorkoutEngine        # Heurísticas Free/PRO
+├── Application          # Clients + composition root
 ├── Localization         # Strings + AppDesign
-├── SharedUI             # Componentes compartilhados
-├── Launch / Onboarding  # Splash + primeira execução
-├── Categories           # Exercícios por categoria
-├── PRHistory            # Lista e novo PR
-├── RecordDetail         # Detalhe e percentuais
-├── Insights             # Free teaser + PRO completo
-├── PROUpgrade           # Assinatura
-└── Settings             # Preferências
+├── SharedUI             # Componentes
+└── Launch … Settings    # Features por aba
 ```
 
-**Padrões:** SwiftUI **MV** (Model + View; sem ViewModels); `@EnvironmentObject` clients; copy/cores via `Strings.*` e `AppDesign.*`.
+**Padrões:** SwiftUI **MV** (sem ViewModels); clients via `@EnvironmentObject`; copy/cores `Strings.*` / `AppDesign.*`.
+
+### Curiosidades do projeto
+
+- **SPDD** — features rastreáveis em `spdd/prompt/` (canvas REASONS).
+- **Monorepo SPM** na raiz — um `Package.swift` para Xcode 14+ e CI moderno.
+- **Offline-first** — JSON local; CloudKit best-effort.
+- **QA pt/en no CI** — `AppLocalizationQATests` + catálogo de exercícios.
+- **Review arquitetural advisory** em PRs (MV, wiring, SwiftLint).
+- **Foco CrossFit** — PRs por modalidade (barbell, ginástico, resistência), não “gym genérico”.
+
+### Roadmap (planned)
+
+| ID | Tema | Status |
+|----|------|--------|
+| [CPR-007](spdd/stories/CPR-007-ai-crossfit-coach-pro.md) | Coach IA PRO | Canvas + infra mock |
+| [CPR-008](spdd/stories/CPR-008-elite-tier.md) | Tier Elite | SPDD |
+| [CPR-009](spdd/stories/CPR-009-watch-companion.md) | Apple Watch | SPDD |
+
+Visão de produto: [`docs/PRODUCT-ROADMAP.md`](docs/PRODUCT-ROADMAP.md).
 
 ---
 

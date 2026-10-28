@@ -3,7 +3,13 @@
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-UDID="${SIM_UDID:-2FA53CFE-DBC2-45F7-80F8-54CBA5B7F99C}"
+if [[ -z "${SIM_UDID:-}" ]]; then
+  SIM_LINE="$(xcrun simctl list devices available -j | ruby "$ROOT/scripts/pick-ios-simulator.rb")"
+  UDID="${SIM_LINE%%$'\t'*}"
+  echo "→ Simulador: ${SIM_LINE#*$'\t'}"
+else
+  UDID="$SIM_UDID"
+fi
 BUNDLE_ID="com.douglast.CrossfitPR"
 DOCS="$ROOT/docs"
 VIDEO="$DOCS/media/crossfitpr-demo.mov"

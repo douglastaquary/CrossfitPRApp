@@ -11,6 +11,7 @@ extension View {
             .environmentObject(environment.workoutEngineClient)
             .environmentObject(environment.settingsClient)
             .environmentObject(environment.notificationManager)
+            .environmentObject(environment.coachingClient)
             .task {
                 await environment.bootstrapServices()
             }

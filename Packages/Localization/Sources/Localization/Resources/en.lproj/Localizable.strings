@@ -289,6 +289,9 @@
 "insight.teaser.feature2" = "Plateau alerts";
 "insight.teaser.feature3" = "Goals personalized to your pace";
 "insight.teaser.cta" = "I want to improve faster";
+"insight.coach.title" = "CrossFit coach (PRO)";
+"insight.coach.refresh" = "Refresh analysis";
+"insight.coach.placeholder" = "Log PRs and tap Refresh to see coach recommendations.";
 
 /* ─────────────────────────────────────────────────────────────
    NEW RECORD SCREEN
