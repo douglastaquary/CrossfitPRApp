@@ -43,7 +43,7 @@ flowchart LR
 |------|---------|
 | Norms MV | `.cursor/skills/swiftui-mv/`, `references/mv-patterns-crossfitpr.md` |
 | Doc | `docs/MV-ARCHITECTURE.md` |
-| App shell | `CrossfitPR/CrossfitPRApp.swift`, `CrossfitPR/RootView.swift` (único target app) |
+| App shell | `CrossfitPR/CrossfitPRApp.swift`, `AppDependencyGraph.swift`, `RootView.swift` (wiring: `docs/APP-WIRING.md`) |
 | Features | `Packages/<Feature>/Sources/.../*View.swift` |
 
 **Views migradas (subviews extraídas, checklist MV):**

@@ -1,0 +1,24 @@
+---
+description: App shell e wiring — composition root, TabView, injeção de clients (CPR-006)
+globs: "CrossfitPR/**/*.swift"
+alwaysApply: false
+---
+
+# App wiring — CrossfitPR
+
+Antes de alterar **app shell**, `@main`, tabs ou injeção global:
+
+`.cursor/skills/app-wiring/SKILL.md`
+
+## Regras rápidas
+
+- `AppEnvironment.make()` **somente** em `CrossfitPRApp`.
+- Clients via `withCrossfitPRDependencyGraph` — não repetir `.environmentObject` em features.
+- `bootstrapServices()` no modifier do root — não em views de feature.
+- Launch/onboarding/rede: pacote `Launch`; tabs: `MainTabView` no app target.
+- Features: `@EnvironmentObject` + `@State` local (MV); sem wiring de infra.
+
+## Docs
+
+- `docs/APP-WIRING.md`
+- `docs/MV-ARCHITECTURE.md`

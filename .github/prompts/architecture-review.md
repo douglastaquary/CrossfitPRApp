@@ -5,6 +5,7 @@ You are reviewing an iOS SwiftUI pull request for **CrossfitPR**.
 ## Norms (mandatory)
 
 - **MV (CPR-006):** no new `*ViewModel` types unless explicitly justified. Views use `@EnvironmentObject` clients + `@State`. Business logic in Domain / Application clients / WorkoutEngine — not in `body`.
+- **App wiring:** `AppEnvironment.make()` only in `CrossfitPRApp`; global clients via `withCrossfitPRDependencyGraph`; no duplicate bootstrap or `.environmentObject` chains in feature packages.
 - **SPM:** respect layer boundaries in `docs/ARCHITECTURE.md`. Feature packages must not import Persistence directly. Composition only in Application.
 - **UI tokens:** `Strings.*`, `AppDesign.*` — no hardcoded user-facing copy in Packages.
 - **Design:** refactors must not change layout/flows unless the PR states a Design canvas change.
@@ -30,7 +31,7 @@ Write in **Portuguese (Brazil)**.
 1. **Resumo** (2–4 sentences)
 2. **Findings** as markdown table with columns: Severity | Location | Category | Finding
    - Severity: `Blocking` | `Suggestion` | `Nit`
-   - Category: `MV` | `SPM` | `SPDD` | `L10n` | `SwiftLint` | `Other`
+   - Category: `MV` | `Wiring` | `SPM` | `SPDD` | `L10n` | `SwiftLint` | `Other`
    - Location: `path:line` or `-` if general
 3. **Veredito:** `Aprovado` | `Aprovado com ressalvas` | `Revisar blocking`
 

@@ -6,7 +6,7 @@ Este projeto é guiado por **[SPDD](https://martinfowler.com/articles/structured
 
 Canvas baseline: [`spdd/prompt/CPR-001-20260520-[Feat]-baseline-pr-tracking-and-insights.md`](../spdd/prompt/CPR-001-20260520-%5BFeat%5D-baseline-pr-tracking-and-insights.md)  
 Skill: [`.cursor/skills/crossfitpr-spdd/SKILL.md`](../.cursor/skills/crossfitpr-spdd/SKILL.md)  
-MV UI: [`.cursor/skills/swiftui-mv/SKILL.md`](../.cursor/skills/swiftui-mv/SKILL.md) · [`MV-ARCHITECTURE.md`](MV-ARCHITECTURE.md)  
+MV UI: [`.cursor/skills/swiftui-mv/SKILL.md`](../.cursor/skills/swiftui-mv/SKILL.md) · [`MV-ARCHITECTURE.md`](MV-ARCHITECTURE.md) · [`APP-WIRING.md`](APP-WIRING.md)  
 iOS: [`.cursor/skills/ios-development-skill/skill-ios.md`](../.cursor/skills/ios-development-skill/skill-ios.md)
 
 ## Princípios (fase atual)

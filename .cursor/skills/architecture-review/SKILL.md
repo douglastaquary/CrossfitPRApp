@@ -18,6 +18,8 @@ description: >-
 | `.cursor/skills/swiftui-mv/references/mv-patterns-crossfitpr.md` | MV, ViewModel, checklist PR |
 | `docs/ARCHITECTURE.md` | Grafo SPM, camadas |
 | `docs/MV-ARCHITECTURE.md` | Clients, injeção |
+| `docs/APP-WIRING.md` | Shell, modifier de grafo |
+| `.cursor/skills/app-wiring/references/app-wiring-crossfitpr.md` | Checklist wiring |
 | `spdd/prompt/CPR-006-*` | Norms N-01…N-07 |
 | `.github/prompts/architecture-review.md` | Prompt do job LLM no GHA |
 

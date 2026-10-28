@@ -17,14 +17,7 @@ struct CrossfitPRApp: App {
                 MainTabView()
             }
             .brandTint()
-            .environmentObject(environment.value.subscriptionClient)
-            .environmentObject(environment.value.personalRecordClient)
-            .environmentObject(environment.value.workoutEngineClient)
-            .environmentObject(environment.value.settingsClient)
-            .environmentObject(environment.value.notificationManager)
-            .task {
-                await environment.value.bootstrapServices()
-            }
+            .withCrossfitPRDependencyGraph(environment.value)
         }
     }
 }

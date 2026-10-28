@@ -89,6 +89,7 @@ public struct WorkoutInsightsView: View {
 - [ ] Refactor: layout/comportamento unchanged; feature: canvas Design
 - [ ] Testes de domínio/client se lógica mudou
 - [ ] Respeito ao grafo SPM (`docs/ARCHITECTURE.md`, `scripts/architecture/check-spm-graph.rb`)
+- [ ] Wiring: clients só via `withCrossfitPRDependencyGraph` — ver `docs/APP-WIRING.md`
 
 ## Checklist de refactor (MV)
 
