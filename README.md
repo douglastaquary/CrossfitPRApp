@@ -102,6 +102,8 @@ cd ../WorkoutEngine && swift test
 
 **QA (CI):** `./scripts/run-qa.sh` — UI tests de localização pt/en. Ver [`docs/QA.md`](docs/QA.md).
 
+**SPM / Xcode 14.2:** o projeto usa pacote local na raiz (`Package.swift`). CI e Xcode 15+ resolvem automaticamente; no Xcode 14.2 rode `./scripts/configure-spm-xcode14.sh` após clone/pull.
+
 ---
 
 ## Arquitetura (SPDD + SPM)

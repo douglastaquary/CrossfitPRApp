@@ -37,6 +37,8 @@ chmod +x scripts/run-qa.sh
 
 Workflow `.github/workflows/ios.yml` roda build + `AppLocalizationQATests` (screenshots README ficam de fora).
 
+SPM no CI usa `XCLocalSwiftPackageReference` (`relativePath = .` → `Package.swift` na raiz). **Não** commitar `file:///Users/...` no `project.pbxproj`. Xcode 14.2 local: `./scripts/configure-spm-xcode14.sh`.
+
 ## Screenshots README
 
 `ReadmeScreenshotsUITests` permanece manual/optional — força PT implícito no simulador; não faz parte do gate de CI.
