@@ -30,25 +30,34 @@ struct InsightsTeaserView: View {
         ScrollView(.vertical, showsIndicators: false) {
             VStack(spacing: 24) {
                 if hasRecords {
-                    previewSection
-                    categoriesSection
+                    InsightsTeaserPreviewSection(
+                        recordCount: recordCount,
+                        topRecord: topRecord,
+                        measureTrackingMode: settingsClient.measureTrackingMode
+                    )
+                    InsightsTeaserCategoriesSection(
+                        categories: categoriesWithRecords,
+                        records: personalRecordClient.records
+                    )
                 } else {
-                    emptyStateSection
+                    InsightsTeaserEmptySection()
                 }
 
-                teaserCard
+                InsightsTeaserCardSection()
 
-                featuresSection
+                InsightsTeaserFeaturesSection()
 
-                ctaButton
+                InsightsTeaserCTASection(isPresentingPROUpgrade: $isPresentingPROUpgrade)
             }
             .padding(20)
         }
     }
+}
 
-    // MARK: - Empty State
+// MARK: - Empty State
 
-    private var emptyStateSection: some View {
+private struct InsightsTeaserEmptySection: View {
+    var body: some View {
         VStack(spacing: 20) {
             Image(systemName: "figure.strengthtraining.traditional")
                 .font(.system(size: 64))
@@ -81,10 +90,16 @@ struct InsightsTeaserView: View {
         }
         .padding(.vertical, 20)
     }
+}
 
-    // MARK: - Preview Section (com PRs)
+// MARK: - Preview Section (com PRs)
 
-    private var previewSection: some View {
+private struct InsightsTeaserPreviewSection: View {
+    let recordCount: Int
+    let topRecord: PersonalRecord?
+    let measureTrackingMode: MeasureTrackingMode
+
+    var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             HStack {
                 Image(systemName: "chart.line.uptrend.xyaxis")
@@ -95,14 +110,16 @@ struct InsightsTeaserView: View {
             }
 
             HStack {
-                statCard(value: "\(recordCount)", label: "PRs registrados")
+                InsightsTeaserStatCard(value: "\(recordCount)", label: "PRs registrados")
                 Spacer()
                 if let top = topRecord {
-                    let weight = settingsClient.measureTrackingMode == .pounds
-                        ? top.poundValue
-                        : top.kiloValue
-                    let suffix = settingsClient.measureTrackingMode.suffix
-                    statCard(value: "\(weight) \(suffix)", label: "Maior PR", alignment: .trailing)
+                    let weight = measureTrackingMode == .pounds ? top.poundValue : top.kiloValue
+                    let suffix = measureTrackingMode.suffix
+                    InsightsTeaserStatCard(
+                        value: "\(weight) \(suffix)",
+                        label: "Maior PR",
+                        alignment: .trailing
+                    )
                 }
             }
             .padding()
@@ -110,8 +127,14 @@ struct InsightsTeaserView: View {
             .cornerRadius(12)
         }
     }
+}
 
-    private func statCard(value: String, label: String, alignment: HorizontalAlignment = .leading) -> some View {
+private struct InsightsTeaserStatCard: View {
+    let value: String
+    let label: String
+    var alignment: HorizontalAlignment = .leading
+
+    var body: some View {
         VStack(alignment: alignment, spacing: 4) {
             Text(value)
                 .font(.system(size: 32, weight: .bold))
@@ -121,25 +144,37 @@ struct InsightsTeaserView: View {
                 .foregroundStyle(.secondary)
         }
     }
+}
 
-    // MARK: - Categories Section
+// MARK: - Categories Section
 
-    private var categoriesSection: some View {
+private struct InsightsTeaserCategoriesSection: View {
+    let categories: [RecordGroup]
+    let records: [PersonalRecord]
+
+    var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             Text("Categorias com PRs")
                 .font(.headline)
 
             HStack(spacing: 12) {
-                ForEach(categoriesWithRecords, id: \.self) { group in
-                    categoryChip(for: group)
+                ForEach(categories, id: \.self) { group in
+                    InsightsTeaserCategoryChip(
+                        group: group,
+                        count: records.filter { $0.group == group }.count
+                    )
                 }
             }
         }
     }
+}
 
-    private func categoryChip(for group: RecordGroup) -> some View {
-        let count = personalRecordClient.records.filter { $0.group == group }.count
-        return HStack(spacing: 6) {
+private struct InsightsTeaserCategoryChip: View {
+    let group: RecordGroup
+    let count: Int
+
+    var body: some View {
+        HStack(spacing: 6) {
             Image(systemName: iconFor(group))
                 .font(.caption)
             Text("\(group.rawValue.capitalized)")
@@ -162,10 +197,12 @@ struct InsightsTeaserView: View {
         case .endurance: return "figure.run"
         }
     }
+}
 
-    // MARK: - Teaser Card
+// MARK: - Teaser Card
 
-    private var teaserCard: some View {
+private struct InsightsTeaserCardSection: View {
+    var body: some View {
         VStack(alignment: .leading, spacing: 16) {
             HStack {
                 Image(systemName: "sparkles")
@@ -188,9 +225,9 @@ struct InsightsTeaserView: View {
                 .foregroundStyle(.secondary)
 
             VStack(alignment: .leading, spacing: 12) {
-                teaserFeatureRow(icon: "chart.bar.fill", text: Strings.tr("insight.teaser.feature1"))
-                teaserFeatureRow(icon: "exclamationmark.triangle.fill", text: Strings.tr("insight.teaser.feature2"))
-                teaserFeatureRow(icon: "target", text: Strings.tr("insight.teaser.feature3"))
+                InsightsTeaserFeatureLine(icon: "chart.bar.fill", text: Strings.tr("insight.teaser.feature1"))
+                InsightsTeaserFeatureLine(icon: "exclamationmark.triangle.fill", text: Strings.tr("insight.teaser.feature2"))
+                InsightsTeaserFeatureLine(icon: "target", text: Strings.tr("insight.teaser.feature3"))
             }
         }
         .padding(20)
@@ -203,8 +240,13 @@ struct InsightsTeaserView: View {
                 )
         )
     }
+}
 
-    private func teaserFeatureRow(icon: String, text: String) -> some View {
+private struct InsightsTeaserFeatureLine: View {
+    let icon: String
+    let text: String
+
+    var body: some View {
         HStack(spacing: 12) {
             Image(systemName: icon)
                 .frame(width: 24)
@@ -214,31 +256,33 @@ struct InsightsTeaserView: View {
             Spacer()
         }
     }
+}
 
-    // MARK: - Features Section
+// MARK: - Features Section
 
-    private var featuresSection: some View {
+private struct InsightsTeaserFeaturesSection: View {
+    var body: some View {
         VStack(alignment: .leading, spacing: 16) {
             Text("O que você ganha")
                 .font(.headline)
 
             VStack(spacing: 12) {
-                featureRow(
+                InsightsTeaserProFeatureRow(
                     icon: "chart.line.uptrend.xyaxis",
                     title: Strings.tr("proFeature.trendCharts"),
                     color: AppDesign.Colors.brand
                 )
-                featureRow(
+                InsightsTeaserProFeatureRow(
                     icon: "brain.head.profile",
                     title: Strings.tr("proFeature.detailedAIAnalysis"),
                     color: .purple
                 )
-                featureRow(
+                InsightsTeaserProFeatureRow(
                     icon: "target",
                     title: Strings.tr("proFeature.personalizedRecommendations"),
                     color: .orange
                 )
-                featureRow(
+                InsightsTeaserProFeatureRow(
                     icon: "bolt.fill",
                     title: Strings.tr("proFeature.workoutEngineAnalysis"),
                     color: .yellow
@@ -246,8 +290,14 @@ struct InsightsTeaserView: View {
             }
         }
     }
+}
 
-    private func featureRow(icon: String, title: String, color: Color) -> some View {
+private struct InsightsTeaserProFeatureRow: View {
+    let icon: String
+    let title: String
+    let color: Color
+
+    var body: some View {
         HStack(spacing: 14) {
             Image(systemName: icon)
                 .font(.title3)
@@ -259,10 +309,14 @@ struct InsightsTeaserView: View {
         }
         .padding(.vertical, 4)
     }
+}
 
-    // MARK: - CTA
+// MARK: - CTA
 
-    private var ctaButton: some View {
+private struct InsightsTeaserCTASection: View {
+    @Binding var isPresentingPROUpgrade: Bool
+
+    var body: some View {
         VStack(spacing: 8) {
             Button {
                 isPresentingPROUpgrade = true
