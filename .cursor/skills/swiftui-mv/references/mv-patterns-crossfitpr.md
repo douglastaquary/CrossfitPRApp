@@ -102,4 +102,12 @@ Prioridade sugerida (arquivos com muitos `private var …: some View`):
 10. ~~`OnboardingView.swift`~~ ✅
 11. ~~`LaunchView.swift`~~ ✅ (+ `LaunchScreenView` logo/animação)
 
+**Onda 4 — L10n (en/pt-BR)**
+
+12. ~~PROUpgrade (planos, estados de compra, retry)~~ ✅
+13. ~~Settings (lembretes push)~~ ✅
+14. ~~`RecordGroup.localizationKey` centralizado~~ ✅
+
+**Backlog:** `SharedUI` (só formatos numéricos); catálogo de exercícios; PR de remoção do legado `CrossfitPR/*`.
+
 Um arquivo por PR; cada um: reorder + extract structs + `/spdd-sync`.

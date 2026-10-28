@@ -32,6 +32,13 @@ Estes caminhos **não** entram no `PBXSourcesBuildPhase` — são resquício da 
 2. Antes de apagar: confirmar que nenhum script/ferramenta referencia esses arquivos.
 3. Remoção futura pode ser um PR dedicado (“delete dead CrossfitPR monolith sources”) após backup/tag.
 
+## Checklist antes de deletar
+
+- [ ] `git tag pre-legacy-purge` ou branch de arquivo
+- [ ] Confirmar `grep -r CrossfitPR/Views` no `project.pbxproj` vazio
+- [ ] CI + UITests screenshots verdes
+- [ ] README não referencia paths legados
+
 ## `Localizable.strings` na raiz do repo
 
 Existem `en.lproj/` e `pt-BR.lproj/` na raiz e em `CrossfitPR/` que **não** alimentam o app atual. A fonte de verdade é:

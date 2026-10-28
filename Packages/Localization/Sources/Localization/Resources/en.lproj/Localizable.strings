@@ -326,6 +326,23 @@
 "pro.upgrade.productsUnavailable.message" = "Couldn't load plans. Please try again.";
 "pro.upgrade.error.generic" = "Something went wrong";
 
+"purchase.plan.monthly" = "Monthly";
+"purchase.plan.annual" = "Annual";
+"purchase.plan.bestValue" = "Best value";
+"purchase.selectPlan.required" = "Select a plan to continue";
+"purchase.retry" = "Try again";
+"purchase.state.connecting" = "Connecting to the App Store…";
+"purchase.state.processing" = "Processing payment…";
+"purchase.state.confirming" = "Confirming subscription…";
+"purchase.state.success" = "Subscription activated!";
+
+"settings.notification.reminder.title1" = "Time to train! 💪🏼";
+"settings.notification.reminder.title2" = "Ready to catch up on training?";
+"settings.notification.reminder.body1" = "Today's workout is going to be good! 🏋🏻";
+"settings.notification.reminder.body2" = "No pain, no gain! 😄";
+
+"category.list.tip.emoji" = "💡";
+
 /* ─────────────────────────────────────────────────────────────
    RANKING
    ───────────────────────────────────────────────────────────── */

@@ -24,5 +24,7 @@
 
 ## Plano
 
-1. Normas + skills + regras (este entregável)
-2. Refactor piloto por pacote feature (CPR-006 follow-ups)
+1. ~~Normas + skills + regras~~ ✅ (2026-10-28)
+2. ~~Refactor views feature (ondas 1–3)~~ ✅ — ver canvas CPR-006 sync
+3. ~~Varredura L10n en/pt-BR em Packages~~ ✅ — PROUpgrade, Settings notifications, `RecordGroup.localizationKey`
+4. **Backlog:** remover sources legados `CrossfitPR/` (fora do target); localizar nomes de exercícios no catálogo (`CrossfitCatalog`)

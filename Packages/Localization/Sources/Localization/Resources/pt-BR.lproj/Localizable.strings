@@ -326,6 +326,23 @@
 "pro.upgrade.productsUnavailable.message" = "Não foi possível carregar os planos. Tente novamente.";
 "pro.upgrade.error.generic" = "Ops, algo deu errado";
 
+"purchase.plan.monthly" = "Mensal";
+"purchase.plan.annual" = "Anual";
+"purchase.plan.bestValue" = "Melhor valor";
+"purchase.selectPlan.required" = "Selecione um plano para continuar";
+"purchase.retry" = "Tentar novamente";
+"purchase.state.connecting" = "Conectando à App Store…";
+"purchase.state.processing" = "Processando pagamento…";
+"purchase.state.confirming" = "Confirmando assinatura…";
+"purchase.state.success" = "Assinatura ativada!";
+
+"settings.notification.reminder.title1" = "Hora de treinar! 💪🏼";
+"settings.notification.reminder.title2" = "E aí?? Bora tirar o atraso?!";
+"settings.notification.reminder.body1" = "Hoje o treino promete! 🏋🏻";
+"settings.notification.reminder.body2" = "No pain, no gain! 😄";
+
+"category.list.tip.emoji" = "💡";
+
 /* ─────────────────────────────────────────────────────────────
    RANKING
    ───────────────────────────────────────────────────────────── */

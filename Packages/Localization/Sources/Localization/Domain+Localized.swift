@@ -3,10 +3,15 @@ import Domain
 public extension RecordGroup {
     /// Nome curto do grupo para chips e listas.
     var localizedDisplayName: String {
+        Strings.tr(localizationKey)
+    }
+
+    /// Chave `Localizable.strings` do grupo (CategoryItemView, chips).
+    var localizationKey: String {
         switch self {
-        case .barbell: return Strings.tr("category.group.barbell.descript")
-        case .gymnastic: return Strings.tr("category.group.gymnastic.descript")
-        case .endurance: return Strings.tr("category.group.endurance.descript")
+        case .barbell: return "category.group.barbell.descript"
+        case .gymnastic: return "category.group.gymnastic.descript"
+        case .endurance: return "category.group.endurance.descript"
         }
     }
 }

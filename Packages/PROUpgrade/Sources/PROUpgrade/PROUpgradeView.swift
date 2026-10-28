@@ -272,7 +272,7 @@ private struct PROUpgradePricingSection: View {
                 if let monthly = monthlyProduct {
                     PROUpgradeProductOption(
                         product: monthly,
-                        label: "Mensal",
+                        label: Strings.Purchase.monthlyPlan,
                         badge: nil,
                         isSelected: selectedProductID == monthly.id,
                         onSelect: { select(monthly.id) }
@@ -282,8 +282,8 @@ private struct PROUpgradePricingSection: View {
                 if let annual = annualProduct {
                     PROUpgradeProductOption(
                         product: annual,
-                        label: "Anual",
-                        badge: "Melhor valor",
+                        label: Strings.Purchase.annualPlan,
+                        badge: Strings.Purchase.bestValueBadge,
                         isSelected: selectedProductID == annual.id,
                         onSelect: { select(annual.id) }
                     )
@@ -334,7 +334,7 @@ private struct PROUpgradeTrialButton: View {
 
     private func tapPurchase() {
         guard let productID = selectedProductID else {
-            errorMessage = "Selecione um plano para continuar"
+            errorMessage = Strings.Purchase.selectPlanRequired
             return
         }
         onPurchase(productID)
@@ -403,7 +403,7 @@ private struct PROUpgradeNoProductsSection: View {
                 .font(.caption)
                 .foregroundStyle(.secondary)
                 .multilineTextAlignment(.center)
-            Button("Tentar novamente", action: onReload)
+            Button(Strings.Purchase.retry, action: onReload)
                 .buttonStyle(.bordered)
         }
         .padding()
@@ -439,28 +439,28 @@ private struct PROUpgradeProcessingOverlay: View {
                 case .connecting:
                     PROUpgradeProcessingStep(
                         icon: "wifi",
-                        title: "Conectando à App Store...",
+                        title: Strings.Purchase.stateConnecting,
                         isAnimating: true
                     )
 
                 case .processing:
                     PROUpgradeProcessingStep(
                         icon: "creditcard",
-                        title: "Processando pagamento...",
+                        title: Strings.Purchase.stateProcessing,
                         isAnimating: true
                     )
 
                 case .confirming:
                     PROUpgradeProcessingStep(
                         icon: "checkmark.shield",
-                        title: "Confirmando assinatura...",
+                        title: Strings.Purchase.stateConfirming,
                         isAnimating: true
                     )
 
                 case .success:
                     PROUpgradeProcessingStep(
                         icon: "checkmark.circle.fill",
-                        title: "Assinatura ativada!",
+                        title: Strings.Purchase.stateSuccess,
                         isAnimating: false,
                         color: AppDesign.Colors.brand
                     )
@@ -531,7 +531,7 @@ private struct PROUpgradeProcessingError: View {
                 .foregroundStyle(.white.opacity(0.8))
                 .multilineTextAlignment(.center)
 
-            Button("Tentar novamente", action: onRetry)
+            Button(Strings.Purchase.retry, action: onRetry)
                 .buttonStyle(.borderedProminent)
                 .tint(AppDesign.Colors.brand)
         }

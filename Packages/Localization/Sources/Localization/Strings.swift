@@ -45,6 +45,19 @@ public enum Strings {
     public enum Category {
         public static var searchPrompt: String { tr("category.search.descript") }
         public static var listHeader: String { tr("exercises.list.header.descript") }
+        public static var listTipEmoji: String { tr("category.list.tip.emoji") }
+    }
+
+    public enum Purchase {
+        public static var monthlyPlan: String { tr("purchase.plan.monthly") }
+        public static var annualPlan: String { tr("purchase.plan.annual") }
+        public static var bestValueBadge: String { tr("purchase.plan.bestValue") }
+        public static var selectPlanRequired: String { tr("purchase.selectPlan.required") }
+        public static var retry: String { tr("purchase.retry") }
+        public static var stateConnecting: String { tr("purchase.state.connecting") }
+        public static var stateProcessing: String { tr("purchase.state.processing") }
+        public static var stateConfirming: String { tr("purchase.state.confirming") }
+        public static var stateSuccess: String { tr("purchase.state.success") }
     }
 
     public enum Record {
@@ -69,6 +82,16 @@ public enum Strings {
         public static var unlockPro: String { tr("settings.screen.section.unlockpro.title") }
         public static var aboutSection: String { tr("settings.screen.section.about.title") }
         public static var privacy: String { tr("settings.screen.section.privacy.title") }
+
+        public enum NotificationReminder {
+            public static var titleOptions: [String] {
+                [tr("settings.notification.reminder.title1"), tr("settings.notification.reminder.title2")]
+            }
+
+            public static var bodyOptions: [String] {
+                [tr("settings.notification.reminder.body1"), tr("settings.notification.reminder.body2")]
+            }
+        }
 
         public enum Pro {
             public static var subscriptionActive: String { tr("settings.pro.subscriptionActive") }

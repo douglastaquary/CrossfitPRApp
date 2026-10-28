@@ -66,14 +66,8 @@ public struct SettingsView: View {
         guard settingsClient.isNotificationEnabled else { return }
         notificationManager.clearRequests()
         let components = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: date)
-        let title = String.randomNotificationMessage(list: [
-            "Hora de treinar! 💪🏼",
-            "E ai?? Bora tirar o atraso?!",
-        ])
-        let body = String.randomNotificationMessage(list: [
-            "Hoje o treino promete! 🏋🏻",
-            "No pain, no gain! 😄",
-        ])
+        let title = String.randomNotificationMessage(list: Strings.Settings.NotificationReminder.titleOptions)
+        let body = String.randomNotificationMessage(list: Strings.Settings.NotificationReminder.bodyOptions)
         let notification = LocalNotification(
             identifier: UUID().uuidString,
             title: title,

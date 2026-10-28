@@ -86,20 +86,10 @@ private struct PRHistoriesSectionsList: View {
                 NavigationLink(value: section) {
                     CategoryItemView(
                         title: section.name,
-                        groupKey: section.group.localizedKey
+                        groupKey: section.group.localizationKey
                     )
                 }
             }
-        }
-    }
-}
-
-private extension RecordGroup {
-    var localizedKey: String {
-        switch self {
-        case .barbell: return "category.group.barbell.descript"
-        case .gymnastic: return "category.group.gymnastic.descript"
-        case .endurance: return "category.group.endurance.descript"
         }
     }
 }

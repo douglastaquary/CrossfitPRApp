@@ -68,7 +68,7 @@ private struct CategoryListScrollContent: View {
                 ForEach(categories) { category in
                     CategoryItemView(
                         title: category.title,
-                        groupKey: category.group.localizedKey
+                        groupKey: category.group.localizationKey
                     )
                     .onTapGesture {
                         onSelectCategory(category)
@@ -82,22 +82,12 @@ private struct CategoryListScrollContent: View {
 private struct CategoryListTipHeader: View {
     var body: some View {
         HStack {
-            Text("💡")
+            Text(Strings.Category.listTipEmoji)
                 .foregroundStyle(.secondary)
                 .font(.subheadline)
                 .padding(.leading, 20)
             Text(Strings.Category.listHeader)
         }
         Divider().padding([.leading, .trailing, .top])
-    }
-}
-
-private extension RecordGroup {
-    var localizedKey: String {
-        switch self {
-        case .barbell: return "category.group.barbell.descript"
-        case .gymnastic: return "category.group.gymnastic.descript"
-        case .endurance: return "category.group.endurance.descript"
-        }
     }
 }
