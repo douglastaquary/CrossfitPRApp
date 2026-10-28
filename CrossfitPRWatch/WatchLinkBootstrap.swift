@@ -1,48 +1,31 @@
 import Foundation
 import WatchConnectivity
 
-/// Ativa WCSession no relógio e envia eventos compactos ao iPhone quando alcançável.
+/// Ativa WCSession no relógio e publica eventos compactos ao iPhone.
 enum WatchLinkBootstrap {
     private static let delegate = WatchWCSessionDelegate()
 
     static func activate() {
+        WatchEventSink.send = { publish($0) }
         guard WCSession.isSupported() else { return }
         let session = WCSession.default
         session.delegate = delegate
         session.activate()
     }
 
-    static func sendSessionSample() {
+    static func publish(_ payload: WatchEventPayload) {
         guard WCSession.isSupported() else { return }
         let session = WCSession.default
-        guard session.activationState == .activated, session.isReachable else { return }
-        sendEvent(
-            session,
-            phase: "session",
-            movement: "thruster",
-            rpe: 8
-        )
-    }
-
-    static func sendRestSample(durationSec: Int = 90) {
-        guard WCSession.isSupported() else { return }
-        let session = WCSession.default
-        guard session.activationState == .activated, session.isReachable else { return }
-        sendEvent(session, phase: "rest", durationSec: durationSec)
-    }
-
-    fileprivate static func sendEvent(
-        _ session: WCSession,
-        phase: String,
-        movement: String? = nil,
-        rpe: Int? = nil,
-        durationSec: Int? = nil
-    ) {
-        var payload: [String: Any] = ["phase": phase]
-        if let movement { payload["movement"] = movement }
-        if let rpe { payload["rpe"] = rpe }
-        if let durationSec { payload["durationSec"] = durationSec }
-        session.sendMessage(payload, replyHandler: nil, errorHandler: nil)
+        guard session.activationState == .activated else { return }
+        var message: [String: Any] = ["phase": payload.phase]
+        if let movement = payload.movement { message["movement"] = movement }
+        if let rpe = payload.rpe { message["rpe"] = rpe }
+        if let durationSec = payload.durationSec { message["durationSec"] = durationSec }
+        if session.isReachable {
+            session.sendMessage(message, replyHandler: nil, errorHandler: nil)
+        } else {
+            try? session.updateApplicationContext(message)
+        }
     }
 }
 
@@ -51,14 +34,7 @@ private final class WatchWCSessionDelegate: NSObject, WCSessionDelegate {
         _ session: WCSession,
         activationDidCompleteWith activationState: WCSessionActivationState,
         error: Error?
-    ) {
-        guard activationState == .activated else { return }
-        WatchLinkBootstrap.sendEvent(session, phase: "session", movement: "thruster", rpe: 8)
-        WatchLinkBootstrap.sendEvent(session, phase: "rest", durationSec: 90)
-    }
+    ) {}
 
-    func sessionReachabilityDidChange(_ session: WCSession) {
-        guard session.isReachable else { return }
-        WatchLinkBootstrap.sendEvent(session, phase: "session", movement: "thruster", rpe: 8)
-    }
+    func sessionReachabilityDidChange(_ session: WCSession) {}
 }

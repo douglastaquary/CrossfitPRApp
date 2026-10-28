@@ -36,9 +36,23 @@ extension iPhoneWatchConnectivityBridge: WCSessionDelegate {
 
     nonisolated public func session(_ session: WCSession, didReceiveMessage message: [String: Any]) {
         Task { @MainActor in
-            lastMessage = message
-            WatchSessionEventStore.shared.ingest(watchConnectivityPayload: message)
+            ingest(message)
         }
+    }
+
+    nonisolated public func session(
+        _ session: WCSession,
+        didReceiveApplicationContext applicationContext: [String: Any]
+    ) {
+        Task { @MainActor in
+            ingest(applicationContext)
+        }
+    }
+
+    @MainActor
+    private func ingest(_ message: [String: Any]) {
+        lastMessage = message
+        WatchSessionEventStore.shared.ingest(watchConnectivityPayload: message)
     }
 }
 #endif
