@@ -29,7 +29,7 @@ chmod +x scripts/ci-modern.sh
 CODE_SIGNING_ALLOWED=NO ./scripts/ci-modern.sh
 ```
 
-Simulador: escolha automática por **UDID** (evita erro `OS:latest` no Xcode 26). Override: `SIM_UDID=<uuid> ./scripts/ci-modern.sh`.
+Simulador padrão: **iPhone 17 Pro** (runtime iOS mais novo no runner), destino `id=<UDID>`. Overrides: `SIM_DEVICE`, `SIM_OS=26.5`, `SIM_UDID`, ou `SIM_DEST='platform=iOS Simulator,name=…,OS=…'`.
 
 ## Antes de push (Xcode 14.2)
 

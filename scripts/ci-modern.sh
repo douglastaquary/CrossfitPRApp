@@ -8,6 +8,7 @@ cd "$ROOT"
 
 SCHEME="${SCHEME:-CrossfitPR}"
 PROJECT="${PROJECT:-CrossfitPR.xcodeproj}"
+PICK_SCRIPT="${ROOT}/scripts/pick-ios-simulator.rb"
 
 echo "==> Toolchain"
 xcodebuild -version
@@ -30,45 +31,8 @@ pick_simulator_line() {
     echo -e "${SIM_UDID}\t${name}"
     return
   fi
-  xcrun simctl list devices available -j | ruby -e "
-    require 'json'
-    data = JSON.parse(STDIN.read)
-    devs = []
-    data['devices'].each do |runtime, list|
-      next unless runtime.include?('iOS')
-      list.each do |d|
-        next unless d['isAvailable']
-        next unless d['name'] =~ /iPhone/
-        devs << d.merge('runtime' => runtime)
-      end
-    end
-    devs.sort_by! { |d| d['runtime'] }.reverse!
-    patterns = [
-      /iPhone 17 Pro$/,
-      /iPhone 17$/,
-      /iPhone 16e$/,
-      /iPhone 16 Pro$/,
-      /iPhone 16$/,
-      /iPhone 15 Pro$/,
-      /iPhone 15$/,
-      /iPhone 14 Pro$/,
-      /iPhone/
-    ]
-    patterns.each do |pat|
-      hit = devs.find { |d| d['name'] =~ pat }
-      if hit
-        puts \"\#{hit['udid']}\t\#{hit['name']} (\#{hit['runtime']})\"
-        exit 0
-      end
-    end
-    if devs.any?
-      d = devs.first
-      puts \"\#{d['udid']}\t\#{d['name']} (\#{d['runtime']})\"
-    else
-      STDERR.puts 'Nenhum simulador iPhone disponível'
-      exit 1
-    end
-  "
+  export SIM_DEVICE="${SIM_DEVICE:-iPhone 17 Pro}"
+  xcrun simctl list devices available -j | ruby "$PICK_SCRIPT"
 }
 
 SIM_LINE="$(pick_simulator_line)"
@@ -77,11 +41,16 @@ SIM_LABEL="${SIM_LINE#*$'\t'}"
 echo "==> Simulator: $SIM_LABEL"
 echo "    UDID: $SIM_UDID"
 
+if [[ -n "${SIM_DEST:-}" ]]; then
+  DEST="$SIM_DEST"
+else
+  DEST="platform=iOS Simulator,id=${SIM_UDID}"
+fi
+echo "    destination: $DEST"
+
 echo "==> Boot simulator (UI tests)"
 xcrun simctl boot "$SIM_UDID" 2>/dev/null || true
 xcrun simctl bootstatus "$SIM_UDID" -b 2>/dev/null || true
-
-DEST="platform=iOS Simulator,id=${SIM_UDID}"
 
 XCB=(xcodebuild -scheme "$SCHEME" -project "$PROJECT" -destination "$DEST" -allowProvisioningUpdates)
 if [[ "${CODE_SIGNING_ALLOWED:-YES}" == "NO" ]]; then
