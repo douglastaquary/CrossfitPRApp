@@ -121,7 +121,6 @@ let package = Package(
                 "SharedUI",
                 "Subscription",
                 "PROUpgrade",
-                "WatchCompanion",
             ],
             path: "Packages/Settings/Sources/Settings"
         ),
@@ -160,8 +159,11 @@ let package = Package(
         ),
         .target(
             name: "WatchCompanion",
-            dependencies: ["Localization"],
-            path: "Packages/WatchCompanion/Sources/WatchCompanion"
+            dependencies: [],
+            path: "Packages/WatchCompanion/Sources/WatchCompanion",
+            resources: [
+                .process("Resources"),
+            ]
         ),
     ]
 )

@@ -90,6 +90,10 @@ public extension View {
     }
 
     func endEditingOnTap() -> some View {
+        #if os(iOS)
         onTapGesture { UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil) }
+        #else
+        self
+        #endif
     }
 }

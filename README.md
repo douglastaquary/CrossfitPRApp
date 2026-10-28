@@ -42,7 +42,7 @@ CrossfitPR é um app iOS feito para quem treina CrossFit e quer histórico claro
   <img src="docs/screenshots/watch-breath.png" width="140" alt="Watch — respiração">
 </p>
 
-> POC no simulador (galeria UITest). Target watchOS + sync: [`docs/WATCH-POC.md`](docs/WATCH-POC.md).
+> Target **CrossfitPRWatch** (watchOS 9+) — capturas: [`docs/WATCH-POC.md`](docs/WATCH-POC.md). Próximo: WatchConnectivity.
 
 ---
 
@@ -126,7 +126,7 @@ SPDD + monorepo SPM — [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md), MV [`doc
 ```
 Packages/
 ├── Domain · Coaching · WorkoutEngine · Application
-├── Insights · PROUpgrade · WatchCompanion (POC)
+├── Insights · PROUpgrade · CrossfitPRWatch + WatchCompanion
 └── Launch … Settings
 ```
 
@@ -136,7 +136,7 @@ Packages/
 |----|------|--------|
 | [CPR-007](spdd/stories/CPR-007-ai-crossfit-coach-pro.md) | Coach IA PRO | Shipped MVP |
 | [CPR-008](spdd/stories/CPR-008-elite-tier.md) | Tier Elite | Em progresso |
-| [CPR-009](spdd/stories/CPR-009-watch-companion.md) | Apple Watch | POC UI |
+| [CPR-009](spdd/stories/CPR-009-watch-companion.md) | Apple Watch | Target watchOS (scaffold) |
 
 [`docs/PRODUCT-ROADMAP.md`](docs/PRODUCT-ROADMAP.md)
 

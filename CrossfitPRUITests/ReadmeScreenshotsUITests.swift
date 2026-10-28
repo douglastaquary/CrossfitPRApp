@@ -67,31 +67,6 @@ final class ReadmeScreenshotsUITests: XCTestCase {
         captureInsightsScreenshot(tier: "elite", fileName: "insights-elite")
     }
 
-    func testCaptureWatchPOCScreens() throws {
-        let app = XCUIApplication()
-        app.launchArguments += ["-AppleLanguages", "(pt-BR)", "-AppleLocale", "pt_BR"]
-        app.launchEnvironment["UITEST_SKIP_SPLASH"] = "1"
-        app.launchEnvironment["UITEST_SKIP_ONBOARDING"] = "1"
-        app.launch()
-
-        app.tabBars.buttons["Ajustes"].tap()
-        _ = app.navigationBars["Ajustes"].waitForExistence(timeout: 8)
-        element(app, identifier: "settings.watch.poc.link").tap()
-
-        XCTAssertTrue(app.staticTexts["Sessão"].waitForExistence(timeout: 12))
-
-        XCTAssertTrue(element(app, identifier: "watch.poc.session").waitForExistence(timeout: 5))
-        saveScreenshot(named: "watch-session")
-
-        app.descendants(matching: .any).matching(identifier: "watch.poc.next").firstMatch.tap()
-        XCTAssertTrue(element(app, identifier: "watch.poc.rest").waitForExistence(timeout: 8))
-        saveScreenshot(named: "watch-rest")
-
-        app.descendants(matching: .any).matching(identifier: "watch.poc.next").firstMatch.tap()
-        XCTAssertTrue(element(app, identifier: "watch.poc.breath").waitForExistence(timeout: 8))
-        saveScreenshot(named: "watch-breath")
-    }
-
     /// Percorre as tabs lentamente — rode com `simctl recordVideo` em paralelo.
     func testDemoTabTour() throws {
         let app = XCUIApplication()

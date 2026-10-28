@@ -36,15 +36,13 @@ xcodebuild test \
   -allowProvisioningUpdates \
   -only-testing:CrossfitPRUITests/ReadmeScreenshotsUITests/testCaptureReadmeScreenshots \
   -only-testing:CrossfitPRUITests/ReadmeScreenshotsUITests/testCaptureInsightsProAndElite \
-  -only-testing:CrossfitPRUITests/ReadmeScreenshotsUITests/testCaptureWatchPOCScreens \
   2>&1 | xcbeautify 2>/dev/null || xcodebuild test \
   -scheme CrossfitPR \
   -project "$ROOT/CrossfitPR.xcodeproj" \
   -destination "$DEST" \
   -allowProvisioningUpdates \
   -only-testing:CrossfitPRUITests/ReadmeScreenshotsUITests/testCaptureReadmeScreenshots \
-  -only-testing:CrossfitPRUITests/ReadmeScreenshotsUITests/testCaptureInsightsProAndElite \
-  -only-testing:CrossfitPRUITests/ReadmeScreenshotsUITests/testCaptureWatchPOCScreens
+  -only-testing:CrossfitPRUITests/ReadmeScreenshotsUITests/testCaptureInsightsProAndElite
 
 xcrun simctl uninstall booted "$BUNDLE_ID" 2>/dev/null || true
 
@@ -80,8 +78,6 @@ elif command -v convert >/dev/null 2>&1; then
     "$DOCS/screenshots/insights-pro.png" \
     "$DOCS/screenshots/insights-elite.png" \
     "$DOCS/screenshots/pro-upgrade.png" \
-    "$DOCS/screenshots/watch-session.png" \
-    "$DOCS/screenshots/watch-rest.png" \
     "$DOCS/screenshots/settings.png" \
     -resize 390x \
     "$GIF"

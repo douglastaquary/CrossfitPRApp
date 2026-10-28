@@ -17,9 +17,9 @@ ALLOWED = {
   "RecordDetail" => ["Domain", "Application", "Localization", "SharedUI", "Subscription", "PROUpgrade"],
   "PRHistory" => ["Domain", "Application", "Localization", "SharedUI", "RecordDetail"],
   "Categories" => ["Domain", "Application", "Localization", "SharedUI", "PRHistory"],
-  "Settings" => ["Domain", "Application", "Localization", "SharedUI", "Subscription", "PROUpgrade", "WatchCompanion"],
+  "Settings" => ["Domain", "Application", "Localization", "SharedUI", "Subscription", "PROUpgrade"],
   "Onboarding" => ["Localization", "SharedUI"],
-  "WatchCompanion" => ["Localization"],
+  "WatchCompanion" => [],
   "Launch" => ["Domain", "Application", "Localization", "SharedUI", "Onboarding"],
   "Insights" => ["Domain", "Application", "Subscription", "PROUpgrade", "Localization", "SharedUI"],
 }.freeze
