@@ -57,11 +57,6 @@ public struct AppEnvironment {
         let personalRecordClient = PersonalRecordClient(repository: resolvedRepository)
         let workoutEngineClient = WorkoutEngineClient(subscriptionClient: subscription)
         let settingsClient = SettingsClient()
-        if UITestLaunchSupport.shouldSkipOnboarding {
-            settingsClient.hasCompletedLaunch = true
-        } else if UITestLaunchSupport.shouldForceOnboarding {
-            settingsClient.hasCompletedLaunch = false
-        }
         let notificationManager = LocalNotificationManager()
         let cloudAdapter = CloudCoachAdapter(
             settings: CoachingOpenAIConfiguration.resolvedSettings(),

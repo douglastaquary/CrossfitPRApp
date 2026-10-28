@@ -24,9 +24,6 @@ struct CrossfitPRApp: App {
 
 @MainActor
 private final class AppEnvironmentHolder: ObservableObject {
-    let value: AppEnvironment
-
-    init() {
-        value = AppEnvironment.make()
-    }
+    /// `App.init()` roda antes do processo receber `launchEnvironment` do XCTest; lazy adia `make()` até o body.
+    lazy var value: AppEnvironment = AppEnvironment.make()
 }
