@@ -2,7 +2,8 @@
 
 **Tipo:** Feat (Norms / arquitetura de presentation)  
 **Story:** `spdd/stories/CPR-006-mv-swiftui-architecture.md`  
-**Analysis:** `spdd/analysis/CPR-006-mv-swiftui-architecture.md`
+**Analysis:** `spdd/analysis/CPR-006-mv-swiftui-architecture.md`  
+**Último sync (code → prompt):** 2026-10-28 — migração MV ondas 1–3 + localização en/pt via pacote `Localization`
 
 ## R — Requirements
 
@@ -13,14 +14,20 @@
 
 **DoD:** skills/regras/docs atualizados; pelo menos um exemplo de view alinhada ao checklist MV.
 
+*(Requirements inalterados — sync documenta estado do código, não novo escopo.)*
+
 ## E — Entities
 
 ```mermaid
 flowchart LR
-  View[Feature Views] --> Client[Application Clients]
+  View[Feature Views + private subviews] --> Client[Application Clients]
   Client --> Domain[Domain]
   Client --> Infra[Persistence / Subscription / WorkoutEngine]
+  View --> Strings[Localization.Strings]
+  Strings --> L10n[en.lproj + pt-BR.lproj no SPM]
 ```
+
+**Presentation (SPM, MV):** views raiz orquestram; subviews `private struct` recebem dados/`Binding`/closures; sem ViewModels.
 
 ## A — Approach
 
@@ -28,18 +35,43 @@ flowchart LR
 2. Atualizar precedência AGENTS / governance / ios-spdd skills.
 3. Regra Cursor `swiftui-mv-architecture.mdc` em `**/*.swift`.
 4. Refactors: reorder → extract subviews → mover lógica para clients/domain.
+5. Copy de UI via `Strings.*` + `Localizable.strings` (en + pt-BR) no pacote `Localization`.
 
 ## S — Structure
 
-- Norms em `.cursor/skills/swiftui-mv/`
-- Doc humana: `docs/MV-ARCHITECTURE.md`
-- Presentation continua em `Packages/<Feature>/`
+| Área | Caminho |
+|------|---------|
+| Norms MV | `.cursor/skills/swiftui-mv/`, `references/mv-patterns-crossfitpr.md` |
+| Doc | `docs/MV-ARCHITECTURE.md` |
+| App shell | `CrossfitPR/CrossfitPRApp.swift`, `CrossfitPR/RootView.swift` (único target app) |
+| Features | `Packages/<Feature>/Sources/.../*View.swift` |
+
+**Views migradas (subviews extraídas, checklist MV):**
+
+| Pacote | View raiz | Subviews (exemplos) |
+|--------|-----------|---------------------|
+| PROUpgrade | `PROUpgradeView` | `PROUpgradePurchaseContent`, `PROUpgradeProcessingOverlay`, … |
+| Insights | `WorkoutInsightsView` | `WorkoutInsightsTierContent` |
+| Insights | `InsightsTeaserView` | `InsightsTeaserEmptySection`, `InsightsTeaserCardSection`, … |
+| Insights | `InsightsViewPRO` | `InsightsViewPROContent`, `InsightsViewPROChartSection`, … |
+| PRHistory | `NewPRRecordView` | `NewPRRecordGroupFields`, `NewPRRecordSaveBar`, … |
+| PRHistory | `PRHistoriesListView` | `PRHistoriesListContent`, estados loading/empty/list |
+| RecordDetail | `RecordDetailView` | `RecordDetailMaxRecordHeader`, `RecordDetailEvolutionSection`, … |
+| Settings | `SettingsView` | `SettingsNotificationSection`, `SettingsProSection`, … |
+| Categories | `CategoryListView` | `CategoryListScrollContent`, `CategoryListTipHeader` |
+| Onboarding | `OnboardingView` | `OnboardingFeatureList`, `OnboardingCompleteButton` |
+| Launch | `LaunchView` | `LaunchOfflineContent` |
+| Launch | `LaunchScreenView` | `LaunchScreenLogo` + `applyLaunchAnimation` |
+
+**Legado (fora do target Xcode):** `CrossfitPR/Views/`, `CrossfitPR/Insights/`, etc. — ver `docs/LEGACY-CROSSFITPR-VIEWS.md`.
 
 ## O — Operations
 
 - Feature nova: SPDD → Design → **MV skill** → iOS skill → implementação.
-- Refactor view: MV checklist + `/spdd-sync`.
+- Refactor view: MV checklist + `/spdd-sync` (este canvas).
 - Code review: rejeitar ViewModels não justificados.
+- **Localização:** novas strings em `Packages/Localization/Resources/{en,pt-BR}.lproj/Localizable.strings` + API `Strings.*`; idioma segue preferência do sistema (`NSLocalizedString` + `Bundle.module`).
+- **Projeto app:** `knownRegions` = `en`, `pt-BR`, `Base`; `developmentRegion` = `pt-BR` (fallback).
 
 ## N — Norms
 
@@ -49,8 +81,9 @@ flowchart LR
 | N-02 | Dependências compartilhadas via `@EnvironmentObject` clients |
 | N-03 | Lógica de negócio em Domain/Clients/Engine, não no `body` |
 | N-04 | Subviews struct > helpers `some View` grandes |
-| N-05 | Strings/cores: `Strings.*`, `AppDesign.*` |
+| N-05 | Strings/cores: `Strings.*`, `AppDesign.*` — **sem copy hardcoded** em Packages |
 | N-06 | iOS 16+: `ObservableObject` clients até revisão de deployment |
+| N-07 | Idiomas iniciais: **inglês (en)** e **português Brasil (pt-BR)** via SPM Localization |
 
 ## S — Safeguards
 
@@ -62,3 +95,5 @@ flowchart LR
 
 - https://github.com/Dimillian/Skills/blob/main/swiftui-view-refactor/SKILL.md
 - `docs/MV-ARCHITECTURE.md`
+- `docs/LOCALIZATION.md`
+- `docs/LEGACY-CROSSFITPR-VIEWS.md`

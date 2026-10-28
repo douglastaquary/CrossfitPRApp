@@ -33,4 +33,11 @@ struct LocalizationTests {
         #expect(!Strings.Onboarding.title.isEmpty)
         #expect(!Strings.Onboarding.subtitle.isEmpty)
     }
+
+    @Test("Chaves bilingues en/pt-BR resolvem no bundle Localization")
+    func bilingualInsightTeaserKeysExist() {
+        #expect(!Strings.Insights.Teaser.emptyTitle.isEmpty)
+        #expect(!Strings.Launch.networkAlertTitle.isEmpty)
+        #expect(!RecordGroup.barbell.localizedDisplayName.isEmpty)
+    }
 }

@@ -56,20 +56,20 @@ private struct LaunchOfflineContent: View {
 
     var body: some View {
         VStack {
-            Text("CrossFitPR")
+            Text(Strings.App.name)
                 .font(AppDesign.Typography.screenTitle)
                 .frame(width: 300, alignment: .leading)
 
             HViewImageAndText(
                 image: "wifi.slash",
                 imageColor: AppDesign.Colors.brand,
-                title: "Not connected!",
-                description: "Please enable Wifi or Celular data"
+                title: Strings.Launch.offlineHeadline,
+                description: Strings.Launch.offlineMessage
             )
 
             Spacer()
 
-            Button("Perform network request") {
+            Button(Strings.Launch.offlineRetry) {
                 showNetworkAlert = true
             }
             .buttonStyle(FilledButtonStyle(fullWidth: true))

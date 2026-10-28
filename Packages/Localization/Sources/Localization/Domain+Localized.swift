@@ -1,5 +1,16 @@
 import Domain
 
+public extension RecordGroup {
+    /// Nome curto do grupo para chips e listas.
+    var localizedDisplayName: String {
+        switch self {
+        case .barbell: return Strings.tr("category.group.barbell.descript")
+        case .gymnastic: return Strings.tr("category.group.gymnastic.descript")
+        case .endurance: return Strings.tr("category.group.endurance.descript")
+        }
+    }
+}
+
 public extension ActivityKind {
     /// Nome localizado do exercício para exibição na UI.
     var localizedName: String {

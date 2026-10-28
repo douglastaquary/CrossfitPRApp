@@ -286,6 +286,46 @@
 
 "emptyView.screen.message" = "Start by logging a PR.\nInsights appear as you\nadd more records.";
 
+"app.name" = "CrossfitPR";
+
+"launch.offline.headline" = "Not connected!";
+"launch.offline.message" = "Please enable Wi‑Fi or cellular data.";
+"launch.offline.retry" = "Check connection";
+"launch.networkAlertTitle" = "No Internet Connection";
+"launch.networkAlertMessage" = "Please enable Wi‑Fi or cellular data.";
+"launch.networkAlertCancel" = "Cancel";
+
+"insight.teaser.empty.title" = "Your journey starts here";
+"insight.teaser.empty.message" = "Log your first PR and watch your progress take shape. Every record tells a story.";
+"insight.teaser.empty.cta" = "Log my first PR";
+"insight.teaser.preview.header" = "Your progress so far";
+"insight.teaser.stats.registered" = "PRs logged";
+"insight.teaser.stats.topPR" = "Top PR";
+"insight.teaser.categories.header" = "Categories with PRs";
+"insight.teaser.benefits.header" = "What you get";
+
+"insight.pro.empty.title" = "Your insights are ready";
+"insight.pro.empty.message" = "Log your first PR to see evolution charts, rankings, and personalized analysis here.";
+"insight.pro.empty.cta" = "Log my first PR";
+"insight.pro.empty.feature.ranking.title" = "PR ranking";
+"insight.pro.empty.feature.ranking.description" = "See your best records organized";
+"insight.pro.empty.feature.charts.title" = "Charts by category";
+"insight.pro.empty.feature.charts.description" = "Barbell, gymnastics, and endurance";
+"insight.pro.empty.feature.goals.title" = "Personalized goals";
+"insight.pro.empty.feature.goals.description" = "Projections based on your pace";
+
+"settings.pro.subscriptionActive" = "PRO subscription active";
+"settings.pro.cancelSubscription" = "Cancel subscription";
+"settings.pro.cancelAlert.title" = "Cancel subscription?";
+"settings.pro.cancelAlert.message" = "You'll lose access to advanced insights, personalized goals, and PR projections. Are you sure?";
+"settings.pro.cancelAlert.keep" = "Keep PRO";
+"settings.pro.cancelAlert.confirm" = "Yes, cancel";
+
+"pro.upgrade.choosePlan" = "Choose your plan";
+"pro.upgrade.productsUnavailable.title" = "Products unavailable";
+"pro.upgrade.productsUnavailable.message" = "Couldn't load plans. Please try again.";
+"pro.upgrade.error.generic" = "Something went wrong";
+
 /* ─────────────────────────────────────────────────────────────
    RANKING
    ───────────────────────────────────────────────────────────── */

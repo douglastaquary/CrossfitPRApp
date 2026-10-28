@@ -64,10 +64,10 @@ private struct InsightsTeaserEmptySection: View {
                 .foregroundStyle(AppDesign.Colors.brand.opacity(0.6))
 
             VStack(spacing: 8) {
-                Text("Sua jornada começa aqui")
+                Text(Strings.Insights.Teaser.emptyTitle)
                     .font(.title2.bold())
 
-                Text("Registre seu primeiro PR e veja sua evolução ganhar forma. Cada record conta uma história de superação.")
+                Text(Strings.Insights.Teaser.emptyMessage)
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
                     .multilineTextAlignment(.center)
@@ -78,7 +78,7 @@ private struct InsightsTeaserEmptySection: View {
             } label: {
                 HStack {
                     Image(systemName: "plus.circle.fill")
-                    Text("Registrar meu primeiro PR")
+                    Text(Strings.Insights.Teaser.emptyCTA)
                 }
                 .fontWeight(.semibold)
                 .frame(maxWidth: .infinity)
@@ -104,20 +104,20 @@ private struct InsightsTeaserPreviewSection: View {
             HStack {
                 Image(systemName: "chart.line.uptrend.xyaxis")
                     .foregroundStyle(AppDesign.Colors.brand)
-                Text("Sua evolução até aqui")
+                Text(Strings.Insights.Teaser.previewHeader)
                     .font(.headline)
                 Spacer()
             }
 
             HStack {
-                InsightsTeaserStatCard(value: "\(recordCount)", label: "PRs registrados")
+                InsightsTeaserStatCard(value: "\(recordCount)", label: Strings.Insights.Teaser.statsRegistered)
                 Spacer()
                 if let top = topRecord {
                     let weight = measureTrackingMode == .pounds ? top.poundValue : top.kiloValue
                     let suffix = measureTrackingMode.suffix
                     InsightsTeaserStatCard(
                         value: "\(weight) \(suffix)",
-                        label: "Maior PR",
+                        label: Strings.Insights.Teaser.statsTopPR,
                         alignment: .trailing
                     )
                 }
@@ -154,7 +154,7 @@ private struct InsightsTeaserCategoriesSection: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text("Categorias com PRs")
+            Text(Strings.Insights.Teaser.categoriesHeader)
                 .font(.headline)
 
             HStack(spacing: 12) {
@@ -177,7 +177,7 @@ private struct InsightsTeaserCategoryChip: View {
         HStack(spacing: 6) {
             Image(systemName: iconFor(group))
                 .font(.caption)
-            Text("\(group.rawValue.capitalized)")
+            Text(group.localizedDisplayName)
                 .font(.caption.weight(.medium))
             Text("(\(count))")
                 .font(.caption2)
@@ -211,7 +211,7 @@ private struct InsightsTeaserCardSection: View {
                 Text(Strings.tr("insight.teaser.title"))
                     .font(.title2.bold())
                 Spacer()
-                Text("PRO")
+                Text(Strings.Insights.proBadge)
                     .font(.caption.bold())
                     .padding(.horizontal, 8)
                     .padding(.vertical, 4)
@@ -263,7 +263,7 @@ private struct InsightsTeaserFeatureLine: View {
 private struct InsightsTeaserFeaturesSection: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
-            Text("O que você ganha")
+            Text(Strings.Insights.Teaser.benefitsHeader)
                 .font(.headline)
 
             VStack(spacing: 12) {

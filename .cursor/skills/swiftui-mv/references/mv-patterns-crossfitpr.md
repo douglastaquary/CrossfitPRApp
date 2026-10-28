@@ -75,7 +75,7 @@ public struct WorkoutInsightsView: View {
 
 - [ ] Sem ViewModel novo
 - [ ] Ações fora do `body` (métodos privados)
-- [ ] Strings/cores via `Strings` / `AppDesign`
+- [ ] Strings/cores via `Strings` / `AppDesign` (en + pt-BR — ver `docs/LOCALIZATION.md`)
 - [ ] Seções grandes extraídas como `View` struct
 - [ ] Comportamento e layout unchanged (refactor) ou canvas Design (feature)
 - [ ] Testes de domínio/client se lógica mudou

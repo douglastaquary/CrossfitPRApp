@@ -38,13 +38,13 @@ public struct SettingsView: View {
         .sheet(isPresented: $showPROUpgrade) {
             PROUpgradeView()
         }
-        .alert("Cancelar assinatura?", isPresented: $showCancelAlert) {
-            Button("Manter PRO", role: .cancel) {}
-            Button("Sim, cancelar", role: .destructive) {
+        .alert(Strings.Settings.Pro.cancelAlertTitle, isPresented: $showCancelAlert) {
+            Button(Strings.Settings.Pro.cancelAlertKeep, role: .cancel) {}
+            Button(Strings.Settings.Pro.cancelAlertConfirm, role: .destructive) {
                 Task { await cancelSubscription() }
             }
         } message: {
-            Text("Ao cancelar, você perderá acesso aos insights avançados, metas personalizadas e projeções de PR. Tem certeza?")
+            Text(Strings.Settings.Pro.cancelAlertMessage)
         }
         .task {
             try? await notificationManager.requestAuthorization()
@@ -142,14 +142,14 @@ private struct SettingsProSection: View {
                 HStack {
                     Image(systemName: "checkmark.seal.fill")
                         .foregroundStyle(AppDesign.Colors.proAccent)
-                    Text("Assinatura PRO ativa")
+                    Text(Strings.Settings.Pro.subscriptionActive)
                         .foregroundStyle(.primary)
                 }
 
                 Button(role: .destructive, action: onShowCancelAlert) {
                     HStack {
                         Image(systemName: "xmark.circle")
-                        Text("Cancelar assinatura")
+                        Text(Strings.Settings.Pro.cancelSubscription)
                     }
                 }
             } else {

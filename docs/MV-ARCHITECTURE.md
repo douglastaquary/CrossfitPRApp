@@ -19,6 +19,8 @@ Este documento é o **padrão oficial de UI** do projeto, junto com [`ARCHITECTU
 
 Adaptação CrossfitPR: `.cursor/skills/swiftui-mv/SKILL.md`
 
+Copy de UI: `Strings.*` + [`LOCALIZATION.md`](LOCALIZATION.md) (en / pt-BR via preferência do sistema).
+
 ## Clients = serviços de aplicação
 
 | Client | Responsabilidade MV |

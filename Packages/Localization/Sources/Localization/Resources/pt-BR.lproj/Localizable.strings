@@ -286,6 +286,46 @@
 
 "emptyView.screen.message" = "Comece registrando um PR.\nOs insights aparecem conforme você\nadiciona mais records.";
 
+"app.name" = "CrossfitPR";
+
+"launch.offline.headline" = "Sem conexão!";
+"launch.offline.message" = "Ative o Wi‑Fi ou os dados móveis.";
+"launch.offline.retry" = "Verificar conexão";
+"launch.networkAlertTitle" = "Sem internet";
+"launch.networkAlertMessage" = "Ative o Wi‑Fi ou os dados móveis.";
+"launch.networkAlertCancel" = "Cancelar";
+
+"insight.teaser.empty.title" = "Sua jornada começa aqui";
+"insight.teaser.empty.message" = "Registre seu primeiro PR e veja sua evolução ganhar forma. Cada record conta uma história de superação.";
+"insight.teaser.empty.cta" = "Registrar meu primeiro PR";
+"insight.teaser.preview.header" = "Sua evolução até aqui";
+"insight.teaser.stats.registered" = "PRs registrados";
+"insight.teaser.stats.topPR" = "Maior PR";
+"insight.teaser.categories.header" = "Categorias com PRs";
+"insight.teaser.benefits.header" = "O que você ganha";
+
+"insight.pro.empty.title" = "Seus insights estão prontos";
+"insight.pro.empty.message" = "Registre seu primeiro PR e veja gráficos de evolução, rankings e análises personalizadas aparecerem aqui.";
+"insight.pro.empty.cta" = "Registrar meu primeiro PR";
+"insight.pro.empty.feature.ranking.title" = "Ranking de PRs";
+"insight.pro.empty.feature.ranking.description" = "Veja seus melhores records organizados";
+"insight.pro.empty.feature.charts.title" = "Gráficos por categoria";
+"insight.pro.empty.feature.charts.description" = "Barbell, ginástico e resistência";
+"insight.pro.empty.feature.goals.title" = "Metas personalizadas";
+"insight.pro.empty.feature.goals.description" = "Projeções baseadas no seu ritmo";
+
+"settings.pro.subscriptionActive" = "Assinatura PRO ativa";
+"settings.pro.cancelSubscription" = "Cancelar assinatura";
+"settings.pro.cancelAlert.title" = "Cancelar assinatura?";
+"settings.pro.cancelAlert.message" = "Ao cancelar, você perderá acesso aos insights avançados, metas personalizadas e projeções de PR. Tem certeza?";
+"settings.pro.cancelAlert.keep" = "Manter PRO";
+"settings.pro.cancelAlert.confirm" = "Sim, cancelar";
+
+"pro.upgrade.choosePlan" = "Escolha seu plano";
+"pro.upgrade.productsUnavailable.title" = "Produtos indisponíveis";
+"pro.upgrade.productsUnavailable.message" = "Não foi possível carregar os planos. Tente novamente.";
+"pro.upgrade.error.generic" = "Ops, algo deu errado";
+
 /* ─────────────────────────────────────────────────────────────
    RANKING
    ───────────────────────────────────────────────────────────── */

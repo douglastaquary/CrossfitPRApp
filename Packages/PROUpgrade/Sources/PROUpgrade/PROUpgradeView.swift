@@ -266,7 +266,7 @@ private struct PROUpgradePricingSection: View {
     var body: some View {
         VStack(spacing: 20) {
             VStack(spacing: 12) {
-                Text("Escolha seu plano")
+                Text(Strings.PRO.Upgrade.choosePlan)
                     .font(.headline)
 
                 if let monthly = monthlyProduct {
@@ -397,9 +397,9 @@ private struct PROUpgradeNoProductsSection: View {
             Image(systemName: "exclamationmark.triangle")
                 .font(.largeTitle)
                 .foregroundStyle(.secondary)
-            Text("Produtos indisponíveis")
+            Text(Strings.PRO.Upgrade.productsUnavailableTitle)
                 .font(.headline)
-            Text("Não foi possível carregar os planos. Tente novamente.")
+            Text(Strings.PRO.Upgrade.productsUnavailableMessage)
                 .font(.caption)
                 .foregroundStyle(.secondary)
                 .multilineTextAlignment(.center)
@@ -522,7 +522,7 @@ private struct PROUpgradeProcessingError: View {
                 .font(.system(size: 48))
                 .foregroundStyle(AppDesign.Colors.error)
 
-            Text("Ops, algo deu errado")
+            Text(Strings.PRO.Upgrade.genericError)
                 .font(.headline)
                 .foregroundStyle(.white)
 

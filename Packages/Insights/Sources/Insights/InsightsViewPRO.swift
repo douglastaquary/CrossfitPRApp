@@ -72,10 +72,10 @@ private struct InsightsViewPROEmptySection: View {
                     }
 
                     VStack(spacing: 12) {
-                        Text("Seus insights estão prontos")
+                        Text(Strings.Insights.ProEmpty.title)
                             .font(.title2.bold())
 
-                        Text("Registre seu primeiro PR e veja gráficos de evolução, rankings e análises personalizadas aparecerem aqui.")
+                        Text(Strings.Insights.ProEmpty.message)
                             .font(.subheadline)
                             .foregroundStyle(.secondary)
                             .multilineTextAlignment(.center)
@@ -86,20 +86,20 @@ private struct InsightsViewPROEmptySection: View {
                 VStack(spacing: 16) {
                     InsightsViewPROFeaturePreviewRow(
                         icon: "trophy.fill",
-                        title: "Ranking de PRs",
-                        description: "Veja seus melhores records organizados",
+                        title: Strings.Insights.ProEmpty.featureRankingTitle,
+                        description: Strings.Insights.ProEmpty.featureRankingDescription,
                         color: .orange
                     )
                     InsightsViewPROFeaturePreviewRow(
                         icon: "chart.bar.fill",
-                        title: "Gráficos por categoria",
-                        description: "Barbell, ginástico e resistência",
+                        title: Strings.Insights.ProEmpty.featureChartsTitle,
+                        description: Strings.Insights.ProEmpty.featureChartsDescription,
                         color: AppDesign.Colors.brand
                     )
                     InsightsViewPROFeaturePreviewRow(
                         icon: "target",
-                        title: "Metas personalizadas",
-                        description: "Projeções baseadas no seu ritmo",
+                        title: Strings.Insights.ProEmpty.featureGoalsTitle,
+                        description: Strings.Insights.ProEmpty.featureGoalsDescription,
                         color: .purple
                     )
                 }
@@ -110,7 +110,7 @@ private struct InsightsViewPROEmptySection: View {
                 } label: {
                     HStack {
                         Image(systemName: "plus.circle.fill")
-                        Text("Registrar meu primeiro PR")
+                        Text(Strings.Insights.ProEmpty.cta)
                     }
                     .fontWeight(.semibold)
                     .frame(maxWidth: .infinity)

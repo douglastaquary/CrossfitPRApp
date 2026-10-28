@@ -69,12 +69,28 @@ public enum Strings {
         public static var unlockPro: String { tr("settings.screen.section.unlockpro.title") }
         public static var aboutSection: String { tr("settings.screen.section.about.title") }
         public static var privacy: String { tr("settings.screen.section.privacy.title") }
+
+        public enum Pro {
+            public static var subscriptionActive: String { tr("settings.pro.subscriptionActive") }
+            public static var cancelSubscription: String { tr("settings.pro.cancelSubscription") }
+            public static var cancelAlertTitle: String { tr("settings.pro.cancelAlert.title") }
+            public static var cancelAlertMessage: String { tr("settings.pro.cancelAlert.message") }
+            public static var cancelAlertKeep: String { tr("settings.pro.cancelAlert.keep") }
+            public static var cancelAlertConfirm: String { tr("settings.pro.cancelAlert.confirm") }
+        }
+    }
+
+    public enum App {
+        public static var name: String { tr("app.name") }
     }
 
     public enum Launch {
-        public static var networkAlertTitle: String { "No Internet Connection" }
-        public static var networkAlertMessage: String { "Please enable Wifi or Celluar data" }
-        public static var networkAlertCancel: String { "Cancel" }
+        public static var offlineHeadline: String { tr("launch.offline.headline") }
+        public static var offlineMessage: String { tr("launch.offline.message") }
+        public static var offlineRetry: String { tr("launch.offline.retry") }
+        public static var networkAlertTitle: String { tr("launch.networkAlertTitle") }
+        public static var networkAlertMessage: String { tr("launch.networkAlertMessage") }
+        public static var networkAlertCancel: String { tr("launch.networkAlertCancel") }
     }
 
     // MARK: - PR History
@@ -123,6 +139,29 @@ public enum Strings {
         public static var proBadge: String { tr("insights.proBadge") }
         public static var unlockPro: String { tr("insights.unlockPro") }
         public static var unlockProAccessibility: String { tr("insights.unlockProAccessibility") }
+
+        public enum Teaser {
+            public static var emptyTitle: String { tr("insight.teaser.empty.title") }
+            public static var emptyMessage: String { tr("insight.teaser.empty.message") }
+            public static var emptyCTA: String { tr("insight.teaser.empty.cta") }
+            public static var previewHeader: String { tr("insight.teaser.preview.header") }
+            public static var statsRegistered: String { tr("insight.teaser.stats.registered") }
+            public static var statsTopPR: String { tr("insight.teaser.stats.topPR") }
+            public static var categoriesHeader: String { tr("insight.teaser.categories.header") }
+            public static var benefitsHeader: String { tr("insight.teaser.benefits.header") }
+        }
+
+        public enum ProEmpty {
+            public static var title: String { tr("insight.pro.empty.title") }
+            public static var message: String { tr("insight.pro.empty.message") }
+            public static var cta: String { tr("insight.pro.empty.cta") }
+            public static var featureRankingTitle: String { tr("insight.pro.empty.feature.ranking.title") }
+            public static var featureRankingDescription: String { tr("insight.pro.empty.feature.ranking.description") }
+            public static var featureChartsTitle: String { tr("insight.pro.empty.feature.charts.title") }
+            public static var featureChartsDescription: String { tr("insight.pro.empty.feature.charts.description") }
+            public static var featureGoalsTitle: String { tr("insight.pro.empty.feature.goals.title") }
+            public static var featureGoalsDescription: String { tr("insight.pro.empty.feature.goals.description") }
+        }
     }
 
     // MARK: - PRO
@@ -135,6 +174,13 @@ public enum Strings {
         public static var unlockButton: String { tr("pro.unlockButton") }
         public static var close: String { tr("pro.close") }
         public static var purchaseFallbackError: String { tr("pro.purchaseFallbackError") }
+
+        public enum Upgrade {
+            public static var choosePlan: String { tr("pro.upgrade.choosePlan") }
+            public static var productsUnavailableTitle: String { tr("pro.upgrade.productsUnavailable.title") }
+            public static var productsUnavailableMessage: String { tr("pro.upgrade.productsUnavailable.message") }
+            public static var genericError: String { tr("pro.upgrade.error.generic") }
+        }
     }
 
     // MARK: - Exercises
