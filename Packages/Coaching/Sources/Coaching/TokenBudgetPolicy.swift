@@ -62,7 +62,8 @@ public struct TokenBudgetPolicy: Sendable {
                 movements: Array(trimmed.movements.prefix(limits.maxMovements)),
                 stalled: trimmed.stalled,
                 rising: trimmed.rising,
-                engineSignals: CoachingSignals(tags: Array(trimmed.engineSignals.tags.prefix(4)))
+                engineSignals: CoachingSignals(tags: Array(trimmed.engineSignals.tags.prefix(4))),
+                sessionEvents: Array(trimmed.sessionEvents.prefix(4))
             )
         }
 
@@ -74,7 +75,8 @@ public struct TokenBudgetPolicy: Sendable {
                 movements: Array(trimmed.movements.prefix(max(3, limits.maxMovements / 2))),
                 stalled: Array(trimmed.stalled.prefix(2)),
                 rising: Array(trimmed.rising.prefix(2)),
-                engineSignals: CoachingSignals(tags: Array(trimmed.engineSignals.tags.prefix(2)))
+                engineSignals: CoachingSignals(tags: Array(trimmed.engineSignals.tags.prefix(2))),
+                sessionEvents: Array(trimmed.sessionEvents.prefix(2))
             )
         }
 

@@ -5,15 +5,18 @@ import Domain
 public struct CoachingContextBuilder: Sendable {
     public var windowDays: Int
     public var maxMovements: Int
+    public var maxSessionEvents: Int
 
-    public init(windowDays: Int = 90, maxMovements: Int = 12) {
+    public init(windowDays: Int = 90, maxMovements: Int = 12, maxSessionEvents: Int = 8) {
         self.windowDays = windowDays
         self.maxMovements = maxMovements
+        self.maxSessionEvents = maxSessionEvents
     }
 
     public func build(
         from records: [PersonalRecord],
-        engineInsights: [WorkoutInsight]
+        engineInsights: [WorkoutInsight],
+        watchEvents: [WatchSessionEvent] = []
     ) -> CoachingContextSnapshot {
         let cutoff = Calendar.current.date(byAdding: .day, value: -windowDays, to: Date()) ?? .distantPast
         let recent = records.filter { $0.recordDate >= cutoff }
@@ -54,7 +57,16 @@ public struct CoachingContextBuilder: Sendable {
             .prefix(6)
             .map { shortTag($0) }
 
-        let hashInput = summaries.map { "\($0.name):\($0.lastValue):\($0.deltaPercent)" }.joined(separator: "|")
+        var sessionEvents = watchEvents
+        if sessionEvents.count > maxSessionEvents {
+            sessionEvents = Array(sessionEvents.suffix(maxSessionEvents))
+        }
+
+        let movementPart = summaries.map { "\($0.name):\($0.lastValue):\($0.deltaPercent)" }.joined(separator: "|")
+        let watchPart = sessionEvents.map {
+            "\($0.phase):\($0.movement ?? ""):\($0.rpe ?? 0):\($0.durationSec ?? 0)"
+        }.joined(separator: "|")
+        let hashInput = movementPart + "|w:" + watchPart
         let contextHash = CoachingContextBuilder.stableHash(hashInput)
 
         return CoachingContextSnapshot(
@@ -63,7 +75,8 @@ public struct CoachingContextBuilder: Sendable {
             movements: summaries,
             stalled: stalled,
             rising: rising,
-            engineSignals: CoachingSignals(tags: tags)
+            engineSignals: CoachingSignals(tags: tags),
+            sessionEvents: sessionEvents
         )
     }
 
