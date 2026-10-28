@@ -12,19 +12,22 @@ public struct AppEnvironment {
     public let workoutEngineClient: WorkoutEngineClient
     public let settingsClient: SettingsClient
     public let notificationManager: LocalNotificationManager
+    public let coachingClient: CoachingClient
 
     public init(
         personalRecordClient: PersonalRecordClient,
         subscriptionClient: SubscriptionClient,
         workoutEngineClient: WorkoutEngineClient,
         settingsClient: SettingsClient,
-        notificationManager: LocalNotificationManager
+        notificationManager: LocalNotificationManager,
+        coachingClient: CoachingClient
     ) {
         self.personalRecordClient = personalRecordClient
         self.subscriptionClient = subscriptionClient
         self.workoutEngineClient = workoutEngineClient
         self.settingsClient = settingsClient
         self.notificationManager = notificationManager
+        self.coachingClient = coachingClient
     }
 
     public static func make(
@@ -36,6 +39,8 @@ public struct AppEnvironment {
         let subscription: SubscriptionClient
         if let store = subscriptionStore {
             subscription = SubscriptionClient(store: store)
+        } else if let tier = UITestLaunchSupport.subscriptionTierOverride {
+            subscription = SubscriptionClient(store: MockSubscriptionStore(tier: tier))
         } else {
             #if targetEnvironment(simulator)
             subscription = SubscriptionClient(store: MockSubscriptionStore())
@@ -53,13 +58,15 @@ public struct AppEnvironment {
             settingsClient.hasCompletedLaunch = false
         }
         let notificationManager = LocalNotificationManager()
+        let coachingClient = CoachingClient()
 
         return AppEnvironment(
             personalRecordClient: personalRecordClient,
             subscriptionClient: subscription,
             workoutEngineClient: workoutEngineClient,
             settingsClient: settingsClient,
-            notificationManager: notificationManager
+            notificationManager: notificationManager,
+            coachingClient: coachingClient
         )
     }
 

@@ -289,6 +289,9 @@
 "insight.teaser.feature2" = "Alertas de estagnação";
 "insight.teaser.feature3" = "Metas personalizadas pro seu ritmo";
 "insight.teaser.cta" = "Quero evoluir mais rápido";
+"insight.coach.title" = "Coach CrossFit (PRO)";
+"insight.coach.refresh" = "Atualizar análise";
+"insight.coach.placeholder" = "Registre PRs e toque em Atualizar para ver recomendações do coach.";
 
 /* ─────────────────────────────────────────────────────────────
    NEW RECORD SCREEN

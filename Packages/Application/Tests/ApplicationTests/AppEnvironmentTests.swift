@@ -15,5 +15,6 @@ struct AppEnvironmentTests {
         #expect(environment.personalRecordClient.records.isEmpty)
         #expect(environment.subscriptionClient.currentTier == .free)
         #expect(environment.workoutEngineClient.insights.isEmpty)
+        #expect(environment.coachingClient.latestInsight == nil)
     }
 }

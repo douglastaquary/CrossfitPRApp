@@ -174,6 +174,12 @@ public enum Strings {
             public static var benefitsHeader: String { tr("insight.teaser.benefits.header") }
         }
 
+        public enum Coach {
+            public static var title: String { tr("insight.coach.title") }
+            public static var refresh: String { tr("insight.coach.refresh") }
+            public static var placeholder: String { tr("insight.coach.placeholder") }
+        }
+
         public enum ProEmpty {
             public static var title: String { tr("insight.pro.empty.title") }
             public static var message: String { tr("insight.pro.empty.message") }

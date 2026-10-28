@@ -1,0 +1,15 @@
+{
+  "engineSignals": { "tags": ["trend:back_squat"] },
+  "movements": [
+    {
+      "deltaPercent": 10,
+      "group": "barbell",
+      "lastDateISO": "2026-10-01",
+      "lastValue": 225,
+      "name": "Back Squat"
+    }
+  ],
+  "rising": ["Back Squat"],
+  "stalled": [],
+  "windowDays": 90
+}
