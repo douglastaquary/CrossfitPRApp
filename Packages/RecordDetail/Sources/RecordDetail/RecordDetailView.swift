@@ -47,7 +47,11 @@ public struct RecordDetailView: View {
     public var body: some View {
         Form {
             Section(Strings.Record.biggestSection) {
-                maxRecordHeader
+                RecordDetailMaxRecordHeader(
+                    group: section.group,
+                    maxRecord: maxRecord,
+                    isPounds: isPounds
+                )
                 HSubtitleView(
                     imageSystemName: "calendar",
                     titleKey: "record.date.title",
@@ -57,43 +61,22 @@ public struct RecordDetailView: View {
             }
 
             if section.group == .barbell {
-                Section(Strings.Record.percentageSection) {
-                    NavigationLink(value: maxRecord) {
-                        HSubtitleView(
-                            imageSystemName: "percent",
-                            titleKey: "record.datail.percentage.title",
-                            subtitle: "\(Int(maxRecord.percentage))%"
-                        )
-                    }
-                }
+                RecordDetailPercentageLinkSection(maxRecord: maxRecord)
             }
 
-            Section(Strings.Record.evolutionSection(section.name)) {
-                Chart {
-                    ForEach(chartPoints) { point in
-                        BarMark(
-                            x: .value("Date", point.date),
-                            y: .value("Value", point.value)
-                        )
-                        .annotation {
-                            Text(verbatim: point.value.formatted())
-                                .font(.caption)
-                        }
-                    }
-                }
-                .frame(height: AppDesign.Layout.chartHeight)
-                .padding(.top)
-            }
+            RecordDetailEvolutionSection(
+                sectionName: section.name,
+                chartPoints: chartPoints
+            )
 
-            Section(Strings.Record.recordsSection) {
-                ForEach(filteredRecords) { record in
-                    PersonalRecordRowView(record: record, isPounds: isPounds)
-                }
-                .onDelete { offsets in
+            RecordDetailRecordsSection(
+                records: filteredRecords,
+                isPounds: isPounds,
+                onDelete: { offsets in
                     pendingDeleteOffsets = offsets
                     confirmationShown = true
                 }
-            }
+            )
         }
         .navigationTitle(section.name)
         .navigationBarTitleDisplayMode(.large)
@@ -116,9 +99,27 @@ public struct RecordDetailView: View {
         .brandTint()
     }
 
-    @ViewBuilder
-    private var maxRecordHeader: some View {
-        switch section.group {
+    private func deleteRecords() async {
+        guard subscriptionClient.currentTier == .pro else {
+            showPROUpgrade = true
+            return
+        }
+        guard let offsets = pendingDeleteOffsets else { return }
+        for index in offsets {
+            await personalRecordClient.delete(filteredRecords[index])
+        }
+    }
+}
+
+// MARK: - Detail sections
+
+private struct RecordDetailMaxRecordHeader: View {
+    let group: RecordGroup
+    let maxRecord: PersonalRecord
+    let isPounds: Bool
+
+    var body: some View {
+        switch group {
         case .barbell:
             HSubtitleView(
                 titleKey: "record.weight.title",
@@ -152,15 +153,59 @@ public struct RecordDetailView: View {
             )
         }
     }
+}
 
-    private func deleteRecords() async {
-        guard subscriptionClient.currentTier == .pro else {
-            showPROUpgrade = true
-            return
+private struct RecordDetailPercentageLinkSection: View {
+    let maxRecord: PersonalRecord
+
+    var body: some View {
+        Section(Strings.Record.percentageSection) {
+            NavigationLink(value: maxRecord) {
+                HSubtitleView(
+                    imageSystemName: "percent",
+                    titleKey: "record.datail.percentage.title",
+                    subtitle: "\(Int(maxRecord.percentage))%"
+                )
+            }
         }
-        guard let offsets = pendingDeleteOffsets else { return }
-        for index in offsets {
-            await personalRecordClient.delete(filteredRecords[index])
+    }
+}
+
+private struct RecordDetailEvolutionSection: View {
+    let sectionName: String
+    let chartPoints: [RecordPoint]
+
+    var body: some View {
+        Section(Strings.Record.evolutionSection(sectionName)) {
+            Chart {
+                ForEach(chartPoints) { point in
+                    BarMark(
+                        x: .value("Date", point.date),
+                        y: .value("Value", point.value)
+                    )
+                    .annotation {
+                        Text(verbatim: point.value.formatted())
+                            .font(.caption)
+                    }
+                }
+            }
+            .frame(height: AppDesign.Layout.chartHeight)
+            .padding(.top)
+        }
+    }
+}
+
+private struct RecordDetailRecordsSection: View {
+    let records: [PersonalRecord]
+    let isPounds: Bool
+    let onDelete: (IndexSet) -> Void
+
+    var body: some View {
+        Section(Strings.Record.recordsSection) {
+            ForEach(records) { record in
+                PersonalRecordRowView(record: record, isPounds: isPounds)
+            }
+            .onDelete(perform: onDelete)
         }
     }
 }

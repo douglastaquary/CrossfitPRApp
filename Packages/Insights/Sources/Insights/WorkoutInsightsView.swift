@@ -15,33 +15,40 @@ public struct WorkoutInsightsView: View {
 
     public var body: some View {
         NavigationStack {
-            insightsContent
-                .navigationTitle(Strings.Screen.insights)
-                .navigationBarTitleDisplayMode(.large)
-                .task(id: personalRecordClient.records.count) {
-                    await loadRecordsIfNeeded()
-                }
-                .refreshable {
-                    await personalRecordClient.fetchRecords()
-                }
-                .sheet(isPresented: $isPresentingPROUpgrade) {
-                    PROUpgradeView()
-                }
+            WorkoutInsightsTierContent(
+                isPro: subscriptionClient.currentTier == .pro,
+                isPresentingPROUpgrade: $isPresentingPROUpgrade
+            )
+            .navigationTitle(Strings.Screen.insights)
+            .navigationBarTitleDisplayMode(.large)
+            .task(id: personalRecordClient.records.count) {
+                await loadRecordsIfNeeded()
+            }
+            .refreshable {
+                await personalRecordClient.fetchRecords()
+            }
+            .sheet(isPresented: $isPresentingPROUpgrade) {
+                PROUpgradeView()
+            }
         }
         .brandTint()
-    }
-
-    @ViewBuilder
-    private var insightsContent: some View {
-        if subscriptionClient.currentTier == .pro {
-            InsightsViewPRO()
-        } else {
-            InsightsTeaserView(isPresentingPROUpgrade: $isPresentingPROUpgrade)
-        }
     }
 
     private func loadRecordsIfNeeded() async {
         guard personalRecordClient.records.isEmpty else { return }
         await personalRecordClient.fetchRecords()
+    }
+}
+
+private struct WorkoutInsightsTierContent: View {
+    let isPro: Bool
+    @Binding var isPresentingPROUpgrade: Bool
+
+    var body: some View {
+        if isPro {
+            InsightsViewPRO()
+        } else {
+            InsightsTeaserView(isPresentingPROUpgrade: $isPresentingPROUpgrade)
+        }
     }
 }

@@ -23,30 +23,11 @@ public struct PRHistoriesListView: View {
 
     public var body: some View {
         NavigationStack {
-            Group {
-                if personalRecordClient.isLoading && sections.isEmpty {
-                    ProgressView(Strings.PRHistory.loading)
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                } else if sections.isEmpty {
-                    VStack {
-                        Text(Strings.PRHistory.emptyMessage)
-                            .foregroundStyle(.secondary)
-                            .multilineTextAlignment(.center)
-                            .padding(.bottom, 64)
-                    }
-                } else {
-                    ScrollView {
-                        ForEach(filteredSections) { section in
-                            NavigationLink(value: section) {
-                                CategoryItemView(
-                                    title: section.name,
-                                    groupKey: section.group.localizedKey
-                                )
-                            }
-                        }
-                    }
-                }
-            }
+            PRHistoriesListContent(
+                isLoading: personalRecordClient.isLoading,
+                sections: sections,
+                filteredSections: filteredSections
+            )
             .navigationTitle(Strings.Screen.records)
             .navigationBarTitleDisplayMode(.large)
             .searchable(text: $searchText, prompt: Strings.Category.searchPrompt)
@@ -57,6 +38,59 @@ public struct PRHistoriesListView: View {
             .refreshable { await personalRecordClient.fetchRecords() }
         }
         .brandTint()
+    }
+}
+
+private struct PRHistoriesListContent: View {
+    let isLoading: Bool
+    let sections: [PRSection]
+    let filteredSections: [PRSection]
+
+    var body: some View {
+        Group {
+            if isLoading && sections.isEmpty {
+                PRHistoriesLoadingState()
+            } else if sections.isEmpty {
+                PRHistoriesEmptyState()
+            } else {
+                PRHistoriesSectionsList(sections: filteredSections)
+            }
+        }
+    }
+}
+
+private struct PRHistoriesLoadingState: View {
+    var body: some View {
+        ProgressView(Strings.PRHistory.loading)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+    }
+}
+
+private struct PRHistoriesEmptyState: View {
+    var body: some View {
+        VStack {
+            Text(Strings.PRHistory.emptyMessage)
+                .foregroundStyle(.secondary)
+                .multilineTextAlignment(.center)
+                .padding(.bottom, 64)
+        }
+    }
+}
+
+private struct PRHistoriesSectionsList: View {
+    let sections: [PRSection]
+
+    var body: some View {
+        ScrollView {
+            ForEach(sections) { section in
+                NavigationLink(value: section) {
+                    CategoryItemView(
+                        title: section.name,
+                        groupKey: section.group.localizedKey
+                    )
+                }
+            }
+        }
     }
 }
 

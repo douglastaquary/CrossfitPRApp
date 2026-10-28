@@ -89,4 +89,13 @@ Prioridade sugerida (arquivos com muitos `private var …: some View`):
 3. ~~`InsightsViewPRO.swift`~~ ✅
 4. ~~`NewPRRecordView.swift`~~ ✅
 
+**Onda 2**
+
+5. ~~`RecordDetailView.swift`~~ ✅
+6. ~~`SettingsView.swift`~~ ✅
+7. ~~`PRHistoriesListView.swift`~~ ✅
+8. ~~`WorkoutInsightsView.swift`~~ ✅ (gate Free/PRO em struct)
+
+**Backlog:** `CategoryListView.swift`, `OnboardingView.swift`, `LaunchView.swift`
+
 Um arquivo por PR; cada um: reorder + extract structs + `/spdd-sync`.

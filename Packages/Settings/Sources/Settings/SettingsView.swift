@@ -18,77 +18,21 @@ public struct SettingsView: View {
 
     public var body: some View {
         Form {
-            Section(Strings.Settings.notificationSection) {
-                Toggle(isOn: $settingsClient.isNotificationEnabled) {
-                    Text(Strings.Settings.notificationToggle)
-                }
-                .onChange(of: settingsClient.isNotificationEnabled) { enabled in
-                    if !enabled { notificationManager.clearRequests() }
-                }
+            SettingsNotificationSection(
+                isNotificationEnabled: $settingsClient.isNotificationEnabled,
+                scheduleDate: scheduleDateBinding,
+                onNotificationDisabled: { notificationManager.clearRequests() }
+            )
 
-                DatePicker(selection: scheduleDateBinding) {
-                    Image(systemName: "calendar")
-                        .font(.system(size: 18))
-                        .foregroundStyle(AppDesign.Colors.brand)
-                }
-            }
+            SettingsTrackingSection(measureTrackingMode: $settingsClient.measureTrackingMode)
 
-            Section(Strings.Settings.trackingSection) {
-                Picker(
-                    selection: $settingsClient.measureTrackingMode,
-                    label: Text(Strings.Settings.measureTitle)
-                ) {
-                    ForEach(MeasureTrackingMode.allCases, id: \.self) { mode in
-                        Text(Strings.tr(mode.localizationKey)).tag(mode)
-                    }
-                }
-            }
+            SettingsProSection(
+                isPro: subscriptionClient.currentTier == .pro,
+                onShowUpgrade: { showPROUpgrade = true },
+                onShowCancelAlert: { showCancelAlert = true }
+            )
 
-            Section(Strings.Settings.proSection) {
-                if subscriptionClient.currentTier == .pro {
-                    HStack {
-                        Image(systemName: "checkmark.seal.fill")
-                            .foregroundStyle(AppDesign.Colors.proAccent)
-                        Text("Assinatura PRO ativa")
-                            .foregroundStyle(.primary)
-                    }
-
-                    Button(role: .destructive) {
-                        showCancelAlert = true
-                    } label: {
-                        HStack {
-                            Image(systemName: "xmark.circle")
-                            Text("Cancelar assinatura")
-                        }
-                    }
-                } else {
-                    Button {
-                        showPROUpgrade = true
-                    } label: {
-                        HStack {
-                            Image(systemName: "sparkles")
-                                .foregroundStyle(AppDesign.Colors.proAccent)
-                            Text(Strings.Settings.unlockPro)
-                        }
-                    }
-
-                    Text(Strings.Settings.noCommitment)
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
-                }
-            }
-
-            Section(Strings.Settings.aboutSection) {
-                Link(destination: URL(string: "https://www.apple.com/legal/privacy/")!) {
-                    HStack {
-                        Text(Strings.Settings.privacy)
-                        Spacer()
-                        Image(systemName: "arrow.up.right.square")
-                            .font(.caption)
-                            .foregroundStyle(.secondary)
-                    }
-                }
-            }
+            SettingsAboutSection()
         }
         .navigationTitle(Strings.Screen.settings)
         .sheet(isPresented: $showPROUpgrade) {
@@ -97,9 +41,7 @@ public struct SettingsView: View {
         .alert("Cancelar assinatura?", isPresented: $showCancelAlert) {
             Button("Manter PRO", role: .cancel) {}
             Button("Sim, cancelar", role: .destructive) {
-                Task {
-                    await cancelSubscription()
-                }
+                Task { await cancelSubscription() }
             }
         } message: {
             Text("Ao cancelar, você perderá acesso aos insights avançados, metas personalizadas e projeções de PR. Tem certeza?")
@@ -144,5 +86,101 @@ public struct SettingsView: View {
 
     private func cancelSubscription() async {
         await subscriptionClient.cancelSubscription()
+    }
+}
+
+// MARK: - Form sections
+
+private struct SettingsNotificationSection: View {
+    @Binding var isNotificationEnabled: Bool
+    var scheduleDate: Binding<Date>
+    let onNotificationDisabled: () -> Void
+
+    var body: some View {
+        Section(Strings.Settings.notificationSection) {
+            Toggle(isOn: $isNotificationEnabled) {
+                Text(Strings.Settings.notificationToggle)
+            }
+            .onChange(of: isNotificationEnabled) { enabled in
+                if !enabled { onNotificationDisabled() }
+            }
+
+            DatePicker(selection: scheduleDate) {
+                Image(systemName: "calendar")
+                    .font(.system(size: 18))
+                    .foregroundStyle(AppDesign.Colors.brand)
+            }
+        }
+    }
+}
+
+private struct SettingsTrackingSection: View {
+    @Binding var measureTrackingMode: MeasureTrackingMode
+
+    var body: some View {
+        Section(Strings.Settings.trackingSection) {
+            Picker(
+                selection: $measureTrackingMode,
+                label: Text(Strings.Settings.measureTitle)
+            ) {
+                ForEach(MeasureTrackingMode.allCases, id: \.self) { mode in
+                    Text(Strings.tr(mode.localizationKey)).tag(mode)
+                }
+            }
+        }
+    }
+}
+
+private struct SettingsProSection: View {
+    let isPro: Bool
+    let onShowUpgrade: () -> Void
+    let onShowCancelAlert: () -> Void
+
+    var body: some View {
+        Section(Strings.Settings.proSection) {
+            if isPro {
+                HStack {
+                    Image(systemName: "checkmark.seal.fill")
+                        .foregroundStyle(AppDesign.Colors.proAccent)
+                    Text("Assinatura PRO ativa")
+                        .foregroundStyle(.primary)
+                }
+
+                Button(role: .destructive, action: onShowCancelAlert) {
+                    HStack {
+                        Image(systemName: "xmark.circle")
+                        Text("Cancelar assinatura")
+                    }
+                }
+            } else {
+                Button(action: onShowUpgrade) {
+                    HStack {
+                        Image(systemName: "sparkles")
+                            .foregroundStyle(AppDesign.Colors.proAccent)
+                        Text(Strings.Settings.unlockPro)
+                    }
+                }
+
+                Text(Strings.Settings.noCommitment)
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
+        }
+    }
+}
+
+private struct SettingsAboutSection: View {
+    var body: some View {
+        Section(Strings.Settings.aboutSection) {
+            Link(destination: URL(string: "https://www.apple.com/legal/privacy/")!) {
+                HStack {
+                    Text(Strings.Settings.privacy)
+                    Spacer()
+                    Image(systemName: "arrow.up.right.square")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
+            }
+        }
     }
 }
