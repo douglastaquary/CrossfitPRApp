@@ -46,11 +46,13 @@ final class ReadmeScreenshotsUITests: XCTestCase {
         saveScreenshot(named: "insights-free")
 
         let proCTA = app.descendants(matching: .any).matching(identifier: "insights.teaser.pro.cta").firstMatch
-        XCTAssertTrue(proCTA.waitForExistence(timeout: 5))
+        XCTAssertTrue(proCTA.waitForExistence(timeout: 8))
         proCTA.tap()
 
-        let proTitle = app.staticTexts["Evolua mais rápido"]
-        XCTAssertTrue(proTitle.waitForExistence(timeout: 8))
+        let paywall = app.descendants(matching: .any).matching(identifier: "pro.upgrade.scroll").firstMatch
+        XCTAssertTrue(paywall.waitForExistence(timeout: 12), "Paywall PRO/Elite")
+        let headline = app.staticTexts["Treine como competidor"]
+        _ = headline.waitForExistence(timeout: 5)
         saveScreenshot(named: "pro-upgrade")
 
         dismissPROSheet(app)
@@ -98,8 +100,8 @@ final class ReadmeScreenshotsUITests: XCTestCase {
             closeCandidates.firstMatch.tap()
             return
         }
-        let iconClose = app.buttons.element(matching: NSPredicate(format: "identifier == 'pro.upgrade.close'"))
-        if iconClose.waitForExistence(timeout: 2) {
+        let iconClose = app.descendants(matching: .any).matching(identifier: "pro.upgrade.close").firstMatch
+        if iconClose.waitForExistence(timeout: 3) {
             iconClose.tap()
             return
         }

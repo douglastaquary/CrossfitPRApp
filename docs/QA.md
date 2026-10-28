@@ -26,7 +26,9 @@ Target `CrossfitPRUITests` → `AppLocalizationQATests`:
 | `UITEST_USE_STOREKIT` | `1` — StoreKit real + Products.storekit (manual) |
 | `OPENAI_API_KEY` | Só builds locais/prod manual — cloud coach; **nunca** no CI |
 
-Idioma: `-AppleLanguages (en)` ou `(pt-BR)` via `XCUIApplication.launchArguments`.
+Idioma: `-AppleLanguages (en)` ou `(pt-BR)` via `XCUIApplication.launchArguments` (e opcionalmente `AppleLanguages` / `AppleLocale` em `launchEnvironment`).
+
+**Wiring:** `AppEnvironment.make()` roda de forma **lazy** no primeiro render do app (`CrossfitPRApp`), para flags `UITEST_*` estarem visíveis no processo antes do composition root.
 
 **Accessibility IDs:** `tab.categories`, `tab.records`, `tab.insights`, `tab.settings`, `insights.teaser.pro.cta`, `insights.coach.section`, `pro.upgrade.close`, `pro.upgrade.scroll`, `pro.upgrade.continue.payment`, `pro.upgrade.restore`, `pro.upgrade.product.proMonthly`, `pro.upgrade.success.title`, `pro.upgrade.error.title`.
 

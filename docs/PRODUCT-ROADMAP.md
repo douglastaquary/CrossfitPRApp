@@ -34,11 +34,12 @@ Visão pública do que já está no app versus o que está **planejado** (SPDD `
 
 ## Próximos passos (dev)
 
-1. **CPR-007:** testar iOS 26+ on-device + `OPENAI_API_KEY` em device; revisar logs `Coaching` no Console.
-2. **Mídia README:** `./scripts/capture-readme-media-auto.sh` → commit PNG/GIF.
-3. **CPR-008:** UI/StoreKit Elite shipped no código → registrar produtos no App Store Connect + screenshots.
-4. **CPR-009:** story/analysis → POC watchOS.
-5. **Personas:** skill [`.cursor/skills/crossfit-athlete-personas`](../.cursor/skills/crossfit-athlete-personas/SKILL.md) · analysis [CPR-010](../spdd/analysis/CPR-010-crossfit-market-mayhem-personas.md).
+1. **CI:** confirmar verde em [`ios.yml`](.github/workflows/ios.yml) na `main` (rerun se fila macOS); gate local Xcode 15+: `./scripts/ci-modern.sh`.
+2. **CPR-007:** testar iOS 26+ on-device + `OPENAI_API_KEY` em device; revisar logs `Coaching` no Console.
+3. **Mídia README:** `./scripts/capture-readme-media-auto.sh` → commit PNG/GIF (incluir paywall Elite quando estável).
+4. **CPR-008:** código Elite no app → App Store Connect (produtos reais) + screenshots Design; prompts coach Elite dedicados (canvas Feat).
+5. **CPR-009:** canvas/story prontos → POC watchOS (`spdd/prompt/CPR-009-*`).
+6. **Personas:** skill [`.cursor/skills/crossfit-athlete-personas`](../.cursor/skills/crossfit-athlete-personas/SKILL.md) · [CPR-010](../spdd/analysis/CPR-010-crossfit-market-mayhem-personas.md).
 
 ## Como acompanhar
 
