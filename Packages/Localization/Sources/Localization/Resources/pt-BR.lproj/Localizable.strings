@@ -292,6 +292,10 @@
 "insight.coach.title" = "Coach CrossFit (PRO)";
 "insight.coach.refresh" = "Atualizar análise";
 "insight.coach.placeholder" = "Registre PRs e toque em Atualizar para ver recomendações do coach.";
+"insight.coach.runtime.onDevice" = "Análise no aparelho (Apple Intelligence)";
+"insight.coach.runtime.cloud" = "Análise via nuvem (OpenAI)";
+"insight.coach.runtime.summarized" = "Análise resumida local";
+"insight.coach.cacheHit" = "Do cache — PRs inalterados";
 
 /* ─────────────────────────────────────────────────────────────
    NEW RECORD SCREEN

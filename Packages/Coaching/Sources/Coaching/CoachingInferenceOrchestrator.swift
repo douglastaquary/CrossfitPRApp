@@ -32,7 +32,13 @@ public struct CoachingInferenceOrchestrator: Sendable {
 
             let adapter = router.adapter(for: runtime)
             do {
-                var insight = try await adapter.generateCoaching(snapshot: applied.snapshot, tier: tier)
+                var insight = try await generateCoaching(
+                    adapter: adapter,
+                    runtime: runtime,
+                    snapshot: applied.snapshot,
+                    tier: tier,
+                    maxOutputTokens: applied.limits.maxOutputTokens
+                )
                 if insight.rationale.count > applied.limits.maxRationaleChars {
                     insight.rationale = String(insight.rationale.prefix(applied.limits.maxRationaleChars))
                 }
@@ -51,5 +57,22 @@ public struct CoachingInferenceOrchestrator: Sendable {
         }
 
         throw lastError
+    }
+
+    private func generateCoaching(
+        adapter: any CrossFitCoachingProviding,
+        runtime: CoachingRuntime,
+        snapshot: CoachingContextSnapshot,
+        tier: SubscriptionTier,
+        maxOutputTokens: Int
+    ) async throws -> CoachingInsight {
+        if runtime == .cloud, let cloud = adapter as? CloudCoachAdapter {
+            return try await cloud.generateCoaching(
+                snapshot: snapshot,
+                tier: tier,
+                maxOutputTokens: maxOutputTokens
+            )
+        }
+        return try await adapter.generateCoaching(snapshot: snapshot, tier: tier)
     }
 }

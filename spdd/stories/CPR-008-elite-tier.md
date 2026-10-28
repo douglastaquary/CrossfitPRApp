@@ -10,7 +10,7 @@ para preparar competições e ciclos de treino longos.
 
 - [ ] `SubscriptionTier.elite` (ou produto StoreKit dedicado) + flags `ProFeature` elite
 - [ ] Paywall multi-plano em PROUpgrade (Design canvas)
-- [ ] UI distinta “modo competidor” — não só copy
+- [ ] UI distinta “modo competidor” — canvas [`CPR-008 Design`](../prompt/CPR-008-20261028-[Design]-elite-tier-ui.md)
 - [ ] `TokenBudgetPolicy` com limites Elite (K maior, janela temporal maior, TTL cache menor)
 - [ ] Coach usa mesma infra CPR-007 com prompts Elite
 

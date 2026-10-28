@@ -12,12 +12,10 @@ Visão pública do que já está no app versus o que está **planejado** (SPDD `
 | Dados | Offline-first + sync iCloud (best-effort) |
 | Idiomas | pt-BR e en com QA automatizado no CI |
 
-## Planned — Coach IA (CPR-007)
+## Coach IA (CPR-007) — shipped MVP
 
-- **Free:** continua só WorkoutEngine (sem LLM).
-- **PRO:** coach CrossFit com **inferência on-device** quando o aparelho suportar; **fallback OpenAI Chat Completions** (API direta, sem backend próprio) quando não houver Apple Intelligence.
-- **Token budget:** contexto compacto (snapshot estruturado + sinais do WorkoutEngine), cache por hash, refresh manual.
-- Copy de engajamento na aba Evolução — foco em atleta intermediário (platôs, rep schemes, movimentos prioritários).
+- Escada: on-device (iOS 26+) → OpenAI → resumo local; ver [`COACHING-INFERENCE.md`](COACHING-INFERENCE.md).
+- Pendente validação em hardware real e tuning de prompts/custo.
 
 ## Planned — Elite (CPR-008)
 
@@ -34,10 +32,10 @@ Visão pública do que já está no app versus o que está **planejado** (SPDD `
 
 ## Próximos passos (dev)
 
-1. **CPR-007 fase 3:** validar on-device iOS 26+; configurar `OPENAI_API_KEY` em builds de teste (ver [`COACHING-INFERENCE.md`](COACHING-INFERENCE.md)).
-2. **Mídia README:** `./scripts/capture-readme-media-auto.sh` (Mac + Xcode) → commit em `docs/screenshots/` e `docs/media/`.
-3. **CPR-008:** canvas Design Elite → `SubscriptionTier.elite` + paywall multi-plano.
-4. **CPR-009:** POC watchOS + eventos compactos no snapshot do coach.
+1. **CPR-007:** testar iOS 26+ on-device + `OPENAI_API_KEY` em device; revisar logs `Coaching` no Console.
+2. **Mídia README:** `./scripts/capture-readme-media-auto.sh` → commit PNG/GIF.
+3. **CPR-008:** aprovar [`CPR-008 Design canvas`](spdd/prompt/CPR-008-20261028-[Design]-elite-tier-ui.md) → StoreKit + `SubscriptionTier.elite`.
+4. **CPR-009:** story/analysis → POC watchOS.
 
 ## Como acompanhar
 
