@@ -30,6 +30,8 @@ public struct CoachingContextSnapshot: Hashable, Sendable, Codable {
     public var stalled: [String]
     public var rising: [String]
     public var engineSignals: CoachingSignals
+    /// Eventos recentes do Apple Watch (truncados no builder / budget).
+    public var sessionEvents: [WatchSessionEvent]
 
     public init(
         windowDays: Int,
@@ -37,7 +39,8 @@ public struct CoachingContextSnapshot: Hashable, Sendable, Codable {
         movements: [MovementSummary],
         stalled: [String],
         rising: [String],
-        engineSignals: CoachingSignals
+        engineSignals: CoachingSignals,
+        sessionEvents: [WatchSessionEvent] = []
     ) {
         self.windowDays = windowDays
         self.contextHash = contextHash
@@ -45,5 +48,6 @@ public struct CoachingContextSnapshot: Hashable, Sendable, Codable {
         self.stalled = stalled
         self.rising = rising
         self.engineSignals = engineSignals
+        self.sessionEvents = sessionEvents
     }
 }

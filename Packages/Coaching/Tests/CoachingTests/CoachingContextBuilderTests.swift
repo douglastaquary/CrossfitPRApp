@@ -25,6 +25,30 @@ struct CoachingContextBuilderTests {
         #expect(!snapshot.contextHash.isEmpty)
     }
 
+    @Test("WatchSessionEvent parseia payload WC")
+    func watchEventParsesPayload() {
+        let event = WatchSessionEvent(watchConnectivityPayload: [
+            "event": "watch.handshake",
+            "movement": "thruster",
+            "rpe": 7,
+        ])
+        #expect(event?.phase == "session")
+        #expect(event?.movement == "thruster")
+        #expect(event?.rpe == 7)
+    }
+
+    @Test("Eventos Watch entram no snapshot e alteram o hash")
+    func watchEventsIncludedInSnapshot() {
+        let builder = CoachingContextBuilder()
+        let base = builder.build(from: [], engineInsights: [])
+        let watchEvent = WatchSessionEvent(phase: "rest", movement: "thruster", rpe: 8, durationSec: 90)
+        let withWatch = builder.build(from: [], engineInsights: [], watchEvents: [watchEvent])
+
+        #expect(withWatch.sessionEvents.count == 1)
+        #expect(withWatch.sessionEvents.first?.phase == "rest")
+        #expect(withWatch.contextHash != base.contextHash)
+    }
+
     @Test("TokenBudget trunca quando estimate excede cloud")
     func budgetTruncatesForCloud() {
         var records: [PersonalRecord] = []

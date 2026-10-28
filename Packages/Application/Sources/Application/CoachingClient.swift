@@ -44,7 +44,8 @@ public final class CoachingClient: ObservableObject {
         lastError = nil
         defer { isLoading = false }
 
-        let snapshot = builder.build(from: records, engineInsights: engineInsights)
+        let watchEvents = WatchSessionEventStore.shared.recentEvents()
+        let snapshot = builder.build(from: records, engineInsights: engineInsights, watchEvents: watchEvents)
         if !force, let cached = cache.insight(for: snapshot.contextHash) {
             let insight = CoachingInsight(
                 workoutSuggestion: cached.workoutSuggestion,

@@ -9,7 +9,7 @@ para manter foco no box sem abrir o iPhone a todo momento.
 ## Critérios de aceite
 
 - [x] Target watchOS companion (`CrossfitPRWatch` + `WatchCompanion`)
-- [ ] Sync com iPhone (WatchConnectivity)
+- [x] Sync com iPhone (WatchConnectivity — eventos compactos → `WatchSessionEventStore` → coach)
 - [ ] Timer de descanso + mensagem motivacional curta
 - [ ] Respiração visual/haptic em treinos intensos (opt-in na sessão)
 - [ ] Eventos compactos (série, RPE, descanso) → `CoachingContextBuilder` no iPhone

@@ -10,7 +10,8 @@ Companion na sessão: dica contextual, timer de descanso e respiração. **Sem L
 | Target Xcode | `CrossfitPRWatch/` — compila os mesmos `.swift` + strings (embed no `CrossfitPR.app`) |
 | SPM | produto `WatchCompanion` no monorepo (sem dep de `Localization`; strings em `Resources/`) |
 | Sync | `WatchLinkBootstrap` (watch) + `iPhoneWatchConnectivityBridge` (iPhone) — handshake WCSession |
-| Próximo | Eventos compactos → `CoachingContextBuilder` (CPR-007) |
+| Coach | `WatchSessionEvent` → `WatchSessionEventStore` → `CoachingContextBuilder.sessionEvents` |
+| Próximo | Timer descanso real + haptics (Design CPR-009) |
 
 ## Build local
 
