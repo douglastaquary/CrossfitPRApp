@@ -5,6 +5,7 @@ import Subscription
 import PROUpgrade
 import SharedUI
 import Localization
+import WatchCompanion
 
 public struct SettingsView: View {
     @EnvironmentObject private var settingsClient: SettingsClient
@@ -33,6 +34,17 @@ public struct SettingsView: View {
             )
 
             SettingsAboutSection()
+
+            if UITestLaunchSupport.isUITestMode {
+                Section(Strings.Watch.galleryTitle) {
+                    NavigationLink {
+                        WatchPOCGalleryView()
+                    } label: {
+                        Text(Strings.Watch.sessionTitle)
+                    }
+                    .accessibilityIdentifier("settings.watch.poc.link")
+                }
+            }
         }
         .navigationTitle(Strings.Screen.settings)
         .sheet(isPresented: $showPROUpgrade) {

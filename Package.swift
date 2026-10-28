@@ -121,6 +121,7 @@ let package = Package(
                 "SharedUI",
                 "Subscription",
                 "PROUpgrade",
+                "WatchCompanion",
             ],
             path: "Packages/Settings/Sources/Settings"
         ),

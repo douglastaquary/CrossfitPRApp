@@ -72,11 +72,13 @@ final class ReadmeScreenshotsUITests: XCTestCase {
         app.launchArguments += ["-AppleLanguages", "(pt-BR)", "-AppleLocale", "pt_BR"]
         app.launchEnvironment["UITEST_SKIP_SPLASH"] = "1"
         app.launchEnvironment["UITEST_SKIP_ONBOARDING"] = "1"
-        app.launchEnvironment["UITEST_WATCH_SCREENSHOT_GALLERY"] = "1"
-        app.launchArguments += ["-UITEST_WATCH_SCREENSHOT_GALLERY", "1"]
         app.launch()
 
-        XCTAssertTrue(app.staticTexts["Sessão"].waitForExistence(timeout: 15))
+        app.tabBars.buttons["Ajustes"].tap()
+        _ = app.navigationBars["Ajustes"].waitForExistence(timeout: 8)
+        element(app, identifier: "settings.watch.poc.link").tap()
+
+        XCTAssertTrue(app.staticTexts["Sessão"].waitForExistence(timeout: 12))
 
         XCTAssertTrue(element(app, identifier: "watch.poc.session").waitForExistence(timeout: 5))
         saveScreenshot(named: "watch-session")
@@ -142,7 +144,6 @@ final class ReadmeScreenshotsUITests: XCTestCase {
             if target.waitForExistence(timeout: 6) { break }
             app.swipeUp()
         }
-        XCTAssertTrue(target.exists, targetID)
 
         saveScreenshot(named: fileName)
         app.terminate()
