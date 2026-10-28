@@ -45,6 +45,11 @@ for dir in "${FEATURE_DIRS[@]}"; do
   done < <(rg -n 'import Persistence' "$ROOT/$dir" 2>/dev/null || true)
 done
 
+while IFS= read -r line; do
+  append "- [wiring] AppEnvironment.make fora do app: $line"
+  FINDINGS=$((FINDINGS + 1))
+done < <(rg -n 'AppEnvironment\.make\s*\(' "$ROOT/Packages" 2>/dev/null || true)
+
 if [[ "$FINDINGS" -eq 0 ]]; then
   append "- Nenhuma violação heurística."
 fi

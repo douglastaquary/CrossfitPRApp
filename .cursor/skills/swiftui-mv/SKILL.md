@@ -25,8 +25,9 @@ Normas **CrossfitPR** (SPDD + iOS 16 + `EnvironmentObject` clients). Detalhes: `
 
 1. **SPDD** — escopo e canvas  
 2. **Design** — layout/cores/tabs baseline  
-3. **Esta skill (MV)** — estrutura de views  
-4. **skill-ios** — Swift/concurrency/testes  
+3. **App wiring** — shell e injeção global (`app-wiring` skill)  
+4. **Esta skill (MV)** — estrutura de views  
+5. **skill-ios** — Swift/concurrency/testes  
 
 Refactor sem mudar comportamento → MV skill + `/spdd-sync`.  
 Mudança visual → canvas Design antes do código.

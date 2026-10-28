@@ -63,7 +63,7 @@ bash scripts/architecture/run-static-checks.sh
 # SwiftLint (macOS): brew install swiftlint
 ```
 
-Skill agentes: [`.cursor/skills/architecture-review/SKILL.md`](../.cursor/skills/architecture-review/SKILL.md)
+Skills agentes: [architecture-review](../.cursor/skills/architecture-review/SKILL.md) · [app-wiring](../.cursor/skills/app-wiring/SKILL.md)
 
 ## Referências
 

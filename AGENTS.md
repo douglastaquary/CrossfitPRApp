@@ -21,6 +21,7 @@ Story → /spdd-analysis → /spdd-reasons-canvas → /spdd-generate → Testes
 | Design | `.cursor/skills/design/skill-design.md` | Alterando UI |
 | **MV SwiftUI** | `.cursor/skills/swiftui-mv/SKILL.md` | Views, refactors, estrutura de telas |
 | **Architecture review** | `.cursor/skills/architecture-review/SKILL.md` | PR/CI, grafo SPM, MV |
+| **App wiring** | `.cursor/skills/app-wiring/SKILL.md` | Shell, tabs, injeção global |
 | iOS | `.cursor/skills/ios-development-skill/skill-ios.md` | Código Swift |
 
 **Precedência:** SPDD → Design → **MV** → iOS

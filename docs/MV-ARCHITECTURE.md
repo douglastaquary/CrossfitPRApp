@@ -13,6 +13,7 @@ Este documento é o **padrão oficial de UI** do projeto, junto com [`ARCHITECTU
 
 | Documento | Uso |
 |-----------|-----|
+| [`APP-WIRING.md`](APP-WIRING.md) | Shell, TabView, `withCrossfitPRDependencyGraph` |
 | [`.cursor/skills/swiftui-mv/SKILL.md`](../.cursor/skills/swiftui-mv/SKILL.md) | Ordem de view, subviews, workflow |
 | [`mv-patterns-crossfitpr.md`](../.cursor/skills/swiftui-mv/references/mv-patterns-crossfitpr.md) | Quando evitar ViewModel, checklist PR/CI |
 | Canvas **CPR-006** | Norms oficiais SPDD |
@@ -28,12 +29,10 @@ Copy de UI: `Strings.*` + [`LOCALIZATION.md`](LOCALIZATION.md) (en / pt-BR).
 | `SettingsClient` | Preferências, gate onboarding |
 | `WorkoutEngineClient` | Insights derivados dos PRs |
 
-Injeção no app shell:
+Injeção no app shell (via [`AppDependencyGraph.swift`](../CrossfitPR/AppDependencyGraph.swift)):
 
 ```swift
-.environmentObject(environment.personalRecordClient)
-.environmentObject(environment.subscriptionClient)
-// …
+.withCrossfitPRDependencyGraph(environment.value)
 ```
 
 Views **não** instanciam repositories nem StoreKit diretamente.
