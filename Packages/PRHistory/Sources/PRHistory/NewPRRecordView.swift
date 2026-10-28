@@ -33,20 +33,22 @@ public struct NewPRRecordView: View {
     public var body: some View {
         NavigationStack {
             Form {
-                Section(Strings.NewPR.sectionPR) {
-                    CrossfitLevelSegmentView(selectedIndex: $selectedLevelIndex)
-                    if category == nil {
-                        Picker(Strings.NewPR.pickerExercise, selection: $selectedExerciseIndex) {
-                            ForEach(CrossfitCatalog.allCategories.indices, id: \.self) { index in
-                                Text(CrossfitCatalog.allCategories[index].title).tag(index)
-                            }
-                        }
-                    } else {
-                        Text(activeCategory.title)
-                    }
-                }
+                NewPRRecordPRSection(
+                    category: category,
+                    activeCategoryTitle: activeCategory.title,
+                    selectedLevelIndex: $selectedLevelIndex,
+                    selectedExerciseIndex: $selectedExerciseIndex
+                )
 
-                groupFields
+                NewPRRecordGroupFields(
+                    group: activeCategory.group,
+                    measureTrackingMode: settingsClient.measureTrackingMode,
+                    percentageText: $percentageText,
+                    weightText: $weightText,
+                    maxRepsText: $maxRepsText,
+                    minTimeText: $minTimeText,
+                    distanceText: $distanceText
+                )
 
                 Section(Strings.NewPR.sectionComment) {
                     TextField(Strings.NewPR.commentPlaceholder, text: $comments, axis: .vertical)
@@ -54,11 +56,7 @@ public struct NewPRRecordView: View {
                 }
 
                 if let saveErrorMessage {
-                    Section {
-                        Text(saveErrorMessage)
-                            .font(.caption)
-                            .foregroundStyle(AppDesign.Colors.error)
-                    }
+                    NewPRRecordErrorSection(message: saveErrorMessage)
                 }
             }
             .navigationTitle(activeCategory.title)
@@ -71,64 +69,12 @@ public struct NewPRRecordView: View {
                 }
             }
             .safeAreaInset(edge: .bottom) {
-                Button(Strings.NewPR.save) {
+                NewPRRecordSaveBar(isSaving: isSaving) {
                     Task { await saveRecord() }
                 }
-                .buttonStyle(FilledButtonStyle(fullWidth: true))
-                .disabled(isSaving)
-                .padding()
             }
         }
         .brandTint()
-    }
-
-    @ViewBuilder
-    private var groupFields: some View {
-        switch activeCategory.group {
-        case .barbell:
-            Section(Strings.NewPR.sectionPercentage) {
-                numericField(text: $percentageText, suffix: "%")
-            }
-            Section(Strings.NewPR.sectionWeight) {
-                numericField(
-                    text: $weightText,
-                    suffix: settingsClient.measureTrackingMode == .pounds ? " lb" : " kg"
-                )
-            }
-        case .gymnastic:
-            Section(Strings.NewPR.sectionMaxReps) {
-                numericField(text: $maxRepsText, suffix: " reps")
-            }
-            Section(Strings.NewPR.sectionTime) {
-                numericField(text: $minTimeText, suffixKey: "newRecord.screen.minutes.description")
-            }
-        case .endurance:
-            Section(Strings.NewPR.sectionDistance) {
-                numericField(text: $distanceText, suffix: " Km")
-            }
-            Section(Strings.NewPR.sectionTime) {
-                numericField(text: $minTimeText, suffixKey: "newRecord.screen.minutes.description")
-            }
-        }
-    }
-
-    private func numericField(text: Binding<String>, suffix: String = "", suffixKey: String? = nil) -> some View {
-        HStack(alignment: .firstTextBaseline, spacing: 0) {
-            TextField("0", text: text)
-                .keyboardType(.numberPad)
-                .font(AppDesign.Typography.formField)
-                .multilineTextAlignment(.center)
-                .accentColor(AppDesign.Colors.brand)
-            if !text.wrappedValue.isEmpty {
-                if let suffixKey {
-                    Text(Strings.tr(suffixKey))
-                        .font(AppDesign.Typography.formField)
-                } else {
-                    Text(suffix)
-                        .font(AppDesign.Typography.formField)
-                }
-            }
-        }
     }
 
     private func saveRecord() async {
@@ -159,5 +105,117 @@ public struct NewPRRecordView: View {
         } else {
             saveErrorMessage = personalRecordClient.lastError ?? Strings.NewPR.saveFallbackError
         }
+    }
+}
+
+// MARK: - Form sections
+
+private struct NewPRRecordPRSection: View {
+    let category: WorkoutCategory?
+    let activeCategoryTitle: String
+    @Binding var selectedLevelIndex: Int
+    @Binding var selectedExerciseIndex: Int
+
+    var body: some View {
+        Section(Strings.NewPR.sectionPR) {
+            CrossfitLevelSegmentView(selectedIndex: $selectedLevelIndex)
+            if category == nil {
+                Picker(Strings.NewPR.pickerExercise, selection: $selectedExerciseIndex) {
+                    ForEach(CrossfitCatalog.allCategories.indices, id: \.self) { index in
+                        Text(CrossfitCatalog.allCategories[index].title).tag(index)
+                    }
+                }
+            } else {
+                Text(activeCategoryTitle)
+            }
+        }
+    }
+}
+
+private struct NewPRRecordGroupFields: View {
+    let group: RecordGroup
+    let measureTrackingMode: MeasureTrackingMode
+    @Binding var percentageText: String
+    @Binding var weightText: String
+    @Binding var maxRepsText: String
+    @Binding var minTimeText: String
+    @Binding var distanceText: String
+
+    var body: some View {
+        switch group {
+        case .barbell:
+            Section(Strings.NewPR.sectionPercentage) {
+                NewPRRecordNumericField(text: $percentageText, suffix: "%")
+            }
+            Section(Strings.NewPR.sectionWeight) {
+                NewPRRecordNumericField(
+                    text: $weightText,
+                    suffix: measureTrackingMode == .pounds ? " lb" : " kg"
+                )
+            }
+        case .gymnastic:
+            Section(Strings.NewPR.sectionMaxReps) {
+                NewPRRecordNumericField(text: $maxRepsText, suffix: " reps")
+            }
+            Section(Strings.NewPR.sectionTime) {
+                NewPRRecordNumericField(text: $minTimeText, suffixKey: "newRecord.screen.minutes.description")
+            }
+        case .endurance:
+            Section(Strings.NewPR.sectionDistance) {
+                NewPRRecordNumericField(text: $distanceText, suffix: " Km")
+            }
+            Section(Strings.NewPR.sectionTime) {
+                NewPRRecordNumericField(text: $minTimeText, suffixKey: "newRecord.screen.minutes.description")
+            }
+        }
+    }
+}
+
+private struct NewPRRecordNumericField: View {
+    @Binding var text: String
+    var suffix: String = ""
+    var suffixKey: String?
+
+    var body: some View {
+        HStack(alignment: .firstTextBaseline, spacing: 0) {
+            TextField("0", text: $text)
+                .keyboardType(.numberPad)
+                .font(AppDesign.Typography.formField)
+                .multilineTextAlignment(.center)
+                .accentColor(AppDesign.Colors.brand)
+            if !text.isEmpty {
+                if let suffixKey {
+                    Text(Strings.tr(suffixKey))
+                        .font(AppDesign.Typography.formField)
+                } else {
+                    Text(suffix)
+                        .font(AppDesign.Typography.formField)
+                }
+            }
+        }
+    }
+}
+
+private struct NewPRRecordErrorSection: View {
+    let message: String
+
+    var body: some View {
+        Section {
+            Text(message)
+                .font(.caption)
+                .foregroundStyle(AppDesign.Colors.error)
+        }
+    }
+}
+
+private struct NewPRRecordSaveBar: View {
+    let isSaving: Bool
+    let onSave: () -> Void
+
+    var body: some View {
+        Button(Strings.NewPR.save, action: onSave)
+            .buttonStyle(FilledButtonStyle(fullWidth: true))
+            .disabled(isSaving)
+            .padding()
     }
 }

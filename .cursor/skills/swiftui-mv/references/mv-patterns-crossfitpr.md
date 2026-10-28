@@ -87,6 +87,6 @@ Prioridade sugerida (arquivos com muitos `private var …: some View`):
 1. ~~`PROUpgradeView.swift`~~ ✅ (subviews extraídas)
 2. ~~`InsightsTeaserView.swift`~~ ✅
 3. ~~`InsightsViewPRO.swift`~~ ✅
-4. `NewPRRecordView.swift`
+4. ~~`NewPRRecordView.swift`~~ ✅
 
 Um arquivo por PR; cada um: reorder + extract structs + `/spdd-sync`.
