@@ -24,14 +24,10 @@ public struct LaunchView<MainContent: View>: View {
     public var body: some View {
         ZStack {
             if !networkMonitor.isConnected {
-                offlineContent
+                LaunchOfflineContent(showNetworkAlert: $showNetworkAlert)
             } else if shouldShowOnboarding {
                 OnboardingView {
-                    print("🟢 ONBOARDING COMPLETE CALLED!")
-                    settingsClient.hasCompletedLaunch = true
-                    withAnimation(.easeInOut(duration: 0.3)) {
-                        didCompleteOnboarding = true
-                    }
+                    completeOnboarding()
                 }
                 .transition(.opacity)
             } else {
@@ -46,7 +42,19 @@ public struct LaunchView<MainContent: View>: View {
         .brandTint()
     }
 
-    private var offlineContent: some View {
+    private func completeOnboarding() {
+        print("🟢 ONBOARDING COMPLETE CALLED!")
+        settingsClient.hasCompletedLaunch = true
+        withAnimation(.easeInOut(duration: 0.3)) {
+            didCompleteOnboarding = true
+        }
+    }
+}
+
+private struct LaunchOfflineContent: View {
+    @Binding var showNetworkAlert: Bool
+
+    var body: some View {
         VStack {
             Text("CrossFitPR")
                 .font(AppDesign.Typography.screenTitle)
