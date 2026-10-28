@@ -62,6 +62,11 @@ final class ReadmeScreenshotsUITests: XCTestCase {
         saveScreenshot(named: "settings")
     }
 
+    func testCaptureInsightsProAndElite() throws {
+        captureInsightsScreenshot(tier: "pro", fileName: "insights-pro")
+        captureInsightsScreenshot(tier: "elite", fileName: "insights-elite")
+    }
+
     /// Percorre as tabs lentamente — rode com `simctl recordVideo` em paralelo.
     func testDemoTabTour() throws {
         let app = XCUIApplication()
@@ -92,6 +97,35 @@ final class ReadmeScreenshotsUITests: XCTestCase {
         } catch {
             XCTFail("Falha ao salvar \(url.path): \(error)")
         }
+    }
+
+    private func captureInsightsScreenshot(tier: String, fileName: String) {
+        let app = XCUIApplication()
+        app.launchArguments += ["-AppleLanguages", "(pt-BR)", "-AppleLocale", "pt_BR"]
+        app.launchEnvironment["UITEST_SKIP_SPLASH"] = "1"
+        app.launchEnvironment["UITEST_SKIP_ONBOARDING"] = "1"
+        app.launchEnvironment["UITEST_SUBSCRIPTION_TIER"] = tier
+        app.launchArguments += ["-UITEST_SUBSCRIPTION_TIER", tier]
+        app.launch()
+
+        let tab = app.tabBars.buttons["Evolução"]
+        XCTAssertTrue(tab.waitForExistence(timeout: 15))
+        tab.tap()
+        XCTAssertTrue(app.navigationBars["Evolução"].waitForExistence(timeout: 8))
+
+        let targetID = tier == "pro" ? "insights.coach.section" : "insights.elite.section"
+        let target = element(app, identifier: targetID)
+        for _ in 0 ..< 4 {
+            if target.waitForExistence(timeout: 6) { break }
+            app.swipeUp()
+        }
+
+        saveScreenshot(named: fileName)
+        app.terminate()
+    }
+
+    private func element(_ app: XCUIApplication, identifier: String) -> XCUIElement {
+        app.descendants(matching: .any).matching(identifier: identifier).firstMatch
     }
 
     private func dismissPROSheet(_ app: XCUIApplication) {

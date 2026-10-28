@@ -82,6 +82,9 @@ public struct AppEnvironment {
         await subscriptionClient.refreshStatus()
         await subscriptionClient.loadSubscriptionProducts()
         subscriptionClient.observeTransactionUpdates()
+        #if canImport(WatchConnectivity)
+        iPhoneWatchConnectivityBridge.shared.activate()
+        #endif
     }
 
     private static func makeUITestMockStore(tier: SubscriptionTier) -> MockSubscriptionStore {
