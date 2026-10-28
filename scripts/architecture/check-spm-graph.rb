@@ -19,6 +19,7 @@ ALLOWED = {
   "Categories" => ["Domain", "Application", "Localization", "SharedUI", "PRHistory"],
   "Settings" => ["Domain", "Application", "Localization", "SharedUI", "Subscription", "PROUpgrade"],
   "Onboarding" => ["Localization", "SharedUI"],
+  "WatchCompanion" => ["Localization"],
   "Launch" => ["Domain", "Application", "Localization", "SharedUI", "Onboarding"],
   "Insights" => ["Domain", "Application", "Subscription", "PROUpgrade", "Localization", "SharedUI"],
 }.freeze

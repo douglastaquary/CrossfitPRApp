@@ -2,6 +2,7 @@ import SwiftUI
 import Application
 import Launch
 import Localization
+import WatchCompanion
 
 @main
 struct CrossfitPRApp: App {
@@ -13,8 +14,14 @@ struct CrossfitPRApp: App {
 
     var body: some Scene {
         WindowGroup {
-            AppLaunchContainer {
-                MainTabView()
+            Group {
+                if UITestLaunchSupport.shouldShowWatchScreenshotGallery {
+                    WatchPOCGalleryView()
+                } else {
+                    AppLaunchContainer {
+                        MainTabView()
+                    }
+                }
             }
             .brandTint()
             .withCrossfitPRDependencyGraph(environment.value)

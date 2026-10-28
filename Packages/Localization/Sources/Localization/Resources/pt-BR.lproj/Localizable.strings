@@ -410,6 +410,16 @@
 "settings.elite.unlock" = "Upgrade para Elite";
 "settings.elite.managePlan" = "Gerenciar plano";
 
+"watch.gallery.title" = "Apple Watch — POC CPR-009";
+"watch.gallery.next" = "Próxima tela";
+"watch.session.title" = "Sessão";
+"watch.session.tip" = "Mantém o core firme no thruster — respira no topo.";
+"watch.rest.label" = "Descanso";
+"watch.rest.motivation" = "Próxima série com intenção.";
+"watch.breath.title" = "Respiração";
+"watch.breath.pattern" = "4 · 4 · 4 · 4";
+"watch.breath.inhale" = "Inspire";
+
 "pro.upgrade.choosePlan" = "Escolha seu plano";
 "pro.upgrade.productsUnavailable.title" = "Produtos indisponíveis";
 "pro.upgrade.productsUnavailable.message" = "Não foi possível carregar os planos. Tente novamente.";

@@ -26,6 +26,7 @@
 		4E58063727F3C5B100F16219 /* Categories in Frameworks */ = {isa = PBXBuildFile; productRef = 4E58063827F3C5B100F16219 /* Categories */; };
 		4E58063927F3C5B100F16219 /* Settings in Frameworks */ = {isa = PBXBuildFile; productRef = 4E58063A27F3C5B100F16219 /* Settings */; };
 		4E58063B27F3C5B100F16219 /* Launch in Frameworks */ = {isa = PBXBuildFile; productRef = 4E58063C27F3C5B100F16219 /* Launch */; };
+		4E58074027F3C5B100F16219 /* WatchCompanion in Frameworks */ = {isa = PBXBuildFile; productRef = 4E58074127F3C5B100F16219 /* WatchCompanion */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,6 +60,7 @@
 				4E58063727F3C5B100F16219 /* Categories in Frameworks */,
 				4E58063927F3C5B100F16219 /* Settings in Frameworks */,
 				4E58063B27F3C5B100F16219 /* Launch in Frameworks */,
+				4E58074027F3C5B100F16219 /* WatchCompanion in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -161,6 +163,7 @@
 				4E58063827F3C5B100F16219 /* Categories */,
 				4E58063A27F3C5B100F16219 /* Settings */,
 				4E58063C27F3C5B100F16219 /* Launch */,
+				4E58074127F3C5B100F16219 /* WatchCompanion */,
 			);
 			productName = CrossfitPR;
 			productReference = 4E58055427F3C5AE00F16219 /* CrossfitPR.app */;
@@ -586,6 +589,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 4E58062127F3C5B100F16219 /* XCLocalSwiftPackageReference "CrossfitPRPackages" */;
 			productName = Launch;
+		};
+		4E58074127F3C5B100F16219 /* WatchCompanion */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4E58062127F3C5B100F16219 /* XCLocalSwiftPackageReference "CrossfitPRPackages" */;
+			productName = WatchCompanion;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

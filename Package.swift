@@ -26,6 +26,7 @@ let package = Package(
         .library(name: "Onboarding", targets: ["Onboarding"]),
         .library(name: "Launch", targets: ["Launch"]),
         .library(name: "Insights", targets: ["Insights"]),
+        .library(name: "WatchCompanion", targets: ["WatchCompanion"]),
     ],
     targets: [
         .target(
@@ -155,6 +156,11 @@ let package = Package(
                 "SharedUI",
             ],
             path: "Packages/Insights/Sources/Insights"
+        ),
+        .target(
+            name: "WatchCompanion",
+            dependencies: ["Localization"],
+            path: "Packages/WatchCompanion/Sources/WatchCompanion"
         ),
     ]
 )

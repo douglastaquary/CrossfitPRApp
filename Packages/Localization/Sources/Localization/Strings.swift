@@ -233,6 +233,20 @@ public enum Strings {
         }
     }
 
+    // MARK: - Watch (CPR-009 POC)
+
+    public enum Watch {
+        public static var galleryTitle: String { tr("watch.gallery.title") }
+        public static var galleryNext: String { tr("watch.gallery.next") }
+        public static var sessionTitle: String { tr("watch.session.title") }
+        public static var sessionTip: String { tr("watch.session.tip") }
+        public static var restLabel: String { tr("watch.rest.label") }
+        public static var restMotivation: String { tr("watch.rest.motivation") }
+        public static var breathTitle: String { tr("watch.breath.title") }
+        public static var breathPattern: String { tr("watch.breath.pattern") }
+        public static var breathInhale: String { tr("watch.breath.inhale") }
+    }
+
     // MARK: - Elite (CPR-008)
 
     public enum Elite {

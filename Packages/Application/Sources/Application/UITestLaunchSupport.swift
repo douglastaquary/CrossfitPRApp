@@ -13,6 +13,13 @@ public enum UITestLaunchSupport {
     public static let purchaseBehaviorKey = "UITEST_PURCHASE_BEHAVIOR"
     /// `1` = força `StoreKitSubscriptionStore` (Products.storekit / sandbox). Default simulador = mock.
     public static let useStoreKitKey = "UITEST_USE_STOREKIT"
+    /// `1` = galeria POC Apple Watch (README / CPR-009).
+    public static let watchScreenshotGalleryKey = "UITEST_WATCH_SCREENSHOT_GALLERY"
+
+    public static var shouldShowWatchScreenshotGallery: Bool {
+        ProcessInfo.processInfo.environment[watchScreenshotGalleryKey] == "1"
+            || launchFlagValue("-UITEST_WATCH_SCREENSHOT_GALLERY") == "1"
+    }
 
     public static var shouldSkipSplash: Bool {
         ProcessInfo.processInfo.environment[skipSplashKey] == "1"
