@@ -29,7 +29,7 @@ chmod +x scripts/ci-modern.sh
 CODE_SIGNING_ALLOWED=NO ./scripts/ci-modern.sh
 ```
 
-Simulador: auto (`iPhone 16` → `15` → …) ou `SIM_NAME="iPhone 16 Pro" ./scripts/ci-modern.sh`.
+Simulador: escolha automática por **UDID** (evita erro `OS:latest` no Xcode 26). Override: `SIM_UDID=<uuid> ./scripts/ci-modern.sh`.
 
 ## Antes de push (Xcode 14.2)
 
