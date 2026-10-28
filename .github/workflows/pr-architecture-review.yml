@@ -1,0 +1,68 @@
+# Review arquitetural em PR (advisory — não bloqueia merge por default).
+name: PR — architecture review
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+concurrency:
+  group: arch-review-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  static-architecture:
+    name: Static (SPM, MV, SwiftLint)
+    runs-on: macos-15
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Instalar SwiftLint
+        run: brew install swiftlint
+
+      - name: Run static checks
+        run: |
+          chmod +x scripts/architecture/*.sh
+          chmod +x scripts/architecture/check-spm-graph.rb
+          bash scripts/architecture/run-static-checks.sh
+
+      - name: Upload report
+        uses: actions/upload-artifact@v4
+        with:
+          name: architecture-report
+          path: architecture-report.md
+
+  ai-architecture-review:
+    name: AI review (advisory)
+    runs-on: ubuntu-latest
+    needs: static-architecture
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Download static report
+        uses: actions/download-artifact@v4
+        with:
+          name: architecture-report
+          path: .
+
+      - name: AI PR comment
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          GITHUB_EVENT_PULL_REQUEST_NUMBER: ${{ github.event.pull_request.number }}
+          GITHUB_EVENT_PULL_REQUEST_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          GITHUB_BASE_REF: ${{ github.base_ref }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          chmod +x scripts/architecture/ai-pr-review.sh
+          bash scripts/architecture/ai-pr-review.sh

@@ -16,7 +16,7 @@ iOS: [`.cursor/skills/ios-development-skill/skill-ios.md`](../.cursor/skills/ios
 3. **Views estáveis** — UI/fluxos congelados nesta fase; mudanças só via clients
 4. **Composition root único** — `AppEnvironment` faz wiring entre pacotes
 5. **Offline-first** — persistência local JSON + CloudKit best-effort via clients
-6. **MV SwiftUI** — CPR-006; sem ViewModels; Dimillian + Clients
+6. **MV SwiftUI** — CPR-006; sem ViewModels; clients + views finas
 
 ## Grafo de dependências SPM
 

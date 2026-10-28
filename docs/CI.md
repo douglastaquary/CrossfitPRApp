@@ -40,7 +40,33 @@ Simulador padrão: **iPhone 17 Pro** (runtime iOS mais novo no runner), destino 
    ```
 3. Push → o CI roda o gate moderno.
 
+## Review arquitetural em PR (advisory)
+
+Workflow: [`.github/workflows/pr-architecture-review.yml`](../.github/workflows/pr-architecture-review.yml)
+
+| Job | O que faz |
+|-----|-----------|
+| **static-architecture** | `scripts/architecture/run-static-checks.sh` — grafo SPM, heurísticas MV, SwiftLint |
+| **ai-architecture-review** | LLM comentando no PR (mesmo checklist MV/SPM) |
+
+**Secrets (Settings → Secrets and variables → Actions):**
+
+- `ANTHROPIC_API_KEY` **ou** `OPENAI_API_KEY` — se ausentes, o job AI é ignorado (static ainda roda).
+
+**Modo advisory:** jobs usam `continue-on-error: true` — não bloqueiam merge. Para gate futuro: `STRICT=1` nos scripts + required check.
+
+Local:
+
+```bash
+chmod +x scripts/architecture/*.sh scripts/architecture/check-spm-graph.rb
+bash scripts/architecture/run-static-checks.sh
+# SwiftLint (macOS): brew install swiftlint
+```
+
+Skill agentes: [`.cursor/skills/architecture-review/SKILL.md`](../.cursor/skills/architecture-review/SKILL.md)
+
 ## Referências
 
 - QA UI: [`docs/QA.md`](QA.md)
+- MV: [`docs/MV-ARCHITECTURE.md`](MV-ARCHITECTURE.md)
 - SPM legado: [`scripts/configure-spm-xcode14.sh`](../scripts/configure-spm-xcode14.sh)

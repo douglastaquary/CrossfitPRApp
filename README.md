@@ -110,7 +110,7 @@ cd ../WorkoutEngine && swift test
 
 ## Arquitetura (SPDD + SPM)
 
-Desenvolvimento guiado por [SPDD](https://martinfowler.com/articles/structured-prompt-driven/) — intenção no canvas, código rastreável. Camadas em [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md); UI **MV** em [`docs/MV-ARCHITECTURE.md`](docs/MV-ARCHITECTURE.md) (CPR-006, [Dimillian](https://github.com/Dimillian/Skills/blob/main/swiftui-view-refactor/SKILL.md)).
+Desenvolvimento guiado por [SPDD](https://martinfowler.com/articles/structured-prompt-driven/) — intenção no canvas, código rastreável. Camadas em [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md); UI **MV** em [`docs/MV-ARCHITECTURE.md`](docs/MV-ARCHITECTURE.md) (CPR-006).
 
 ```
 CrossfitPR/              # App shell (App + MainTabView + assets; ver docs/LEGACY-CROSSFITPR-VIEWS.md)

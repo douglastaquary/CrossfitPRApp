@@ -1,0 +1,50 @@
+# CrossfitPR — SwiftLint (MV / SwiftUI hygiene). CI: advisory.
+included:
+  - Packages
+  - CrossfitPR
+excluded:
+  - DerivedData
+  - CrossfitPRUITests
+  - CrossfitPRTests
+
+line_length:
+  warning: 140
+  error: 200
+  ignores_urls: true
+
+file_length:
+  warning: 400
+  error: 550
+
+type_body_length:
+  warning: 300
+  error: 450
+
+function_body_length:
+  warning: 60
+  error: 100
+
+cyclomatic_complexity:
+  warning: 12
+  error: 20
+
+nesting:
+  type_level:
+    warning: 2
+
+identifier_name:
+  min_length:
+    warning: 2
+  excluded:
+    - id
+    - x
+    - y
+
+custom_rules:
+  no_viewmodel_type:
+    name: "Avoid ViewModel types"
+    regex: '(class|struct|actor)\s+\w*ViewModel\b'
+    message: "Use MV (clients + @State). ViewModel exige canvas CPR explícito."
+    severity: warning
+
+reporter: "xcode"

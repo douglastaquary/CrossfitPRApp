@@ -3,7 +3,7 @@
 **Tipo:** Feat (Norms / arquitetura de presentation)  
 **Story:** `spdd/stories/CPR-006-mv-swiftui-architecture.md`  
 **Analysis:** `spdd/analysis/CPR-006-mv-swiftui-architecture.md`  
-**Último sync (code → prompt):** 2026-10-28 — migração MV ondas 1–3 + localização en/pt via pacote `Localization`
+**Último sync (code → prompt):** 2026-10-28 — CI advisory (grafo SPM, MV, SwiftLint, review LLM em PR); ver `docs/CI.md`
 
 ## R — Requirements
 
@@ -50,7 +50,7 @@ flowchart LR
 
 | Pacote | View raiz | Subviews (exemplos) |
 |--------|-----------|---------------------|
-| PROUpgrade | `PROUpgradeView` | `PROUpgradePurchaseContent`, `PROUpgradeProcessingOverlay`, … |
+| PROUpgrade | `PROUpgradeView` | `PROUpgradeSubviews.swift` (`PROUpgradePurchaseContent`, overlay, …) |
 | Insights | `WorkoutInsightsView` | `WorkoutInsightsTierContent` |
 | Insights | `InsightsTeaserView` | `InsightsTeaserEmptySection`, `InsightsTeaserCardSection`, … |
 | Insights | `InsightsViewPRO` | `InsightsViewPROContent`, `InsightsViewPROChartSection`, … |
@@ -69,7 +69,7 @@ flowchart LR
 
 - Feature nova: SPDD → Design → **MV skill** → iOS skill → implementação.
 - Refactor view: MV checklist + `/spdd-sync` (este canvas).
-- Code review: rejeitar ViewModels não justificados.
+- Code review: rejeitar ViewModels não justificados; PR workflow `pr-architecture-review.yml` (advisory) + scripts `scripts/architecture/*`.
 - **Localização:** novas strings em `Packages/Localization/Resources/{en,pt-BR}.lproj/Localizable.strings` + API `Strings.*`; idioma segue preferência do sistema (`NSLocalizedString` + `Bundle.module`).
 - **Projeto app:** `knownRegions` = `en`, `pt-BR`, `Base`; `developmentRegion` = `pt-BR` (fallback).
 

@@ -1,5 +1,5 @@
 ---
-description: SwiftUI MV — Dimillian + Clients CrossfitPR; aplicar em views e refactors de UI
+description: SwiftUI MV — CPR-006 + Clients CrossfitPR; aplicar em views e refactors de UI
 globs: "**/*.swift"
 alwaysApply: false
 ---
