@@ -5,12 +5,23 @@ import PRHistory
 import Insights
 import Settings
 import Localization
+import WatchCompanion
 
 /// Tab shell principal — onboarding/rede ficam no LaunchView.
 struct MainTabView: View {
     @SceneStorage("selectedTab") private var selectedTab = 0
 
     var body: some View {
+        ZStack {
+            if UITestLaunchSupport.shouldShowWatchScreenshotGallery {
+                WatchPOCGalleryView()
+            } else {
+                mainTabs
+            }
+        }
+    }
+
+    private var mainTabs: some View {
         TabView(selection: $selectedTab) {
             CategoryListView()
                 .accessibilityIdentifier("tab.categories")
@@ -51,6 +62,7 @@ struct MainTabView: View {
         }
     }
 }
+
 
 extension Notification.Name {
     static let navigateToCategories = Notification.Name("navigateToCategories")
