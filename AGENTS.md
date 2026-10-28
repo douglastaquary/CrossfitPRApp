@@ -76,12 +76,15 @@ AppLaunchContainer → LaunchView → MainTabView
 ## Comandos úteis
 
 ```bash
-# Build
-xcodebuild -scheme CrossfitPR -destination 'platform=iOS Simulator,name=iPhone 16' build
+# Build (Xcode 14.2 local)
+./scripts/configure-spm-xcode14.sh
+xcodebuild -scheme CrossfitPR -destination 'platform=iOS Simulator,name=iPhone 14 Pro' build
 
-# Testes
-cd Packages/Domain && swift test
+# Gate CI (Xcode recente — espelha GitHub Actions)
+CODE_SIGNING_ALLOWED=NO ./scripts/ci-modern.sh
 ```
+
+CI: [`docs/CI.md`](docs/CI.md) · workflow `.github/workflows/ios.yml`
 
 ## Refs
 

@@ -1,0 +1,46 @@
+# CI vs desenvolvimento local (Xcode 14.2)
+
+## Divisão de responsabilidade
+
+| Onde | Xcode | SPM | Validação |
+|------|-------|-----|-----------|
+| **Sua máquina** | 14.2 | `./scripts/configure-spm-xcode14.sh` → `file URL` local (não commitar) | `xcodebuild` manual, `./scripts/run-qa.sh` |
+| **GitHub Actions** | **latest-stable** em `macos-15` | `XCLocalSwiftPackageReference` + `relativePath = .` | `./scripts/ci-modern.sh` |
+
+O repositório **versionado** usa pacote SPM **local relativo** na raiz (`Package.swift`). Isso funciona no CI e no Xcode 15+ sem scripts.
+
+## Workflow GitHub
+
+Arquivo: [`.github/workflows/ios.yml`](../.github/workflows/ios.yml)
+
+- **Trigger:** push/PR em `main`, ou **Run workflow** manual (`workflow_dispatch`).
+- **Runner:** `macos-15`
+- **Xcode:** `maxim-lobanov/setup-xcode@v1` com `latest-stable`
+- **Script:** [`scripts/ci-modern.sh`](../scripts/ci-modern.sh)
+  - Build app
+  - `AppLocalizationQATests` (pt/en)
+  - `swift test` em `Packages/Localization` e `Packages/Domain`
+  - Falha se `project.pbxproj` tiver `file:///Users/...` (evita push acidental pós configure local)
+
+## Rodar o mesmo pipeline num Mac com Xcode recente
+
+```bash
+chmod +x scripts/ci-modern.sh
+CODE_SIGNING_ALLOWED=NO ./scripts/ci-modern.sh
+```
+
+Simulador: auto (`iPhone 16` → `15` → …) ou `SIM_NAME="iPhone 16 Pro" ./scripts/ci-modern.sh`.
+
+## Antes de push (Xcode 14.2)
+
+1. **Não commitar** `project.pbxproj` após `configure-spm-xcode14.sh` (contém caminho absoluto).
+2. Restaurar referência local relativa:
+   ```bash
+   git checkout -- CrossfitPR.xcodeproj/project.pbxproj
+   ```
+3. Push → o CI roda o gate moderno.
+
+## Referências
+
+- QA UI: [`docs/QA.md`](QA.md)
+- SPM legado: [`scripts/configure-spm-xcode14.sh`](../scripts/configure-spm-xcode14.sh)

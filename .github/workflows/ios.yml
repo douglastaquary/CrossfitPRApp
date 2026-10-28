@@ -1,54 +1,38 @@
-name: Build
+# Validação oficial em Xcode / iOS recentes (runners GitHub).
+# Desenvolvimento local Xcode 14.2: ./scripts/configure-spm-xcode14.sh — ver docs/CI.md
+name: iOS — Xcode moderno
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [main]
   pull_request:
-    branches: [ "main" ]
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: ios-modern-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
-  build-and-test:
-    name: Build and localization QA (iOS Simulator)
-    runs-on: macos-latest
+  modern-xcode-qa:
+    name: Build & test (Xcode latest)
+    runs-on: macos-15
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Select simulator
-        id: sim
-        run: |
-          device=$(xcrun simctl list devices available -j | ruby -e "
-            require 'json'
-            devs = JSON.parse(STDIN.read)['devices'].values.flatten
-            pick = devs.find { |d| d['name'] =~ /iPhone 1[56]/ && d['isAvailable'] } ||
-                   devs.find { |d| d['name'] =~ /iPhone/ && d['isAvailable'] }
-            puts pick ? pick['name'] : 'iPhone 15'
-          ")
-          echo "name=$device" >> "$GITHUB_OUTPUT"
-          echo "Using simulator: $device"
+      - name: Selecionar Xcode mais recente estável
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: latest-stable
 
-      - name: Build
+      - name: Versões (log)
         run: |
-          xcodebuild build \
-            -scheme CrossfitPR \
-            -project CrossfitPR.xcodeproj \
-            -destination "platform=iOS Simulator,name=${{ steps.sim.outputs.name }}" \
-            -allowProvisioningUpdates \
-            CODE_SIGNING_ALLOWED=NO
+          xcodebuild -version
+          xcrun simctl list runtimes available | head -20
 
-      - name: UI tests — AppLocalizationQATests
-        run: |
-          xcodebuild test \
-            -scheme CrossfitPR \
-            -project CrossfitPR.xcodeproj \
-            -destination "platform=iOS Simulator,name=${{ steps.sim.outputs.name }}" \
-            -allowProvisioningUpdates \
-            CODE_SIGNING_ALLOWED=NO \
-            -only-testing:CrossfitPRUITests/AppLocalizationQATests \
-            -skip-testing:CrossfitPRUITests/ReadmeScreenshotsUITests
-
-      - name: Unit tests — Localization (Swift Testing)
-        run: |
-          cd Packages/Localization
-          swift test
+      - name: Build & test (scripts/ci-modern.sh)
+        env:
+          CODE_SIGNING_ALLOWED: "NO"
+        run: bash scripts/ci-modern.sh

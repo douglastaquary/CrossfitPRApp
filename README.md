@@ -102,7 +102,9 @@ cd ../WorkoutEngine && swift test
 
 **QA (CI):** `./scripts/run-qa.sh` — UI tests de localização pt/en. Ver [`docs/QA.md`](docs/QA.md).
 
-**SPM / Xcode 14.2:** o projeto usa pacote local na raiz (`Package.swift`). CI e Xcode 15+ resolvem automaticamente; no Xcode 14.2 rode `./scripts/configure-spm-xcode14.sh` após clone/pull.
+**SPM / Xcode 14.2:** pacote local na raiz (`Package.swift`). Rode `./scripts/configure-spm-xcode14.sh` após clone/pull; **não commite** o `project.pbxproj` gerado (file URL absoluta).
+
+**CI (Xcode/iOS recentes):** GitHub Actions roda [`scripts/ci-modern.sh`](scripts/ci-modern.sh) em `macos-15` — ver [`docs/CI.md`](docs/CI.md). Antes do push: `git checkout -- CrossfitPR.xcodeproj/project.pbxproj` se usou o script 14.2.
 
 ---
 

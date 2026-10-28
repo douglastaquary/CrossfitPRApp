@@ -37,7 +37,7 @@ chmod +x scripts/run-qa.sh
 
 Workflow `.github/workflows/ios.yml` roda build + `AppLocalizationQATests` (screenshots README ficam de fora).
 
-SPM no CI usa `XCLocalSwiftPackageReference` (`relativePath = .` → `Package.swift` na raiz). **Não** commitar `file:///Users/...` no `project.pbxproj`. Xcode 14.2 local: `./scripts/configure-spm-xcode14.sh`.
+SPM no CI: ver [`CI.md`](CI.md). Pipeline: [`scripts/ci-modern.sh`](../scripts/ci-modern.sh) via [`.github/workflows/ios.yml`](../.github/workflows/ios.yml).
 
 ## Screenshots README
 

@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# QA automatizado local — espelha CI (build + testes de localização).
+# QA local (tipicamente Xcode 14.2 após configure-spm-xcode14.sh).
+# Para o mesmo gate do GitHub Actions (Xcode recente): ./scripts/ci-modern.sh
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
