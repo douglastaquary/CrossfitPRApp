@@ -60,6 +60,14 @@ fi
 echo "==> Build"
 "${XCB[@]}" build
 
+echo "==> Build watchOS (CrossfitPRWatch embed)"
+WATCH_DEST="${WATCH_DEST:-generic/platform=watchOS Simulator}"
+WATCH_XCB=(xcodebuild -scheme "$SCHEME" -project "$PROJECT" -destination "$WATCH_DEST" -allowProvisioningUpdates)
+if [[ "${CODE_SIGNING_ALLOWED:-YES}" == "NO" ]]; then
+  WATCH_XCB+=(CODE_SIGNING_ALLOWED=NO)
+fi
+"${WATCH_XCB[@]}" build
+
 echo "==> UI tests (AppLocalizationQATests)"
 "${XCB[@]}" test \
   -only-testing:CrossfitPRUITests/AppLocalizationQATests \

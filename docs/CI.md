@@ -17,7 +17,8 @@ Arquivo: [`.github/workflows/ios.yml`](../.github/workflows/ios.yml)
 - **Runner:** `macos-15`
 - **Xcode:** `maxim-lobanov/setup-xcode@v1` com `latest-stable`
 - **Script:** [`scripts/ci-modern.sh`](../scripts/ci-modern.sh)
-  - Build app
+  - Build app (iOS)
+  - Build **CrossfitPRWatch** (`generic/platform=watchOS Simulator`)
   - `AppLocalizationQATests` (pt/en)
   - `swift test` em `Packages/Localization` e `Packages/Domain`
   - Falha se `project.pbxproj` tiver `file:///Users/...` (evita push acidental pós configure local)

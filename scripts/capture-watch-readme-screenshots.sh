@@ -5,37 +5,25 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 DOCS="$ROOT/docs/screenshots"
 BUNDLE_ID="com.douglast.CrossfitPR.watchkitapp"
-WATCH_NAME="${WATCH_SIM_NAME:-Apple Watch Series 8 (45mm)}"
+PICK_SCRIPT="${ROOT}/scripts/pick-watch-simulator.rb"
 
 mkdir -p "$DOCS"
 
-echo "→ Build CrossfitPR + Watch (simulador Watch)"
+WATCH_LINE="$(xcrun simctl list devices available -j | ruby "$PICK_SCRIPT")"
+WATCH_UDID="${WATCH_LINE%%$'\t'*}"
+WATCH_LABEL="${WATCH_LINE#*$'\t'}"
+echo "→ Simulador: $WATCH_LABEL ($WATCH_UDID)"
+
+echo "→ Build CrossfitPR + Watch"
 xcodebuild build \
   -scheme CrossfitPR \
   -project "$ROOT/CrossfitPR.xcodeproj" \
-  -destination "platform=watchOS Simulator,name=$WATCH_NAME" \
+  -destination "platform=watchOS Simulator,id=${WATCH_UDID}" \
   -allowProvisioningUpdates \
   CODE_SIGNING_ALLOWED=NO
 
-WATCH_UDID="$(xcrun simctl list devices available -j | ruby -e "
-require 'json'
-name = ARGV[0]
-JSON.parse(STDIN.read)['devices'].each_value do |list|
-  list.each do |d|
-    next unless d['name'] == name && d['isAvailable']
-    puts d['udid']
-    exit
-  end
-end
-" "$WATCH_NAME")"
-
-if [[ -z "$WATCH_UDID" ]]; then
-  echo "⚠️  Simulador Watch não encontrado: $WATCH_NAME"
-  echo "    Liste: xcrun simctl list devices available | grep Watch"
-  exit 1
-fi
-
 xcrun simctl boot "$WATCH_UDID" 2>/dev/null || true
+xcrun simctl bootstatus "$WATCH_UDID" -b 2>/dev/null || true
 
 APP_PATH="$(find "$HOME/Library/Developer/Xcode/DerivedData" -path "*Build/Products/Debug-watchsimulator/CrossfitPRWatch.app" -print -quit 2>/dev/null || true)"
 if [[ -z "$APP_PATH" || ! -d "$APP_PATH" ]]; then
@@ -44,11 +32,18 @@ if [[ -z "$APP_PATH" || ! -d "$APP_PATH" ]]; then
 fi
 
 xcrun simctl install "$WATCH_UDID" "$APP_PATH"
-xcrun simctl launch "$WATCH_UDID" "$BUNDLE_ID" || true
-sleep 3
 
-xcrun simctl io "$WATCH_UDID" screenshot "$DOCS/watch-session.png"
-echo "   $DOCS/watch-session.png (tab Sessão — troque tabs manualmente ou estenda o script)"
+capture_tab() {
+  local tab="$1"
+  local outfile="$2"
+  xcrun simctl launch --terminate-running-process "$WATCH_UDID" "$BUNDLE_ID" -WatchSnapshotTab "$tab" >/dev/null
+  sleep 2
+  xcrun simctl io "$WATCH_UDID" screenshot "$outfile"
+  echo "   $outfile (tab $tab)"
+}
 
-echo "→ Para rest/breath: navegue no simulador e rode:"
-echo "   xcrun simctl io $WATCH_UDID screenshot $DOCS/watch-rest.png"
+capture_tab 0 "$DOCS/watch-session.png"
+capture_tab 1 "$DOCS/watch-rest.png"
+capture_tab 2 "$DOCS/watch-breath.png"
+
+echo "→ Capturas watch concluídas em $DOCS"

@@ -36,6 +36,7 @@
 		4E58077527F3C5B100F16219 /* WatchEventSink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E58077627F3C5B100F16219 /* WatchEventSink.swift */; };
 		4E58077727F3C5B100F16219 /* WatchRestTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E58077827F3C5B100F16219 /* WatchRestTimerView.swift */; };
 		4E58077927F3C5B100F16219 /* WatchBreathingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E58077A27F3C5B100F16219 /* WatchBreathingView.swift */; };
+		4E58077B27F3C5B100F16219 /* WatchCompanionLaunchConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E58077C27F3C5B100F16219 /* WatchCompanionLaunchConfig.swift */; };
 		4E58076B27F3C5B100F16219 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4E58076C27F3C5B100F16219 /* Localizable.strings */; };
 		4E58076D27F3C5B100F16219 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4E58076E27F3C5B100F16219 /* Localizable.strings */; };
 /* End PBXBuildFile section */
@@ -64,6 +65,7 @@
 		4E58077627F3C5B100F16219 /* WatchEventSink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WatchEventSink.swift; path = Packages/WatchCompanion/Sources/WatchCompanion/WatchEventSink.swift; sourceTree = SOURCE_ROOT; };
 		4E58077827F3C5B100F16219 /* WatchRestTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WatchRestTimerView.swift; path = Packages/WatchCompanion/Sources/WatchCompanion/WatchRestTimerView.swift; sourceTree = SOURCE_ROOT; };
 		4E58077A27F3C5B100F16219 /* WatchBreathingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WatchBreathingView.swift; path = Packages/WatchCompanion/Sources/WatchCompanion/WatchBreathingView.swift; sourceTree = SOURCE_ROOT; };
+		4E58077C27F3C5B100F16219 /* WatchCompanionLaunchConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WatchCompanionLaunchConfig.swift; path = Packages/WatchCompanion/Sources/WatchCompanion/WatchCompanionLaunchConfig.swift; sourceTree = SOURCE_ROOT; };
 		4E58076C27F3C5B100F16219 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Localizable.strings; path = Packages/WatchCompanion/Sources/WatchCompanion/Resources/en.lproj/Localizable.strings; sourceTree = SOURCE_ROOT; };
 		4E58076E27F3C5B100F16219 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Localizable.strings; path = Packages/WatchCompanion/Sources/WatchCompanion/Resources/pt-BR.lproj/Localizable.strings; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -181,6 +183,7 @@
 			children = (
 				4E58076627F3C5B100F16219 /* WatchPOCViews.swift */,
 				4E58076827F3C5B100F16219 /* WatchCompanionRootView.swift */,
+				4E58077C27F3C5B100F16219 /* WatchCompanionLaunchConfig.swift */,
 				4E58077627F3C5B100F16219 /* WatchEventSink.swift */,
 				4E58077827F3C5B100F16219 /* WatchRestTimerView.swift */,
 				4E58077A27F3C5B100F16219 /* WatchBreathingView.swift */,
@@ -391,6 +394,7 @@
 				4E58077327F3C5B100F16219 /* WatchLinkBootstrap.swift in Sources */,
 				4E58076527F3C5B100F16219 /* WatchPOCViews.swift in Sources */,
 				4E58076727F3C5B100F16219 /* WatchCompanionRootView.swift in Sources */,
+				4E58077B27F3C5B100F16219 /* WatchCompanionLaunchConfig.swift in Sources */,
 				4E58077527F3C5B100F16219 /* WatchEventSink.swift in Sources */,
 				4E58077727F3C5B100F16219 /* WatchRestTimerView.swift in Sources */,
 				4E58077927F3C5B100F16219 /* WatchBreathingView.swift in Sources */,

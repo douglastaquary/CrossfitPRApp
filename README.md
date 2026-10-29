@@ -42,7 +42,7 @@ CrossfitPR é um app iOS feito para quem treina CrossFit e quer histórico claro
   <img src="docs/screenshots/watch-breath.png" width="140" alt="Watch — respiração">
 </p>
 
-> Target **CrossfitPRWatch** (watchOS 9+) — capturas: [`docs/WATCH-POC.md`](docs/WATCH-POC.md). Próximo: WatchConnectivity.
+> Target **CrossfitPRWatch** (watchOS 9+) — sync via WatchConnectivity para o coach no iPhone. Capturas: [`docs/WATCH-POC.md`](docs/WATCH-POC.md).
 
 ---
 
