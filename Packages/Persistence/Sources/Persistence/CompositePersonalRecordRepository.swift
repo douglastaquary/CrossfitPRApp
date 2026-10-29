@@ -63,4 +63,14 @@ public enum PersistenceFactory {
             remote: CloudKitPersonalRecordRepository()
         )
     }
+
+    public static func makeWorkoutSessionRepository(inMemory: Bool = false) -> any WorkoutSessionRepository {
+        if inMemory {
+            return LocalWorkoutSessionRepository.inMemory()
+        }
+        if let local = try? LocalWorkoutSessionRepository.makeDefault() {
+            return local
+        }
+        return LocalWorkoutSessionRepository.inMemory()
+    }
 }
