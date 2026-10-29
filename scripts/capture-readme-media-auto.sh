@@ -75,8 +75,11 @@ elif command -v convert >/dev/null 2>&1; then
     "$DOCS/screenshots/onboarding.png" \
     "$DOCS/screenshots/categories.png" \
     "$DOCS/screenshots/insights-free.png" \
+    "$DOCS/screenshots/insights-free-empty.png" \
     "$DOCS/screenshots/insights-pro.png" \
+    "$DOCS/screenshots/insights-pro-empty.png" \
     "$DOCS/screenshots/insights-elite.png" \
+    "$DOCS/screenshots/insights-elite-empty.png" \
     "$DOCS/screenshots/pro-upgrade.png" \
     "$DOCS/screenshots/settings.png" \
     -resize 390x \
