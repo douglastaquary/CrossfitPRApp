@@ -7,13 +7,13 @@
 | `en` | Inglês |
 | `pt-BR` | Português (Brasil) — **fallback** do pacote (`defaultLocalization`) |
 
-O idioma exibido segue a **preferência de idioma do dispositivo** (Settings → General → Language). O iOS escolhe o melhor `.lproj` disponível no bundle do pacote `Localization`.
+O idioma exibido segue a **preferência de idioma do dispositivo** (Settings → General → Language). O app declara `en` e `pt-BR` em `CFBundleLocalizations` (`CrossfitPR/Info.plist`) para o pacote SPM poder usar os dois `.lproj`. Nos UI tests, `-AppleLanguages (en)` ou `(pt-BR)` escolhe o `.lproj` direto — não coloque `AppleLanguages` em `launchEnvironment`.
 
 ## Onde ficam as strings
 
 - Arquivos: `Packages/Localization/Sources/Localization/Resources/en.lproj/Localizable.strings` e `pt-BR.lproj/Localizable.strings`
 - API Swift: `Strings.*` em `Packages/Localization/Sources/Localization/Strings.swift`
-- Resolução: `NSLocalizedString(key, bundle: .module, comment: "")`
+- Resolução: `Strings.tr` abre o `.lproj` de `-AppleLanguages` quando o processo foi lançado com esse argumento; sem o argumento, usa `Bundle.module`.
 
 ## Adicionar copy nova
 
