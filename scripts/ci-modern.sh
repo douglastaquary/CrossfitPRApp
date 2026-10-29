@@ -77,9 +77,25 @@ xcrun simctl boot "$SIM_UDID" 2>/dev/null || true
 xcrun simctl bootstatus "$SIM_UDID" -b 2>/dev/null || true
 
 BUILD_CONFIG="${BUILD_CONFIG:-Debug}"
-XCB=(xcodebuild -scheme "$SCHEME" -project "$PROJECT" -destination "$DEST" -configuration "$BUILD_CONFIG" -allowProvisioningUpdates)
+# CODE_SIGNING_ALLOWED=NO no workflow significa "sem conta Apple". No Xcode 26
+# isso não pode ir literal para o xcodebuild: o app sai ad hoc ("-") e o
+# Watch em PlugIns/ fica sem assinatura. ValidateEmbeddedBinary e
+# RegisterExecutionPolicyException falham. Ad hoc igual nos dois, sem team.
+SIGNING_OVERRIDES=()
 if [[ "${CODE_SIGNING_ALLOWED:-YES}" == "NO" ]]; then
-  XCB+=(CODE_SIGNING_ALLOWED=NO)
+  SIGNING_OVERRIDES+=(
+    CODE_SIGN_STYLE=Manual
+    "DEVELOPMENT_TEAM="
+    "CODE_SIGN_IDENTITY=-"
+    CODE_SIGNING_ALLOWED=YES
+    CODE_SIGNING_REQUIRED=NO
+    AD_HOC_CODE_SIGNING_ALLOWED=YES
+    "PROVISIONING_PROFILE_SPECIFIER="
+  )
+fi
+XCB=(xcodebuild -scheme "$SCHEME" -project "$PROJECT" -destination "$DEST" -configuration "$BUILD_CONFIG" -allowProvisioningUpdates)
+if ((${#SIGNING_OVERRIDES[@]})); then
+  XCB+=("${SIGNING_OVERRIDES[@]}")
 fi
 if ((${#ARCH_OVERRIDES[@]})); then
   XCB+=("${ARCH_OVERRIDES[@]}")
@@ -94,8 +110,8 @@ echo "==> Build ($BUILD_CONFIG)"
 echo "==> Build watchOS (CrossfitPRWatch embed)"
 WATCH_DEST="${WATCH_DEST:-generic/platform=watchOS Simulator}"
 WATCH_XCB=(xcodebuild -scheme "$SCHEME" -project "$PROJECT" -destination "$WATCH_DEST" -configuration "$BUILD_CONFIG" -allowProvisioningUpdates)
-if [[ "${CODE_SIGNING_ALLOWED:-YES}" == "NO" ]]; then
-  WATCH_XCB+=(CODE_SIGNING_ALLOWED=NO)
+if ((${#SIGNING_OVERRIDES[@]})); then
+  WATCH_XCB+=("${SIGNING_OVERRIDES[@]}")
 fi
 if ((${#ARCH_OVERRIDES[@]})); then
   WATCH_XCB+=("${ARCH_OVERRIDES[@]}")

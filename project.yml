@@ -72,6 +72,7 @@ targets:
     dependencies:
       - target: CrossfitPRWatch
         embed: true
+        codeSign: true
       - package: CrossfitPRPackages
         product: Domain
       - package: CrossfitPRPackages
