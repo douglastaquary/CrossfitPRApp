@@ -227,7 +227,7 @@
 "tab.prs" = "PRs";
 "tabbar.myrecords.title" = "My PRs";
 "tabbar.categories.title" = "Exercises";
-"tabbar.insights.title" = "Progress";
+"tabbar.insights.title" = "Insights";
 "tabbar.settings.title" = "Settings";
 
 /* ─────────────────────────────────────────────────────────────
@@ -242,7 +242,7 @@
 
 "screen.records.title" = "My PRs";
 "screen.category.title" = "Exercises";
-"screen.insights.title" = "Progress";
+"screen.insights.title" = "Insights";
 "screen.settings.title" = "Settings";
 
 /* ─────────────────────────────────────────────────────────────
@@ -461,3 +461,29 @@
    ───────────────────────────────────────────────────────────── */
 
 "ranking.screen.evolution.percentage %@" = "You improved %@ since your last PR!";
+
+/* CPR-011 Insights hub */
+"insight.hub.summary.title" = "Summary";
+"insight.hub.summary.prs" = "PRs";
+"insight.hub.summary.bestLift" = "Best lift";
+"insight.hub.summary.consistency" = "Movements";
+"insight.hub.engine.title" = "Your insights";
+"insight.hub.session.title" = "Last workout";
+"insight.hub.sessions.title" = "Recent workouts";
+"insight.hub.metric.activeCalories" = "Active calories";
+"insight.hub.metric.totalCalories" = "Total calories";
+"insight.hub.metric.exerciseTime" = "Exercise time";
+"insight.hub.metric.duration" = "Duration";
+"insight.hub.metric.averageHR" = "Average heart rate";
+"insight.hub.health.connect" = "Connect Apple Watch or allow Health access to see heart rate and calories.";
+"insight.hub.recovery.title" = "Recovery";
+"insight.hub.recovery.message" = "You used breath or rest on Watch — great for the next block.";
+"insight.hub.locked.title" = "More insights with PRO";
+"insight.hub.locked.message" = "Unlock plateaus, targets, coach, and Elite assessment with richer charts.";
+"insight.hub.upgrade.cta" = "See PRO and Elite plans";
+"insight.hub.chart.teaser.title" = "Your curve";
+"insight.teaser.empty.title" = "Start your insights";
+"insight.teaser.empty.message" = "Log a PR to see clear trends and tips — Fitness-style.";
+"insight.pro.empty.title" = "No data yet";
+"insight.pro.empty.message" = "Log PRs or a session to see summary, metrics, and insights here.";
+

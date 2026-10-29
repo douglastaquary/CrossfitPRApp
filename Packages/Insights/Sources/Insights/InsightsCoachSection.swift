@@ -16,7 +16,7 @@ struct InsightsCoachSection: View {
         VStack(alignment: .leading, spacing: 12) {
             HStack {
                 Text(Strings.Insights.Coach.title)
-                    .font(.headline)
+                    .font(AppDesign.Typography.sectionTitle)
                 Spacer()
                 if coachingClient.isLoading {
                     ProgressView()

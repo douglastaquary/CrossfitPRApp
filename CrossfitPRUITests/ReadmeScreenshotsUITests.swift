@@ -26,6 +26,7 @@ final class ReadmeScreenshotsUITests: XCTestCase {
         let app = XCUIApplication()
         app.launchArguments += ["-AppleLanguages", "(pt-BR)", "-AppleLocale", "pt_BR"]
         app.launchEnvironment["UITEST_SKIP_SPLASH"] = "1"
+        app.launchEnvironment["UITEST_SEED_SCENARIO"] = "empty"
         app.launch()
 
         let onboardingCTA = app.buttons["onboarding.cta"]
@@ -41,9 +42,9 @@ final class ReadmeScreenshotsUITests: XCTestCase {
         _ = app.navigationBars["Meus PRs"].waitForExistence(timeout: 5)
         saveScreenshot(named: "records-empty")
 
-        app.tabBars.buttons["Evolução"].tap()
-        _ = app.navigationBars["Evolução"].waitForExistence(timeout: 5)
-        saveScreenshot(named: "insights-free")
+        app.tabBars.buttons["Percepções"].tap()
+        _ = app.navigationBars["Percepções"].waitForExistence(timeout: 5)
+        saveScreenshot(named: "insights-free-empty")
 
         let proCTA = app.descendants(matching: .any).matching(identifier: "insights.teaser.pro.cta").firstMatch
         XCTAssertTrue(proCTA.waitForExistence(timeout: 8))
@@ -60,11 +61,16 @@ final class ReadmeScreenshotsUITests: XCTestCase {
         app.tabBars.buttons["Ajustes"].tap()
         _ = app.navigationBars["Ajustes"].waitForExistence(timeout: 5)
         saveScreenshot(named: "settings")
+        app.terminate()
+
+        captureInsightsScreenshot(tier: "free", seed: "freeTeaser", fileName: "insights-free")
     }
 
     func testCaptureInsightsProAndElite() throws {
-        captureInsightsScreenshot(tier: "pro", fileName: "insights-pro")
-        captureInsightsScreenshot(tier: "elite", fileName: "insights-elite")
+        captureInsightsScreenshot(tier: "pro", seed: "proRich", fileName: "insights-pro")
+        captureInsightsScreenshot(tier: "elite", seed: "eliteRich", fileName: "insights-elite")
+        captureInsightsScreenshot(tier: "pro", seed: "empty", fileName: "insights-pro-empty")
+        captureInsightsScreenshot(tier: "elite", seed: "empty", fileName: "insights-elite-empty")
     }
 
     /// Percorre as tabs lentamente — rode com `simctl recordVideo` em paralelo.
@@ -76,7 +82,7 @@ final class ReadmeScreenshotsUITests: XCTestCase {
             app.buttons["Bora começar"].tap()
         }
 
-        let tabs = ["Exercícios", "Meus PRs", "Evolução", "Ajustes"]
+        let tabs = ["Exercícios", "Meus PRs", "Percepções", "Ajustes"]
         for _ in 0 ..< 2 {
             for tab in tabs {
                 app.tabBars.buttons[tab].tap()
@@ -99,25 +105,37 @@ final class ReadmeScreenshotsUITests: XCTestCase {
         }
     }
 
-    private func captureInsightsScreenshot(tier: String, fileName: String) {
+    private func captureInsightsScreenshot(tier: String, seed: String, fileName: String) {
         let app = XCUIApplication()
         app.launchArguments += ["-AppleLanguages", "(pt-BR)", "-AppleLocale", "pt_BR"]
         app.launchEnvironment["UITEST_SKIP_SPLASH"] = "1"
         app.launchEnvironment["UITEST_SKIP_ONBOARDING"] = "1"
         app.launchEnvironment["UITEST_SUBSCRIPTION_TIER"] = tier
+        app.launchEnvironment["UITEST_SEED_SCENARIO"] = seed
         app.launchArguments += ["-UITEST_SUBSCRIPTION_TIER", tier]
+        app.launchArguments += ["-UITEST_SEED_SCENARIO", seed]
         app.launch()
 
-        let tab = app.tabBars.buttons["Evolução"]
+        let tab = app.tabBars.buttons["Percepções"]
         XCTAssertTrue(tab.waitForExistence(timeout: 15))
         tab.tap()
-        XCTAssertTrue(app.navigationBars["Evolução"].waitForExistence(timeout: 8))
+        XCTAssertTrue(app.navigationBars["Percepções"].waitForExistence(timeout: 8))
 
-        let targetID = tier == "pro" ? "insights.coach.section" : "insights.elite.section"
-        let target = element(app, identifier: targetID)
-        for _ in 0 ..< 4 {
-            if target.waitForExistence(timeout: 6) { break }
-            app.swipeUp()
+        if seed != "empty" {
+            let targetID: String
+            switch tier {
+            case "elite":
+                targetID = "insights.elite.section"
+            case "pro":
+                targetID = "insights.coach.section"
+            default:
+                targetID = "insights.teaser.pro.cta"
+            }
+            let target = element(app, identifier: targetID)
+            for _ in 0 ..< 5 {
+                if target.waitForExistence(timeout: 4) { break }
+                app.swipeUp()
+            }
         }
 
         saveScreenshot(named: fileName)
