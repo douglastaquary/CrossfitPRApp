@@ -32,6 +32,10 @@ settings:
     SWIFT_VERSION: "5.0"
   configs:
     Debug:
+      # XcodeGen não emite o default do template (YES no Debug). Sem isto o
+      # xcodebuild compila todas as ARCHS do simulador; no CI arm64 o SPM só
+      # gera .swiftmodule arm64 e o slice x86_64 quebra o import.
+      ONLY_ACTIVE_ARCH: YES
       SWIFT_OPTIMIZATION_LEVEL: -Onone
       SWIFT_ACTIVE_COMPILATION_CONDITIONS: DEBUG
     Release:

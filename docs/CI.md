@@ -31,7 +31,7 @@ chmod +x scripts/ci-modern.sh
 CODE_SIGNING_ALLOWED=NO ./scripts/ci-modern.sh
 ```
 
-Simulador padrão: **iPhone 17 Pro** (runtime iOS mais novo no runner), destino `id=<UDID>`. Overrides: `SIM_DEVICE`, `SIM_OS=26.5`, `SIM_UDID`, ou `SIM_DEST='platform=iOS Simulator,name=…,OS=…'`.
+Simulador padrão: **iPhone 17 Pro** (runtime iOS mais novo no runner), destino `id=<UDID>`. Em host **arm64** o destino ganha `arch=arm64` e o `xcodebuild` recebe `EXCLUDED_ARCHS` de `x86_64` nos SDKs de simulador — o SPM só emite módulos da arch do host; um slice x86_64 quebra com `could not find module 'Application'`. Overrides: `SIM_DEVICE`, `SIM_OS=26.5`, `SIM_UDID`, ou `SIM_DEST='platform=iOS Simulator,name=…,OS=…'`.
 
 ## Xcode 14.2 local
 

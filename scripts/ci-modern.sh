@@ -50,8 +50,27 @@ if [[ -n "${SIM_DEST:-}" ]]; then
   DEST="$SIM_DEST"
 else
   DEST="platform=iOS Simulator,id=${SIM_UDID}"
+  # arch= no destino fixa o slice ativo. Sem isto o Xcode 26 no runner arm64
+  # ainda agenda compile x86_64 (GeneratedAssetSymbols) contra módulos SPM arm64.
+  if [[ "$(uname -m)" == "arm64" ]]; then
+    DEST="${DEST},arch=arm64"
+  fi
 fi
 echo "    destination: $DEST"
+
+# macos-15 é arm64. ARCHS do iphonesimulator inclui x86_64; os produtos SPM
+# (Application, etc.) só emitem a arch do host. O app então falha com:
+# could not find module 'Application' for target 'x86_64-apple-ios-simulator'.
+# Não vai para project.yml: a máquina local de dev é Intel (simulador x86_64).
+ARCH_OVERRIDES=()
+if [[ "$(uname -m)" == "arm64" ]]; then
+  ARCH_OVERRIDES+=(
+    ONLY_ACTIVE_ARCH=YES
+    ARCHS=arm64
+    "EXCLUDED_ARCHS[sdk=iphonesimulator*]=x86_64"
+    "EXCLUDED_ARCHS[sdk=watchsimulator*]=x86_64"
+  )
+fi
 
 echo "==> Boot simulator (UI tests)"
 xcrun simctl boot "$SIM_UDID" 2>/dev/null || true
@@ -61,6 +80,9 @@ BUILD_CONFIG="${BUILD_CONFIG:-Debug}"
 XCB=(xcodebuild -scheme "$SCHEME" -project "$PROJECT" -destination "$DEST" -configuration "$BUILD_CONFIG" -allowProvisioningUpdates)
 if [[ "${CODE_SIGNING_ALLOWED:-YES}" == "NO" ]]; then
   XCB+=(CODE_SIGNING_ALLOWED=NO)
+fi
+if ((${#ARCH_OVERRIDES[@]})); then
+  XCB+=("${ARCH_OVERRIDES[@]}")
 fi
 
 echo "==> Resolve Package Graph"
@@ -74,6 +96,9 @@ WATCH_DEST="${WATCH_DEST:-generic/platform=watchOS Simulator}"
 WATCH_XCB=(xcodebuild -scheme "$SCHEME" -project "$PROJECT" -destination "$WATCH_DEST" -configuration "$BUILD_CONFIG" -allowProvisioningUpdates)
 if [[ "${CODE_SIGNING_ALLOWED:-YES}" == "NO" ]]; then
   WATCH_XCB+=(CODE_SIGNING_ALLOWED=NO)
+fi
+if ((${#ARCH_OVERRIDES[@]})); then
+  WATCH_XCB+=("${ARCH_OVERRIDES[@]}")
 fi
 "${WATCH_XCB[@]}" build
 
