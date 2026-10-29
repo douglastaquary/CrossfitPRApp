@@ -69,7 +69,6 @@ targets:
         PRODUCT_NAME: CrossfitPR
         SWIFT_EMIT_LOC_STRINGS: YES
         TARGETED_DEVICE_FAMILY: "1,2"
-        ENABLE_USER_SCRIPT_SANDBOXING: NO
     dependencies:
       - target: CrossfitPRWatch
         embed: true
@@ -96,30 +95,6 @@ targets:
         product: Settings
       - package: CrossfitPRPackages
         product: Launch
-    postBuildScripts:
-      - name: Bind embedded Watch Info.plist
-        basedOnDependencyAnalysis: false
-        shell: /bin/bash
-        script: |
-          # Depois do embed e antes do ValidateEmbeddedBinary. O CodeSign do
-          # Xcode 26 no watchsimulator deixa Info.plist=not bound; o validador
-          # lê o plist pela assinatura e falha com "Couldn't load Info dictionary".
-          if [[ "${GITHUB_ACTIONS:-}" != "true" ]]; then
-            exit 0
-          fi
-          app="${TARGET_BUILD_DIR}/${WRAPPER_NAME}/PlugIns/CrossfitPRWatch.app"
-          if [[ ! -d "$app" ]]; then
-            echo "CrossfitPRWatch.app não foi embutido em PlugIns/"
-            exit 1
-          fi
-          echo "Selando Info.plist em $app"
-          /usr/bin/codesign --force --sign - --timestamp=none "$app"
-          sign_out="$(/usr/bin/codesign -dv "$app" 2>&1 || true)"
-          echo "$sign_out"
-          if echo "$sign_out" | /usr/bin/grep -q "Info.plist=not bound"; then
-            echo "Info.plist do Watch continua fora da assinatura"
-            exit 1
-          fi
 
   CrossfitPRWatch:
     type: application

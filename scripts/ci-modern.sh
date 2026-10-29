@@ -110,10 +110,13 @@ xcrun simctl pair "$WATCH_UDID" "$SIM_UDID" || true
 
 BUILD_CONFIG="${BUILD_CONFIG:-Debug}"
 # Sem conta Apple. O iPhone sai ad hoc ("-"), sem entitlements de iCloud.
-# O script do app sela o Watch em PlugIns/: o CodeSign do Xcode 26 deixa
-# Info.plist=not bound e o ValidateEmbeddedBinary não lê o plist.
+# O Watch compila à parte. Não entra no .app do simulador: a assinatura ad hoc
+# do watchsimulator deixa Info.plist=not bound e o ValidateEmbeddedBinary
+# falha com "Couldn't load Info dictionary". codesign --force não sela o plist.
 SIGNING_OVERRIDES=()
+SKIP_WATCH_EMBED=0
 if [[ "${CODE_SIGNING_ALLOWED:-YES}" == "NO" ]]; then
+  SKIP_WATCH_EMBED=1
   SIGNING_OVERRIDES+=(
     CODE_SIGN_STYLE=Manual
     "DEVELOPMENT_TEAM="
@@ -132,6 +135,9 @@ if ((${#SIGNING_OVERRIDES[@]})); then
 fi
 if ((${#ARCH_OVERRIDES[@]})); then
   XCB+=("${ARCH_OVERRIDES[@]}")
+fi
+if [[ "$SKIP_WATCH_EMBED" == "1" ]]; then
+  XCB+=(EXCLUDED_SOURCE_FILE_NAMES=CrossfitPRWatch.app)
 fi
 
 echo "==> Resolve Package Graph"
