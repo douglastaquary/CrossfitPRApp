@@ -190,9 +190,12 @@ if [[ -z "$WATCH_PRODUCT" ]]; then
 fi
 echo "==> Watch product: $WATCH_PRODUCT"
 
-echo "==> Build iOS ($BUILD_CONFIG) com destino do Watch pareado"
+# O scheme CrossfitPR só lista destinos iOS. Passar o simulador watchOS aqui
+# faz o xcodebuild abortar ("Unable to find a destination"), mesmo com o
+# companion já compilado via -target.
+echo "==> Build iOS ($BUILD_CONFIG)"
 set +e
-"${XCB[@]}" -destination "$WATCH_SIM_DEST" build
+"${XCB[@]}" build
 ios_status=$?
 set -e
 if [[ "$ios_status" -ne 0 ]]; then
