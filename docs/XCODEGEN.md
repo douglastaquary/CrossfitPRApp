@@ -8,8 +8,7 @@ O projeto Xcode é **gerado** a partir de [`project.yml`](../project.yml). Não 
 ./scripts/generate-xcodeproj.sh
 ```
 
-- **CI (macOS 15):** `brew install xcodegen` + gate em `scripts/verify-xcodeproj-sync.sh` (via `ci-modern.sh`).
-- **Mac sem Homebrew (ex. macOS 12 + Xcode 14.2):** o script baixa XcodeGen **2.46.0** para `.tools/` (ignorado pelo git).
+- **CI e local:** `./scripts/generate-xcodeproj.sh` sempre usa XcodeGen **2.46.0** em `.tools/` (download automático; ignorado pelo git). Não depende do `brew install xcodegen` — versões diferentes quebram o gate `verify-xcodeproj-sync.sh`.
 
 Formato do projeto: **`projectFormat: xcode14_0`** (`objectVersion = 56`) — abre no **Xcode 14.2** local e no Xcode recente do GitHub Actions.
 

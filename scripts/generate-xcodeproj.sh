@@ -8,16 +8,17 @@ SPEC="${ROOT}/project.yml"
 XCODEGEN_VERSION="${XCODEGEN_VERSION:-2.46.0}"
 CACHE_DIR="${ROOT}/.tools/xcodegen"
 
-find_xcodegen() {
-  if command -v xcodegen >/dev/null 2>&1; then
-    command -v xcodegen
-    return 0
-  fi
-  if [[ -x "$CACHE_DIR/bin/xcodegen" ]]; then
-    echo "$CACHE_DIR/bin/xcodegen"
-    return 0
-  fi
-  return 1
+pinned_xcodegen_path() {
+  echo "$CACHE_DIR/bin/xcodegen"
+}
+
+pinned_xcodegen_ready() {
+  local bin
+  bin="$(pinned_xcodegen_path)"
+  [[ -x "$bin" ]] || return 1
+  local ver
+  ver="$("$bin" --version 2>/dev/null | awk '{print $NF}')"
+  [[ "$ver" == "$XCODEGEN_VERSION" ]]
 }
 
 install_xcodegen_to_cache() {
@@ -34,14 +35,19 @@ install_xcodegen_to_cache() {
   chmod +x "$CACHE_DIR/bin/xcodegen"
 }
 
-XCODEGEN="$(find_xcodegen)" || {
+if ! pinned_xcodegen_ready; then
   install_xcodegen_to_cache
-  XCODEGEN="$(find_xcodegen)"
-}
+fi
+XCODEGEN="$(pinned_xcodegen_path)"
+if ! pinned_xcodegen_ready; then
+  echo "ERROR: não foi possível instalar XcodeGen ${XCODEGEN_VERSION} em ${CACHE_DIR}"
+  exit 1
+fi
 
-echo "→ XcodeGen: $($XCODEGEN --version)"
+echo "→ XcodeGen: $($XCODEGEN --version) (${CACHE_DIR})"
 echo "→ Gerando a partir de project.yml"
 "$XCODEGEN" generate --spec "$SPEC"
+bash "$ROOT/scripts/xcodegen-postgen.sh"
 
 echo ""
 echo "Pronto: CrossfitPR.xcodeproj"

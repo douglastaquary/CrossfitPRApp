@@ -17,7 +17,6 @@ options:
   # objectVersion 56 — abre no Xcode 14.2 local; Xcode 15+ no CI também lê.
   projectFormat: xcode14_0
   xcodeVersion: "14.2"
-  postGenCommand: bash scripts/xcodegen-postgen.sh
 
 packages:
   CrossfitPRPackages:
