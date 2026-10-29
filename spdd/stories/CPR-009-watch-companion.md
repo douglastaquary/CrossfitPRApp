@@ -15,8 +15,10 @@ para manter foco no box sem abrir o iPhone a todo momento.
 - [x] Eventos compactos (série, RPE, descanso) → `CoachingContextBuilder.sessionEvents`
 - [ ] Sem spam de notificações push
 - [ ] Comercial: add-on ou bundle PRO+Watch (canvas)
+- [ ] HealthKit no iPhone: FC média, calorias, duração → Insights (mock em UITest)
 
 ## Fases
 
 1. Read-only tips na sessão
 2. Captura real-time + sync
+3. HealthKit metrics → SessionBiometrics / Insights hub
