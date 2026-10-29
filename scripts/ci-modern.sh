@@ -93,7 +93,7 @@ if [[ "${CODE_SIGNING_ALLOWED:-YES}" == "NO" ]]; then
     "PROVISIONING_PROFILE_SPECIFIER="
   )
 fi
-XCB=(xcodebuild -scheme "$SCHEME" -project "$PROJECT" -destination "$DEST" -configuration "$BUILD_CONFIG" -allowProvisioningUpdates)
+XCB=(xcodebuild -scheme "$SCHEME" -project "$PROJECT" -destination "$DEST" -configuration "$BUILD_CONFIG" -allowProvisioningUpdates ENABLE_DEBUG_DYLIB=NO)
 if ((${#SIGNING_OVERRIDES[@]})); then
   XCB+=("${SIGNING_OVERRIDES[@]}")
 fi
@@ -109,7 +109,7 @@ echo "==> Build ($BUILD_CONFIG)"
 
 echo "==> Build watchOS (CrossfitPRWatch embed)"
 WATCH_DEST="${WATCH_DEST:-generic/platform=watchOS Simulator}"
-WATCH_XCB=(xcodebuild -scheme "$SCHEME" -project "$PROJECT" -destination "$WATCH_DEST" -configuration "$BUILD_CONFIG" -allowProvisioningUpdates)
+WATCH_XCB=(xcodebuild -scheme "$SCHEME" -project "$PROJECT" -destination "$WATCH_DEST" -configuration "$BUILD_CONFIG" -allowProvisioningUpdates ENABLE_DEBUG_DYLIB=NO)
 if ((${#SIGNING_OVERRIDES[@]})); then
   WATCH_XCB+=("${SIGNING_OVERRIDES[@]}")
 fi

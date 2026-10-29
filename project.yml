@@ -122,6 +122,10 @@ targets:
         MARKETING_VERSION: 1.0
         PRODUCT_BUNDLE_IDENTIFIER: com.douglast.CrossfitPR.watchkitapp
         PRODUCT_NAME: CrossfitPRWatch
+        # Xcode 26 no Debug troca o .app por stub + .debug.dylib. O embed em
+        # PlugIns/ então não tem Info.plist e o ValidateEmbeddedBinary falha
+        # com "Couldn't load Info dictionary".
+        ENABLE_DEBUG_DYLIB: NO
         SKIP_INSTALL: YES
         SWIFT_EMIT_LOC_STRINGS: YES
         TARGETED_DEVICE_FAMILY: 4
