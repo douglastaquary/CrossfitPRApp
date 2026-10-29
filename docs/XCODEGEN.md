@@ -10,7 +10,7 @@ open CrossfitPR.xcodeproj
 ```
 
 - **XcodeGen 2.46.0** é baixado para `.tools/` (ignorado pelo git) se ainda não existir.
-- **CI:** `ci-modern.sh` regera o projeto antes de cada build (`REGENERATE_XCODEPROJ=1`).
+- **CI:** `ci-modern.sh` regera o projeto antes de cada build (`REGENERATE_XCODEPROJ=1`). No GitHub Actions o generate usa **`projectFormat: xcode16_0`** (`objectVersion` 77 — SPM expõe módulos ao SwiftDriver no Xcode 26); local Xcode 14.2 continua com **`xcode14_0`** do `project.yml`. O spec temporário do CI usa `--project-root` na raiz do repo para paths relativos (`CrossfitPR/`, `Packages/`) não apontarem para `/tmp`.
 
 Atalho se o `.xcodeproj` sumiu após clone:
 

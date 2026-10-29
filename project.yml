@@ -45,6 +45,7 @@ targets:
       - path: CrossfitPR
     settings:
       base:
+        SWIFT_ENABLE_EXPLICIT_MODULES: NO
         SDKROOT: iphoneos
         SUPPORTED_PLATFORMS: "iphoneos iphonesimulator"
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon

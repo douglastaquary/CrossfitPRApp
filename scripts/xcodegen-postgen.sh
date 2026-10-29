@@ -11,8 +11,12 @@ if [[ ! -f "$PBX" ]]; then
   exit 1
 fi
 
-if ! grep -q 'objectVersion = 56;' "$PBX"; then
-  echo "WARN: esperado objectVersion 56 (projectFormat xcode14_0) — verifique XcodeGen ≥ 2.45"
+if grep -q 'objectVersion = 56;' "$PBX"; then
+  echo "xcodegen-postgen: projectFormat xcode14_0 (local Xcode 14.2)"
+elif grep -qE 'objectVersion = (60|77);' "$PBX"; then
+  echo "xcodegen-postgen: projectFormat moderno (CI / Xcode 15+)"
+else
+  echo "WARN: objectVersion inesperado no pbxproj"
 fi
 
 export PBX_PATH="$PBX"

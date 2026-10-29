@@ -4,8 +4,27 @@ set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT"
-SPEC="${ROOT}/project.yml"
+SOURCE_SPEC="${ROOT}/project.yml"
+SPEC="${SOURCE_SPEC}"
+SPEC_TMP=""
 XCODEGEN_VERSION="${XCODEGEN_VERSION:-2.46.0}"
+
+# GitHub Actions (Xcode 26): projectFormat moderno — SPM injeta -I/-F no SwiftDriver.
+# Local Xcode 14.2: mantém xcode14_0 do project.yml (objectVersion 56).
+if [[ "${GITHUB_ACTIONS:-}" == "true" ]]; then
+  SPEC_TMP="$(mktemp -t crossfitpr-project.XXXXXX.yml)"
+  sed \
+    -e 's/projectFormat: xcode14_0/projectFormat: xcode16_0/' \
+    -e 's/xcodeVersion: "14.2"/xcodeVersion: "16.0"/' \
+    "$SOURCE_SPEC" > "$SPEC_TMP"
+  SPEC="$SPEC_TMP"
+  echo "→ CI: projectFormat xcode16_0 (SPM compatível com Xcode recente)"
+fi
+
+cleanup() {
+  [[ -n "$SPEC_TMP" && -f "$SPEC_TMP" ]] && rm -f "$SPEC_TMP"
+}
+trap cleanup EXIT
 CACHE_DIR="${ROOT}/.tools/xcodegen"
 
 pinned_xcodegen_path() {
@@ -45,8 +64,9 @@ if ! pinned_xcodegen_ready; then
 fi
 
 echo "→ XcodeGen: $($XCODEGEN --version) (${CACHE_DIR})"
-echo "→ Gerando a partir de project.yml"
-"$XCODEGEN" generate --spec "$SPEC"
+echo "→ Gerando a partir de ${SPEC##*/}"
+# --project-root: spec em /tmp (CI) ainda resolve CrossfitPR/, Packages/, etc. na raiz do repo.
+"$XCODEGEN" generate --spec "$SPEC" --project-root "$ROOT" --project "$ROOT"
 bash "$ROOT/scripts/xcodegen-postgen.sh"
 
 echo ""
