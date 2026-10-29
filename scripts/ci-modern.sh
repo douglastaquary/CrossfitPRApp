@@ -102,17 +102,17 @@ if [[ "$(uname -m)" == "arm64" ]]; then
   )
 fi
 
-echo "==> Boot simulator (UI tests) e parear Watch"
+echo "==> Boot simulator (UI tests)"
 xcrun simctl boot "$SIM_UDID" 2>/dev/null || true
 xcrun simctl bootstatus "$SIM_UDID" -b 2>/dev/null || true
-xcrun simctl boot "$WATCH_UDID" 2>/dev/null || true
-xcrun simctl pair "$WATCH_UDID" "$SIM_UDID" || true
+# Não parear o Watch: o companion não vai no .app e o pareamento deixa o
+# iPhone ocupado durante o XCUITest.
 
 BUILD_CONFIG="${BUILD_CONFIG:-Debug}"
-# Sem conta Apple. O iPhone sai ad hoc ("-"), sem entitlements de iCloud.
-# O Watch compila à parte. Não entra no .app do simulador: a assinatura ad hoc
-# do watchsimulator deixa Info.plist=not bound e o ValidateEmbeddedBinary
-# falha com "Couldn't load Info dictionary". codesign --force não sela o plist.
+# Sem conta Apple. O iPhone sai ad hoc ("-") com só get-task-allow, para o
+# XCUITest conseguir anexar. Sem esse entitlement o teste não vê a UI
+# ("Unable to monitor event loop"). O Watch compila à parte e não entra no
+# .app: a assinatura ad hoc do watchsimulator deixa Info.plist=not bound.
 SIGNING_OVERRIDES=()
 SKIP_WATCH_EMBED=0
 if [[ "${CODE_SIGNING_ALLOWED:-YES}" == "NO" ]]; then
@@ -125,7 +125,6 @@ if [[ "${CODE_SIGNING_ALLOWED:-YES}" == "NO" ]]; then
     CODE_SIGNING_REQUIRED=NO
     AD_HOC_CODE_SIGNING_ALLOWED=YES
     "PROVISIONING_PROFILE_SPECIFIER="
-    "CODE_SIGN_ENTITLEMENTS="
     COPY_PHASE_STRIP=NO
   )
 fi
@@ -138,6 +137,10 @@ if ((${#ARCH_OVERRIDES[@]})); then
 fi
 if [[ "$SKIP_WATCH_EMBED" == "1" ]]; then
   XCB+=(EXCLUDED_SOURCE_FILE_NAMES=CrossfitPRWatch.app)
+  XCB+=(
+    "CODE_SIGN_ENTITLEMENTS=CrossfitPR/CI-Simulator.entitlements"
+    CODE_SIGN_INJECT_BASE_ENTITLEMENTS=YES
+  )
 fi
 
 echo "==> Resolve Package Graph"
