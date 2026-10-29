@@ -31,7 +31,7 @@ chmod +x scripts/ci-modern.sh
 CODE_SIGNING_ALLOWED=NO ./scripts/ci-modern.sh
 ```
 
-`CODE_SIGNING_ALLOWED=NO` deixa o app e o Watch **sem assinatura**. Ad hoc no simulador do relógio faz o `ValidateEmbeddedBinary` do Xcode 26.3 falhar mesmo com `Info.plist` válido.
+`CODE_SIGNING_ALLOWED=NO` vira assinatura **ad hoc** (`CODE_SIGN_IDENTITY=-`), sem team e sem o entitlements de iCloud. O embed usa `CodeSignOnCopy`. Sem isso o Xcode 26.3 reescreve o executável do Watch em `PlugIns/` e o `ValidateEmbeddedBinary` falha.
 
 Simulador padrão: **iPhone 17 Pro** (runtime iOS mais novo no runner), destino `id=<UDID>`. O script compila `CrossfitPRWatch` com `-target` num Apple Watch pareado antes do app. O scheme do iPhone não recebe esse destino: o Xcode não o lista entre os destinos do scheme e o build aborta. Em host **arm64** os destinos ganham `arch=arm64` e o `xcodebuild` recebe `EXCLUDED_ARCHS` de `x86_64` nos SDKs de simulador. Overrides: `SIM_DEVICE`, `SIM_OS=26.5`, `SIM_UDID`, `SIM_DEST`, `WATCH_UDID`, `WATCH_DEVICE`, `WATCH_DEST`.
 

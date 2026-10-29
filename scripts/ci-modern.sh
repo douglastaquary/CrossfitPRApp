@@ -109,19 +109,22 @@ xcrun simctl boot "$WATCH_UDID" 2>/dev/null || true
 xcrun simctl pair "$WATCH_UDID" "$SIM_UDID" || true
 
 BUILD_CONFIG="${BUILD_CONFIG:-Debug}"
-# Sem conta Apple. Assinatura ad hoc ("-") grava _CodeSignature no .app
-# watchsimulator; o ValidateEmbeddedBinary do Xcode 26.3 então falha mesmo
-# com Info.plist válido. Os dois ficam sem assinatura.
+# Sem conta Apple. Os dois lados ficam ad hoc ("-"), sem entitlements de
+# iCloud/push: esse arquivo invalida a assinatura de simulador. Sem
+# CodeSignOnCopy o Xcode 26.3 encolhe o executável em PlugIns/ e o
+# ValidateEmbeddedBinary recusa o Watch mesmo com Info.plist válido.
 SIGNING_OVERRIDES=()
 if [[ "${CODE_SIGNING_ALLOWED:-YES}" == "NO" ]]; then
   SIGNING_OVERRIDES+=(
-    CODE_SIGNING_ALLOWED=NO
-    CODE_SIGNING_REQUIRED=NO
-    "CODE_SIGN_IDENTITY="
-    "EXPANDED_CODE_SIGN_IDENTITY="
-    "EXPANDED_CODE_SIGN_IDENTITY_NAME="
+    CODE_SIGN_STYLE=Manual
     "DEVELOPMENT_TEAM="
+    "CODE_SIGN_IDENTITY=-"
+    CODE_SIGNING_ALLOWED=YES
+    CODE_SIGNING_REQUIRED=NO
+    AD_HOC_CODE_SIGNING_ALLOWED=YES
     "PROVISIONING_PROFILE_SPECIFIER="
+    "CODE_SIGN_ENTITLEMENTS="
+    COPY_PHASE_STRIP=NO
   )
 fi
 XCB=(xcodebuild -scheme "$SCHEME" -project "$PROJECT" -destination "$DEST" -configuration "$BUILD_CONFIG" -allowProvisioningUpdates ENABLE_DEBUG_DYLIB=NO)
@@ -139,8 +142,12 @@ dump_watch_app() {
   local app="$1"
   echo "-- $app"
   ls -la "$app" || true
+  if [[ -f "$app/CrossfitPRWatch" ]]; then
+    echo "   executable bytes: $(wc -c < "$app/CrossfitPRWatch" | tr -d ' ')"
+    codesign -dv "$app" 2>&1 | head -20 || true
+  fi
   if [[ -f "$app/Info.plist" ]]; then
-    plutil -p "$app/Info.plist" | head -30 || true
+    plutil -p "$app/Info.plist" || true
   else
     echo "   (sem Info.plist)"
   fi
@@ -193,11 +200,14 @@ echo "==> Watch product: $WATCH_PRODUCT"
 # faz o xcodebuild abortar ("Unable to find a destination"), mesmo com o
 # companion já compilado via -target.
 echo "==> Build iOS ($BUILD_CONFIG)"
+mkdir -p "$ROOT/build"
 set +e
-"${XCB[@]}" build
-ios_status=$?
+"${XCB[@]}" build 2>&1 | tee "$ROOT/build/ios-build.log"
+ios_status=${PIPESTATUS[0]}
 set -e
 if [[ "$ios_status" -ne 0 ]]; then
+  echo "==> Erros do xcodebuild:"
+  grep -E "error:|warning:.*[Ee]mbed|ValidateEmbeddedBinary|Embedded binary|Foundation extension|CodeSign" "$ROOT/build/ios-build.log" | tail -40 || true
   echo "==> Embed falhou; produtos CrossfitPRWatch.app:"
   set +o pipefail
   while IFS= read -r app; do
