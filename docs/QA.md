@@ -26,7 +26,7 @@ Target `CrossfitPRUITests` → `AppLocalizationQATests`:
 | `UITEST_USE_STOREKIT` | `1` — StoreKit real + Products.storekit (manual) |
 | `OPENAI_API_KEY` | Só builds locais/prod manual — cloud coach; **nunca** no CI |
 
-Idioma: `-AppleLanguages (en)` ou `(pt-BR)` via `XCUIApplication.launchArguments` (e opcionalmente `AppleLanguages` / `AppleLocale` em `launchEnvironment`).
+Idioma: `-AppleLanguages (en)` ou `(pt-BR)` e `-AppleLocale` só em `launchArguments`. `AppleLanguages` no `launchEnvironment` faz o app cair no fallback pt-BR.
 
 **Wiring:** `AppEnvironment.make()` roda de forma **lazy** no primeiro render do app (`CrossfitPRApp`), para flags `UITEST_*` estarem visíveis no processo antes do composition root.
 
