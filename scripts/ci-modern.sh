@@ -109,19 +109,18 @@ xcrun simctl boot "$WATCH_UDID" 2>/dev/null || true
 xcrun simctl pair "$WATCH_UDID" "$SIM_UDID" || true
 
 BUILD_CONFIG="${BUILD_CONFIG:-Debug}"
-# CODE_SIGNING_ALLOWED=NO no workflow significa "sem conta Apple". No Xcode 26
-# isso não pode ir literal para o xcodebuild: o app sai ad hoc ("-") e o
-# Watch em PlugIns/ fica sem assinatura. ValidateEmbeddedBinary e
-# RegisterExecutionPolicyException falham. Ad hoc igual nos dois, sem team.
+# Sem conta Apple. Assinatura ad hoc ("-") grava _CodeSignature no .app
+# watchsimulator; o ValidateEmbeddedBinary do Xcode 26.3 então falha mesmo
+# com Info.plist válido. Os dois ficam sem assinatura.
 SIGNING_OVERRIDES=()
 if [[ "${CODE_SIGNING_ALLOWED:-YES}" == "NO" ]]; then
   SIGNING_OVERRIDES+=(
-    CODE_SIGN_STYLE=Manual
-    "DEVELOPMENT_TEAM="
-    "CODE_SIGN_IDENTITY=-"
-    CODE_SIGNING_ALLOWED=YES
+    CODE_SIGNING_ALLOWED=NO
     CODE_SIGNING_REQUIRED=NO
-    AD_HOC_CODE_SIGNING_ALLOWED=YES
+    "CODE_SIGN_IDENTITY="
+    "EXPANDED_CODE_SIGN_IDENTITY="
+    "EXPANDED_CODE_SIGN_IDENTITY_NAME="
+    "DEVELOPMENT_TEAM="
     "PROVISIONING_PROFILE_SPECIFIER="
   )
 fi

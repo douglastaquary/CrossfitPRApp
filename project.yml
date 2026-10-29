@@ -72,7 +72,7 @@ targets:
     dependencies:
       - target: CrossfitPRWatch
         embed: true
-        codeSign: true
+        codeSign: false
       - package: CrossfitPRPackages
         product: Domain
       - package: CrossfitPRPackages
@@ -129,6 +129,14 @@ targets:
         SKIP_INSTALL: YES
         SWIFT_EMIT_LOC_STRINGS: YES
         TARGETED_DEVICE_FAMILY: 4
+    postBuildScripts:
+      - name: Remove MinimumOSVersion~ipad
+        basedOnDependencyAnalysis: false
+        script: |
+          plist="${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/Info.plist"
+          if [[ -f "$plist" ]]; then
+            /usr/libexec/PlistBuddy -c 'Delete :MinimumOSVersion~ipad' "$plist" >/dev/null 2>&1 || true
+          fi
 
   CrossfitPRUITests:
     type: bundle.ui-testing
