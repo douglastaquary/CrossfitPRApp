@@ -23,6 +23,7 @@ packages:
 
 settings:
   base:
+    ALWAYS_SEARCH_USER_PATHS: NO
     DEVELOPMENT_TEAM: 6V95FQX348
     SWIFT_VERSION: "5.0"
 
@@ -54,6 +55,7 @@ targets:
         INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone: "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight"
         MARKETING_VERSION: 1.0
         PRODUCT_BUNDLE_IDENTIFIER: com.douglast.CrossfitPR
+        PRODUCT_NAME: CrossfitPR
         SWIFT_EMIT_LOC_STRINGS: YES
         TARGETED_DEVICE_FAMILY: "1,2"
     dependencies:
@@ -107,6 +109,7 @@ targets:
         INFOPLIST_KEY_WKCompanionAppBundleIdentifier: com.douglast.CrossfitPR
         MARKETING_VERSION: 1.0
         PRODUCT_BUNDLE_IDENTIFIER: com.douglast.CrossfitPR.watchkitapp
+        PRODUCT_NAME: CrossfitPRWatch
         SKIP_INSTALL: YES
         SWIFT_EMIT_LOC_STRINGS: YES
         TARGETED_DEVICE_FAMILY: 4
@@ -126,6 +129,7 @@ targets:
         IPHONEOS_DEPLOYMENT_TARGET: "16.0"
         MARKETING_VERSION: 1.0
         PRODUCT_BUNDLE_IDENTIFIER: com.douglast.CrossfitPRUITests
+        PRODUCT_NAME: CrossfitPRUITests
         SWIFT_EMIT_LOC_STRINGS: NO
         TEST_TARGET_NAME: CrossfitPR
         TARGETED_DEVICE_FAMILY: "1,2"
