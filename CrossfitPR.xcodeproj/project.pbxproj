@@ -7,270 +7,286 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4E58056127F3C5B100F16219 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4E58056027F3C5B100F16219 /* Assets.xcassets */; };
-		4E58056427F3C5B100F16219 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4E58056227F3C5B100F16219 /* LaunchScreen.storyboard */; };
-		4E58060127F3C5B100F16219 /* CrossfitPRApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E58060027F3C5B100F16219 /* CrossfitPRApp.swift */; };
-		4E58060327F3C5B100F16219 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E58060227F3C5B100F16219 /* RootView.swift */; };
-		4E58072227F3C5B100F16219 /* AppDependencyGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E58072127F3C5B100F16220 /* AppDependencyGraph.swift */; };
-		4E58070427F3C5B100F16219 /* ReadmeScreenshotsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E58070327F3C5B100F16219 /* ReadmeScreenshotsUITests.swift */; };
-		4E58072027F3C5B100F16219 /* AppLocalizationQATests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E58072127F3C5B100F16219 /* AppLocalizationQATests.swift */; };
-		4E58073027F3C5B100F16219 /* PaymentFlowUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E58073127F3C5B100F16219 /* PaymentFlowUITests.swift */; };
-		4E58061127F3C5B100F16219 /* Domain in Frameworks */ = {isa = PBXBuildFile; productRef = 4E58061027F3C5B100F16219 /* Domain */; };
-		4E58061727F3C5B100F16219 /* Subscription in Frameworks */ = {isa = PBXBuildFile; productRef = 4E58061627F3C5B100F16219 /* Subscription */; };
-		4E58061927F3C5B100F16219 /* Application in Frameworks */ = {isa = PBXBuildFile; productRef = 4E58061827F3C5B100F16219 /* Application */; };
-		4E58063027F3C5B100F16219 /* PRHistory in Frameworks */ = {isa = PBXBuildFile; productRef = 4E58062C27F3C5B100F16219 /* PRHistory */; };
-		4E58063127F3C5B100F16219 /* Insights in Frameworks */ = {isa = PBXBuildFile; productRef = 4E58062D27F3C5B100F16219 /* Insights */; };
-		4E58063227F3C5B100F16219 /* PROUpgrade in Frameworks */ = {isa = PBXBuildFile; productRef = 4E58062E27F3C5B100F16219 /* PROUpgrade */; };
-		4E58063327F3C5B100F16219 /* Onboarding in Frameworks */ = {isa = PBXBuildFile; productRef = 4E58062F27F3C5B100F16219 /* Onboarding */; };
-		4E58063627F3C5B100F16219 /* Localization in Frameworks */ = {isa = PBXBuildFile; productRef = 4E58063527F3C5B100F16219 /* Localization */; };
-		4E58063727F3C5B100F16219 /* Categories in Frameworks */ = {isa = PBXBuildFile; productRef = 4E58063827F3C5B100F16219 /* Categories */; };
-		4E58063927F3C5B100F16219 /* Settings in Frameworks */ = {isa = PBXBuildFile; productRef = 4E58063A27F3C5B100F16219 /* Settings */; };
-		4E58063B27F3C5B100F16219 /* Launch in Frameworks */ = {isa = PBXBuildFile; productRef = 4E58063C27F3C5B100F16219 /* Launch */; };
-		4E58075227F3C5B100F16219 /* CrossfitPRWatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E58075127F3C5B100F16219 /* CrossfitPRWatchApp.swift */; };
-		4E58077327F3C5B100F16219 /* WatchLinkBootstrap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E58077427F3C5B100F16219 /* WatchLinkBootstrap.swift */; };
-		4E58075427F3C5B100F16219 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4E58075327F3C5B100F16219 /* Assets.xcassets */; };
-		4E58076127F3C5B100F16219 /* CrossfitPRWatch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 4E58075027F3C5B100F16219 /* CrossfitPRWatch.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		4E58076527F3C5B100F16219 /* WatchPOCViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E58076627F3C5B100F16219 /* WatchPOCViews.swift */; };
-		4E58076727F3C5B100F16219 /* WatchCompanionRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E58076827F3C5B100F16219 /* WatchCompanionRootView.swift */; };
-		4E58076927F3C5B100F16219 /* WatchDesign.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E58076A27F3C5B100F16219 /* WatchDesign.swift */; };
-		4E58077527F3C5B100F16219 /* WatchEventSink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E58077627F3C5B100F16219 /* WatchEventSink.swift */; };
-		4E58077727F3C5B100F16219 /* WatchRestTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E58077827F3C5B100F16219 /* WatchRestTimerView.swift */; };
-		4E58077927F3C5B100F16219 /* WatchBreathingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E58077A27F3C5B100F16219 /* WatchBreathingView.swift */; };
-		4E58077B27F3C5B100F16219 /* WatchCompanionLaunchConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E58077C27F3C5B100F16219 /* WatchCompanionLaunchConfig.swift */; };
-		4E58076B27F3C5B100F16219 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4E58076C27F3C5B100F16219 /* Localizable.strings */; };
-		4E58076D27F3C5B100F16219 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4E58076E27F3C5B100F16219 /* Localizable.strings */; };
+		01CFDF7292C95FB9AD050A54 /* PaymentFlowUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B2AED4CA0F4169223264E82 /* PaymentFlowUITests.swift */; };
+		0663838BD2865F3F6C795345 /* CrossfitPRApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B5871789B0DB9697DE59CF /* CrossfitPRApp.swift */; };
+		1E4E5B7B3917ACBD3796AB03 /* AppLocalizationQATests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CA81281159996CE9F64973 /* AppLocalizationQATests.swift */; };
+		1EBB4A6B1F1282ACB11ED4CB /* WatchLinkBootstrap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D854E5284309F7C133C2985 /* WatchLinkBootstrap.swift */; };
+		24908721FF7483423F4E71E7 /* Application in Frameworks */ = {isa = PBXBuildFile; productRef = 1019385849212E164277D716 /* Application */; };
+		2FE4409042F771FC4E003D97 /* WatchBreathingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CFEBD7169AF570AB489053E /* WatchBreathingView.swift */; };
+		3E595BB686C2B1D48911A364 /* CrossfitPRWatch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = B7A992352F28962ABFE9DA89 /* CrossfitPRWatch.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		417E6CF4E3424D0668180755 /* Settings in Frameworks */ = {isa = PBXBuildFile; productRef = 43940B96131509D85FBD238A /* Settings */; };
+		4F96E7570B4AB3A91CDB0D3C /* Categories in Frameworks */ = {isa = PBXBuildFile; productRef = B65C05FF365D58226E1DF7F2 /* Categories */; };
+		58467C49435983D975DA0EBC /* AppDependencyGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6467F194224F4B3C089E24 /* AppDependencyGraph.swift */; };
+		5FF7E8FDC5162E74C513578E /* WatchEventSink.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6357D853333028C64C18D98 /* WatchEventSink.swift */; };
+		6CB40E9C0DDBB5712AF27642 /* Launch in Frameworks */ = {isa = PBXBuildFile; productRef = FDEB71C1A6466AB7BFB1EA94 /* Launch */; };
+		6D184E7038540C21A9E83888 /* Insights in Frameworks */ = {isa = PBXBuildFile; productRef = 4B19AEEF280335D5D32BDFD9 /* Insights */; };
+		7526E433064EED18DB76C7D3 /* ReadmeScreenshotsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C22D63726B5C88FA38B29CB3 /* ReadmeScreenshotsUITests.swift */; };
+		82D9E2C1809F006B8CDA629F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 17EAD356E3DA3EB362A90A94 /* Assets.xcassets */; };
+		83763ED49BA1AA8C4EA7276A /* Domain in Frameworks */ = {isa = PBXBuildFile; productRef = F75F2805ABC31ACBD10C81B9 /* Domain */; };
+		86C650447D3FE7635FAE97A0 /* Onboarding in Frameworks */ = {isa = PBXBuildFile; productRef = DA29378289FF9654956923D5 /* Onboarding */; };
+		A5824D687A372EBA04446A61 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97233A696C983E582C1A1A6A /* LaunchScreen.storyboard */; };
+		AB4B3A41A8E1E14D8170CE01 /* WatchCompanionLaunchConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB530E08D5378283DAF50E76 /* WatchCompanionLaunchConfig.swift */; };
+		B6D78B77002903C6E5916FC7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A4C97BE23EA62BA9604EE71B /* Assets.xcassets */; };
+		B6D88802478BFCD35F99D344 /* WatchPOCViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38DCBDC84120883D9148CC56 /* WatchPOCViews.swift */; };
+		D4440A689EC136268FE1901C /* WatchDesign.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21060C2092535978FAA4A25E /* WatchDesign.swift */; };
+		D44B8954314411CD59E443AC /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5409EE33E553CB8482C481 /* RootView.swift */; };
+		D68A8EFE58C3398588D4DB16 /* WatchRestTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61167E09A04C2A1264BD0ACD /* WatchRestTimerView.swift */; };
+		D845AEAB4FD4E6CCE86BA33C /* Localization in Frameworks */ = {isa = PBXBuildFile; productRef = EEEF99DFBB84D2EB1558F151 /* Localization */; };
+		D8CA9AF29F2FA99089F17C67 /* WatchCompanionRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73C3E376EC0A28D2D396AEB /* WatchCompanionRootView.swift */; };
+		DBE33BD8240C10D3E4186E89 /* Resources in Resources */ = {isa = PBXBuildFile; fileRef = 6128D09AC8C2EF51769D670A /* Resources */; };
+		F1CA0D7441ACC0CFFB09E1B9 /* PROUpgrade in Frameworks */ = {isa = PBXBuildFile; productRef = EC49321B047EF6544DEDF3AF /* PROUpgrade */; };
+		F3FC3FD28F6DFAAA42F36D86 /* Subscription in Frameworks */ = {isa = PBXBuildFile; productRef = D251BBCC1B6BD1FE1BC4B3E9 /* Subscription */; };
+		F4F4CBCC9B23F2364E0B2BEF /* CrossfitPRWatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279AD19FABD8D735D23F8555 /* CrossfitPRWatchApp.swift */; };
+		F6C0CD4AD66224D1E6197C6A /* PRHistory in Frameworks */ = {isa = PBXBuildFile; productRef = 50317D7E5F04D0307430B05D /* PRHistory */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		70B4B3C8BB9D2A8ECEB26DFB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6B0DFB974B5E0F97487144B0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E84D0E3EA0E83FB8A35DCB9C;
+			remoteInfo = CrossfitPRWatch;
+		};
+		AFE1F4E703BFE8BE0017AE40 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6B0DFB974B5E0F97487144B0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 78E1277CB2052A7902434D8C;
+			remoteInfo = CrossfitPR;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		41540AA99C45845DF4E106DC /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				3E595BB686C2B1D48911A364 /* CrossfitPRWatch.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
-		4E58055427F3C5AE00F16219 /* CrossfitPR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CrossfitPR.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		4E58056027F3C5B100F16219 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		4E58056327F3C5B100F16219 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		4E58056527F3C5B100F16219 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4E58058527FA865F00F16219 /* CrossfitPR.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CrossfitPR.entitlements; sourceTree = "<group>"; };
-		4E58060027F3C5B100F16219 /* CrossfitPRApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrossfitPRApp.swift; sourceTree = "<group>"; };
-		4E58060227F3C5B100F16219 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
-		4E58072127F3C5B100F16220 /* AppDependencyGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDependencyGraph.swift; sourceTree = "<group>"; };
-		4E58070227F3C5AE00F16219 /* CrossfitPRUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CrossfitPRUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		4E58070327F3C5B100F16219 /* ReadmeScreenshotsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadmeScreenshotsUITests.swift; sourceTree = "<group>"; };
-		4E58072127F3C5B100F16219 /* AppLocalizationQATests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLocalizationQATests.swift; sourceTree = "<group>"; };
-		4E58073127F3C5B100F16219 /* PaymentFlowUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentFlowUITests.swift; sourceTree = "<group>"; };
-		4E58075027F3C5B100F16219 /* CrossfitPRWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CrossfitPRWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		4E58075127F3C5B100F16219 /* CrossfitPRWatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrossfitPRWatchApp.swift; sourceTree = "<group>"; };
-		4E58077427F3C5B100F16219 /* WatchLinkBootstrap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchLinkBootstrap.swift; sourceTree = "<group>"; };
-		4E58075327F3C5B100F16219 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		4E58076227F3C5B100F16219 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4E58076627F3C5B100F16219 /* WatchPOCViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WatchPOCViews.swift; path = Packages/WatchCompanion/Sources/WatchCompanion/WatchPOCViews.swift; sourceTree = SOURCE_ROOT; };
-		4E58076827F3C5B100F16219 /* WatchCompanionRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WatchCompanionRootView.swift; path = Packages/WatchCompanion/Sources/WatchCompanion/WatchCompanionRootView.swift; sourceTree = SOURCE_ROOT; };
-		4E58076A27F3C5B100F16219 /* WatchDesign.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WatchDesign.swift; path = Packages/WatchCompanion/Sources/WatchCompanion/WatchDesign.swift; sourceTree = SOURCE_ROOT; };
-		4E58077627F3C5B100F16219 /* WatchEventSink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WatchEventSink.swift; path = Packages/WatchCompanion/Sources/WatchCompanion/WatchEventSink.swift; sourceTree = SOURCE_ROOT; };
-		4E58077827F3C5B100F16219 /* WatchRestTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WatchRestTimerView.swift; path = Packages/WatchCompanion/Sources/WatchCompanion/WatchRestTimerView.swift; sourceTree = SOURCE_ROOT; };
-		4E58077A27F3C5B100F16219 /* WatchBreathingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WatchBreathingView.swift; path = Packages/WatchCompanion/Sources/WatchCompanion/WatchBreathingView.swift; sourceTree = SOURCE_ROOT; };
-		4E58077C27F3C5B100F16219 /* WatchCompanionLaunchConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WatchCompanionLaunchConfig.swift; path = Packages/WatchCompanion/Sources/WatchCompanion/WatchCompanionLaunchConfig.swift; sourceTree = SOURCE_ROOT; };
-		4E58076C27F3C5B100F16219 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Localizable.strings; path = Packages/WatchCompanion/Sources/WatchCompanion/Resources/en.lproj/Localizable.strings; sourceTree = SOURCE_ROOT; };
-		4E58076E27F3C5B100F16219 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Localizable.strings; path = Packages/WatchCompanion/Sources/WatchCompanion/Resources/pt-BR.lproj/Localizable.strings; sourceTree = SOURCE_ROOT; };
+		17EAD356E3DA3EB362A90A94 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		1CFEBD7169AF570AB489053E /* WatchBreathingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchBreathingView.swift; sourceTree = "<group>"; };
+		21060C2092535978FAA4A25E /* WatchDesign.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchDesign.swift; sourceTree = "<group>"; };
+		279AD19FABD8D735D23F8555 /* CrossfitPRWatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrossfitPRWatchApp.swift; sourceTree = "<group>"; };
+		35CFC7FB40EA53820575B14E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		38DCBDC84120883D9148CC56 /* WatchPOCViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchPOCViews.swift; sourceTree = "<group>"; };
+		5D854E5284309F7C133C2985 /* WatchLinkBootstrap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchLinkBootstrap.swift; sourceTree = "<group>"; };
+		61167E09A04C2A1264BD0ACD /* WatchRestTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchRestTimerView.swift; sourceTree = "<group>"; };
+		6128D09AC8C2EF51769D670A /* Resources */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Resources; path = Packages/WatchCompanion/Sources/WatchCompanion/Resources; sourceTree = SOURCE_ROOT; };
+		6B2AED4CA0F4169223264E82 /* PaymentFlowUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentFlowUITests.swift; sourceTree = "<group>"; };
+		7F029A2BE04A8A446754DE07 /* CrossfitPRUITests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = CrossfitPRUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8236B461B3AE081ECFA1161D /* Products.storekit */ = {isa = PBXFileReference; path = Products.storekit; sourceTree = "<group>"; };
+		A4C97BE23EA62BA9604EE71B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B518F88CF070948BD21A3ED0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		B7A992352F28962ABFE9DA89 /* CrossfitPRWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CrossfitPRWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B8B5871789B0DB9697DE59CF /* CrossfitPRApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrossfitPRApp.swift; sourceTree = "<group>"; };
+		C22D63726B5C88FA38B29CB3 /* ReadmeScreenshotsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadmeScreenshotsUITests.swift; sourceTree = "<group>"; };
+		C5E09D928E1DFFB2977B7333 /* CrossfitPR */ = {isa = PBXFileReference; lastKnownFileType = folder; name = CrossfitPR; path = .; sourceTree = SOURCE_ROOT; };
+		C6357D853333028C64C18D98 /* WatchEventSink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchEventSink.swift; sourceTree = "<group>"; };
+		C73C3E376EC0A28D2D396AEB /* WatchCompanionRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchCompanionRootView.swift; sourceTree = "<group>"; };
+		CF6467F194224F4B3C089E24 /* AppDependencyGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDependencyGraph.swift; sourceTree = "<group>"; };
+		D714CA8B4B7ACAD88E65FD4D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		DF183A5BC3E0410116705BF1 /* CrossfitPR.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CrossfitPR.entitlements; sourceTree = "<group>"; };
+		E5A147FD9BCB12F29BF3D20B /* CrossfitPR.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = CrossfitPR.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E7CA81281159996CE9F64973 /* AppLocalizationQATests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLocalizationQATests.swift; sourceTree = "<group>"; };
+		EA5409EE33E553CB8482C481 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		EB530E08D5378283DAF50E76 /* WatchCompanionLaunchConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchCompanionLaunchConfig.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		4E58055127F3C5AE00F16219 /* Frameworks */ = {
+		6BD0EA03C2C0F2885EBB0FD4 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4E58061127F3C5B100F16219 /* Domain in Frameworks */,
-				4E58061727F3C5B100F16219 /* Subscription in Frameworks */,
-				4E58061927F3C5B100F16219 /* Application in Frameworks */,
-				4E58063027F3C5B100F16219 /* PRHistory in Frameworks */,
-				4E58063127F3C5B100F16219 /* Insights in Frameworks */,
-				4E58063227F3C5B100F16219 /* PROUpgrade in Frameworks */,
-				4E58063327F3C5B100F16219 /* Onboarding in Frameworks */,
-				4E58063627F3C5B100F16219 /* Localization in Frameworks */,
-				4E58063727F3C5B100F16219 /* Categories in Frameworks */,
-				4E58063927F3C5B100F16219 /* Settings in Frameworks */,
-				4E58063B27F3C5B100F16219 /* Launch in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		4E58075727F3C5B100F16219 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		4E58071527F3C5B100F16219 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				83763ED49BA1AA8C4EA7276A /* Domain in Frameworks */,
+				F3FC3FD28F6DFAAA42F36D86 /* Subscription in Frameworks */,
+				24908721FF7483423F4E71E7 /* Application in Frameworks */,
+				F6C0CD4AD66224D1E6197C6A /* PRHistory in Frameworks */,
+				6D184E7038540C21A9E83888 /* Insights in Frameworks */,
+				F1CA0D7441ACC0CFFB09E1B9 /* PROUpgrade in Frameworks */,
+				86C650447D3FE7635FAE97A0 /* Onboarding in Frameworks */,
+				D845AEAB4FD4E6CCE86BA33C /* Localization in Frameworks */,
+				4F96E7570B4AB3A91CDB0D3C /* Categories in Frameworks */,
+				417E6CF4E3424D0668180755 /* Settings in Frameworks */,
+				6CB40E9C0DDBB5712AF27642 /* Launch in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
-/* Begin PBXContainerItemProxy section */
-		4E58070527F3C5B100F16219 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4E58054C27F3C5AE00F16219 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 4E58055327F3C5AE00F16219;
-			remoteInfo = CrossfitPR;
-		};
-		4E58075E27F3C5B100F16219 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4E58054C27F3C5AE00F16219 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 4E58075527F3C5B100F16219;
-			remoteInfo = CrossfitPRWatch;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXGroup section */
-		4E58054B27F3C5AE00F16219 = {
+		48460EB7F644F8768B0E3D48 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				4E58062027F3C5B100F16219 /* Packages */,
-				4E58055627F3C5AE00F16219 /* CrossfitPR */,
-				4E58075A27F3C5B100F16219 /* CrossfitPRWatch */,
-				4E58071227F3C5B100F16219 /* CrossfitPRUITests */,
-				4E58055527F3C5AE00F16219 /* Products */,
+				6246E7B5DB1D6058A193393C /* WatchCompanion */,
 			);
+			path = Sources;
 			sourceTree = "<group>";
 		};
-		4E58055527F3C5AE00F16219 /* Products */ = {
+		504561E0FC94C8DF34C0F715 /* Configuration */ = {
 			isa = PBXGroup;
 			children = (
-				4E58055427F3C5AE00F16219 /* CrossfitPR.app */,
-				4E58075027F3C5B100F16219 /* CrossfitPRWatch.app */,
-				4E58070227F3C5AE00F16219 /* CrossfitPRUITests.xctest */,
+				8236B461B3AE081ECFA1161D /* Products.storekit */,
 			);
-			name = Products;
+			path = Configuration;
 			sourceTree = "<group>";
 		};
-		4E58055627F3C5AE00F16219 /* CrossfitPR */ = {
+		6246E7B5DB1D6058A193393C /* WatchCompanion */ = {
 			isa = PBXGroup;
 			children = (
-				4E58058527FA865F00F16219 /* CrossfitPR.entitlements */,
-				4E58060027F3C5B100F16219 /* CrossfitPRApp.swift */,
-				4E58072127F3C5B100F16220 /* AppDependencyGraph.swift */,
-				4E58060227F3C5B100F16219 /* RootView.swift */,
-				4E58056027F3C5B100F16219 /* Assets.xcassets */,
-				4E58056227F3C5B100F16219 /* LaunchScreen.storyboard */,
-				4E58056527F3C5B100F16219 /* Info.plist */,
+				6128D09AC8C2EF51769D670A /* Resources */,
+				1CFEBD7169AF570AB489053E /* WatchBreathingView.swift */,
+				EB530E08D5378283DAF50E76 /* WatchCompanionLaunchConfig.swift */,
+				C73C3E376EC0A28D2D396AEB /* WatchCompanionRootView.swift */,
+				21060C2092535978FAA4A25E /* WatchDesign.swift */,
+				C6357D853333028C64C18D98 /* WatchEventSink.swift */,
+				38DCBDC84120883D9148CC56 /* WatchPOCViews.swift */,
+				61167E09A04C2A1264BD0ACD /* WatchRestTimerView.swift */,
 			);
-			path = CrossfitPR;
+			path = WatchCompanion;
 			sourceTree = "<group>";
 		};
-		4E58062027F3C5B100F16219 /* Packages */ = {
+		6B6B05A0E4A5208C52A0E7C2 /* CrossfitPRWatch */ = {
 			isa = PBXGroup;
 			children = (
-			);
-			name = Packages;
-			path = Packages;
-			sourceTree = "<group>";
-		};
-		4E58075A27F3C5B100F16219 /* CrossfitPRWatch */ = {
-			isa = PBXGroup;
-			children = (
-				4E58075127F3C5B100F16219 /* CrossfitPRWatchApp.swift */,
-				4E58077427F3C5B100F16219 /* WatchLinkBootstrap.swift */,
-				4E58076F27F3C5B100F16219 /* WatchCompanionSources */,
-				4E58075327F3C5B100F16219 /* Assets.xcassets */,
-				4E58076227F3C5B100F16219 /* Info.plist */,
+				A4C97BE23EA62BA9604EE71B /* Assets.xcassets */,
+				279AD19FABD8D735D23F8555 /* CrossfitPRWatchApp.swift */,
+				B518F88CF070948BD21A3ED0 /* Info.plist */,
+				5D854E5284309F7C133C2985 /* WatchLinkBootstrap.swift */,
 			);
 			path = CrossfitPRWatch;
 			sourceTree = "<group>";
 		};
-		4E58076F27F3C5B100F16219 /* WatchCompanionSources */ = {
+		7CD210E4AF6FBBD7D10B08EB /* CrossfitPR */ = {
 			isa = PBXGroup;
 			children = (
-				4E58076627F3C5B100F16219 /* WatchPOCViews.swift */,
-				4E58076827F3C5B100F16219 /* WatchCompanionRootView.swift */,
-				4E58077C27F3C5B100F16219 /* WatchCompanionLaunchConfig.swift */,
-				4E58077627F3C5B100F16219 /* WatchEventSink.swift */,
-				4E58077827F3C5B100F16219 /* WatchRestTimerView.swift */,
-				4E58077A27F3C5B100F16219 /* WatchBreathingView.swift */,
-				4E58076A27F3C5B100F16219 /* WatchDesign.swift */,
-				4E58077027F3C5B100F16219 /* Resources */,
+				504561E0FC94C8DF34C0F715 /* Configuration */,
+				97233A696C983E582C1A1A6A /* LaunchScreen.storyboard */,
+				CF6467F194224F4B3C089E24 /* AppDependencyGraph.swift */,
+				17EAD356E3DA3EB362A90A94 /* Assets.xcassets */,
+				DF183A5BC3E0410116705BF1 /* CrossfitPR.entitlements */,
+				B8B5871789B0DB9697DE59CF /* CrossfitPRApp.swift */,
+				D714CA8B4B7ACAD88E65FD4D /* Info.plist */,
+				EA5409EE33E553CB8482C481 /* RootView.swift */,
 			);
-			name = WatchCompanionSources;
+			path = CrossfitPR;
 			sourceTree = "<group>";
 		};
-		4E58077027F3C5B100F16219 /* Resources */ = {
+		C74C2A74936803C601AC3D36 = {
 			isa = PBXGroup;
 			children = (
-				4E58076C27F3C5B100F16219 /* Localizable.strings */,
-				4E58076E27F3C5B100F16219 /* Localizable.strings */,
+				7CD210E4AF6FBBD7D10B08EB /* CrossfitPR */,
+				EB97F6B06D21683EE333B100 /* CrossfitPRUITests */,
+				6B6B05A0E4A5208C52A0E7C2 /* CrossfitPRWatch */,
+				DE04C38B15C783A850141E55 /* Packages */,
+				EC56CAA05B5041860DA34FE1 /* Products */,
 			);
-			name = Resources;
 			sourceTree = "<group>";
 		};
-		4E58071227F3C5B100F16219 /* CrossfitPRUITests */ = {
+		CAD156B133BFCA3BD74374BE /* WatchCompanion */ = {
 			isa = PBXGroup;
 			children = (
-				4E58070327F3C5B100F16219 /* ReadmeScreenshotsUITests.swift */,
-				4E58072127F3C5B100F16219 /* AppLocalizationQATests.swift */,
-				4E58073127F3C5B100F16219 /* PaymentFlowUITests.swift */,
+				48460EB7F644F8768B0E3D48 /* Sources */,
+			);
+			path = WatchCompanion;
+			sourceTree = "<group>";
+		};
+		DE04C38B15C783A850141E55 /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				CAD156B133BFCA3BD74374BE /* WatchCompanion */,
+				C5E09D928E1DFFB2977B7333 /* CrossfitPR */,
+			);
+			path = Packages;
+			sourceTree = "<group>";
+		};
+		EB97F6B06D21683EE333B100 /* CrossfitPRUITests */ = {
+			isa = PBXGroup;
+			children = (
+				E7CA81281159996CE9F64973 /* AppLocalizationQATests.swift */,
+				6B2AED4CA0F4169223264E82 /* PaymentFlowUITests.swift */,
+				C22D63726B5C88FA38B29CB3 /* ReadmeScreenshotsUITests.swift */,
 			);
 			path = CrossfitPRUITests;
+			sourceTree = "<group>";
+		};
+		EC56CAA05B5041860DA34FE1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E5A147FD9BCB12F29BF3D20B /* CrossfitPR.app */,
+				7F029A2BE04A8A446754DE07 /* CrossfitPRUITests.xctest */,
+				B7A992352F28962ABFE9DA89 /* CrossfitPRWatch.app */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		4E58055327F3C5AE00F16219 /* CrossfitPR */ = {
+		17A54BD2F2DEB5520F48EC47 /* CrossfitPRUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4E58056827F3C5B100F16219 /* Build configuration list for PBXNativeTarget "CrossfitPR" */;
+			buildConfigurationList = 2E5B172A7338ED840EE211B6 /* Build configuration list for PBXNativeTarget "CrossfitPRUITests" */;
 			buildPhases = (
-				4E58055027F3C5AE00F16219 /* Sources */,
-				4E58055127F3C5AE00F16219 /* Frameworks */,
-				4E58055227F3C5AE00F16219 /* Resources */,
-				4E58076027F3C5B100F16219 /* Embed Watch Content */,
+				E15034D1A956E7860EE35CD6 /* Sources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				4E58075F27F3C5B100F16219 /* PBXTargetDependency */,
+				168A4E63B2436F1134B071EA /* PBXTargetDependency */,
+			);
+			name = CrossfitPRUITests;
+			packageProductDependencies = (
+			);
+			productName = CrossfitPRUITests;
+			productReference = 7F029A2BE04A8A446754DE07 /* CrossfitPRUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		78E1277CB2052A7902434D8C /* CrossfitPR */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 919E7CD85CE80017AF07C4C5 /* Build configuration list for PBXNativeTarget "CrossfitPR" */;
+			buildPhases = (
+				0E1B3A81B735A34588211EBA /* Sources */,
+				5119569B68A18AA9D7866647 /* Resources */,
+				6BD0EA03C2C0F2885EBB0FD4 /* Frameworks */,
+				41540AA99C45845DF4E106DC /* Embed Watch Content */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B27F3099D9D7138CED266892 /* PBXTargetDependency */,
 			);
 			name = CrossfitPR;
 			packageProductDependencies = (
-				4E58061027F3C5B100F16219 /* Domain */,
-				4E58061627F3C5B100F16219 /* Subscription */,
-				4E58061827F3C5B100F16219 /* Application */,
-				4E58062C27F3C5B100F16219 /* PRHistory */,
-				4E58062D27F3C5B100F16219 /* Insights */,
-				4E58062E27F3C5B100F16219 /* PROUpgrade */,
-				4E58062F27F3C5B100F16219 /* Onboarding */,
-				4E58063527F3C5B100F16219 /* Localization */,
-				4E58063827F3C5B100F16219 /* Categories */,
-				4E58063A27F3C5B100F16219 /* Settings */,
-				4E58063C27F3C5B100F16219 /* Launch */,
+				F75F2805ABC31ACBD10C81B9 /* Domain */,
+				D251BBCC1B6BD1FE1BC4B3E9 /* Subscription */,
+				1019385849212E164277D716 /* Application */,
+				50317D7E5F04D0307430B05D /* PRHistory */,
+				4B19AEEF280335D5D32BDFD9 /* Insights */,
+				EC49321B047EF6544DEDF3AF /* PROUpgrade */,
+				DA29378289FF9654956923D5 /* Onboarding */,
+				EEEF99DFBB84D2EB1558F151 /* Localization */,
+				B65C05FF365D58226E1DF7F2 /* Categories */,
+				43940B96131509D85FBD238A /* Settings */,
+				FDEB71C1A6466AB7BFB1EA94 /* Launch */,
 			);
 			productName = CrossfitPR;
-			productReference = 4E58055427F3C5AE00F16219 /* CrossfitPR.app */;
+			productReference = E5A147FD9BCB12F29BF3D20B /* CrossfitPR.app */;
 			productType = "com.apple.product-type.application";
 		};
-		4E58070127F3C5AE00F16219 /* CrossfitPRUITests */ = {
+		E84D0E3EA0E83FB8A35DCB9C /* CrossfitPRWatch */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4E58071327F3C5B100F16219 /* Build configuration list for PBXNativeTarget "CrossfitPRUITests" */;
+			buildConfigurationList = 69C0D6E0B19ECCCC362E1A81 /* Build configuration list for PBXNativeTarget "CrossfitPRWatch" */;
 			buildPhases = (
-				4E58071427F3C5B100F16219 /* Sources */,
-				4E58071527F3C5B100F16219 /* Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				4E58071727F3C5B100F16219 /* PBXTargetDependency */,
-			);
-			name = CrossfitPRUITests;
-			productName = CrossfitPRUITests;
-			productReference = 4E58070227F3C5AE00F16219 /* CrossfitPRUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
-		4E58075527F3C5B100F16219 /* CrossfitPRWatch */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 4E58075B27F3C5B100F16219 /* Build configuration list for PBXNativeTarget "CrossfitPRWatch" */;
-			buildPhases = (
-				4E58075627F3C5B100F16219 /* Sources */,
-				4E58075727F3C5B100F16219 /* Frameworks */,
-				4E58075827F3C5B100F16219 /* Resources */,
+				ABA6CCB065AF16B69F45F86F /* Sources */,
+				81A7EF691C6E792AB614BABA /* Resources */,
 			);
 			buildRules = (
 			);
@@ -280,145 +296,135 @@
 			packageProductDependencies = (
 			);
 			productName = CrossfitPRWatch;
-			productReference = 4E58075027F3C5B100F16219 /* CrossfitPRWatch.app */;
+			productReference = B7A992352F28962ABFE9DA89 /* CrossfitPRWatch.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
-/* Begin PBXTargetDependency section */
-		4E58071727F3C5B100F16219 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 4E58055327F3C5AE00F16219 /* CrossfitPR */;
-			targetProxy = 4E58070527F3C5B100F16219 /* PBXContainerItemProxy */;
-		};
-		4E58075F27F3C5B100F16219 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 4E58075527F3C5B100F16219 /* CrossfitPRWatch */;
-			targetProxy = 4E58075E27F3C5B100F16219 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
 /* Begin PBXProject section */
-		4E58054C27F3C5AE00F16219 /* Project object */ = {
+		6B0DFB974B5E0F97487144B0 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1420;
+				BuildIndependentTargetsInParallel = YES;
 				LastUpgradeCheck = 1420;
 				TargetAttributes = {
-					4E58055327F3C5AE00F16219 = {
-						CreatedOnToolsVersion = 13.0;
+					17A54BD2F2DEB5520F48EC47 = {
+						DevelopmentTeam = 6V95FQX348;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 78E1277CB2052A7902434D8C;
 					};
-					4E58070127F3C5AE00F16219 = {
-						CreatedOnToolsVersion = 14.2;
-						TestTargetID = 4E58055327F3C5AE00F16219;
+					78E1277CB2052A7902434D8C = {
+						DevelopmentTeam = 6V95FQX348;
+						ProvisioningStyle = Automatic;
+					};
+					E84D0E3EA0E83FB8A35DCB9C = {
+						DevelopmentTeam = 6V95FQX348;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
-			buildConfigurationList = 4E58054F27F3C5AE00F16219 /* Build configuration list for PBXProject "CrossfitPR" */;
+			buildConfigurationList = B400C64E3C26E7571F455B67 /* Build configuration list for PBXProject "CrossfitPR" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = "pt-BR";
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
 				Base,
 				"pt-BR",
 			);
-			mainGroup = 4E58054B27F3C5AE00F16219;
+			mainGroup = C74C2A74936803C601AC3D36;
+			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				4E58062127F3C5B100F16219 /* XCLocalSwiftPackageReference "CrossfitPRPackages" */,
+				C307F72BD60653EB75458D48 /* XCLocalSwiftPackageReference "." */,
 			);
-			productRefGroup = 4E58055527F3C5AE00F16219 /* Products */;
+			productRefGroup = EC56CAA05B5041860DA34FE1 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				4E58055327F3C5AE00F16219 /* CrossfitPR */,
-				4E58075527F3C5B100F16219 /* CrossfitPRWatch */,
-				4E58070127F3C5AE00F16219 /* CrossfitPRUITests */,
+				78E1277CB2052A7902434D8C /* CrossfitPR */,
+				E84D0E3EA0E83FB8A35DCB9C /* CrossfitPRWatch */,
+				17A54BD2F2DEB5520F48EC47 /* CrossfitPRUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		4E58055227F3C5AE00F16219 /* Resources */ = {
+		5119569B68A18AA9D7866647 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4E58056427F3C5B100F16219 /* LaunchScreen.storyboard in Resources */,
-				4E58056127F3C5B100F16219 /* Assets.xcassets in Resources */,
+				82D9E2C1809F006B8CDA629F /* Assets.xcassets in Resources */,
+				A5824D687A372EBA04446A61 /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		4E58075827F3C5B100F16219 /* Resources */ = {
+		81A7EF691C6E792AB614BABA /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4E58075427F3C5B100F16219 /* Assets.xcassets in Resources */,
-				4E58076B27F3C5B100F16219 /* Localizable.strings in Resources */,
-				4E58076D27F3C5B100F16219 /* Localizable.strings in Resources */,
+				B6D78B77002903C6E5916FC7 /* Assets.xcassets in Resources */,
+				DBE33BD8240C10D3E4186E89 /* Resources in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXCopyFilesBuildPhase section */
-		4E58076027F3C5B100F16219 /* Embed Watch Content */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
-			dstSubfolderSpec = 16;
-			files = (
-				4E58076127F3C5B100F16219 /* CrossfitPRWatch.app in Embed Watch Content */,
-			);
-			name = "Embed Watch Content";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
-		4E58055027F3C5AE00F16219 /* Sources */ = {
+		0E1B3A81B735A34588211EBA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4E58060127F3C5B100F16219 /* CrossfitPRApp.swift in Sources */,
-				4E58072227F3C5B100F16219 /* AppDependencyGraph.swift in Sources */,
-				4E58060327F3C5B100F16219 /* RootView.swift in Sources */,
+				58467C49435983D975DA0EBC /* AppDependencyGraph.swift in Sources */,
+				0663838BD2865F3F6C795345 /* CrossfitPRApp.swift in Sources */,
+				D44B8954314411CD59E443AC /* RootView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		4E58075627F3C5B100F16219 /* Sources */ = {
+		ABA6CCB065AF16B69F45F86F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4E58075227F3C5B100F16219 /* CrossfitPRWatchApp.swift in Sources */,
-				4E58077327F3C5B100F16219 /* WatchLinkBootstrap.swift in Sources */,
-				4E58076527F3C5B100F16219 /* WatchPOCViews.swift in Sources */,
-				4E58076727F3C5B100F16219 /* WatchCompanionRootView.swift in Sources */,
-				4E58077B27F3C5B100F16219 /* WatchCompanionLaunchConfig.swift in Sources */,
-				4E58077527F3C5B100F16219 /* WatchEventSink.swift in Sources */,
-				4E58077727F3C5B100F16219 /* WatchRestTimerView.swift in Sources */,
-				4E58077927F3C5B100F16219 /* WatchBreathingView.swift in Sources */,
-				4E58076927F3C5B100F16219 /* WatchDesign.swift in Sources */,
+				F4F4CBCC9B23F2364E0B2BEF /* CrossfitPRWatchApp.swift in Sources */,
+				2FE4409042F771FC4E003D97 /* WatchBreathingView.swift in Sources */,
+				AB4B3A41A8E1E14D8170CE01 /* WatchCompanionLaunchConfig.swift in Sources */,
+				D8CA9AF29F2FA99089F17C67 /* WatchCompanionRootView.swift in Sources */,
+				D4440A689EC136268FE1901C /* WatchDesign.swift in Sources */,
+				5FF7E8FDC5162E74C513578E /* WatchEventSink.swift in Sources */,
+				1EBB4A6B1F1282ACB11ED4CB /* WatchLinkBootstrap.swift in Sources */,
+				B6D88802478BFCD35F99D344 /* WatchPOCViews.swift in Sources */,
+				D68A8EFE58C3398588D4DB16 /* WatchRestTimerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		4E58071427F3C5B100F16219 /* Sources */ = {
+		E15034D1A956E7860EE35CD6 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4E58070427F3C5B100F16219 /* ReadmeScreenshotsUITests.swift in Sources */,
-				4E58072027F3C5B100F16219 /* AppLocalizationQATests.swift in Sources */,
-				4E58073027F3C5B100F16219 /* PaymentFlowUITests.swift in Sources */,
+				1E4E5B7B3917ACBD3796AB03 /* AppLocalizationQATests.swift in Sources */,
+				01CFDF7292C95FB9AD050A54 /* PaymentFlowUITests.swift in Sources */,
+				7526E433064EED18DB76C7D3 /* ReadmeScreenshotsUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		168A4E63B2436F1134B071EA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 78E1277CB2052A7902434D8C /* CrossfitPR */;
+			targetProxy = AFE1F4E703BFE8BE0017AE40 /* PBXContainerItemProxy */;
+		};
+		B27F3099D9D7138CED266892 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E84D0E3EA0E83FB8A35DCB9C /* CrossfitPRWatch */;
+			targetProxy = 70B4B3C8BB9D2A8ECEB26DFB /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
-		4E58056227F3C5B100F16219 /* LaunchScreen.storyboard */ = {
+		97233A696C983E582C1A1A6A /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				4E58056327F3C5B100F16219 /* Base */,
+				35CFC7FB40EA53820575B14E /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -426,127 +432,50 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		4E58056627F3C5B100F16219 /* Debug */ = {
+		43B3D284528C2B23562602F0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_TESTABILITY = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
+				DEVELOPMENT_TEAM = 6V95FQX348;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
-				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
-				MTL_FAST_MATH = YES;
-				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = iphoneos;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				WATCHOS_DEPLOYMENT_TARGET = 9.0;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
+				WATCHOS_DEPLOYMENT_TARGET = 9.0;
 			};
 			name = Debug;
 		};
-		4E58056727F3C5B100F16219 /* Release */ = {
+		4D7EA53BBF414AEC3525D4CD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_NS_ASSERTIONS = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				MTL_FAST_MATH = YES;
-				SDKROOT = iphoneos;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				WATCHOS_DEPLOYMENT_TARGET = 9.0;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
-				SWIFT_VERSION = 5.0;
-				VALIDATE_PRODUCT = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = CrossfitPRWatch/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = CrossfitPR;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.douglast.CrossfitPR;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.douglast.CrossfitPR.watchkitapp;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+			};
+			name = Debug;
+		};
+		5F31FECC097C5AC24E7A9E9C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.douglast.CrossfitPRUITests;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = CrossfitPR;
 			};
 			name = Release;
 		};
-		4E58056927F3C5B100F16219 /* Debug */ = {
+		7EDC1AA848D9AA546D8AA1BA /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -554,7 +483,6 @@
 				CODE_SIGN_ENTITLEMENTS = CrossfitPR/CrossfitPR.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 6V95FQX348;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CrossfitPR/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = MyCrossfitPRs;
@@ -562,20 +490,33 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.douglast.CrossfitPR;
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
-			name = Debug;
+			name = Release;
 		};
-		4E58056A27F3C5B100F16219 /* Release */ = {
+		8CE9577F5071B2B9DE6FFAF3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = CrossfitPRWatch/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = CrossfitPR;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.douglast.CrossfitPR;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.douglast.CrossfitPR.watchkitapp;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+			};
+			name = Release;
+		};
+		AE149FF1F942B5FD15E668A1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -583,7 +524,6 @@
 				CODE_SIGN_ENTITLEMENTS = CrossfitPR/CrossfitPR.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 6V95FQX348;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CrossfitPR/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = MyCrossfitPRs;
@@ -591,146 +531,72 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.douglast.CrossfitPR;
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D774A0E8AD17083016755E1F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = 6V95FQX348;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				SWIFT_VERSION = 5.0;
+				WATCHOS_DEPLOYMENT_TARGET = 9.0;
 			};
 			name = Release;
 		};
-		4E58071827F3C5B100F16219 /* Debug */ = {
+		DDF96C5C21AFBA9F6EC09938 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 6V95FQX348;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.douglast.CrossfitPRUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = CrossfitPR;
 			};
 			name = Debug;
-		};
-		4E58071927F3C5B100F16219 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 6V95FQX348;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.douglast.CrossfitPRUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = CrossfitPR;
-			};
-			name = Release;
-		};
-		4E58075C27F3C5B100F16219 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 6V95FQX348;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = CrossfitPRWatch/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = CrossfitPR;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "com.douglast.CrossfitPR";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.douglast.CrossfitPR.watchkitapp;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 9.0;
-			};
-			name = Debug;
-		};
-		4E58075D27F3C5B100F16219 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 6V95FQX348;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = CrossfitPRWatch/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = CrossfitPR;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "com.douglast.CrossfitPR";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.douglast.CrossfitPR.watchkitapp;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 9.0;
-			};
-			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		4E58054F27F3C5AE00F16219 /* Build configuration list for PBXProject "CrossfitPR" */ = {
+		2E5B172A7338ED840EE211B6 /* Build configuration list for PBXNativeTarget "CrossfitPRUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				4E58056627F3C5B100F16219 /* Debug */,
-				4E58056727F3C5B100F16219 /* Release */,
+				DDF96C5C21AFBA9F6EC09938 /* Debug */,
+				5F31FECC097C5AC24E7A9E9C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4E58056827F3C5B100F16219 /* Build configuration list for PBXNativeTarget "CrossfitPR" */ = {
+		69C0D6E0B19ECCCC362E1A81 /* Build configuration list for PBXNativeTarget "CrossfitPRWatch" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				4E58056927F3C5B100F16219 /* Debug */,
-				4E58056A27F3C5B100F16219 /* Release */,
+				4D7EA53BBF414AEC3525D4CD /* Debug */,
+				8CE9577F5071B2B9DE6FFAF3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4E58071327F3C5B100F16219 /* Build configuration list for PBXNativeTarget "CrossfitPRUITests" */ = {
+		919E7CD85CE80017AF07C4C5 /* Build configuration list for PBXNativeTarget "CrossfitPR" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				4E58071827F3C5B100F16219 /* Debug */,
-				4E58071927F3C5B100F16219 /* Release */,
+				AE149FF1F942B5FD15E668A1 /* Debug */,
+				7EDC1AA848D9AA546D8AA1BA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4E58075B27F3C5B100F16219 /* Build configuration list for PBXNativeTarget "CrossfitPRWatch" */ = {
+		B400C64E3C26E7571F455B67 /* Build configuration list for PBXProject "CrossfitPR" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				4E58075C27F3C5B100F16219 /* Debug */,
-				4E58075D27F3C5B100F16219 /* Release */,
+				43B3D284528C2B23562602F0 /* Debug */,
+				D774A0E8AD17083016755E1F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -738,69 +604,58 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
-		4E58062127F3C5B100F16219 /* XCLocalSwiftPackageReference "CrossfitPRPackages" */ = {
+		C307F72BD60653EB75458D48 /* XCLocalSwiftPackageReference "." */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = .;
 		};
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		4E58061027F3C5B100F16219 /* Domain */ = {
+		1019385849212E164277D716 /* Application */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 4E58062127F3C5B100F16219 /* XCLocalSwiftPackageReference "CrossfitPRPackages" */;
-			productName = Domain;
-		};
-		4E58061627F3C5B100F16219 /* Subscription */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 4E58062127F3C5B100F16219 /* XCLocalSwiftPackageReference "CrossfitPRPackages" */;
-			productName = Subscription;
-		};
-		4E58061827F3C5B100F16219 /* Application */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 4E58062127F3C5B100F16219 /* XCLocalSwiftPackageReference "CrossfitPRPackages" */;
 			productName = Application;
 		};
-		4E58062C27F3C5B100F16219 /* PRHistory */ = {
+		43940B96131509D85FBD238A /* Settings */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 4E58062127F3C5B100F16219 /* XCLocalSwiftPackageReference "CrossfitPRPackages" */;
-			productName = PRHistory;
-		};
-		4E58062D27F3C5B100F16219 /* Insights */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 4E58062127F3C5B100F16219 /* XCLocalSwiftPackageReference "CrossfitPRPackages" */;
-			productName = Insights;
-		};
-		4E58062E27F3C5B100F16219 /* PROUpgrade */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 4E58062127F3C5B100F16219 /* XCLocalSwiftPackageReference "CrossfitPRPackages" */;
-			productName = PROUpgrade;
-		};
-		4E58062F27F3C5B100F16219 /* Onboarding */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 4E58062127F3C5B100F16219 /* XCLocalSwiftPackageReference "CrossfitPRPackages" */;
-			productName = Onboarding;
-		};
-		4E58063527F3C5B100F16219 /* Localization */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 4E58062127F3C5B100F16219 /* XCLocalSwiftPackageReference "CrossfitPRPackages" */;
-			productName = Localization;
-		};
-		4E58063827F3C5B100F16219 /* Categories */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 4E58062127F3C5B100F16219 /* XCLocalSwiftPackageReference "CrossfitPRPackages" */;
-			productName = Categories;
-		};
-		4E58063A27F3C5B100F16219 /* Settings */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 4E58062127F3C5B100F16219 /* XCLocalSwiftPackageReference "CrossfitPRPackages" */;
 			productName = Settings;
 		};
-		4E58063C27F3C5B100F16219 /* Launch */ = {
+		4B19AEEF280335D5D32BDFD9 /* Insights */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 4E58062127F3C5B100F16219 /* XCLocalSwiftPackageReference "CrossfitPRPackages" */;
+			productName = Insights;
+		};
+		50317D7E5F04D0307430B05D /* PRHistory */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PRHistory;
+		};
+		B65C05FF365D58226E1DF7F2 /* Categories */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Categories;
+		};
+		D251BBCC1B6BD1FE1BC4B3E9 /* Subscription */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Subscription;
+		};
+		DA29378289FF9654956923D5 /* Onboarding */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Onboarding;
+		};
+		EC49321B047EF6544DEDF3AF /* PROUpgrade */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PROUpgrade;
+		};
+		EEEF99DFBB84D2EB1558F151 /* Localization */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Localization;
+		};
+		F75F2805ABC31ACBD10C81B9 /* Domain */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Domain;
+		};
+		FDEB71C1A6466AB7BFB1EA94 /* Launch */ = {
+			isa = XCSwiftPackageProductDependency;
 			productName = Launch;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
-	rootObject = 4E58054C27F3C5AE00F16219 /* Project object */;
+	rootObject = 6B0DFB974B5E0F97487144B0 /* Project object */;
 }

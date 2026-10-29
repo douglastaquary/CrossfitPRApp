@@ -1,0 +1,152 @@
+# Fonte do CrossfitPR.xcodeproj — gere com: ./scripts/generate-xcodeproj.sh
+# CI: XCLocalSwiftPackageReference (relativePath ".") — ver docs/CI.md
+# Xcode 14.2 local: após gerar, ./scripts/configure-spm-xcode14.sh (não commitar file URL)
+
+name: CrossfitPR
+
+options:
+  bundleIdPrefix: com.douglast
+  deploymentTarget:
+    iOS: "16.0"
+    watchOS: "9.0"
+  createIntermediateGroups: true
+  defaultConfig: Release
+  developmentLanguage: pt-BR
+  groupSortPosition: top
+  minimumXcodeGenVersion: 2.45.0
+  # objectVersion 56 — abre no Xcode 14.2 local; Xcode 15+ no CI também lê.
+  projectFormat: xcode14_0
+  xcodeVersion: "14.2"
+  postGenCommand: bash scripts/xcodegen-postgen.sh
+
+packages:
+  CrossfitPRPackages:
+    path: .
+
+settings:
+  base:
+    DEVELOPMENT_TEAM: 6V95FQX348
+    SWIFT_VERSION: "5.0"
+
+configs:
+  Debug: debug
+  Release: release
+
+targets:
+  CrossfitPR:
+    type: application
+    platform: iOS
+    sources:
+      - path: CrossfitPR
+    settings:
+      base:
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+        CODE_SIGN_ENTITLEMENTS: CrossfitPR/CrossfitPR.entitlements
+        CODE_SIGN_STYLE: Automatic
+        CURRENT_PROJECT_VERSION: 1
+        GENERATE_INFOPLIST_FILE: YES
+        INFOPLIST_FILE: CrossfitPR/Info.plist
+        INFOPLIST_KEY_CFBundleDisplayName: MyCrossfitPRs
+        INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents: YES
+        INFOPLIST_KEY_UILaunchStoryboardName: LaunchScreen
+        INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad: "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight"
+        INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone: "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight"
+        MARKETING_VERSION: 1.0
+        PRODUCT_BUNDLE_IDENTIFIER: com.douglast.CrossfitPR
+        SWIFT_EMIT_LOC_STRINGS: YES
+        TARGETED_DEVICE_FAMILY: "1,2"
+    dependencies:
+      - target: CrossfitPRWatch
+        embed: true
+      - package: CrossfitPRPackages
+        product: Domain
+      - package: CrossfitPRPackages
+        product: Subscription
+      - package: CrossfitPRPackages
+        product: Application
+      - package: CrossfitPRPackages
+        product: PRHistory
+      - package: CrossfitPRPackages
+        product: Insights
+      - package: CrossfitPRPackages
+        product: PROUpgrade
+      - package: CrossfitPRPackages
+        product: Onboarding
+      - package: CrossfitPRPackages
+        product: Localization
+      - package: CrossfitPRPackages
+        product: Categories
+      - package: CrossfitPRPackages
+        product: Settings
+      - package: CrossfitPRPackages
+        product: Launch
+
+  CrossfitPRWatch:
+    type: application
+    platform: watchOS
+    sources:
+      - path: CrossfitPRWatch
+      - path: Packages/WatchCompanion/Sources/WatchCompanion
+        includes:
+          - "**/*.swift"
+      - path: Packages/WatchCompanion/Sources/WatchCompanion/Resources
+        buildPhase: resources
+        type: folder
+    settings:
+      base:
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        CODE_SIGN_STYLE: Automatic
+        CURRENT_PROJECT_VERSION: 1
+        GENERATE_INFOPLIST_FILE: YES
+        INFOPLIST_FILE: CrossfitPRWatch/Info.plist
+        INFOPLIST_KEY_CFBundleDisplayName: CrossfitPR
+        INFOPLIST_KEY_UISupportedInterfaceOrientations: "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown"
+        INFOPLIST_KEY_WKCompanionAppBundleIdentifier: com.douglast.CrossfitPR
+        MARKETING_VERSION: 1.0
+        PRODUCT_BUNDLE_IDENTIFIER: com.douglast.CrossfitPR.watchkitapp
+        SKIP_INSTALL: YES
+        SWIFT_EMIT_LOC_STRINGS: YES
+        TARGETED_DEVICE_FAMILY: 4
+
+  CrossfitPRUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources:
+      - path: CrossfitPRUITests
+    settings:
+      base:
+        CODE_SIGN_STYLE: Automatic
+        CURRENT_PROJECT_VERSION: 1
+        GENERATE_INFOPLIST_FILE: YES
+        MARKETING_VERSION: 1.0
+        PRODUCT_BUNDLE_IDENTIFIER: com.douglast.CrossfitPRUITests
+        SWIFT_EMIT_LOC_STRINGS: NO
+        TEST_TARGET_NAME: CrossfitPR
+        TARGETED_DEVICE_FAMILY: "1,2"
+    dependencies:
+      - target: CrossfitPR
+
+schemes:
+  CrossfitPR:
+    build:
+      targets:
+        CrossfitPR: all
+        CrossfitPRWatch: all
+        CrossfitPRUITests: [test]
+    run:
+      config: Debug
+      # Caminho final ajustado em scripts/xcodegen-postgen.sh (compatível com scheme legado).
+      storeKitConfiguration: Configuration/Products.storekit
+    test:
+      config: Debug
+      targets:
+        - CrossfitPRUITests
+      environmentVariables:
+        CROSSFITPR_DOCS_ROOT: $(SRCROOT)/docs
+    profile:
+      config: Release
+    analyze:
+      config: Debug
+    archive:
+      config: Release

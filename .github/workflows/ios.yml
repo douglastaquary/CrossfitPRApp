@@ -32,6 +32,9 @@ jobs:
           xcodebuild -version
           xcrun simctl list runtimes available | head -20
 
+      - name: Instalar XcodeGen
+        run: brew install xcodegen
+
       - name: Build & test (scripts/ci-modern.sh)
         env:
           CODE_SIGNING_ALLOWED: "NO"

@@ -12,7 +12,7 @@ CrossfitPR é um app iOS feito para quem treina CrossFit e quer histórico claro
   <img src="docs/media/crossfitpr-demo.gif" width="320" alt="Demonstração do CrossfitPR">
 </p>
 
-> GIF e prints vêm de `docs/media/` e `docs/screenshots/` (capturas em **pt-BR**). Atualizar: `./scripts/capture-readme-media-auto.sh` — simulador via `scripts/pick-ios-simulator.rb`. Xcode 14.2: `./scripts/configure-spm-xcode14.sh` na primeira vez (não commitar `project.pbxproj` gerado).
+> GIF e prints vêm de `docs/media/` e `docs/screenshots/` (capturas em **pt-BR**). Atualizar: `./scripts/capture-readme-media-auto.sh`. Projeto Xcode: [`docs/XCODEGEN.md`](docs/XCODEGEN.md) — Xcode 14.2: `./scripts/configure-spm-xcode14.sh` após abrir (não commitar `file URL` no pbxproj).
 
 ---
 

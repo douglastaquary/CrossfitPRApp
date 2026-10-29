@@ -14,6 +14,13 @@ echo "==> Toolchain"
 xcodebuild -version
 xcrun swift --version
 
+echo "==> XcodeGen (project.yml ↔ pbxproj)"
+if command -v xcodegen >/dev/null 2>&1; then
+  bash "$ROOT/scripts/verify-xcodeproj-sync.sh"
+else
+  echo "WARN: xcodegen não instalado — pulando sync check (Actions: brew install xcodegen)"
+fi
+
 echo "==> SPM (monorepo local — sem file URL absoluta no git)"
 if grep -qE 'repositoryURL = "file:///Users/' "$PROJECT/project.pbxproj" 2>/dev/null; then
   echo "ERROR: project.pbxproj contém file URL absoluta (típico de configure-spm-xcode14.sh local)."

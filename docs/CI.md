@@ -7,7 +7,7 @@
 | **Sua máquina** | 14.2 | `./scripts/configure-spm-xcode14.sh` → `file URL` local (não commitar) | `xcodebuild` manual, `./scripts/run-qa.sh` |
 | **GitHub Actions** | **latest-stable** em `macos-15` | `XCLocalSwiftPackageReference` + `relativePath = .` | `./scripts/ci-modern.sh` |
 
-O repositório **versionado** usa pacote SPM **local relativo** na raiz (`Package.swift`). Isso funciona no CI e no Xcode 15+ sem scripts.
+O repositório **versionado** usa pacote SPM **local relativo** na raiz (`Package.swift`). O `.xcodeproj` é gerado por [**XcodeGen**](XCODEGEN.md) (`project.yml` + `./scripts/generate-xcodeproj.sh`).
 
 ## Workflow GitHub
 
@@ -75,6 +75,7 @@ Skills agentes: [architecture-review](../.cursor/skills/architecture-review/SKIL
 
 ## Referências
 
+- XcodeGen: [`docs/XCODEGEN.md`](XCODEGEN.md)
 - QA UI: [`docs/QA.md`](QA.md)
 - MV: [`docs/MV-ARCHITECTURE.md`](MV-ARCHITECTURE.md)
 - SPM legado: [`scripts/configure-spm-xcode14.sh`](../scripts/configure-spm-xcode14.sh)
