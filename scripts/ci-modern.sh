@@ -14,14 +14,15 @@ echo "==> Toolchain"
 xcodebuild -version
 xcrun swift --version
 
-echo "==> XcodeGen (project.yml ↔ pbxproj)"
+echo "==> XcodeGen (project.yml → CrossfitPR.xcodeproj)"
 export XCODEGEN_VERSION="${XCODEGEN_VERSION:-2.46.0}"
-bash "$ROOT/scripts/verify-xcodeproj-sync.sh"
+export REGENERATE_XCODEPROJ=1
+bash "$ROOT/scripts/generate-xcodeproj.sh"
 
 echo "==> SPM (monorepo local — sem file URL absoluta no git)"
 if grep -qE 'repositoryURL = "file:///Users/' "$PROJECT/project.pbxproj" 2>/dev/null; then
   echo "ERROR: project.pbxproj contém file URL absoluta (típico de configure-spm-xcode14.sh local)."
-  echo "       No CI use XCLocalSwiftPackageReference (relativePath = .). Reverta o pbxproj antes do push."
+  echo "       Regenere limpo: REGENERATE_XCODEPROJ=1 ./scripts/generate-xcodeproj.sh (não commitar — xcodeproj está no .gitignore)."
   exit 1
 fi
 if ! grep -q 'isa = XCLocalSwiftPackageReference' "$PROJECT/project.pbxproj"; then

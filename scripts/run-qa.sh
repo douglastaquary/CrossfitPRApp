@@ -5,6 +5,7 @@ set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT"
+bash "$ROOT/scripts/ensure-xcodeproj.sh"
 
 SCHEME="${SCHEME:-CrossfitPR}"
 PROJECT="${PROJECT:-CrossfitPR.xcodeproj}"

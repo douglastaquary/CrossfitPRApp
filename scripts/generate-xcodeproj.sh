@@ -50,6 +50,5 @@ echo "→ Gerando a partir de project.yml"
 bash "$ROOT/scripts/xcodegen-postgen.sh"
 
 echo ""
-echo "Pronto: CrossfitPR.xcodeproj"
-echo "  CI / push: commite project.yml + pbxproj (XCLocal relativePath .)"
-echo "  Xcode 14.2 local: ./scripts/configure-spm-xcode14.sh antes de abrir (não commitar file URL)"
+echo "Pronto: CrossfitPR.xcodeproj (local/CI — não versionado; fonte: project.yml)"
+echo "  Xcode 14.2: ./scripts/configure-spm-xcode14.sh após gerar (file URL só na máquina)"

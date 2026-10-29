@@ -79,10 +79,11 @@ AppLaunchContainer → LaunchView → MainTabView
 ## Comandos úteis
 
 ```bash
-# Alterou targets/SPM/embed Watch? Regenerar Xcode:
-./scripts/generate-xcodeproj.sh   # fonte: project.yml — ver docs/XCODEGEN.md
+# Clone / alterou project.yml — gerar .xcodeproj (não está no git):
+./scripts/generate-xcodeproj.sh   # docs/XCODEGEN.md
 
 # Build (Xcode 14.2 local)
+./scripts/generate-xcodeproj.sh
 ./scripts/configure-spm-xcode14.sh
 xcodebuild -scheme CrossfitPR -destination 'platform=iOS Simulator,name=iPhone 14 Pro' build
 

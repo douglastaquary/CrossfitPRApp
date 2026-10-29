@@ -23,7 +23,7 @@ O idioma exibido segue a **preferência de idioma do dispositivo** (Settings →
 
 ## Projeto Xcode
 
-`CrossfitPR.xcodeproj`: `developmentRegion = pt-BR`, `knownRegions = en, pt-BR, Base`.
+[`project.yml`](../project.yml) (`developmentLanguage: pt-BR`); regiões conhecidas vêm do XcodeGen ao rodar `./scripts/generate-xcodeproj.sh`.
 
 Strings do app shell (se houver) devem usar o módulo `Localization`; o target app **não** inclui `.lproj` próprios ativos para copy de features.
 

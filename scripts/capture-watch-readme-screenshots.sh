@@ -3,6 +3,7 @@
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+bash "$ROOT/scripts/ensure-xcodeproj.sh"
 DOCS="$ROOT/docs/screenshots"
 BUNDLE_ID="com.douglast.CrossfitPR.watchkitapp"
 PICK_SCRIPT="${ROOT}/scripts/pick-watch-simulator.rb"

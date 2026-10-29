@@ -1,6 +1,5 @@
-# Fonte do CrossfitPR.xcodeproj — gere com: ./scripts/generate-xcodeproj.sh
-# CI: XCLocalSwiftPackageReference (relativePath ".") — ver docs/CI.md
-# Xcode 14.2 local: após gerar, ./scripts/configure-spm-xcode14.sh (não commitar file URL)
+# Único artefato Xcode versionado no git — gere o .xcodeproj com: ./scripts/generate-xcodeproj.sh
+# CrossfitPR.xcodeproj está no .gitignore (CI regera a cada build). Ver docs/XCODEGEN.md
 
 name: CrossfitPR
 

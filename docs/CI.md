@@ -7,7 +7,7 @@
 | **Sua máquina** | 14.2 | `./scripts/configure-spm-xcode14.sh` → `file URL` local (não commitar) | `xcodebuild` manual, `./scripts/run-qa.sh` |
 | **GitHub Actions** | **latest-stable** em `macos-15` | `XCLocalSwiftPackageReference` + `relativePath = .` | `./scripts/ci-modern.sh` |
 
-O repositório **versionado** usa pacote SPM **local relativo** na raiz (`Package.swift`). O `.xcodeproj` é gerado por [**XcodeGen**](XCODEGEN.md) (`project.yml` + `./scripts/generate-xcodeproj.sh`).
+O repositório versiona **`project.yml`** + SPM na raiz (`Package.swift`). O **`CrossfitPR.xcodeproj` não está no git** — CI e clone local rodam [`./scripts/generate-xcodeproj.sh`](../scripts/generate-xcodeproj.sh) ([XCODEGEN.md](XCODEGEN.md)).
 
 ## Workflow GitHub
 
@@ -17,6 +17,7 @@ Arquivo: [`.github/workflows/ios.yml`](../.github/workflows/ios.yml)
 - **Runner:** `macos-15`
 - **Xcode:** `maxim-lobanov/setup-xcode@v1` com `latest-stable`
 - **Script:** [`scripts/ci-modern.sh`](../scripts/ci-modern.sh)
+  - Regenera `CrossfitPR.xcodeproj` (XcodeGen 2.46.0)
   - Build app (iOS)
   - Build **CrossfitPRWatch** (`generic/platform=watchOS Simulator`)
   - `AppLocalizationQATests` (pt/en)
@@ -32,14 +33,11 @@ CODE_SIGNING_ALLOWED=NO ./scripts/ci-modern.sh
 
 Simulador padrão: **iPhone 17 Pro** (runtime iOS mais novo no runner), destino `id=<UDID>`. Overrides: `SIM_DEVICE`, `SIM_OS=26.5`, `SIM_UDID`, ou `SIM_DEST='platform=iOS Simulator,name=…,OS=…'`.
 
-## Antes de push (Xcode 14.2)
+## Xcode 14.2 local
 
-1. **Não commitar** `project.pbxproj` após `configure-spm-xcode14.sh` (contém caminho absoluto).
-2. Restaurar referência local relativa:
-   ```bash
-   git checkout -- CrossfitPR.xcodeproj/project.pbxproj
-   ```
-3. Push → o CI roda o gate moderno.
+1. `./scripts/generate-xcodeproj.sh` → `./scripts/configure-spm-xcode14.sh` (file URL só na máquina).
+2. O `.xcodeproj` está no **`.gitignore`** — nada de project Xcode para commitar.
+3. Push → CI regera o projeto limpo e roda o gate moderno.
 
 ## Review arquitetural em PR (advisory)
 

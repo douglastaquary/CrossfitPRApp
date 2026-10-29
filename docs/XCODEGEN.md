@@ -1,37 +1,48 @@
-# XcodeGen — `CrossfitPR.xcodeproj`
+# XcodeGen — `project.yml`
 
-O projeto Xcode é **gerado** a partir de [`project.yml`](../project.yml). Não edite `project.pbxproj` à mão para targets, dependências SPM ou embed do Watch — altere o YAML e regenere.
+O repositório versiona **apenas** [`project.yml`](../project.yml). O **`CrossfitPR.xcodeproj`** é gerado localmente e no CI (está no `.gitignore`).
 
-## Regenerar
+## Primeiro passo (clone ou mudança no YAML)
 
 ```bash
 ./scripts/generate-xcodeproj.sh
+open CrossfitPR.xcodeproj
 ```
 
-- **CI e local:** `./scripts/generate-xcodeproj.sh` sempre usa XcodeGen **2.46.0** em `.tools/` (download automático; ignorado pelo git). Não depende do `brew install xcodegen` — versões diferentes quebram o gate `verify-xcodeproj-sync.sh`.
+- **XcodeGen 2.46.0** é baixado para `.tools/` (ignorado pelo git) se ainda não existir.
+- **CI:** `ci-modern.sh` regera o projeto antes de cada build (`REGENERATE_XCODEPROJ=1`).
 
-Formato do projeto: **`projectFormat: xcode14_0`** (`objectVersion = 56`) — abre no **Xcode 14.2** local e no Xcode recente do GitHub Actions.
+Atalho se o `.xcodeproj` sumiu após clone:
+
+```bash
+./scripts/ensure-xcodeproj.sh
+```
+
+Forçar regerar (ex. após editar `project.yml`):
+
+```bash
+REGENERATE_XCODEPROJ=1 ./scripts/generate-xcodeproj.sh
+```
 
 ## SPM local (monorepo)
 
 | Ambiente | Referência SPM |
 |----------|----------------|
-| Git / CI / Xcode 15+ | `XCLocalSwiftPackageReference` + `relativePath = .` |
-| Xcode 14.2 após abrir | `./scripts/configure-spm-xcode14.sh` → `file URL` **só na máquina** |
+| Git / CI / Xcode 15+ | `XCLocalSwiftPackageReference` + `relativePath = .` (saída do XcodeGen) |
+| Xcode 14.2 na sua máquina | `./scripts/configure-spm-xcode14.sh` → `file URL` **só local** |
 
-**Nunca commitar** `file:///Users/...` no `project.pbxproj`. Antes do push:
+O `pbxproj` **não vai para o git**. Se rodou `configure-spm-xcode14.sh`, regenere antes de comparar com CI:
 
 ```bash
-git checkout -- CrossfitPR.xcodeproj/project.pbxproj
-# ou regenere: ./scripts/generate-xcodeproj.sh
+REGENERATE_XCODEPROJ=1 ./scripts/generate-xcodeproj.sh
 ```
 
-## O que inclui `project.yml`
+## Conteúdo do `project.yml`
 
-- Target **CrossfitPR** (iOS 16+) + pacotes SPM da raiz
-- **CrossfitPRWatch** (watchOS 9+) — sources de `WatchCompanion` + embed no app iPhone
+- **CrossfitPR** (iOS 16+) + pacotes SPM na raiz
+- **CrossfitPRWatch** (watchOS 9+) — sources `WatchCompanion` + embed no iPhone
 - **CrossfitPRUITests** + scheme **CrossfitPR** (StoreKit, env `CROSSFITPR_DOCS_ROOT`)
 
-Pós-geração: [`scripts/xcodegen-postgen.sh`](../scripts/xcodegen-postgen.sh) remove `Products.storekit` do Copy Bundle Resources e corrige o caminho no scheme.
+Pós-geração: [`scripts/xcodegen-postgen.sh`](../scripts/xcodegen-postgen.sh) (StoreKit no scheme, `BuildableName`, `objectVersion` 56).
 
 Ver também: [`docs/CI.md`](CI.md)

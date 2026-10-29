@@ -19,6 +19,7 @@ Companion na sessão: dica contextual, timer de descanso e respiração. **Sem L
 ## Build local
 
 ```bash
+./scripts/generate-xcodeproj.sh
 ./scripts/configure-spm-xcode14.sh   # Xcode 14.2 local
 open CrossfitPR.xcodeproj
 # Scheme CrossfitPR — destino iPhone + Watch pareado no simulador
