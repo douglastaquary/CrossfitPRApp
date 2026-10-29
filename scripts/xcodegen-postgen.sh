@@ -75,6 +75,34 @@ text = re.sub(
     text,
 )
 
+# Xcode 26 trata o app watchOS como Foundation extension: o embed tem de ir
+# para PlugIns/ (dstSubfolderSpec 13). XcodeGen 2.46 ainda gera Watch/
+# (spec 16) e o ValidateEmbeddedBinary falha com
+# "Couldn't load Info dictionary" em CrossfitPR.app/Watch/CrossfitPRWatch.app.
+# objectVersion 56 (Xcode 14.2 local) permanece em Watch/.
+if "objectVersion = 77;" in text:
+    phase = re.search(
+        r"\t\t" + hex_id + r" /\* Embed Watch Content \*/ = \{.*?\n\t\t\};",
+        text,
+        flags=re.S,
+    )
+    if phase is None:
+        raise SystemExit("xcodegen-postgen: fase Embed Watch Content não encontrada")
+    block = phase.group(0)
+    if 'dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";' not in block or "dstSubfolderSpec = 16;" not in block:
+        raise SystemExit("xcodegen-postgen: fase Embed Watch Content em formato inesperado")
+    updated = block.replace(
+        'dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";',
+        'dstPath = "";',
+        1,
+    ).replace(
+        "dstSubfolderSpec = 16;",
+        "dstSubfolderSpec = 13;",
+        1,
+    )
+    text = text[: phase.start()] + updated + text[phase.end() :]
+    print("xcodegen-postgen: embed do Watch em PlugIns/ (Xcode 26)")
+
 pbx_path.write_text(text)
 print("xcodegen-postgen: OK (SPM package links + StoreKit/scheme)")
 PY

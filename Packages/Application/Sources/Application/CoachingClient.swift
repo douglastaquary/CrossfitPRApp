@@ -13,14 +13,14 @@ public final class CoachingClient: ObservableObject {
     private let budget: TokenBudgetPolicy
     private let cache: CoachingInsightCaching
     private let router: CoachingAdapterRouter
-    private let isOnDeviceAvailable: () -> Bool
+    private let isOnDeviceAvailable: @Sendable () -> Bool
 
     public init(
         builder: CoachingContextBuilder = CoachingContextBuilder(),
         budget: TokenBudgetPolicy = TokenBudgetPolicy(),
         cache: CoachingInsightCaching = InMemoryCoachingInsightCache(),
         router: CoachingAdapterRouter = CoachingAdapterRouter(),
-        isOnDeviceAvailable: @escaping () -> Bool = { false }
+        isOnDeviceAvailable: @escaping @Sendable () -> Bool = { false }
     ) {
         self.builder = builder
         self.budget = budget

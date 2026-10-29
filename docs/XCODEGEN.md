@@ -43,6 +43,6 @@ REGENERATE_XCODEPROJ=1 ./scripts/generate-xcodeproj.sh
 - **CrossfitPRWatch** (watchOS 9+) — sources `WatchCompanion` + embed no iPhone
 - **CrossfitPRUITests** + scheme **CrossfitPR** (StoreKit, env `CROSSFITPR_DOCS_ROOT`)
 
-Pós-geração: [`scripts/xcodegen-postgen.sh`](../scripts/xcodegen-postgen.sh) (StoreKit no scheme, `BuildableName`, `objectVersion` 56).
+Pós-geração: [`scripts/xcodegen-postgen.sh`](../scripts/xcodegen-postgen.sh) (StoreKit no scheme, `BuildableName`, `objectVersion` 56). No formato Xcode 16 (`objectVersion` 77, CI) o embed do Watch vai para `PlugIns/` — o Xcode 26 não valida mais `Watch/`.
 
 Ver também: [`docs/CI.md`](CI.md)
