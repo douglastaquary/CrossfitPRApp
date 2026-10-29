@@ -67,8 +67,7 @@ echo "==> Resolve Package Graph"
 "${XCB[@]}" -resolvePackageDependencies
 
 echo "==> Build ($BUILD_CONFIG)"
-# Evita corrida: app Swift compilar antes dos .swiftmodule SPM (objectVersion legado / paralelismo).
-"${XCB[@]}" build -parallelizeTargets NO
+"${XCB[@]}" build
 
 echo "==> Build watchOS (CrossfitPRWatch embed)"
 WATCH_DEST="${WATCH_DEST:-generic/platform=watchOS Simulator}"
