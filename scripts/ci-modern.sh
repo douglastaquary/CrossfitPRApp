@@ -159,12 +159,33 @@ if ((${#ARCH_OVERRIDES[@]})); then
 fi
 "${WATCH_XCB[@]}" build
 
+# Xcode 26 com arch=arm64 grava em Debug-watchsimulator-arm64, não em
+# Debug-watchsimulator/. O -path '*Debug-watchsimulator/…' não achava o .app
+# mesmo com BUILD SUCCEEDED.
+WATCH_PRODUCT=""
+WATCH_FALLBACK=""
+WATCH_APPS=()
 set +o pipefail
-WATCH_PRODUCT="$(find "$HOME/Library/Developer/Xcode/DerivedData" -path '*Debug-watchsimulator/CrossfitPRWatch.app' -type d 2>/dev/null | head -1)"
+while IFS= read -r app; do
+  [[ -n "$app" ]] || continue
+  WATCH_APPS+=("$app")
+  [[ -f "$app/Info.plist" ]] || continue
+  case "$app" in
+    *watchsimulator*) WATCH_PRODUCT="$app"; break ;;
+  esac
+  WATCH_FALLBACK="$app"
+done < <(find "$HOME/Library/Developer/Xcode/DerivedData" "$ROOT/build" -name 'CrossfitPRWatch.app' -type d 2>/dev/null)
 set -o pipefail
-if [[ -z "$WATCH_PRODUCT" || ! -f "$WATCH_PRODUCT/Info.plist" ]]; then
+WATCH_PRODUCT="${WATCH_PRODUCT:-$WATCH_FALLBACK}"
+if [[ -z "$WATCH_PRODUCT" ]]; then
   echo "ERROR: CrossfitPRWatch.app não saiu com Info.plist (watchsimulator)."
-  dump_watch_app "${WATCH_PRODUCT:-/dev/null}"
+  if ((${#WATCH_APPS[@]})); then
+    for app in "${WATCH_APPS[@]}"; do
+      dump_watch_app "$app"
+    done
+  else
+    echo "Nenhum CrossfitPRWatch.app em DerivedData nem em build/."
+  fi
   exit 1
 fi
 echo "==> Watch product: $WATCH_PRODUCT"
