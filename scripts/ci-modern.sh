@@ -109,10 +109,9 @@ xcrun simctl boot "$WATCH_UDID" 2>/dev/null || true
 xcrun simctl pair "$WATCH_UDID" "$SIM_UDID" || true
 
 BUILD_CONFIG="${BUILD_CONFIG:-Debug}"
-# Sem conta Apple. Os dois lados ficam ad hoc ("-"), sem entitlements de
-# iCloud/push: esse arquivo invalida a assinatura de simulador. Sem
-# CodeSignOnCopy o Xcode 26.3 encolhe o executável em PlugIns/ e o
-# ValidateEmbeddedBinary recusa o Watch mesmo com Info.plist válido.
+# Sem conta Apple. O iPhone sai ad hoc ("-"), sem entitlements de iCloud.
+# O script do app sela o Watch em PlugIns/: o CodeSign do Xcode 26 deixa
+# Info.plist=not bound e o ValidateEmbeddedBinary não lê o plist.
 SIGNING_OVERRIDES=()
 if [[ "${CODE_SIGNING_ALLOWED:-YES}" == "NO" ]]; then
   SIGNING_OVERRIDES+=(
