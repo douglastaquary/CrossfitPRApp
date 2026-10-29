@@ -116,12 +116,15 @@ final class AppLocalizationQATests: XCTestCase {
         let app = XCUIApplication()
         let locale = languageCode == "en" ? "en_US" : "pt_BR"
         app.launchArguments += ["-AppleLanguages", "(\(languageCode))", "-AppleLocale", locale]
+        app.launchArguments += ["-UITEST_SKIP_SPLASH", "1"]
         app.launchEnvironment["AppleLanguages"] = "(\(languageCode))"
         app.launchEnvironment["AppleLocale"] = locale
         app.launchEnvironment["UITEST_SKIP_SPLASH"] = "1"
         if skipOnboarding {
+            app.launchArguments += ["-UITEST_SKIP_ONBOARDING", "1"]
             app.launchEnvironment["UITEST_SKIP_ONBOARDING"] = "1"
         } else {
+            app.launchArguments += ["-UITEST_FORCE_ONBOARDING", "1"]
             app.launchEnvironment["UITEST_FORCE_ONBOARDING"] = "1"
         }
         if let subscriptionTier {

@@ -109,23 +109,18 @@ xcrun simctl bootstatus "$SIM_UDID" -b 2>/dev/null || true
 # iPhone ocupado durante o XCUITest.
 
 BUILD_CONFIG="${BUILD_CONFIG:-Debug}"
-# Sem conta Apple. O iPhone sai ad hoc ("-") com só get-task-allow, para o
-# XCUITest conseguir anexar. Sem esse entitlement o teste não vê a UI
-# ("Unable to monitor event loop"). O Watch compila à parte e não entra no
-# .app: a assinatura ad hoc do watchsimulator deixa Info.plist=not bound.
+# Sem conta Apple o app fica sem assinatura. Ad hoc sem get-task-allow faz o
+# XCUITest não enxergar a UI. O Watch compila à parte e não entra no .app.
 SIGNING_OVERRIDES=()
 SKIP_WATCH_EMBED=0
 if [[ "${CODE_SIGNING_ALLOWED:-YES}" == "NO" ]]; then
   SKIP_WATCH_EMBED=1
   SIGNING_OVERRIDES+=(
-    CODE_SIGN_STYLE=Manual
-    "DEVELOPMENT_TEAM="
-    "CODE_SIGN_IDENTITY=-"
-    CODE_SIGNING_ALLOWED=YES
+    CODE_SIGNING_ALLOWED=NO
     CODE_SIGNING_REQUIRED=NO
-    AD_HOC_CODE_SIGNING_ALLOWED=YES
+    "CODE_SIGN_IDENTITY="
+    "DEVELOPMENT_TEAM="
     "PROVISIONING_PROFILE_SPECIFIER="
-    COPY_PHASE_STRIP=NO
   )
 fi
 XCB=(xcodebuild -scheme "$SCHEME" -project "$PROJECT" -destination "$DEST" -configuration "$BUILD_CONFIG" -allowProvisioningUpdates ENABLE_DEBUG_DYLIB=NO)
@@ -137,10 +132,6 @@ if ((${#ARCH_OVERRIDES[@]})); then
 fi
 if [[ "$SKIP_WATCH_EMBED" == "1" ]]; then
   XCB+=(EXCLUDED_SOURCE_FILE_NAMES=CrossfitPRWatch.app)
-  XCB+=(
-    "CODE_SIGN_ENTITLEMENTS=CrossfitPR/CI-Simulator.entitlements"
-    CODE_SIGN_INJECT_BASE_ENTITLEMENTS=YES
-  )
 fi
 
 echo "==> Resolve Package Graph"

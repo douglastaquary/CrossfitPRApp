@@ -31,7 +31,7 @@ chmod +x scripts/ci-modern.sh
 CODE_SIGNING_ALLOWED=NO ./scripts/ci-modern.sh
 ```
 
-`CODE_SIGNING_ALLOWED=NO` assina o iPhone com **ad hoc** (`CODE_SIGN_IDENTITY=-`) e o entitlement `get-task-allow` (`CrossfitPR/CI-Simulator.entitlements`). Sem ele o XCUITest não anexa ao processo e a tab bar nunca aparece. O `CrossfitPRWatch` é compilado com `-target`, sem parear o relógio, e **não é embutido**: a assinatura ad hoc do watchsimulator deixa `Info.plist=not bound`. No Xcode local, com a conta de desenvolvimento, o embed e os entitlements de iCloud continuam no `project.yml`.
+`CODE_SIGNING_ALLOWED=NO` deixa o iPhone **sem assinatura**. Ad hoc nesse simulador impede o XCUITest de ver a interface. O `CrossfitPRWatch` é compilado com `-target`, sem parear o relógio, e **não é embutido**: a assinatura ad hoc do watchsimulator deixa `Info.plist=not bound`. No simulador o app não abre o CloudKit na subida e não trata falta de rede como bloqueio. No Xcode local, com a conta de desenvolvimento, o embed e o iCloud continuam no `project.yml`.
 
 Simulador padrão: **iPhone 17 Pro** (runtime iOS mais novo no runner), destino `id=<UDID>`. O script compila `CrossfitPRWatch` com `-target` num Apple Watch **desligado** antes do app. O scheme do iPhone não recebe esse destino: o Xcode não o lista entre os destinos do scheme e o build aborta. Em host **arm64** os destinos ganham `arch=arm64` e o `xcodebuild` recebe `EXCLUDED_ARCHS` de `x86_64` nos SDKs de simulador. Overrides: `SIM_DEVICE`, `SIM_OS=26.5`, `SIM_UDID`, `SIM_DEST`, `WATCH_UDID`, `WATCH_DEVICE`, `WATCH_DEST`.
 

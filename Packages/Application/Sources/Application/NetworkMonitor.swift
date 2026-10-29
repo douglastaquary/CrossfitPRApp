@@ -10,7 +10,12 @@ public final class NetworkMonitor: ObservableObject {
     @Published public private(set) var isConnected = true
 
     public init() {
-        // CI/simulador: NWPathMonitor costuma reportar offline e bloqueia LaunchView.
+        #if targetEnvironment(simulator)
+        // No simulador o NWPathMonitor reporta offline e o LaunchView
+        // não mostra tab bar nem onboarding.
+        isConnected = true
+        return
+        #endif
         if UITestLaunchSupport.isUITestMode {
             isConnected = true
             return
