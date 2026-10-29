@@ -58,6 +58,36 @@ else
 fi
 echo "    destination: $DEST"
 
+# Sem um Watch pareado, o destino só-iPhone não compila o companion. O embed
+# cria PlugIns/CrossfitPRWatch.app vazio e o ValidateEmbeddedBinary falha com
+# "Couldn't load Info dictionary".
+pick_watch_line() {
+  if [[ -n "${WATCH_UDID:-}" ]]; then
+    echo -e "${WATCH_UDID}\t${WATCH_NAME:-Apple Watch}"
+    return
+  fi
+  xcrun simctl list devices available -j | SIM_KIND=watchOS ruby "$PICK_SCRIPT"
+}
+
+set +e
+WATCH_LINE="$(pick_watch_line)"
+watch_pick_status=$?
+set -e
+if [[ "$watch_pick_status" -ne 0 ]]; then
+  echo "==> Nenhum Apple Watch disponível; baixando runtime watchOS"
+  xcodebuild -downloadPlatform watchOS
+  WATCH_LINE="$(pick_watch_line)"
+fi
+WATCH_UDID="${WATCH_LINE%%$'\t'*}"
+WATCH_LABEL="${WATCH_LINE#*$'\t'}"
+echo "==> Watch: $WATCH_LABEL"
+echo "    UDID: $WATCH_UDID"
+WATCH_SIM_DEST="platform=watchOS Simulator,id=${WATCH_UDID}"
+if [[ "$(uname -m)" == "arm64" && -z "${WATCH_DEST:-}" ]]; then
+  WATCH_SIM_DEST="${WATCH_SIM_DEST},arch=arm64"
+fi
+echo "    destination: $WATCH_SIM_DEST"
+
 # macos-15 é arm64. ARCHS do iphonesimulator inclui x86_64; os produtos SPM
 # (Application, etc.) só emitem a arch do host. O app então falha com:
 # could not find module 'Application' for target 'x86_64-apple-ios-simulator'.
@@ -72,9 +102,11 @@ if [[ "$(uname -m)" == "arm64" ]]; then
   )
 fi
 
-echo "==> Boot simulator (UI tests)"
+echo "==> Boot simulator (UI tests) e parear Watch"
 xcrun simctl boot "$SIM_UDID" 2>/dev/null || true
 xcrun simctl bootstatus "$SIM_UDID" -b 2>/dev/null || true
+xcrun simctl boot "$WATCH_UDID" 2>/dev/null || true
+xcrun simctl pair "$WATCH_UDID" "$SIM_UDID" || true
 
 BUILD_CONFIG="${BUILD_CONFIG:-Debug}"
 # CODE_SIGNING_ALLOWED=NO no workflow significa "sem conta Apple". No Xcode 26
@@ -104,12 +136,21 @@ fi
 echo "==> Resolve Package Graph"
 "${XCB[@]}" -resolvePackageDependencies
 
-echo "==> Build ($BUILD_CONFIG)"
-"${XCB[@]}" build
+dump_watch_app() {
+  local app="$1"
+  echo "-- $app"
+  ls -la "$app" || true
+  if [[ -f "$app/Info.plist" ]]; then
+    plutil -p "$app/Info.plist" | head -30 || true
+  else
+    echo "   (sem Info.plist)"
+  fi
+}
 
-echo "==> Build watchOS (CrossfitPRWatch embed)"
-WATCH_DEST="${WATCH_DEST:-generic/platform=watchOS Simulator}"
-WATCH_XCB=(xcodebuild -scheme "$SCHEME" -project "$PROJECT" -destination "$WATCH_DEST" -configuration "$BUILD_CONFIG" -allowProvisioningUpdates ENABLE_DEBUG_DYLIB=NO)
+echo "==> Build watchOS antes do embed ($BUILD_CONFIG)"
+# -target, não o scheme: o scheme também sobe o app iOS e o embed vazio
+# mascara o erro real do companion.
+WATCH_XCB=(xcodebuild -target CrossfitPRWatch -project "$PROJECT" -destination "${WATCH_DEST:-$WATCH_SIM_DEST}" -configuration "$BUILD_CONFIG" -allowProvisioningUpdates ENABLE_DEBUG_DYLIB=NO)
 if ((${#SIGNING_OVERRIDES[@]})); then
   WATCH_XCB+=("${SIGNING_OVERRIDES[@]}")
 fi
@@ -117,6 +158,31 @@ if ((${#ARCH_OVERRIDES[@]})); then
   WATCH_XCB+=("${ARCH_OVERRIDES[@]}")
 fi
 "${WATCH_XCB[@]}" build
+
+set +o pipefail
+WATCH_PRODUCT="$(find "$HOME/Library/Developer/Xcode/DerivedData" -path '*Debug-watchsimulator/CrossfitPRWatch.app' -type d 2>/dev/null | head -1)"
+set -o pipefail
+if [[ -z "$WATCH_PRODUCT" || ! -f "$WATCH_PRODUCT/Info.plist" ]]; then
+  echo "ERROR: CrossfitPRWatch.app não saiu com Info.plist (watchsimulator)."
+  dump_watch_app "${WATCH_PRODUCT:-/dev/null}"
+  exit 1
+fi
+echo "==> Watch product: $WATCH_PRODUCT"
+
+echo "==> Build iOS ($BUILD_CONFIG) com destino do Watch pareado"
+set +e
+"${XCB[@]}" -destination "$WATCH_SIM_DEST" build
+ios_status=$?
+set -e
+if [[ "$ios_status" -ne 0 ]]; then
+  echo "==> Embed falhou; produtos CrossfitPRWatch.app:"
+  set +o pipefail
+  while IFS= read -r app; do
+    dump_watch_app "$app"
+  done < <(find "$HOME/Library/Developer/Xcode/DerivedData" -name 'CrossfitPRWatch.app' -type d 2>/dev/null)
+  set -o pipefail
+  exit "$ios_status"
+fi
 
 echo "==> UI tests (AppLocalizationQATests)"
 "${XCB[@]}" test \
