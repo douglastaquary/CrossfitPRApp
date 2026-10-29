@@ -57,17 +57,21 @@ echo "==> Boot simulator (UI tests)"
 xcrun simctl boot "$SIM_UDID" 2>/dev/null || true
 xcrun simctl bootstatus "$SIM_UDID" -b 2>/dev/null || true
 
-XCB=(xcodebuild -scheme "$SCHEME" -project "$PROJECT" -destination "$DEST" -allowProvisioningUpdates)
+BUILD_CONFIG="${BUILD_CONFIG:-Debug}"
+XCB=(xcodebuild -scheme "$SCHEME" -project "$PROJECT" -destination "$DEST" -configuration "$BUILD_CONFIG" -allowProvisioningUpdates)
 if [[ "${CODE_SIGNING_ALLOWED:-YES}" == "NO" ]]; then
   XCB+=(CODE_SIGNING_ALLOWED=NO)
 fi
 
-echo "==> Build"
+echo "==> Resolve Package Graph"
+"${XCB[@]}" -resolvePackageDependencies
+
+echo "==> Build ($BUILD_CONFIG)"
 "${XCB[@]}" build
 
 echo "==> Build watchOS (CrossfitPRWatch embed)"
 WATCH_DEST="${WATCH_DEST:-generic/platform=watchOS Simulator}"
-WATCH_XCB=(xcodebuild -scheme "$SCHEME" -project "$PROJECT" -destination "$WATCH_DEST" -allowProvisioningUpdates)
+WATCH_XCB=(xcodebuild -scheme "$SCHEME" -project "$PROJECT" -destination "$WATCH_DEST" -configuration "$BUILD_CONFIG" -allowProvisioningUpdates)
 if [[ "${CODE_SIGNING_ALLOWED:-YES}" == "NO" ]]; then
   WATCH_XCB+=(CODE_SIGNING_ALLOWED=NO)
 fi

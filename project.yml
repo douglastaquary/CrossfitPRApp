@@ -9,7 +9,7 @@ options:
     iOS: "16.0"
     watchOS: "9.0"
   createIntermediateGroups: true
-  defaultConfig: Release
+  defaultConfig: Debug
   developmentLanguage: pt-BR
   groupSortPosition: top
   minimumXcodeGenVersion: 2.45.0
@@ -21,15 +21,21 @@ packages:
   CrossfitPRPackages:
     path: .
 
+configs:
+  Debug: debug
+  Release: release
+
 settings:
   base:
     ALWAYS_SEARCH_USER_PATHS: NO
     DEVELOPMENT_TEAM: 6V95FQX348
     SWIFT_VERSION: "5.0"
-
-configs:
-  Debug: debug
-  Release: release
+  configs:
+    Debug:
+      SWIFT_OPTIMIZATION_LEVEL: -Onone
+      SWIFT_ACTIVE_COMPILATION_CONDITIONS: DEBUG
+    Release:
+      SWIFT_OPTIMIZATION_LEVEL: -O
 
 targets:
   CrossfitPR:
@@ -139,6 +145,7 @@ targets:
 schemes:
   CrossfitPR:
     build:
+      config: Debug
       targets:
         CrossfitPR: all
         CrossfitPRWatch: all
