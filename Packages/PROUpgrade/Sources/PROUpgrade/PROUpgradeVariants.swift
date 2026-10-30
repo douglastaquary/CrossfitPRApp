@@ -275,6 +275,7 @@ extension PROUpgradePurchaseContent {
     }
 
     private var lightCompareRow: some View {
+        // Altura igual entre colunas (Elite tem 4 checks) — composição estável.
         HStack(alignment: .top, spacing: 10) {
             compareChip(
                 title: Strings.Elite.planFree,
@@ -293,28 +294,49 @@ extension PROUpgradePurchaseContent {
                 lines: ["Coach", "Engine", "Assessment", "Limiting"]
             )
         }
+        .fixedSize(horizontal: false, vertical: true)
     }
 
     private func compareChip(title: String, accent: Color, lines: [String]) -> some View {
-        VStack(alignment: .leading, spacing: 8) {
+        VStack(alignment: .leading, spacing: 0) {
             Text(title)
                 .font(.caption.bold())
                 .foregroundStyle(accent)
-            ForEach(lines, id: \.self) { line in
-                HStack(spacing: 4) {
-                    Image(systemName: "checkmark")
-                        .font(.caption2.bold())
-                        .foregroundStyle(accent)
-                    Text(line)
-                        .font(.caption2)
-                        .foregroundStyle(.secondary)
+                .padding(.bottom, 8)
+
+            // Grid 2×N — Elite com 4 itens fica na mesma “caixa” que Free/PRO.
+            LazyVGrid(
+                columns: [
+                    GridItem(.flexible(), spacing: 6),
+                    GridItem(.flexible(), spacing: 6),
+                ],
+                alignment: .leading,
+                spacing: 6
+            ) {
+                ForEach(lines, id: \.self) { line in
+                    HStack(spacing: 3) {
+                        Image(systemName: "checkmark")
+                            .font(.system(size: 9, weight: .bold))
+                            .foregroundStyle(accent)
+                        Text(line)
+                            .font(.caption2)
+                            .foregroundStyle(.secondary)
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.85)
+                    }
                 }
             }
+
+            Spacer(minLength: 0)
         }
-        .padding(14)
-        .frame(maxWidth: .infinity, alignment: .topLeading)
+        .padding(12)
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         .background(AppDesign.Colors.cardBackground)
         .cornerRadius(14)
+        .overlay(
+            RoundedRectangle(cornerRadius: 14)
+                .stroke(accent.opacity(0.22), lineWidth: 1)
+        )
     }
 
     private func stepLabel(_ text: String) -> some View {
