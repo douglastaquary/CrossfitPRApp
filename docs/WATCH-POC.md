@@ -18,11 +18,14 @@ Companion na sessão: dica contextual, timer de descanso e respiração. **Sem L
 
 ## Build local
 
+O Simulator **não** sobe o Watch sozinho ao abrir só o iPhone. O companion aparece quando o Watch está **pareado e Booted** com o iPhone do destino (Xcode Cmd+R, ou o helper abaixo).
+
 ```bash
 ./scripts/generate-xcodeproj.sh
 ./scripts/configure-spm-xcode14.sh   # Xcode 14.2 local
+./scripts/boot-paired-watch.sh      # sobe o Watch do iPhone Booted
 open CrossfitPR.xcodeproj
-# Scheme CrossfitPR — destino iPhone + Watch pareado no simulador
+# Scheme CrossfitPR — destino iPhone 14 Pro (Watch pareado) → Cmd+R
 ```
 
 Build watch-only (CI / captura):
