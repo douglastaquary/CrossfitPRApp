@@ -29,7 +29,8 @@ Visão pública do que já está no app versus o que está **planejado** (SPDD `
 
 - Target **CrossfitPRWatch** + pacote `WatchCompanion` ([`WATCH-POC.md`](WATCH-POC.md)).
 - Sync WC + eventos no coach PRO; timer descanso + respiração/haptic no relógio.
-- Próximo: capturas README watch + Design final (CPR-009 canvas).
+- CI compila watchOS no gate moderno; capturas README via `./scripts/capture-watch-readme-screenshots.sh`.
+- Próximo: Design final (CPR-009 canvas).
 - Dicas **contextuais na sessão** — sem spam de push.
 - Eventos compactos (série, RPE, descanso) alimentam o snapshot do coach no iPhone (PRO).
 - Comercial: add-on ou bundle PRO + Watch (definido no canvas CPR-009).
@@ -40,7 +41,7 @@ Visão pública do que já está no app versus o que está **planejado** (SPDD `
 2. **CPR-007:** testar iOS 26+ on-device + `OPENAI_API_KEY` em device; revisar logs `Coaching` no Console.
 3. **Mídia README:** `./scripts/capture-readme-media-auto.sh` → commit PNG/GIF (incluir paywall Elite quando estável).
 4. **CPR-008:** código Elite no app → App Store Connect (produtos reais) + screenshots Design; prompts coach Elite dedicados (canvas Feat).
-5. **CPR-009:** capturas watch (`./scripts/capture-watch-readme-screenshots.sh`); CI build watchOS no gate moderno.
+5. **CPR-009:** rodar `./scripts/capture-watch-readme-screenshots.sh` e commitar `watch-*.png`; canvas Design + comercial PRO+Watch.
 6. **Personas:** skill [`.cursor/skills/crossfit-athlete-personas`](../.cursor/skills/crossfit-athlete-personas/SKILL.md) · [CPR-010](../spdd/analysis/CPR-010-crossfit-market-mayhem-personas.md).
 
 ## Como acompanhar

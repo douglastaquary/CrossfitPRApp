@@ -12,7 +12,7 @@ CrossfitPR é um app iOS feito para quem treina CrossFit e quer histórico claro
   <img src="docs/media/crossfitpr-demo.gif" width="320" alt="Demonstração do CrossfitPR">
 </p>
 
-> GIF e prints vêm de `docs/media/` e `docs/screenshots/` (capturas em **pt-BR**). Atualizar: `./scripts/capture-readme-media-auto.sh` — simulador via `scripts/pick-ios-simulator.rb`. Xcode 14.2: `./scripts/configure-spm-xcode14.sh` na primeira vez (não commitar `project.pbxproj` gerado).
+> GIF e prints vêm de `docs/media/` e `docs/screenshots/` (capturas em **pt-BR**). Atualizar: `./scripts/capture-readme-media-auto.sh`. O `.xcodeproj` **não está no git** — veja [`docs/XCODEGEN.md`](docs/XCODEGEN.md).
 
 ---
 
@@ -42,7 +42,7 @@ CrossfitPR é um app iOS feito para quem treina CrossFit e quer histórico claro
   <img src="docs/screenshots/watch-breath.png" width="140" alt="Watch — respiração">
 </p>
 
-> Target **CrossfitPRWatch** (watchOS 9+) — capturas: [`docs/WATCH-POC.md`](docs/WATCH-POC.md). Próximo: WatchConnectivity.
+> Target **CrossfitPRWatch** (watchOS 9+) — sync via WatchConnectivity para o coach no iPhone. Capturas: [`docs/WATCH-POC.md`](docs/WATCH-POC.md).
 
 ---
 
@@ -89,18 +89,31 @@ O PRO é para quem quer **interpretação**, não só números na tela:
 ## Rodar o projeto
 
 ```bash
-git clone https://github.com/douglastaquary/CrossfitPR.git
-cd CrossfitPR
+git clone https://github.com/douglastaquary/CrossfitPRApp.git
+cd CrossfitPRApp
+chmod +x scripts/*.sh
+./scripts/generate-xcodeproj.sh    # project.yml → CrossfitPR.xcodeproj (obrigatório)
 open CrossfitPR.xcodeproj
 ```
+
+**Xcode 14.2:** depois de gerar, rode `./scripts/configure-spm-xcode14.sh` uma vez (SPM local na sua máquina).
 
 1. Em **Signing & Capabilities**, escolha seu Team (`com.douglast.CrossfitPR`).
 2. Simulador **iPhone 14 Pro** (ou superior) → `⌘R`.
 
+Alterou targets, Watch ou deps no [`project.yml`](project.yml)? Regenere:
+
+```bash
+REGENERATE_XCODEPROJ=1 ./scripts/generate-xcodeproj.sh
+```
+
+Detalhes: [`docs/XCODEGEN.md`](docs/XCODEGEN.md).
+
 **Linha de comando:**
 
 ```bash
-xcodebuild -scheme CrossfitPR \
+./scripts/ensure-xcodeproj.sh
+xcodebuild -scheme CrossfitPR -project CrossfitPR.xcodeproj \
   -destination 'platform=iOS Simulator,name=iPhone 14 Pro' build
 
 cd Packages/Domain && swift test
@@ -109,7 +122,8 @@ cd Packages/Domain && swift test
 **Atualizar GIF e screenshots do README:**
 
 ```bash
-./scripts/configure-spm-xcode14.sh
+./scripts/generate-xcodeproj.sh
+./scripts/configure-spm-xcode14.sh   # só Xcode 14.2
 ./scripts/capture-readme-media-auto.sh
 ```
 

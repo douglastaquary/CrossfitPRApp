@@ -35,6 +35,7 @@ jobs:
       - name: Build & test (scripts/ci-modern.sh)
         env:
           CODE_SIGNING_ALLOWED: "NO"
+          XCODEGEN_VERSION: "2.46.0"
           SIM_DEVICE: "iPhone 17 Pro"
           # UDID varia por runner; o script resolve pelo nome + runtime iOS mais novo.
           # Override pontual: SIM_UDID ou SIM_DEST (destino xcodebuild completo).

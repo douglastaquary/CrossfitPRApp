@@ -6,6 +6,9 @@
 build/
 DerivedData/
 
+## XcodeGen — só project.yml é versionado; gere com ./scripts/generate-xcodeproj.sh
+CrossfitPR.xcodeproj/
+
 ## Various settings
 *.pbxuser
 !default.pbxuser
@@ -16,6 +19,7 @@ DerivedData/
 *.perspectivev3
 !default.perspectivev3
 xcuserdata/
+.tools/
 .DS_Store
 
 ## Other

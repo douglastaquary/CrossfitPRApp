@@ -127,6 +127,7 @@ final class PaymentFlowUITests: XCTestCase {
         app.launchArguments += ["-AppleLanguages", "(\(languageCode))"]
         let locale = languageCode == "en" ? "en_US" : "pt_BR"
         app.launchArguments += ["-AppleLocale", locale]
+        app.launchArguments += ["-UITEST_SKIP_SPLASH", "1", "-UITEST_SKIP_ONBOARDING", "1"]
         app.launchEnvironment["UITEST_SKIP_SPLASH"] = "1"
         app.launchEnvironment["UITEST_SKIP_ONBOARDING"] = "1"
         app.launchEnvironment["UITEST_SUBSCRIPTION_TIER"] = "free"

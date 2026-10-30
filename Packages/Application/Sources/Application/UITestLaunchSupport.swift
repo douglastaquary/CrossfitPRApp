@@ -17,7 +17,7 @@ public enum UITestLaunchSupport {
     public static let seedScenarioKey = "UITEST_SEED_SCENARIO"
 
     public static var shouldSkipSplash: Bool {
-        ProcessInfo.processInfo.environment[skipSplashKey] == "1"
+        flag(skipSplashKey)
     }
 
     public static var seedScenario: DemoDataScenario? {
@@ -30,11 +30,11 @@ public enum UITestLaunchSupport {
     }
 
     public static var shouldSkipOnboarding: Bool {
-        ProcessInfo.processInfo.environment[skipOnboardingKey] == "1"
+        flag(skipOnboardingKey)
     }
 
     public static var shouldForceOnboarding: Bool {
-        ProcessInfo.processInfo.environment[forceOnboardingKey] == "1"
+        flag(forceOnboardingKey)
     }
 
     /// App lançado pelos UI tests (`UITEST_SKIP_SPLASH=1` em `AppLocalizationQATests`).
@@ -56,6 +56,11 @@ public enum UITestLaunchSupport {
         case "free": return .free
         default: return nil
         }
+    }
+
+    private static func flag(_ key: String) -> Bool {
+        if ProcessInfo.processInfo.environment[key] == "1" { return true }
+        return launchFlagValue("-\(key)") == "1"
     }
 
     private static func launchFlagValue(_ flag: String) -> String? {

@@ -4,9 +4,9 @@ import Domain
 /// Escada on-device → cloud → resumo (CPR-007).
 public struct CoachingInferenceOrchestrator: Sendable {
     public let router: CoachingAdapterRouter
-    public let isOnDeviceAvailable: () -> Bool
+    public let isOnDeviceAvailable: @Sendable () -> Bool
 
-    public init(router: CoachingAdapterRouter, isOnDeviceAvailable: @escaping () -> Bool) {
+    public init(router: CoachingAdapterRouter, isOnDeviceAvailable: @escaping @Sendable () -> Bool) {
         self.router = router
         self.isOnDeviceAvailable = isOnDeviceAvailable
     }

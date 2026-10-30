@@ -79,7 +79,11 @@ AppLaunchContainer → LaunchView → MainTabView
 ## Comandos úteis
 
 ```bash
+# Clone / alterou project.yml — gerar .xcodeproj (não está no git):
+./scripts/generate-xcodeproj.sh   # docs/XCODEGEN.md
+
 # Build (Xcode 14.2 local)
+./scripts/generate-xcodeproj.sh
 ./scripts/configure-spm-xcode14.sh
 xcodebuild -scheme CrossfitPR -destination 'platform=iOS Simulator,name=iPhone 14 Pro' build
 

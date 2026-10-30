@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # Legado Xcode 14.2: converte pacote local (relativePath) em file URL absoluta do monorepo.
-# Xcode 15+ e CI usam XCLocalSwiftPackageReference com relativePath "." (sem rodar este script).
+# Xcode 15+ e CI usam XCLocalSwiftPackageReference com relativePath "." (gerado via project.yml / XcodeGen).
+# Após ./scripts/generate-xcodeproj.sh, rode este script só na máquina 14.2 — não commitar o pbxproj convertido.
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 PBX="$ROOT/CrossfitPR.xcodeproj/project.pbxproj"
