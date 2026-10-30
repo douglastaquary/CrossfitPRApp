@@ -39,6 +39,11 @@ enum LocalizationBundle {
     static func table(languageCode: String) -> [String: String]? {
         let normalized = languageCode.replacingOccurrences(of: "_", with: "-")
         var candidates = [normalized]
+        // SPM no host macOS embute `pt-br.lproj` (minúsculo) a partir de `pt-BR.lproj`.
+        let lowered = normalized.lowercased()
+        if lowered != normalized {
+            candidates.append(lowered)
+        }
         if let prefix = normalized.split(separator: "-").first {
             let language = String(prefix)
             if language != normalized {

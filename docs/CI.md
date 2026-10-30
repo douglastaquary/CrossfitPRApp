@@ -21,7 +21,7 @@ Arquivo: [`.github/workflows/ios.yml`](../.github/workflows/ios.yml)
   - Build app (iOS)
   - Build **CrossfitPRWatch** (`generic/platform=watchOS Simulator`)
   - `AppLocalizationQATests` (pt/en)
-  - `swift test` em `Packages/Localization` e `Packages/Domain`
+  - `swift test` em `Packages/Localization`, `Domain` e `Subscription` (host CI; packages declaram `.macOS` só para isso — **sem app Mac**; produto = iPhone/iPad + Watch)
   - Falha se `project.pbxproj` tiver `file:///Users/...` (evita push acidental pós configure local)
 
 ## Rodar o mesmo pipeline num Mac com Xcode recente

@@ -97,7 +97,7 @@ public final class SubscriptionClient: SubscriptionStatusProviding, ObservableOb
     }
 
     /// Elite > PRO > free; se entitlements atrasarem, confia no resultado da compra.
-    static func reconciledTier(
+    nonisolated static func reconciledTier(
         purchaseResult: SubscriptionTier,
         entitlements: SubscriptionTier
     ) -> SubscriptionTier {
