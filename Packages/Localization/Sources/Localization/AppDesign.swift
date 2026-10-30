@@ -1,18 +1,27 @@
 import SwiftUI
+#if canImport(UIKit)
+import UIKit
+#endif
 
 /// Tokens visuais do baseline beta CrossfitPR (fix-for-beta-version).
 /// Alterações exigem canvas SPDD + skill design.
 public enum AppDesign {
     public enum Colors {
         /// Verde de marca adaptativo — light: verde padrão do app; dark: verde mais claro (legibilidade).
-        public static let brand = Color(UIColor { traits in
-            if traits.userInterfaceStyle == .dark {
-                // Lima clara — CTAs, tabs, chips e ícones no dark
-                return UIColor(red: 0.63, green: 0.94, blue: 0.0, alpha: 1)
-            }
-            // Verde sistema / baseline atual do app no light
-            return .systemGreen
-        })
+        public static let brand: Color = {
+            #if canImport(UIKit)
+            return Color(UIColor { traits in
+                if traits.userInterfaceStyle == .dark {
+                    // Lima clara — CTAs, tabs, chips e ícones no dark
+                    return UIColor(red: 0.63, green: 0.94, blue: 0.0, alpha: 1)
+                }
+                // Verde sistema / baseline atual do app no light
+                return .systemGreen
+            })
+            #else
+            return Color(red: 0.2, green: 0.78, blue: 0.35)
+            #endif
+        }()
 
         /// Alias de atividade (CPR-013) — mesmo verde adaptativo de `brand`.
         public static let activityAccent = brand
@@ -33,21 +42,33 @@ public enum AppDesign {
         public static let metadataChip = Color.gray
 
         /// Fundo adaptativo (beta Extensions.swift).
-        public static let background = Color(UIColor { traits in
-            traits.userInterfaceStyle == .dark
-                ? UIColor(red: 50 / 255, green: 50 / 255, blue: 54 / 255, alpha: 1)
-                : UIColor(red: 239 / 255, green: 239 / 255, blue: 240 / 255, alpha: 1)
-        })
+        public static let background: Color = {
+            #if canImport(UIKit)
+            return Color(UIColor { traits in
+                traits.userInterfaceStyle == .dark
+                    ? UIColor(red: 50 / 255, green: 50 / 255, blue: 54 / 255, alpha: 1)
+                    : UIColor(red: 239 / 255, green: 239 / 255, blue: 240 / 255, alpha: 1)
+            })
+            #else
+            return Color(red: 0.937, green: 0.937, blue: 0.941)
+            #endif
+        }()
 
         /// Botão card escuro (#151E27).
         public static let cardButton = Color(red: 0.082, green: 0.118, blue: 0.153)
 
         /// Fundo de cards/seções.
-        public static let cardBackground = Color(UIColor { traits in
-            traits.userInterfaceStyle == .dark
-                ? UIColor.secondarySystemBackground
-                : UIColor.systemBackground
-        })
+        public static let cardBackground: Color = {
+            #if canImport(UIKit)
+            return Color(UIColor { traits in
+                traits.userInterfaceStyle == .dark
+                    ? UIColor.secondarySystemBackground
+                    : UIColor.systemBackground
+            })
+            #else
+            return Color(red: 1, green: 1, blue: 1)
+            #endif
+        }()
     }
 
     public enum Icon {

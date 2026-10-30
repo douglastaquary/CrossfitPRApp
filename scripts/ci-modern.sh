@@ -227,6 +227,8 @@ echo "==> UI tests (PaymentFlowUITests)"
   -only-testing:CrossfitPRUITests/PaymentFlowUITests \
   -skip-testing:CrossfitPRUITests/ReadmeScreenshotsUITests
 
+# Unit tests SPM no host (bibliotecas). Package.swift declara .macOS só para
+# compilar estes testes — o app (project.yml) continua iPhone/iPad + Watch, sem Mac.
 echo "==> Unit tests — Localization (catálogo workout.*)"
 (cd Packages/Localization && swift test)
 
