@@ -294,9 +294,17 @@ public enum Strings {
         public static var sessionTip: String { tr("watch.session.tip") }
         public static var restLabel: String { tr("watch.rest.label") }
         public static var restMotivation: String { tr("watch.rest.motivation") }
+        public static var restDuration: String { tr("watch.rest.duration") }
         public static var breathTitle: String { tr("watch.breath.title") }
         public static var breathPattern: String { tr("watch.breath.pattern") }
         public static var breathInhale: String { tr("watch.breath.inhale") }
+        public static var breathTapHint: String { tr("watch.breath.tapHint") }
+        public static var loadTitle: String { tr("watch.load.title") }
+        public static var loadOneRM: String { tr("watch.load.oneRM") }
+        public static var loadDetailHint: String { tr("watch.load.detailHint") }
+        public static var wodRestLabel: String { tr("watch.wod.restLabel") }
+        public static var wodRestDuration: String { tr("watch.wod.restDuration") }
+        public static var wodRestStart: String { tr("watch.wod.restStart") }
     }
 
     // MARK: - Elite (CPR-008)

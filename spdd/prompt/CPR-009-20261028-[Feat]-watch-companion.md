@@ -9,6 +9,8 @@
 - UX respiração/descanso sem notification spam.
 - Eventos compactos para snapshot CPR-007.
 - **Ênfase sessão pesada / WOD (Compete / Mayhem):** tip de bloco/metcon; rest entre séries/rounds; breath como cool-down pós-esforço — sem LLM no Watch; sem timer AMRAP completo nesta fase (backlog #12 = P1).
+- **Rest tab (2026-10-30):** duração configurável na tab Descanso (`AppStorage watch.rest.durationSec`, presets 60/90/120/180); independente do rest da Sessão (CPR-016).
+- **Breath (2026-10-30):** ciclo 4–4 inicia/pausa com tap na fase Inhale/Exhale; abre pausado; toggle haptic permanece.
 
 ## A — Approach
 

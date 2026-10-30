@@ -3,19 +3,17 @@ import SwiftUI
 import WatchKit
 #endif
 
-/// Timer de descanso CPR-009 Design — ring + timer dominante; evento `rest` ao concluir.
+/// Timer de descanso CPR-009 Design — ring + timer dominante; duração própria da tab (`watch.rest.durationSec`).
 public struct WatchRestTimerView: View {
-    private let totalDurationSec: Int
+    @AppStorage(WatchRestDuration.restTabKey) private var durationSec = WatchRestDuration.defaultSec
 
-    @State private var remainingSec: Int
+    @State private var remainingSec: Int = WatchRestDuration.defaultSec
     @State private var isRunning = false
     @State private var timerTask: Task<Void, Never>?
 
-    public init(initialDurationSec: Int = 90) {
-        let duration = max(1, initialDurationSec)
-        totalDurationSec = duration
-        _remainingSec = State(initialValue: duration)
-    }
+    public init() {}
+
+    private var totalDurationSec: Int { WatchRestDuration.clamped(durationSec) }
 
     private var progress: Double {
         guard totalDurationSec > 0 else { return 0 }
@@ -23,10 +21,14 @@ public struct WatchRestTimerView: View {
     }
 
     public var body: some View {
-        VStack(spacing: 8) {
+        VStack(spacing: 6) {
             Text(WatchL10n.restLabel)
                 .font(WatchDesign.sectionLabel)
                 .foregroundStyle(WatchDesign.secondaryLabel)
+
+            durationPicker
+                .disabled(isRunning)
+                .accessibilityIdentifier("watch.rest.duration")
 
             ZStack {
                 Circle()
@@ -61,7 +63,27 @@ public struct WatchRestTimerView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .padding(.horizontal, 4)
         .accessibilityIdentifier("watch.poc.rest")
+        .onAppear { syncRemainingIfIdle() }
+        .onChange(of: durationSec) { _ in
+            guard !isRunning else { return }
+            remainingSec = totalDurationSec
+        }
         .onDisappear { stopTimer() }
+    }
+
+    private var durationPicker: some View {
+        Picker(WatchL10n.restDuration, selection: $durationSec) {
+            ForEach(WatchRestDuration.presets, id: \.self) { sec in
+                Text(WatchRestDuration.label(seconds: sec)).tag(sec)
+            }
+        }
+        .labelsHidden()
+        .font(.caption2)
+    }
+
+    private func syncRemainingIfIdle() {
+        guard !isRunning else { return }
+        remainingSec = totalDurationSec
     }
 
     private func toggleTimer() {
@@ -73,6 +95,9 @@ public struct WatchRestTimerView: View {
     }
 
     private func startTimer() {
+        if remainingSec <= 0 {
+            remainingSec = totalDurationSec
+        }
         isRunning = true
         timerTask?.cancel()
         timerTask = Task { @MainActor in
@@ -104,8 +129,6 @@ public struct WatchRestTimerView: View {
     }
 
     private func formattedTime(_ totalSec: Int) -> String {
-        let m = totalSec / 60
-        let s = totalSec % 60
-        return String(format: "%d:%02d", m, s)
+        WatchRestDuration.label(seconds: max(0, totalSec))
     }
 }

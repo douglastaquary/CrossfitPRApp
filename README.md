@@ -96,29 +96,29 @@ Passos: plano → período → preço → CTA · tabela Free/PRO/Elite. Detalhe:
 ## Apple Watch — companion de sessão (WOD)
 
 <p align="center">
-  <img src="docs/screenshots/watch-session.png" width="140" alt="Watch — timer WOD">
-  <img src="docs/screenshots/watch-load.png" width="140" alt="Watch — % load">
-  <img src="docs/screenshots/watch-rest.png" width="140" alt="Watch — descanso">
-  <img src="docs/screenshots/watch-breath.png" width="140" alt="Watch — cool-down">
+  <img src="docs/screenshots/watch-session.png" width="140" alt="Watch — timer WOD + rest entre rounds">
+  <img src="docs/screenshots/watch-load.png" width="140" alt="Watch — cargas 1RM">
+  <img src="docs/screenshots/watch-rest.png" width="140" alt="Watch — descanso configurável">
+  <img src="docs/screenshots/watch-breath.png" width="140" alt="Watch — cool-down tap Start/Pause">
 </p>
 
-Homologação: [`docs/WATCH-HOMOLOGATION.md`](docs/WATCH-HOMOLOGATION.md).
+Homologação: [`docs/WATCH-HOMOLOGATION.md`](docs/WATCH-HOMOLOGATION.md). Capturas: `./scripts/capture-watch-readme-screenshots.sh`.
 
 ### Resumo por tela
 
 | Tela Watch | Função | Dados exibidos | Envia ao iPhone? |
 |------------|--------|----------------|------------------|
-| **Sessão** | Timer AMRAP / EMOM / For Time + tip | `mm:ss` · modo · tip WOD | Eventos timer → coach |
-| **% load** | 70/80/90% de 1RM (até 3 lifts) | Nome · % · valor | Contexto WC (fixture se offline) |
-| **Descanso** | Timer 1:30 entre séries/rounds | `mm:ss` · ring · “entre rounds” | Sim — evento `rest` (WC) |
-| **Cool-down** | Respiração 4–4 pós-esforço | Fase · anel · haptic opt-in | Preferência local |
+| **Sessão** | Timer AMRAP / EMOM / For Time + **rest próprio** entre rounds | `mm:ss` · modo · tip · duração rest (60/90/120/180) | `amrap` / `emom_round` / `wod_rest` → coach |
+| **% load** | 70/80/90% de 1RM (até 3 lifts) + **detalhe por PR** | `Cargas · 1RM` · `70% · 98 kg` | Contexto WC (fixture se offline) |
+| **Descanso** | Countdown **configurável** (duração independente da Sessão) | `mm:ss` · ring · presets | Sim — evento `rest` (WC) |
+| **Cool-down** | Respiração 4–4; **tap** inicia/pausa | Fase · anel · hint · haptic opt-in | Preferência local |
 
 ### Detalhe das funcionalidades
 
-1. **Sessão** — timer de metcon no pulso (Compete / Mayhem). Sem LLM no Watch.
-2. **% load** — carga rápida a partir dos PRs do iPhone (ou fixture).
-3. **Descanso** — intervalo entre rounds; ao fim grava `rest` → coach no iPhone.
-4. **Cool-down** — reset 4s/4s após esforço; haptic opt-in.
+1. **Sessão** — timer de metcon no pulso (Compete / Mayhem) + rest entre rounds com duração própria. Sem LLM no Watch.
+2. **% load** — carga rápida a partir dos PRs do iPhone (ou fixture); tap no lift abre detalhe 70/80/90.
+3. **Descanso** — intervalo entre séries com presets; duração **não** sincroniza com a Sessão; ao fim grava `rest` → coach.
+4. **Cool-down** — abre pausado; tap em Inhale/Exhale inicia/pausa o ciclo 4s/4s; haptic opt-in.
 
 ### Dados: Watch × app iPhone
 

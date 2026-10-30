@@ -416,9 +416,17 @@
 "watch.session.tip" = "Metcon: quality reps — don't rush your core.";
 "watch.rest.label" = "Rest";
 "watch.rest.motivation" = "Between rounds — next set with intent.";
+"watch.rest.duration" = "Duration";
 "watch.breath.title" = "Cool-down";
 "watch.breath.pattern" = "4 · 4 · 4 · 4";
 "watch.breath.inhale" = "Inhale";
+"watch.breath.tapHint" = "Tap to start";
+"watch.load.title" = "Loads · 1RM";
+"watch.load.oneRM" = "1RM";
+"watch.load.detailHint" = "Working weight from your 1RM.";
+"watch.wod.restLabel" = "Between rounds";
+"watch.wod.restDuration" = "Rest duration";
+"watch.wod.restStart" = "Rest";
 
 "pro.upgrade.choosePlan" = "Choose your plan";
 "pro.upgrade.productsUnavailable.title" = "Products unavailable";

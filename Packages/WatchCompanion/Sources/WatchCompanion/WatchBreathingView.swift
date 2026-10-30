@@ -3,11 +3,13 @@ import SwiftUI
 import WatchKit
 #endif
 
-/// Respiração 4-4 — Design CPR-009: anel + fase; haptic opt-in.
+/// Respiração 4-4 — Design CPR-009: anel + fase; tap inicia/pausa; haptic opt-in.
 public struct WatchBreathingView: View {
     @AppStorage("watch.breath.hapticsEnabled") private var hapticsEnabled = true
     @State private var inhale = true
     @State private var scale: CGFloat = 0.85
+    @State private var isRunning = false
+    @State private var cycleTask: Task<Void, Never>?
 
     public init() {}
 
@@ -36,16 +38,44 @@ public struct WatchBreathingView: View {
                     .foregroundStyle(WatchDesign.brand)
             }
             .animation(.easeInOut(duration: 4), value: scale)
+            .contentShape(Circle())
+            .onTapGesture { toggleCycle() }
+            .accessibilityIdentifier("watch.breath.togglePhase")
+            .accessibilityAddTraits(.isButton)
+            .accessibilityHint(WatchL10n.breathTapHint)
 
-            Text(WatchL10n.breathPattern)
+            Text(isRunning ? WatchL10n.breathPattern : WatchL10n.breathTapHint)
                 .font(WatchDesign.micro)
                 .foregroundStyle(WatchDesign.secondaryLabel)
                 .monospacedDigit()
+                .multilineTextAlignment(.center)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .padding(.horizontal, 4)
         .accessibilityIdentifier("watch.poc.breath")
-        .task { await runBreathCycle() }
+        .onDisappear { stopCycle() }
+    }
+
+    private func toggleCycle() {
+        if isRunning {
+            stopCycle()
+        } else {
+            startCycle()
+        }
+    }
+
+    private func startCycle() {
+        isRunning = true
+        cycleTask?.cancel()
+        cycleTask = Task { @MainActor in
+            await runBreathCycle()
+        }
+    }
+
+    private func stopCycle() {
+        isRunning = false
+        cycleTask?.cancel()
+        cycleTask = nil
     }
 
     @MainActor
@@ -55,6 +85,7 @@ public struct WatchBreathingView: View {
             scale = 1.08
             pulseHaptic(start: true)
             try? await Task.sleep(nanoseconds: 4_000_000_000)
+            guard !Task.isCancelled else { return }
             inhale = false
             scale = 0.82
             pulseHaptic(start: false)
