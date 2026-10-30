@@ -5,8 +5,10 @@ import PackageDescription
 let package = Package(
     name: "Subscription",
     defaultLocalization: "pt-BR",
+    // macOS: necessário para `swift test` no CI (host).
     platforms: [
         .iOS(.v16),
+        .macOS(.v13),
     ],
     products: [
         .library(
