@@ -3,7 +3,7 @@ import SwiftUI
 import WatchKit
 #endif
 
-/// Respiração 4-4-4-4 — haptic leve opcional (CPR-009).
+/// Respiração 4-4 — Design CPR-009: anel + fase; haptic opt-in.
 public struct WatchBreathingView: View {
     @AppStorage("watch.breath.hapticsEnabled") private var hapticsEnabled = true
     @State private var inhale = true
@@ -12,26 +12,38 @@ public struct WatchBreathingView: View {
     public init() {}
 
     public var body: some View {
-        VStack(spacing: 12) {
+        VStack(spacing: 8) {
             Toggle(WatchL10n.breathHapticsToggle, isOn: $hapticsEnabled)
-                .font(.caption2)
+                .font(WatchDesign.micro)
+                .tint(WatchDesign.brand)
                 .accessibilityIdentifier("watch.breath.haptics")
 
             Text(WatchL10n.breathTitle)
-                .font(.headline)
+                .font(WatchDesign.sectionLabel)
+                .foregroundStyle(WatchDesign.secondaryLabel)
+
+            ZStack {
+                Circle()
+                    .stroke(WatchDesign.brand.opacity(0.25), lineWidth: WatchDesign.ringLineWidth)
+                    .frame(width: WatchDesign.breathRingSize, height: WatchDesign.breathRingSize)
+                Circle()
+                    .stroke(WatchDesign.brand, lineWidth: WatchDesign.ringLineWidth)
+                    .frame(width: WatchDesign.breathRingSize, height: WatchDesign.breathRingSize)
+                    .scaleEffect(scale)
+                    .opacity(inhale ? 1 : 0.55)
+                Text(inhale ? WatchL10n.breathInhale : WatchL10n.breathExhale)
+                    .font(WatchDesign.phaseFont)
+                    .foregroundStyle(WatchDesign.brand)
+            }
+            .animation(.easeInOut(duration: 4), value: scale)
+
             Text(WatchL10n.breathPattern)
-                .font(.title3.monospaced())
-            Circle()
-                .stroke(WatchDesign.brand.opacity(0.5), lineWidth: 3)
-                .frame(width: 72, height: 72)
-                .scaleEffect(scale)
-                .overlay(
-                    Text(inhale ? WatchL10n.breathInhale : WatchL10n.breathExhale)
-                        .font(.caption2)
-                )
-                .animation(.easeInOut(duration: 4), value: scale)
+                .font(WatchDesign.micro)
+                .foregroundStyle(WatchDesign.secondaryLabel)
+                .monospacedDigit()
         }
-        .padding()
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .padding(.horizontal, 4)
         .accessibilityIdentifier("watch.poc.breath")
         .task { await runBreathCycle() }
     }
@@ -40,11 +52,11 @@ public struct WatchBreathingView: View {
     private func runBreathCycle() async {
         while !Task.isCancelled {
             inhale = true
-            scale = 1.05
+            scale = 1.08
             pulseHaptic(start: true)
             try? await Task.sleep(nanoseconds: 4_000_000_000)
             inhale = false
-            scale = 0.85
+            scale = 0.82
             pulseHaptic(start: false)
             try? await Task.sleep(nanoseconds: 4_000_000_000)
         }

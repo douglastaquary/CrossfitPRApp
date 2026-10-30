@@ -21,6 +21,7 @@ Eventos compactos por sessão — **não** transcript bruto:
 - Dicas in-session only
 - Respiração: cadência 4-4 ou box breathing — haptic leve
 - Descanso: timer + uma linha motivacional; retomada explícita
+- **Design final (2026-10-29):** canvas `CPR-009-*- [Design]-watch-companion-ui` — brand token, ring rest/breath, tip curta; sem densidade de iPhone
 
 ## Dependências
 

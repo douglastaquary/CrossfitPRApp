@@ -14,7 +14,7 @@ Companion na sessão: dica contextual, timer de descanso e respiração. **Sem L
 | Timer | `WatchRestTimerView` — countdown 1:30, evento `rest` ao fim |
 | Respiração | Animação 4-4 + toggle haptic (`watch.breath.hapticsEnabled`) |
 | Notificações | Sem push no companion — só UI no pulso + eventos WC (haptic opt-in na respiração) |
-| Próximo | Design CPR-009 (canvas UI final) |
+| Design | Canvas Design CPR-009 — `WatchDesign` + rings Rest/Breath |
 
 ## Build local
 
@@ -47,9 +47,12 @@ chmod +x scripts/capture-watch-readme-screenshots.sh
 
 iPhone (onboarding, Insights, paywall): `./scripts/capture-readme-media-auto.sh`
 
+## Design (CPR-009)
+
+Canvas: [`spdd/prompt/CPR-009-20261029-[Design]-watch-companion-ui.md`](../spdd/prompt/CPR-009-20261029-[Design]-watch-companion-ui.md) — tokens `WatchDesign`, ring no Rest/Breath, tip de sessão curta.
+
 ## Próximo
 
-- Canvas Design CPR-009 para UI final + haptics
-- Comercial add-on/bundle PRO+Watch (canvas)
+- Comercial add-on/bundle PRO+Watch (canvas Feat)
 
 Refs: [`spdd/prompt/CPR-009-20261028-[Feat]-watch-companion.md`](../spdd/prompt/CPR-009-20261028-[Feat]-watch-companion.md)

@@ -1,7 +1,23 @@
 import SwiftUI
 
+/// Tokens visuais do companion watchOS (CPR-009 Design).
+/// Espelha a intenção de `AppDesign` no iPhone sem depender do pacote Localization.
 enum WatchDesign {
+    /// Brand verde — accent CTAs, anéis e ícones.
     static let brand = Color.green
+
+    /// Label secundário (caption hierarchy).
+    static let secondaryLabel = Color.secondary
+
+    static let timerFont = Font.system(size: 34, weight: .bold, design: .rounded)
+    static let phaseFont = Font.title3.monospacedDigit().weight(.semibold)
+    static let sectionLabel = Font.caption.weight(.semibold)
+    static let bodyTip = Font.caption
+    static let micro = Font.caption2
+
+    static let ringLineWidth: CGFloat = 5
+    static let breathRingSize: CGFloat = 78
+    static let restRingSize: CGFloat = 96
 }
 
 enum WatchL10n {

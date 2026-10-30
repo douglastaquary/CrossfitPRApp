@@ -14,11 +14,13 @@ para manter foco no box sem abrir o iPhone a todo momento.
 - [x] Respiração visual/haptic em treinos intensos (opt-in — toggle na tab Respiração)
 - [x] Eventos compactos (série, RPE, descanso) → `CoachingContextBuilder.sessionEvents`
 - [x] Sem spam de notificações push (companion não registra push — só WC + haptic opt-in)
-- [ ] Comercial: add-on ou bundle PRO+Watch (canvas)
-- [ ] HealthKit no iPhone: FC média, calorias, duração → Insights (mock em UITest)
+- [x] HealthKit no iPhone: FC média, calorias, duração → Insights (mock em UITest) — CPR-011/012
+- [x] Design final UI (canvas Design CPR-009) — hierarquia Fitness no pulso + tokens `WatchDesign`
+- [ ] Comercial: add-on ou bundle PRO+Watch (canvas Feat)
 
 ## Fases
 
 1. Read-only tips na sessão
 2. Captura real-time + sync
 3. HealthKit metrics → SessionBiometrics / Insights hub
+4. Design final (UI polish + capturas README)

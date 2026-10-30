@@ -3,7 +3,7 @@ import SwiftUI
 import WatchKit
 #endif
 
-/// Timer de descanso CPR-009 — envia evento `rest` ao concluir.
+/// Timer de descanso CPR-009 Design — ring + timer dominante; evento `rest` ao concluir.
 public struct WatchRestTimerView: View {
     private let totalDurationSec: Int
 
@@ -17,26 +17,49 @@ public struct WatchRestTimerView: View {
         _remainingSec = State(initialValue: duration)
     }
 
+    private var progress: Double {
+        guard totalDurationSec > 0 else { return 0 }
+        return Double(totalDurationSec - remainingSec) / Double(totalDurationSec)
+    }
+
     public var body: some View {
-        VStack(spacing: 10) {
+        VStack(spacing: 8) {
             Text(WatchL10n.restLabel)
-                .font(.caption.bold())
-                .foregroundStyle(.secondary)
-            Text(formattedTime(remainingSec))
-                .font(.system(size: 36, weight: .bold, design: .rounded))
-                .monospacedDigit()
-                .accessibilityIdentifier("watch.rest.timer")
+                .font(WatchDesign.sectionLabel)
+                .foregroundStyle(WatchDesign.secondaryLabel)
+
+            ZStack {
+                Circle()
+                    .stroke(WatchDesign.brand.opacity(0.22), lineWidth: WatchDesign.ringLineWidth)
+                Circle()
+                    .trim(from: 0, to: progress)
+                    .stroke(
+                        WatchDesign.brand,
+                        style: StrokeStyle(lineWidth: WatchDesign.ringLineWidth, lineCap: .round)
+                    )
+                    .rotationEffect(.degrees(-90))
+                    .animation(.linear(duration: 0.25), value: progress)
+                Text(formattedTime(remainingSec))
+                    .font(WatchDesign.timerFont)
+                    .monospacedDigit()
+                    .accessibilityIdentifier("watch.rest.timer")
+            }
+            .frame(width: WatchDesign.restRingSize, height: WatchDesign.restRingSize)
+
             Text(WatchL10n.restMotivation)
-                .font(.caption2)
-                .foregroundStyle(.secondary)
+                .font(WatchDesign.micro)
+                .foregroundStyle(WatchDesign.secondaryLabel)
                 .multilineTextAlignment(.center)
+                .lineLimit(2)
 
             Button(isRunning ? WatchL10n.restPause : WatchL10n.restStart) {
                 toggleTimer()
             }
+            .tint(WatchDesign.brand)
             .accessibilityIdentifier("watch.rest.toggle")
         }
-        .padding()
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .padding(.horizontal, 4)
         .accessibilityIdentifier("watch.poc.rest")
         .onDisappear { stopTimer() }
     }
