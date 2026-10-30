@@ -18,43 +18,23 @@ struct PROUpgradePurchaseContent: View {
     let onPurchase: (String) -> Void
     let onRestore: () -> Void
 
+    /// Pickers da variante B (CPR-014).
+    @State var selectedTier: PaywallTierPick = .pro
+    @State var selectedPeriod: PaywallPeriodPick = .annual
+
     var body: some View {
-        VStack(spacing: 24) {
-            PROUpgradeHeaderSection()
-            PROUpgradePlanCompareSection()
-
-            // Pricing cedo (acima da dobra) — conversão + UI tests estáveis.
-            if hasProducts {
-                PROUpgradePricingSection(
-                    monthlyProduct: monthlyProduct,
-                    annualProduct: annualProduct,
-                    eliteMonthlyProduct: eliteMonthlyProduct,
-                    eliteAnnualProduct: eliteAnnualProduct,
-                    selectedProductID: $selectedProductID,
-                    errorMessage: $errorMessage,
-                    onPurchase: onPurchase,
-                    onRestore: onRestore
-                )
-            } else {
-                PROUpgradeNoProductsSection(onReload: onReloadProducts)
-                PROUpgradeRestoreSection(onRestore: onRestore)
-            }
-
-            PROUpgradeBenefitsSection()
-            PROUpgradeEliteBenefitsSection()
-
-            if let errorMessage {
-                Text(errorMessage)
-                    .font(.caption)
-                    .foregroundStyle(AppDesign.Colors.error)
-                    .padding(.horizontal)
-            }
-
-            PROUpgradeCommitmentSection()
-        }
-        .padding(.horizontal, 24)
-        .padding(.bottom, 40)
+        conversionBody
     }
+}
+
+enum PaywallTierPick {
+    case pro
+    case elite
+}
+
+enum PaywallPeriodPick {
+    case monthly
+    case annual
 }
 
 struct PROUpgradeRestoreSection: View {
@@ -415,13 +395,16 @@ struct PROUpgradeTrialButton: View {
     let onPurchase: (String) -> Void
 
     var body: some View {
-        // `.borderedProminent` — mesmo padrão do Restore (UI tests conseguem tap estável).
+        // Altura alinhada aos CTAs do app (ex.: Insights upsell com `.padding()`).
+        // `.borderedProminent` — UI tests de pagamento com tap estável.
         Button(action: tapPurchase) {
             Label(Strings.Purchase.continueToPayment, systemImage: "creditcard.fill")
+                .fontWeight(.semibold)
                 .frame(maxWidth: .infinity)
-                .padding(.vertical, 4)
+                .padding(.vertical, 14)
         }
         .buttonStyle(.borderedProminent)
+        .controlSize(.large)
         .tint(selectedProductID != nil ? AppDesign.Colors.brand : .gray)
         .accessibilityIdentifier("pro.upgrade.continue.payment")
     }

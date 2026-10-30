@@ -11,15 +11,20 @@ import SharedUI
 struct InsightsMetricCell: View {
     let label: String
     let value: String
+    var compact: Bool = false
 
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
             Text(label)
                 .font(AppDesign.Typography.metricLabel)
                 .foregroundStyle(.secondary)
+                .lineLimit(1)
+                .minimumScaleFactor(0.8)
             Text(value)
-                .font(AppDesign.Typography.metricValue)
+                .font(compact ? AppDesign.Typography.rowValue.weight(.bold) : AppDesign.Typography.metricValue)
                 .foregroundStyle(.primary)
+                .lineLimit(1)
+                .minimumScaleFactor(0.7)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
     }
@@ -146,40 +151,33 @@ struct InsightsLastSessionSection: View {
 
     private func metricsGrid(_ metrics: SessionBiometrics, sessionDuration: TimeInterval) -> some View {
         let exercise = metrics.exerciseTime ?? sessionDuration
-        return VStack(spacing: 12) {
-            HStack(spacing: 16) {
-                if let active = metrics.activeCalories {
-                    InsightsMetricCell(
-                        label: Strings.Insights.Hub.activeCalories,
-                        value: "\(Int(active.rounded())) CAL"
-                    )
-                }
-                if let total = metrics.totalCalories {
-                    InsightsMetricCell(
-                        label: Strings.Insights.Hub.totalCalories,
-                        value: "\(Int(total.rounded())) CAL"
-                    )
-                }
+        let cells: [(String, String)] = {
+            var items: [(String, String)] = []
+            if let active = metrics.activeCalories {
+                items.append((Strings.Insights.Hub.activeCalories, "\(Int(active.rounded()))"))
             }
-            HStack(spacing: 16) {
-                if exercise > 0 {
-                    InsightsMetricCell(
-                        label: Strings.Insights.Hub.exerciseTime,
-                        value: formatDuration(exercise)
-                    )
-                }
-                if sessionDuration > 0, sessionDuration != exercise {
-                    InsightsMetricCell(
-                        label: Strings.Insights.Hub.duration,
-                        value: formatDuration(sessionDuration)
-                    )
-                }
-                if let hr = metrics.averageHeartRate {
-                    InsightsMetricCell(
-                        label: Strings.Insights.Hub.averageHR,
-                        value: "\(hr) bpm"
-                    )
-                }
+            if let total = metrics.totalCalories {
+                items.append((Strings.Insights.Hub.totalCalories, "\(Int(total.rounded()))"))
+            }
+            if exercise > 0 {
+                items.append((Strings.Insights.Hub.exerciseTime, formatDuration(exercise)))
+            }
+            if sessionDuration > 0, abs(sessionDuration - exercise) > 1 {
+                items.append((Strings.Insights.Hub.duration, formatDuration(sessionDuration)))
+            }
+            if let hr = metrics.averageHeartRate {
+                items.append((Strings.Insights.Hub.averageHR, "\(hr)"))
+            }
+            return items
+        }()
+
+        return LazyVGrid(
+            columns: [GridItem(.flexible(), spacing: 12), GridItem(.flexible(), spacing: 12)],
+            alignment: .leading,
+            spacing: 12
+        ) {
+            ForEach(Array(cells.enumerated()), id: \.offset) { _, cell in
+                InsightsMetricCell(label: cell.0, value: cell.1, compact: true)
             }
         }
     }
@@ -281,8 +279,21 @@ struct InsightsFreeChartTeaser: View {
     let records: [PersonalRecord]
     let measureMode: MeasureTrackingMode
 
-    private var barbell: [PersonalRecord] {
-        InsightsRanking.records(for: .barbell, in: records)
+    /// Um ponto por movimento (melhor lift) — evita eixo de datas sobreposto.
+    private var chartRows: [(name: String, value: Double)] {
+        let barbell = InsightsRanking.records(for: .barbell, in: records)
+        let grouped = Dictionary(grouping: barbell, by: \.prName)
+        return grouped.keys.sorted().compactMap { name -> (String, Double)? in
+            guard let best = grouped[name]?.max(by: {
+                (measureMode == .pounds ? $0.poundValue : $0.kiloValue)
+                    < (measureMode == .pounds ? $1.poundValue : $1.kiloValue)
+            }) else { return nil }
+            let value = Double(measureMode == .pounds ? best.poundValue : best.kiloValue)
+            let short = name.localizedWorkoutTitle
+            return (short, value)
+        }
+        .prefix(6)
+        .map { ($0.0, $0.1) }
     }
 
     var body: some View {
@@ -290,7 +301,7 @@ struct InsightsFreeChartTeaser: View {
             Text(Strings.Insights.Hub.chartTeaserTitle)
                 .font(AppDesign.Typography.sectionTitle)
 
-            if barbell.isEmpty {
+            if chartRows.isEmpty {
                 RoundedRectangle(cornerRadius: 12)
                     .fill(AppDesign.Colors.brand.opacity(0.12))
                     .frame(height: 160)
@@ -301,16 +312,22 @@ struct InsightsFreeChartTeaser: View {
                     }
             } else {
                 Chart {
-                    ForEach(barbell.prefix(8)) { record in
+                    ForEach(chartRows, id: \.name) { row in
                         BarMark(
-                            x: .value("Date", record.formattedShortDate),
-                            y: .value(
-                                "Value",
-                                Double(measureMode == .pounds ? record.poundValue : record.kiloValue)
-                            )
+                            x: .value("Move", row.name),
+                            y: .value("Value", row.value)
                         )
                         .foregroundStyle(AppDesign.Colors.brand)
                     }
+                }
+                .chartXAxis {
+                    AxisMarks { _ in
+                        AxisValueLabel()
+                            .font(.caption2)
+                    }
+                }
+                .chartYAxis {
+                    AxisMarks(position: .leading)
                 }
                 .frame(height: 180)
             }

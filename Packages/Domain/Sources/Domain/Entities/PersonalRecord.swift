@@ -16,6 +16,8 @@ public struct PersonalRecord: Identifiable, Hashable, Sendable, Codable {
     public var minTime: Int
     public var comments: String
     public var evolutionPercentage: Int
+    /// Contexto Fitness (local, CAL, Watch, clima) — CPR-013.
+    public var sessionContext: PRSessionContext?
 
     public init(
         id: UUID = UUID(),
@@ -31,7 +33,8 @@ public struct PersonalRecord: Identifiable, Hashable, Sendable, Codable {
         maxReps: Int = 0,
         minTime: Int = 0,
         comments: String = "",
-        evolutionPercentage: Int = 0
+        evolutionPercentage: Int = 0,
+        sessionContext: PRSessionContext? = nil
     ) {
         self.id = id
         self.prName = prName
@@ -47,6 +50,7 @@ public struct PersonalRecord: Identifiable, Hashable, Sendable, Codable {
         self.minTime = minTime
         self.comments = comments
         self.evolutionPercentage = evolutionPercentage
+        self.sessionContext = sessionContext
     }
 
     /// Init legado — compatível com WorkoutEngine e testes SPM.

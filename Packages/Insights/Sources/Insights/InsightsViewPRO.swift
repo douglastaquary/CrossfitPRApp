@@ -211,23 +211,43 @@ private struct InsightsViewPROChartSection: View {
     let annotation: (PersonalRecord) -> String
     let value: (PersonalRecord) -> Double
 
+    /// Melhor PR por movimento — eixo legível (sem datas empilhadas).
+    private var chartRows: [(id: String, name: String, value: Double, label: String)] {
+        let grouped = Dictionary(grouping: records, by: \.prName)
+        return grouped.keys.sorted().compactMap { name -> (String, String, Double, String)? in
+            guard let best = grouped[name]?.max(by: { value($0) < value($1) }) else { return nil }
+            return (best.id.uuidString, name.localizedWorkoutTitle, value(best), annotation(best))
+        }
+        .prefix(8)
+        .map { ($0.0, $0.1, $0.2, $0.3) }
+    }
+
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             InsightsViewPROSectionHeader(icon: icon, titleKey: titleKey)
             Chart {
-                ForEach(records) { record in
+                ForEach(chartRows, id: \.id) { row in
                     BarMark(
-                        x: .value("Date", record.formattedShortDate),
-                        y: .value("Value", value(record))
+                        x: .value("Move", row.name),
+                        y: .value("Value", row.value)
                     )
-                    .foregroundStyle(by: .value("Name", record.prName.localizedWorkoutTitle))
-                    .annotation(position: .top) {
-                        Text(annotation(record))
-                            .font(AppDesign.Typography.captionSecondary)
+                    .foregroundStyle(AppDesign.Colors.brand)
+                    .annotation(position: .top, spacing: 2) {
+                        Text(row.label)
+                            .font(.caption2)
                             .foregroundStyle(.secondary)
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.7)
                     }
                 }
             }
+            .chartXAxis {
+                AxisMarks { _ in
+                    AxisValueLabel()
+                        .font(.caption2)
+                }
+            }
+            .chartLegend(.hidden)
             .frame(height: AppDesign.Layout.chartHeight)
             .shimmering(active: isShimmering)
         }

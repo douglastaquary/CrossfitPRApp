@@ -1,4 +1,6 @@
-# Apple Watch companion (CPR-009)
+# Apple Watch companion (CPR-009) — histórico POC
+
+> **Homologação atual:** [`WATCH-HOMOLOGATION.md`](WATCH-HOMOLOGATION.md) (resumo por tela, dados Watch × iPhone).
 
 Companion na sessão: dica contextual, timer de descanso e respiração. **Sem LLM no relógio** — eventos futuros alimentam o coach no iPhone (CPR-007).
 

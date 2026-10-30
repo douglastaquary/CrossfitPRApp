@@ -470,11 +470,11 @@
 "insight.hub.engine.title" = "Your insights";
 "insight.hub.session.title" = "Last workout";
 "insight.hub.sessions.title" = "Recent workouts";
-"insight.hub.metric.activeCalories" = "Active calories";
-"insight.hub.metric.totalCalories" = "Total calories";
-"insight.hub.metric.exerciseTime" = "Exercise time";
+"insight.hub.metric.activeCalories" = "Active";
+"insight.hub.metric.totalCalories" = "Total";
+"insight.hub.metric.exerciseTime" = "Exercise";
 "insight.hub.metric.duration" = "Duration";
-"insight.hub.metric.averageHR" = "Average heart rate";
+"insight.hub.metric.averageHR" = "Avg HR";
 "insight.hub.health.connect" = "Connect Apple Watch or allow Health access to see heart rate and calories.";
 "insight.hub.recovery.title" = "Recovery";
 "insight.hub.recovery.message" = "You used breath or rest on Watch — great for the next block.";
@@ -486,4 +486,27 @@
 "insight.teaser.empty.message" = "Log a PR to see clear trends and tips — Fitness-style.";
 "insight.pro.empty.title" = "No data yet";
 "insight.pro.empty.message" = "Log PRs or a session to see summary, metrics, and insights here.";
+
+/* CPR-013 — PR list Fitness */
+"prHistory.filter.all" = "All";
+"prHistory.filter.barbell" = "Barbell";
+"prHistory.filter.gymnastic" = "Gymnastics";
+"prHistory.filter.endurance" = "Endurance";
+"prHistory.source.appleWatch" = "Apple Watch";
+"prHistory.source.manual" = "Manual";
+"prHistory.source.health" = "Health";
+"record.detail.exerciseDetails" = "Workout details";
+"record.detail.awards" = "Awards";
+"record.detail.humidity" = "Humidity";
+"record.detail.temperature" = "Temperature";
+"award.newPR.title" = "New PR";
+"award.newPR.body" = "You logged a new personal record. Keep building — every lift counts.";
+"award.weekActive.title" = "Active week";
+"award.weekActive.body" = "You stacked several PRs in the same week. Athlete consistency.";
+"award.evolution.title" = "Progress";
+"award.evolution.body" = "More than one PR with a real jump. The chart is on your side.";
+"award.heavyMetal.title" = "Heavy metal";
+"award.heavyMetal.body" = "Elite mark: a heavy lift on the board. Keep building strength.";
+"award.earnedTimesFormat %lld" = "You've earned this award %lld times.";
+"award.latestFormat %@" = "Latest: %@.";
 
