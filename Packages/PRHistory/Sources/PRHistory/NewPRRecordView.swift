@@ -3,6 +3,7 @@ import Domain
 import Application
 import SharedUI
 import Localization
+import RecordDetail
 
 public struct NewPRRecordView: View {
     @EnvironmentObject private var personalRecordClient: PersonalRecordClient
@@ -21,6 +22,7 @@ public struct NewPRRecordView: View {
     @State private var selectedExerciseIndex = 0
     @State private var isSaving = false
     @State private var saveErrorMessage: String?
+    @State private var celebrationAward: PRAward?
 
     public init(category: WorkoutCategory? = nil) {
         self.category = category
@@ -75,6 +77,10 @@ public struct NewPRRecordView: View {
             }
         }
         .brandTint()
+        .sheet(item: $celebrationAward) { award in
+            PRAwardDetailSheet(award: award)
+                .onDisappear { dismiss() }
+        }
     }
 
     private func saveRecord() async {
@@ -84,9 +90,10 @@ public struct NewPRRecordView: View {
 
         let level = CrossfitLevel.allCases[selectedLevelIndex]
         let pounds = Int(weightText) ?? 0
+        let now = Date()
         let record = PersonalRecord(
             prName: activeCategory.title,
-            recordDate: Date(),
+            recordDate: now,
             kiloValue: settingsClient.measureTrackingMode == .pounds ? Int(Double(pounds) * 0.453592) : pounds,
             poundValue: settingsClient.measureTrackingMode == .pounds ? pounds : Int(Double(pounds) / 0.453592),
             distance: Int(distanceText) ?? 0,
@@ -96,12 +103,17 @@ public struct NewPRRecordView: View {
             group: activeCategory.group,
             maxReps: Int(maxRepsText) ?? 0,
             minTime: Int(minTimeText) ?? 0,
-            comments: comments
+            comments: comments,
+            sessionContext: PRSessionContext.mockWatchBox(at: now)
         )
 
         let success = await personalRecordClient.save(record)
         if success {
-            dismiss()
+            let awards = PRAwardEvaluator.awards(from: personalRecordClient.records)
+            celebrationAward = awards.first
+            if celebrationAward == nil {
+                dismiss()
+            }
         } else {
             saveErrorMessage = personalRecordClient.lastError ?? Strings.NewPR.saveFallbackError
         }

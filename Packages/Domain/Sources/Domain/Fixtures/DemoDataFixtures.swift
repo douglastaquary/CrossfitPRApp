@@ -70,7 +70,8 @@ public enum DemoDataFixtures {
         _ name: String,
         pounds: Int,
         daysAgo: Int,
-        evolution: Int = 0
+        evolution: Int = 0,
+        withContext: Bool = false
     ) -> PersonalRecord {
         PersonalRecord(
             prName: name,
@@ -79,39 +80,42 @@ public enum DemoDataFixtures {
             poundValue: pounds,
             recordMode: .maxWeight,
             group: .barbell,
-            evolutionPercentage: evolution
+            evolutionPercentage: evolution,
+            sessionContext: withContext ? PRSessionContext.mockWatchBox(at: day(daysAgo)) : nil
         )
     }
 
-    private static func gymnastic(_ name: String, reps: Int, daysAgo: Int) -> PersonalRecord {
+    private static func gymnastic(_ name: String, reps: Int, daysAgo: Int, withContext: Bool = false) -> PersonalRecord {
         PersonalRecord(
             prName: name,
             recordDate: day(daysAgo),
             recordMode: .maxRepetition,
             group: .gymnastic,
-            maxReps: reps
+            maxReps: reps,
+            sessionContext: withContext ? PRSessionContext.mockWatchBox(at: day(daysAgo)) : nil
         )
     }
 
-    private static func endurance(_ name: String, km: Int, daysAgo: Int) -> PersonalRecord {
+    private static func endurance(_ name: String, km: Int, daysAgo: Int, withContext: Bool = false) -> PersonalRecord {
         PersonalRecord(
             prName: name,
             recordDate: day(daysAgo),
             distance: km,
             recordMode: .maxDistance,
-            group: .endurance
+            group: .endurance,
+            sessionContext: withContext ? PRSessionContext.mockWatchBox(at: day(daysAgo)) : nil
         )
     }
 
     private static func freeTeaserRecords() -> [PersonalRecord] {
         [
             barbell("Back Squat", pounds: 185, daysAgo: 40),
-            barbell("Back Squat", pounds: 205, daysAgo: 20, evolution: 11),
+            barbell("Back Squat", pounds: 205, daysAgo: 20, evolution: 11, withContext: true),
             barbell("Deadlift", pounds: 275, daysAgo: 30),
-            barbell("Deadlift", pounds: 295, daysAgo: 10, evolution: 7),
+            barbell("Deadlift", pounds: 295, daysAgo: 10, evolution: 7, withContext: true),
             barbell("Clean", pounds: 135, daysAgo: 25),
-            barbell("Clean", pounds: 155, daysAgo: 5, evolution: 15),
-            gymnastic("Pull-ups", reps: 12, daysAgo: 8),
+            barbell("Clean", pounds: 155, daysAgo: 5, evolution: 15, withContext: true),
+            gymnastic("Pull-ups", reps: 12, daysAgo: 8, withContext: true),
             endurance("Row", km: 2, daysAgo: 12)
         ]
     }
@@ -138,13 +142,13 @@ public enum DemoDataFixtures {
     private static func eliteRichRecords() -> [PersonalRecord] {
         var records = proRichRecords()
         records += [
-            barbell("Back Squat", pounds: 315, daysAgo: 2, evolution: 12),
-            barbell("Deadlift", pounds: 405, daysAgo: 1, evolution: 10),
-            barbell("Clean & Jerk", pounds: 225, daysAgo: 2, evolution: 8),
-            barbell("Snatch", pounds: 175, daysAgo: 1, evolution: 9),
-            gymnastic("Muscle-ups", reps: 6, daysAgo: 4),
-            gymnastic("Pull-ups", reps: 25, daysAgo: 3),
-            endurance("Row", km: 5, daysAgo: 2),
+            barbell("Back Squat", pounds: 315, daysAgo: 2, evolution: 12, withContext: true),
+            barbell("Deadlift", pounds: 405, daysAgo: 1, evolution: 10, withContext: true),
+            barbell("Clean & Jerk", pounds: 225, daysAgo: 2, evolution: 8, withContext: true),
+            barbell("Snatch", pounds: 175, daysAgo: 1, evolution: 9, withContext: true),
+            gymnastic("Muscle-ups", reps: 6, daysAgo: 4, withContext: true),
+            gymnastic("Pull-ups", reps: 25, daysAgo: 3, withContext: true),
+            endurance("Row", km: 5, daysAgo: 2, withContext: true),
             endurance("Run", km: 10, daysAgo: 5)
         ]
         return records
@@ -164,7 +168,7 @@ public enum DemoDataFixtures {
     public static func sampleSession(
         daysAgo: Int,
         withMetrics: Bool,
-        title: String = "Cross Training",
+        title: String = "WOD",
         style: WorkoutSessionStyle = .amrap,
         score: String = "14 rounds"
     ) -> CrossFitWorkoutSession {

@@ -80,6 +80,10 @@ public enum Strings {
         public static var recordsSection: String { tr("record.records.section.title") }
         public static var deleteConfirmation: String { tr("record.screen.delete.confirmation.title") }
         public static var deleteButton: String { tr("record.screen.delete.button.title") }
+        public static var exerciseDetails: String { tr("record.detail.exerciseDetails") }
+        public static var awards: String { tr("record.detail.awards") }
+        public static var humidity: String { tr("record.detail.humidity") }
+        public static var temperature: String { tr("record.detail.temperature") }
 
         public static func evolutionSection(_ name: String) -> String {
             format("record.evolution.section.title %@", name)
@@ -143,6 +147,32 @@ public enum Strings {
         public static var emptyTitle: String { tr("prHistory.emptyTitle") }
         public static var emptyMessage: String { tr("prHistory.emptyMessage") }
         public static var registerButton: String { tr("prHistory.registerButton") }
+
+        public enum Filter {
+            public static var all: String { tr("prHistory.filter.all") }
+            public static var barbell: String { tr("prHistory.filter.barbell") }
+            public static var gymnastic: String { tr("prHistory.filter.gymnastic") }
+            public static var endurance: String { tr("prHistory.filter.endurance") }
+        }
+
+        public enum Source {
+            public static var appleWatch: String { tr("prHistory.source.appleWatch") }
+            public static var manual: String { tr("prHistory.source.manual") }
+            public static var health: String { tr("prHistory.source.health") }
+        }
+    }
+
+    public enum Award {
+        public static var newPRTitle: String { tr("award.newPR.title") }
+        public static var newPRBody: String { tr("award.newPR.body") }
+        public static var weekActiveTitle: String { tr("award.weekActive.title") }
+        public static var weekActiveBody: String { tr("award.weekActive.body") }
+        public static var evolutionTitle: String { tr("award.evolution.title") }
+        public static var evolutionBody: String { tr("award.evolution.body") }
+        public static var heavyMetalTitle: String { tr("award.heavyMetal.title") }
+        public static var heavyMetalBody: String { tr("award.heavyMetal.body") }
+        public static func earnedTimes(_ count: Int) -> String { format("award.earnedTimesFormat %lld", Int64(count)) }
+        public static func latest(_ date: String) -> String { format("award.latestFormat %@", date) }
     }
 
     // MARK: - New PR

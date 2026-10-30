@@ -470,11 +470,11 @@
 "insight.hub.engine.title" = "Suas percepções";
 "insight.hub.session.title" = "Última sessão";
 "insight.hub.sessions.title" = "Últimas sessões";
-"insight.hub.metric.activeCalories" = "Calorias ativas";
-"insight.hub.metric.totalCalories" = "Total de calorias";
-"insight.hub.metric.exerciseTime" = "Tempo de exercício";
+"insight.hub.metric.activeCalories" = "Ativas";
+"insight.hub.metric.totalCalories" = "Total";
+"insight.hub.metric.exerciseTime" = "Exercício";
 "insight.hub.metric.duration" = "Duração";
-"insight.hub.metric.averageHR" = "Frequência cardíaca média";
+"insight.hub.metric.averageHR" = "FC média";
 "insight.hub.health.connect" = "Conecte o Apple Watch ou permita acesso ao Saúde para ver FC e calorias.";
 "insight.hub.recovery.title" = "Recuperação";
 "insight.hub.recovery.message" = "Você usou respiração ou descanso no Watch — ótimo para o próximo bloco.";
@@ -486,4 +486,27 @@
 "insight.teaser.empty.message" = "Registre um PR e veja tendências e dicas claras — no estilo do app Fitness.";
 "insight.pro.empty.title" = "Sem dados ainda";
 "insight.pro.empty.message" = "Registre PRs ou uma sessão para ver resumo, métricas e percepções aqui.";
+
+/* CPR-013 — Meus PRs Fitness */
+"prHistory.filter.all" = "Todos";
+"prHistory.filter.barbell" = "Barra";
+"prHistory.filter.gymnastic" = "Ginásticos";
+"prHistory.filter.endurance" = "Resistência";
+"prHistory.source.appleWatch" = "Apple Watch";
+"prHistory.source.manual" = "Manual";
+"prHistory.source.health" = "Saúde";
+"record.detail.exerciseDetails" = "Detalhes do exercício";
+"record.detail.awards" = "Prêmios";
+"record.detail.humidity" = "Umidade";
+"record.detail.temperature" = "Temperatura";
+"award.newPR.title" = "Novo PR";
+"award.newPR.body" = "Você registrou um novo personal record. Continue evoluindo — cada lift conta.";
+"award.weekActive.title" = "Semana ativa";
+"award.weekActive.body" = "Você acumulou vários PRs na mesma semana. Consistência de atleta.";
+"award.evolution.title" = "Evolução";
+"award.evolution.body" = "Mais de um PR com salto de evolução. O gráfico está a seu favor.";
+"award.heavyMetal.title" = "Heavy metal";
+"award.heavyMetal.body" = "Marca Elite: lift pesado no radar. Continue construindo força no box.";
+"award.earnedTimesFormat %lld" = "Você ganhou este prêmio %lld vezes.";
+"award.latestFormat %@" = "Mais recente: %@.";
 

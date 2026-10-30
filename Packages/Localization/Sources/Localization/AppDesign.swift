@@ -7,6 +7,9 @@ public enum AppDesign {
         /// Verde de marca — accent global, tabs, CTAs (.green beta).
         public static let brand = Color.green
 
+        /// Lima Fitness — chips ativos / ícone de atividade (CPR-013 Design).
+        public static let activityAccent = Color(red: 0.63, green: 0.94, blue: 0.0)
+
         /// Badge PRO e destaques premium.
         public static let proAccent = Color.orange
 
