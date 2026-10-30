@@ -13,38 +13,34 @@ Visão pública do que já está no app versus o que está **planejado** (SPDD `
 | Idiomas | pt-BR e en com QA automatizado no CI |
 | Percepções | Hub Insights estilo Fitness (Free teaser + PRO/Elite) — CPR-011 |
 | Sessão / HealthKit | WOD + biometrics (mock em sim/UITest) — CPR-012 / CPR-009 |
+| Meus PRs | Lista/detalhe estilo Fitness (contexto Watch + prêmios) — CPR-013 |
+| Paywall | Sheet em passos (variante B) + tabela Free/PRO/Elite — CPR-014 |
+| Watch | Companion sessão (tip / rest / breath) — homologação [`WATCH-HOMOLOGATION.md`](WATCH-HOMOLOGATION.md) |
 
 ## Coach IA (CPR-007) — shipped MVP
 
 - Escada: on-device (iOS 26+) → OpenAI → resumo local; ver [`COACHING-INFERENCE.md`](COACHING-INFERENCE.md).
 - Pendente validação em hardware real e tuning de prompts/custo.
 
-## In progress — Elite (CPR-008)
+## Elite (CPR-008) — shipped MVP (código)
 
-- Tier Elite + assessment / limiting factor (Domain + WorkoutEngine).
-- UI modo competidor: paywall 3 planos, Insights cards, Settings Elite.
-- StoreKit: IDs Elite em `SubscriptionCatalog` + `Products.storekit`.
-- Pendente: prompts coach Elite dedicados; App Store Connect produtos reais; screenshots Design.
-- UX pagamento: feedback por etapa + restore — ver [`STOREKIT-PAYMENTS.md`](STOREKIT-PAYMENTS.md).
+- Tier Elite + assessment / limiting factor; paywall multi-plano; Insights + Settings.
+- Pendente: produtos Elite no ASC ([`APP-STORE-CONNECT-ELITE.md`](APP-STORE-CONNECT-ELITE.md)); prompts coach Elite dedicados.
+- UX pagamento: [`STOREKIT-PAYMENTS.md`](STOREKIT-PAYMENTS.md).
 
-## In progress — Apple Watch (CPR-009)
+## Apple Watch (CPR-009) — homologação
 
-- Target **CrossfitPRWatch** + pacote `WatchCompanion` ([`WATCH-POC.md`](WATCH-POC.md)).
-- Sync WC + eventos no coach PRO; timer descanso + respiração/haptic no relógio.
-- CI compila watchOS no gate moderno; capturas README via `./scripts/capture-watch-readme-screenshots.sh`.
-- Design final (canvas Design CPR-009): brand token, ring rest/breath, tip curta.
-- Dicas **contextuais na sessão** — sem spam de push.
-- Eventos compactos (série, RPE, descanso) alimentam o snapshot do coach no iPhone (PRO).
-- Comercial: add-on ou bundle PRO + Watch (definido no canvas CPR-009).
+- Target **CrossfitPRWatch** + `WatchCompanion` — resumo por tela: [`WATCH-HOMOLOGATION.md`](WATCH-HOMOLOGATION.md).
+- Sync WC + eventos no coach; Design CPR-009 (rings Rest/Breath).
+- Pendente: comercial PRO+Watch (add-on/bundle); validação em hardware.
 
 ## Próximos passos (dev)
 
-1. **CI:** confirmar verde em [`ios.yml`](.github/workflows/ios.yml) na `main` (rerun se fila macOS); gate local Xcode 15+: `./scripts/ci-modern.sh`.
-2. **Mídia README:** `./scripts/capture-readme-media-auto.sh` → commit PNG/GIF Insights Free/PRO/Elite (empty + rich) + paywall Elite quando estável.
-3. **CPR-007:** testar iOS 26+ on-device + `OPENAI_API_KEY` em device; revisar logs `Coaching` no Console.
-4. **CPR-008:** criar produtos Elite no ASC ([`APP-STORE-CONNECT-ELITE.md`](APP-STORE-CONNECT-ELITE.md)); prompts coach Elite dedicados (canvas Feat).
-5. **CPR-009:** comercial PRO+Watch (add-on/bundle); Design UI no canvas Design CPR-009.
-6. **Personas:** skill [`.cursor/skills/crossfit-athlete-personas`](../.cursor/skills/crossfit-athlete-personas/SKILL.md) · [CPR-010](../spdd/analysis/CPR-010-crossfit-market-mayhem-personas.md).
+1. **CI:** confirmar verde em [`ios.yml`](.github/workflows/ios.yml) na `main` pós-merge CPR-013/014; gate local: `./scripts/ci-modern.sh`.
+2. **CPR-008 ASC:** criar/publicar produtos Elite no App Store Connect.
+3. **CPR-009:** checklist homologação Watch em device + comercial bundle.
+4. **CPR-007:** testar iOS 26+ on-device + `OPENAI_API_KEY`; tuning de prompts/custo.
+5. **Personas / retenção:** [CPR-010](../spdd/analysis/CPR-010-crossfit-market-mayhem-personas.md) · skill personas.
 
 ## Como acompanhar
 

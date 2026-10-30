@@ -2,7 +2,7 @@
 
 **Registre seus PRs, veja sua evolução e entenda quando vale a pena ir mais pesado.**
 
-CrossfitPR é um app iOS para quem treina CrossFit e quer histórico claro de Personal Records — sem planilha. Quatro abas: exercícios → PRs → percepções → ajustes. O Apple Watch é companion de sessão (descanso + respiração), homologado junto ao valor principal do iPhone.
+CrossfitPR é um app iOS para quem treina CrossFit e quer histórico claro de Personal Records — sem planilha. Quatro abas: exercícios → PRs → percepções → ajustes. O Apple Watch é companion de sessão (descanso + respiração); o **valor principal fica no iPhone** (PRs + Insights + planos).
 
 ---
 
@@ -12,7 +12,7 @@ CrossfitPR é um app iOS para quem treina CrossFit e quer histórico claro de Pe
   <img src="docs/media/crossfitpr-demo.gif" width="320" alt="Demonstração do CrossfitPR">
 </p>
 
-> Prints com **mocks cheios** (`freeTeaser` / `proRich` / `eliteRich`) — sem empty state. Galeria completa: [`docs/screenshots/REVIEW-TIERS.md`](docs/screenshots/REVIEW-TIERS.md). Gerar `.xcodeproj`: [`docs/XCODEGEN.md`](docs/XCODEGEN.md).
+> Prints com **mocks cheios** (`freeTeaser` / `proRich` / `eliteRich`) — **sem empty state**. Fonte: `docs/screenshots/review/{free,pro,elite}/` · índice [`REVIEW-TIERS.md`](docs/screenshots/REVIEW-TIERS.md). Gerar `.xcodeproj`: [`docs/XCODEGEN.md`](docs/XCODEGEN.md).
 
 ---
 
@@ -28,6 +28,14 @@ CrossfitPR é um app iOS para quem treina CrossFit e quer histórico claro de Pe
   <img src="docs/screenshots/review/free/settings.png" width="140" alt="Ajustes Free">
 </p>
 
+| Tela | O que mostra (dados) |
+|------|----------------------|
+| Exercícios | Categorias de movimentos |
+| Meus PRs | Lista populada (seed `freeTeaser`) |
+| Detalhe | PR atual, histórico, percentuais |
+| Percepções | Teaser + insight real + CTA PRO |
+| Ajustes | Unidade kg/lb, unlock PRO |
+
 ### PRO
 
 <p align="center">
@@ -36,7 +44,15 @@ CrossfitPR é um app iOS para quem treina CrossFit e quer histórico claro de Pe
   <img src="docs/screenshots/review/pro/record-detail.png" width="140" alt="Detalhe PR PRO">
   <img src="docs/screenshots/review/pro/insights-top.png" width="140" alt="Percepções PRO">
   <img src="docs/screenshots/review/pro/insights-mid.png" width="140" alt="Coach PRO">
+  <img src="docs/screenshots/review/pro/settings.png" width="140" alt="Ajustes PRO">
 </p>
+
+| Tela | O que mostra (dados) |
+|------|----------------------|
+| Exercícios / Meus PRs / Detalhe | Mesmo fluxo Free, seed `proRich` |
+| Percepções (topo) | Resumo, sessão, métricas |
+| Percepções (meio) | Coach IA + WorkoutEngine |
+| Ajustes | Tier PRO ativo |
 
 ### Elite
 
@@ -46,17 +62,26 @@ CrossfitPR é um app iOS para quem treina CrossFit e quer histórico claro de Pe
   <img src="docs/screenshots/review/elite/record-detail.png" width="140" alt="Detalhe PR Elite">
   <img src="docs/screenshots/review/elite/insights-top.png" width="140" alt="Percepções Elite">
   <img src="docs/screenshots/review/elite/insights-mid.png" width="140" alt="Assessment Elite">
+  <img src="docs/screenshots/review/elite/settings.png" width="140" alt="Ajustes Elite">
 </p>
 
-### Planos (sheet) — variante B (CPR-014)
+| Tela | O que mostra (dados) |
+|------|----------------------|
+| Exercícios / Meus PRs / Detalhe | Seed `eliteRich` |
+| Percepções | Tudo do PRO + **assessment** + **limiting factor** |
+| Ajustes | Tier Elite ativo |
 
-Layout em passos: plano → período → preço → CTA. Review A/B/C: [`docs/screenshots/REVIEW-PAYWALL.md`](docs/screenshots/REVIEW-PAYWALL.md).
+### Planos (sheet) — variante B
 
 <p align="center">
   <img src="docs/screenshots/paywall-variant-b.png" width="220" alt="Paywall B — Passos">
 </p>
 
-### Apple Watch — companion de sessão
+Passos: plano → período → preço → CTA · tabela Free/PRO/Elite. Detalhe: [`REVIEW-PAYWALL.md`](docs/screenshots/REVIEW-PAYWALL.md).
+
+---
+
+## Apple Watch — companion de sessão
 
 <p align="center">
   <img src="docs/screenshots/watch-session.png" width="140" alt="Watch — sessão">
@@ -64,27 +89,43 @@ Layout em passos: plano → período → preço → CTA. Review A/B/C: [`docs/sc
   <img src="docs/screenshots/watch-breath.png" width="140" alt="Watch — respiração">
 </p>
 
-Homologação por tela e dados Watch × iPhone: [`docs/WATCH-HOMOLOGATION.md`](docs/WATCH-HOMOLOGATION.md).
+Homologação (fora do POC de UI): [`docs/WATCH-HOMOLOGATION.md`](docs/WATCH-HOMOLOGATION.md).
+
+### Resumo por tela
+
+| Tela Watch | Função | Dados exibidos | Envia ao iPhone? |
+|------------|--------|----------------|------------------|
+| **Sessão** | Tip curta do bloco / WOD | Ícone · título · 1 tip localizada | Não lista PRs; eventos futuros → coach |
+| **Descanso** | Timer 1:30 com ring · pause/start | `mm:ss` · progresso do anel · frase curta | Sim — evento `rest` ao concluir (WC) |
+| **Respiração** | Ciclo 4–4 + haptic opt-in | Fase inspire/expire · anel · toggle háptico | Preferência local; sem PR/Health |
+
+### Detalhe das funcionalidades
+
+1. **Sessão** (`WatchSessionTipView`) — foco do bloco sem abrir o iPhone. Strings `watch.session.*`. Sem LLM, gráficos ou HealthKit no relógio.
+2. **Descanso** (`WatchRestTimerView`) — intervalo entre séries. Countdown + CTA; ao fim grava `WatchSessionEvent` tipado `rest` no iPhone (`WatchSessionEventStore` → contexto do coach).
+3. **Respiração** (`WatchBreathingView`) — reset 4s/4s entre esforços. Toggle `watch.breath.hapticsEnabled`; háptico só no device.
+
+### Dados: Watch × app iPhone
+
+| Domínio | Watch | iPhone |
+|---------|-------|--------|
+| PRs / histórico / detalhe | — | Exercícios, Meus PRs, Record Detail (kg/lb, datas, evolução, prêmios) |
+| Insights / Coach / Elite | — | Hub Percepções (teaser Free · coach PRO · assessment Elite) |
+| Assinatura | — | Ajustes + sheet de planos |
+| Sessão no box | Tip + rest + breath | Consome eventos WC no coach (`sessionEvents`) |
+| Health / CAL / FC | — | Insights hub (quando autorizado) |
+
+O iPhone é o centro de valor. O Watch **não** substitui Insights nem o histórico de PRs.
 
 ---
 
 ## O que o app faz de melhor
-
-### iPhone — centro de valor
 
 | Plano | Destaque |
 |-------|----------|
 | **Grátis** | PRs por categoria, histórico, teaser de Insights, kg/lb, iCloud |
 | **PRO** | Coach IA, WorkoutEngine, gráficos, export — [`COACHING-INFERENCE.md`](docs/COACHING-INFERENCE.md) |
 | **Elite** | Assessment + limiting factor + orçamento maior no coach — [`STOREKIT-PAYMENTS.md`](docs/STOREKIT-PAYMENTS.md) |
-
-### Watch — sessão no pulso (não substitui Insights)
-
-| Tela | Função | Dados |
-|------|--------|--------|
-| Sessão | Tip do bloco | Texto local (sem lista de PRs) |
-| Descanso | Timer 1:30 + ring | Countdown; evento `rest` → iPhone |
-| Respiração | Ciclo 4–4 + haptic | Fase inspire/expire; preferência local |
 
 ---
 
@@ -116,16 +157,12 @@ export CROSSFITPR_DOCS_ROOT="$(pwd)/docs"
 xcodebuild test -scheme CrossfitPR -destination 'platform=iOS Simulator,name=iPhone 14 Pro' \
   -only-testing:CrossfitPRUITests/ReadmeScreenshotsUITests/testCaptureTierScreenGallery
 
-# 3 variantes do paywall
-xcodebuild test -scheme CrossfitPR -destination 'platform=iOS Simulator,name=iPhone 14 Pro' \
-  -only-testing:CrossfitPRUITests/ReadmeScreenshotsUITests/testCapturePaywallVariants
-
 # Watch
 ./scripts/boot-paired-watch.sh
 ./scripts/capture-watch-readme-screenshots.sh
 ```
 
-**QA:** `./scripts/run-qa.sh` · pagamentos: [`docs/QA.md`](docs/QA.md) · CI: [`docs/CI.md`](docs/CI.md).
+**QA:** `./scripts/run-qa.sh` · CI: [`docs/CI.md`](docs/CI.md).
 
 ---
 

@@ -36,7 +36,7 @@ PRO (já existentes / espelhar no ASC se ainda não estiverem):
 - [ ] Compra sandbox Elite mensal → Settings/Insights mostram tier Elite
 - [ ] Restore em outro simulador/device restaura Elite
 - [ ] Se houver entitlement Elite + PRO, app resolve **Elite** (prioridade no `StoreKitSubscriptionStore`)
-- [ ] Review visual: `docs/screenshots/insights-elite.png`, `insights-elite-empty.png`, `pro-upgrade.png`
+- [ ] Review visual: `docs/screenshots/review/elite/insights-*.png`, `paywall-variant-b.png` / `pro-upgrade.png`
 
 ## Refs
 

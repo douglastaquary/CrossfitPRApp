@@ -83,7 +83,12 @@ final class AppLocalizationQATests: XCTestCase {
     }
 
     func testProCoachSectionPortuguese() throws {
-        let app = configuredApp(languageCode: "pt-BR", subscriptionTier: "pro")
+        // Seed obrigatório: sem PRs o PRO cai no empty e não monta `insights.coach.section`.
+        let app = configuredApp(
+            languageCode: "pt-BR",
+            subscriptionTier: "pro",
+            seedScenario: "proRich"
+        )
         app.launch()
 
         waitForMainShell(app)
@@ -111,7 +116,8 @@ final class AppLocalizationQATests: XCTestCase {
     private func configuredApp(
         languageCode: String,
         skipOnboarding: Bool = true,
-        subscriptionTier: String? = nil
+        subscriptionTier: String? = nil,
+        seedScenario: String? = nil
     ) -> XCUIApplication {
         let app = XCUIApplication()
         let locale = languageCode == "en" ? "en_US" : "pt_BR"
@@ -130,6 +136,10 @@ final class AppLocalizationQATests: XCTestCase {
         if let subscriptionTier {
             app.launchEnvironment["UITEST_SUBSCRIPTION_TIER"] = subscriptionTier
             app.launchArguments += ["-UITEST_SUBSCRIPTION_TIER", subscriptionTier]
+        }
+        if let seedScenario {
+            app.launchEnvironment["UITEST_SEED_SCENARIO"] = seedScenario
+            app.launchArguments += ["-UITEST_SEED_SCENARIO", seedScenario]
         }
         return app
     }

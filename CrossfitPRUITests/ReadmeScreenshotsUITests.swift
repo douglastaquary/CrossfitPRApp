@@ -22,86 +22,64 @@ final class ReadmeScreenshotsUITests: XCTestCase {
         continueAfterFailure = false
     }
 
+    /// Paywall B + smoke das tabs Free com dados (galeria completa: `testCaptureTierScreenGallery`).
     func testCaptureReadmeScreenshots() throws {
         let app = XCUIApplication()
         app.launchArguments += ["-AppleLanguages", "(pt-BR)", "-AppleLocale", "pt_BR"]
         app.launchEnvironment["UITEST_SKIP_SPLASH"] = "1"
-        app.launchEnvironment["UITEST_FORCE_ONBOARDING"] = "1"
-        app.launchEnvironment["UITEST_SEED_SCENARIO"] = "empty"
+        app.launchEnvironment["UITEST_SKIP_ONBOARDING"] = "1"
+        app.launchEnvironment["UITEST_SUBSCRIPTION_TIER"] = "free"
+        app.launchEnvironment["UITEST_SEED_SCENARIO"] = "freeTeaser"
+        app.launchArguments += ["-UITEST_SUBSCRIPTION_TIER", "free"]
+        app.launchArguments += ["-UITEST_SEED_SCENARIO", "freeTeaser"]
         app.launch()
 
-        let onboardingCTA = app.buttons["onboarding.cta"]
-        XCTAssertTrue(onboardingCTA.waitForExistence(timeout: 20), "Onboarding não apareceu")
-        saveScreenshot(named: "onboarding")
-        onboardingCTA.tap()
-
-        let tabExercises = app.tabBars.buttons["Exercícios"]
-        XCTAssertTrue(tabExercises.waitForExistence(timeout: 10))
-        saveScreenshot(named: "categories")
-
-        app.tabBars.buttons["Meus PRs"].tap()
-        _ = app.navigationBars["Meus PRs"].waitForExistence(timeout: 5)
-        saveScreenshot(named: "records-empty")
-
+        XCTAssertTrue(app.tabBars.buttons["Percepções"].waitForExistence(timeout: 15))
         app.tabBars.buttons["Percepções"].tap()
-        _ = app.navigationBars["Percepções"].waitForExistence(timeout: 5)
-        saveScreenshot(named: "insights-free-empty")
-
         let proCTA = app.descendants(matching: .any).matching(identifier: "insights.teaser.pro.cta").firstMatch
+        if !proCTA.waitForExistence(timeout: 6) {
+            app.swipeUp()
+        }
         XCTAssertTrue(proCTA.waitForExistence(timeout: 8))
         proCTA.tap()
 
         let paywall = app.descendants(matching: .any).matching(identifier: "pro.upgrade.scroll").firstMatch
         XCTAssertTrue(paywall.waitForExistence(timeout: 12), "Paywall PRO/Elite")
+        sleep(1)
         saveScreenshot(named: "pro-upgrade")
         saveScreenshot(named: "paywall-variant-b")
-
-        dismissPROSheet(app)
-
-        app.tabBars.buttons["Ajustes"].tap()
-        _ = app.navigationBars["Ajustes"].waitForExistence(timeout: 5)
-        saveScreenshot(named: "settings")
+        saveScreenshot(named: "review/paywall/variant-b")
         app.terminate()
-
-        captureInsightsScreenshot(tier: "free", seed: "freeTeaser", fileName: "insights-free")
     }
 
-    func testCaptureInsightsProAndElite() throws {
-        captureInsightsScreenshot(tier: "pro", seed: "proRich", fileName: "insights-pro")
-        captureInsightsScreenshot(tier: "elite", seed: "eliteRich", fileName: "insights-elite")
-        captureInsightsScreenshot(tier: "pro", seed: "empty", fileName: "insights-pro-empty")
-        captureInsightsScreenshot(tier: "elite", seed: "empty", fileName: "insights-elite-empty")
-    }
-
-    /// CPR-014 — 3 variantes de paywall para escolha de conversão (`UITEST_PAYWALL_VARIANT=a|b|c`).
+    /// CPR-014 — captura da variante B (produção).
     func testCapturePaywallVariants() throws {
-        for variant in ["a", "b", "c"] {
-            let app = XCUIApplication()
-            app.launchArguments += ["-AppleLanguages", "(pt-BR)", "-AppleLocale", "pt_BR"]
-            app.launchEnvironment["UITEST_SKIP_SPLASH"] = "1"
-            app.launchEnvironment["UITEST_SKIP_ONBOARDING"] = "1"
-            app.launchEnvironment["UITEST_SUBSCRIPTION_TIER"] = "free"
-            app.launchEnvironment["UITEST_SEED_SCENARIO"] = "freeTeaser"
-            app.launchEnvironment["UITEST_PAYWALL_VARIANT"] = variant
-            app.launchArguments += ["-UITEST_PAYWALL_VARIANT", variant]
-            app.launch()
+        let app = XCUIApplication()
+        app.launchArguments += ["-AppleLanguages", "(pt-BR)", "-AppleLocale", "pt_BR"]
+        app.launchEnvironment["UITEST_SKIP_SPLASH"] = "1"
+        app.launchEnvironment["UITEST_SKIP_ONBOARDING"] = "1"
+        app.launchEnvironment["UITEST_SUBSCRIPTION_TIER"] = "free"
+        app.launchEnvironment["UITEST_SEED_SCENARIO"] = "freeTeaser"
+        app.launchEnvironment["UITEST_PAYWALL_VARIANT"] = "b"
+        app.launchArguments += ["-UITEST_PAYWALL_VARIANT", "b"]
+        app.launch()
 
-            XCTAssertTrue(app.tabBars.buttons["Percepções"].waitForExistence(timeout: 15))
-            app.tabBars.buttons["Percepções"].tap()
-            let proCTA = app.descendants(matching: .any).matching(identifier: "insights.teaser.pro.cta").firstMatch
-            if !proCTA.waitForExistence(timeout: 6) {
-                app.swipeUp()
-            }
-            XCTAssertTrue(proCTA.waitForExistence(timeout: 8), "CTA PRO (variante \(variant))")
-            proCTA.tap()
-
-            let paywall = app.descendants(matching: .any).matching(identifier: "pro.upgrade.scroll").firstMatch
-            XCTAssertTrue(paywall.waitForExistence(timeout: 12), "Paywall variante \(variant)")
-            sleep(1)
-            saveScreenshot(named: "review/paywall/variant-\(variant)")
-            saveScreenshot(named: "paywall-variant-\(variant)")
-            app.terminate()
+        XCTAssertTrue(app.tabBars.buttons["Percepções"].waitForExistence(timeout: 15))
+        app.tabBars.buttons["Percepções"].tap()
+        let proCTA = app.descendants(matching: .any).matching(identifier: "insights.teaser.pro.cta").firstMatch
+        if !proCTA.waitForExistence(timeout: 6) {
+            app.swipeUp()
         }
+        XCTAssertTrue(proCTA.waitForExistence(timeout: 8), "CTA PRO (variante B)")
+        proCTA.tap()
+
+        let paywall = app.descendants(matching: .any).matching(identifier: "pro.upgrade.scroll").firstMatch
+        XCTAssertTrue(paywall.waitForExistence(timeout: 12), "Paywall variante B")
+        sleep(1)
+        saveScreenshot(named: "review/paywall/variant-b")
+        saveScreenshot(named: "paywall-variant-b")
+        saveScreenshot(named: "pro-upgrade")
+        app.terminate()
     }
 
     /// Galeria Free/PRO/Elite com dados — todas as tabs (+ Insights scroll) para review visual.
@@ -141,14 +119,6 @@ final class ReadmeScreenshotsUITests: XCTestCase {
     }
 
     // MARK: - Helpers
-
-    private func captureInsightsScreenshot(tier: String, seed: String, fileName: String) {
-        let app = launchSeededApp(tier: tier, seed: seed)
-        openTab(app, "Percepções", nav: "Percepções")
-        scrollInsightsTowardContent(app, tier: tier, seed: seed)
-        saveScreenshot(named: fileName)
-        app.terminate()
-    }
 
     private func captureTierTabs(tier: String, seed: String) {
         let prefix = "review/\(tier)"
