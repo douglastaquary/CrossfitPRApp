@@ -53,9 +53,8 @@ final class ReadmeScreenshotsUITests: XCTestCase {
 
         let paywall = app.descendants(matching: .any).matching(identifier: "pro.upgrade.scroll").firstMatch
         XCTAssertTrue(paywall.waitForExistence(timeout: 12), "Paywall PRO/Elite")
-        let headline = app.staticTexts["Treine como competidor"]
-        _ = headline.waitForExistence(timeout: 5)
         saveScreenshot(named: "pro-upgrade")
+        saveScreenshot(named: "paywall-variant-b")
 
         dismissPROSheet(app)
 
@@ -72,6 +71,37 @@ final class ReadmeScreenshotsUITests: XCTestCase {
         captureInsightsScreenshot(tier: "elite", seed: "eliteRich", fileName: "insights-elite")
         captureInsightsScreenshot(tier: "pro", seed: "empty", fileName: "insights-pro-empty")
         captureInsightsScreenshot(tier: "elite", seed: "empty", fileName: "insights-elite-empty")
+    }
+
+    /// CPR-014 — 3 variantes de paywall para escolha de conversão (`UITEST_PAYWALL_VARIANT=a|b|c`).
+    func testCapturePaywallVariants() throws {
+        for variant in ["a", "b", "c"] {
+            let app = XCUIApplication()
+            app.launchArguments += ["-AppleLanguages", "(pt-BR)", "-AppleLocale", "pt_BR"]
+            app.launchEnvironment["UITEST_SKIP_SPLASH"] = "1"
+            app.launchEnvironment["UITEST_SKIP_ONBOARDING"] = "1"
+            app.launchEnvironment["UITEST_SUBSCRIPTION_TIER"] = "free"
+            app.launchEnvironment["UITEST_SEED_SCENARIO"] = "freeTeaser"
+            app.launchEnvironment["UITEST_PAYWALL_VARIANT"] = variant
+            app.launchArguments += ["-UITEST_PAYWALL_VARIANT", variant]
+            app.launch()
+
+            XCTAssertTrue(app.tabBars.buttons["Percepções"].waitForExistence(timeout: 15))
+            app.tabBars.buttons["Percepções"].tap()
+            let proCTA = app.descendants(matching: .any).matching(identifier: "insights.teaser.pro.cta").firstMatch
+            if !proCTA.waitForExistence(timeout: 6) {
+                app.swipeUp()
+            }
+            XCTAssertTrue(proCTA.waitForExistence(timeout: 8), "CTA PRO (variante \(variant))")
+            proCTA.tap()
+
+            let paywall = app.descendants(matching: .any).matching(identifier: "pro.upgrade.scroll").firstMatch
+            XCTAssertTrue(paywall.waitForExistence(timeout: 12), "Paywall variante \(variant)")
+            sleep(1)
+            saveScreenshot(named: "review/paywall/variant-\(variant)")
+            saveScreenshot(named: "paywall-variant-\(variant)")
+            app.terminate()
+        }
     }
 
     /// Galeria Free/PRO/Elite com dados — todas as tabs (+ Insights scroll) para review visual.
