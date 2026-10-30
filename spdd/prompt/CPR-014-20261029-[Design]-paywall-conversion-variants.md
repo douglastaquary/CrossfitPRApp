@@ -25,4 +25,4 @@ Flag: `UITEST_PAYWALL_VARIANT=a|b|c` · **produção: B** (escolhida 2026-10-29)
 Abaixo do subtítulo: **tabela** Free / PRO / Elite (uma card; labels na coluna esquerda — sem cortar).
 - Linhas: PRs, Teaser, Coach, Engine, Assessment, Limiting
 - Elite marca Coach+Engine+Assessment+Limiting (superconjunto do PRO)
-- Ref visual: `docs/screenshots/design-refs/07-paywall-ref.png` (= paywall B)
+- Ref visual: `docs/screenshots/paywall-variant-b.png`

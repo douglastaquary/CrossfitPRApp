@@ -29,21 +29,21 @@ xcrun simctl uninstall booted "$BUNDLE_ID" 2>/dev/null || true
 
 export CROSSFITPR_DOCS_ROOT="$DOCS"
 
-echo "→ UI Test: screenshots"
+echo "→ UI Test: galeria Free/PRO/Elite + paywall B"
 xcodebuild test \
   -scheme CrossfitPR \
   -project "$ROOT/CrossfitPR.xcodeproj" \
   -destination "$DEST" \
   -allowProvisioningUpdates \
-  -only-testing:CrossfitPRUITests/ReadmeScreenshotsUITests/testCaptureReadmeScreenshots \
-  -only-testing:CrossfitPRUITests/ReadmeScreenshotsUITests/testCaptureInsightsProAndElite \
+  -only-testing:CrossfitPRUITests/ReadmeScreenshotsUITests/testCaptureTierScreenGallery \
+  -only-testing:CrossfitPRUITests/ReadmeScreenshotsUITests/testCapturePaywallVariants \
   2>&1 | xcbeautify 2>/dev/null || xcodebuild test \
   -scheme CrossfitPR \
   -project "$ROOT/CrossfitPR.xcodeproj" \
   -destination "$DEST" \
   -allowProvisioningUpdates \
-  -only-testing:CrossfitPRUITests/ReadmeScreenshotsUITests/testCaptureReadmeScreenshots \
-  -only-testing:CrossfitPRUITests/ReadmeScreenshotsUITests/testCaptureInsightsProAndElite
+  -only-testing:CrossfitPRUITests/ReadmeScreenshotsUITests/testCaptureTierScreenGallery \
+  -only-testing:CrossfitPRUITests/ReadmeScreenshotsUITests/testCapturePaywallVariants
 
 xcrun simctl uninstall booted "$BUNDLE_ID" 2>/dev/null || true
 
@@ -71,18 +71,14 @@ if command -v ffmpeg >/dev/null 2>&1; then
     -loop 0 "$GIF"
   echo "   $GIF"
 elif command -v convert >/dev/null 2>&1; then
-  echo "→ GIF (ImageMagick a partir dos PNGs)"
+  echo "→ GIF (ImageMagick a partir dos PNGs da galeria review)"
   convert -delay 25 -loop 0 \
-    "$DOCS/screenshots/onboarding.png" \
-    "$DOCS/screenshots/categories.png" \
-    "$DOCS/screenshots/insights-free.png" \
-    "$DOCS/screenshots/insights-free-empty.png" \
-    "$DOCS/screenshots/insights-pro.png" \
-    "$DOCS/screenshots/insights-pro-empty.png" \
-    "$DOCS/screenshots/insights-elite.png" \
-    "$DOCS/screenshots/insights-elite-empty.png" \
-    "$DOCS/screenshots/pro-upgrade.png" \
-    "$DOCS/screenshots/settings.png" \
+    "$DOCS/screenshots/review/free/categories.png" \
+    "$DOCS/screenshots/review/free/records.png" \
+    "$DOCS/screenshots/review/pro/insights-top.png" \
+    "$DOCS/screenshots/review/elite/insights-mid.png" \
+    "$DOCS/screenshots/paywall-variant-b.png" \
+    "$DOCS/screenshots/review/pro/settings.png" \
     -resize 390x \
     "$GIF"
   echo "   $GIF"
