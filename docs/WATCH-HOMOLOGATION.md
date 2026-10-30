@@ -1,8 +1,8 @@
 # Apple Watch — Homologação (CPR-009)
 
-Companion de sessão no pulso: **dica contextual**, **timer de descanso** e **respiração**. Sem LLM no relógio — eventos sincronizam com o coach no iPhone.
+Companion de **sessão pesada / WOD** no pulso: tip de metcon, timer de descanso entre rounds e cool-down respiratório. Sem LLM no relógio — eventos sincronizam com o coach no iPhone.
 
-Status: **pronto para homologação** (fora do estágio POC de UI). Design: canvas CPR-009 · capturas `docs/screenshots/watch-*.png`.
+Status: **pronto para homologação**. Design: canvas CPR-009 · capturas `docs/screenshots/watch-*.png`.
 
 ---
 
@@ -10,9 +10,9 @@ Status: **pronto para homologação** (fora do estágio POC de UI). Design: canv
 
 | Tela Watch | O que faz | Dados exibidos | Relação com o iPhone |
 |------------|-----------|----------------|----------------------|
-| **Sessão** | Tip curta para o WOD em andamento | Ícone · título · 1 tip motivacional (string local) | Não lista PRs. Eventos futuros alimentam `WatchSessionEvent` → coach no iPhone |
-| **Descanso** | Countdown 1:30 com ring; pause/start | Tempo restante `mm:ss` · progresso do anel · frase curta | Ao concluir → evento `rest` via WatchConnectivity → `WatchSessionEventStore` no iPhone |
-| **Respiração** | Ciclo 4–4 (inspire/expire) + haptic opt-in | Fase (inspire/expire) · anel animado · toggle háptico · padrão `4-4` | Local no Watch; sem payload de PR. Háptico só no device |
+| **Sessão** | Tip do bloco / metcon em andamento | Ícone · título · tip WOD (string local) | Não lista PRs. Eventos futuros → `WatchSessionEvent` → coach |
+| **Descanso** | Countdown 1:30 entre séries/rounds | `mm:ss` · ring · microcopy entre rounds | Ao concluir → evento `rest` (WC) → `WatchSessionEventStore` |
+| **Cool-down** | Respiração 4–4 pós-esforço + haptic opt-in | Fase inspire/expire · anel · toggle háptico | Preferência local; recovery no iPhone quando houver eventos breath/rest |
 
 ---
 
@@ -20,35 +20,37 @@ Status: **pronto para homologação** (fora do estágio POC de UI). Design: canv
 
 ### 1. Sessão (`WatchSessionTipView`)
 
-- **Job:** lembrar o atleta do foco do bloco sem abrir o iPhone.
-- **Exibe:** tip estática localizada (`watch.session.*`) — não puxa histórico de PRs nem Insights.
+- **Job:** foco do metcon/bloco pesado sem abrir o iPhone (persona Compete / Mayhem).
+- **Exibe:** tip localizada `watch.session.tip` — estímulo/qualidade de reps.
 - **Não faz:** LLM, gráficos, ranking, HealthKit no Watch.
 
 ### 2. Descanso (`WatchRestTimerView`)
 
-- **Job:** controlar intervalo entre séries no pulso.
-- **Exibe:** ring de progresso, timer monoespaçado, CTA iniciar/pausar.
-- **Dado enviado ao iPhone:** evento tipado `rest` (fim do countdown) para contexto de coach / sessão.
+- **Job:** intervalo entre séries ou rounds do WOD.
+- **Exibe:** ring + timer + “entre rounds”.
+- **Dado ao iPhone:** evento `rest` ao fim → contexto do coach.
 
-### 3. Respiração (`WatchBreathingView`)
+### 3. Cool-down / Respiração (`WatchBreathingView`)
 
-- **Job:** reset rápido entre esforços (padrão 4s / 4s).
-- **Exibe:** anel + label de fase; toggle `watch.breath.hapticsEnabled`.
-- **Dado:** preferência local de háptico; sem sync de métricas fisiológicas nesta versão.
+- **Job:** reset após esforço (4s / 4s).
+- **Exibe:** anel + fase; toggle `watch.breath.hapticsEnabled`.
+- **Dado:** preferência local de háptico.
+
+**P1 (fora desta rodada):** timer AMRAP/EMOM, % load no pulso, haptic de PR (backlog #12).
 
 ---
 
-## Dados: Watch vs app iPhone
+## Dados: Watch × app iPhone
 
 | Domínio | Watch | iPhone |
 |---------|-------|--------|
-| PRs / histórico | — | Categories, Meus PRs, Record Detail (kg/lb, datas, evolução) |
-| Insights / Coach / Elite | — | Hub Percepções (Free teaser · PRO coach · Elite assessment) |
-| Assinatura PRO/Elite | — | Settings + sheet PROUpgrade |
-| Sessão no box | Tip + rest + breath | Consome eventos WC para coaching (`CoachingContextBuilder.sessionEvents`) |
+| PRs / histórico | — | Exercícios, Meus PRs, Record Detail |
+| Insights / Coach / Elite | — | Hub (teaser Free · coach PRO · assessment Elite + selo) |
+| Assinatura | — | Settings + paywall |
+| Sessão no box | Tip WOD + rest + cool-down | Eventos WC → `sessionEvents` no coach |
 | Health / CAL / FC | — | Insights hub (quando autorizado) |
 
-**Prioridade de produto:** o iPhone continua o centro de valor (PRs + Insights + planos). O Watch é **companion de sessão** — homologar UX de 3 tabs, sync WC e design CPR-009; não compete com o hub de Insights.
+**Prioridade:** iPhone = centro de valor. Watch = companion de sessão pesada — não substitui Insights.
 
 ---
 
@@ -61,4 +63,4 @@ Status: **pronto para homologação** (fora do estágio POC de UI). Design: canv
 ```
 
 Código: `Packages/WatchCompanion/` · target `CrossfitPRWatch/`.  
-Doc legado (histórico POC): [`WATCH-POC.md`](WATCH-POC.md).
+Doc legado: [`WATCH-POC.md`](WATCH-POC.md).

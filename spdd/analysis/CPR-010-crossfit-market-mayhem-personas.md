@@ -47,8 +47,9 @@ CrossfitPR precisa ancorar Free/PRO/Elite + Watch em perfis reais de praticantes
 2. ~~Prompt-update CPR-008~~ → story/analysis/Feat/Design.  
 3. ~~Generate Domain+Engine~~ → assessment + budget.  
 4. ~~UI Design + StoreKit Elite~~ → paywall, Insights, Settings, Products.storekit.  
-5. **App Store Connect** (produtos Elite) + screenshots Design.  
-6. Depois: Watch CPR-009 / Share Card / Benchmarks (P1).
+5. ~~Selo Elite discreto + ênfase Watch WOD~~ (2026-10-30 — CPR-008/009 Design).  
+6. **App Store Connect** (produtos Elite) + screenshots Design.  
+7. P1: Season mode · Watch timer AMRAP/% load (#12) · Share Card · Benchmarks.
 
 ## Fora de escopo deste analysis
 

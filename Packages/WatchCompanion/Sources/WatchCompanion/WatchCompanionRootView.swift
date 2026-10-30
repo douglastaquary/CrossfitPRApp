@@ -13,7 +13,7 @@ public struct WatchCompanionRootView: View {
             WatchSessionTipView()
                 .tag(0)
                 .tabItem {
-                    Label(WatchL10n.sessionTitle, systemImage: "figure.strengthtraining.traditional")
+                    Label(WatchL10n.sessionTitle, systemImage: "flame.fill")
                 }
                 .accessibilityIdentifier("watch.tab.session")
 

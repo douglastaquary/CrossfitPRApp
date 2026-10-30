@@ -1,8 +1,8 @@
 "watch.session.title" = "Session";
-"watch.session.tip" = "Keep your core tight on thrusters — breathe at the top.";
+"watch.session.tip" = "Metcon: quality reps — don't rush your core.";
 "watch.rest.label" = "Rest";
-"watch.rest.motivation" = "Next set with intent.";
-"watch.breath.title" = "Breathing";
+"watch.rest.motivation" = "Between rounds — next set with intent.";
+"watch.breath.title" = "Cool-down";
 "watch.breath.pattern" = "4 · 4 · 4 · 4";
 "watch.breath.inhale" = "Inhale";
 "watch.breath.exhale" = "Exhale";

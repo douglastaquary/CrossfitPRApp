@@ -8,6 +8,7 @@
 - Companion watchOS alinhado a PRs e coach PRO no iPhone.
 - UX respiração/descanso sem notification spam.
 - Eventos compactos para snapshot CPR-007.
+- **Ênfase sessão pesada / WOD (Compete / Mayhem):** tip de bloco/metcon; rest entre séries/rounds; breath como cool-down pós-esforço — sem LLM no Watch; sem timer AMRAP completo nesta fase (backlog #12 = P1).
 
 ## A — Approach
 

@@ -62,6 +62,8 @@ public enum AppDesign {
         public static let proBenefit = "checkmark.seal.fill"
         /// Badge Elite (CPR-008 Design).
         public static let eliteBadge = "medal.fill"
+        /// Teaser / locked hint (outline).
+        public static let eliteBadgeOutline = "medal"
         // Legacy aliases
         public static let tabPRs = tabRecords
     }
