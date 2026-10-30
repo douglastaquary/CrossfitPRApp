@@ -11,6 +11,8 @@ Visão pública do que já está no app versus o que está **planejado** (SPDD `
 | PRO | Gráficos, rankings, WorkoutEngine, card **Coach** (on-device / cloud / resumo), cache local, export |
 | Dados | Offline-first + sync iCloud (best-effort) |
 | Idiomas | pt-BR e en com QA automatizado no CI |
+| Percepções | Hub Insights estilo Fitness (Free teaser + PRO/Elite) — CPR-011 |
+| Sessão / HealthKit | WOD + biometrics (mock em sim/UITest) — CPR-012 / CPR-009 |
 
 ## Coach IA (CPR-007) — shipped MVP
 
@@ -38,10 +40,10 @@ Visão pública do que já está no app versus o que está **planejado** (SPDD `
 ## Próximos passos (dev)
 
 1. **CI:** confirmar verde em [`ios.yml`](.github/workflows/ios.yml) na `main` (rerun se fila macOS); gate local Xcode 15+: `./scripts/ci-modern.sh`.
-2. **CPR-007:** testar iOS 26+ on-device + `OPENAI_API_KEY` em device; revisar logs `Coaching` no Console.
-3. **Mídia README:** `./scripts/capture-readme-media-auto.sh` → commit PNG/GIF (incluir paywall Elite quando estável).
-4. **CPR-008:** código Elite no app → App Store Connect (produtos reais) + screenshots Design; prompts coach Elite dedicados (canvas Feat).
-5. **CPR-009:** rodar `./scripts/capture-watch-readme-screenshots.sh` e commitar `watch-*.png`; canvas Design + comercial PRO+Watch.
+2. **Mídia README:** `./scripts/capture-readme-media-auto.sh` → commit PNG/GIF Insights Free/PRO/Elite (empty + rich) + paywall Elite quando estável.
+3. **CPR-007:** testar iOS 26+ on-device + `OPENAI_API_KEY` em device; revisar logs `Coaching` no Console.
+4. **CPR-008:** App Store Connect (produtos Elite reais) + screenshots Design; prompts coach Elite dedicados (canvas Feat).
+5. **CPR-009:** canvas Design final + comercial PRO+Watch (`watch-*.png` já na `main`).
 6. **Personas:** skill [`.cursor/skills/crossfit-athlete-personas`](../.cursor/skills/crossfit-athlete-personas/SKILL.md) · [CPR-010](../spdd/analysis/CPR-010-crossfit-market-mayhem-personas.md).
 
 ## Como acompanhar

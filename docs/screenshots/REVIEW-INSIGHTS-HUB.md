@@ -1,6 +1,6 @@
 # Review visual — Insights hub (CPR-011)
 
-Branch: `feature/insights-hub-healthkit-wod`
+Na `main` (PR #37).
 
 ## Como regenerar os prints
 
@@ -9,7 +9,7 @@ Com o simulador saudável (se o CoreSimulator travar: reinicie o Mac ou `killall
 ```bash
 ./scripts/generate-xcodeproj.sh
 ./scripts/configure-spm-xcode14.sh   # só Xcode 14.2 local
-export CODE_SIGNING_ALLOWED=NO
+# Não use CODE_SIGNING_ALLOWED=NO — o XCUITest deixa de ver a UI no simulador.
 ./scripts/capture-readme-media-auto.sh
 ```
 

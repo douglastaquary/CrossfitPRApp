@@ -26,6 +26,7 @@ final class ReadmeScreenshotsUITests: XCTestCase {
         let app = XCUIApplication()
         app.launchArguments += ["-AppleLanguages", "(pt-BR)", "-AppleLocale", "pt_BR"]
         app.launchEnvironment["UITEST_SKIP_SPLASH"] = "1"
+        app.launchEnvironment["UITEST_FORCE_ONBOARDING"] = "1"
         app.launchEnvironment["UITEST_SEED_SCENARIO"] = "empty"
         app.launch()
 
