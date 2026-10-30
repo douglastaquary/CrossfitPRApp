@@ -19,3 +19,10 @@ Sheet de planos PRO/Elite com **mais respiro** (inspirado em hierarquia Fitness:
 | **C** | Compare leve | Headline · 3 colunas só checkmarks (Free/PRO/Elite) · CTA · sem benefit rows |
 
 Flag: `UITEST_PAYWALL_VARIANT=a|b|c` · **produção: B** (escolhida 2026-10-29).
+
+## B — ajuste compare (2026-10-29)
+
+Abaixo do subtítulo: chips Free / PRO / Elite.
+- Free: PRs, Teaser
+- PRO: Coach, Engine
+- Elite: Coach, Engine, Assessment, Limiting (mostra que Elite inclui o PRO)

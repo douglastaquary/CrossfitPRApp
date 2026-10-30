@@ -69,12 +69,15 @@ extension PROUpgradePurchaseContent {
     // MARK: B — Passos (plano → período → CTA)
 
     private var variantB: some View {
-        VStack(spacing: 36) {
+        VStack(spacing: 28) {
             paywallHero(
                 badge: Strings.Elite.competitorMode,
                 title: Strings.Elite.title,
                 subtitle: Strings.Elite.subtitle
             )
+
+            // Comparativo curto — Elite inclui Coach/Engine + Assessment/Limiting.
+            lightCompareRow
 
             VStack(spacing: 22) {
                 VStack(alignment: .leading, spacing: 12) {
@@ -273,9 +276,22 @@ extension PROUpgradePurchaseContent {
 
     private var lightCompareRow: some View {
         HStack(alignment: .top, spacing: 10) {
-            compareChip(title: Strings.Elite.planFree, accent: AppDesign.Colors.metadataChip, lines: ["PRs", "Teaser"])
-            compareChip(title: Strings.Elite.planPro, accent: AppDesign.Colors.proAccent, lines: ["Coach", "Engine"])
-            compareChip(title: Strings.Elite.planElite, accent: AppDesign.Colors.eliteAccent, lines: ["Assessment", "Limiting"])
+            compareChip(
+                title: Strings.Elite.planFree,
+                accent: AppDesign.Colors.metadataChip,
+                lines: ["PRs", "Teaser"]
+            )
+            compareChip(
+                title: Strings.Elite.planPro,
+                accent: AppDesign.Colors.proAccent,
+                lines: ["Coach", "Engine"]
+            )
+            // Elite = PRO + Assessment + Limiting (superconjunto).
+            compareChip(
+                title: Strings.Elite.planElite,
+                accent: AppDesign.Colors.eliteAccent,
+                lines: ["Coach", "Engine", "Assessment", "Limiting"]
+            )
         }
     }
 

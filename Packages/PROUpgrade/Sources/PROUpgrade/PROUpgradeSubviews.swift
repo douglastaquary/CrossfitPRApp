@@ -395,13 +395,16 @@ struct PROUpgradeTrialButton: View {
     let onPurchase: (String) -> Void
 
     var body: some View {
-        // `.borderedProminent` — mesmo padrão do Restore (UI tests conseguem tap estável).
+        // Altura alinhada aos CTAs do app (ex.: Insights upsell com `.padding()`).
+        // `.borderedProminent` — UI tests de pagamento com tap estável.
         Button(action: tapPurchase) {
             Label(Strings.Purchase.continueToPayment, systemImage: "creditcard.fill")
+                .fontWeight(.semibold)
                 .frame(maxWidth: .infinity)
-                .padding(.vertical, 4)
+                .padding(.vertical, 14)
         }
         .buttonStyle(.borderedProminent)
+        .controlSize(.large)
         .tint(selectedProductID != nil ? AppDesign.Colors.brand : .gray)
         .accessibilityIdentifier("pro.upgrade.continue.payment")
     }
