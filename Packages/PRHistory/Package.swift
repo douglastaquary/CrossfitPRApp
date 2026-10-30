@@ -12,6 +12,7 @@ let package = Package(
     dependencies: [
         .package(path: "../Domain"),
         .package(path: "../Application"),
+        .package(path: "../Subscription"),
         .package(path: "../Localization"),
         .package(path: "../SharedUI"),
         .package(path: "../RecordDetail"),
@@ -22,6 +23,7 @@ let package = Package(
             dependencies: [
                 "Domain",
                 "Application",
+                "Subscription",
                 "Localization",
                 "SharedUI",
                 "RecordDetail",

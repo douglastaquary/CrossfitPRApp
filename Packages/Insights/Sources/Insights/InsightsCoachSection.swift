@@ -11,6 +11,7 @@ struct InsightsCoachSection: View {
     @EnvironmentObject private var personalRecordClient: PersonalRecordClient
     @EnvironmentObject private var workoutEngineClient: WorkoutEngineClient
     @EnvironmentObject private var subscriptionClient: SubscriptionClient
+    @EnvironmentObject private var settingsClient: SettingsClient
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
@@ -81,6 +82,7 @@ struct InsightsCoachSection: View {
             records: personalRecordClient.records,
             engineInsights: workoutEngineClient.insights,
             tier: tier,
+            seasonPhase: settingsClient.seasonPhase,
             force: force
         )
     }

@@ -26,6 +26,12 @@ public struct SettingsView: View {
 
             SettingsTrackingSection(measureTrackingMode: $settingsClient.measureTrackingMode)
 
+            SettingsSeasonSection(
+                tier: subscriptionClient.currentTier,
+                seasonPhase: $settingsClient.seasonPhase,
+                onShowUpgrade: { showPROUpgrade = true }
+            )
+
             SettingsProSection(
                 tier: subscriptionClient.currentTier,
                 onShowUpgrade: { showPROUpgrade = true },
@@ -120,6 +126,46 @@ private struct SettingsTrackingSection: View {
                 ForEach(MeasureTrackingMode.allCases, id: \.self) { mode in
                     Text(Strings.tr(mode.localizationKey)).tag(mode)
                 }
+            }
+        }
+    }
+}
+
+private struct SettingsSeasonSection: View {
+    let tier: SubscriptionTier
+    @Binding var seasonPhase: SeasonPhase
+    let onShowUpgrade: () -> Void
+
+    var body: some View {
+        Group {
+            switch tier {
+            case .elite:
+                Section(Strings.Season.sectionTitle) {
+                    Picker(Strings.Season.cardTitle, selection: $seasonPhase) {
+                        ForEach(SeasonPhase.allCases) { phase in
+                            Text(Strings.Season.phaseName(phase)).tag(phase)
+                        }
+                    }
+                    Text(Strings.Season.phaseBlurb(seasonPhase))
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
+                .accessibilityIdentifier("settings.season.section")
+            case .pro:
+                Section(Strings.Season.sectionTitle) {
+                    Button(action: onShowUpgrade) {
+                        HStack {
+                            EliteSealBadge(style: .lockedHint, showsLabel: false)
+                            Text(Strings.Season.teaserCTA)
+                        }
+                    }
+                    Text(Strings.Season.teaserBody)
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
+                .accessibilityIdentifier("settings.season.section")
+            case .free:
+                EmptyView()
             }
         }
     }

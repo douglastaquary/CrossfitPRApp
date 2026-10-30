@@ -1,6 +1,7 @@
 import SwiftUI
 import Domain
 import Application
+import Subscription
 import SharedUI
 import Localization
 import RecordDetail
@@ -8,6 +9,7 @@ import RecordDetail
 public struct NewPRRecordView: View {
     @EnvironmentObject private var personalRecordClient: PersonalRecordClient
     @EnvironmentObject private var settingsClient: SettingsClient
+    @EnvironmentObject private var subscriptionClient: SubscriptionClient
     @Environment(\.dismiss) private var dismiss
 
     private let category: WorkoutCategory?
@@ -23,6 +25,7 @@ public struct NewPRRecordView: View {
     @State private var isSaving = false
     @State private var saveErrorMessage: String?
     @State private var celebrationAward: PRAward?
+    @State private var celebrationShare: PRShareCardModel?
 
     public init(category: WorkoutCategory? = nil) {
         self.category = category
@@ -78,7 +81,7 @@ public struct NewPRRecordView: View {
         }
         .brandTint()
         .sheet(item: $celebrationAward) { award in
-            PRAwardDetailSheet(award: award)
+            PRAwardDetailSheet(award: award, shareModel: celebrationShare)
                 .onDisappear { dismiss() }
         }
     }
@@ -109,6 +112,11 @@ public struct NewPRRecordView: View {
 
         let success = await personalRecordClient.save(record)
         if success {
+            celebrationShare = PRShareCardModel(
+                record: record,
+                tier: subscriptionClient.currentTier,
+                preferPounds: settingsClient.measureTrackingMode == .pounds
+            )
             let awards = PRAwardEvaluator.awards(from: personalRecordClient.records)
             celebrationAward = awards.first
             if celebrationAward == nil {

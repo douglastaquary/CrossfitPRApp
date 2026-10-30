@@ -510,3 +510,36 @@
 "award.earnedTimesFormat %lld" = "Você ganhou este prêmio %lld vezes.";
 "award.latestFormat %@" = "Mais recente: %@.";
 
+
+/* CPR-015 Season */
+"season.sectionTitle" = "Temporada";
+"season.cardTitle" = "Fase de treino";
+"season.teaser.cta" = "Desbloquear Season mode";
+"season.teaser.body" = "Marque Off-season, Build, Open, Peaking ou Deload — só Elite.";
+"season.insight.hint" = "Sem programming diário — só contexto de ciclo para coach e insights.";
+"season.phase.offSeason" = "Off-season";
+"season.phase.build" = "Build";
+"season.phase.open" = "Open";
+"season.phase.peaking" = "Peaking";
+"season.phase.deload" = "Deload";
+"season.blurb.offSeason" = "Base e recuperação. Mantenha skills sem pressão de peaking.";
+"season.blurb.build" = "Volume e capacidade. Empilhe sessões de qualidade.";
+"season.blurb.open" = "Janela de competição. Priorize testes conhecidos e recuperação.";
+"season.blurb.peaking" = "Afie. Corte volume lixo; proteja os lifts grandes.";
+"season.blurb.deload" = "Recue de propósito. Volte com fome.";
+"proFeature.seasonMode" = "Season mode";
+"proFeature.benchmarksPack" = "Pack de benchmarks";
+
+/* CPR-017 Share */
+"share.action" = "Compartilhar";
+"share.card.brand" = "CrossfitPR";
+"share.celebration.title" = "Novo PR — compartilhe";
+
+/* CPR-018 Benchmarks */
+"benchmarks.sectionTitle" = "Benchmarks";
+"benchmarks.emptyMatch" = "Registre uma Girl, Hero ou Open para comparar aqui.";
+"benchmarks.openYoY" = "Open por ano";
+"benchmarks.yourBest" = "Seu melhor";
+"benchmarks.family.girls" = "Girls";
+"benchmarks.family.heroes" = "Heroes";
+"benchmarks.family.open" = "Open";

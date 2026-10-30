@@ -11,6 +11,7 @@ struct InsightsEliteSection: View {
     @EnvironmentObject private var personalRecordClient: PersonalRecordClient
     @EnvironmentObject private var workoutEngineClient: WorkoutEngineClient
     @EnvironmentObject private var subscriptionClient: SubscriptionClient
+    @EnvironmentObject private var settingsClient: SettingsClient
     @State private var showUpgrade = false
 
     private var isElite: Bool {
@@ -61,6 +62,8 @@ struct InsightsEliteSection: View {
             if let limitingInsight {
                 EliteLimitingFactorCard(insight: limitingInsight)
             }
+
+            EliteSeasonCard(phase: settingsClient.seasonPhase)
         }
         .accessibilityIdentifier("insights.elite.section")
     }
@@ -79,6 +82,10 @@ struct InsightsEliteSection: View {
                     .font(.footnote)
                     .foregroundStyle(.secondary)
             }
+
+            Text(Strings.Season.teaserBody)
+                .font(.footnote)
+                .foregroundStyle(.secondary)
 
             Button {
                 showUpgrade = true
@@ -146,5 +153,40 @@ struct EliteLimitingFactorCard: View {
         .padding()
         .background(AppDesign.Colors.eliteAccent.opacity(0.08))
         .cornerRadius(12)
+    }
+}
+
+/// Season mode card — CPR-015 (sem programming diário).
+struct EliteSeasonCard: View {
+    let phase: SeasonPhase
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            HStack(spacing: 6) {
+                Image(systemName: "calendar")
+                    .foregroundStyle(AppDesign.Colors.eliteAccent)
+                Text(Strings.Season.cardTitle)
+                    .font(.subheadline.weight(.semibold))
+                Spacer(minLength: 8)
+                EliteSealBadge(style: .unlocked, showsLabel: false)
+            }
+            Text(Strings.Season.phaseName(phase))
+                .font(.headline)
+            Text(Strings.Season.phaseBlurb(phase))
+                .font(.footnote)
+                .foregroundStyle(.secondary)
+            Text(Strings.Season.insightHint)
+                .font(.caption2)
+                .foregroundStyle(.tertiary)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding()
+        .background(AppDesign.Colors.cardBackground)
+        .cornerRadius(12)
+        .overlay(
+            RoundedRectangle(cornerRadius: 12)
+                .stroke(AppDesign.Colors.eliteAccent.opacity(0.35), lineWidth: 1)
+        )
+        .accessibilityIdentifier("insights.elite.season")
     }
 }

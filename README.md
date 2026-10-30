@@ -2,7 +2,7 @@
 
 **Registre seus PRs, veja sua evolução e entenda quando vale a pena ir mais pesado.**
 
-CrossfitPR é um app iOS para quem treina CrossFit e quer histórico claro de Personal Records — sem planilha. Quatro abas: exercícios → PRs → percepções → ajustes. O Apple Watch é companion de sessão (descanso + respiração); o **valor principal fica no iPhone** (PRs + Insights + planos).
+CrossfitPR é um app iOS para quem treina CrossFit e quer histórico claro de Personal Records — sem planilha. Quatro abas: exercícios → PRs → percepções → ajustes. O Apple Watch é companion de WOD (timer AMRAP/EMOM/FT, % load, descanso, cool-down); o **valor principal fica no iPhone** (PRs + Insights + planos).
 
 ---
 
@@ -96,7 +96,8 @@ Passos: plano → período → preço → CTA · tabela Free/PRO/Elite. Detalhe:
 ## Apple Watch — companion de sessão (WOD)
 
 <p align="center">
-  <img src="docs/screenshots/watch-session.png" width="140" alt="Watch — sessão">
+  <img src="docs/screenshots/watch-session.png" width="140" alt="Watch — timer WOD">
+  <img src="docs/screenshots/watch-load.png" width="140" alt="Watch — % load">
   <img src="docs/screenshots/watch-rest.png" width="140" alt="Watch — descanso">
   <img src="docs/screenshots/watch-breath.png" width="140" alt="Watch — cool-down">
 </p>
@@ -107,24 +108,26 @@ Homologação: [`docs/WATCH-HOMOLOGATION.md`](docs/WATCH-HOMOLOGATION.md).
 
 | Tela Watch | Função | Dados exibidos | Envia ao iPhone? |
 |------------|--------|----------------|------------------|
-| **Sessão** | Tip de metcon / bloco pesado | Ícone · título · tip WOD | Não lista PRs; eventos → coach |
+| **Sessão** | Timer AMRAP / EMOM / For Time + tip | `mm:ss` · modo · tip WOD | Eventos timer → coach |
+| **% load** | 70/80/90% de 1RM (até 3 lifts) | Nome · % · valor | Contexto WC (fixture se offline) |
 | **Descanso** | Timer 1:30 entre séries/rounds | `mm:ss` · ring · “entre rounds” | Sim — evento `rest` (WC) |
 | **Cool-down** | Respiração 4–4 pós-esforço | Fase · anel · haptic opt-in | Preferência local |
 
 ### Detalhe das funcionalidades
 
-1. **Sessão** — tip de WOD/metcon no pulso (Compete / Mayhem). Sem LLM no Watch.
-2. **Descanso** — intervalo entre rounds; ao fim grava `rest` → coach no iPhone.
-3. **Cool-down** — reset 4s/4s após esforço; haptic opt-in.
+1. **Sessão** — timer de metcon no pulso (Compete / Mayhem). Sem LLM no Watch.
+2. **% load** — carga rápida a partir dos PRs do iPhone (ou fixture).
+3. **Descanso** — intervalo entre rounds; ao fim grava `rest` → coach no iPhone.
+4. **Cool-down** — reset 4s/4s após esforço; haptic opt-in.
 
 ### Dados: Watch × app iPhone
 
 | Domínio | Watch | iPhone |
 |---------|-------|--------|
-| PRs / histórico / detalhe | — | Exercícios, Meus PRs, Record Detail (kg/lb, datas, evolução, prêmios Elite com selo) |
-| Insights / Coach / Elite | — | Hub (teaser Free · coach PRO · assessment Elite + selo) |
+| PRs / histórico / detalhe | % load | Exercícios, Meus PRs, Record Detail, Share Card |
+| Insights / Coach / Elite | — | Hub (teaser Free · benchmarks PRO · Season + assessment Elite) |
 | Assinatura | — | Ajustes + sheet de planos |
-| Sessão no box | Tip WOD + rest + cool-down | Eventos WC → `sessionEvents` no coach |
+| Sessão no box | Timer + % + rest + cool-down | Eventos WC → `sessionEvents` no coach |
 | Health / CAL / FC | — | Insights hub (quando autorizado) |
 
 O iPhone é o centro de valor. O Watch **não** substitui Insights nem o histórico de PRs.
@@ -135,9 +138,9 @@ O iPhone é o centro de valor. O Watch **não** substitui Insights nem o histór
 
 | Plano | Destaque |
 |-------|----------|
-| **Grátis** | PRs por categoria, histórico, teaser de Insights, kg/lb, iCloud |
-| **PRO** | Coach IA, WorkoutEngine, gráficos, export — [`COACHING-INFERENCE.md`](docs/COACHING-INFERENCE.md) |
-| **Elite** | Assessment + limiting factor + orçamento maior no coach — [`STOREKIT-PAYMENTS.md`](docs/STOREKIT-PAYMENTS.md) |
+| **Grátis** | PRs, histórico, celebração + Share Card simples, teaser Insights, kg/lb, iCloud |
+| **PRO** | Coach IA, benchmarks Girls/Heroes/Open, gráficos, Share branded — [`COACHING-INFERENCE.md`](docs/COACHING-INFERENCE.md) |
+| **Elite** | Season mode + assessment + limiting + coach 180d — [`STOREKIT-PAYMENTS.md`](docs/STOREKIT-PAYMENTS.md) |
 
 ---
 
@@ -198,6 +201,10 @@ Packages/
 | [CPR-009](spdd/stories/CPR-009-watch-companion.md) | Apple Watch | Homologação |
 | [CPR-013](spdd/stories/CPR-013-pr-list-detail-fitness.md) | Meus PRs Fitness | Shipped |
 | [CPR-014](spdd/prompt/CPR-014-20261029-[Design]-paywall-conversion-variants.md) | Paywall (variante B) | Shipped |
+| [CPR-015](spdd/stories/CPR-015-season-mode.md) | Season mode Elite | Shipped MVP |
+| [CPR-016](spdd/stories/CPR-016-watch-wod-timer.md) | Watch timer + % load | Shipped MVP |
+| [CPR-017](spdd/stories/CPR-017-pr-share-card.md) | PR Share Card | Shipped MVP |
+| [CPR-018](spdd/stories/CPR-018-benchmarks-pack.md) | Benchmarks pack | Shipped MVP |
 
 [`docs/PRODUCT-ROADMAP.md`](docs/PRODUCT-ROADMAP.md)
 

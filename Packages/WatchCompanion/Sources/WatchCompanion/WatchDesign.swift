@@ -32,8 +32,10 @@ enum WatchL10n {
     static var breathHapticsToggle: String { tr("watch.breath.haptics") }
     static var restStart: String { tr("watch.rest.start") }
     static var restPause: String { tr("watch.rest.pause") }
+    static var loadTitle: String { tr("watch.load.title") }
+    static var wodReset: String { tr("watch.wod.reset") }
 
-    private static func tr(_ key: String) -> String {
+    static func tr(_ key: String) -> String {
         #if SWIFT_PACKAGE
         return NSLocalizedString(key, bundle: .module, comment: "")
         #else

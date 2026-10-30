@@ -353,8 +353,48 @@ public enum Strings {
             case .exportHistory: return tr("proFeature.exportHistory")
             case .athleteAssessment: return tr("proFeature.athleteAssessment")
             case .limitingFactorAnalysis: return tr("proFeature.limitingFactorAnalysis")
+            case .seasonMode: return tr("proFeature.seasonMode")
+            case .benchmarksPack: return tr("proFeature.benchmarksPack")
             }
         }
+    }
+
+    // MARK: - Season (CPR-015)
+
+    public enum Season {
+        public static var sectionTitle: String { tr("season.sectionTitle") }
+        public static var cardTitle: String { tr("season.cardTitle") }
+        public static var teaserCTA: String { tr("season.teaser.cta") }
+        public static var teaserBody: String { tr("season.teaser.body") }
+        public static var insightHint: String { tr("season.insight.hint") }
+
+        public static func phaseName(_ phase: SeasonPhase) -> String {
+            tr(phase.localizationKey)
+        }
+
+        public static func phaseBlurb(_ phase: SeasonPhase) -> String {
+            tr("season.blurb.\(phase.rawValue)")
+        }
+    }
+
+    // MARK: - Share (CPR-017)
+
+    public enum Share {
+        public static var action: String { tr("share.action") }
+        public static var cardBrand: String { tr("share.card.brand") }
+        public static var celebrationTitle: String { tr("share.celebration.title") }
+    }
+
+    // MARK: - Benchmarks (CPR-018)
+
+    public enum Benchmarks {
+        public static var sectionTitle: String { tr("benchmarks.sectionTitle") }
+        public static var emptyMatch: String { tr("benchmarks.emptyMatch") }
+        public static var openYoY: String { tr("benchmarks.openYoY") }
+        public static var yourBest: String { tr("benchmarks.yourBest") }
+        public static var girls: String { tr("benchmarks.family.girls") }
+        public static var heroes: String { tr("benchmarks.family.heroes") }
+        public static var open: String { tr("benchmarks.family.open") }
     }
 
     // MARK: - Errors
