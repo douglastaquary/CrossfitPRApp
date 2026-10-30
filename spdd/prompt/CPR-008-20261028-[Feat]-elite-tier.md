@@ -14,6 +14,7 @@
 - **Athlete Assessment** por domínio (strength / olympic / gymnastics / engine).
 - **Limiting factor** derivado do assessment; teaser no PRO.
 - Engine calibra com heurísticas de cobertura/progresso (referência elite); densidade gated por tier.
+- **Selo Elite discreto** em superfícies Elite-only (assessment, limiting, awards Elite) — contraste vs teaser PRO; persona Compete / Mayhem.
 - Não shippar programming diário.
 
 ### DoD (fase Domain + Engine)
@@ -24,6 +25,8 @@
 - [x] `TokenBudgetPolicy.limits(for: .elite, …)`
 - [x] Strings `Strings.Engine` / Elite via Localizable en + pt-BR
 - [ ] Free/PRO behavior regressão verde (CI `swift test` Domain/WorkoutEngine — Xcode recente)
+- [x] Selo Elite (`EliteSealBadge`) em cards assessment/limiting + awards Elite-only
+- [x] Teaser PRO sem selo “desbloqueado” (medalha outlined + CTA)
 
 ## E — Entities
 

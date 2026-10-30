@@ -20,6 +20,7 @@ para preparar competições e ciclos de treino longos — sem virar app de progr
 - [x] **Athlete Assessment** — scores + cards UI
 - [x] **Limiting factor** + teaser PRO → Elite
 - [x] Free/PRO gating; `isPaid` inclui Elite
+- [x] Selo Elite discreto em assessment / limiting / awards Elite-only (contraste vs teaser PRO)
 
 ## Fora de escopo
 

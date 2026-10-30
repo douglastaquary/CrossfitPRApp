@@ -27,6 +27,17 @@ Diferenciar **Elite** visualmente do PRO — “modo competidor” — sem quebr
 
 **Regra:** não altera `brand` global; Elite é accent adicional.
 
+## EliteSealBadge (2026-10-30)
+
+Componente discreto SharedUI: ícone `medal.fill` + opcional `Strings.Elite.badge`, fonte caption, tint `eliteAccent`.
+
+| Variante | Uso |
+|----------|-----|
+| `.unlocked` | Conteúdo Elite desbloqueado (assessment, limiting, award Elite) |
+| `.lockedHint` | Teaser PRO — `medal` outlined, sem texto “Elite” ativo |
+
+**Regra:** só `.unlocked` em features `isEliteOnly` / `minimumTier == .elite` com usuário Elite (ou card já gated Elite).
+
 ## Copy
 
 - `Strings.Elite.*` + `Strings.Engine.*` (assessment) — en + pt-BR
@@ -35,6 +46,7 @@ Diferenciar **Elite** visualmente do PRO — “modo competidor” — sem quebr
 
 - `PROUpgradePlanColumn` / `PROUpgradePlanColumnElite`
 - `InsightsEliteSection` / `EliteAssessmentCard` / `EliteLimitingFactorCard`
+- `EliteSealBadge` (SharedUI) — selo discreto Elite-only
 
 ## Fora de escopo Design
 

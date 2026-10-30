@@ -15,9 +15,15 @@
 
 | Tab | Foco visual | CTA |
 |-----|-------------|-----|
-| Sessão | Ícone SF + título + tip 1–2 linhas | — (read-only) |
-| Descanso | Timer dominante + ring de progresso + motivação caption | Start / Pause único |
-| Respiração | Anel animado + fase inhale/exhale + toggle haptic compacto | Toggle haptics |
+| Sessão | Ícone SF + título + tip **WOD / bloco pesado** (1–2 linhas) | — (read-only) |
+| Descanso | Timer dominante + ring; microcopy **entre séries / rounds** | Start / Pause único |
+| Respiração | Anel + fase; copy **cool-down pós-esforço** + toggle haptic | Toggle haptics |
+
+### Narrativa WOD (2026-10-30)
+
+- Sessão = foco do metcon/bloco sem abrir o iPhone.
+- Rest = intervalo de treino pesado (não “pausa genérica”).
+- Breath = reset após esforço; alimenta recuperação no iPhone via eventos WC quando aplicável.
 
 ## Safeguards
 

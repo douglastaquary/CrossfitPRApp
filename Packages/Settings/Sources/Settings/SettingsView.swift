@@ -135,8 +135,7 @@ private struct SettingsProSection: View {
             switch tier {
             case .elite:
                 HStack {
-                    Image(systemName: AppDesign.Icon.eliteBadge)
-                        .foregroundStyle(AppDesign.Colors.eliteAccent)
+                    EliteSealBadge(style: .unlocked, showsLabel: true)
                     Text(Strings.Settings.Pro.eliteSubscriptionActive)
                         .foregroundStyle(.primary)
                 }
@@ -166,8 +165,7 @@ private struct SettingsProSection: View {
 
                 Button(action: onShowUpgrade) {
                     HStack {
-                        Image(systemName: AppDesign.Icon.eliteBadge)
-                            .foregroundStyle(AppDesign.Colors.eliteAccent)
+                        EliteSealBadge(style: .lockedHint, showsLabel: false)
                         Text(Strings.Settings.Pro.unlockElite)
                     }
                 }

@@ -354,16 +354,28 @@ private struct RecordDetailFallbackMetrics: View {
 private struct PRAwardRowView: View {
     let award: PRAward
 
+    private var isEliteOnly: Bool {
+        award.minimumTier == .elite
+    }
+
     var body: some View {
         HStack(spacing: 12) {
-            Image(systemName: "medal.fill")
+            Image(systemName: isEliteOnly ? AppDesign.Icon.eliteBadge : "medal.fill")
                 .font(.title2)
-                .foregroundStyle(AppDesign.Colors.eliteAccent)
+                .foregroundStyle(isEliteOnly ? AppDesign.Colors.eliteAccent : AppDesign.Colors.proAccent)
                 .frame(width: 40, height: 40)
-                .background(AppDesign.Colors.eliteAccent.opacity(0.18), in: Circle())
+                .background(
+                    (isEliteOnly ? AppDesign.Colors.eliteAccent : AppDesign.Colors.proAccent).opacity(0.18),
+                    in: Circle()
+                )
             VStack(alignment: .leading, spacing: 2) {
-                Text(Strings.tr(award.titleKey))
-                    .font(.body.weight(.semibold))
+                HStack(spacing: 6) {
+                    Text(Strings.tr(award.titleKey))
+                        .font(.body.weight(.semibold))
+                    if isEliteOnly {
+                        EliteSealBadge(style: .unlocked, showsLabel: false)
+                    }
+                }
                 Text(Strings.Award.earnedTimes(award.earnedCount))
                     .font(.caption)
                     .foregroundStyle(.secondary)

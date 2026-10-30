@@ -1,12 +1,12 @@
 import SwiftUI
 
-/// Dica contextual na sessão (CPR-009 Design — tip curta, sem densidade de iPhone).
+/// Tip de sessão / WOD (CPR-009 Design — bloco pesado, sem densidade de iPhone).
 public struct WatchSessionTipView: View {
     public init() {}
 
     public var body: some View {
         VStack(spacing: 10) {
-            Image(systemName: "figure.strengthtraining.traditional")
+            Image(systemName: "flame.fill")
                 .font(.title2)
                 .foregroundStyle(WatchDesign.brand)
                 .symbolRenderingMode(.hierarchical)

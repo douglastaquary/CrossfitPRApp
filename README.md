@@ -80,8 +80,8 @@ Light/dark: [`REVIEW-PR-FITNESS.md`](docs/screenshots/REVIEW-PR-FITNESS.md).
 | Tela | O que mostra (dados) |
 |------|----------------------|
 | Exercícios / Meus PRs / Detalhe | Layout Fitness, seed `eliteRich` |
-| Percepções | Tudo do PRO + **assessment** + **limiting factor** |
-| Ajustes | Tier Elite ativo |
+| Percepções | Tudo do PRO + **assessment** + **limiting factor** (selo Elite) |
+| Ajustes | Tier Elite ativo (selo) |
 
 ### Planos (sheet) — variante B
 
@@ -93,38 +93,38 @@ Passos: plano → período → preço → CTA · tabela Free/PRO/Elite. Detalhe:
 
 ---
 
-## Apple Watch — companion de sessão
+## Apple Watch — companion de sessão (WOD)
 
 <p align="center">
   <img src="docs/screenshots/watch-session.png" width="140" alt="Watch — sessão">
   <img src="docs/screenshots/watch-rest.png" width="140" alt="Watch — descanso">
-  <img src="docs/screenshots/watch-breath.png" width="140" alt="Watch — respiração">
+  <img src="docs/screenshots/watch-breath.png" width="140" alt="Watch — cool-down">
 </p>
 
-Homologação (fora do POC de UI): [`docs/WATCH-HOMOLOGATION.md`](docs/WATCH-HOMOLOGATION.md).
+Homologação: [`docs/WATCH-HOMOLOGATION.md`](docs/WATCH-HOMOLOGATION.md).
 
 ### Resumo por tela
 
 | Tela Watch | Função | Dados exibidos | Envia ao iPhone? |
 |------------|--------|----------------|------------------|
-| **Sessão** | Tip curta do bloco / WOD | Ícone · título · 1 tip localizada | Não lista PRs; eventos futuros → coach |
-| **Descanso** | Timer 1:30 com ring · pause/start | `mm:ss` · progresso do anel · frase curta | Sim — evento `rest` ao concluir (WC) |
-| **Respiração** | Ciclo 4–4 + haptic opt-in | Fase inspire/expire · anel · toggle háptico | Preferência local; sem PR/Health |
+| **Sessão** | Tip de metcon / bloco pesado | Ícone · título · tip WOD | Não lista PRs; eventos → coach |
+| **Descanso** | Timer 1:30 entre séries/rounds | `mm:ss` · ring · “entre rounds” | Sim — evento `rest` (WC) |
+| **Cool-down** | Respiração 4–4 pós-esforço | Fase · anel · haptic opt-in | Preferência local |
 
 ### Detalhe das funcionalidades
 
-1. **Sessão** (`WatchSessionTipView`) — foco do bloco sem abrir o iPhone. Strings `watch.session.*`. Sem LLM, gráficos ou HealthKit no relógio.
-2. **Descanso** (`WatchRestTimerView`) — intervalo entre séries. Countdown + CTA; ao fim grava `WatchSessionEvent` tipado `rest` no iPhone (`WatchSessionEventStore` → contexto do coach).
-3. **Respiração** (`WatchBreathingView`) — reset 4s/4s entre esforços. Toggle `watch.breath.hapticsEnabled`; háptico só no device.
+1. **Sessão** — tip de WOD/metcon no pulso (Compete / Mayhem). Sem LLM no Watch.
+2. **Descanso** — intervalo entre rounds; ao fim grava `rest` → coach no iPhone.
+3. **Cool-down** — reset 4s/4s após esforço; haptic opt-in.
 
 ### Dados: Watch × app iPhone
 
 | Domínio | Watch | iPhone |
 |---------|-------|--------|
-| PRs / histórico / detalhe | — | Exercícios, Meus PRs, Record Detail (kg/lb, datas, evolução, prêmios) |
-| Insights / Coach / Elite | — | Hub Percepções (teaser Free · coach PRO · assessment Elite) |
+| PRs / histórico / detalhe | — | Exercícios, Meus PRs, Record Detail (kg/lb, datas, evolução, prêmios Elite com selo) |
+| Insights / Coach / Elite | — | Hub (teaser Free · coach PRO · assessment Elite + selo) |
 | Assinatura | — | Ajustes + sheet de planos |
-| Sessão no box | Tip + rest + breath | Consome eventos WC no coach (`sessionEvents`) |
+| Sessão no box | Tip WOD + rest + cool-down | Eventos WC → `sessionEvents` no coach |
 | Health / CAL / FC | — | Insights hub (quando autorizado) |
 
 O iPhone é o centro de valor. O Watch **não** substitui Insights nem o histórico de PRs.

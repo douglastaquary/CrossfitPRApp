@@ -48,18 +48,10 @@ struct InsightsEliteSection: View {
     private var eliteContent: some View {
         VStack(alignment: .leading, spacing: 12) {
             HStack(spacing: 8) {
-                Image(systemName: AppDesign.Icon.eliteBadge)
-                    .foregroundStyle(AppDesign.Colors.eliteAccent)
                 Text(Strings.Elite.insightsHeader)
                     .font(AppDesign.Typography.sectionTitle)
                 Spacer()
-                Text(Strings.Elite.badge)
-                    .font(AppDesign.Typography.proBadge)
-                    .padding(.horizontal, AppDesign.Layout.proBadgeHorizontalPadding)
-                    .padding(.vertical, AppDesign.Layout.proBadgeVerticalPadding)
-                    .background(AppDesign.Colors.eliteAccent)
-                    .foregroundStyle(.white)
-                    .cornerRadius(4)
+                EliteSealBadge(style: .unlocked, showsLabel: true)
             }
 
             if let assessmentInsight {
@@ -75,9 +67,8 @@ struct InsightsEliteSection: View {
 
     private var teaserContent: some View {
         VStack(alignment: .leading, spacing: 10) {
-            HStack {
-                Image(systemName: AppDesign.Icon.eliteBadge)
-                    .foregroundStyle(AppDesign.Colors.eliteAccent)
+            HStack(spacing: 8) {
+                EliteSealBadge(style: .lockedHint, showsLabel: false)
                 Text(Strings.Engine.eliteTeaserTitle)
                     .font(.subheadline.weight(.semibold))
                 Spacer()
@@ -113,8 +104,12 @@ struct EliteAssessmentCard: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text(insight.title)
-                .font(.subheadline.weight(.semibold))
+            HStack(alignment: .firstTextBaseline) {
+                Text(insight.title)
+                    .font(.subheadline.weight(.semibold))
+                Spacer(minLength: 8)
+                EliteSealBadge(style: .unlocked, showsLabel: false)
+            }
             Text(insight.message)
                 .font(.footnote)
                 .foregroundStyle(.secondary)
@@ -140,6 +135,8 @@ struct EliteLimitingFactorCard: View {
                     .foregroundStyle(AppDesign.Colors.eliteAccent)
                 Text(insight.title)
                     .font(.subheadline.weight(.semibold))
+                Spacer(minLength: 8)
+                EliteSealBadge(style: .unlocked, showsLabel: false)
             }
             Text(insight.message)
                 .font(.footnote)
