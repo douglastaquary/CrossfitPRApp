@@ -13,7 +13,7 @@ para manter foco no box sem abrir o iPhone a todo momento.
 - [x] Timer de descanso + mensagem motivacional curta (`WatchRestTimerView`)
 - [x] Respiração visual/haptic em treinos intensos (opt-in — toggle na tab Respiração)
 - [x] Eventos compactos (série, RPE, descanso) → `CoachingContextBuilder.sessionEvents`
-- [ ] Sem spam de notificações push
+- [x] Sem spam de notificações push (companion não registra push — só WC + haptic opt-in)
 - [ ] Comercial: add-on ou bundle PRO+Watch (canvas)
 
 ## Fases

@@ -7,7 +7,7 @@
 | **Sua máquina** | 14.2 | `./scripts/configure-spm-xcode14.sh` → `file URL` local (não commitar) | `xcodebuild` manual, `./scripts/run-qa.sh` |
 | **GitHub Actions** | **latest-stable** em `macos-15` | `XCLocalSwiftPackageReference` + `relativePath = .` | `./scripts/ci-modern.sh` |
 
-O repositório **versionado** usa pacote SPM **local relativo** na raiz (`Package.swift`). Isso funciona no CI e no Xcode 15+ sem scripts.
+O repositório versiona **`project.yml`** + SPM na raiz (`Package.swift`). O **`CrossfitPR.xcodeproj` não está no git** — CI e clone local rodam [`./scripts/generate-xcodeproj.sh`](../scripts/generate-xcodeproj.sh) ([XCODEGEN.md](XCODEGEN.md)).
 
 ## Workflow GitHub
 
@@ -17,7 +17,9 @@ Arquivo: [`.github/workflows/ios.yml`](../.github/workflows/ios.yml)
 - **Runner:** `macos-15`
 - **Xcode:** `maxim-lobanov/setup-xcode@v1` com `latest-stable`
 - **Script:** [`scripts/ci-modern.sh`](../scripts/ci-modern.sh)
-  - Build app
+  - Regenera `CrossfitPR.xcodeproj` (XcodeGen 2.46.0)
+  - Build app (iOS)
+  - Build **CrossfitPRWatch** (`generic/platform=watchOS Simulator`)
   - `AppLocalizationQATests` (pt/en)
   - `swift test` em `Packages/Localization` e `Packages/Domain`
   - Falha se `project.pbxproj` tiver `file:///Users/...` (evita push acidental pós configure local)
@@ -29,16 +31,15 @@ chmod +x scripts/ci-modern.sh
 CODE_SIGNING_ALLOWED=NO ./scripts/ci-modern.sh
 ```
 
-Simulador padrão: **iPhone 17 Pro** (runtime iOS mais novo no runner), destino `id=<UDID>`. Overrides: `SIM_DEVICE`, `SIM_OS=26.5`, `SIM_UDID`, ou `SIM_DEST='platform=iOS Simulator,name=…,OS=…'`.
+`CODE_SIGNING_ALLOWED=NO` deixa o iPhone **sem assinatura**. Ad hoc nesse simulador impede o XCUITest de ver a interface. O `CrossfitPRWatch` é compilado com `-target`, sem parear o relógio, e **não é embutido**: a assinatura ad hoc do watchsimulator deixa `Info.plist=not bound`. No simulador o app não abre o CloudKit na subida e não trata falta de rede como bloqueio. No Xcode local, com a conta de desenvolvimento, o embed e o iCloud continuam no `project.yml`.
 
-## Antes de push (Xcode 14.2)
+Simulador padrão: **iPhone 17 Pro** (runtime iOS mais novo no runner), destino `id=<UDID>`. O script compila `CrossfitPRWatch` com `-target` num Apple Watch **desligado** antes do app. O scheme do iPhone não recebe esse destino: o Xcode não o lista entre os destinos do scheme e o build aborta. Em host **arm64** os destinos ganham `arch=arm64` e o `xcodebuild` recebe `EXCLUDED_ARCHS` de `x86_64` nos SDKs de simulador. Overrides: `SIM_DEVICE`, `SIM_OS=26.5`, `SIM_UDID`, `SIM_DEST`, `WATCH_UDID`, `WATCH_DEVICE`, `WATCH_DEST`.
 
-1. **Não commitar** `project.pbxproj` após `configure-spm-xcode14.sh` (contém caminho absoluto).
-2. Restaurar referência local relativa:
-   ```bash
-   git checkout -- CrossfitPR.xcodeproj/project.pbxproj
-   ```
-3. Push → o CI roda o gate moderno.
+## Xcode 14.2 local
+
+1. `./scripts/generate-xcodeproj.sh` → `./scripts/configure-spm-xcode14.sh` (file URL só na máquina).
+2. O `.xcodeproj` está no **`.gitignore`** — nada de project Xcode para commitar.
+3. Push → CI regera o projeto limpo e roda o gate moderno.
 
 ## Review arquitetural em PR (advisory)
 
@@ -74,6 +75,7 @@ Skills agentes: [architecture-review](../.cursor/skills/architecture-review/SKIL
 
 ## Referências
 
+- XcodeGen: [`docs/XCODEGEN.md`](XCODEGEN.md)
 - QA UI: [`docs/QA.md`](QA.md)
 - MV: [`docs/MV-ARCHITECTURE.md`](MV-ARCHITECTURE.md)
 - SPM legado: [`scripts/configure-spm-xcode14.sh`](../scripts/configure-spm-xcode14.sh)

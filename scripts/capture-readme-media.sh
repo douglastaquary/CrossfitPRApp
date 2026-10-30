@@ -4,6 +4,7 @@
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+bash "$ROOT/scripts/ensure-xcodeproj.sh"
 BUNDLE_ID="com.douglast.CrossfitPR"
 SIM_NAME="${SIM_NAME:-iPhone 14 Pro}"
 DOCS_SCREEN="$ROOT/docs/screenshots"

@@ -115,13 +115,16 @@ final class AppLocalizationQATests: XCTestCase {
     ) -> XCUIApplication {
         let app = XCUIApplication()
         let locale = languageCode == "en" ? "en_US" : "pt_BR"
+        // Só argumentos. AppleLanguages no environment, no formato "(en)", não é um
+        // código de idioma: o pacote ignora o pedido e cai no fallback pt-BR.
         app.launchArguments += ["-AppleLanguages", "(\(languageCode))", "-AppleLocale", locale]
-        app.launchEnvironment["AppleLanguages"] = "(\(languageCode))"
-        app.launchEnvironment["AppleLocale"] = locale
+        app.launchArguments += ["-UITEST_SKIP_SPLASH", "1"]
         app.launchEnvironment["UITEST_SKIP_SPLASH"] = "1"
         if skipOnboarding {
+            app.launchArguments += ["-UITEST_SKIP_ONBOARDING", "1"]
             app.launchEnvironment["UITEST_SKIP_ONBOARDING"] = "1"
         } else {
+            app.launchArguments += ["-UITEST_FORCE_ONBOARDING", "1"]
             app.launchEnvironment["UITEST_FORCE_ONBOARDING"] = "1"
         }
         if let subscriptionTier {

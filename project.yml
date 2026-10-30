@@ -1,0 +1,178 @@
+# Único artefato Xcode versionado no git — gere o .xcodeproj com: ./scripts/generate-xcodeproj.sh
+# CrossfitPR.xcodeproj está no .gitignore (CI regera a cada build). Ver docs/XCODEGEN.md
+
+name: CrossfitPR
+
+options:
+  bundleIdPrefix: com.douglast
+  deploymentTarget:
+    iOS: "16.0"
+    watchOS: "9.0"
+  createIntermediateGroups: true
+  defaultConfig: Debug
+  developmentLanguage: pt-BR
+  groupSortPosition: top
+  minimumXcodeGenVersion: 2.45.0
+  # objectVersion 56 — abre no Xcode 14.2 local; Xcode 15+ no CI também lê.
+  projectFormat: xcode14_0
+  xcodeVersion: "14.2"
+
+packages:
+  CrossfitPRPackages:
+    path: .
+
+configs:
+  Debug: debug
+  Release: release
+
+settings:
+  base:
+    ALWAYS_SEARCH_USER_PATHS: NO
+    DEVELOPMENT_TEAM: 6V95FQX348
+    SWIFT_VERSION: "5.0"
+  configs:
+    Debug:
+      # XcodeGen não emite o default do template (YES no Debug). Sem isto o
+      # xcodebuild compila todas as ARCHS do simulador; no CI arm64 o SPM só
+      # gera .swiftmodule arm64 e o slice x86_64 quebra o import.
+      ONLY_ACTIVE_ARCH: YES
+      SWIFT_OPTIMIZATION_LEVEL: -Onone
+      SWIFT_ACTIVE_COMPILATION_CONDITIONS: DEBUG
+    Release:
+      SWIFT_OPTIMIZATION_LEVEL: -O
+
+targets:
+  CrossfitPR:
+    type: application
+    platform: iOS
+    sources:
+      - path: CrossfitPR
+    settings:
+      base:
+        SWIFT_ENABLE_EXPLICIT_MODULES: NO
+        SDKROOT: iphoneos
+        SUPPORTED_PLATFORMS: "iphoneos iphonesimulator"
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+        CODE_SIGN_ENTITLEMENTS: CrossfitPR/CrossfitPR.entitlements
+        CODE_SIGN_STYLE: Automatic
+        CURRENT_PROJECT_VERSION: 1
+        GENERATE_INFOPLIST_FILE: YES
+        INFOPLIST_FILE: CrossfitPR/Info.plist
+        INFOPLIST_KEY_CFBundleDisplayName: MyCrossfitPRs
+        INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents: YES
+        INFOPLIST_KEY_UILaunchStoryboardName: LaunchScreen
+        INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad: "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight"
+        INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone: "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight"
+        MARKETING_VERSION: 1.0
+        PRODUCT_BUNDLE_IDENTIFIER: com.douglast.CrossfitPR
+        PRODUCT_NAME: CrossfitPR
+        SWIFT_EMIT_LOC_STRINGS: YES
+        TARGETED_DEVICE_FAMILY: "1,2"
+    dependencies:
+      - target: CrossfitPRWatch
+        embed: true
+        codeSign: false
+      - package: CrossfitPRPackages
+        product: Domain
+      - package: CrossfitPRPackages
+        product: Subscription
+      - package: CrossfitPRPackages
+        product: Application
+      - package: CrossfitPRPackages
+        product: PRHistory
+      - package: CrossfitPRPackages
+        product: Insights
+      - package: CrossfitPRPackages
+        product: PROUpgrade
+      - package: CrossfitPRPackages
+        product: Onboarding
+      - package: CrossfitPRPackages
+        product: Localization
+      - package: CrossfitPRPackages
+        product: Categories
+      - package: CrossfitPRPackages
+        product: Settings
+      - package: CrossfitPRPackages
+        product: Launch
+
+  CrossfitPRWatch:
+    type: application
+    platform: watchOS
+    sources:
+      - path: CrossfitPRWatch
+      - path: Packages/WatchCompanion/Sources/WatchCompanion
+        includes:
+          - "**/*.swift"
+      - path: Packages/WatchCompanion/Sources/WatchCompanion/Resources
+        buildPhase: resources
+        type: folder
+    settings:
+      base:
+        SDKROOT: watchos
+        SUPPORTED_PLATFORMS: "watchos watchsimulator"
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        CODE_SIGN_STYLE: Automatic
+        CURRENT_PROJECT_VERSION: 1
+        GENERATE_INFOPLIST_FILE: YES
+        INFOPLIST_FILE: CrossfitPRWatch/Info.plist
+        INFOPLIST_KEY_CFBundleDisplayName: CrossfitPR
+        INFOPLIST_KEY_UISupportedInterfaceOrientations: "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown"
+        INFOPLIST_KEY_WKCompanionAppBundleIdentifier: com.douglast.CrossfitPR
+        MARKETING_VERSION: 1.0
+        PRODUCT_BUNDLE_IDENTIFIER: com.douglast.CrossfitPR.watchkitapp
+        PRODUCT_NAME: CrossfitPRWatch
+        # Xcode 26 no Debug troca o .app por stub + .debug.dylib. O embed em
+        # PlugIns/ então não tem Info.plist e o ValidateEmbeddedBinary falha
+        # com "Couldn't load Info dictionary".
+        ENABLE_DEBUG_DYLIB: NO
+        SKIP_INSTALL: YES
+        SWIFT_EMIT_LOC_STRINGS: YES
+        TARGETED_DEVICE_FAMILY: 4
+
+  CrossfitPRUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources:
+      - path: CrossfitPRUITests
+    settings:
+      base:
+        SDKROOT: iphoneos
+        SUPPORTED_PLATFORMS: "iphoneos iphonesimulator"
+        CODE_SIGN_STYLE: Automatic
+        CURRENT_PROJECT_VERSION: 1
+        GENERATE_INFOPLIST_FILE: YES
+        IPHONEOS_DEPLOYMENT_TARGET: "16.0"
+        MARKETING_VERSION: 1.0
+        PRODUCT_BUNDLE_IDENTIFIER: com.douglast.CrossfitPRUITests
+        PRODUCT_NAME: CrossfitPRUITests
+        SWIFT_EMIT_LOC_STRINGS: NO
+        TEST_TARGET_NAME: CrossfitPR
+        TARGETED_DEVICE_FAMILY: "1,2"
+    dependencies:
+      - target: CrossfitPR
+
+schemes:
+  CrossfitPR:
+    build:
+      config: Debug
+      targets:
+        CrossfitPR: all
+        CrossfitPRWatch: all
+        CrossfitPRUITests: [test]
+    run:
+      config: Debug
+      # Caminho final ajustado em scripts/xcodegen-postgen.sh (compatível com scheme legado).
+      storeKitConfiguration: Configuration/Products.storekit
+    test:
+      config: Debug
+      targets:
+        - CrossfitPRUITests
+      environmentVariables:
+        CROSSFITPR_DOCS_ROOT: $(SRCROOT)/docs
+    profile:
+      config: Release
+    analyze:
+      config: Debug
+    archive:
+      config: Release

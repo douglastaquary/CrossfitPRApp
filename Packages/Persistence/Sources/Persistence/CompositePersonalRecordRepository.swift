@@ -58,9 +58,14 @@ public enum PersistenceFactory {
             local = LocalPersonalRecordRepository.inMemory()
         }
 
+        #if targetEnvironment(simulator)
+        // Sem conta iCloud o CKContainer trava a abertura no simulador e a UI não aparece.
+        return local
+        #else
         return CompositePersonalRecordRepository(
             local: local,
             remote: CloudKitPersonalRecordRepository()
         )
+        #endif
     }
 }

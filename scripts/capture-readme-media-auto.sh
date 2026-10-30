@@ -3,6 +3,7 @@
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+bash "$ROOT/scripts/ensure-xcodeproj.sh"
 if [[ -z "${SIM_UDID:-}" ]]; then
   SIM_LINE="$(xcrun simctl list devices available -j | ruby "$ROOT/scripts/pick-ios-simulator.rb")"
   UDID="${SIM_LINE%%$'\t'*}"

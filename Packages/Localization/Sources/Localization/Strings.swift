@@ -4,7 +4,7 @@ import Domain
 /// API central de strings localizadas (pt-BR + en).
 public enum Strings {
     public static func tr(_ key: String) -> String {
-        NSLocalizedString(key, bundle: .module, comment: "")
+        LocalizationBundle.string(for: key)
     }
 
     public static func format(_ key: String, _ arguments: CVarArg...) -> String {
