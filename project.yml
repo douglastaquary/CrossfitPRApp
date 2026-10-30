@@ -106,9 +106,11 @@ targets:
       - path: Packages/WatchCompanion/Sources/WatchCompanion
         includes:
           - "**/*.swift"
+      # Sem `type: folder`: .lproj precisa ser recurso localizado na raiz do .app.
+      # Folder reference copia Resources/en.lproj aninhado e o codesign falha com
+      # "bundle format unrecognized … en.lproj".
       - path: Packages/WatchCompanion/Sources/WatchCompanion/Resources
         buildPhase: resources
-        type: folder
     settings:
       base:
         SDKROOT: watchos
@@ -129,7 +131,8 @@ targets:
         # com "Couldn't load Info dictionary".
         ENABLE_DEBUG_DYLIB: NO
         SKIP_INSTALL: YES
-        SWIFT_EMIT_LOC_STRINGS: YES
+        # Strings vêm dos .lproj em Resources; emitir LOC do Swift duplica en.lproj.
+        SWIFT_EMIT_LOC_STRINGS: NO
         TARGETED_DEVICE_FAMILY: 4
 
   CrossfitPRUITests:
