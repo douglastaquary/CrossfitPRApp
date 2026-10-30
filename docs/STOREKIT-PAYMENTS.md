@@ -3,6 +3,8 @@
 Guia de produto e engenharia para o fluxo de assinatura no CrossfitPR (CPR-002 + CPR-008).  
 Objetivo: processo **simples, intuitivo e claro** — primeira compra ou renovação — com feedback em cada etapa até o tier estar registrado **no cliente e na App Store**.
 
+Produtos Elite no App Store Connect: [`APP-STORE-CONNECT-ELITE.md`](APP-STORE-CONNECT-ELITE.md).
+
 ## Preocupações (o que não pode falhar em silêncio)
 
 | Preocupação | Risco | Mitigação no app |

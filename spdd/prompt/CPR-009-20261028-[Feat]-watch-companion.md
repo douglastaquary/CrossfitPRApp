@@ -20,5 +20,5 @@
 ## Safeguards
 
 - Watch não chama LLM; iPhone permanece composition root do coach.
-- SPDD Design para telas watch antes de implementação UI.
+- SPDD Design para telas watch antes de implementação UI — ver `CPR-009-20261029-[Design]-watch-companion-ui.md`.
 - HealthKit opcional: falha/negação não bloqueia Insights; CI usa mock.

@@ -1,6 +1,6 @@
 import SwiftUI
 
-/// Shell CPR-009 no relógio — sessão, descanso e respiração (sem LLM no device).
+/// Shell CPR-009 Design — sessão, descanso e respiração (sem LLM no device).
 public struct WatchCompanionRootView: View {
     @State private var selectedTab: Int
 
@@ -31,6 +31,7 @@ public struct WatchCompanionRootView: View {
                 }
                 .accessibilityIdentifier("watch.tab.breath")
         }
+        .tint(WatchDesign.brand)
         .accessibilityIdentifier("watch.companion.root")
     }
 }
