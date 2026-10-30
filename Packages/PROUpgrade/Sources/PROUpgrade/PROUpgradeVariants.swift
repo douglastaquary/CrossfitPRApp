@@ -274,69 +274,73 @@ extension PROUpgradePurchaseContent {
         .accessibilityIdentifier(PROUpgradeProductOption.accessibilityID(for: productID))
     }
 
+    /// Comparativo Free / PRO / Elite — uma tabela (sem truncar labels longas).
     private var lightCompareRow: some View {
-        // Altura igual entre colunas (Elite tem 4 checks) — composição estável.
-        HStack(alignment: .top, spacing: 10) {
-            compareChip(
-                title: Strings.Elite.planFree,
-                accent: AppDesign.Colors.metadataChip,
-                lines: ["PRs", "Teaser"]
-            )
-            compareChip(
-                title: Strings.Elite.planPro,
-                accent: AppDesign.Colors.proAccent,
-                lines: ["Coach", "Engine"]
-            )
-            // Elite = PRO + Assessment + Limiting (superconjunto).
-            compareChip(
-                title: Strings.Elite.planElite,
-                accent: AppDesign.Colors.eliteAccent,
-                lines: ["Coach", "Engine", "Assessment", "Limiting"]
-            )
-        }
-        .fixedSize(horizontal: false, vertical: true)
-    }
+        let rows: [(name: String, free: Bool, pro: Bool, elite: Bool)] = [
+            ("PRs", true, true, true),
+            ("Teaser", true, true, true),
+            ("Coach", false, true, true),
+            ("Engine", false, true, true),
+            ("Assessment", false, false, true),
+            ("Limiting", false, false, true),
+        ]
 
-    private func compareChip(title: String, accent: Color, lines: [String]) -> some View {
-        VStack(alignment: .leading, spacing: 0) {
-            Text(title)
-                .font(.caption.bold())
-                .foregroundStyle(accent)
-                .padding(.bottom, 8)
-
-            // Grid 2×N — Elite com 4 itens fica na mesma “caixa” que Free/PRO.
-            LazyVGrid(
-                columns: [
-                    GridItem(.flexible(), spacing: 6),
-                    GridItem(.flexible(), spacing: 6),
-                ],
-                alignment: .leading,
-                spacing: 6
-            ) {
-                ForEach(lines, id: \.self) { line in
-                    HStack(spacing: 3) {
-                        Image(systemName: "checkmark")
-                            .font(.system(size: 9, weight: .bold))
-                            .foregroundStyle(accent)
-                        Text(line)
-                            .font(.caption2)
-                            .foregroundStyle(.secondary)
-                            .lineLimit(1)
-                            .minimumScaleFactor(0.85)
-                    }
-                }
+        return VStack(spacing: 10) {
+            HStack(spacing: 0) {
+                Color.clear.frame(width: 96, height: 1)
+                comparePlanHeader(Strings.Elite.planFree, AppDesign.Colors.metadataChip)
+                comparePlanHeader(Strings.Elite.planPro, AppDesign.Colors.proAccent)
+                comparePlanHeader(Strings.Elite.planElite, AppDesign.Colors.eliteAccent)
             }
 
-            Spacer(minLength: 0)
+            ForEach(Array(rows.enumerated()), id: \.offset) { _, row in
+                HStack(spacing: 0) {
+                    Text(row.name)
+                        .font(.caption2.weight(.medium))
+                        .foregroundStyle(.secondary)
+                        .frame(width: 96, alignment: .leading)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.9)
+                    compareCheckCell(row.free, AppDesign.Colors.metadataChip)
+                    compareCheckCell(row.pro, AppDesign.Colors.proAccent)
+                    compareCheckCell(row.elite, AppDesign.Colors.eliteAccent)
+                }
+            }
         }
-        .padding(12)
-        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+        .padding(.horizontal, 14)
+        .padding(.vertical, 14)
+        .frame(maxWidth: .infinity, alignment: .leading)
         .background(AppDesign.Colors.cardBackground)
         .cornerRadius(14)
         .overlay(
             RoundedRectangle(cornerRadius: 14)
-                .stroke(accent.opacity(0.22), lineWidth: 1)
+                .stroke(Color.secondary.opacity(0.15), lineWidth: 1)
         )
+        .accessibilityElement(children: .contain)
+        .accessibilityLabel("\(Strings.Elite.planFree), \(Strings.Elite.planPro), \(Strings.Elite.planElite)")
+    }
+
+    private func comparePlanHeader(_ title: String, _ accent: Color) -> some View {
+        Text(title)
+            .font(.caption.bold())
+            .foregroundStyle(accent)
+            .frame(maxWidth: .infinity)
+    }
+
+    private func compareCheckCell(_ on: Bool, _ accent: Color) -> some View {
+        Group {
+            if on {
+                Image(systemName: "checkmark")
+                    .font(.system(size: 11, weight: .bold))
+                    .foregroundStyle(accent)
+            } else {
+                Text("·")
+                    .font(.caption)
+                    .foregroundStyle(.tertiary)
+            }
+        }
+        .frame(maxWidth: .infinity)
+        .frame(height: 18)
     }
 
     private func stepLabel(_ text: String) -> some View {
