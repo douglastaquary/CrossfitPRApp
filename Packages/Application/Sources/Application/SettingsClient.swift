@@ -9,6 +9,7 @@ public final class SettingsClient: ObservableObject {
         static let measureTrackingMode = "measureTrackingMode"
         static let isNotificationEnabled = "isNotificationEnabled"
         static let launchBefore = "LaunchBefore"
+        static let seasonPhase = "seasonPhase"
     }
 
     private let defaults: UserDefaults
@@ -19,6 +20,11 @@ public final class SettingsClient: ObservableObject {
 
     @Published public var isNotificationEnabled: Bool {
         didSet { defaults.set(isNotificationEnabled, forKey: Keys.isNotificationEnabled) }
+    }
+
+    /// Fase de temporada Elite (CPR-015). Persistida; UI gated por tier.
+    @Published public var seasonPhase: SeasonPhase {
+        didSet { defaults.set(seasonPhase.rawValue, forKey: Keys.seasonPhase) }
     }
 
     @Published public var hasCompletedLaunch: Bool {
@@ -34,6 +40,8 @@ public final class SettingsClient: ObservableObject {
             .flatMap { MeasureTrackingMode(rawValue: $0) } ?? .pounds
         measureTrackingMode = storedMeasure
         isNotificationEnabled = defaults.bool(forKey: Keys.isNotificationEnabled)
+        seasonPhase = defaults.string(forKey: Keys.seasonPhase)
+            .flatMap { SeasonPhase(rawValue: $0) } ?? .build
         if UITestLaunchSupport.shouldSkipOnboarding {
             hasCompletedLaunch = true
         } else if UITestLaunchSupport.shouldForceOnboarding {

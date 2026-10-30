@@ -112,12 +112,15 @@ private struct InsightsViewPROContent: View {
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
             VStack(spacing: 20) {
-                InsightsSummarySection(records: records, measureMode: measureMode)
-                InsightsLastSessionSection()
-                InsightsEngineCardsSection()
-                InsightsEliteSection()
-                InsightsCoachSection()
-                InsightsRecentSessionsSection()
+                Group {
+                    InsightsSummarySection(records: records, measureMode: measureMode)
+                    InsightsLastSessionSection()
+                    InsightsEngineCardsSection()
+                    InsightsEliteSection()
+                    InsightsBenchmarksSection()
+                    InsightsCoachSection()
+                    InsightsRecentSessionsSection()
+                }
 
                 if !topBarbell.isEmpty {
                     InsightsViewPRORankingSection(

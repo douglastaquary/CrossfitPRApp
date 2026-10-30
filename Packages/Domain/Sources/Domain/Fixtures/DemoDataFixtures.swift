@@ -35,7 +35,9 @@ public enum DemoDataFixtures {
                 records: proRichRecords(),
                 sessions: [
                     sampleSession(daysAgo: 1, withMetrics: true),
-                    sampleSession(daysAgo: 5, withMetrics: true, title: "Fran", style: .forTime, score: "4:12")
+                    sampleSession(daysAgo: 5, withMetrics: true, title: "Fran", style: .forTime, score: "4:12"),
+                    sampleSession(daysAgo: 20, withMetrics: true, title: "24.1", style: .forTime, score: "312 reps"),
+                    sampleSession(daysAgo: 40, withMetrics: false, title: "Grace", style: .forTime, score: "3:45")
                 ],
                 watchEvents: sampleWatchEvents(),
                 healthMetrics: sampleBiometrics()
@@ -45,7 +47,10 @@ public enum DemoDataFixtures {
                 records: eliteRichRecords(),
                 sessions: [
                     sampleSession(daysAgo: 1, withMetrics: true),
-                    sampleSession(daysAgo: 3, withMetrics: true, title: "Cindy", style: .amrap, score: "18 rounds")
+                    sampleSession(daysAgo: 3, withMetrics: true, title: "Cindy", style: .amrap, score: "18 rounds"),
+                    sampleSession(daysAgo: 10, withMetrics: true, title: "Murph", style: .forTime, score: "42:10"),
+                    sampleSession(daysAgo: 30, withMetrics: true, title: "25.1", style: .forTime, score: "8:41"),
+                    sampleSession(daysAgo: 60, withMetrics: false, title: "24.2", style: .amrap, score: "185 reps")
                 ],
                 watchEvents: sampleWatchEvents(),
                 healthMetrics: sampleBiometrics()
@@ -176,13 +181,18 @@ public enum DemoDataFixtures {
             date: day(daysAgo),
             style: style,
             title: title,
-            benchmarkName: title == "Fran" || title == "Cindy" ? title : nil,
+            benchmarkName: Self.isKnownBenchmark(title) ? title : nil,
             duration: withMetrics ? (52 * 60 + 17) : (40 * 60),
             score: score,
             movements: ["thruster", "pull-up", "box jump"],
             rpe: 7,
             metrics: withMetrics ? sampleBiometrics() : nil
         )
+    }
+
+    private static func isKnownBenchmark(_ title: String) -> Bool {
+        let known = Set(CrossfitBenchmarkCatalog.all.map { $0.name.lowercased() })
+        return known.contains(title.lowercased())
     }
 
     public static func sampleWatchEvents() -> [WatchSessionEvent] {

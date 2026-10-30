@@ -510,3 +510,36 @@
 "award.earnedTimesFormat %lld" = "You've earned this award %lld times.";
 "award.latestFormat %@" = "Latest: %@.";
 
+
+/* CPR-015 Season */
+"season.sectionTitle" = "Season";
+"season.cardTitle" = "Training season";
+"season.teaser.cta" = "Unlock Season mode";
+"season.teaser.body" = "Tag Off-season, Build, Open, Peaking, or Deload — Elite only.";
+"season.insight.hint" = "No daily programming — just cycle context for coach and insights.";
+"season.phase.offSeason" = "Off-season";
+"season.phase.build" = "Build";
+"season.phase.open" = "Open";
+"season.phase.peaking" = "Peaking";
+"season.phase.deload" = "Deload";
+"season.blurb.offSeason" = "Base and recovery. Keep skills sharp without peaking pressure.";
+"season.blurb.build" = "Volume and capacity. Stack quality sessions.";
+"season.blurb.open" = "Competition window. Prioritize known tests and recovery.";
+"season.blurb.peaking" = "Sharpen. Reduce junk volume; protect the big lifts.";
+"season.blurb.deload" = "Back off on purpose. Come back hungrier.";
+"proFeature.seasonMode" = "Season mode";
+"proFeature.benchmarksPack" = "Benchmarks pack";
+
+/* CPR-017 Share */
+"share.action" = "Share";
+"share.card.brand" = "CrossfitPR";
+"share.celebration.title" = "New PR — share it";
+
+/* CPR-018 Benchmarks */
+"benchmarks.sectionTitle" = "Benchmarks";
+"benchmarks.emptyMatch" = "Log a Girl, Hero, or Open session to compare here.";
+"benchmarks.openYoY" = "Open by year";
+"benchmarks.yourBest" = "Your best";
+"benchmarks.family.girls" = "Girls";
+"benchmarks.family.heroes" = "Heroes";
+"benchmarks.family.open" = "Open";

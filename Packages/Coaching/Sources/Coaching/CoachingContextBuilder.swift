@@ -16,9 +16,12 @@ public struct CoachingContextBuilder: Sendable {
     public func build(
         from records: [PersonalRecord],
         engineInsights: [WorkoutInsight],
-        watchEvents: [WatchSessionEvent] = []
+        watchEvents: [WatchSessionEvent] = [],
+        seasonPhase: SeasonPhase? = nil,
+        windowDaysOverride: Int? = nil
     ) -> CoachingContextSnapshot {
-        let cutoff = Calendar.current.date(byAdding: .day, value: -windowDays, to: Date()) ?? .distantPast
+        let effectiveWindow = windowDaysOverride ?? windowDays
+        let cutoff = Calendar.current.date(byAdding: .day, value: -effectiveWindow, to: Date()) ?? .distantPast
         let recent = records.filter { $0.recordDate >= cutoff }
         let grouped = Dictionary(grouping: recent, by: { $0.prName.lowercased() })
 
@@ -45,7 +48,7 @@ public struct CoachingContextBuilder: Sendable {
 
         let stalled = summaries.filter { $0.deltaPercent <= 2 }.map(\.name).prefix(3).map { $0 }
         let rising = summaries.filter { $0.deltaPercent >= 8 }.map(\.name).prefix(3).map { $0 }
-        let tags = engineInsights
+        var tags = engineInsights
             .filter {
                 switch $0.category {
                 case .workoutEngine, .trend, .eliteAssessment, .eliteLimitingFactor:
@@ -54,8 +57,14 @@ public struct CoachingContextBuilder: Sendable {
                     return false
                 }
             }
-            .prefix(6)
+            .prefix(5)
             .map { shortTag($0) }
+        if let seasonPhase {
+            tags.insert("season:\(seasonPhase.rawValue)", at: 0)
+            if tags.count > 6 {
+                tags = Array(tags.prefix(6))
+            }
+        }
 
         var sessionEvents = watchEvents
         if sessionEvents.count > maxSessionEvents {
@@ -70,7 +79,7 @@ public struct CoachingContextBuilder: Sendable {
         let contextHash = CoachingContextBuilder.stableHash(hashInput)
 
         return CoachingContextSnapshot(
-            windowDays: windowDays,
+            windowDays: effectiveWindow,
             contextHash: contextHash,
             movements: summaries,
             stalled: stalled,

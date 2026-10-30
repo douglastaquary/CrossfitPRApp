@@ -33,6 +33,7 @@ public final class CoachingClient: ObservableObject {
         records: [PersonalRecord],
         engineInsights: [WorkoutInsight],
         tier: SubscriptionTier,
+        seasonPhase: SeasonPhase? = nil,
         force: Bool = false
     ) async {
         guard tier.canAccess(.detailedAIAnalysis) else {
@@ -45,7 +46,15 @@ public final class CoachingClient: ObservableObject {
         defer { isLoading = false }
 
         let watchEvents = WatchSessionEventStore.shared.recentEvents()
-        let snapshot = builder.build(from: records, engineInsights: engineInsights, watchEvents: watchEvents)
+        let eliteWindow = tier == .elite ? 180 : nil
+        let seasonTag = tier.canAccess(.seasonMode) ? seasonPhase : nil
+        let snapshot = builder.build(
+            from: records,
+            engineInsights: engineInsights,
+            watchEvents: watchEvents,
+            seasonPhase: seasonTag,
+            windowDaysOverride: eliteWindow
+        )
         if !force, let cached = cache.insight(for: snapshot.contextHash) {
             let insight = CoachingInsight(
                 workoutSuggestion: cached.workoutSuggestion,

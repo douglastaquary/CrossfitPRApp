@@ -17,6 +17,8 @@ public enum ProFeature: String, Sendable, CaseIterable {
     case exportHistory
     case athleteAssessment
     case limitingFactorAnalysis
+    case seasonMode
+    case benchmarksPack
 
     public var isAvailableInFreeTier: Bool {
         switch self {
@@ -25,10 +27,10 @@ public enum ProFeature: String, Sendable, CaseIterable {
         }
     }
 
-    /// Features exclusivas do tier Elite (CPR-008).
+    /// Features exclusivas do tier Elite (CPR-008 / CPR-015).
     public var isEliteOnly: Bool {
         switch self {
-        case .athleteAssessment, .limitingFactorAnalysis: return true
+        case .athleteAssessment, .limitingFactorAnalysis, .seasonMode: return true
         default: return false
         }
     }

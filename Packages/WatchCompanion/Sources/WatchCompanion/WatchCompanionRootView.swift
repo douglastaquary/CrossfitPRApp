@@ -1,6 +1,6 @@
 import SwiftUI
 
-/// Shell CPR-009 Design — sessão, descanso e respiração (sem LLM no device).
+/// Shell CPR-009/016 — sessão timer, % load, descanso e cool-down (sem LLM).
 public struct WatchCompanionRootView: View {
     @State private var selectedTab: Int
 
@@ -10,22 +10,29 @@ public struct WatchCompanionRootView: View {
 
     public var body: some View {
         TabView(selection: $selectedTab) {
-            WatchSessionTipView()
+            WatchWODTimerView()
                 .tag(0)
                 .tabItem {
                     Label(WatchL10n.sessionTitle, systemImage: "flame.fill")
                 }
                 .accessibilityIdentifier("watch.tab.session")
 
-            WatchRestTimerView()
+            WatchPercentLoadView()
                 .tag(1)
+                .tabItem {
+                    Label(WatchL10n.loadTitle, systemImage: "percent")
+                }
+                .accessibilityIdentifier("watch.tab.load")
+
+            WatchRestTimerView()
+                .tag(2)
                 .tabItem {
                     Label(WatchL10n.restLabel, systemImage: "timer")
                 }
                 .accessibilityIdentifier("watch.tab.rest")
 
             WatchBreathingView()
-                .tag(2)
+                .tag(3)
                 .tabItem {
                     Label(WatchL10n.breathTitle, systemImage: "wind")
                 }

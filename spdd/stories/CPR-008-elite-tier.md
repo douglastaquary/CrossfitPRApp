@@ -26,5 +26,5 @@ para preparar competições e ciclos de treino longos — sem virar app de progr
 
 - watchOS (CPR-009)
 - Programming diário estilo Mayhem Athlete
-- Season mode completo (P1 — story/canvas follow-up)
+- ~~Season mode completo~~ → CPR-015
 - Volume/readiness avançado (P2)

@@ -4,8 +4,8 @@
 # Env: WATCH_SIM_DEVICE (default Apple Watch Series 10 (46mm)), WATCH_SIM_OS (opcional)
 require "json"
 
-prefer_name = ENV.fetch("WATCH_SIM_DEVICE", "Apple Watch Series 10 (46mm)")
-prefer_os = ENV["WATCH_SIM_OS"]
+prefer_name = ENV.fetch("WATCH_SIM_DEVICE", "Apple Watch Series 8 (41mm)")
+prefer_os = ENV.fetch("WATCH_SIM_OS", "9.0")
 
 data = JSON.parse($stdin.read)
 devs = []

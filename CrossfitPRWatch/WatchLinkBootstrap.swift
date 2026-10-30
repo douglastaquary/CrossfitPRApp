@@ -34,7 +34,18 @@ private final class WatchWCSessionDelegate: NSObject, WCSessionDelegate {
         _ session: WCSession,
         activationDidCompleteWith activationState: WCSessionActivationState,
         error: Error?
-    ) {}
+    ) {
+        if activationState == .activated {
+            WatchLoadContextStore.latest = session.receivedApplicationContext
+        }
+    }
+
+    func session(
+        _ session: WCSession,
+        didReceiveApplicationContext applicationContext: [String: Any]
+    ) {
+        WatchLoadContextStore.latest = applicationContext
+    }
 
     func sessionReachabilityDidChange(_ session: WCSession) {}
 }

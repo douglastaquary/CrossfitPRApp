@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Capturas README das telas watchOS (target CrossfitPRWatch) — rode após build no simulador Watch.
+# Capturas README das telas watchOS (scheme CrossfitPRWatch).
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
@@ -9,18 +9,20 @@ BUNDLE_ID="com.douglast.CrossfitPR.watchkitapp"
 PICK_SCRIPT="${ROOT}/scripts/pick-watch-simulator.rb"
 
 mkdir -p "$DOCS"
+export WATCH_SIM_DEVICE="${WATCH_SIM_DEVICE:-Apple Watch Series 8 (41mm)}"
+export WATCH_SIM_OS="${WATCH_SIM_OS:-9.0}"
 
 WATCH_LINE="$(xcrun simctl list devices available -j | ruby "$PICK_SCRIPT")"
 WATCH_UDID="${WATCH_LINE%%$'\t'*}"
 WATCH_LABEL="${WATCH_LINE#*$'\t'}"
 echo "→ Simulador: $WATCH_LABEL ($WATCH_UDID)"
 
-echo "→ Build CrossfitPR + Watch"
+echo "→ Build CrossfitPRWatch"
+DEST="platform=watchOS Simulator,name=${WATCH_SIM_DEVICE},OS=${WATCH_SIM_OS}"
 xcodebuild build \
-  -scheme CrossfitPR \
+  -scheme CrossfitPRWatch \
   -project "$ROOT/CrossfitPR.xcodeproj" \
-  -destination "platform=watchOS Simulator,id=${WATCH_UDID}" \
-  -allowProvisioningUpdates \
+  -destination "$DEST" \
   CODE_SIGNING_ALLOWED=NO
 
 xcrun simctl boot "$WATCH_UDID" 2>/dev/null || true
@@ -28,7 +30,7 @@ xcrun simctl bootstatus "$WATCH_UDID" -b 2>/dev/null || true
 
 APP_PATH="$(find "$HOME/Library/Developer/Xcode/DerivedData" -path "*Build/Products/Debug-watchsimulator/CrossfitPRWatch.app" -print -quit 2>/dev/null || true)"
 if [[ -z "$APP_PATH" || ! -d "$APP_PATH" ]]; then
-  echo "⚠️  CrossfitPRWatch.app não encontrado em DerivedData — abra o Xcode e faça build do scheme CrossfitPR."
+  echo "⚠️  CrossfitPRWatch.app não encontrado em DerivedData."
   exit 1
 fi
 
@@ -46,7 +48,8 @@ capture_tab() {
 }
 
 capture_tab 0 "$DOCS/watch-session.png"
-capture_tab 1 "$DOCS/watch-rest.png"
-capture_tab 2 "$DOCS/watch-breath.png"
+capture_tab 1 "$DOCS/watch-load.png"
+capture_tab 2 "$DOCS/watch-rest.png"
+capture_tab 3 "$DOCS/watch-breath.png"
 
 echo "→ Capturas watch concluídas em $DOCS"

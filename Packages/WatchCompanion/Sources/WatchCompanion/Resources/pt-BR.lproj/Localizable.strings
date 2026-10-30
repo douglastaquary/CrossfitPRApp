@@ -9,3 +9,9 @@
 "watch.breath.haptics" = "Haptic";
 "watch.rest.start" = "Iniciar";
 "watch.rest.pause" = "Pausar";
+
+"watch.load.title" = "% carga";
+"watch.wod.reset" = "Zerar";
+"watch.wod.amrap" = "AMRAP";
+"watch.wod.emom" = "EMOM";
+"watch.wod.forTime" = "For Time";

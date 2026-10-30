@@ -118,6 +118,12 @@ public struct AppEnvironment {
         await seedDemoDataIfNeeded()
         await workoutSessionClient.fetchSessions()
         await healthMetricsClient.refresh()
+        #if canImport(WatchConnectivity)
+        if personalRecordClient.records.isEmpty {
+            await personalRecordClient.fetchRecords()
+        }
+        iPhoneWatchConnectivityBridge.shared.updateLoadContext(from: personalRecordClient.records)
+        #endif
     }
 
     private func seedDemoDataIfNeeded() async {

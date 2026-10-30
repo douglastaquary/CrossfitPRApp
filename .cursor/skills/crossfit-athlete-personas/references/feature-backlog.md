@@ -6,18 +6,18 @@ Prioridade relativa: **P0** (fundação / já no canvas) → **P1** (atração p
 
 | # | Feature | Tier | Persona | SPDD / status | P |
 |---|---------|------|---------|---------------|---|
-| 1 | PR Celebration + Share Card | Free→PRO | Social, Liberty+ | Story futura | P1 |
+| 1 | PR Celebration + Share Card | Free→PRO | Social, Liberty+ | CPR-017 | P1 |
 | 2 | %1RM instantâneo (RecordDetail) | Free teaser / PRO full | Independence | CPR-001 (evoluir) | P0 |
-| 3 | Benchmarks Girls / Heroes / Open YoY | PRO | Independence | Story futura | P1 |
+| 3 | Benchmarks Girls / Heroes / Open YoY | PRO | Independence | CPR-018 | P1 |
 | 4 | Nível auto-sugerido Liberty→Freedom | Free+PRO | Todas | Story futura | P1 |
 | 5 | Streak + consistência (manhã) | Free leve / PRO denso | Social, Liberty | CPR-001 Insights | P1 |
 | 6 | Athlete Assessment (gaps vs baselines) | Elite | Compete, Freedom | CPR-008 ( Domínio+Engine ) | P0 |
 | 7 | Limiting factor card | Elite (teaser PRO) | Compete | CPR-008 + CPR-007 | P0 |
-| 8 | Season mode (Open / peaking / deload) | Elite | Compete | CPR-008 | P1 |
+| 8 | Season mode (Open / peaking / deload) | Elite | Compete | CPR-015 | P1 |
 | 9 | RPE + intended stimulus no log | PRO/Elite | Freedom+ | CPR-007 context | P1 |
 | 10 | Volume/semana + readiness leve | Elite | Compete, Masters | CPR-008 | P2 |
 | 11 | Watch companion (tips → captura) | PRO+ / Elite bundle | Compete, Independence | CPR-009 | P0 |
-| 12 | Watch: timer WOD + % load + haptic PR | PRO+/Elite | Independence+ | CPR-009 fase 2+ | P1 |
+| 12 | Watch: timer WOD + % load + haptic PR | PRO+/Elite | Independence+ | CPR-016 (haptic PR follow-up) | P1 |
 | 13 | Coach IA CrossFit | PRO / Elite prompts | Independence+ | CPR-007 / CPR-008 | P0 |
 | 14 | iPhone Duo layouts (outer/inner/seated) | Todos | Box logging | Futuro (pós iPhone/iPad) | P3 |
 
