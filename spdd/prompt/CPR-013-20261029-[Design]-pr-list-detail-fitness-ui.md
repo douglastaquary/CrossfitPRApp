@@ -28,5 +28,6 @@
 
 ## Tokens
 
-- `AppDesign.Colors.activityAccent` — chips / ícone atividade (lima Fitness)
-- Brand verde permanece em CTAs globais
+- `AppDesign.Colors.brand` — verde adaptativo: **light** = `systemGreen` (padrão do app); **dark** = lima clara `#A0F000`
+- `AppDesign.Colors.activityAccent` — alias de `brand` (chips, ícones, hero, charts)
+- Watch: `WatchDesign.brand` espelha a mesma regra

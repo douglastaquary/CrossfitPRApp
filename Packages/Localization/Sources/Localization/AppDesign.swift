@@ -4,11 +4,18 @@ import SwiftUI
 /// Alterações exigem canvas SPDD + skill design.
 public enum AppDesign {
     public enum Colors {
-        /// Verde de marca — accent global, tabs, CTAs (.green beta).
-        public static let brand = Color.green
+        /// Verde de marca adaptativo — light: verde padrão do app; dark: verde mais claro (legibilidade).
+        public static let brand = Color(UIColor { traits in
+            if traits.userInterfaceStyle == .dark {
+                // Lima clara — CTAs, tabs, chips e ícones no dark
+                return UIColor(red: 0.63, green: 0.94, blue: 0.0, alpha: 1)
+            }
+            // Verde sistema / baseline atual do app no light
+            return .systemGreen
+        })
 
-        /// Lima Fitness — chips ativos / ícone de atividade (CPR-013 Design).
-        public static let activityAccent = Color(red: 0.63, green: 0.94, blue: 0.0)
+        /// Alias de atividade (CPR-013) — mesmo verde adaptativo de `brand`.
+        public static let activityAccent = brand
 
         /// Badge PRO e destaques premium.
         public static let proAccent = Color.orange
