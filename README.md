@@ -18,6 +18,18 @@ CrossfitPR é um app iOS para quem treina CrossFit e quer histórico claro de Pe
 
 ## Telas — Free / PRO / Elite (com dados)
 
+### Meus PRs — lista e detalhe (CPR-013 Fitness)
+
+Layout atual: categorias sticky, cards com peso/data, detalhe com gráfico, histórico, sessão Watch e prêmios. Seeds `proRich` / `eliteRich`.
+
+<p align="center">
+  <img src="docs/screenshots/review/pro/records.png" width="180" alt="Meus PRs — lista">
+  <img src="docs/screenshots/review/pro/record-detail.png" width="180" alt="Detalhe PR — topo">
+  <img src="docs/screenshots/review/pr-fitness/light/detail-mid.png" width="180" alt="Detalhe PR — sessão e prêmios">
+</p>
+
+Light/dark: [`REVIEW-PR-FITNESS.md`](docs/screenshots/REVIEW-PR-FITNESS.md).
+
 ### Free
 
 <p align="center">
@@ -31,8 +43,8 @@ CrossfitPR é um app iOS para quem treina CrossFit e quer histórico claro de Pe
 | Tela | O que mostra (dados) |
 |------|----------------------|
 | Exercícios | Categorias de movimentos |
-| Meus PRs | Lista populada (seed `freeTeaser`) |
-| Detalhe | PR atual, histórico, percentuais |
+| Meus PRs | Lista Fitness (seed `freeTeaser`) |
+| Detalhe | Gráfico, histórico, sessão, prêmios |
 | Percepções | Teaser + insight real + CTA PRO |
 | Ajustes | Unidade kg/lb, unlock PRO |
 
@@ -49,7 +61,7 @@ CrossfitPR é um app iOS para quem treina CrossFit e quer histórico claro de Pe
 
 | Tela | O que mostra (dados) |
 |------|----------------------|
-| Exercícios / Meus PRs / Detalhe | Mesmo fluxo Free, seed `proRich` |
+| Exercícios / Meus PRs / Detalhe | Layout Fitness, seed `proRich` |
 | Percepções (topo) | Resumo, sessão, métricas |
 | Percepções (meio) | Coach IA + WorkoutEngine |
 | Ajustes | Tier PRO ativo |
@@ -67,7 +79,7 @@ CrossfitPR é um app iOS para quem treina CrossFit e quer histórico claro de Pe
 
 | Tela | O que mostra (dados) |
 |------|----------------------|
-| Exercícios / Meus PRs / Detalhe | Seed `eliteRich` |
+| Exercícios / Meus PRs / Detalhe | Layout Fitness, seed `eliteRich` |
 | Percepções | Tudo do PRO + **assessment** + **limiting factor** |
 | Ajustes | Tier Elite ativo |
 
