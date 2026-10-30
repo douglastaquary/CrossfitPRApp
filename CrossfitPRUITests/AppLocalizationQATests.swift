@@ -11,14 +11,14 @@ final class AppLocalizationQATests: XCTestCase {
         app.launch()
 
         waitForMainShell(app)
-        assertTabBar(app, categories: "Exercícios", records: "Meus PRs", insights: "Evolução", settings: "Ajustes")
+        assertTabBar(app, categories: "Exercícios", records: "Meus PRs", insights: "Percepções", settings: "Ajustes")
         assertRootIdentifiers(app)
 
         app.tabBars.buttons["Meus PRs"].tap()
         XCTAssertTrue(app.navigationBars["Meus PRs"].waitForExistence(timeout: 8))
 
-        app.tabBars.buttons["Evolução"].tap()
-        XCTAssertTrue(app.navigationBars["Evolução"].waitForExistence(timeout: 8))
+        app.tabBars.buttons["Percepções"].tap()
+        XCTAssertTrue(app.navigationBars["Percepções"].waitForExistence(timeout: 8))
 
         app.tabBars.buttons["Ajustes"].tap()
         XCTAssertTrue(app.navigationBars["Ajustes"].waitForExistence(timeout: 8))
@@ -29,14 +29,14 @@ final class AppLocalizationQATests: XCTestCase {
         app.launch()
 
         waitForMainShell(app)
-        assertTabBar(app, categories: "Exercises", records: "My PRs", insights: "Progress", settings: "Settings")
+        assertTabBar(app, categories: "Exercises", records: "My PRs", insights: "Insights", settings: "Settings")
         assertRootIdentifiers(app)
 
         app.tabBars.buttons["My PRs"].tap()
         XCTAssertTrue(app.navigationBars["My PRs"].waitForExistence(timeout: 8))
 
-        app.tabBars.buttons["Progress"].tap()
-        XCTAssertTrue(app.navigationBars["Progress"].waitForExistence(timeout: 8))
+        app.tabBars.buttons["Insights"].tap()
+        XCTAssertTrue(app.navigationBars["Insights"].waitForExistence(timeout: 8))
 
         app.tabBars.buttons["Settings"].tap()
         XCTAssertTrue(app.navigationBars["Settings"].waitForExistence(timeout: 8))
@@ -52,8 +52,8 @@ final class AppLocalizationQATests: XCTestCase {
         app.launch()
 
         waitForMainShell(app)
-        app.tabBars.buttons["Evolução"].tap()
-        XCTAssertTrue(app.navigationBars["Evolução"].waitForExistence(timeout: 8))
+        app.tabBars.buttons["Percepções"].tap()
+        XCTAssertTrue(app.navigationBars["Percepções"].waitForExistence(timeout: 8))
 
         let cta = element(app, identifier: "insights.teaser.pro.cta")
         XCTAssertTrue(cta.waitForExistence(timeout: 8))
@@ -62,7 +62,7 @@ final class AppLocalizationQATests: XCTestCase {
         let close = element(app, identifier: "pro.upgrade.close")
         XCTAssertTrue(close.waitForExistence(timeout: 8))
         close.tap()
-        XCTAssertTrue(app.navigationBars["Evolução"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.navigationBars["Percepções"].waitForExistence(timeout: 5))
     }
 
     func testInsightsPROUpgradeSheetEnglish() throws {
@@ -70,8 +70,8 @@ final class AppLocalizationQATests: XCTestCase {
         app.launch()
 
         waitForMainShell(app)
-        app.tabBars.buttons["Progress"].tap()
-        XCTAssertTrue(app.navigationBars["Progress"].waitForExistence(timeout: 8))
+        app.tabBars.buttons["Insights"].tap()
+        XCTAssertTrue(app.navigationBars["Insights"].waitForExistence(timeout: 8))
 
         let cta = element(app, identifier: "insights.teaser.pro.cta")
         XCTAssertTrue(cta.waitForExistence(timeout: 8))
@@ -87,8 +87,8 @@ final class AppLocalizationQATests: XCTestCase {
         app.launch()
 
         waitForMainShell(app)
-        app.tabBars.buttons["Evolução"].tap()
-        XCTAssertTrue(app.navigationBars["Evolução"].waitForExistence(timeout: 8))
+        app.tabBars.buttons["Percepções"].tap()
+        XCTAssertTrue(app.navigationBars["Percepções"].waitForExistence(timeout: 8))
         let coach = element(app, identifier: "insights.coach.section")
         if !coach.waitForExistence(timeout: 8) {
             app.swipeUp()

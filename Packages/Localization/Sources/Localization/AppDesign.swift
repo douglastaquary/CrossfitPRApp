@@ -62,10 +62,15 @@ public enum AppDesign {
         public static let rowTitle = Font.title2.weight(.semibold)
         public static let rowSubtitle = Font.caption
         public static let rowValue = Font.subheadline.monospacedDigit()
+        /// Valor grande estilo Fitness (CAL, bpm, duração).
+        public static let metricValue = Font.system(size: 28, weight: .bold).monospacedDigit()
+        public static let metricLabel = Font.caption.weight(.medium)
         public static let bodySecondary = Font.subheadline
         public static let captionSecondary = Font.caption
         public static let proBadge = Font.caption2.bold()
         public static let formField = Font.system(size: 18, weight: .medium)
+        public static let insightCardTitle = Font.headline
+        public static let insightCardBody = Font.subheadline
     }
 
     public enum Layout {

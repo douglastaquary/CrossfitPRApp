@@ -37,8 +37,10 @@ xcrun simctl install "$WATCH_UDID" "$APP_PATH"
 capture_tab() {
   local tab="$1"
   local outfile="$2"
-  xcrun simctl launch --terminate-running-process "$WATCH_UDID" "$BUNDLE_ID" -WatchSnapshotTab "$tab" >/dev/null
-  sleep 2
+  xcrun simctl terminate "$WATCH_UDID" "$BUNDLE_ID" 2>/dev/null || true
+  sleep 0.5
+  xcrun simctl launch "$WATCH_UDID" "$BUNDLE_ID" -WatchSnapshotTab "$tab" >/dev/null
+  sleep 2.5
   xcrun simctl io "$WATCH_UDID" screenshot "$outfile"
   echo "   $outfile (tab $tab)"
 }

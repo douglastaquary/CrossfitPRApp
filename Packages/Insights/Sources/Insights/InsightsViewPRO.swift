@@ -43,7 +43,8 @@ struct InsightsViewPRO: View {
                     barbellRecords: barbellRecords,
                     gymnasticRecords: gymnasticRecords,
                     enduranceRecords: enduranceRecords,
-                    isShimmering: isShimmering
+                    isShimmering: isShimmering,
+                    records: personalRecordClient.records
                 )
             } else {
                 InsightsViewPROEmptySection()
@@ -57,57 +58,21 @@ struct InsightsViewPRO: View {
 private struct InsightsViewPROEmptySection: View {
     var body: some View {
         ScrollView {
-            VStack(spacing: 32) {
-                InsightsCoachSection()
-                    .padding(.horizontal, 24)
-                    .padding(.top, 16)
+            VStack(spacing: 24) {
+                Spacer(minLength: 40)
 
-                Spacer(minLength: 24)
+                Image(systemName: AppDesign.Icon.emptyInsights)
+                    .font(.system(size: AppDesign.Layout.emptyStateIconSize))
+                    .foregroundStyle(AppDesign.Colors.brand)
 
-                VStack(spacing: 20) {
-                    ZStack {
-                        Circle()
-                            .fill(AppDesign.Colors.brand.opacity(0.1))
-                            .frame(width: 120, height: 120)
+                Text(Strings.Insights.ProEmpty.title)
+                    .font(AppDesign.Typography.sectionTitle)
 
-                        Image(systemName: "chart.line.uptrend.xyaxis")
-                            .font(.system(size: 48))
-                            .foregroundStyle(AppDesign.Colors.brand)
-                    }
-
-                    VStack(spacing: 12) {
-                        Text(Strings.Insights.ProEmpty.title)
-                            .font(.title2.bold())
-
-                        Text(Strings.Insights.ProEmpty.message)
-                            .font(.subheadline)
-                            .foregroundStyle(.secondary)
-                            .multilineTextAlignment(.center)
-                            .padding(.horizontal, 32)
-                    }
-                }
-
-                VStack(spacing: 16) {
-                    InsightsViewPROFeaturePreviewRow(
-                        icon: "trophy.fill",
-                        title: Strings.Insights.ProEmpty.featureRankingTitle,
-                        description: Strings.Insights.ProEmpty.featureRankingDescription,
-                        color: .orange
-                    )
-                    InsightsViewPROFeaturePreviewRow(
-                        icon: "chart.bar.fill",
-                        title: Strings.Insights.ProEmpty.featureChartsTitle,
-                        description: Strings.Insights.ProEmpty.featureChartsDescription,
-                        color: AppDesign.Colors.brand
-                    )
-                    InsightsViewPROFeaturePreviewRow(
-                        icon: "target",
-                        title: Strings.Insights.ProEmpty.featureGoalsTitle,
-                        description: Strings.Insights.ProEmpty.featureGoalsDescription,
-                        color: .purple
-                    )
-                }
-                .padding(.horizontal, 24)
+                Text(Strings.Insights.ProEmpty.message)
+                    .font(AppDesign.Typography.bodySecondary)
+                    .foregroundStyle(.secondary)
+                    .multilineTextAlignment(.center)
+                    .padding(.horizontal, 32)
 
                 Button {
                     NotificationCenter.default.post(name: .navigateToCategories, object: nil)
@@ -128,37 +93,7 @@ private struct InsightsViewPROEmptySection: View {
                 Spacer(minLength: 40)
             }
         }
-    }
-}
-
-private struct InsightsViewPROFeaturePreviewRow: View {
-    let icon: String
-    let title: String
-    let description: String
-    let color: Color
-
-    var body: some View {
-        HStack(spacing: 16) {
-            Image(systemName: icon)
-                .font(.title2)
-                .frame(width: 44, height: 44)
-                .foregroundStyle(color)
-                .background(color.opacity(0.1))
-                .cornerRadius(10)
-
-            VStack(alignment: .leading, spacing: 2) {
-                Text(title)
-                    .font(.subheadline.weight(.semibold))
-                Text(description)
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
-            }
-
-            Spacer()
-        }
-        .padding()
-        .background(AppDesign.Colors.cardBackground)
-        .cornerRadius(12)
+        .background(AppDesign.Colors.background.ignoresSafeArea())
     }
 }
 
@@ -172,12 +107,17 @@ private struct InsightsViewPROContent: View {
     let gymnasticRecords: [PersonalRecord]
     let enduranceRecords: [PersonalRecord]
     let isShimmering: Bool
+    let records: [PersonalRecord]
 
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
-            VStack(spacing: 16) {
+            VStack(spacing: 20) {
+                InsightsSummarySection(records: records, measureMode: measureMode)
+                InsightsLastSessionSection()
+                InsightsEngineCardsSection()
                 InsightsEliteSection()
                 InsightsCoachSection()
+                InsightsRecentSessionsSection()
 
                 if !topBarbell.isEmpty {
                     InsightsViewPRORankingSection(
@@ -221,8 +161,9 @@ private struct InsightsViewPROContent: View {
                     )
                 }
             }
-            .padding(16)
+            .padding(AppDesign.Layout.horizontalPadding)
         }
+        .background(AppDesign.Colors.background.ignoresSafeArea())
     }
 }
 
@@ -256,7 +197,7 @@ private struct InsightsViewPROSectionHeader: View {
             Image(systemName: icon)
                 .frame(width: 24, height: 24)
             Text(Strings.tr(titleKey))
-                .font(.title2.bold())
+                .font(AppDesign.Typography.sectionTitle)
             Spacer()
         }
     }
@@ -282,7 +223,7 @@ private struct InsightsViewPROChartSection: View {
                     .foregroundStyle(by: .value("Name", record.prName.localizedWorkoutTitle))
                     .annotation(position: .top) {
                         Text(annotation(record))
-                            .font(.caption)
+                            .font(AppDesign.Typography.captionSecondary)
                             .foregroundStyle(.secondary)
                     }
                 }

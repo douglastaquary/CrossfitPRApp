@@ -24,6 +24,7 @@ Target `CrossfitPRUITests` → `AppLocalizationQATests`:
 | `UITEST_SUBSCRIPTION_TIER` | `free` \| `pro` \| `elite` — mock StoreKit no simulador |
 | `UITEST_PURCHASE_BEHAVIOR` | `succeed` \| `cancel` \| `fail` \| `pending` — resultado da compra mock |
 | `UITEST_USE_STOREKIT` | `1` — StoreKit real + Products.storekit (manual) |
+| `UITEST_SEED_SCENARIO` | `empty` \| `freeTeaser` \| `proRich` \| `eliteRich` \| `watchLinked` — popula PRs/sessões/métricas mock |
 | `OPENAI_API_KEY` | Só builds locais/prod manual — cloud coach; **nunca** no CI |
 
 Idioma: `-AppleLanguages (en)` ou `(pt-BR)` e `-AppleLocale` só em `launchArguments`. `AppleLanguages` no `launchEnvironment` faz o app cair no fallback pt-BR.

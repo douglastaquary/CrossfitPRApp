@@ -227,7 +227,7 @@
 "tab.prs" = "PRs";
 "tabbar.myrecords.title" = "Meus PRs";
 "tabbar.categories.title" = "Exercícios";
-"tabbar.insights.title" = "Evolução";
+"tabbar.insights.title" = "Percepções";
 "tabbar.settings.title" = "Ajustes";
 
 /* ─────────────────────────────────────────────────────────────
@@ -242,7 +242,7 @@
 
 "screen.records.title" = "Meus PRs";
 "screen.category.title" = "Exercícios";
-"screen.insights.title" = "Evolução";
+"screen.insights.title" = "Percepções";
 "screen.settings.title" = "Ajustes";
 
 /* ─────────────────────────────────────────────────────────────
@@ -461,3 +461,29 @@
    ───────────────────────────────────────────────────────────── */
 
 "ranking.screen.evolution.percentage %@" = "Você evoluiu %@ desde o último PR!";
+
+/* CPR-011 Insights hub */
+"insight.hub.summary.title" = "Resumo";
+"insight.hub.summary.prs" = "PRs";
+"insight.hub.summary.bestLift" = "Melhor lift";
+"insight.hub.summary.consistency" = "Movimentos";
+"insight.hub.engine.title" = "Suas percepções";
+"insight.hub.session.title" = "Última sessão";
+"insight.hub.sessions.title" = "Últimas sessões";
+"insight.hub.metric.activeCalories" = "Calorias ativas";
+"insight.hub.metric.totalCalories" = "Total de calorias";
+"insight.hub.metric.exerciseTime" = "Tempo de exercício";
+"insight.hub.metric.duration" = "Duração";
+"insight.hub.metric.averageHR" = "Frequência cardíaca média";
+"insight.hub.health.connect" = "Conecte o Apple Watch ou permita acesso ao Saúde para ver FC e calorias.";
+"insight.hub.recovery.title" = "Recuperação";
+"insight.hub.recovery.message" = "Você usou respiração ou descanso no Watch — ótimo para o próximo bloco.";
+"insight.hub.locked.title" = "Mais percepções no PRO";
+"insight.hub.locked.message" = "Desbloqueie platôs, metas, coach e assessment Elite com gráficos e análises densas.";
+"insight.hub.upgrade.cta" = "Ver planos PRO e Elite";
+"insight.hub.chart.teaser.title" = "Sua curva";
+"insight.teaser.empty.title" = "Comece suas percepções";
+"insight.teaser.empty.message" = "Registre um PR e veja tendências e dicas claras — no estilo do app Fitness.";
+"insight.pro.empty.title" = "Sem dados ainda";
+"insight.pro.empty.message" = "Registre PRs ou uma sessão para ver resumo, métricas e percepções aqui.";
+

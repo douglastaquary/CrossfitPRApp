@@ -212,6 +212,28 @@ public enum Strings {
             public static var featureGoalsTitle: String { tr("insight.pro.empty.feature.goals.title") }
             public static var featureGoalsDescription: String { tr("insight.pro.empty.feature.goals.description") }
         }
+
+        public enum Hub {
+            public static var summaryTitle: String { tr("insight.hub.summary.title") }
+            public static var prsLabel: String { tr("insight.hub.summary.prs") }
+            public static var bestLiftLabel: String { tr("insight.hub.summary.bestLift") }
+            public static var consistencyLabel: String { tr("insight.hub.summary.consistency") }
+            public static var engineTitle: String { tr("insight.hub.engine.title") }
+            public static var sessionTitle: String { tr("insight.hub.session.title") }
+            public static var sessionsTitle: String { tr("insight.hub.sessions.title") }
+            public static var activeCalories: String { tr("insight.hub.metric.activeCalories") }
+            public static var totalCalories: String { tr("insight.hub.metric.totalCalories") }
+            public static var exerciseTime: String { tr("insight.hub.metric.exerciseTime") }
+            public static var duration: String { tr("insight.hub.metric.duration") }
+            public static var averageHR: String { tr("insight.hub.metric.averageHR") }
+            public static var connectHealth: String { tr("insight.hub.health.connect") }
+            public static var recoveryTitle: String { tr("insight.hub.recovery.title") }
+            public static var recoveryMessage: String { tr("insight.hub.recovery.message") }
+            public static var lockedTitle: String { tr("insight.hub.locked.title") }
+            public static var lockedMessage: String { tr("insight.hub.locked.message") }
+            public static var upgradeCTA: String { tr("insight.hub.upgrade.cta") }
+            public static var chartTeaserTitle: String { tr("insight.hub.chart.teaser.title") }
+        }
     }
 
     // MARK: - PRO

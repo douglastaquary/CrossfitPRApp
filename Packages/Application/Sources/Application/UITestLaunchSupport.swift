@@ -13,9 +13,20 @@ public enum UITestLaunchSupport {
     public static let purchaseBehaviorKey = "UITEST_PURCHASE_BEHAVIOR"
     /// `1` = força `StoreKitSubscriptionStore` (Products.storekit / sandbox). Default simulador = mock.
     public static let useStoreKitKey = "UITEST_USE_STOREKIT"
+    /// Cenário de seed: `empty` | `freeTeaser` | `proRich` | `eliteRich` | `watchLinked`.
+    public static let seedScenarioKey = "UITEST_SEED_SCENARIO"
 
     public static var shouldSkipSplash: Bool {
         flag(skipSplashKey)
+    }
+
+    public static var seedScenario: DemoDataScenario? {
+        let raw = ProcessInfo.processInfo.environment[seedScenarioKey]
+            ?? launchFlagValue("-UITEST_SEED_SCENARIO")
+        guard let raw = raw?.trimmingCharacters(in: .whitespacesAndNewlines), !raw.isEmpty else {
+            return nil
+        }
+        return DemoDataScenario(rawValue: raw)
     }
 
     public static var shouldSkipOnboarding: Bool {

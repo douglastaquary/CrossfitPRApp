@@ -46,9 +46,9 @@ final class PaymentFlowUITests: XCTestCase {
         )
 
         close.tap()
-        let insightsTab = app.tabBars.buttons["Evolução"]
+        let insightsTab = app.tabBars.buttons["Percepções"]
         XCTAssertTrue(
-            insightsTab.waitForExistence(timeout: 5) || app.tabBars.buttons["Progress"].waitForExistence(timeout: 2),
+            insightsTab.waitForExistence(timeout: 5) || app.tabBars.buttons["Insights"].waitForExistence(timeout: 2),
             "Deve voltar ao Insights após fechar o paywall"
         )
     }
@@ -109,7 +109,7 @@ final class PaymentFlowUITests: XCTestCase {
             if success {
                 if element(app, identifier: "pro.upgrade.success.title").exists { return true }
                 let sheetGone = !element(app, identifier: "pro.upgrade.close").exists
-                let onInsights = app.tabBars.buttons["Evolução"].exists || app.tabBars.buttons["Progress"].exists
+                let onInsights = app.tabBars.buttons["Percepções"].exists || app.tabBars.buttons["Insights"].exists
                 if sheetGone && onInsights { return true }
             } else if element(app, identifier: "pro.upgrade.error.title").exists
                         || element(app, identifier: "pro.upgrade.error.retry").exists {
@@ -139,8 +139,8 @@ final class PaymentFlowUITests: XCTestCase {
         waitForMainShell(app)
 
         // Só a tab selecionada expõe accessibilityIdentifier; usar label localizado do TabBar.
-        let pt = app.tabBars.buttons["Evolução"]
-        let en = app.tabBars.buttons["Progress"]
+        let pt = app.tabBars.buttons["Percepções"]
+        let en = app.tabBars.buttons["Insights"]
         if pt.waitForExistence(timeout: 8) {
             pt.tap()
         } else {

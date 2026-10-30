@@ -4,7 +4,7 @@
 
 - Target watchOS + provisioning
 - WatchConnectivity vs shared container
-- HealthKit / workout session (opcional fase 2)
+- HealthKit / workout session — **fase ativa (CPR-009 update + CPR-011/012):** FC, CAL, duração no iPhone; mock UITest
 
 ## Dados → Coach
 

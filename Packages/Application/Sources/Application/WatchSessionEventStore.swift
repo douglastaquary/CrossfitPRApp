@@ -27,4 +27,9 @@ public final class WatchSessionEventStore: ObservableObject {
     public func clear() {
         events = []
     }
+
+    /// Seed UITest / demos (CPR-011).
+    public func replaceAll(_ newEvents: [WatchSessionEvent]) {
+        events = Array(newEvents.suffix(maxStored))
+    }
 }

@@ -51,7 +51,7 @@ struct InsightsEliteSection: View {
                 Image(systemName: AppDesign.Icon.eliteBadge)
                     .foregroundStyle(AppDesign.Colors.eliteAccent)
                 Text(Strings.Elite.insightsHeader)
-                    .font(.headline)
+                    .font(AppDesign.Typography.sectionTitle)
                 Spacer()
                 Text(Strings.Elite.badge)
                     .font(AppDesign.Typography.proBadge)

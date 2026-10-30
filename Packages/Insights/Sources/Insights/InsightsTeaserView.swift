@@ -13,42 +13,33 @@ struct InsightsTeaserView: View {
         !personalRecordClient.records.isEmpty
     }
 
-    private var recordCount: Int {
-        personalRecordClient.records.count
-    }
-
-    private var topRecord: PersonalRecord? {
-        personalRecordClient.records.max { $0.poundValue < $1.poundValue }
-    }
-
-    private var categoriesWithRecords: [RecordGroup] {
-        let groups = Set(personalRecordClient.records.map(\.group))
-        return RecordGroup.allCases.filter { groups.contains($0) }
-    }
-
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
-            VStack(spacing: 24) {
+            VStack(spacing: 20) {
                 if hasRecords {
-                    InsightsTeaserPreviewSection(
-                        recordCount: recordCount,
-                        topRecord: topRecord,
-                        measureTrackingMode: settingsClient.measureTrackingMode
+                    InsightsSummarySection(
+                        records: personalRecordClient.records,
+                        measureMode: settingsClient.measureTrackingMode
                     )
-                    InsightsTeaserCategoriesSection(
-                        categories: categoriesWithRecords,
-                        records: personalRecordClient.records
+                    InsightsEngineCardsSection()
+                    InsightsFreeChartTeaser(
+                        records: personalRecordClient.records,
+                        measureMode: settingsClient.measureTrackingMode
                     )
+                    InsightsLastSessionSection()
                 } else {
                     InsightsTeaserEmptySection()
+                    InsightsFreeChartTeaser(
+                        records: [],
+                        measureMode: settingsClient.measureTrackingMode
+                    )
                 }
 
-                InsightsTeaserCardSection()
-                InsightsTeaserFeaturesSection()
-                InsightsTeaserCTASection(isPresentingPROUpgrade: $isPresentingPROUpgrade)
+                InsightsLockedUpsellSection(isPresentingPROUpgrade: $isPresentingPROUpgrade)
             }
-            .padding(20)
+            .padding(AppDesign.Layout.horizontalPadding)
         }
+        .background(AppDesign.Colors.background.ignoresSafeArea())
     }
 }
 
