@@ -10,8 +10,8 @@ para manter foco no box sem abrir o iPhone a todo momento.
 
 - [x] Target watchOS companion (`CrossfitPRWatch` + `WatchCompanion`)
 - [x] Sync com iPhone (WatchConnectivity — eventos compactos → `WatchSessionEventStore` → coach)
-- [x] Timer de descanso + mensagem motivacional curta (`WatchRestTimerView`)
-- [x] Respiração visual/haptic em treinos intensos (opt-in — toggle na tab Respiração)
+- [x] Timer de descanso + mensagem motivacional curta (`WatchRestTimerView`); duração configurável (presets)
+- [x] Respiração visual/haptic em treinos intensos (opt-in — toggle + tap Inhale/Exhale Start/Pause)
 - [x] Eventos compactos (série, RPE, descanso) → `CoachingContextBuilder.sessionEvents`
 - [x] Sem spam de notificações push (companion não registra push — só WC + haptic opt-in)
 - [x] HealthKit no iPhone: FC média, calorias, duração → Insights (mock em UITest) — CPR-011/012

@@ -84,7 +84,7 @@ struct InsightsLastSessionSection: View {
 
     private var hasRecoveryEvents: Bool {
         WatchSessionEventStore.shared.recentEvents().contains {
-            $0.phase == "breath" || $0.phase == "rest"
+            $0.phase == "breath" || $0.phase == "rest" || $0.phase == "wod_rest"
         }
     }
 

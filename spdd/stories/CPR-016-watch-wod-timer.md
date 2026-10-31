@@ -11,10 +11,11 @@ para conduzir o WOD sem abrir o iPhone — sem LLM no relógio.
 
 ## Critérios de aceite
 
-- [ ] Modos AMRAP (count-up + cap), EMOM, For Time na Sessão
-- [ ] Start/pause/reset; eventos → `WatchEventSink`
-- [ ] % load (1–3 lifts) via applicationContext ou fixture
-- [ ] Rest / cool-down preservados; docs WATCH-HOMOLOGATION
+- [x] Modos AMRAP (count-up + cap), EMOM, For Time na Sessão
+- [x] Start/pause/reset; eventos → `WatchEventSink`
+- [x] % load (1–3 lifts) via applicationContext ou fixture; detalhe por PR
+- [x] Rest próprio da Sessão (duração independente da tab Descanso; evento `wod_rest`)
+- [x] Rest tab / cool-down preservados (duração configurável Descanso; Breath tap Start/Pause); docs WATCH-HOMOLOGATION
 
 ## Fora de escopo
 
